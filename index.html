@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMQ Tracker Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+
+<div class="login-shell">
+  <div class="login-box">
+    <div class="login-main">
+      <h1>AMQ Relearn Tracker</h1>
+      <p class="login-subtitle">Works for any tour player.</p>
+
+      <form id="loginForm" novalidate>
+        <input id="username" placeholder="Enter username" autocomplete="username" autofocus>
+        <button type="submit">Enter Dashboard</button>
+      </form>
+
+      <p id="error" class="login-error"></p>
+    </div>
+
+    <div class="login-data-dates" aria-label="Data freshness information">
+      <div id="loginDataUpTo">Data up to February 1, 2026</div>
+      <div class="login-background-toggle" aria-label="Background image style">
+        <button id="loginBgToggleBtn" class="login-bg-toggle-btn" type="button" aria-pressed="false">Default</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const DATA_BASE_URL =
+  location.hostname === "localhost" || location.hostname === "127.0.0.1"
+    ? "./data"
+    : "https://pub-d42861e79d364f02841015cca59918a2.r2.dev";
+
+function dataUrl(path) {
+  const cleanPath = String(path || "")
+    .replace(/^data\//, "")
+    .replace(/^\/+/, "");
+  return `${DATA_BASE_URL}/${cleanPath}`;
+}
+
+async function loadJSON(path) {
+  const res = await fetch(dataUrl(path));
+  if (!res.ok) {
+    throw new Error(`Failed to load ${path}: ${res.status}`);
+  }
+  return res.json();
+}
+
+let loginDesmosBackgroundReady = false;
+let loginDesmosBackgroundPromise = null;
+
+function preloadLoginDesmosBackground() {
+  if (loginDesmosBackgroundReady) {
+    return Promise.resolve(true);
+  }
+  if (loginDesmosBackgroundPromise) {
+    return loginDesmosBackgroundPromise;
+  }
+
+  loginDesmosBackgroundPromise = new Promise(resolve => {
+    const image = new Image();
+    let settled = false;
+    const finish = (ok) => {
+      if (settled) return;
+      settled = true;
+      if (ok) {
+        loginDesmosBackgroundReady = true;
+      }
+      resolve(ok);
+    };
+
+    image.decoding = "async";
+    image.onload = () => finish(true);
+    image.onerror = () => finish(false);
+    image.src = dataUrl("images/ilia-desmos.png");
+
+    if (image.complete && image.naturalWidth > 0) {
+      finish(true);
+    }
+  });
+
+  return loginDesmosBackgroundPromise;
+}
+
+function setLoginBackgroundView(view) {
+  const normalizedView = view === "desmos" ? "desmos" : "default";
+  const toggleBtn = document.getElementById("loginBgToggleBtn");
+  document.body.classList.toggle("is-desmos-view", normalizedView === "desmos");
+  if (toggleBtn) {
+    toggleBtn.textContent = normalizedView === "desmos" ? "Desmos" : "Default";
+    toggleBtn.setAttribute("aria-pressed", normalizedView === "desmos" ? "true" : "false");
+  }
+}
+
+function initializeLoginBackgroundToggle() {
+  const toggleBtn = document.getElementById("loginBgToggleBtn");
+  if (!toggleBtn) {
+    return;
+  }
+
+  setLoginBackgroundView("default");
+  preloadLoginDesmosBackground();
+
+  toggleBtn.addEventListener("click", async () => {
+    const nextView = document.body.classList.contains("is-desmos-view") ? "default" : "desmos";
+    if (nextView === "desmos" && !loginDesmosBackgroundReady) {
+      toggleBtn.disabled = true;
+      try {
+        await preloadLoginDesmosBackground();
+      } finally {
+        toggleBtn.disabled = false;
+      }
+    }
+    setLoginBackgroundView(nextView);
+  });
+}
+
+function parseDataDateFromChangelogText(text) {
+  const lines = String(text || "").split(/\r?\n/);
+  let inDataSection = false;
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) {
+      continue;
+    }
+    if (/^__\s*data\s*__$/i.test(line)) {
+      inDataSection = true;
+      continue;
+    }
+    if (/^__.*__$/.test(line) && inDataSection) {
+      break;
+    }
+    if (!inDataSection) {
+      continue;
+    }
+    const isoMatch = line.match(/\b(\d{4}-\d{2}-\d{2})\b/);
+    if (isoMatch) {
+      return isoMatch[1];
+    }
+  }
+  return null;
+}
+
+function compareVersionFileNamesDesc(a, b) {
+  const getParts = (value) => String(value || "")
+    .replace(/\.txt$/i, "")
+    .split(".")
+    .map(part => Number(part))
+    .filter(Number.isFinite);
+  const aParts = getParts(a);
+  const bParts = getParts(b);
+  const maxLen = Math.max(aParts.length, bParts.length);
+  for (let i = 0; i < maxLen; i += 1) {
+    const av = aParts[i] || 0;
+    const bv = bParts[i] || 0;
+    if (av !== bv) {
+      return bv - av;
+    }
+  }
+  return String(b).localeCompare(String(a));
+}
+
+async function listChangelogFiles() {
+  try {
+    const indexRes = await fetch(dataUrl("changelog/index.json"));
+    if (indexRes.ok) {
+      const payload = await indexRes.json();
+      if (Array.isArray(payload)) {
+        return payload
+          .map(item => String(item || "").trim())
+          .filter(name => /\.txt$/i.test(name));
+      }
+    }
+  } catch (err) {
+    console.warn("Unable to load changelog index.json", err);
+  }
+
+  try {
+    const dirRes = await fetch(dataUrl("changelog/"));
+    if (dirRes.ok) {
+      const html = await dirRes.text();
+      const hrefMatches = [...html.matchAll(/href="([^"]+\.txt)"/gi)];
+      const names = hrefMatches
+        .map(match => decodeURIComponent((match[1] || "").split("/").pop() || ""))
+        .filter(Boolean);
+      return [...new Set(names)];
+    }
+  } catch (err) {
+    console.warn("Unable to read changelog directory listing", err);
+  }
+
+  return [];
+}
+
+function formatIsoDate(isoDate) {
+  const date = new Date(`${isoDate}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) {
+    return isoDate;
+  }
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC"
+  }).format(date);
+}
+
+async function updateLoginDataUpTo() {
+  const dataUpToEl = document.getElementById("loginDataUpTo");
+  if (!dataUpToEl) {
+    return;
+  }
+
+  const fileNames = await listChangelogFiles();
+  const sortedFiles = [...fileNames].sort(compareVersionFileNamesDesc);
+  for (const fileName of sortedFiles) {
+    try {
+      const res = await fetch(dataUrl(`changelog/${encodeURIComponent(fileName)}`));
+      if (!res.ok) {
+        continue;
+      }
+      const text = await res.text();
+      const isoDate = parseDataDateFromChangelogText(text);
+      if (isoDate) {
+        dataUpToEl.innerText = `Data up to ${formatIsoDate(isoDate)}`;
+        return;
+      }
+    } catch (err) {
+      console.warn(`Unable to load changelog file: ${fileName}`, err);
+    }
+  }
+}
+
+async function loadPlayers() {
+  const res = await fetch(dataUrl("players.json"));
+  if (!res.ok) {
+    throw new Error("Could not load data/players.json");
+  }
+  const players = await res.json();
+  return Array.isArray(players) ? players : [];
+}
+
+async function login() {
+  const errorEl = document.getElementById("error");
+  const inputEl = document.getElementById("username");
+  const input = inputEl.value.trim();
+
+  errorEl.innerText = "";
+
+  if (!input) {
+    errorEl.innerText = "Please enter a username";
+    return;
+  }
+
+  try {
+    const players = await loadPlayers();
+    const normalized = input.toLowerCase();
+    const matchedPlayer = players.find(player => {
+      const displayName = String(player.displayName || "").toLowerCase();
+      const altNameMatch = Array.isArray(player.altnames)
+        && player.altnames.some(alt => String(alt).toLowerCase() === normalized);
+      return displayName === normalized || altNameMatch;
+    });
+
+    if (!matchedPlayer || !matchedPlayer.displayName) {
+      errorEl.innerText = "User not found";
+      return;
+    }
+
+    window.location.href = `player.html?user=${encodeURIComponent(input)}`;
+  } catch (err) {
+    console.error(err);
+    errorEl.innerText = "Unable to load user data";
+  }
+}
+
+document.getElementById("loginForm").addEventListener("submit", event => {
+  event.preventDefault();
+  login();
+});
+
+initializeLoginBackgroundToggle();
+updateLoginDataUpTo();
+</script>
+
+</body>
+</html>
