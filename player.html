@@ -60,7 +60,8 @@
     body.unified-nav-mode .topbar {
       position: relative !important;
       display: grid !important;
-      grid-template-columns: auto minmax(0, 1fr) auto !important;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+      --username-aka-inline-max-width: 210px !important;
       align-items: center !important;
       gap: 8px !important;
       padding-top: 9px !important;
@@ -75,6 +76,67 @@
 
     body.unified-nav-mode .topbar-left {
       min-width: 0 !important;
+      overflow: visible !important;
+      justify-self: stretch !important;
+      width: 100% !important;
+      max-width: min(42vw, 460px) !important;
+    }
+
+    body.unified-nav-mode .topbar-left .username-display,
+    body.unified-nav-mode .topbar-left .username-aka {
+      display: block !important;
+      min-width: 0 !important;
+      width: 100% !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+    }
+
+    body.unified-nav-mode .topbar-left .username-display {
+      max-width: 100% !important;
+    }
+
+    body.unified-nav-mode .topbar-left .username-aka {
+      max-width: var(--username-aka-inline-max-width) !important;
+    }
+
+    body.unified-nav-mode .topbar-left .username-block {
+      position: relative !important;
+      display: block !important;
+      min-width: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow: visible !important;
+    }
+
+    body.unified-nav-mode .topbar-left .username-aka-popover {
+      position: absolute !important;
+      left: 0 !important;
+      top: calc(100% + 6px) !important;
+      min-width: 200px !important;
+      max-width: min(340px, 38vw) !important;
+      max-height: 220px !important;
+      overflow-y: auto !important;
+      padding: 8px 10px !important;
+      border-radius: 8px !important;
+      border: 1px solid rgba(148, 163, 184, 0.55) !important;
+      background: rgba(15, 23, 42, 0.96) !important;
+      color: #e2e8f0 !important;
+      font-size: 11px !important;
+      line-height: 1.35 !important;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      z-index: 40 !important;
+      white-space: normal !important;
+    }
+
+    body.unified-nav-mode .topbar-left .username-block.has-aka:hover .username-aka-popover,
+    body.unified-nav-mode .topbar-left .username-block.has-aka:focus-within .username-aka-popover {
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
     }
 
     body.unified-nav-mode .topbar-center {
@@ -84,6 +146,7 @@
       gap: 8px !important;
       min-width: 0 !important;
       padding: 0 4px !important;
+      justify-self: center !important;
     }
 
     body.unified-nav-mode .topbar-right {
@@ -2140,7 +2203,7 @@
       max-width: 980px !important;
       margin: 0 auto !important;
       display: grid !important;
-      grid-template-columns: auto auto minmax(0, 1fr) auto !important;
+      grid-template-columns: auto auto minmax(0, 1fr) auto auto !important;
       align-items: center !important;
       gap: 10px !important;
     }
@@ -2174,6 +2237,64 @@
       display: block !important;
       object-fit: contain !important;
       pointer-events: none !important;
+    }
+
+    #relearnAudioDockVolumeWrap {
+      position: relative !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    #relearnAudioDockVolumePopover {
+      position: absolute !important;
+      left: 50% !important;
+      transform: translateX(-50%) translateY(6px) !important;
+      bottom: calc(100% + 8px) !important;
+      width: 52px !important;
+      min-height: 148px !important;
+      border: 1px solid rgba(148, 163, 184, 0.5) !important;
+      border-radius: 10px !important;
+      background: rgba(15, 23, 42, 0.96) !important;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.28) !important;
+      padding: 12px 8px 10px !important;
+      display: inline-flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      gap: 10px !important;
+      z-index: 132 !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    #relearnAudioDockVolumePopover.is-open {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      transform: translateX(-50%) translateY(0) !important;
+    }
+
+    #relearnAudioDockVolumePopover[hidden] {
+      display: none !important;
+    }
+
+    #relearnAudioDockVolumeSlider {
+      width: 18px !important;
+      height: 112px !important;
+      margin: 0 !important;
+      writing-mode: vertical-lr !important;
+      direction: rtl !important;
+      accent-color: #60a5fa !important;
+      cursor: pointer !important;
+    }
+
+    #relearnAudioDockVolumePercent {
+      font-size: 10px !important;
+      color: #e2e8f0 !important;
+      font-variant-numeric: tabular-nums !important;
+      line-height: 1 !important;
+      min-width: 30px !important;
+      text-align: center !important;
     }
 
     #relearnAudioProgressCurrent,
@@ -4347,9 +4468,10 @@
   <!-- TOP NAV -->
   <div class="topbar">
     <div class="topbar-left">
-      <div class="username-block">
+      <div id="usernameBlock" class="username-block">
         <div id="usernameDisplay" class="username-display">User</div>
         <div id="usernameAka" class="username-aka"></div>
+        <div id="usernameAkaPopover" class="username-aka-popover" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -5301,6 +5423,15 @@
     <span id="relearnAudioProgressCurrent">0:00</span>
     <input id="relearnAudioProgressRange" type="range" min="0" max="100" step="0.01" value="0" aria-label="Seek audio position">
     <span id="relearnAudioProgressDuration">0:00</span>
+    <div id="relearnAudioDockVolumeWrap">
+      <button id="relearnAudioDockVolumeBtn" class="relearn-audio-btn" type="button" aria-label="Volume: 100%" title="Volume: 100%" disabled>
+        <img src="" data-data-src="images/sound_1.jpg" alt="Volume: 100%" loading="lazy">
+      </button>
+      <div id="relearnAudioDockVolumePopover" hidden>
+        <input id="relearnAudioDockVolumeSlider" type="range" min="0" max="100" step="1" value="100" aria-label="Volume percentage">
+        <span id="relearnAudioDockVolumePercent">100%</span>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -5519,6 +5650,11 @@ const searchSongsSuggestions = document.getElementById("searchSongsSuggestions")
 const searchSongsInlineSuggestion = document.getElementById("searchSongsInlineSuggestion");
 const relearnAudioProgressDock = document.getElementById("relearnAudioProgressDock");
 const relearnAudioDockToggleBtn = document.getElementById("relearnAudioDockToggleBtn");
+const relearnAudioDockVolumeWrap = document.getElementById("relearnAudioDockVolumeWrap");
+const relearnAudioDockVolumeBtn = document.getElementById("relearnAudioDockVolumeBtn");
+const relearnAudioDockVolumePopover = document.getElementById("relearnAudioDockVolumePopover");
+const relearnAudioDockVolumeSlider = document.getElementById("relearnAudioDockVolumeSlider");
+const relearnAudioDockVolumePercent = document.getElementById("relearnAudioDockVolumePercent");
 const relearnAudioProgressRange = document.getElementById("relearnAudioProgressRange");
 const relearnAudioProgressCurrent = document.getElementById("relearnAudioProgressCurrent");
 const relearnAudioProgressDuration = document.getElementById("relearnAudioProgressDuration");
@@ -5579,6 +5715,10 @@ let relearnActiveToggleButton = null;
 let relearnActiveClipStartTime = null;
 let relearnActiveClipEndTime = null;
 let isSeekingRelearnAudio = false;
+let relearnAudioVolumePercentValue = 100;
+let relearnAudioLastNonZeroPercentValue = 100;
+let isRelearnVolumePopoverOpen = false;
+let relearnVolumePopoverFadeTimer = null;
 let relearnPageIndex = 0;
 let wrongGuessPageIndex = 0;
 let neverCorrectPageIndex = 0;
@@ -5655,13 +5795,16 @@ let overviewLoadRequestId = 0;
 let socialSynergyPageIndex = 0;
 let latestRankByPlayerKey = null;
 let latestRankPercentileByPlayerKey = null;
+let latestRankTimestampByPlayerKey = null;
 let latestRankLoadPromise = null;
+let playersDirectoryPromise = null;
+let playersDirectoryByLookup = new Map();
 const PCORRECT_FILE_BY_CAP = {
   "45": "pcorrect/pcorrect_0_45.json",
   "40": "pcorrect/pcorrect_0_40.json",
   "35": "pcorrect/pcorrect_0_35.json"
 };
-const MAX_SELECTED_TAGS = 18;
+const MAX_SELECTED_TAGS = 8;
 const MAX_SELECTED_BY_ERA_SEASONS = 6;
 const MAX_SELECTED_SOCIAL_RIVALS = 4;
 const RELEARN_PAGE_SIZE = 20;
@@ -5684,6 +5827,12 @@ const SOCIAL_TEAM_CONTRIBUTION_METRICS = [
   "Total hit",
   "Onlist",
   "Offlist"
+];
+const RELEARN_AUDIO_VOLUME_ICONS = [
+  "images/sound_1.jpg",
+  "images/sound_2.jpg",
+  "images/sound_3.jpg",
+  "images/sound_4.jpg"
 ];
 const SOCIAL_RIVALS_METRICS = {
   guess_rate: { label: "Guess rate", field: "Guess rate", isPercent: true, axisLabel: "Guess rate (%)" },
@@ -5824,8 +5973,67 @@ async function fetchChangelogFileNames() {
     return Array.from(fileSet);
   } catch (err) {
     console.warn("Unable to read changelog directory listing", err);
-    return [];
   }
+
+  const playerScopedCandidates = [];
+  if (currentPlayerId) {
+    playerScopedCandidates.push(String(currentPlayerId));
+  }
+  try {
+    const playerEntry = await getPlayerEntryByName(currentDisplayName || currentStatKey || username || "");
+    if (playerEntry && playerEntry.playerId != null) {
+      playerScopedCandidates.push(String(playerEntry.playerId));
+    }
+  } catch (err) {
+    // Ignore; we can still proceed with other sources.
+  }
+
+  const uniquePlayerIds = Array.from(new Set(playerScopedCandidates.filter(Boolean)));
+  for (const playerId of uniquePlayerIds) {
+    try {
+      const scopedIndexRes = await fetch(dataUrl(`players/${playerId}/changelog/index.json`));
+      if (scopedIndexRes.ok) {
+        const scopedIndexPayload = await scopedIndexRes.json();
+        const files = Array.isArray(scopedIndexPayload)
+          ? scopedIndexPayload
+          : (scopedIndexPayload && Array.isArray(scopedIndexPayload.files) ? scopedIndexPayload.files : []);
+        const parsed = files
+          .map(file => String(file || "").trim())
+          .filter(file => /\.txt$/i.test(file));
+        if (parsed.length) {
+          return parsed;
+        }
+      }
+    } catch (err) {
+      console.warn(`Unable to load player-scoped changelog index for player ${playerId}`, err);
+    }
+
+    try {
+      const playerMetaRes = await fetch(dataUrl(`players/${playerId}/player.json`));
+      if (playerMetaRes.ok) {
+        const playerMeta = await playerMetaRes.json();
+        const rawFiles = Array.isArray(playerMeta && playerMeta.changelog)
+          ? playerMeta.changelog
+          : (Array.isArray(playerMeta && playerMeta.changelogFiles) ? playerMeta.changelogFiles : []);
+        const parsed = rawFiles
+          .map(item => {
+            if (!item) return "";
+            if (typeof item === "string") return item.trim();
+            if (typeof item === "object") return String(item.file || item.path || item.name || "").trim();
+            return "";
+          })
+          .map(file => file.split("/").pop() || "")
+          .filter(file => /\.txt$/i.test(file));
+        if (parsed.length) {
+          return parsed;
+        }
+      }
+    } catch (err) {
+      console.warn(`Unable to load player metadata changelog for player ${playerId}`, err);
+    }
+  }
+
+  return [];
 }
 
 async function loadChangelogPosts(forceReload = false) {
@@ -5847,11 +6055,33 @@ async function loadChangelogPosts(forceReload = false) {
 
     const posts = await Promise.all(sortedNames.map(async fileName => {
       try {
-        const res = await fetch(dataUrl(`changelog/${encodeURIComponent(fileName)}`));
-        if (!res.ok) {
-          return null;
+        const candidatePaths = [`changelog/${encodeURIComponent(fileName)}`];
+        if (currentPlayerId) {
+          candidatePaths.push(`players/${encodeURIComponent(currentPlayerId)}/changelog/${encodeURIComponent(fileName)}`);
         }
-        const rawText = await res.text();
+
+        if (!currentPlayerId) {
+          try {
+            const playerEntry = await getPlayerEntryByName(currentDisplayName || currentStatKey || username || "");
+            if (playerEntry && playerEntry.playerId != null) {
+              candidatePaths.push(`players/${encodeURIComponent(String(playerEntry.playerId))}/changelog/${encodeURIComponent(fileName)}`);
+            }
+          } catch (err) {
+            // Ignore lookup errors; remaining candidates still apply.
+          }
+        }
+
+        let rawText = "";
+        let found = false;
+        for (const path of candidatePaths) {
+          const res = await fetch(dataUrl(path));
+          if (!res.ok) continue;
+          rawText = await res.text();
+          found = true;
+          break;
+        }
+        if (!found) return null;
+
         const { customTitle, content } = parseChangelogText(rawText);
         const baseTitle = buildChangelogTitleFromFileName(fileName);
         return {
@@ -10006,10 +10236,60 @@ function getLatestRankForPlayer(playerKeyOrRecords, recordsMaybe = null) {
   return Number.isFinite(rank) ? rank : null;
 }
 
+function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = null) {
+  if (!Array.isArray(records) || !records.length) {
+    return { latestRank: null, latestTimestamp: Number.NEGATIVE_INFINITY };
+  }
+
+  if (latestRankByPlayerKey instanceof Map && latestRankByPlayerKey.size) {
+    const canonicalName = String(
+      playerEntry && playerEntry.displayName
+        ? playerEntry.displayName
+        : playerKey || ""
+    ).trim();
+    const altNames = Array.isArray(playerEntry && playerEntry.altnames)
+      ? playerEntry.altnames
+      : [];
+    const mappedRank = resolveLatestRankFromMap(latestRankByPlayerKey, canonicalName, playerKey, altNames);
+    if (Number.isFinite(mappedRank)) {
+      return {
+        latestRank: mappedRank,
+        latestTimestamp: Number.POSITIVE_INFINITY
+      };
+    }
+  }
+
+  let latestTimestamp = Number.NEGATIVE_INFINITY;
+  let latestRank = null;
+  records.forEach(row => {
+    const timestampValue = getSortableTimestampValue(row && row.Timestamp);
+    if (!Number.isFinite(timestampValue)) return;
+    const rankValue = Number(row && row["Rank"]);
+    if (timestampValue > latestTimestamp) {
+      latestTimestamp = timestampValue;
+      latestRank = Number.isFinite(rankValue) ? rankValue : null;
+      return;
+    }
+    if (timestampValue === latestTimestamp && Number.isFinite(rankValue) && !Number.isFinite(latestRank)) {
+      latestRank = rankValue;
+    }
+  });
+
+  if (!Number.isFinite(latestRank)) {
+    latestRank = getLatestRankForPlayer(records);
+  }
+  return {
+    latestRank: Number.isFinite(latestRank) ? latestRank : null,
+    latestTimestamp
+  };
+}
+
 function getClosestRivalKeys(targetKey, count = 4) {
   if (!targetKey || !allPlayerStatsData || typeof allPlayerStatsData !== "object") return [];
   const targetRecords = targetKey === currentStatKey ? getCurrentUserRecords() : allPlayerStatsData[targetKey];
-  const targetRank = getLatestRankForPlayer(targetKey, targetRecords);
+  const targetPlayerEntry = getPlayerEntryFromCacheByName(targetKey);
+  const targetRankSnapshot = getLatestRankSnapshotForRows(targetRecords, targetKey, targetPlayerEntry);
+  const targetRank = targetRankSnapshot.latestRank;
   if (!Number.isFinite(targetRank)) return [];
 
   const rivals = Object.entries(allPlayerStatsData)
@@ -10020,21 +10300,57 @@ function getClosestRivalKeys(targetKey, count = 4) {
       && rows.length
     ))
     .map(([key, rows]) => {
-      const latestRank = getLatestRankForPlayer(key, rows);
+      const playerEntry = getPlayerEntryFromCacheByName(key);
+      const rankSnapshot = getLatestRankSnapshotForRows(rows, key, playerEntry);
+      const latestRank = rankSnapshot.latestRank;
       return {
         key,
         latestRank,
+        latestTimestamp: rankSnapshot.latestTimestamp,
         rankDistance: Number.isFinite(latestRank) ? Math.abs(latestRank - targetRank) : Number.POSITIVE_INFINITY
       };
     })
-    .filter(item => Number.isFinite(item.latestRank))
-    .sort((a, b) => {
-      if (a.rankDistance !== b.rankDistance) return a.rankDistance - b.rankDistance;
-      if (a.latestRank !== b.latestRank) return a.latestRank - b.latestRank;
-      return a.key.localeCompare(b.key);
-    });
+    .filter(item => Number.isFinite(item.latestRank));
 
-  return rivals.slice(0, count).map(item => item.key);
+  const dedupedByIdentity = new Map();
+  rivals.forEach(item => {
+    const playerEntry = getPlayerEntryFromCacheByName(item.key);
+    const playerId = String(playerEntry && playerEntry.playerId || "").trim();
+    const identityKey = playerId ? `id:${playerId}` : `key:${item.key.toLowerCase()}`;
+    const existing = dedupedByIdentity.get(identityKey);
+    if (!existing) {
+      dedupedByIdentity.set(identityKey, item);
+      return;
+    }
+    const shouldReplace =
+      item.latestTimestamp > existing.latestTimestamp
+      || (
+        item.latestTimestamp === existing.latestTimestamp
+        && item.rankDistance < existing.rankDistance
+      )
+      || (
+        item.latestTimestamp === existing.latestTimestamp
+        && item.rankDistance === existing.rankDistance
+        && item.latestRank < existing.latestRank
+      )
+      || (
+        item.latestTimestamp === existing.latestTimestamp
+        && item.rankDistance === existing.rankDistance
+        && item.latestRank === existing.latestRank
+        && item.key.localeCompare(existing.key) < 0
+      );
+    if (shouldReplace) {
+      dedupedByIdentity.set(identityKey, item);
+    }
+  });
+
+  const dedupedRivals = Array.from(dedupedByIdentity.values()).sort((a, b) => {
+    if (a.rankDistance !== b.rankDistance) return a.rankDistance - b.rankDistance;
+    if (a.latestRank !== b.latestRank) return a.latestRank - b.latestRank;
+    return a.key.localeCompare(b.key);
+  });
+
+  return dedupedRivals.slice(0, count).map(item => item.key);
 }
 
 function formatSocialRankLabel(rankValue) {
@@ -10476,20 +10792,54 @@ async function renderOverviewSynergySummary() {
 
 function getAvailableSocialRivalEntries() {
   if (!currentStatKey || !allPlayerStatsData || typeof allPlayerStatsData !== "object") return [];
-  return Object.entries(allPlayerStatsData)
+  const rawEntries = Object.entries(allPlayerStatsData)
     .filter(([key, rows]) => !isCurrentUserStatKey(key) && Array.isArray(rows) && rows.length)
     .map(([key, rows]) => {
-      const latestRank = getLatestRankForPlayer(key, rows);
-      return { key, latestRank };
+      const playerEntry = getPlayerEntryFromCacheByName(key);
+      const rankSnapshot = getLatestRankSnapshotForRows(rows, key, playerEntry);
+      const latestRank = rankSnapshot.latestRank;
+      const playerId = String(playerEntry && playerEntry.playerId || "").trim();
+      return {
+        key,
+        latestRank,
+        latestTimestamp: rankSnapshot.latestTimestamp,
+        playerId,
+        displayLabel: formatPlayerDisplayWithAliases(playerEntry, key)
+      };
     })
-    .filter(item => Number.isFinite(item.latestRank))
-    .sort((a, b) => {
-      const aLowRankBucket = a.latestRank < 30 ? 1 : 0;
-      const bLowRankBucket = b.latestRank < 30 ? 1 : 0;
-      if (aLowRankBucket !== bLowRankBucket) return aLowRankBucket - bLowRankBucket;
-      if (a.latestRank !== b.latestRank) return a.latestRank - b.latestRank;
-      return a.key.localeCompare(b.key);
-    });
+    .filter(item => Number.isFinite(item.latestRank));
+
+  const dedupedByIdentity = new Map();
+  rawEntries.forEach(entry => {
+    const identityKey = entry.playerId ? `id:${entry.playerId}` : `key:${entry.key.toLowerCase()}`;
+    const existing = dedupedByIdentity.get(identityKey);
+    if (!existing) {
+      dedupedByIdentity.set(identityKey, entry);
+      return;
+    }
+    const shouldReplace =
+      entry.latestTimestamp > existing.latestTimestamp
+      || (
+        entry.latestTimestamp === existing.latestTimestamp
+        && entry.latestRank < existing.latestRank
+      )
+      || (
+        entry.latestTimestamp === existing.latestTimestamp
+        && entry.latestRank === existing.latestRank
+        && entry.key.localeCompare(existing.key) < 0
+      );
+    if (shouldReplace) {
+      dedupedByIdentity.set(identityKey, entry);
+    }
+  });
+
+  return Array.from(dedupedByIdentity.values()).sort((a, b) => {
+    const aLowRankBucket = a.latestRank < 30 ? 1 : 0;
+    const bLowRankBucket = b.latestRank < 30 ? 1 : 0;
+    if (aLowRankBucket !== bLowRankBucket) return aLowRankBucket - bLowRankBucket;
+    if (a.latestRank !== b.latestRank) return a.latestRank - b.latestRank;
+    return a.displayLabel.localeCompare(b.displayLabel);
+  });
 }
 
 function renderSelectedSocialRivalButtons(entriesByKey) {
@@ -10504,7 +10854,8 @@ function renderSelectedSocialRivalButtons(entriesByKey) {
   wrap.innerHTML = "";
   selectedSocialRivalKeys.forEach(key => {
     const entry = entriesByKey.get(key);
-    const labelText = entry ? `${entry.key} (${formatSocialRankLabel(entry.latestRank)})` : key;
+    const entryLabel = entry ? (entry.displayLabel || entry.key) : key;
+    const labelText = entry ? `${entryLabel} (${formatSocialRankLabel(entry.latestRank)})` : key;
 
     const chip = document.createElement("div");
     chip.className = "social-rivals-selected-chip";
@@ -10561,7 +10912,8 @@ function renderSocialRivalFilter() {
   const parsedRatingFilter = parseSocialRatingSearchQuery(normalizedSearch);
   const visibleEntries = normalizedSearch
     ? entries.filter(entry => {
-        const nameMatch = entry.key.toLowerCase().includes(normalizedSearch);
+        const nameMatch = entry.key.toLowerCase().includes(normalizedSearch)
+          || String(entry.displayLabel || "").toLowerCase().includes(normalizedSearch);
         const ratingText = formatSocialRankLabel(entry.latestRank).toLowerCase();
         const ratingTextMatch = ratingText.includes(normalizedSearch);
         const ratingFilterMatch = matchesSocialRatingFilter(entry.latestRank, parsedRatingFilter);
@@ -10580,7 +10932,7 @@ function renderSocialRivalFilter() {
     input.checked = selectedSocialRivalKeys.includes(entry.key);
 
     label.appendChild(input);
-    label.appendChild(document.createTextNode(` ${entry.key} (${formatSocialRankLabel(entry.latestRank)})`));
+    label.appendChild(document.createTextNode(` ${entry.displayLabel || entry.key} (${formatSocialRankLabel(entry.latestRank)})`));
     list.appendChild(label);
   });
 
@@ -10664,9 +11016,13 @@ function renderSocialRivalsChart() {
   }
 
   const targetLabel = currentDisplayName || currentStatKey;
+  const rivalEntriesByKey = new Map(getAvailableSocialRivalEntries().map(entry => [entry.key, entry]));
   const seriesPlayers = [
     { key: currentStatKey, label: targetLabel },
-    ...rivalKeys.map(key => ({ key, label: key }))
+    ...rivalKeys.map(key => {
+      const rivalEntry = rivalEntriesByKey.get(key);
+      return { key, label: rivalEntry ? (rivalEntry.displayLabel || key) : key };
+    })
   ];
 
   const seriesData = seriesPlayers.map(player => {
@@ -11262,7 +11618,13 @@ function renderKnowledgeTagRadar() {
 
   const tagEntries = Object.entries(cachedTagData)
     .filter(([, value]) => value && typeof value.guessRate === "number")
-    .sort((a, b) => (b[1].total || 0) - (a[1].total || 0));
+    .sort((a, b) => {
+      const guessRateDiff = Number(b[1].guessRate || 0) - Number(a[1].guessRate || 0);
+      if (guessRateDiff !== 0) return guessRateDiff;
+      const totalDiff = Number(b[1].total || 0) - Number(a[1].total || 0);
+      if (totalDiff !== 0) return totalDiff;
+      return String(a[0]).localeCompare(String(b[0]));
+    });
   const tagEntriesAlphabetical = [...tagEntries].sort((a, b) => a[0].localeCompare(b[0]));
 
   if (!tagEntries.length) {
@@ -11687,27 +12049,88 @@ function renderSelectedTagButtons(tagNames) {
   });
 }
 
-async function getPlayerEntryByName(displayName) {
-  try {
-    const playersRes = await fetch(dataUrl("players.json"));
-    if (!playersRes.ok) return null;
-    const players = await playersRes.json();
-    if (!Array.isArray(players)) return null;
+function getCleanAltNames(playerEntry, canonicalName = "") {
+  const rawAltNames = Array.isArray(playerEntry && playerEntry.altnames)
+    ? playerEntry.altnames
+    : [];
+  const canonicalLower = String(canonicalName || "").trim().toLowerCase();
+  const seen = new Set();
+  return rawAltNames.filter(name => {
+    const trimmed = String(name || "").trim();
+    if (!trimmed) return false;
+    const key = trimmed.toLowerCase();
+    if (canonicalLower && key === canonicalLower) return false;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
 
-    const target = String(displayName || "").toLowerCase();
-    const playerEntry = players.find(player => {
-      const nameMatch =
-        String(player.displayName || "").toLowerCase() === target;
-      const altMatch = Array.isArray(player.altnames)
-        && player.altnames.some(alt => String(alt).toLowerCase() === target);
-      return nameMatch || altMatch;
-    });
+function formatPlayerDisplayWithAliases(playerEntry, fallbackName = "") {
+  const canonicalName = String(
+    playerEntry && playerEntry.displayName
+      ? playerEntry.displayName
+      : fallbackName || "Unknown"
+  ).trim();
+  const cleanAlts = getCleanAltNames(playerEntry, canonicalName);
+  return cleanAlts.length
+    ? `${canonicalName} [${cleanAlts.join(", ")}]`
+    : canonicalName;
+}
 
-    return playerEntry || null;
-  } catch (err) {
-    console.error("Failed loading players.json", err);
+async function loadPlayersDirectory() {
+  if (playersDirectoryPromise) {
+    return playersDirectoryPromise;
+  }
+
+  playersDirectoryPromise = (async () => {
+    try {
+      const playersRes = await fetch(dataUrl("players.json"));
+      if (!playersRes.ok) {
+        playersDirectoryByLookup = new Map();
+        return [];
+      }
+      const players = await playersRes.json();
+      if (!Array.isArray(players)) {
+        playersDirectoryByLookup = new Map();
+        return [];
+      }
+
+      const lookup = new Map();
+      players.forEach(player => {
+        const aliases = [
+          player && player.displayName,
+          ...(Array.isArray(player && player.altnames) ? player.altnames : [])
+        ];
+        aliases.forEach(alias => {
+          const normalized = String(alias || "").trim().toLowerCase();
+          if (!normalized || lookup.has(normalized)) return;
+          lookup.set(normalized, player);
+        });
+      });
+      playersDirectoryByLookup = lookup;
+      return players;
+    } catch (err) {
+      console.error("Failed loading players.json", err);
+      playersDirectoryByLookup = new Map();
+      return [];
+    }
+  })();
+
+  return playersDirectoryPromise;
+}
+
+function getPlayerEntryFromCacheByName(displayName) {
+  const target = String(displayName || "").trim().toLowerCase();
+  if (!target || !(playersDirectoryByLookup instanceof Map) || !playersDirectoryByLookup.size) {
     return null;
   }
+  return playersDirectoryByLookup.get(target) || null;
+}
+
+async function getPlayerEntryByName(displayName) {
+  await loadPlayersDirectory();
+  return getPlayerEntryFromCacheByName(displayName);
 }
 
 function getWeightedGuessRateFromEntry(entry) {
@@ -13653,6 +14076,84 @@ function setRelearnDockToggleState(isPlaying) {
   relearnAudioDockToggleBtn.ariaLabel = titleText;
 }
 
+function setRelearnAudioVolumePopoverOpen(isOpen) {
+  isRelearnVolumePopoverOpen = !!isOpen;
+  if (!relearnAudioDockVolumePopover) return;
+  clearRelearnVolumePopoverFadeTimer();
+
+  if (isRelearnVolumePopoverOpen) {
+    relearnAudioDockVolumePopover.hidden = false;
+    requestAnimationFrame(() => {
+      if (!isRelearnVolumePopoverOpen || !relearnAudioDockVolumePopover) return;
+      relearnAudioDockVolumePopover.classList.add("is-open");
+    });
+    return;
+  }
+
+  relearnAudioDockVolumePopover.classList.remove("is-open");
+  relearnAudioDockVolumePopover.hidden = true;
+}
+
+function clearRelearnVolumePopoverFadeTimer() {
+  if (!relearnVolumePopoverFadeTimer) return;
+  clearTimeout(relearnVolumePopoverFadeTimer);
+  relearnVolumePopoverFadeTimer = null;
+}
+
+function isPointerNearRelearnVolumeControl(clientX, clientY) {
+  if (!relearnAudioDockVolumeBtn) return false;
+
+  const expandedContains = (rect, padPx) =>
+    clientX >= (rect.left - padPx) &&
+    clientX <= (rect.right + padPx) &&
+    clientY >= (rect.top - padPx) &&
+    clientY <= (rect.bottom + padPx);
+
+  const btnRect = relearnAudioDockVolumeBtn.getBoundingClientRect();
+  if (expandedContains(btnRect, 0)) return true;
+
+  if (!relearnAudioDockVolumePopover || relearnAudioDockVolumePopover.hidden) return false;
+  const popoverRect = relearnAudioDockVolumePopover.getBoundingClientRect();
+  return expandedContains(popoverRect, 10);
+}
+
+function getRelearnAudioVolumeIconPath(percentValue) {
+  const numeric = Math.max(0, Math.min(100, Number(percentValue) || 0));
+  if (numeric <= 0) return RELEARN_AUDIO_VOLUME_ICONS[3];
+  if (numeric <= 33) return RELEARN_AUDIO_VOLUME_ICONS[2];
+  if (numeric <= 66) return RELEARN_AUDIO_VOLUME_ICONS[1];
+  return RELEARN_AUDIO_VOLUME_ICONS[0];
+}
+
+function applyRelearnAudioVolumeState(percentValue = relearnAudioVolumePercentValue) {
+  const clampedPercent = Math.round(Math.max(0, Math.min(100, Number(percentValue) || 0)));
+  relearnAudioVolumePercentValue = clampedPercent;
+  if (clampedPercent > 0) {
+    relearnAudioLastNonZeroPercentValue = clampedPercent;
+  }
+
+  if (relearnAudioElement) {
+    relearnAudioElement.volume = clampedPercent / 100;
+  }
+  if (relearnAudioDockVolumeSlider && Number(relearnAudioDockVolumeSlider.value) !== clampedPercent) {
+    relearnAudioDockVolumeSlider.value = String(clampedPercent);
+  }
+  if (relearnAudioDockVolumePercent) {
+    relearnAudioDockVolumePercent.innerText = `${clampedPercent}%`;
+  }
+  if (!relearnAudioDockVolumeBtn) return;
+
+  const iconPath = getRelearnAudioVolumeIconPath(clampedPercent);
+  const icon = relearnAudioDockVolumeBtn.querySelector("img");
+  if (icon) {
+    icon.src = dataUrl(iconPath);
+    icon.alt = `Volume: ${clampedPercent}%`;
+  }
+  const titleText = `Volume: ${clampedPercent}%`;
+  relearnAudioDockVolumeBtn.title = titleText;
+  relearnAudioDockVolumeBtn.ariaLabel = titleText;
+}
+
 function syncRelearnPlaybackControlState(isPlaying) {
   setRelearnInlineToggleState(relearnActiveToggleButton, isPlaying);
   setRelearnDockToggleState(isPlaying);
@@ -13707,6 +14208,8 @@ function updateRelearnAudioProgressUI(forceHide = false) {
   const shouldShow = !forceHide && hasAudio && hasDuration && hasActiveSource;
   relearnAudioProgressDock.style.display = shouldShow ? "block" : "none";
   if (relearnAudioDockToggleBtn) relearnAudioDockToggleBtn.disabled = !shouldShow;
+  if (relearnAudioDockVolumeBtn) relearnAudioDockVolumeBtn.disabled = !shouldShow;
+  if (!shouldShow) setRelearnAudioVolumePopoverOpen(false);
   if (!hasAudio) return;
 
   if (hasDuration && windowLength > 0) {
@@ -13733,6 +14236,7 @@ function ensureRelearnAudioElement() {
 
   relearnAudioElement = new Audio();
   relearnAudioElement.preload = "none";
+  applyRelearnAudioVolumeState();
   relearnAudioElement.addEventListener("pause", () => {
     syncRelearnPlaybackControlState(false);
     updateRelearnAudioProgressUI();
@@ -13864,6 +14368,65 @@ if (relearnAudioDockToggleBtn) {
     toggleRelearnPlaybackFromControls();
   });
 }
+
+if (relearnAudioDockVolumeBtn) {
+  relearnAudioDockVolumeBtn.addEventListener("click", () => {
+    if (relearnAudioDockVolumeBtn.disabled) return;
+    if (relearnAudioVolumePercentValue > 0) {
+      applyRelearnAudioVolumeState(0);
+      return;
+    }
+    const restoredPercent = Math.max(1, Math.min(100, Number(relearnAudioLastNonZeroPercentValue) || 100));
+    applyRelearnAudioVolumeState(restoredPercent);
+  });
+}
+
+if (relearnAudioDockVolumeSlider) {
+  relearnAudioDockVolumeSlider.addEventListener("input", () => {
+    applyRelearnAudioVolumeState(relearnAudioDockVolumeSlider.value);
+  });
+}
+
+if (relearnAudioDockVolumeWrap) {
+  relearnAudioDockVolumeWrap.addEventListener("pointerenter", () => {
+    if (relearnAudioDockVolumeBtn && relearnAudioDockVolumeBtn.disabled) return;
+    clearRelearnVolumePopoverFadeTimer();
+    setRelearnAudioVolumePopoverOpen(true);
+  });
+  relearnAudioDockVolumeWrap.addEventListener("focusin", () => {
+    if (relearnAudioDockVolumeBtn && relearnAudioDockVolumeBtn.disabled) return;
+    clearRelearnVolumePopoverFadeTimer();
+    setRelearnAudioVolumePopoverOpen(true);
+  });
+  relearnAudioDockVolumeWrap.addEventListener("focusout", event => {
+    const nextTarget = event.relatedTarget;
+    if (nextTarget instanceof Node && relearnAudioDockVolumeWrap.contains(nextTarget)) return;
+    setRelearnAudioVolumePopoverOpen(false);
+  });
+}
+
+document.addEventListener("pointermove", event => {
+  if (!isRelearnVolumePopoverOpen) return;
+  if (isPointerNearRelearnVolumeControl(event.clientX, event.clientY)) {
+    clearRelearnVolumePopoverFadeTimer();
+    return;
+  }
+  setRelearnAudioVolumePopoverOpen(false);
+});
+
+document.addEventListener("pointerdown", event => {
+  if (!isRelearnVolumePopoverOpen || !relearnAudioDockVolumeWrap) return;
+  const target = event.target;
+  if (target instanceof Node && relearnAudioDockVolumeWrap.contains(target)) return;
+  clearRelearnVolumePopoverFadeTimer();
+  setRelearnAudioVolumePopoverOpen(false);
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key !== "Escape" || !isRelearnVolumePopoverOpen) return;
+  clearRelearnVolumePopoverFadeTimer();
+  setRelearnAudioVolumePopoverOpen(false);
+});
 
 document.addEventListener("keydown", event => {
   if (event.key !== " " && event.code !== "Space") return;
@@ -16355,11 +16918,13 @@ async function loadLatestRankMap() {
   latestRankLoadPromise = (async () => {
     const map = new Map();
     const percentileMap = new Map();
+    const timestampMap = new Map();
     try {
       const latestRankRes = await fetch(dataUrl("latest_rank.json"));
       if (!latestRankRes.ok) {
         latestRankByPlayerKey = map;
         latestRankPercentileByPlayerKey = percentileMap;
+        latestRankTimestampByPlayerKey = timestampMap;
         return map;
       }
 
@@ -16367,19 +16932,29 @@ async function loadLatestRankMap() {
       if (!Array.isArray(payload)) {
         latestRankByPlayerKey = map;
         latestRankPercentileByPlayerKey = percentileMap;
+        latestRankTimestampByPlayerKey = timestampMap;
         return map;
       }
 
       const normalizedRows = payload.map(entry => {
         const playerKey = String(entry && entry.player ? entry.player : "").trim().toLowerCase();
         const rankValue = Number(entry && entry.rank);
-        return { playerKey, rankValue };
+        const timestampValue = getSortableTimestampValue(entry && entry.timestamp);
+        return { playerKey, rankValue, timestampValue };
       }).filter(entry => entry.playerKey && Number.isFinite(entry.rankValue));
 
       normalizedRows.forEach(entry => {
         const playerKey = entry.playerKey;
         const rankValue = entry.rankValue;
+        const timestampValue = entry.timestampValue;
+        const existingTimestamp = Number(timestampMap.get(playerKey));
+        const shouldReplace = !Number.isFinite(existingTimestamp)
+          || (Number.isFinite(timestampValue) && timestampValue >= existingTimestamp);
+        if (!shouldReplace) return;
         map.set(playerKey, rankValue);
+        if (Number.isFinite(timestampValue)) {
+          timestampMap.set(playerKey, timestampValue);
+        }
       });
 
       const percentileEligibleRows = normalizedRows.filter(entry => entry.rankValue >= MIN_VALID_RANK);
@@ -16400,6 +16975,7 @@ async function loadLatestRankMap() {
 
     latestRankByPlayerKey = map;
     latestRankPercentileByPlayerKey = percentileMap;
+    latestRankTimestampByPlayerKey = timestampMap;
     return map;
   })();
 
@@ -16410,9 +16986,41 @@ function resolveLatestRankFromMap(latestRankMap, canonicalName, matchedKey, altN
   if (!(latestRankMap instanceof Map) || !latestRankMap.size) return null;
 
   const candidates = [canonicalName, matchedKey, ...(Array.isArray(altNames) ? altNames : [])];
-  for (const name of candidates) {
+  const uniqueCandidates = [];
+  const seen = new Set();
+  candidates.forEach(name => {
     const key = String(name || "").trim().toLowerCase();
-    if (!key) continue;
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    uniqueCandidates.push(key);
+  });
+
+  const timestampMap = latestRankTimestampByPlayerKey instanceof Map
+    ? latestRankTimestampByPlayerKey
+    : null;
+  let bestRank = null;
+  let bestTimestamp = Number.NEGATIVE_INFINITY;
+  let foundWithTimestamp = false;
+
+  if (timestampMap && timestampMap.size) {
+    uniqueCandidates.forEach(key => {
+      if (!latestRankMap.has(key)) return;
+      const rankValue = Number(latestRankMap.get(key));
+      if (!Number.isFinite(rankValue)) return;
+      const timestampValue = Number(timestampMap.get(key));
+      if (!Number.isFinite(timestampValue)) return;
+      if (!foundWithTimestamp || timestampValue > bestTimestamp) {
+        foundWithTimestamp = true;
+        bestTimestamp = timestampValue;
+        bestRank = rankValue;
+      }
+    });
+    if (foundWithTimestamp && Number.isFinite(bestRank)) {
+      return bestRank;
+    }
+  }
+
+  for (const key of uniqueCandidates) {
     if (!latestRankMap.has(key)) continue;
     const rankValue = Number(latestRankMap.get(key));
     if (Number.isFinite(rankValue)) return rankValue;
@@ -16535,6 +17143,8 @@ loadStatsData()
     const canonicalName = (playerEntry && playerEntry.displayName) ? playerEntry.displayName : matchedKey;
     document.getElementById("usernameDisplay").innerText = canonicalName;
     const akaEl = document.getElementById("usernameAka");
+    const akaPopoverEl = document.getElementById("usernameAkaPopover");
+    const usernameBlockEl = document.getElementById("usernameBlock");
     const rawAltNames = Array.isArray(playerEntry && playerEntry.altnames) ? playerEntry.altnames : [];
     const seen = new Set();
     const cleanedAltNames = rawAltNames.filter(name => {
@@ -16546,7 +17156,10 @@ loadStatsData()
       seen.add(key);
       return true;
     });
-    akaEl.innerText = cleanedAltNames.length ? `(aka) ${cleanedAltNames.join(", ")}` : "";
+    const akaInlineText = cleanedAltNames.length ? `(aka) ${cleanedAltNames.join(", ")}` : "";
+    akaEl.innerText = akaInlineText;
+    akaPopoverEl.innerText = cleanedAltNames.length ? cleanedAltNames.join(", ") : "";
+    usernameBlockEl.classList.toggle("has-aka", cleanedAltNames.length > 0);
 
     const identityNames = new Set([
       normalizedUser,
