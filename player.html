@@ -5935,10 +5935,40 @@ function parseChangelogText(rawText) {
   };
 }
 
+function getChangelogBaseUrls() {
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+    return ["./data", DATA_BASE_URL];
+  }
+  return [DATA_BASE_URL, "./data"];
+}
+
+async function fetchChangelogFromAnyBase(path, options) {
+  const cleanPath = String(path || "")
+    .replace(/^data\//, "")
+    .replace(/^\/+/, "");
+  const bases = Array.from(new Set(getChangelogBaseUrls().filter(Boolean)));
+  let lastError = null;
+
+  for (const base of bases) {
+    try {
+      const cleanBase = String(base).replace(/\/+$/, "");
+      const res = await fetch(`${cleanBase}/${cleanPath}`, options);
+      if (res.ok) return res;
+    } catch (err) {
+      lastError = err;
+    }
+  }
+
+  if (lastError) {
+    throw lastError;
+  }
+  return null;
+}
+
 async function fetchChangelogFileNames() {
   try {
-    const indexRes = await fetch(dataUrl("changelog/index.json"));
-    if (indexRes.ok) {
+    const indexRes = await fetchChangelogFromAnyBase("changelog/index.json");
+    if (indexRes && indexRes.ok) {
       const indexPayload = await indexRes.json();
       const files = Array.isArray(indexPayload)
         ? indexPayload
@@ -5952,8 +5982,8 @@ async function fetchChangelogFileNames() {
   }
 
   try {
-    const dirRes = await fetch(dataUrl("changelog/"));
-    if (!dirRes.ok) return [];
+    const dirRes = await fetchChangelogFromAnyBase("changelog/");
+    if (!dirRes || !dirRes.ok) return [];
     const html = await dirRes.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
@@ -5991,8 +6021,8 @@ async function fetchChangelogFileNames() {
   const uniquePlayerIds = Array.from(new Set(playerScopedCandidates.filter(Boolean)));
   for (const playerId of uniquePlayerIds) {
     try {
-      const scopedIndexRes = await fetch(dataUrl(`players/${playerId}/changelog/index.json`));
-      if (scopedIndexRes.ok) {
+      const scopedIndexRes = await fetchChangelogFromAnyBase(`players/${playerId}/changelog/index.json`);
+      if (scopedIndexRes && scopedIndexRes.ok) {
         const scopedIndexPayload = await scopedIndexRes.json();
         const files = Array.isArray(scopedIndexPayload)
           ? scopedIndexPayload
@@ -6009,8 +6039,8 @@ async function fetchChangelogFileNames() {
     }
 
     try {
-      const playerMetaRes = await fetch(dataUrl(`players/${playerId}/player.json`));
-      if (playerMetaRes.ok) {
+      const playerMetaRes = await fetchChangelogFromAnyBase(`players/${playerId}/player.json`);
+      if (playerMetaRes && playerMetaRes.ok) {
         const playerMeta = await playerMetaRes.json();
         const rawFiles = Array.isArray(playerMeta && playerMeta.changelog)
           ? playerMeta.changelog
@@ -6076,8 +6106,8 @@ async function loadChangelogPosts(forceReload = false) {
         let rawText = "";
         let found = false;
         for (const path of candidatePaths) {
-          const res = await fetch(dataUrl(path));
-          if (!res.ok) continue;
+          const res = await fetchChangelogFromAnyBase(path);
+          if (!res || !res.ok) continue;
           rawText = await res.text();
           found = true;
           break;
