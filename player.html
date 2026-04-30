@@ -13,7 +13,7 @@
     }
 
     .topbar-data-range.locked .data-range-select {
-      background: #f1f5f9 !important;
+      background: transparent !important;
       border-color: #94a3b8 !important;
       color: #334155 !important;
       cursor: not-allowed !important;
@@ -1502,7 +1502,7 @@
     #overviewSection .overview-rig-top-song-card {
       width: 178px !important;
       min-width: 178px !important;
-      border: 1px solid #dbe3ee !important;
+      border: 0 !important;
       border-radius: 10px !important;
       background: #ffffff !important;
       box-shadow: 0 2px 8px rgba(51, 65, 85, 0.08) !important;
@@ -1526,9 +1526,9 @@
       aspect-ratio: 2 / 3 !important;
       border-radius: 8px !important;
       object-fit: contain !important;
-      object-position: center top !important;
-      border: 1px solid #dbe3ee !important;
-      background: #f1f5f9 !important;
+      object-position: center center !important;
+      border: 0 !important;
+      background: transparent !important;
       display: block !important;
       flex: 0 0 auto !important;
     }
@@ -1780,7 +1780,7 @@
 
     #overviewSection #overviewMainView .overview-rig-top-song-card {
       background: #d7c39f !important;
-      border-color: #b89b73 !important;
+      border: 0 !important;
       box-shadow: none !important;
     }
 
@@ -1799,8 +1799,8 @@
     }
 
     #overviewSection #overviewMainView .overview-rig-top-song-cover {
-      background: #eadcc2 !important;
-      border-color: #b89b73 !important;
+      background: transparent !important;
+      border: 0 !important;
     }
 
     #overviewSection #overviewMainView #overviewTopSolosCard {
@@ -2681,9 +2681,9 @@
       display: none;
       flex-direction: column !important;
       align-items: center !important;
-      gap: 4px !important;
+      gap: 0 !important;
       pointer-events: none !important;
-      z-index: 2 !important;
+      z-index: 1 !important;
     }
 
     #otherToolsSection .rig-analysis-year-marker::before {
@@ -2693,18 +2693,32 @@
       border-radius: 2px !important;
       background: #334155 !important;
       display: block !important;
+      margin-bottom: -2px !important;
     }
 
     #otherToolsSection .rig-analysis-year-marker.mean::before {
       background: var(--rig-year-mean-color) !important;
+      height: 40px !important;
+    }
+
+    #otherToolsSection .rig-analysis-year-marker.mean {
+      z-index: 0 !important;
+    }
+
+    #otherToolsSection .rig-analysis-year-marker.median {
+      top: 22px !important;
+      z-index: 2 !important;
     }
 
     #otherToolsSection .rig-analysis-year-marker.median::before {
       background: var(--rig-year-median-color) !important;
+      height: 12px !important;
     }
 
     #otherToolsSection .rig-analysis-year-tag {
       display: inline-block !important;
+      position: relative !important;
+      z-index: 3 !important;
       border-radius: 999px !important;
       padding: 2px 8px !important;
       font-size: 12px !important;
@@ -2725,7 +2739,7 @@
     #otherToolsSection .rig-analysis-year-marker.median .rig-analysis-year-tag {
       color: #0f172a !important;
       background: var(--rig-year-median-color) !important;
-      transform: translateY(10px) !important;
+      transform: none !important;
     }
 
     #otherToolsSection .rig-analysis-year-ends {
@@ -3863,7 +3877,7 @@
     #socialSection .social-synergy-rig-left-total,
     #socialSection .social-synergy-rig-right-total {
       position: absolute !important;
-      top: 50% !important;
+      top: calc(50% - 0.5px) !important;
       transform: translateY(-50%) !important;
       height: 0 !important;
       border-top-width: 2px !important;
@@ -3877,7 +3891,7 @@
     #socialSection .social-synergy-rig-right-total::after {
       content: "" !important;
       position: absolute !important;
-      top: 50% !important;
+      top: calc(50% - 0.5px) !important;
       transform: translateY(-50%) !important;
       width: 2px !important;
       height: 10px !important;
@@ -4079,7 +4093,7 @@
     #overviewSection .social-synergy-rig-left-total,
     #overviewSection .social-synergy-rig-right-total {
       position: absolute !important;
-      top: 50% !important;
+      top: calc(50% - 0.5px) !important;
       transform: translateY(-50%) !important;
       height: 0 !important;
       border-top-width: 2px !important;
@@ -4093,7 +4107,7 @@
     #overviewSection .social-synergy-rig-right-total::after {
       content: "" !important;
       position: absolute !important;
-      top: 50% !important;
+      top: calc(50% - 0.5px) !important;
       transform: translateY(-50%) !important;
       width: 2px !important;
       height: 10px !important;
@@ -5436,10 +5450,15 @@
 </div>
 
 <script>
-const DATA_BASE_URL =
-  location.hostname === "localhost" || location.hostname === "127.0.0.1"
-    ? "./data"
-    : "https://pub-d42861e79d364f02841015cca59918a2.r2.dev";
+const isLocalDataContext =
+  location.protocol === "file:"
+  || location.hostname === ""
+  || location.hostname === "localhost"
+  || location.hostname === "127.0.0.1";
+
+const DATA_BASE_URL = isLocalDataContext
+  ? "./data"
+  : "https://pub-d42861e79d364f02841015cca59918a2.r2.dev";
 
 function dataUrl(path) {
   const cleanPath = String(path || "")
@@ -10430,13 +10449,21 @@ async function loadSocialSynergyData(playerId) {
   cachedSocialSynergyPlayerId = targetPlayerId;
   socialSynergyCachePromise = (async () => {
     try {
-      const response = await fetch(dataUrl(`players/${targetPlayerId}/synergy/synergy_count.json`));
-      if (!response.ok) {
-        cachedSocialSynergyByPlayer = null;
-        return cachedSocialSynergyByPlayer;
-      }
-      const payload = await response.json();
-      cachedSocialSynergyByPlayer = payload && typeof payload === "object" ? payload : null;
+      const [classicRes, sharedRes] = await Promise.allSettled([
+        fetch(dataUrl(`players/${targetPlayerId}/synergy/synergy_count.json`)),
+        fetch(dataUrl(`players/${targetPlayerId}/synergy/synergy_samesongsseen.json`))
+      ]);
+      const parsePayload = async (result) => {
+        if (!result || result.status !== "fulfilled" || !result.value || !result.value.ok) return null;
+        const payload = await result.value.json();
+        return payload && typeof payload === "object" ? payload : null;
+      };
+      const classicPayload = await parsePayload(classicRes);
+      const sharedPayload = await parsePayload(sharedRes);
+      cachedSocialSynergyByPlayer = {
+        classic: classicPayload,
+        shared: sharedPayload
+      };
       return cachedSocialSynergyByPlayer;
     } catch (err) {
       console.error("Failed loading social synergy data", err);
@@ -10454,6 +10481,53 @@ function getSocialSynergyComparableKey(row) {
   const rivalKey = String(row && row.rivalKey || "").trim();
   if (rivalKey) return rivalKey.toLowerCase();
   return String(row && row.rivalLabel || "").trim().toLowerCase();
+}
+
+function mapSynergyComparisons(payload) {
+  const map = new Map();
+  const comparisons = payload && Array.isArray(payload.comparisons) ? payload.comparisons : [];
+  comparisons.forEach((entry) => {
+    const rivalKey = String(entry && entry.otherPlayerId || "").trim();
+    const rivalLabel = String(entry && entry.otherDisplayName || rivalKey || "Unknown");
+    if (!rivalKey && !rivalLabel) return;
+    map.set((rivalKey || rivalLabel).toLowerCase(), {
+      rivalKey,
+      rivalLabel,
+      targetOnlyCount: Math.max(0, Number(entry && entry.targetOnlyCount || 0)),
+      otherOnlyCount: Math.max(0, Number(entry && entry.otherOnlyCount || 0)),
+      overlapCount: Math.max(0, Number(entry && entry.overlapCount || 0)),
+      targetRigCount: Math.max(0, Number(entry && entry.targetRigCount || 0)),
+      otherRigCount: Math.max(0, Number(entry && entry.otherRigCount || 0))
+    });
+  });
+  return map;
+}
+
+function buildMergedSocialSynergyRows(synergyPayload) {
+  const classicMap = mapSynergyComparisons(synergyPayload && synergyPayload.classic);
+  const sharedMap = mapSynergyComparisons(synergyPayload && synergyPayload.shared);
+  const allKeys = new Set([...classicMap.keys(), ...sharedMap.keys()]);
+  const rows = [];
+  allKeys.forEach((key) => {
+    const classic = classicMap.get(key) || null;
+    const shared = sharedMap.get(key) || null;
+    const base = classic || shared;
+    if (!base) return;
+    rows.push({
+      rivalKey: base.rivalKey,
+      rivalLabel: base.rivalLabel,
+      targetKnown: Math.max(0, (classic ? classic.targetOnlyCount + classic.overlapCount : 0)),
+      rivalKnown: Math.max(0, (classic ? classic.otherOnlyCount + classic.overlapCount : 0)),
+      overlapCount: Math.max(0, Number(classic ? classic.overlapCount : (shared ? shared.overlapCount : 0))),
+      targetOnlyCount: Math.max(0, Number(classic ? classic.targetOnlyCount : (shared ? shared.targetOnlyCount : 0))),
+      otherOnlyCount: Math.max(0, Number(classic ? classic.otherOnlyCount : (shared ? shared.otherOnlyCount : 0))),
+      targetRigCount: Math.max(0, Number(classic ? classic.targetRigCount : (shared ? shared.targetRigCount : 0))),
+      otherRigCount: Math.max(0, Number(classic ? classic.otherRigCount : (shared ? shared.otherRigCount : 0))),
+      classic,
+      shared
+    });
+  });
+  return rows;
 }
 
 function createSocialSynergyRowElement(row, targetLabel, rankText = "") {
@@ -10609,7 +10683,31 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
   });
 
   compareWrap.innerHTML = "";
-  compareWrap.appendChild(createSocialSynergyRowElement(selectedRow, targetLabel));
+
+  const allSeenTitle = document.createElement("div");
+  allSeenTitle.className = "chart-meta";
+  allSeenTitle.style.margin = "0 0 8px 0";
+  allSeenTitle.style.fontWeight = "400";
+  allSeenTitle.style.fontSize = "12px";
+  allSeenTitle.textContent = "Single Comparison—All seen songs";
+  compareWrap.appendChild(allSeenTitle);
+  compareWrap.appendChild(createSocialSynergyRowElement(selectedRow.classic || selectedRow, targetLabel));
+
+  const sharedSeenTitle = document.createElement("div");
+  sharedSeenTitle.className = "chart-meta";
+  sharedSeenTitle.style.margin = "14px 0 8px 0";
+  sharedSeenTitle.style.fontWeight = "400";
+  sharedSeenTitle.style.fontSize = "12px";
+  sharedSeenTitle.textContent = "Single Comparison—Shared seen songs";
+  compareWrap.appendChild(sharedSeenTitle);
+  if (selectedRow.shared) {
+    compareWrap.appendChild(createSocialSynergyRowElement(selectedRow.shared, targetLabel));
+  } else {
+    const empty = document.createElement("div");
+    empty.className = "social-synergy-empty";
+    empty.textContent = "No shared-seen comparison data available.";
+    compareWrap.appendChild(empty);
+  }
 }
 
 function renderSocialSynergyTableRows(allRows) {
@@ -10695,7 +10793,8 @@ async function renderSocialSynergyView() {
   if (requestId !== socialSynergyRequestId) return;
 
   const targetLabel = currentDisplayName || currentStatKey;
-  if (!synergyPayload || !Array.isArray(synergyPayload.comparisons)) {
+  const mergedRows = buildMergedSocialSynergyRows(synergyPayload);
+  if (!mergedRows.length) {
     meta.innerText = "Found 0 players";
     list.innerHTML = '<div class="social-synergy-empty">No synergy count data found for this player.</div>';
     cachedSocialSynergyRows = [];
@@ -10706,26 +10805,7 @@ async function renderSocialSynergyView() {
     return;
   }
 
-  const candidateRows = synergyPayload.comparisons.map(entry => {
-    const targetOnlyCount = Math.max(0, Number(entry && entry.targetOnlyCount || 0));
-    const otherOnlyCount = Math.max(0, Number(entry && entry.otherOnlyCount || 0));
-    const overlapCount = Math.max(0, Number(entry && entry.overlapCount || 0));
-    const targetRigCount = Math.max(0, Number(entry && entry.targetRigCount || 0));
-    const otherRigCount = Math.max(0, Number(entry && entry.otherRigCount || 0));
-    return {
-      rivalKey: String(entry && entry.otherPlayerId || ""),
-      rivalLabel: String(entry && entry.otherDisplayName || entry && entry.otherPlayerId || "Unknown"),
-      targetKnown: Math.max(0, Number(entry && entry.targetKnownCount || targetOnlyCount + overlapCount)),
-      rivalKnown: Math.max(0, Number(entry && entry.otherKnownCount || otherOnlyCount + overlapCount)),
-      overlapCount,
-      targetOnlyCount,
-      otherOnlyCount,
-      targetRigCount,
-      otherRigCount
-    };
-  });
-
-  const sortedRows = candidateRows
+  const sortedRows = mergedRows
     .filter(row => row && (row.rivalKey || row.rivalLabel))
     .filter(row => (row.targetOnlyCount + row.overlapCount + row.otherOnlyCount) > 0)
     .sort((a, b) => {
@@ -10783,30 +10863,14 @@ async function renderOverviewSynergySummary() {
   if (requestId !== overviewSynergyRequestId) return;
 
   const targetLabel = currentDisplayName || currentStatKey;
-  if (!synergyPayload || !Array.isArray(synergyPayload.comparisons)) {
+  const mergedRows = buildMergedSocialSynergyRows(synergyPayload);
+  if (!mergedRows.length) {
     meta.innerText = "Found 0 players";
     list.innerHTML = '<div class="social-synergy-empty">No synergy count data found for this player.</div>';
     return;
   }
 
-  const candidateRows = synergyPayload.comparisons.map(entry => {
-    const targetOnlyCount = Math.max(0, Number(entry && entry.targetOnlyCount || 0));
-    const otherOnlyCount = Math.max(0, Number(entry && entry.otherOnlyCount || 0));
-    const overlapCount = Math.max(0, Number(entry && entry.overlapCount || 0));
-    return {
-      rivalKey: String(entry && entry.otherPlayerId || ""),
-      rivalLabel: String(entry && entry.otherDisplayName || entry && entry.otherPlayerId || "Unknown"),
-      targetKnown: Math.max(0, Number(entry && entry.targetKnownCount || targetOnlyCount + overlapCount)),
-      rivalKnown: Math.max(0, Number(entry && entry.otherKnownCount || otherOnlyCount + overlapCount)),
-      overlapCount,
-      targetOnlyCount,
-      otherOnlyCount,
-      targetRigCount: Math.max(0, Number(entry && entry.targetRigCount || 0)),
-      otherRigCount: Math.max(0, Number(entry && entry.otherRigCount || 0))
-    };
-  });
-
-  const sortedRows = candidateRows
+  const sortedRows = mergedRows
     .filter(row => row && (row.rivalKey || row.rivalLabel))
     .filter(row => (row.targetOnlyCount + row.overlapCount + row.otherOnlyCount) > 0)
     .sort((a, b) => {
@@ -11142,16 +11206,41 @@ function renderSocialRivalsChart() {
   const metricPadding = Math.max(1, metricRange * 0.15);
   let yMin = minMetricValue - metricPadding;
   let yMax = maxMetricValue + metricPadding;
+  let yTickStep = null;
+  const getNiceStep = (rawStep) => {
+    if (!Number.isFinite(rawStep) || rawStep <= 0) return 1;
+    const exponent = Math.floor(Math.log10(rawStep));
+    const base = Math.pow(10, exponent);
+    const normalized = rawStep / base;
+    if (normalized <= 1) return 1 * base;
+    if (normalized <= 2) return 2 * base;
+    if (normalized <= 5) return 5 * base;
+    return 10 * base;
+  };
   if (metricConfig.isPercent) {
-    yMin = Math.max(0, yMin);
+    // Keep % chart grid consistent: fixed step, and max snapped to a step multiple.
+    yMin = 0;
+    const boundedMax = Math.min(100, Math.max(1, maxMetricValue));
+    // Aim for a tighter, zoomed-in scale (roughly up to ~10 tick steps).
+    yTickStep = Math.max(1, getNiceStep(boundedMax / 10));
+    yMax = Math.ceil(boundedMax / yTickStep) * yTickStep;
     yMax = Math.min(100, yMax);
+    if (yMax <= yMin) {
+      yMax = Math.min(100, yTickStep * 2);
+    }
   } else {
     yMin = Math.max(0, yMin);
   }
   if (yMax - yMin < 4) {
-    const center = (yMin + yMax) / 2;
-    yMin = Math.max(0, center - 2);
-    yMax = metricConfig.isPercent ? Math.min(100, center + 2) : center + 2;
+    if (metricConfig.isPercent) {
+      const boundedMax = Math.min(100, Math.max(1, maxMetricValue));
+      yMax = Math.min(100, Math.max(yTickStep * 2, Math.ceil(boundedMax / yTickStep) * yTickStep));
+      yMin = 0;
+    } else {
+      const center = (yMin + yMax) / 2;
+      yMin = Math.max(0, center - 2);
+      yMax = center + 2;
+    }
   }
 
   socialRivalsChart = new Chart(canvas, {
@@ -11196,7 +11285,7 @@ function renderSocialRivalsChart() {
           grid: { color: "#e5e7eb" }
         },
         y: {
-          beginAtZero: false,
+          beginAtZero: metricConfig.isPercent,
           min: yMin,
           max: yMax,
           title: {
@@ -11207,6 +11296,7 @@ function renderSocialRivalsChart() {
           },
           ticks: {
             color: "#555",
+            stepSize: yTickStep || undefined,
             callback: function(value) {
               return metricConfig.isPercent
                 ? `${Number(value).toFixed(0)}%`

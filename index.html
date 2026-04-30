@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AMQ Tracker Login</title>
+  <link rel="preload" href="https://pub-d42861e79d364f02841015cca59918a2.r2.dev/final_compressed.mp4" as="video" type="video/mp4" crossorigin>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="login-page">
@@ -12,7 +13,10 @@
   <div class="login-box">
     <div class="login-main">
       <h1>AMQ Relearn Tracker</h1>
-      <p class="login-subtitle">Works for any tour player.</p>
+      <p class="login-subtitle">
+        Works for any tour player.
+        <span class="login-feedback-link-wrap">(<a href="https://forms.gle/VqiTvvUPwTTyCTb96" target="_blank" rel="noopener noreferrer">Feedback form</a>)</span>
+      </p>
 
       <form id="loginForm" novalidate>
         <input id="username" placeholder="Enter username" autocomplete="username" autofocus>
@@ -24,12 +28,14 @@
 
     <div class="login-data-dates" aria-label="Data freshness information">
       <div id="loginDataUpTo">Data up to February 1, 2026</div>
+      <div id="loginCreditLine">Made by i_dont_like_loli, special thanks to all tour staff for data</div>
       <div class="login-background-toggle" aria-label="Background image style">
-        <button id="loginBgToggleBtn" class="login-bg-toggle-btn" type="button" aria-pressed="false">Default</button>
+        <button id="loginBgToggleBtn" class="login-bg-toggle-btn" type="button" aria-pressed="false">Do-not-click</button>
       </div>
     </div>
   </div>
 </div>
+<video id="loginBackgroundVideo" class="login-background-video" preload="auto" playsinline aria-hidden="true"></video>
 
 <script>
 const DATA_BASE_URL =
@@ -52,72 +58,77 @@ async function loadJSON(path) {
   return res.json();
 }
 
-let loginDesmosBackgroundReady = false;
-let loginDesmosBackgroundPromise = null;
-
-function preloadLoginDesmosBackground() {
-  if (loginDesmosBackgroundReady) {
-    return Promise.resolve(true);
-  }
-  if (loginDesmosBackgroundPromise) {
-    return loginDesmosBackgroundPromise;
-  }
-
-  loginDesmosBackgroundPromise = new Promise(resolve => {
-    const image = new Image();
-    let settled = false;
-    const finish = (ok) => {
-      if (settled) return;
-      settled = true;
-      if (ok) {
-        loginDesmosBackgroundReady = true;
-      }
-      resolve(ok);
-    };
-
-    image.decoding = "async";
-    image.onload = () => finish(true);
-    image.onerror = () => finish(false);
-    image.src = dataUrl("images/ilia-desmos.png");
-
-    if (image.complete && image.naturalWidth > 0) {
-      finish(true);
-    }
-  });
-
-  return loginDesmosBackgroundPromise;
-}
-
-function setLoginBackgroundView(view) {
-  const normalizedView = view === "desmos" ? "desmos" : "default";
-  const toggleBtn = document.getElementById("loginBgToggleBtn");
-  document.body.classList.toggle("is-desmos-view", normalizedView === "desmos");
-  if (toggleBtn) {
-    toggleBtn.textContent = normalizedView === "desmos" ? "Desmos" : "Default";
-    toggleBtn.setAttribute("aria-pressed", normalizedView === "desmos" ? "true" : "false");
-  }
-}
-
 function initializeLoginBackgroundToggle() {
   const toggleBtn = document.getElementById("loginBgToggleBtn");
+  const videoEl = document.getElementById("loginBackgroundVideo");
+  const dataUpToEl = document.getElementById("loginDataUpTo");
+  const creditLineEl = document.getElementById("loginCreditLine");
+
   if (!toggleBtn) {
     return;
   }
 
-  setLoginBackgroundView("default");
-  preloadLoginDesmosBackground();
+  const loginVideoUrl = "https://pub-d42861e79d364f02841015cca59918a2.r2.dev/final_compressed.mp4";
+
+  if (dataUpToEl && !dataUpToEl.dataset.defaultText) {
+    dataUpToEl.dataset.defaultText = dataUpToEl.innerText;
+  }
+  if (creditLineEl && !creditLineEl.dataset.defaultText) {
+    creditLineEl.dataset.defaultText = creditLineEl.innerText;
+  }
+
+  toggleBtn.setAttribute("aria-pressed", "false");
+  toggleBtn.textContent = "Do-not-click";
+
+  if (videoEl) {
+    if (!videoEl.src) {
+      videoEl.src = loginVideoUrl;
+      videoEl.load();
+    }
+
+    videoEl.addEventListener("ended", () => {
+      if (!Number.isFinite(videoEl.duration) || videoEl.duration <= 0) {
+        return;
+      }
+      videoEl.currentTime = Math.max(0, videoEl.duration - 0.001);
+      videoEl.pause();
+    });
+  }
 
   toggleBtn.addEventListener("click", async () => {
-    const nextView = document.body.classList.contains("is-desmos-view") ? "default" : "desmos";
-    if (nextView === "desmos" && !loginDesmosBackgroundReady) {
-      toggleBtn.disabled = true;
-      try {
-        await preloadLoginDesmosBackground();
-      } finally {
-        toggleBtn.disabled = false;
+    if (!videoEl) return;
+
+    const isVideoView = document.body.classList.contains("is-video-view");
+
+    if (isVideoView) {
+      document.body.classList.remove("is-video-view");
+      toggleBtn.setAttribute("aria-pressed", "false");
+      toggleBtn.textContent = "Do-not-click";
+      videoEl.pause();
+      videoEl.currentTime = 0;
+      if (dataUpToEl && dataUpToEl.dataset.defaultText) {
+        dataUpToEl.innerText = dataUpToEl.dataset.defaultText;
       }
+      if (creditLineEl && creditLineEl.dataset.defaultText) {
+        creditLineEl.innerText = creditLineEl.dataset.defaultText;
+      }
+      return;
     }
-    setLoginBackgroundView(nextView);
+
+    document.body.classList.add("is-video-view");
+    toggleBtn.setAttribute("aria-pressed", "true");
+    toggleBtn.textContent = "Back";
+    if (dataUpToEl) {
+      dataUpToEl.innerText = "Desmos Tracing / Total 32 hrs";
+    }
+    if (creditLineEl) {
+      creditLineEl.innerText = "";
+    }
+    try {
+      await videoEl.play();
+    } catch (err) {
+      console.warn("Video autoplay failed; waiting for user interaction.", err);
+    }
   });
 }
 
@@ -228,7 +239,11 @@ async function updateLoginDataUpTo() {
       const text = await res.text();
       const isoDate = parseDataDateFromChangelogText(text);
       if (isoDate) {
-        dataUpToEl.innerText = `Data up to ${formatIsoDate(isoDate)}`;
+        const defaultText = `Data up to ${formatIsoDate(isoDate)}`;
+        dataUpToEl.dataset.defaultText = defaultText;
+        if (!document.body.classList.contains("is-video-view")) {
+          dataUpToEl.innerText = defaultText;
+        }
         return;
       }
     } catch (err) {
