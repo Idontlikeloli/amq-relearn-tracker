@@ -193,10 +193,8 @@ a {
   background-attachment: fixed;
 }
 
-.login-page.is-desmos-view {
-  background-image:
-    radial-gradient(circle at 18% 22%, rgba(148, 194, 255, 0.22) 0, rgba(148, 194, 255, 0) 42%),
-    url("data/images/ilia-desmos.png");
+.login-page.is-video-view {
+  background: #000;
 }
 
 @media (max-width: 900px) {
@@ -205,7 +203,26 @@ a {
   }
 }
 
+.login-background-video {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  object-fit: contain;
+  object-position: center center;
+  background: #000;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.login-page.is-video-view .login-background-video {
+  display: block;
+}
+
 .login-shell {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   display: flex;
   align-items: stretch;
@@ -234,11 +251,19 @@ a {
   justify-content: flex-start;
 }
 
+.login-page.is-video-view .login-box {
+  background: transparent;
+}
+
 .login-main {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.login-page.is-video-view .login-main {
+  display: none;
 }
 
 .login-box h1 {
@@ -256,6 +281,17 @@ a {
   font-weight: 600;
 }
 
+.login-feedback-link-wrap {
+  font-size: 12px;
+  font-weight: 500;
+  color: #d8b4fe;
+}
+
+.login-feedback-link-wrap a,
+.login-feedback-link-wrap a:visited {
+  color: #d8b4fe;
+}
+
 .login-data-dates {
   display: flex;
   flex-direction: column;
@@ -271,9 +307,62 @@ a {
   order: 0;
 }
 
+.login-page.is-video-view .login-data-dates {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  align-self: auto;
+  max-width: calc(100vw - 24px);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.login-page.is-video-view #loginCreditLine {
+  display: none;
+}
+
+.login-page.is-video-view #loginDataUpTo {
+  margin-top: 0;
+  margin-left: 6px;
+  white-space: nowrap;
+  color: rgba(15, 23, 42, 0.92);
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.45),
+    0 0 8px rgba(0, 0, 0, 0.45);
+}
+
+.login-page.is-video-view .login-background-toggle {
+  margin-bottom: 0;
+}
+
+.login-page.is-video-view .login-bg-toggle-btn {
+  background: rgba(255, 255, 255, 0.55) !important;
+  color: rgba(15, 23, 42, 0.96) !important;
+  border: 1px solid rgba(15, 23, 42, 0.35) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22) !important;
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.5),
+    0 0 8px rgba(0, 0, 0, 0.45);
+}
+
 #loginDataUpTo {
   order: 2;
   margin-top: auto;
+}
+
+#loginCreditLine {
+  order: 3;
+  color: rgba(226, 232, 240, 0.68);
 }
 
 .login-background-toggle {
