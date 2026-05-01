@@ -41,6 +41,25 @@
       visibility: visible !important;
     }
 
+    .topbar-data-range.locked.label-lock-mode .data-range-label {
+      display: none !important;
+    }
+
+    .topbar-data-range.locked.label-lock-mode .data-range-lock-badge {
+      display: inline-block !important;
+      visibility: visible !important;
+      margin-left: 0 !important;
+      order: 0 !important;
+    }
+
+    .topbar-data-range.locked.label-lock-mode .data-range-select {
+      order: 1 !important;
+    }
+
+    .topbar-data-range.locked.label-lock-mode .language-toggle {
+      order: 2 !important;
+    }
+
     body.performance-nav-mode {
       background:
         radial-gradient(circle at 16% -10%, rgba(126, 164, 209, 0.20), rgba(126, 164, 209, 0) 40%),
@@ -1752,6 +1771,10 @@
       box-shadow: none !important;
     }
 
+    #overviewStatsSummaryView .overview-genre-radar-wrap {
+      height: 520px !important;
+    }
+
     #overviewStatsSummaryView .chart-card {
       background: transparent !important;
       border-color: transparent !important;
@@ -1779,23 +1802,23 @@
     }
 
     #overviewSection #overviewMainView .overview-rig-top-song-card {
-      background: #d7c39f !important;
-      border: 0 !important;
-      box-shadow: none !important;
+      background: #E9F2FA !important;
+      border: 1px solid #C8DBEA !important;
+      box-shadow: 0 3px 8px rgba(95, 76, 66, 0.12) !important;
     }
 
     #overviewSection #overviewMainView .overview-rig-top-song-anime,
     #overviewSection #overviewMainView .overview-rig-top-song-name {
-      color: #2f2417 !important;
+      color: #4a3a33 !important;
     }
 
     #overviewSection #overviewMainView .overview-rig-top-song-type {
-      color: #4a3823 !important;
+      color: #6a564e !important;
     }
 
     #overviewSection #overviewMainView .overview-rig-top-song-submeta,
     #overviewSection #overviewMainView .overview-rig-top-song-rank {
-      color: #5c4a33 !important;
+      color: #7b685f !important;
     }
 
     #overviewSection #overviewMainView .overview-rig-top-song-cover {
@@ -1804,38 +1827,43 @@
     }
 
     #overviewSection #overviewMainView #overviewTopSolosCard {
-      border: 1px solid #d4a017 !important;
-      background: #f4d35e !important;
-      box-shadow: none !important;
+      border: 1px solid #bcd8d4 !important;
+      background: linear-gradient(145deg, #eef7f6 0%, #e6f1ef 52%, #ddebea 100%) !important;
+      box-shadow: 0 4px 10px rgba(71, 102, 112, 0.10) !important;
     }
 
     #overviewSection #overviewMainView #overviewTopSolosCard .chart-title {
-      color: #6b4500 !important;
+      color: #2f4d52 !important;
     }
 
     #overviewSection #overviewMainView #overviewTopSolosCard .overview-solos-table th {
-      background: #fde68a !important;
-      color: #6b4500 !important;
-      border-bottom-color: #e6b640 !important;
+      background: #d9e9e7 !important;
+      color: #36565b !important;
+      border-bottom-color: #c4dad7 !important;
     }
 
     #overviewSection #overviewMainView #overviewTopSolosCard .overview-solos-table td {
-      background: #fff8dc !important;
-      border-bottom-color: #edd08a !important;
+      background: #f4faf9 !important;
+      color: #2f4d52 !important;
+      border-bottom-color: #d8e8e5 !important;
     }
 
     #overviewSection #overviewMainView #overviewTopSolosCard .overview-solos-table tbody tr:nth-child(even) td {
-      background: #fff2bf !important;
+      background: #ebf4f3 !important;
     }
 
     #overviewSection #overviewMainView #overviewTopSolosCard .overview-solos-empty {
-      color: #7a5a14 !important;
+      color: #4f6d72 !important;
     }
 
     #overviewSection #overviewMainView #overviewTopRigSongsCard {
-      border: 1px solid #5f7fa4 !important;
-      background: #7394ba !important;
-      box-shadow: none !important;
+      border: 1px solid #bcd8d4 !important;
+      background: linear-gradient(145deg, #eef7f6 0%, #e6f1ef 52%, #ddebea 100%) !important;
+      box-shadow: 0 4px 10px rgba(71, 102, 112, 0.10) !important;
+    }
+
+    #overviewSection #overviewMainView #overviewTopRigSongsCard .chart-title {
+      color: #2f4d52 !important;
     }
 
     #overviewSection #overviewMainView #overviewGuessRateTrendCard {
@@ -1847,6 +1875,30 @@
     #overviewSection #overviewMainView #overviewGuessRateTrendCard .chart-wrap {
       background: #ffffff !important;
       border-color: #e3ebf5 !important;
+    }
+
+    .trend-zoom-title-block {
+      display: inline-flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 6px !important;
+    }
+
+    .trend-zoom-reset-btn {
+      display: none;
+      border: 1px solid rgba(148, 163, 184, 0.8) !important;
+      background: rgba(226, 232, 240, 0.95) !important;
+      color: #0f172a !important;
+      border-radius: 8px !important;
+      padding: 4px 10px !important;
+      font-size: 11px !important;
+      font-weight: 500 !important;
+      line-height: 1.1 !important;
+      cursor: pointer !important;
+    }
+
+    .trend-zoom-reset-btn:hover {
+      background: rgba(203, 213, 225, 0.95) !important;
     }
 
     @media (max-width: 900px) {
@@ -2733,6 +2785,7 @@
     #otherToolsSection .rig-analysis-year-marker.mean .rig-analysis-year-tag {
       color: #0f172a !important;
       background: var(--rig-year-mean-color) !important;
+      filter: brightness(0.86) !important;
       transform: none !important;
     }
 
@@ -4514,15 +4567,15 @@
       <div class="topbar-data-range">
         <label for="dataRangeSelect" class="data-range-label">Using data</label>
         <select id="dataRangeSelect" class="data-range-select">
-          <option value="all">All games</option>
-          <option value="10">Past 10 games</option>
-          <option value="20">Past 20 games</option>
-          <option value="50">Past 50 games</option>
+          <option value="all">All tours</option>
           <option value="week">Past week</option>
           <option value="month">Past month</option>
           <option value="2months">Past 2 months</option>
           <option value="3months">Past 3 months</option>
           <option value="6months">Past 6 months</option>
+          <option value="10">Past 10 tours</option>
+          <option value="20">Past 20 tours</option>
+          <option value="50">Past 50 tours</option>
         </select>
         <div id="overviewLanguageToggle" class="language-toggle" role="group" aria-label="Language toggle">
           <button id="overviewLanguageEnBtn" class="language-toggle-btn active" type="button" data-lang="en" aria-pressed="true">EN</button>
@@ -4605,9 +4658,12 @@
 
       <div id="overviewGuessRateTrendCard" class="chart-card">
         <div class="chart-header">
-          <div class="chart-title">Guess Rate Trend</div>
+          <div class="trend-zoom-title-block">
+            <div class="chart-title">Guess Rate Trend</div>
+            <button id="overviewGuessRateTrendResetZoom" class="trend-zoom-reset-btn" type="button">Reset zoom</button>
+          </div>
           <div class="chart-meta">
-            <span id="foundGames">Found 0 games</span>
+            <span id="foundGames">Found 0 tours</span>
             <span id="slopeInfo">Slope: 0.00% per game</span>
           </div>
         </div>
@@ -4645,7 +4701,7 @@
           <div class="chart-header">
             <div class="chart-title">Genre</div>
           </div>
-          <div class="chart-wrap"><canvas id="genreRadarChart"></canvas></div>
+          <div class="chart-wrap overview-genre-radar-wrap"><canvas id="genreRadarChart"></canvas></div>
         </div>
         <div class="chart-card">
         <div class="chart-header">
@@ -4706,7 +4762,7 @@
         <div class="chart-header">
           <div class="chart-title">OP Guess Rate Trend</div>
           <div class="chart-meta">
-            <span id="opFoundGames">Found 0 games</span>
+            <span id="opFoundGames">Found 0 tours</span>
             <span id="opSlopeInfo">Slope: 0.00% per game</span>
           </div>
         </div>
@@ -4716,7 +4772,7 @@
         <div class="chart-header">
           <div class="chart-title">ED Guess Rate Trend</div>
           <div class="chart-meta">
-            <span id="edFoundGames">Found 0 games</span>
+            <span id="edFoundGames">Found 0 tours</span>
             <span id="edSlopeInfo">Slope: 0.00% per game</span>
           </div>
         </div>
@@ -4726,7 +4782,7 @@
         <div class="chart-header">
           <div class="chart-title">Insert Guess Rate Trend</div>
           <div class="chart-meta">
-            <span id="inFoundGames">Found 0 games</span>
+            <span id="inFoundGames">Found 0 tours</span>
             <span id="inSlopeInfo">Slope: 0.00% per game</span>
           </div>
         </div>
@@ -4737,7 +4793,7 @@
         <div class="chart-header">
           <div class="chart-title">Combined OP / ED / IN Guess Rate Trend</div>
           <div class="chart-meta">
-            <span id="combinedFoundGames">Found 0 games</span>
+            <span id="combinedFoundGames">Found 0 tours</span>
           </div>
         </div>
         <div class="chart-wrap"><canvas id="combinedGuessAreaChart"></canvas></div>
@@ -4747,7 +4803,7 @@
         <div class="chart-header">
           <div class="chart-title">Rolling Average Guess Rate</div>
           <div class="chart-meta">
-            <span id="rollingFoundGames">Found 0 games</span>
+            <span id="rollingFoundGames">Found 0 tours</span>
             <span>Windows: trailing 3 / 5 games</span>
           </div>
         </div>
@@ -4758,7 +4814,7 @@
         <div class="chart-header">
           <div class="chart-title">Composite Guess Rate</div>
           <div class="chart-meta">
-            <span id="mixFoundGames">Found 0 games</span>
+            <span id="mixFoundGames">Found 0 tours</span>
           </div>
         </div>
         <div class="chart-wrap"><canvas id="guessRateMixRadarChart"></canvas></div>
@@ -4782,7 +4838,7 @@
         <div class="chart-header">
           <div class="chart-title">Lives Taken Trend</div>
           <div class="chart-meta">
-            <span id="takenFoundGames">Found 0 games</span>
+            <span id="takenFoundGames">Found 0 tours</span>
             <span id="takenSlopeInfo">Slope: 0.00% per game</span>
           </div>
         </div>
@@ -4792,7 +4848,7 @@
         <div class="chart-header">
           <div class="chart-title">Lives Saved Trend</div>
           <div class="chart-meta">
-            <span id="savedFoundGames">Found 0 games</span>
+            <span id="savedFoundGames">Found 0 tours</span>
             <span id="savedSlopeInfo">Slope: 0.00% per game</span>
           </div>
         </div>
@@ -4805,7 +4861,7 @@
         <div class="chart-header">
           <div class="chart-title">Onlist Guess Rate Trend</div>
           <div class="chart-meta">
-            <span id="onlistFoundGames">Found 0 games</span>
+            <span id="onlistFoundGames">Found 0 tours</span>
             <span id="onlistSlopeInfo">Slope: 0.00% per game</span>
           </div>
         </div>
@@ -4815,7 +4871,7 @@
         <div class="chart-header">
           <div class="chart-title">Offlist Guess Rate Trend</div>
           <div class="chart-meta">
-            <span id="offlistFoundGames">Found 0 games</span>
+            <span id="offlistFoundGames">Found 0 tours</span>
             <span id="offlistSlopeInfo">Slope: 0.00% per game</span>
           </div>
         </div>
@@ -4828,7 +4884,7 @@
         <div class="chart-header">
           <div class="chart-title">Rig vs Total Songs Over Time</div>
           <div class="chart-meta">
-            <span id="rigFoundGames">Found 0 games</span>
+            <span id="rigFoundGames">Found 0 tours</span>
             <span id="rigSlopeInfo">Rigs slope: 0.00% per game</span>
             <span id="rigHitSlopeInfo">Total hit slope: 0.00% per game</span>
           </div>
@@ -4839,7 +4895,7 @@
         <div class="chart-header">
           <div class="chart-title">Guess Rate vs Avg/8</div>
           <div class="chart-meta">
-            <span id="guessVsAvg8FoundGames">Found 0 games</span>
+            <span id="guessVsAvg8FoundGames">Found 0 tours</span>
           </div>
         </div>
         <div class="chart-wrap"><canvas id="guessRateVsAvg8Chart"></canvas></div>
@@ -5642,6 +5698,20 @@ const sectionLabels = {
   otherTools: "Other tools"
 };
 
+const DATA_RANGE_OPTIONS = [
+  { value: "all", label: "All tours" },
+  { value: "week", label: "Past week" },
+  { value: "month", label: "Past month" },
+  { value: "2months", label: "Past 2 months" },
+  { value: "3months", label: "Past 3 months" },
+  { value: "6months", label: "Past 6 months" },
+  { value: "10", label: "Past 10 tours" },
+  { value: "20", label: "Past 20 tours" },
+  { value: "50", label: "Past 50 tours" }
+];
+
+const DATA_RANGE_EXCLUDED_VALUES_FOR_NO_PAST_GAMES = new Set(["10", "20", "50"]);
+
 const initialSection = sections[sectionFromUrl] ? sectionFromUrl : "overview";
 const dataRangeSelect = document.getElementById("dataRangeSelect");
 const overviewViewTabs = document.getElementById("overviewViewTabs");
@@ -5818,6 +5888,7 @@ let latestRankTimestampByPlayerKey = null;
 let latestRankLoadPromise = null;
 let playersDirectoryPromise = null;
 let playersDirectoryByLookup = new Map();
+const preloadTaskStatus = new Set();
 const PCORRECT_FILE_BY_CAP = {
   "45": "pcorrect/pcorrect_0_45.json",
   "40": "pcorrect/pcorrect_0_40.json",
@@ -5918,6 +5989,131 @@ const secondaryNavBySection = {
   social: ["Synergy", "Rivals", "Team Contributions"],
   otherTools: ["Search songs", "Search song frequency", "Rig/List analysis", "Original Tour data(Calendar)", "Changelog"]
 };
+
+function scheduleBackgroundTask(taskKey, taskFn, delayMs = 0) {
+  if (!taskKey || typeof taskFn !== "function") return;
+  if (preloadTaskStatus.has(taskKey)) return;
+  preloadTaskStatus.add(taskKey);
+
+  const runTask = () => {
+    Promise.resolve()
+      .then(taskFn)
+      .catch(err => {
+        console.error(`[preload] ${taskKey} failed`, err);
+      });
+  };
+
+  const launch = () => {
+    if (delayMs > 0) {
+      setTimeout(runTask, delayMs);
+    } else {
+      runTask();
+    }
+  };
+
+  if (typeof requestIdleCallback === "function") {
+    requestIdleCallback(() => launch(), { timeout: 1200 });
+  } else {
+    setTimeout(() => launch(), 0);
+  }
+}
+
+function preloadOverviewGeneralForUser(displayName) {
+  if (!displayName) return;
+  scheduleBackgroundTask(`overview-general:${displayName}`, async () => {
+    await Promise.allSettled([
+      loadOverviewAnimeTypeDataForUser(displayName),
+      loadOverviewTopSolosForUser(displayName),
+      loadOverviewTopRigSongsForUser(displayName)
+    ]);
+  });
+}
+
+function preloadFirstSubtabForSection(sectionKey, displayName) {
+  if (!displayName || !sectionKey || sectionKey === "overview") return;
+  const taskKey = `section-first:${sectionKey}:${displayName}`;
+  scheduleBackgroundTask(taskKey, async () => {
+    if (sectionKey === "performance") {
+      if (Array.isArray(fullUserData) && fullUserData.length) {
+        renderPerformanceGuessRate(getVisibleUserData(fullUserData));
+      }
+      return;
+    }
+    if (sectionKey === "knowledge") {
+      await loadArtistDataForUser(displayName);
+      return;
+    }
+    if (sectionKey === "insights") {
+      await loadRelearnDataForUser(displayName);
+      return;
+    }
+    if (sectionKey === "social") {
+      await renderSocialSynergyView();
+      return;
+    }
+    if (sectionKey === "otherTools") {
+      await loadSearchSongsDataForUser(displayName);
+    }
+  }, 60);
+}
+
+function preloadFirstSubtabsForAllSections(displayName) {
+  if (!displayName) return;
+  ["performance", "knowledge", "insights", "social", "otherTools"].forEach(sectionKey => {
+    preloadFirstSubtabForSection(sectionKey, displayName);
+  });
+}
+
+function preloadOtherSubtabsForSection(sectionKey, displayName) {
+  if (!displayName || !sectionKey) return;
+  const firstSubtab = (secondaryNavBySection[sectionKey] || [])[0];
+  if (!firstSubtab) return;
+  const activeSub = activeSubSectionBySection[sectionKey] || firstSubtab;
+  if (activeSub !== firstSubtab) return;
+
+  const taskKey = `section-rest:${sectionKey}:${displayName}`;
+  scheduleBackgroundTask(taskKey, async () => {
+    if (sectionKey === "performance") {
+      if (Array.isArray(fullUserData) && fullUserData.length) {
+        const visible = getVisibleUserData(fullUserData);
+        renderPerformanceLivesTakenSaved(visible);
+        renderPerformanceRigAnalysis(visible);
+        renderPerformanceCompositeCharts(visible);
+      }
+      return;
+    }
+    if (sectionKey === "knowledge") {
+      await Promise.allSettled([
+        loadTagDataForUser(displayName),
+        loadByEraDataForUser(displayName)
+      ]);
+      return;
+    }
+    if (sectionKey === "insights") {
+      await Promise.allSettled([
+        loadWrongGuessDataForUser(displayName),
+        loadNeverCorrectDataForUser(displayName),
+        loadPopularityDataForUser(displayName),
+        loadPCorrectDataForUser(displayName)
+      ]);
+      return;
+    }
+    if (sectionKey === "social") {
+      renderSocialRivalFilter();
+      renderSocialRivalsChart();
+      renderSocialTeamContributionView();
+      return;
+    }
+    if (sectionKey === "otherTools") {
+      await Promise.allSettled([
+        ensureSearchSongFrequencyData(),
+        ensureRigAnalysisData(),
+        ensureOriginalTourCalendarData(),
+        renderOtherToolsChangelog()
+      ]);
+    }
+  }, 140);
+}
 
 function setSectionTitle(sectionKey, title) {
   const titleEl = document.querySelector(`#${sections[sectionKey]} .page-title`);
@@ -6558,18 +6754,52 @@ function updateDataRangeControlState(sectionKey, subSection) {
   if (!dataRangeSelect) return;
   const dataRangeWrap = dataRangeSelect.closest(".topbar-data-range");
   const dataRangeLockBadge = document.getElementById("dataRangeLockBadge");
-  const shouldLockToAll = sectionKey === "social" && subSection === "Synergy";
+  const isKnowledgeArtistFamiliarity = sectionKey === "knowledge" && subSection === "Artist Familiarity";
+  const isSocialSynergy = sectionKey === "social" && subSection === "Synergy";
+  const isSocialTeamContributions = sectionKey === "social" && subSection === "Team Contributions";
+  const isRecommendationsSection = sectionKey === "insights";
+  const isOtherToolsSection = sectionKey === "otherTools";
+  const isOtherToolsRigListAnalysis = isOtherToolsSection && subSection === "Rig/List analysis";
+
+  const shouldHidePastGameOptions =
+    (sectionKey === "overview" && overviewActiveView === "statsSummary")
+    || (sectionKey === "knowledge" && (subSection === "Tag Familiarity" || subSection === "Seasonal Comparison" || subSection === "Artist Familiarity"))
+    || isRecommendationsSection
+    || (isOtherToolsSection && !isOtherToolsRigListAnalysis);
+
+  const allowedOptions = shouldHidePastGameOptions
+    ? DATA_RANGE_OPTIONS.filter(opt => !DATA_RANGE_EXCLUDED_VALUES_FOR_NO_PAST_GAMES.has(opt.value))
+    : DATA_RANGE_OPTIONS;
+
+  const previousValue = String(dataRangeSelect.value || "all");
+  dataRangeSelect.innerHTML = allowedOptions
+    .map(opt => `<option value="${opt.value}">${opt.label}</option>`)
+    .join("");
+  const hasPreviousValue = allowedOptions.some(opt => opt.value === previousValue);
+  const nextValue = hasPreviousValue ? previousValue : "all";
+  dataRangeSelect.value = nextValue;
+
+  const shouldLockToAll =
+    isSocialSynergy
+    || isSocialTeamContributions
+    || isRecommendationsSection
+    || (isOtherToolsSection && !isOtherToolsRigListAnalysis)
+    || isKnowledgeArtistFamiliarity;
   dataRangeSelect.disabled = shouldLockToAll;
   if (dataRangeWrap) {
     dataRangeWrap.classList.toggle("locked", shouldLockToAll);
+    dataRangeWrap.classList.toggle("label-lock-mode", shouldLockToAll);
   }
   if (dataRangeLockBadge) {
     dataRangeLockBadge.title = shouldLockToAll
-      ? "This view requires All games."
+      ? "This view requires All tours."
       : "";
   }
   if (shouldLockToAll && dataRangeSelect.value !== "all") {
     dataRangeSelect.value = "all";
+  }
+
+  if (dataRangeSelect.value !== previousValue) {
     dataRangeSelect.dispatchEvent(new Event("change"));
   }
 }
@@ -6585,6 +6815,7 @@ function setActiveSubSection(sectionKey, subSection) {
 
   updateDataRangeControlState(sectionKey, subSection);
   renderSubSectionContent(sectionKey, subSection);
+  preloadOtherSubtabsForSection(sectionKey, currentDisplayName || currentStatKey || "");
 }
 
 function buildSecondaryNav(sectionKey) {
@@ -6643,6 +6874,7 @@ function setActiveSection(targetSection) {
   updateDataRangeControlState(targetSection, activeSubSectionBySection[targetSection] || "");
   buildSecondaryNav(targetSection);
   renderOverviewSubView();
+  preloadFirstSubtabForSection(targetSection, currentDisplayName || currentStatKey || "");
 }
 
 function renderOverviewSubView() {
@@ -6797,6 +7029,7 @@ if (overviewViewTabs) {
         ? "statsSummary"
         : "overview";
       overviewActiveView = targetView;
+      updateDataRangeControlState(activeSection, activeSubSectionBySection[activeSection] || "");
       renderOverviewSubView();
     });
   });
@@ -7293,23 +7526,23 @@ function rerenderRecommendationsForLanguage() {
   if (activeSection === "insights") {
     const activeSubSection = activeSubSectionBySection.insights || "";
     if (activeSubSection === "Relearn Tracker") {
-      renderInsightsRelearnTracker();
+      rerenderInsightsRelearnTrackerLanguageOnly();
       return;
     }
     if (activeSubSection === "By never correct") {
-      renderInsightsNeverCorrect();
+      rerenderInsightsNeverCorrectLanguageOnly();
       return;
     }
     if (activeSubSection === "By Wrong Guess") {
-      renderInsightsWrongGuess();
+      rerenderInsightsWrongGuessLanguageOnly();
       return;
     }
     if (activeSubSection === "By Popularity") {
-      renderInsightsPopularity();
+      rerenderInsightsPopularityLanguageOnly();
       return;
     }
     if (activeSubSection === "By % correct") {
-      renderInsightsPCorrect();
+      rerenderInsightsPCorrectLanguageOnly();
       return;
     }
     return;
@@ -7318,7 +7551,7 @@ function rerenderRecommendationsForLanguage() {
   if (activeSection === "otherTools") {
     const activeSubSection = activeSubSectionBySection.otherTools || "";
     if (activeSubSection === "Search songs") {
-      renderInsightsSearchSongs();
+      rerenderInsightsSearchSongsLanguageOnly();
       return;
     }
     if (activeSubSection === "Search song frequency") {
@@ -7326,6 +7559,159 @@ function rerenderRecommendationsForLanguage() {
       return;
     }
   }
+}
+
+function rerenderInsightsRelearnTrackerLanguageOnly() {
+  const tbody = document.getElementById("relearnSongsTableBody");
+  if (!tbody) return;
+
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+  if (!rows.length) {
+    renderInsightsRelearnTracker();
+    return;
+  }
+
+  const songs = Array.isArray(cachedRelearnSongs) ? cachedRelearnSongs : [];
+  const start = relearnPageIndex * RELEARN_PAGE_SIZE;
+  const end = start + RELEARN_PAGE_SIZE;
+  const pageSongs = songs.slice(start, end);
+  if (!pageSongs.length || rows.length !== pageSongs.length) {
+    renderInsightsRelearnTracker();
+    return;
+  }
+
+  rows.forEach((row, index) => {
+    const animeCell = row.children[1];
+    if (!animeCell) return;
+    animeCell.innerText = getLanguageAwareAnimeName(pageSongs[index]);
+  });
+}
+
+function rerenderTableAnimeColumnLanguageOnly({
+  tbodyId,
+  fallbackRender,
+  pageSongs,
+  animeColumnIndex
+}) {
+  const tbody = document.getElementById(tbodyId);
+  if (!tbody) return;
+
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+  if (!rows.length || !Array.isArray(pageSongs) || !pageSongs.length || rows.length !== pageSongs.length) {
+    fallbackRender();
+    return;
+  }
+
+  rows.forEach((row, index) => {
+    const animeCell = row.children[animeColumnIndex];
+    if (!animeCell) return;
+    animeCell.innerText = getLanguageAwareAnimeName(pageSongs[index]);
+  });
+}
+
+function rerenderInsightsWrongGuessLanguageOnly() {
+  const songs = Array.isArray(cachedWrongGuessSongs) ? cachedWrongGuessSongs : [];
+  const pageCount = Math.max(1, Math.ceil(songs.length / RELEARN_PAGE_SIZE));
+  const normalizedPageIndex = Math.min(Math.max(0, wrongGuessPageIndex), pageCount - 1);
+  const start = normalizedPageIndex * RELEARN_PAGE_SIZE;
+  const end = start + RELEARN_PAGE_SIZE;
+  const pageSongs = songs.slice(start, end);
+
+  rerenderTableAnimeColumnLanguageOnly({
+    tbodyId: "wrongGuessSongsTableBody",
+    fallbackRender: renderInsightsWrongGuess,
+    pageSongs,
+    animeColumnIndex: 2
+  });
+}
+
+function rerenderInsightsNeverCorrectLanguageOnly() {
+  const songs = Array.isArray(cachedNeverCorrectSongs) ? cachedNeverCorrectSongs : [];
+  const pageCount = Math.max(1, Math.ceil(songs.length / RELEARN_PAGE_SIZE));
+  const normalizedPageIndex = Math.min(Math.max(0, neverCorrectPageIndex), pageCount - 1);
+  const start = normalizedPageIndex * RELEARN_PAGE_SIZE;
+  const end = start + RELEARN_PAGE_SIZE;
+  const pageSongs = songs.slice(start, end);
+
+  rerenderTableAnimeColumnLanguageOnly({
+    tbodyId: "neverCorrectSongsTableBody",
+    fallbackRender: renderInsightsNeverCorrect,
+    pageSongs,
+    animeColumnIndex: 2
+  });
+}
+
+function rerenderInsightsPopularityLanguageOnly() {
+  const songs = Array.isArray(cachedPopularitySongs) ? cachedPopularitySongs : [];
+  const pageCount = Math.max(1, Math.ceil(songs.length / RELEARN_PAGE_SIZE));
+  const normalizedPageIndex = Math.min(Math.max(0, popularityPageIndex), pageCount - 1);
+  const start = normalizedPageIndex * RELEARN_PAGE_SIZE;
+  const end = start + RELEARN_PAGE_SIZE;
+  const pageSongs = songs.slice(start, end);
+
+  rerenderTableAnimeColumnLanguageOnly({
+    tbodyId: "popularitySongsTableBody",
+    fallbackRender: renderInsightsPopularity,
+    pageSongs,
+    animeColumnIndex: 2
+  });
+}
+
+function rerenderInsightsPCorrectLanguageOnly() {
+  const songs = Array.isArray(cachedPCorrectSongs) ? cachedPCorrectSongs : [];
+  const eligibleSongs = songs.filter(song => {
+    const attempts = Number(song && song.attempts);
+    return Number.isFinite(attempts) && attempts >= 8;
+  });
+  const pageCount = Math.max(1, Math.ceil(eligibleSongs.length / RELEARN_PAGE_SIZE));
+  const normalizedPageIndex = Math.min(Math.max(0, pcorrectPageIndex), pageCount - 1);
+  const start = normalizedPageIndex * RELEARN_PAGE_SIZE;
+  const end = start + RELEARN_PAGE_SIZE;
+  const pageSongs = eligibleSongs.slice(start, end);
+
+  rerenderTableAnimeColumnLanguageOnly({
+    tbodyId: "pcorrectSongsTableBody",
+    fallbackRender: renderInsightsPCorrect,
+    pageSongs,
+    animeColumnIndex: 2
+  });
+}
+
+function getFilteredSearchSongsRows() {
+  const songs = Array.isArray(cachedSearchSongs) ? cachedSearchSongs : [];
+  const normalizedQuery = String(searchSongsQuery || "").trim().toLowerCase();
+  const normalizedQueryCompact = normalizeSearchSongText(normalizedQuery);
+  const rawMode = String(searchSongsMode || "all").toLowerCase();
+  const activeMode = rawMode === "off" ? "all" : rawMode;
+
+  if (!normalizedQuery) return songs;
+
+  return songs.filter(song => {
+    const candidates = getSearchSongCandidatesByMode(song, activeMode);
+    const compactCandidates = candidates.map(value => normalizeSearchSongText(value));
+    if (searchSongsExactMatch) {
+      return candidates.some(value => value === normalizedQuery)
+        || compactCandidates.some(value => value === normalizedQueryCompact);
+    }
+    return candidates.some(value => value.includes(normalizedQuery))
+      || compactCandidates.some(value => value.includes(normalizedQueryCompact));
+  });
+}
+
+function rerenderInsightsSearchSongsLanguageOnly() {
+  const filteredSongs = getFilteredSearchSongsRows();
+  const pageCount = Math.max(1, Math.ceil(filteredSongs.length / SEARCH_SONGS_PAGE_SIZE));
+  const normalizedPageIndex = Math.min(Math.max(0, searchSongsPageIndex), pageCount - 1);
+  const start = normalizedPageIndex * SEARCH_SONGS_PAGE_SIZE;
+  const end = start + SEARCH_SONGS_PAGE_SIZE;
+  const pageSongs = filteredSongs.slice(start, end);
+
+  rerenderTableAnimeColumnLanguageOnly({
+    tbodyId: "searchSongsTableBody",
+    fallbackRender: renderInsightsSearchSongs,
+    pageSongs,
+    animeColumnIndex: 1
+  });
 }
 
 function scheduleLanguageRerender() {
@@ -11508,6 +11894,134 @@ function buildRadarScale(values, ringCount = 5) {
   };
 }
 
+function ensureTrendZoomResetButton(chart, canvasId) {
+  const canvas = chart && chart.canvas;
+  const card = canvas && canvas.closest ? canvas.closest(".chart-card") : null;
+  if (!card) return null;
+  const title = card.querySelector(".chart-header .chart-title");
+  if (!title) return null;
+
+  let titleBlock = title.closest(".trend-zoom-title-block");
+  if (!titleBlock) {
+    titleBlock = document.createElement("div");
+    titleBlock.className = "trend-zoom-title-block";
+    title.parentNode.insertBefore(titleBlock, title);
+    titleBlock.appendChild(title);
+  }
+
+  let resetBtn = titleBlock.querySelector(`.trend-zoom-reset-btn[data-chart-id="${canvasId}"]`);
+  if (!resetBtn) {
+    resetBtn = document.createElement("button");
+    resetBtn.type = "button";
+    resetBtn.className = "trend-zoom-reset-btn";
+    resetBtn.dataset.chartId = canvasId;
+    resetBtn.textContent = "Reset zoom";
+    titleBlock.appendChild(resetBtn);
+  }
+
+  resetBtn.style.display = "none";
+  resetBtn.onclick = () => {
+    if (!chart || !chart.options || !chart.options.scales || !chart.options.scales.x) return;
+    chart.options.scales.x.min = undefined;
+    chart.options.scales.x.max = undefined;
+    chart.update("none");
+    resetBtn.style.display = "none";
+  };
+  return resetBtn;
+}
+
+function attachTrendZoomBrush(chart, canvasId, pointCount) {
+  const canvas = chart && chart.canvas;
+  if (!canvas || !canvas.parentElement || pointCount < 3) return;
+  const resetBtn = ensureTrendZoomResetButton(chart, canvasId);
+  if (!resetBtn) return;
+  const wrap = canvas.parentElement;
+  if (getComputedStyle(wrap).position === "static") {
+    wrap.style.position = "relative";
+  }
+
+  let brush = wrap.querySelector(".overview-trend-brush");
+  if (!brush) {
+    brush = document.createElement("div");
+    brush.className = "overview-trend-brush";
+    brush.style.position = "absolute";
+    brush.style.display = "none";
+    brush.style.pointerEvents = "none";
+    brush.style.background = "rgba(88, 111, 138, 0.20)";
+    brush.style.border = "1px solid rgba(88, 111, 138, 0.72)";
+    wrap.appendChild(brush);
+  }
+
+  let dragging = false;
+  let startX = 0;
+
+  const endDrag = event => {
+    if (!dragging) return;
+    dragging = false;
+    const xScale = chart && chart.scales && chart.scales.x;
+    const rect = canvas.getBoundingClientRect();
+    const endX = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
+    const minX = Math.max(0, Math.min(startX, endX));
+    const maxX = Math.max(0, Math.max(startX, endX));
+    brush.style.display = "none";
+
+    if (!xScale || maxX - minX < 10) return;
+    const rawStart = Number(xScale.getValueForPixel(minX));
+    const rawEnd = Number(xScale.getValueForPixel(maxX));
+    if (!Number.isFinite(rawStart) || !Number.isFinite(rawEnd)) return;
+
+    const startIdx = Math.max(0, Math.min(pointCount - 1, Math.floor(Math.min(rawStart, rawEnd))));
+    const endIdx = Math.max(0, Math.min(pointCount - 1, Math.ceil(Math.max(rawStart, rawEnd))));
+    if (endIdx - startIdx < 1) return;
+
+    if (chart.options && chart.options.scales && chart.options.scales.x) {
+      chart.options.scales.x.min = startIdx;
+      chart.options.scales.x.max = endIdx;
+      chart.update("none");
+      if (resetBtn) resetBtn.style.display = "inline-block";
+    }
+  };
+
+  const onMouseDown = event => {
+    if (event.button !== 0) return;
+    const chartArea = chart && chart.chartArea;
+    if (!chartArea) return;
+    const rect = canvas.getBoundingClientRect();
+    const pointerY = event.clientY - rect.top;
+    if (pointerY < chartArea.top || pointerY > chartArea.bottom) return;
+    startX = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
+    dragging = true;
+    brush.style.display = "block";
+    brush.style.top = `${canvas.offsetTop + chartArea.top}px`;
+    brush.style.height = `${Math.max(0, chartArea.bottom - chartArea.top)}px`;
+    brush.style.left = `${canvas.offsetLeft + startX}px`;
+    brush.style.width = "0px";
+  };
+
+  const onMouseMove = event => {
+    if (!dragging) return;
+    const rect = canvas.getBoundingClientRect();
+    const currentX = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
+    const left = Math.min(startX, currentX);
+    const width = Math.abs(currentX - startX);
+    brush.style.left = `${canvas.offsetLeft + left}px`;
+    brush.style.width = `${width}px`;
+  };
+
+  const onMouseUp = event => endDrag(event);
+
+  canvas.addEventListener("mousedown", onMouseDown);
+  window.addEventListener("mousemove", onMouseMove);
+  window.addEventListener("mouseup", onMouseUp);
+
+  chart.$trendZoomBrushCleanup = () => {
+    canvas.removeEventListener("mousedown", onMouseDown);
+    window.removeEventListener("mousemove", onMouseMove);
+    window.removeEventListener("mouseup", onMouseUp);
+    brush.style.display = "none";
+  };
+}
+
 function renderTrendChart(
   existingChart,
   canvasId,
@@ -11524,10 +12038,13 @@ function renderTrendChart(
   };
 
   if (existingChart) {
+    if (typeof existingChart.$trendZoomBrushCleanup === "function") {
+      existingChart.$trendZoomBrushCleanup();
+    }
     existingChart.destroy();
   }
 
-  return new Chart(document.getElementById(canvasId), {
+  const chart = new Chart(document.getElementById(canvasId), {
     type: "line",
     data: {
       labels: labels,
@@ -11630,6 +12147,10 @@ function renderTrendChart(
       }
     }
   });
+
+  attachTrendZoomBrush(chart, canvasId, labels.length);
+
+  return chart;
 }
 
 function renderKnowledgeGenreRadar() {
@@ -11661,6 +12182,20 @@ function renderKnowledgeGenreRadar() {
     genreRadarChart.destroy();
   }
 
+  const axisHighlightColor = "#ff7a00";
+  function getTooltipAxisIndex(chart) {
+    const tooltip = chart && chart.tooltip;
+    if (!tooltip || tooltip.opacity === 0) {
+      return -1;
+    }
+    const activeElements = typeof tooltip.getActiveElements === "function"
+      ? tooltip.getActiveElements()
+      : [];
+    return Array.isArray(activeElements) && activeElements.length
+      ? Number(activeElements[0].index)
+      : -1;
+  }
+
   genreRadarChart = new Chart(document.getElementById("genreRadarChart"), {
     type: "radar",
     data: {
@@ -11673,25 +12208,65 @@ function renderKnowledgeGenreRadar() {
           backgroundColor: "rgba(42, 157, 143, 0.28)",
           pointBackgroundColor: "#2a9d8f",
           pointBorderColor: "#2a9d8f",
-          pointRadius: 2,
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          pointHitRadius: 14,
           borderWidth: 2
+        },
+        {
+          label: "__genre_axis_hit__",
+          data: labels.map(() => radarScale.max),
+          borderColor: "rgba(0, 0, 0, 0)",
+          backgroundColor: "rgba(0, 0, 0, 0)",
+          pointBackgroundColor: "rgba(0, 0, 0, 0)",
+          pointBorderColor: "rgba(0, 0, 0, 0)",
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          pointHitRadius: 20,
+          borderWidth: 0,
+          fill: false
         }
       ]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0
+        }
+      },
+      onHover: (event, activeElements, chart) => {
+        chart.draw();
+      },
+      interaction: {
+        mode: "nearest",
+        intersect: false
+      },
       plugins: {
         legend: {
+          onClick: () => {},
           labels: {
+            filter: function(item) {
+              return item && item.datasetIndex === 0;
+            },
             color: "#333",
             font: { size: 14 }
           }
         },
         tooltip: {
+          filter: function(context) {
+            return context && context.datasetIndex === 0;
+          },
           callbacks: {
             label: function(context) {
-              return `${context.dataset.label}: ${Math.round(Number(context.raw))}%`;
+              const idx = Number(context && context.dataIndex);
+              const safeIndex = Number.isFinite(idx) ? idx : 0;
+              const value = Number(values[safeIndex]);
+              return `Genre Guess Rate (%): ${Math.round(Number.isFinite(value) ? value : 0)}%`;
             }
           }
         }
@@ -11707,13 +12282,42 @@ function renderKnowledgeGenreRadar() {
             color: "#555",
             backdropColor: "transparent",
             callback: function(value) {
-              return String(Math.round(Number(value)));
+              return `${Math.round(Number(value))}%`;
             }
           },
-          grid: { color: "#e5e7eb", circular: true },
-          angleLines: { color: "#dbe4f2" },
+          grid: {
+            circular: true,
+            color: function(context) {
+              const value = Number(context.tick && context.tick.value);
+              const min = Number(radarScale.min);
+              const max = Number(radarScale.max);
+              if (!Number.isFinite(value) || !Number.isFinite(min) || !Number.isFinite(max) || max <= min) {
+                return "rgba(148, 163, 184, 0.22)";
+              }
+              const isOuterRing = Math.abs(value - max) < Math.max(1e-8, Math.abs(max) * 1e-8);
+              return isOuterRing
+                ? "rgba(51, 65, 85, 0.72)"
+                : "rgba(148, 163, 184, 0.22)";
+            }
+          },
+          angleLines: {
+            color: function(context) {
+              const activeAxisIndex = getTooltipAxisIndex(context && context.chart);
+              const idx = Number(context && context.index);
+              if (Number.isFinite(idx) && idx === activeAxisIndex) {
+                return axisHighlightColor;
+              }
+              return "rgba(148, 163, 184, 0.40)";
+            }
+          },
           pointLabels: {
-            color: "#374151",
+            color: function(context) {
+              const activeAxisIndex = getTooltipAxisIndex(context && context.chart);
+              const idx = Number(context && context.index);
+              return Number.isFinite(idx) && idx === activeAxisIndex
+                ? axisHighlightColor
+                : "#374151";
+            },
             font: { size: 12 }
           }
         }
@@ -12071,6 +12675,20 @@ function drawTagRadarFromSelection() {
     tagRadarChart.destroy();
   }
 
+  const axisHighlightColor = "#ff7a00";
+  function getTooltipAxisIndex(chart) {
+    const tooltip = chart && chart.tooltip;
+    if (!tooltip || tooltip.opacity === 0) {
+      return -1;
+    }
+    const activeElements = typeof tooltip.getActiveElements === "function"
+      ? tooltip.getActiveElements()
+      : [];
+    return Array.isArray(activeElements) && activeElements.length
+      ? Number(activeElements[0].index)
+      : -1;
+  }
+
   tagRadarChart = new Chart(document.getElementById("tagRadarChart"), {
     type: "radar",
     data: {
@@ -12083,7 +12701,9 @@ function drawTagRadarFromSelection() {
           backgroundColor: "rgba(42, 157, 143, 0.28)",
           pointBackgroundColor: "#2a9d8f",
           pointBorderColor: "#2a9d8f",
-          pointRadius: 2,
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          pointHitRadius: 18,
           borderWidth: 2
         }
       ]
@@ -12091,6 +12711,21 @@ function drawTagRadarFromSelection() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      layout: {
+        padding: {
+          left: 0,
+          right: 44,
+          top: 0,
+          bottom: 0
+        }
+      },
+      onHover: (event, activeElements, chart) => {
+        chart.draw();
+      },
+      interaction: {
+        mode: "nearest",
+        intersect: false
+      },
       plugins: {
         legend: {
           labels: {
@@ -12117,13 +12752,42 @@ function drawTagRadarFromSelection() {
             color: "#555",
             backdropColor: "transparent",
             callback: function(value) {
-              return String(Math.round(Number(value)));
+              return `${Math.round(Number(value))}%`;
             }
           },
-          grid: { color: "#e5e7eb", circular: true },
-          angleLines: { color: "#dbe4f2" },
+          grid: {
+            circular: true,
+            color: function(context) {
+              const value = Number(context.tick && context.tick.value);
+              const min = Number(radarScale.min);
+              const max = Number(radarScale.max);
+              if (!Number.isFinite(value) || !Number.isFinite(min) || !Number.isFinite(max) || max <= min) {
+                return "rgba(148, 163, 184, 0.22)";
+              }
+              const isOuterRing = Math.abs(value - max) < Math.max(1e-8, Math.abs(max) * 1e-8);
+              return isOuterRing
+                ? "rgba(51, 65, 85, 0.72)"
+                : "rgba(148, 163, 184, 0.22)";
+            }
+          },
+          angleLines: {
+            color: function(context) {
+              const activeAxisIndex = getTooltipAxisIndex(context && context.chart);
+              const idx = Number(context && context.index);
+              if (Number.isFinite(idx) && idx === activeAxisIndex) {
+                return axisHighlightColor;
+              }
+              return "rgba(148, 163, 184, 0.40)";
+            }
+          },
           pointLabels: {
-            color: "#374151",
+            color: function(context) {
+              const activeAxisIndex = getTooltipAxisIndex(context && context.chart);
+              const idx = Number(context && context.index);
+              return Number.isFinite(idx) && idx === activeAxisIndex
+                ? axisHighlightColor
+                : "#374151";
+            },
             font: { size: 12 }
           }
         }
@@ -12819,11 +13483,16 @@ function renderOverviewTopSolos() {
     songName.innerText = String(item && (item.songName || item.title) ? (item.songName || item.title) : "—");
     card.appendChild(songName);
 
-    const soloMeta = document.createElement("p");
-    soloMeta.className = "overview-rig-top-song-type";
-    const countText = `${Math.max(0, Number(item.soloCount || 0))} solos`;
-    soloMeta.innerText = countText;
-    card.appendChild(soloMeta);
+    const type = document.createElement("p");
+    type.className = "overview-rig-top-song-type";
+    const typeLabel = String(item && item.type ? item.type : "—");
+    type.innerText = typeLabel;
+    card.appendChild(type);
+
+    const count = document.createElement("p");
+    count.className = "overview-rig-top-song-submeta";
+    count.innerText = `${Math.max(0, Number(item.soloCount || 0))} solos`;
+    card.appendChild(count);
 
     strip.appendChild(card);
   });
@@ -15725,11 +16394,11 @@ function renderPerformanceGuessRate(records) {
     }
     const combinedMeta = document.getElementById("combinedFoundGames");
     if (combinedMeta) {
-      combinedMeta.innerText = "Found 0 games";
+      combinedMeta.innerText = "Found 0 tours";
     }
     const rollingMeta = document.getElementById("rollingFoundGames");
     if (rollingMeta) {
-      rollingMeta.innerText = "Found 0 games";
+      rollingMeta.innerText = "Found 0 tours";
     }
     const weightedMeta = document.getElementById("weightedGuessRateFound");
     if (weightedMeta) {
@@ -15757,12 +16426,12 @@ function renderPerformanceGuessRate(records) {
   const { trend: edTrend } = buildTrend(edValues);
   const { trend: inTrend } = buildTrend(inValues);
 
-  document.getElementById("opFoundGames").innerText = `Found ${records.length} games`;
-  document.getElementById("edFoundGames").innerText = `Found ${records.length} games`;
-  document.getElementById("inFoundGames").innerText = `Found ${records.length} games`;
-  document.getElementById("combinedFoundGames").innerText = `Found ${records.length} games`;
-  document.getElementById("rollingFoundGames").innerText = `Found ${records.length} games`;
-  document.getElementById("mixFoundGames").innerText = `Found ${records.length} games`;
+  document.getElementById("opFoundGames").innerText = `Found ${records.length} tours`;
+  document.getElementById("edFoundGames").innerText = `Found ${records.length} tours`;
+  document.getElementById("inFoundGames").innerText = `Found ${records.length} tours`;
+  document.getElementById("combinedFoundGames").innerText = `Found ${records.length} tours`;
+  document.getElementById("rollingFoundGames").innerText = `Found ${records.length} tours`;
+  document.getElementById("mixFoundGames").innerText = `Found ${records.length} tours`;
   document.getElementById("opSlopeInfo").innerText = `Slope: ${opSlope >= 0 ? "+" : ""}${opSlope.toFixed(2)}% per game`;
   document.getElementById("edSlopeInfo").innerText = `Slope: ${edSlope >= 0 ? "+" : ""}${edSlope.toFixed(2)}% per game`;
   document.getElementById("inSlopeInfo").innerText = `Slope: ${inSlope >= 0 ? "+" : ""}${inSlope.toFixed(2)}% per game`;
@@ -15800,17 +16469,17 @@ function renderPerformanceGuessRate(records) {
   const combinedValues = [...opValues, ...edValues, ...inValues].filter(value => Number.isFinite(value));
   const combinedMin = combinedValues.length ? Math.min(...combinedValues) : 0;
   const combinedMax = combinedValues.length ? Math.max(...combinedValues) : 100;
-  const combinedRange = combinedMax - combinedMin;
-  const combinedPadding = Math.max(1, combinedRange * 0.15);
-  let combinedYMin = Math.max(0, combinedMin - combinedPadding);
-  let combinedYMax = Math.min(100, combinedMax + combinedPadding);
-  if (combinedYMax - combinedYMin < 4) {
-    const center = (combinedYMin + combinedYMax) / 2;
-    combinedYMin = Math.max(0, center - 2);
-    combinedYMax = Math.min(100, center + 2);
-  }
+  const combinedStep = combinedMax <= 25 ? 2.5 : (combinedMax <= 60 ? 5 : 10);
+  const combinedYMax = Math.min(
+    100,
+    Math.ceil(Math.max(0, combinedMax) / combinedStep) * combinedStep
+  );
+  const combinedYMin = Math.max(0, Math.floor(Math.max(0, combinedMin) / combinedStep) * combinedStep);
 
   if (combinedGuessAreaChart) {
+    if (typeof combinedGuessAreaChart.$trendZoomBrushCleanup === "function") {
+      combinedGuessAreaChart.$trendZoomBrushCleanup();
+    }
     combinedGuessAreaChart.destroy();
   }
 
@@ -15964,8 +16633,9 @@ function renderPerformanceGuessRate(records) {
           },
           ticks: {
             color: "#5d7087",
+            stepSize: combinedStep,
             callback: function(value) {
-              return `${Number(value).toFixed(0)}%`;
+              return `${Number(value).toFixed(combinedStep % 1 ? 1 : 0)}%`;
             }
           },
           grid: { color: "rgba(148, 163, 184, 0.24)" }
@@ -15973,6 +16643,7 @@ function renderPerformanceGuessRate(records) {
       }
     }
   });
+  attachTrendZoomBrush(combinedGuessAreaChart, "combinedGuessAreaChart", labels.length);
 
   const perGameGuessRateValues = records.map(row => {
     const values = [
@@ -16002,6 +16673,9 @@ function renderPerformanceGuessRate(records) {
   }
 
   if (guessRateRollingChart) {
+    if (typeof guessRateRollingChart.$trendZoomBrushCleanup === "function") {
+      guessRateRollingChart.$trendZoomBrushCleanup();
+    }
     guessRateRollingChart.destroy();
   }
 
@@ -16098,6 +16772,7 @@ function renderPerformanceGuessRate(records) {
       }
     }
   });
+  attachTrendZoomBrush(guessRateRollingChart, "guessRateRollingChart", labels.length);
 
   const opAverage = opValues.reduce((sum, value) => sum + value, 0) / opValues.length;
   const edAverage = edValues.reduce((sum, value) => sum + value, 0) / edValues.length;
@@ -16195,7 +16870,7 @@ function renderPerformanceGuessRate(records) {
 function renderGuessRateVsAvg8Chart(records) {
   const guessVsAvg8Meta = document.getElementById("guessVsAvg8FoundGames");
   if (guessVsAvg8Meta) {
-    guessVsAvg8Meta.innerText = `Found ${records.length} games`;
+    guessVsAvg8Meta.innerText = `Found ${records.length} tours`;
   }
 
   const labels = records.map(x => x.Timestamp);
@@ -16242,6 +16917,9 @@ function renderGuessRateVsAvg8Chart(records) {
   }
 
   if (guessRateVsAvg8Chart) {
+    if (typeof guessRateVsAvg8Chart.$trendZoomBrushCleanup === "function") {
+      guessRateVsAvg8Chart.$trendZoomBrushCleanup();
+    }
     guessRateVsAvg8Chart.destroy();
   }
 
@@ -16397,6 +17075,7 @@ function renderGuessRateVsAvg8Chart(records) {
       }
     }
   });
+  attachTrendZoomBrush(guessRateVsAvg8Chart, "guessRateVsAvg8Chart", labels.length);
 }
 
 function renderPerformanceLivesTakenSaved(records) {
@@ -16408,8 +17087,8 @@ function renderPerformanceLivesTakenSaved(records) {
   ));
 
   if (!filteredRecords.length) {
-    document.getElementById("takenFoundGames").innerText = "Found 0 games";
-    document.getElementById("savedFoundGames").innerText = "Found 0 games";
+    document.getElementById("takenFoundGames").innerText = "Found 0 tours";
+    document.getElementById("savedFoundGames").innerText = "Found 0 tours";
     document.getElementById("takenSlopeInfo").innerText = "Slope: 0.00% per game";
     document.getElementById("savedSlopeInfo").innerText = "Slope: 0.00% per game";
     if (takenLivesChart) {
@@ -16429,8 +17108,8 @@ function renderPerformanceLivesTakenSaved(records) {
   const { slope: takenSlope } = buildTrend(takenValues);
   const { slope: savedSlope } = buildTrend(savedValues);
 
-  document.getElementById("takenFoundGames").innerText = `Found ${filteredRecords.length} games`;
-  document.getElementById("savedFoundGames").innerText = `Found ${filteredRecords.length} games`;
+  document.getElementById("takenFoundGames").innerText = `Found ${filteredRecords.length} tours`;
+  document.getElementById("savedFoundGames").innerText = `Found ${filteredRecords.length} tours`;
   document.getElementById("takenSlopeInfo").innerText = `Slope: ${takenSlope >= 0 ? "+" : ""}${takenSlope.toFixed(2)}% per game`;
   document.getElementById("savedSlopeInfo").innerText = `Slope: ${savedSlope >= 0 ? "+" : ""}${savedSlope.toFixed(2)}% per game`;
 
@@ -16482,9 +17161,9 @@ function renderPerformanceRigAnalysis(records) {
   const onlistSlopeInfo = document.getElementById("onlistSlopeInfo");
   const offlistFoundGames = document.getElementById("offlistFoundGames");
   const offlistSlopeInfo = document.getElementById("offlistSlopeInfo");
-  if (onlistFoundGames) onlistFoundGames.innerText = `Found ${records.length} games`;
+  if (onlistFoundGames) onlistFoundGames.innerText = `Found ${records.length} tours`;
   if (onlistSlopeInfo) onlistSlopeInfo.innerText = `Slope: ${onlistSlope >= 0 ? "+" : ""}${onlistSlope.toFixed(2)}% per game`;
-  if (offlistFoundGames) offlistFoundGames.innerText = `Found ${records.length} games`;
+  if (offlistFoundGames) offlistFoundGames.innerText = `Found ${records.length} tours`;
   if (offlistSlopeInfo) offlistSlopeInfo.innerText = `Slope: ${offlistSlope >= 0 ? "+" : ""}${offlistSlope.toFixed(2)}% per game`;
 
   onlistAnalysisChart = renderTrendChart(
@@ -16514,11 +17193,14 @@ function renderPerformanceCompositeCharts(records) {
     const rigSlopeInfo = document.getElementById("rigSlopeInfo");
     const rigHitSlopeInfo = document.getElementById("rigHitSlopeInfo");
     const guessVsAvg8Meta = document.getElementById("guessVsAvg8FoundGames");
-    if (rigFoundGames) rigFoundGames.innerText = "Found 0 games";
+    if (rigFoundGames) rigFoundGames.innerText = "Found 0 tours";
     if (rigSlopeInfo) rigSlopeInfo.innerText = "Rigs slope: 0.00% per game";
     if (rigHitSlopeInfo) rigHitSlopeInfo.innerText = "Total hit slope: 0.00% per game";
-    if (guessVsAvg8Meta) guessVsAvg8Meta.innerText = "Found 0 games";
+    if (guessVsAvg8Meta) guessVsAvg8Meta.innerText = "Found 0 tours";
     if (rigAnalysisChart) {
+      if (typeof rigAnalysisChart.$trendZoomBrushCleanup === "function") {
+        rigAnalysisChart.$trendZoomBrushCleanup();
+      }
       rigAnalysisChart.destroy();
       rigAnalysisChart = null;
     }
@@ -16538,11 +17220,14 @@ function renderPerformanceCompositeCharts(records) {
   const rigFoundGames = document.getElementById("rigFoundGames");
   const rigSlopeInfo = document.getElementById("rigSlopeInfo");
   const rigHitSlopeInfo = document.getElementById("rigHitSlopeInfo");
-  if (rigFoundGames) rigFoundGames.innerText = `Found ${records.length} games`;
+  if (rigFoundGames) rigFoundGames.innerText = `Found ${records.length} tours`;
   if (rigSlopeInfo) rigSlopeInfo.innerText = `Rigs slope: ${rigSlope >= 0 ? "+" : ""}${rigSlope.toFixed(2)}% per game`;
   if (rigHitSlopeInfo) rigHitSlopeInfo.innerText = `Total hit slope: ${totalHitSlope >= 0 ? "+" : ""}${totalHitSlope.toFixed(2)}% per game`;
 
   if (rigAnalysisChart) {
+    if (typeof rigAnalysisChart.$trendZoomBrushCleanup === "function") {
+      rigAnalysisChart.$trendZoomBrushCleanup();
+    }
     rigAnalysisChart.destroy();
   }
 
@@ -16673,6 +17358,7 @@ function renderPerformanceCompositeCharts(records) {
       }
     }
   });
+  attachTrendZoomBrush(rigAnalysisChart, "rigAnalysisChart", labels.length);
 
   renderGuessRateVsAvg8Chart(records);
 }
@@ -16820,9 +17506,8 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
   document.getElementById("guess").innerText = Number.isFinite(averageGuessRate)
     ? `${averageGuessRate.toFixed(3)}%`
     : "-";
-  document.getElementById("foundGames").innerText = `Found ${records.length} games`;
-
   const labels = records.map(x => x.Timestamp);
+  document.getElementById("foundGames").innerText = `Found ${labels.length} tours`;
   const { slope } = buildTrend(values);
   const slopePrefix = slope >= 0 ? "+" : "";
   document.getElementById("slopeInfo").innerText = `Slope: ${slopePrefix}${slope.toFixed(2)}% per game`;
@@ -17317,19 +18002,7 @@ loadStatsData()
     selectedSocialRivalKeys = [];
     socialRivalSearchQuery = "";
     currentPlayerId = null;
-    loadOverviewAnimeTypeDataForUser(canonicalName);
-    loadOverviewTopSolosForUser(canonicalName);
-    loadOverviewTopRigSongsForUser(canonicalName);
-    loadGenreDataForUser(canonicalName);
-    loadTagDataForUser(canonicalName);
-    loadByEraDataForUser(canonicalName);
-    loadArtistDataForUser(canonicalName);
-    loadRelearnDataForUser(canonicalName);
-    loadWrongGuessDataForUser(canonicalName);
-    loadNeverCorrectDataForUser(canonicalName);
-    loadPopularityDataForUser(canonicalName);
-    loadPCorrectDataForUser(canonicalName);
-    loadSearchSongsDataForUser(canonicalName);
+    preloadOverviewGeneralForUser(canonicalName);
 
     if (!mergedUserData.length) {
       alert("No records found for this user");
@@ -17344,6 +18017,8 @@ loadStatsData()
     fullUserData = mergedUserData;
     const visibleRecords = getVisibleUserData(fullUserData);
     renderOverview(visibleRecords, currentLatestRankValue, currentLatestRankPercentile, currentLatestRankIsTopThree);
+    preloadFirstSubtabsForAllSections(canonicalName);
+    preloadOtherSubtabsForSection("overview", canonicalName);
 
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Guess Rate") {
       renderPerformanceGuessRate(visibleRecords);

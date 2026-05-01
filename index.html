@@ -265,11 +265,14 @@ async function login() {
   const errorEl = document.getElementById("error");
   const inputEl = document.getElementById("username");
   const input = inputEl.value.trim();
+  const loginErrorColor = "#9F294C";
 
   errorEl.innerText = "";
+  errorEl.style.color = "";
 
   if (!input) {
     errorEl.innerText = "Please enter a username";
+    errorEl.style.color = loginErrorColor;
     return;
   }
 
@@ -285,6 +288,7 @@ async function login() {
 
     if (!matchedPlayer || !matchedPlayer.displayName) {
       errorEl.innerText = "User not found";
+      errorEl.style.color = loginErrorColor;
       return;
     }
 
