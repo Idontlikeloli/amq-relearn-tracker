@@ -5794,7 +5794,9 @@ let cachedSearchSongs = [];
 let cachedSearchSongFrequencyRows = [];
 let cachedWeightedGuessRateSeriesByPlayerId = new Map();
 let cachedMalImageCache = null;
+let cachedMalImageCachePromise = null;
 let cachedSongKeyById = null;
+let cachedSongKeyByIdPromise = null;
 let weightedGuessRateRequestId = 0;
 let overviewLanguageRerenderHandle = null;
 let cachedChangelogPosts = null;
@@ -6018,15 +6020,20 @@ function scheduleBackgroundTask(taskKey, taskFn, delayMs = 0) {
   }
 }
 
-function preloadOverviewGeneralForUser(displayName) {
+function preloadOverviewGeneralForUser(displayName, { immediate = false } = {}) {
   if (!displayName) return;
-  scheduleBackgroundTask(`overview-general:${displayName}`, async () => {
+  const task = async () => {
     await Promise.allSettled([
       loadOverviewAnimeTypeDataForUser(displayName),
       loadOverviewTopSolosForUser(displayName),
       loadOverviewTopRigSongsForUser(displayName)
     ]);
-  });
+  };
+  if (immediate) {
+    task().catch(err => console.error("[preload] overview-general failed", err));
+    return;
+  }
+  scheduleBackgroundTask(`overview-general:${displayName}`, task);
 }
 
 function preloadFirstSubtabForSection(sectionKey, displayName) {
@@ -13861,53 +13868,71 @@ async function loadMalImageCache() {
   if (cachedMalImageCache && typeof cachedMalImageCache === "object") {
     return cachedMalImageCache;
   }
+  if (cachedMalImageCachePromise) {
+    return cachedMalImageCachePromise;
+  }
 
-  try {
-    const imageCacheRes = await fetch(dataUrl("mal_image_cache.json"));
-    if (!imageCacheRes.ok) {
+  cachedMalImageCachePromise = (async () => {
+    try {
+      const imageCacheRes = await fetch(dataUrl("mal_image_cache.json"));
+      if (!imageCacheRes.ok) {
+        cachedMalImageCache = {};
+        return cachedMalImageCache;
+      }
+      const payload = await imageCacheRes.json();
+      cachedMalImageCache = payload && typeof payload === "object" ? payload : {};
+      return cachedMalImageCache;
+    } catch (err) {
+      console.error("Failed loading mal_image_cache.json", err);
       cachedMalImageCache = {};
       return cachedMalImageCache;
+    } finally {
+      cachedMalImageCachePromise = null;
     }
-    const payload = await imageCacheRes.json();
-    cachedMalImageCache = payload && typeof payload === "object" ? payload : {};
-    return cachedMalImageCache;
-  } catch (err) {
-    console.error("Failed loading mal_image_cache.json", err);
-    cachedMalImageCache = {};
-    return cachedMalImageCache;
-  }
+  })();
+
+  return cachedMalImageCachePromise;
 }
 
 async function loadSongKeyById() {
   if (cachedSongKeyById && typeof cachedSongKeyById === "object") {
     return cachedSongKeyById;
   }
+  if (cachedSongKeyByIdPromise) {
+    return cachedSongKeyByIdPromise;
+  }
 
-  try {
-    const songKeyRes = await fetch(dataUrl("song_key.json"));
-    if (!songKeyRes.ok) {
+  cachedSongKeyByIdPromise = (async () => {
+    try {
+      const songKeyRes = await fetch(dataUrl("song_key.json"));
+      if (!songKeyRes.ok) {
+        cachedSongKeyById = {};
+        return cachedSongKeyById;
+      }
+
+      const payload = await songKeyRes.json();
+      const rows = Array.isArray(payload) ? payload : [];
+      const byId = {};
+
+      rows.forEach(row => {
+        if (!row || typeof row !== "object") return;
+        const id = row.songid;
+        if (id == null) return;
+        byId[String(id)] = row;
+      });
+
+      cachedSongKeyById = byId;
+      return cachedSongKeyById;
+    } catch (err) {
+      console.error("Failed loading song_key.json", err);
       cachedSongKeyById = {};
       return cachedSongKeyById;
+    } finally {
+      cachedSongKeyByIdPromise = null;
     }
+  })();
 
-    const payload = await songKeyRes.json();
-    const rows = Array.isArray(payload) ? payload : [];
-    const byId = {};
-
-    rows.forEach(row => {
-      if (!row || typeof row !== "object") return;
-      const id = row.songid;
-      if (id == null) return;
-      byId[String(id)] = row;
-    });
-
-    cachedSongKeyById = byId;
-    return cachedSongKeyById;
-  } catch (err) {
-    console.error("Failed loading song_key.json", err);
-    cachedSongKeyById = {};
-    return cachedSongKeyById;
-  }
+  return cachedSongKeyByIdPromise;
 }
 
 function hydrateSongRowWithKey(rawRow, keyRow) {
@@ -17926,20 +17951,23 @@ async function loadStatsData() {
 ------------------------- */
 loadStatsData()
   .then(async data => {
-    const latestRankMap = await loadLatestRankMap();
+    const latestRankMapPromise = loadLatestRankMap();
     allPlayerStatsData = (data && typeof data === "object") ? data : {};
     cachedWeightedGuessRateSeriesByPlayerId = new Map();
     weightedGuessRateRequestId = 0;
     const normalizedUser = String(username || "").toLowerCase();
     const statKeys = Object.keys(data);
-    const playerEntry = await getPlayerEntryByName(username || "");
-    const altNames = Array.isArray(playerEntry && playerEntry.altnames)
-      ? playerEntry.altnames.map(name => String(name).toLowerCase())
-      : [];
-
     let matchedKey = statKeys.find(key => key.toLowerCase() === normalizedUser);
-    if (!matchedKey && altNames.length) {
-      matchedKey = statKeys.find(key => altNames.includes(key.toLowerCase()));
+    let playerEntry = null;
+    let altNames = [];
+    if (!matchedKey) {
+      playerEntry = await getPlayerEntryByName(username || "");
+      altNames = Array.isArray(playerEntry && playerEntry.altnames)
+        ? playerEntry.altnames.map(name => String(name).toLowerCase())
+        : [];
+      if (altNames.length) {
+        matchedKey = statKeys.find(key => altNames.includes(key.toLowerCase()));
+      }
     }
 
     if (!matchedKey) {
@@ -17986,23 +18014,13 @@ loadStatsData()
     currentDisplayName = canonicalName;
     currentStatKey = matchedKey;
     currentStatSourceKeys = sourceKeys;
-    currentLatestRankValue = resolveLatestRankFromMap(
-      latestRankMap,
-      canonicalName,
-      matchedKey,
-      cleanedAltNames
-    );
-    currentLatestRankPercentile = resolveLatestRankPercentileFromMap(
-      canonicalName,
-      matchedKey,
-      cleanedAltNames
-    );
-    const latestTopThreeSet = new Set(Array.from(latestRankMap.keys()).slice(0, 3));
-    currentLatestRankIsTopThree = Array.from(identityNames).some(name => latestTopThreeSet.has(name));
+    currentLatestRankValue = null;
+    currentLatestRankPercentile = null;
+    currentLatestRankIsTopThree = false;
     selectedSocialRivalKeys = [];
     socialRivalSearchQuery = "";
     currentPlayerId = null;
-    preloadOverviewGeneralForUser(canonicalName);
+    preloadOverviewGeneralForUser(canonicalName, { immediate: true });
 
     if (!mergedUserData.length) {
       alert("No records found for this user");
@@ -18042,6 +18060,32 @@ loadStatsData()
     if (activeSection === "social" && activeSubSectionBySection.social === "Team Contributions") {
       renderSocialTeamContributionView();
     }
+
+    latestRankMapPromise.then(latestRankMap => {
+      currentLatestRankValue = resolveLatestRankFromMap(
+        latestRankMap,
+        canonicalName,
+        matchedKey,
+        cleanedAltNames
+      );
+      currentLatestRankPercentile = resolveLatestRankPercentileFromMap(
+        canonicalName,
+        matchedKey,
+        cleanedAltNames
+      );
+      const latestTopThreeSet = new Set(Array.from(latestRankMap.keys()).slice(0, 3));
+      currentLatestRankIsTopThree = Array.from(identityNames).some(name => latestTopThreeSet.has(name));
+      if (Array.isArray(fullUserData) && fullUserData.length) {
+        renderOverview(
+          getVisibleUserData(fullUserData),
+          currentLatestRankValue,
+          currentLatestRankPercentile,
+          currentLatestRankIsTopThree
+        );
+      }
+    }).catch(err => {
+      console.warn("Deferred latest rank load failed", err);
+    });
   })
   .catch(err => {
     console.error(err);
