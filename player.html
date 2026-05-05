@@ -5797,7 +5797,7 @@
       </div>
       <div id="socialRivalsBubbleView" class="chart-card" style="display:none;">
         <div class="chart-header">
-          <div class="chart-title">Average Guess Rate vs Rank vs Usefulness</div>
+          <div class="chart-title">Average Guess Rate vs Rank vs Usefulness (usefulness bugged/old usefulness)</div>
           <div class="chart-meta">
             <span id="socialRivalsBubbleMeta">Found 0 players</span>
           </div>
@@ -5889,7 +5889,7 @@
       </section>
       <div id="rigAnalysisWrap" class="rig-analysis-wrap">
         <section class="rig-analysis-section rig-analysis-section-difficulty">
-          <div class="rig-analysis-section-title">Median Difficulty</div>
+          <div class="rig-analysis-section-title">Average Difficulty</div>
           <div id="rigAnalysisDifficultyValue" class="rig-analysis-section-value">—</div>
           <div class="rig-analysis-difficulty-bar">
             <div class="rig-analysis-difficulty-ends" aria-hidden="true">
@@ -6034,7 +6034,7 @@
           <div class="convert-estimator-title">Rank converter</div>
           <div id="convertRankAccuracy" class="convert-estimator-accuracy">Accuracy: —</div>
           <div class="convert-estimator-row">
-            <input id="convertOldRankInput" class="convert-estimator-input" type="text" placeholder="Old rank (e.g. 41.2)">
+            <input id="convertOldRankInput" class="convert-estimator-input" type="text" placeholder="Old rank (e.g. 8.9)">
             <button id="convertRankBtn" class="convert-estimator-btn" type="button">Convert</button>
           </div>
           <div id="convertRankResult" class="convert-estimator-result">New rank: —</div>
@@ -6098,7 +6098,7 @@
       <div class="chart-header">
         <div>
           <div id="otherToolsChangelogTitle" class="chart-title">Welcome! This is where I post updates</div>
-          <div id="otherToolsChangelogSubtitle" class="changelog-subtitle">Feel free to dm me about any bugs or features you want added!</div>
+          <div id="otherToolsChangelogSubtitle" class="changelog-subtitle">Feel free to dm me about any bugs or features you want added! (or use <a href="https://forms.gle/VqiTvvUPwTTyCTb96" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">this link</a> to fill out a feedback form!)</div>
         </div>
       </div>
       <div id="otherToolsChangelogList" class="changelog-list"></div>
@@ -6334,6 +6334,62 @@ if (window.Chart) {
       ctx.arc(point.x, point.y, 4.5, 0, Math.PI * 2);
       ctx.fillStyle = markerColor;
       ctx.fill();
+      ctx.restore();
+    }
+  };
+  const trendForegroundPlugin = {
+    id: "trendForegroundPlugin",
+    afterDatasetsDraw(chart) {
+      if (!chart || chart.config.type !== "line") return;
+      const area = chart.chartArea;
+      if (!area) return;
+      const datasets = chart.data && Array.isArray(chart.data.datasets) ? chart.data.datasets : [];
+      if (!datasets.length) return;
+
+      const ctx = chart.ctx;
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(area.left, area.top, area.right - area.left, area.bottom - area.top);
+      ctx.clip();
+
+      for (let i = 0; i < datasets.length; i++) {
+        const dataset = datasets[i];
+        const label = String((dataset && dataset.label) || "").toLowerCase();
+        if (!label.includes("trend")) continue;
+
+        const meta = chart.getDatasetMeta(i);
+        if (!meta || meta.hidden || !Array.isArray(meta.data) || !meta.data.length) continue;
+
+        const options = (meta.dataset && meta.dataset.options) || {};
+        const stroke = options.borderColor || dataset.borderColor || "#64748b";
+        const width = Number(options.borderWidth ?? dataset.borderWidth ?? 2);
+        const dash = options.borderDash || dataset.borderDash || [];
+        const lineJoin = options.borderJoinStyle || dataset.borderJoinStyle || "round";
+        const lineCap = options.borderCapStyle || dataset.borderCapStyle || "round";
+
+        ctx.strokeStyle = stroke;
+        ctx.lineWidth = Number.isFinite(width) ? width : 2;
+        ctx.setLineDash(Array.isArray(dash) ? dash : []);
+        ctx.lineJoin = lineJoin;
+        ctx.lineCap = lineCap;
+        ctx.beginPath();
+
+        let drawing = false;
+        for (const point of meta.data) {
+          if (!point || point.skip || !Number.isFinite(point.x) || !Number.isFinite(point.y)) {
+            drawing = false;
+            continue;
+          }
+          if (!drawing) {
+            ctx.moveTo(point.x, point.y);
+            drawing = true;
+          } else {
+            ctx.lineTo(point.x, point.y);
+          }
+        }
+        ctx.stroke();
+      }
+
       ctx.restore();
     }
   };
@@ -6638,6 +6694,103 @@ const PERFORMANCE_LINE_PALETTES = {
     trend: "#dc2626"
   }
 };
+const TIME_SERIES_FULL_OPACITY_MAX_POINTS = 90;
+const TIME_SERIES_DENSE_OPACITY_SCALE = 0.55;
+
+function getTimeSeriesOpacityScale(pointCount) {
+  return pointCount > TIME_SERIES_FULL_OPACITY_MAX_POINTS ? TIME_SERIES_DENSE_OPACITY_SCALE : 1;
+}
+
+function withSeriesOpacity(colorValue, opacityScale) {
+  if (!colorValue || !Number.isFinite(opacityScale) || opacityScale >= 0.999) {
+    return colorValue;
+  }
+  const colorText = String(colorValue).trim();
+  let match = colorText.match(/^rgba?\(\s*([\d.]+)\s*,\s*([\d.]+)\s*,\s*([\d.]+)\s*(?:,\s*([\d.]+)\s*)?\)$/i);
+  if (match) {
+    const red = Number(match[1]);
+    const green = Number(match[2]);
+    const blue = Number(match[3]);
+    const alpha = Number.isFinite(Number(match[4])) ? Number(match[4]) : 1;
+    const nextAlpha = Math.max(0, Math.min(1, alpha * opacityScale));
+    return `rgba(${red}, ${green}, ${blue}, ${nextAlpha.toFixed(3)})`;
+  }
+  match = colorText.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  if (match) {
+    let hex = match[1];
+    if (hex.length === 3) {
+      hex = hex.split("").map(ch => ch + ch).join("");
+    }
+    const red = parseInt(hex.slice(0, 2), 16);
+    const green = parseInt(hex.slice(2, 4), 16);
+    const blue = parseInt(hex.slice(4, 6), 16);
+    const nextAlpha = Math.max(0, Math.min(1, opacityScale));
+    return `rgba(${red}, ${green}, ${blue}, ${nextAlpha.toFixed(3)})`;
+  }
+  return colorValue;
+}
+
+function isTrendDatasetLabel(datasetLabel) {
+  return /trend/i.test(String(datasetLabel || ""));
+}
+
+function withSeriesOpacityDeep(colorValue, opacityScale) {
+  if (Array.isArray(colorValue)) {
+    return colorValue.map(entry => withSeriesOpacity(entry, opacityScale));
+  }
+  return withSeriesOpacity(colorValue, opacityScale);
+}
+
+function ensureTrendZoomOpacityState(chart) {
+  if (!chart || !chart.data || !Array.isArray(chart.data.datasets)) return;
+  if (Array.isArray(chart.$trendZoomOpacityEntries)) return;
+  const styleKeys = ["borderColor", "backgroundColor", "pointBackgroundColor", "pointBorderColor"];
+  chart.$trendZoomOpacityEntries = chart.data.datasets
+    .filter(dataset => dataset && !isTrendDatasetLabel(dataset.label))
+    .map(dataset => {
+      const baseStyles = {};
+      const explicitBaseStyles = dataset && dataset._opacityBaseStyles && typeof dataset._opacityBaseStyles === "object"
+        ? dataset._opacityBaseStyles
+        : null;
+      styleKeys.forEach(key => {
+        if (explicitBaseStyles && explicitBaseStyles[key] !== undefined) {
+          const rawValue = explicitBaseStyles[key];
+          baseStyles[key] = Array.isArray(rawValue) ? rawValue.slice() : rawValue;
+        } else if (dataset[key] !== undefined) {
+          const rawValue = dataset[key];
+          baseStyles[key] = Array.isArray(rawValue) ? rawValue.slice() : rawValue;
+        }
+      });
+      return { dataset, baseStyles };
+    });
+}
+
+function applyTrendZoomSelectionState(chart, selectedCount, totalCount, options = {}) {
+  if (!chart) return;
+  const safeSelected = Number.isFinite(selectedCount) ? Math.max(0, Math.floor(selectedCount)) : 0;
+  const safeTotal = Number.isFinite(totalCount) ? Math.max(0, Math.floor(totalCount)) : 0;
+  const isZoomed = safeSelected > 0 && safeTotal > 0 && safeSelected < safeTotal;
+
+  const metaElement = options && options.metaElement ? options.metaElement : null;
+  if (metaElement) {
+    const unit = options.metaUnit || "tours";
+    const prefix = isZoomed ? "Selected" : "Found";
+    const displayCount = isZoomed ? safeSelected : safeTotal;
+    metaElement.innerText = `${prefix} ${displayCount} ${unit}`;
+  }
+
+  ensureTrendZoomOpacityState(chart);
+  const opacityEntries = Array.isArray(chart.$trendZoomOpacityEntries) ? chart.$trendZoomOpacityEntries : [];
+  if (opacityEntries.length) {
+    const opacityScale = getTimeSeriesOpacityScale(isZoomed ? safeSelected : safeTotal);
+    opacityEntries.forEach(entry => {
+      if (!entry || !entry.dataset || !entry.baseStyles) return;
+      Object.keys(entry.baseStyles).forEach(key => {
+        entry.dataset[key] = withSeriesOpacityDeep(entry.baseStyles[key], opacityScale);
+      });
+    });
+  }
+}
 const knowledgeWindowFileByRange = {
   all: "all.json",
   "10": "past_10_games.json",
@@ -7055,7 +7208,7 @@ async function renderOtherToolsChangelog() {
     titleEl.innerText = "Welcome! This is where I post updates";
   }
   if (subtitleEl) {
-    subtitleEl.innerText = "Feel free to dm me about any bugs or features you want added!";
+    subtitleEl.innerHTML = "Feel free to dm me about any bugs or features you want added! (or use <a href=\"https://forms.gle/VqiTvvUPwTTyCTb96\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"text-decoration: underline;\">this link</a> to fill out a feedback form!)";
   }
   if (!listEl) return;
 
@@ -12333,6 +12486,9 @@ function renderSocialRivalsChart() {
   }
 
   if (socialRivalsChart) {
+    if (typeof socialRivalsChart.$trendZoomBrushCleanup === "function") {
+      socialRivalsChart.$trendZoomBrushCleanup();
+    }
     socialRivalsChart.destroy();
     socialRivalsChart = null;
   }
@@ -12407,6 +12563,7 @@ function renderSocialRivalsChart() {
 
   meta.innerText = "";
   bubbleMeta.innerText = "X: latest rank | Y: average guess rate | Bubble size: avg usefulness (selected range)";
+  const rivalsSeriesOpacityScale = getTimeSeriesOpacityScale(labels.length);
 
   const toRgba = (hexColor, alpha) => {
     const cleaned = String(hexColor || "").replace("#", "");
@@ -12418,6 +12575,8 @@ function renderSocialRivalsChart() {
   };
 
   const palette = ["#2563eb", "#16a34a", "#f59e0b", "#9333ea", "#ef4444"];
+  const hideStaticPoints = true;
+  const overviewHoverPointRadius = 5;
   const datasets = seriesData.map((player, index) => {
     const valueMap = new Map();
     player.rows.forEach(row => {
@@ -12429,18 +12588,31 @@ function renderSocialRivalsChart() {
 
     const color = palette[index % palette.length];
     const isTarget = index === 0;
-    const lineAlpha = isTarget ? 1 : 0.35;
-    const pointAlpha = isTarget ? 1 : 0.3;
+    const baseLineAlpha = 0.28;
+    const basePointAlpha = 0.20;
+    const targetLineAlpha = 0.92;
+    const targetPointAlpha = 0.80;
+    const lineAlpha = isTarget ? targetLineAlpha : baseLineAlpha;
+    const pointAlpha = isTarget ? targetPointAlpha : basePointAlpha;
     return {
       label: player.label,
       data: labels.map(label => (valueMap.has(label) ? valueMap.get(label) : null)),
-      borderColor: toRgba(color, lineAlpha),
-      backgroundColor: toRgba(color, pointAlpha),
-      pointBackgroundColor: toRgba(color, pointAlpha),
-      pointBorderColor: toRgba(color, pointAlpha),
-      pointRadius: 2,
-      pointHoverRadius: 4,
-      borderWidth: index === 0 ? 3 : 2,
+      borderColor: withSeriesOpacity(toRgba(color, lineAlpha), rivalsSeriesOpacityScale),
+      backgroundColor: withSeriesOpacity(toRgba(color, pointAlpha), rivalsSeriesOpacityScale),
+      pointBackgroundColor: withSeriesOpacity(toRgba(color, pointAlpha), rivalsSeriesOpacityScale),
+      pointBorderColor: withSeriesOpacity(toRgba(color, pointAlpha), rivalsSeriesOpacityScale),
+      _opacityBaseStyles: {
+        borderColor: toRgba(color, lineAlpha),
+        backgroundColor: toRgba(color, pointAlpha),
+        pointBackgroundColor: toRgba(color, pointAlpha),
+        pointBorderColor: toRgba(color, pointAlpha)
+      },
+      pointRadius: hideStaticPoints
+        ? (context => (context && context.active ? overviewHoverPointRadius : 0))
+        : 2,
+      pointHoverRadius: hideStaticPoints ? overviewHoverPointRadius : 4,
+      pointHitRadius: 12,
+      borderWidth: 2,
       tension: 0,
       fill: false,
       spanGaps: true
@@ -12559,6 +12731,7 @@ function renderSocialRivalsChart() {
       }
     }
   });
+  attachTrendZoomBrush(socialRivalsChart, "socialRivalsChart", labels.length);
 
   const bubblePlayers = seriesData
     .map((player, index) => {
@@ -12645,12 +12818,19 @@ function renderSocialRivalsChart() {
   const maxBubbleGuessRate = Math.max(...bubbleGuessRates);
   const bubbleGuessRateRange = maxBubbleGuessRate - minBubbleGuessRate;
   const bubbleGuessRatePadding = Math.max(1, bubbleGuessRateRange * 0.18);
-  let bubbleYMin = Math.max(0, minBubbleGuessRate - bubbleGuessRatePadding);
-  let bubbleYMax = Math.min(100, maxBubbleGuessRate + bubbleGuessRatePadding);
-  if (bubbleYMax - bubbleYMin < 4) {
-    const center = (bubbleYMin + bubbleYMax) / 2;
-    bubbleYMin = Math.max(0, center - 2);
-    bubbleYMax = Math.min(100, center + 2);
+  const rawBubbleYMin = Math.max(0, minBubbleGuessRate - bubbleGuessRatePadding);
+  const rawBubbleYMax = Math.min(100, maxBubbleGuessRate + bubbleGuessRatePadding);
+  let bubbleYTickStep = 5;
+  let bubbleYMin = Math.floor(rawBubbleYMin / bubbleYTickStep) * bubbleYTickStep;
+  let bubbleYMax = Math.ceil(rawBubbleYMax / bubbleYTickStep) * bubbleYTickStep;
+  bubbleYMin = Math.max(0, bubbleYMin);
+  bubbleYMax = Math.min(100, bubbleYMax);
+  if (bubbleYMax - bubbleYMin < bubbleYTickStep * 2) {
+    bubbleYMax = Math.min(100, bubbleYMin + bubbleYTickStep * 2);
+  }
+  if (bubbleYMax <= bubbleYMin) {
+    bubbleYMin = 0;
+    bubbleYMax = bubbleYTickStep * 2;
   }
 
   const minBubbleRank = Math.min(...bubbleRanks);
@@ -12714,6 +12894,7 @@ function renderSocialRivalsChart() {
           },
           ticks: {
             color: "#555",
+            stepSize: bubbleYTickStep,
             callback: function(value) {
               return `${Number(value).toFixed(1)}%`;
             }
@@ -12795,21 +12976,23 @@ function ensureTrendZoomResetButton(chart, canvasId) {
   }
 
   resetBtn.style.display = "none";
-  resetBtn.onclick = () => {
-    if (!chart || !chart.options || !chart.options.scales || !chart.options.scales.x) return;
-    chart.options.scales.x.min = undefined;
-    chart.options.scales.x.max = undefined;
-    chart.update("none");
-    resetBtn.style.display = "none";
-  };
   return resetBtn;
 }
 
-function attachTrendZoomBrush(chart, canvasId, pointCount) {
+function attachTrendZoomBrush(chart, canvasId, pointCount, options = {}) {
   const canvas = chart && chart.canvas;
   if (!canvas || !canvas.parentElement || pointCount < 3) return;
   const resetBtn = ensureTrendZoomResetButton(chart, canvasId);
   if (!resetBtn) return;
+  applyTrendZoomSelectionState(chart, pointCount, pointCount, options);
+  resetBtn.onclick = () => {
+    if (!chart || !chart.options || !chart.options.scales || !chart.options.scales.x) return;
+    chart.options.scales.x.min = undefined;
+    chart.options.scales.x.max = undefined;
+    applyTrendZoomSelectionState(chart, pointCount, pointCount, options);
+    chart.update("none");
+    resetBtn.style.display = "none";
+  };
   const wrap = canvas.parentElement;
   if (getComputedStyle(wrap).position === "static") {
     wrap.style.position = "relative";
@@ -12834,10 +13017,12 @@ function attachTrendZoomBrush(chart, canvasId, pointCount) {
     if (!dragging) return;
     dragging = false;
     const xScale = chart && chart.scales && chart.scales.x;
+    const chartArea = chart && chart.chartArea;
     const rect = canvas.getBoundingClientRect();
-    const endX = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
-    const minX = Math.max(0, Math.min(startX, endX));
-    const maxX = Math.max(0, Math.max(startX, endX));
+    if (!chartArea) return;
+    const endX = Math.max(chartArea.left, Math.min(chartArea.right, event.clientX - rect.left));
+    const minX = Math.max(chartArea.left, Math.min(startX, endX));
+    const maxX = Math.min(chartArea.right, Math.max(startX, endX));
     brush.style.display = "none";
 
     if (!xScale || maxX - minX < 10) return;
@@ -12848,10 +13033,12 @@ function attachTrendZoomBrush(chart, canvasId, pointCount) {
     const startIdx = Math.max(0, Math.min(pointCount - 1, Math.floor(Math.min(rawStart, rawEnd))));
     const endIdx = Math.max(0, Math.min(pointCount - 1, Math.ceil(Math.max(rawStart, rawEnd))));
     if (endIdx - startIdx < 1) return;
+    const selectedCount = endIdx - startIdx + 1;
 
     if (chart.options && chart.options.scales && chart.options.scales.x) {
       chart.options.scales.x.min = startIdx;
       chart.options.scales.x.max = endIdx;
+      applyTrendZoomSelectionState(chart, selectedCount, pointCount, options);
       chart.update("none");
       if (resetBtn) resetBtn.style.display = "inline-block";
     }
@@ -12862,9 +13049,11 @@ function attachTrendZoomBrush(chart, canvasId, pointCount) {
     const chartArea = chart && chart.chartArea;
     if (!chartArea) return;
     const rect = canvas.getBoundingClientRect();
+    const pointerX = event.clientX - rect.left;
     const pointerY = event.clientY - rect.top;
+    if (pointerX < chartArea.left || pointerX > chartArea.right) return;
     if (pointerY < chartArea.top || pointerY > chartArea.bottom) return;
-    startX = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
+    startX = Math.max(chartArea.left, Math.min(chartArea.right, pointerX));
     dragging = true;
     brush.style.display = "block";
     brush.style.top = `${canvas.offsetTop + chartArea.top}px`;
@@ -12875,8 +13064,10 @@ function attachTrendZoomBrush(chart, canvasId, pointCount) {
 
   const onMouseMove = event => {
     if (!dragging) return;
+    const chartArea = chart && chart.chartArea;
+    if (!chartArea) return;
     const rect = canvas.getBoundingClientRect();
-    const currentX = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
+    const currentX = Math.max(chartArea.left, Math.min(chartArea.right, event.clientX - rect.left));
     const left = Math.min(startX, currentX);
     const width = Math.abs(currentX - startX);
     brush.style.left = `${canvas.offsetLeft + left}px`;
@@ -12904,7 +13095,14 @@ function renderTrendChart(
   values,
   seriesLabel,
   yTitle,
-  { suffix = "%", decimals = 3, integerTicks = false, palette = null } = {}
+  {
+    suffix = "%",
+    decimals = 3,
+    integerTicks = false,
+    palette = null,
+    metaElementId = null,
+    metaUnit = "tours"
+  } = {}
 ) {
   const { trend } = buildTrend(values);
   const resolvedPalette = {
@@ -12994,6 +13192,7 @@ function renderTrendChart(
     existingChart.destroy();
   }
 
+  const seriesOpacityScale = getTimeSeriesOpacityScale(labels.length);
   const chart = new Chart(document.getElementById(canvasId), {
     type: "line",
     data: {
@@ -13002,16 +13201,23 @@ function renderTrendChart(
         {
           label: seriesLabel,
           data: values,
-          borderColor: resolvedPalette.line,
-          backgroundColor: resolvedPalette.fill,
-          pointBackgroundColor: resolvedPalette.line,
-          pointBorderColor: "#ffffff",
+          borderColor: withSeriesOpacity(resolvedPalette.line, seriesOpacityScale),
+          backgroundColor: withSeriesOpacity(resolvedPalette.fill, seriesOpacityScale),
+          pointBackgroundColor: withSeriesOpacity(resolvedPalette.line, seriesOpacityScale),
+          pointBorderColor: withSeriesOpacity("#ffffff", seriesOpacityScale),
+          _opacityBaseStyles: {
+            borderColor: resolvedPalette.line,
+            backgroundColor: resolvedPalette.fill,
+            pointBackgroundColor: resolvedPalette.line,
+            pointBorderColor: "#ffffff"
+          },
           pointBorderWidth: 1.5,
           pointRadius: hideStaticPoints
             ? (context => (context && context.active ? overviewHoverPointRadius : 0))
             : 2.2,
           pointHoverRadius: hideStaticPoints ? overviewHoverPointRadius : 5,
-          borderWidth: 2.4,
+          order: 10,
+          borderWidth: 1.8,
           tension: 0,
           fill: false
         },
@@ -13020,7 +13226,8 @@ function renderTrendChart(
           data: trend,
           borderColor: resolvedPalette.trend,
           borderDash: [8, 6],
-          borderWidth: 1.8,
+          order: 30,
+          borderWidth: 3.2,
           pointRadius: 0,
           tension: 0,
           fill: false
@@ -13103,7 +13310,8 @@ function renderTrendChart(
     }
   });
 
-  attachTrendZoomBrush(chart, canvasId, labels.length);
+  const metaElement = metaElementId ? document.getElementById(metaElementId) : null;
+  attachTrendZoomBrush(chart, canvasId, labels.length, { metaElement, metaUnit });
 
   return chart;
 }
@@ -14232,7 +14440,8 @@ async function renderWeightedGuessRateChart(records) {
     labels,
     values,
     "Weighted Guess Rate (%)",
-    "Weighted guess rate (%)"
+    "Weighted guess rate (%)",
+    { metaElementId: "weightedGuessRateFound", metaUnit: "games" }
   );
 }
 
@@ -14783,13 +14992,10 @@ function renderOverviewAnimeTypeCharts() {
   const maxGuessRate = guessRates.length ? Math.max(...guessRates) : 0;
   const guessRateRange = maxGuessRate - minGuessRate;
   const guessRatePadding = Math.max(1, guessRateRange * 0.2);
-  let guessRateMin = Math.max(0, minGuessRate - guessRatePadding);
-  let guessRateMax = Math.min(100, maxGuessRate + guessRatePadding);
-  if (guessRateMax - guessRateMin < 4) {
-    const center = (guessRateMin + guessRateMax) / 2;
-    guessRateMin = Math.max(0, center - 2);
-    guessRateMax = Math.min(100, center + 2);
-  }
+  const rawGuessRateMax = Math.min(100, maxGuessRate + guessRatePadding);
+  const guessRateTickStep = rawGuessRateMax <= 30 ? 5 : 10;
+  let guessRateMax = Math.ceil(rawGuessRateMax / guessRateTickStep) * guessRateTickStep;
+  guessRateMax = Math.min(100, Math.max(guessRateTickStep, guessRateMax));
 
   overviewGuessRateChart = new Chart(document.getElementById("overviewGuessRateChart"), {
     type: "bar",
@@ -14837,6 +15043,7 @@ function renderOverviewAnimeTypeCharts() {
           max: guessRateMax,
           ticks: {
             color: "#475569",
+            stepSize: guessRateTickStep,
             callback: function(value) {
               return `${Number(value).toFixed(1)}%`;
             }
@@ -18137,7 +18344,7 @@ function renderPerformanceGuessRate(records) {
     opValues,
     "OP Guess Rate (%)",
     "OP guess rate (%)",
-    { palette: PERFORMANCE_LINE_PALETTES.op }
+    { palette: PERFORMANCE_LINE_PALETTES.op, metaElementId: "opFoundGames", metaUnit: "tours" }
   );
 
   edGuessChart = renderTrendChart(
@@ -18147,7 +18354,7 @@ function renderPerformanceGuessRate(records) {
     edValues,
     "ED Guess Rate (%)",
     "ED guess rate (%)",
-    { palette: PERFORMANCE_LINE_PALETTES.ed }
+    { palette: PERFORMANCE_LINE_PALETTES.ed, metaElementId: "edFoundGames", metaUnit: "tours" }
   );
 
   inGuessChart = renderTrendChart(
@@ -18157,7 +18364,7 @@ function renderPerformanceGuessRate(records) {
     inValues,
     "Insert Guess Rate (%)",
     "Insert guess rate (%)",
-    { palette: PERFORMANCE_LINE_PALETTES.insert }
+    { palette: PERFORMANCE_LINE_PALETTES.insert, metaElementId: "inFoundGames", metaUnit: "tours" }
   );
 
   const combinedValues = [...opValues, ...edValues, ...inValues].filter(value => Number.isFinite(value));
@@ -18176,6 +18383,7 @@ function renderPerformanceGuessRate(records) {
     }
     combinedGuessAreaChart.destroy();
   }
+  const combinedSeriesOpacityScale = getTimeSeriesOpacityScale(labels.length);
 
   combinedGuessAreaChart = new Chart(document.getElementById("combinedGuessAreaChart"), {
     type: "line",
@@ -18185,13 +18393,18 @@ function renderPerformanceGuessRate(records) {
         {
           label: "OP Guess Rate (%)",
           data: opValues,
-          borderColor: "rgba(47, 109, 246, 0.40)",
-          backgroundColor: "rgba(47, 109, 246, 0.06)",
-          borderWidth: 1.6,
+          borderColor: withSeriesOpacity("rgba(47, 109, 246, 0.40)", combinedSeriesOpacityScale),
+          backgroundColor: withSeriesOpacity("rgba(47, 109, 246, 0.06)", combinedSeriesOpacityScale),
+          _opacityBaseStyles: {
+            borderColor: "rgba(47, 109, 246, 0.40)",
+            backgroundColor: "rgba(47, 109, 246, 0.06)",
+            pointBorderColor: "rgba(255, 255, 255, 0.52)"
+          },
+          borderWidth: 1.3,
           pointRadius: 1.2,
           pointHoverRadius: 2.8,
           pointBorderWidth: 0.8,
-          pointBorderColor: "rgba(255, 255, 255, 0.52)",
+          pointBorderColor: withSeriesOpacity("rgba(255, 255, 255, 0.52)", combinedSeriesOpacityScale),
           order: 8,
           fill: false,
           tension: 0,
@@ -18202,7 +18415,7 @@ function renderPerformanceGuessRate(records) {
           data: opTrend,
           borderColor: "#2f6df6",
           borderDash: [8, 6],
-          borderWidth: 2.6,
+          borderWidth: 3.2,
           pointRadius: 0,
           pointHoverRadius: 0,
           order: 30,
@@ -18213,13 +18426,18 @@ function renderPerformanceGuessRate(records) {
         {
           label: "ED Guess Rate (%)",
           data: edValues,
-          borderColor: "rgba(16, 185, 129, 0.40)",
-          backgroundColor: "rgba(16, 185, 129, 0.06)",
-          borderWidth: 1.6,
+          borderColor: withSeriesOpacity("rgba(16, 185, 129, 0.40)", combinedSeriesOpacityScale),
+          backgroundColor: withSeriesOpacity("rgba(16, 185, 129, 0.06)", combinedSeriesOpacityScale),
+          _opacityBaseStyles: {
+            borderColor: "rgba(16, 185, 129, 0.40)",
+            backgroundColor: "rgba(16, 185, 129, 0.06)",
+            pointBorderColor: "rgba(255, 255, 255, 0.52)"
+          },
+          borderWidth: 1.3,
           pointRadius: 1.2,
           pointHoverRadius: 2.8,
           pointBorderWidth: 0.8,
-          pointBorderColor: "rgba(255, 255, 255, 0.52)",
+          pointBorderColor: withSeriesOpacity("rgba(255, 255, 255, 0.52)", combinedSeriesOpacityScale),
           order: 8,
           fill: false,
           tension: 0,
@@ -18230,7 +18448,7 @@ function renderPerformanceGuessRate(records) {
           data: edTrend,
           borderColor: "#10b981",
           borderDash: [8, 6],
-          borderWidth: 2.6,
+          borderWidth: 3.2,
           pointRadius: 0,
           pointHoverRadius: 0,
           order: 30,
@@ -18241,13 +18459,18 @@ function renderPerformanceGuessRate(records) {
         {
           label: "Insert Guess Rate (%)",
           data: inValues,
-          borderColor: "rgba(245, 158, 11, 0.40)",
-          backgroundColor: "rgba(245, 158, 11, 0.06)",
-          borderWidth: 1.6,
+          borderColor: withSeriesOpacity("rgba(245, 158, 11, 0.40)", combinedSeriesOpacityScale),
+          backgroundColor: withSeriesOpacity("rgba(245, 158, 11, 0.06)", combinedSeriesOpacityScale),
+          _opacityBaseStyles: {
+            borderColor: "rgba(245, 158, 11, 0.40)",
+            backgroundColor: "rgba(245, 158, 11, 0.06)",
+            pointBorderColor: "rgba(255, 255, 255, 0.52)"
+          },
+          borderWidth: 1.3,
           pointRadius: 1.2,
           pointHoverRadius: 2.8,
           pointBorderWidth: 0.8,
-          pointBorderColor: "rgba(255, 255, 255, 0.52)",
+          pointBorderColor: withSeriesOpacity("rgba(255, 255, 255, 0.52)", combinedSeriesOpacityScale),
           order: 8,
           fill: false,
           tension: 0,
@@ -18258,7 +18481,7 @@ function renderPerformanceGuessRate(records) {
           data: inTrend,
           borderColor: "#f59e0b",
           borderDash: [8, 6],
-          borderWidth: 2.6,
+          borderWidth: 3.2,
           pointRadius: 0,
           pointHoverRadius: 0,
           order: 30,
@@ -18337,7 +18560,10 @@ function renderPerformanceGuessRate(records) {
       }
     }
   });
-  attachTrendZoomBrush(combinedGuessAreaChart, "combinedGuessAreaChart", labels.length);
+  attachTrendZoomBrush(combinedGuessAreaChart, "combinedGuessAreaChart", labels.length, {
+    metaElement: document.getElementById("combinedFoundGames"),
+    metaUnit: "tours"
+  });
 
   const perGameGuessRateValues = records.map(row => {
     const values = [
@@ -18353,6 +18579,8 @@ function renderPerformanceGuessRate(records) {
   });
   const rolling3Values = buildRollingAverageSeries(perGameGuessRateValues, 3);
   const rolling5Values = buildRollingAverageSeries(perGameGuessRateValues, 5);
+  const hideStaticPoints = true;
+  const overviewHoverPointRadius = 5;
   const rollingAllValues = [...rolling3Values, ...rolling5Values].filter(value => Number.isFinite(value));
   const rollingMin = rollingAllValues.length ? Math.min(...rollingAllValues) : 0;
   const rollingMax = rollingAllValues.length ? Math.max(...rollingAllValues) : 100;
@@ -18388,6 +18616,7 @@ function renderPerformanceGuessRate(records) {
     }
     guessRateRollingChart.destroy();
   }
+  const rollingSeriesOpacityScale = getTimeSeriesOpacityScale(labels.length);
 
   guessRateRollingChart = new Chart(document.getElementById("guessRateRollingChart"), {
     type: "line",
@@ -18397,13 +18626,21 @@ function renderPerformanceGuessRate(records) {
         {
           label: "3-game rolling avg (%)",
           data: rolling3Values,
-          borderColor: "#2563eb",
-          backgroundColor: "rgba(37, 99, 235, 0.10)",
+          borderColor: withSeriesOpacity("#2563eb", rollingSeriesOpacityScale),
+          backgroundColor: withSeriesOpacity("rgba(37, 99, 235, 0.10)", rollingSeriesOpacityScale),
+          _opacityBaseStyles: {
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.10)",
+            pointBorderColor: "rgba(255, 255, 255, 0.62)"
+          },
           borderWidth: 2.5,
-          pointRadius: 1.8,
-          pointHoverRadius: 3.8,
+          pointRadius: hideStaticPoints
+            ? (context => (context && context.active ? overviewHoverPointRadius : 0))
+            : 1.8,
+          pointHoverRadius: hideStaticPoints ? overviewHoverPointRadius : 3.8,
+          pointHitRadius: 12,
           pointBorderWidth: 0.8,
-          pointBorderColor: "rgba(255, 255, 255, 0.62)",
+          pointBorderColor: withSeriesOpacity("rgba(255, 255, 255, 0.62)", rollingSeriesOpacityScale),
           fill: false,
           tension: 0.15,
           spanGaps: true
@@ -18411,13 +18648,21 @@ function renderPerformanceGuessRate(records) {
         {
           label: "5-game rolling avg (%)",
           data: rolling5Values,
-          borderColor: "#0f766e",
-          backgroundColor: "rgba(15, 118, 110, 0.10)",
+          borderColor: withSeriesOpacity("#0f766e", rollingSeriesOpacityScale),
+          backgroundColor: withSeriesOpacity("rgba(15, 118, 110, 0.10)", rollingSeriesOpacityScale),
+          _opacityBaseStyles: {
+            borderColor: "#0f766e",
+            backgroundColor: "rgba(15, 118, 110, 0.10)",
+            pointBorderColor: "rgba(255, 255, 255, 0.62)"
+          },
           borderWidth: 2.5,
-          pointRadius: 1.8,
-          pointHoverRadius: 3.8,
+          pointRadius: hideStaticPoints
+            ? (context => (context && context.active ? overviewHoverPointRadius : 0))
+            : 1.8,
+          pointHoverRadius: hideStaticPoints ? overviewHoverPointRadius : 3.8,
+          pointHitRadius: 12,
           pointBorderWidth: 0.8,
-          pointBorderColor: "rgba(255, 255, 255, 0.62)",
+          pointBorderColor: withSeriesOpacity("rgba(255, 255, 255, 0.62)", rollingSeriesOpacityScale),
           fill: false,
           tension: 0.15,
           spanGaps: true
@@ -18483,7 +18728,10 @@ function renderPerformanceGuessRate(records) {
       }
     }
   });
-  attachTrendZoomBrush(guessRateRollingChart, "guessRateRollingChart", labels.length);
+  attachTrendZoomBrush(guessRateRollingChart, "guessRateRollingChart", labels.length, {
+    metaElement: document.getElementById("rollingFoundGames"),
+    metaUnit: "tours"
+  });
 
   const opAverage = opValues.reduce((sum, value) => sum + value, 0) / opValues.length;
   const edAverage = edValues.reduce((sum, value) => sum + value, 0) / edValues.length;
@@ -18585,6 +18833,8 @@ function renderGuessRateVsAvg8Chart(records) {
   }
 
   const labels = records.map(x => x.Timestamp);
+  const hideStaticPoints = true;
+  const overviewHoverPointRadius = 5;
   const isGuessVsAvg8PercentageMode = overviewDataMode === "percentage";
   const guessRateValues = records.map(row => {
     const value = resolveNumericMetricValue(row, "Guess rate");
@@ -18612,16 +18862,23 @@ function renderGuessRateVsAvg8Chart(records) {
   const guessRateRange = guessRateMaxValue - guessRateMinValue;
   const guessRatePadding = Math.max(1, guessRateRange * 0.2);
   const rawGuessRateMax = Math.min(100, guessRateMaxValue + guessRatePadding);
-  const guessRateAxisMax = Math.max(5, Math.ceil(rawGuessRateMax / 5) * 5);
-  const guessRateTickStep = guessRateAxisMax <= 25 ? 2.5 : (guessRateAxisMax <= 60 ? 5 : 10);
+  const guessRateTickStep = rawGuessRateMax <= 30 ? 5 : 10;
+  const guessRateAxisMax = Math.max(
+    guessRateTickStep,
+    Math.ceil(rawGuessRateMax / guessRateTickStep) * guessRateTickStep
+  );
 
   const finiteAvg8Values = avg8Values.filter(value => Number.isFinite(value));
   const avg8MaxValue = finiteAvg8Values.length ? Math.max(...finiteAvg8Values) : 0;
   let avg8AxisMax;
   let avg8TickStep;
   if (isGuessVsAvg8PercentageMode) {
-    avg8AxisMax = Math.max(5, Math.min(100, Math.ceil((avg8MaxValue + 5) / 5) * 5));
-    avg8TickStep = avg8AxisMax <= 25 ? 2.5 : (avg8AxisMax <= 60 ? 5 : 10);
+    const rawAvg8PercentMax = Math.min(100, avg8MaxValue + 5);
+    avg8TickStep = rawAvg8PercentMax <= 30 ? 5 : 10;
+    avg8AxisMax = Math.max(
+      avg8TickStep,
+      Math.ceil(rawAvg8PercentMax / avg8TickStep) * avg8TickStep
+    );
   } else {
     avg8AxisMax = Math.max(1, Math.min(8, Math.ceil((avg8MaxValue + 0.25) / 0.5) * 0.5));
     avg8TickStep = avg8AxisMax <= 3 ? 0.25 : 0.5;
@@ -18633,6 +18890,7 @@ function renderGuessRateVsAvg8Chart(records) {
     }
     guessRateVsAvg8Chart.destroy();
   }
+  const guessVsAvgSeriesOpacityScale = getTimeSeriesOpacityScale(labels.length);
 
   guessRateVsAvg8Chart = new Chart(document.getElementById("guessRateVsAvg8Chart"), {
     type: "line",
@@ -18643,11 +18901,19 @@ function renderGuessRateVsAvg8Chart(records) {
           label: "Guess Rate (%)",
           data: guessRateValues,
           yAxisID: "yGuessRate",
-          borderColor: "#2563eb",
-          backgroundColor: "rgba(37, 99, 235, 0.15)",
-          borderWidth: 2.2,
-          pointRadius: 2.2,
-          pointHoverRadius: 4.6,
+          borderColor: withSeriesOpacity("#2563eb", guessVsAvgSeriesOpacityScale),
+          backgroundColor: withSeriesOpacity("rgba(37, 99, 235, 0.15)", guessVsAvgSeriesOpacityScale),
+          _opacityBaseStyles: {
+            borderColor: "#2563eb",
+            backgroundColor: "rgba(37, 99, 235, 0.15)"
+          },
+          borderWidth: 1.8,
+          pointRadius: hideStaticPoints
+            ? (context => (context && context.active ? overviewHoverPointRadius : 0))
+            : 2.2,
+          pointHoverRadius: hideStaticPoints ? overviewHoverPointRadius : 4.6,
+          pointHitRadius: 12,
+          order: 10,
           spanGaps: true,
           tension: 0
         },
@@ -18657,7 +18923,8 @@ function renderGuessRateVsAvg8Chart(records) {
           yAxisID: "yGuessRate",
           borderColor: "#1d4ed8",
           borderDash: [8, 6],
-          borderWidth: 2.4,
+          order: 30,
+          borderWidth: 3.2,
           pointRadius: 0,
           pointHoverRadius: 0,
           spanGaps: true,
@@ -18667,11 +18934,19 @@ function renderGuessRateVsAvg8Chart(records) {
           label: isGuessVsAvg8PercentageMode ? "Avg/8 (%)" : "Avg/8",
           data: avg8Values,
           yAxisID: "yAvg8",
-          borderColor: "#f97316",
-          backgroundColor: "rgba(249, 115, 22, 0.15)",
-          borderWidth: 2.2,
-          pointRadius: 2.2,
-          pointHoverRadius: 4.6,
+          borderColor: withSeriesOpacity("#f97316", guessVsAvgSeriesOpacityScale),
+          backgroundColor: withSeriesOpacity("rgba(249, 115, 22, 0.15)", guessVsAvgSeriesOpacityScale),
+          _opacityBaseStyles: {
+            borderColor: "#f97316",
+            backgroundColor: "rgba(249, 115, 22, 0.15)"
+          },
+          borderWidth: 1.8,
+          pointRadius: hideStaticPoints
+            ? (context => (context && context.active ? overviewHoverPointRadius : 0))
+            : 2.2,
+          pointHoverRadius: hideStaticPoints ? overviewHoverPointRadius : 4.6,
+          pointHitRadius: 12,
+          order: 11,
           spanGaps: true,
           tension: 0
         },
@@ -18681,7 +18956,8 @@ function renderGuessRateVsAvg8Chart(records) {
           yAxisID: "yAvg8",
           borderColor: "#c2410c",
           borderDash: [8, 6],
-          borderWidth: 2.4,
+          order: 31,
+          borderWidth: 3.2,
           pointRadius: 0,
           pointHoverRadius: 0,
           spanGaps: true,
@@ -18786,7 +19062,10 @@ function renderGuessRateVsAvg8Chart(records) {
       }
     }
   });
-  attachTrendZoomBrush(guessRateVsAvg8Chart, "guessRateVsAvg8Chart", labels.length);
+  attachTrendZoomBrush(guessRateVsAvg8Chart, "guessRateVsAvg8Chart", labels.length, {
+    metaElement: document.getElementById("guessVsAvg8FoundGames"),
+    metaUnit: "tours"
+  });
 }
 
 function renderPerformanceLivesTakenSaved(records) {
@@ -18831,7 +19110,14 @@ function renderPerformanceLivesTakenSaved(records) {
     takenValues,
     "Lives Taken",
     "Lives taken",
-    { suffix: "", decimals: 0, integerTicks: true, palette: PERFORMANCE_LINE_PALETTES.taken }
+    {
+      suffix: "",
+      decimals: 0,
+      integerTicks: true,
+      palette: PERFORMANCE_LINE_PALETTES.taken,
+      metaElementId: "takenFoundGames",
+      metaUnit: "tours"
+    }
   );
 
   savedLivesChart = renderTrendChart(
@@ -18841,7 +19127,14 @@ function renderPerformanceLivesTakenSaved(records) {
     savedValues,
     "Lives Saved",
     "Lives saved",
-    { suffix: "", decimals: 0, integerTicks: true, palette: PERFORMANCE_LINE_PALETTES.saved }
+    {
+      suffix: "",
+      decimals: 0,
+      integerTicks: true,
+      palette: PERFORMANCE_LINE_PALETTES.saved,
+      metaElementId: "savedFoundGames",
+      metaUnit: "tours"
+    }
   );
 }
 
@@ -18884,7 +19177,13 @@ function renderPerformanceRigAnalysis(records) {
     onlistValues,
     "Onlist guess rate",
     "Onlist guess rate (%)",
-    { suffix: "%", decimals: 2, palette: PERFORMANCE_LINE_PALETTES.op }
+    {
+      suffix: "%",
+      decimals: 2,
+      palette: PERFORMANCE_LINE_PALETTES.op,
+      metaElementId: "onlistFoundGames",
+      metaUnit: "tours"
+    }
   );
 
   offlistAnalysisChart = renderTrendChart(
@@ -18894,7 +19193,13 @@ function renderPerformanceRigAnalysis(records) {
     offlistValues,
     "Offlist guess rate",
     "Offlist guess rate (%)",
-    { suffix: "%", decimals: 2, palette: PERFORMANCE_LINE_PALETTES.insert }
+    {
+      suffix: "%",
+      decimals: 2,
+      palette: PERFORMANCE_LINE_PALETTES.insert,
+      metaElementId: "offlistFoundGames",
+      metaUnit: "tours"
+    }
   );
 }
 
@@ -18923,6 +19228,8 @@ function renderPerformanceCompositeCharts(records) {
   }
 
   const labels = records.map(x => x.Timestamp);
+  const hideStaticPoints = true;
+  const overviewHoverPointRadius = 5;
   const rigCountValues = records.map(row => getFirstFiniteNumber(row, ["Rigs", "Rig count", "rig count", "rigs"]));
   const totalSongsHitValues = records.map(row => getFirstFiniteNumber(row, ["Total hit", "total songs hit", "Total songs hit", "total hit"]));
   const { trend: rigTrend, slope: rigSlope } = buildTrend(rigCountValues);
@@ -18941,6 +19248,7 @@ function renderPerformanceCompositeCharts(records) {
     }
     rigAnalysisChart.destroy();
   }
+  const rigSeriesOpacityScale = getTimeSeriesOpacityScale(labels.length);
 
   rigAnalysisChart = new Chart(document.getElementById("rigAnalysisChart"), {
     type: "line",
@@ -18950,14 +19258,24 @@ function renderPerformanceCompositeCharts(records) {
         {
           label: "Rig count",
           data: rigCountValues,
-          borderColor: "#8b5cf6",
-          backgroundColor: "rgba(139, 92, 246, 0.16)",
-          pointBackgroundColor: "#8b5cf6",
-          pointBorderColor: "#ffffff",
+          borderColor: withSeriesOpacity("#8b5cf6", rigSeriesOpacityScale),
+          backgroundColor: withSeriesOpacity("rgba(139, 92, 246, 0.16)", rigSeriesOpacityScale),
+          pointBackgroundColor: withSeriesOpacity("#8b5cf6", rigSeriesOpacityScale),
+          pointBorderColor: withSeriesOpacity("#ffffff", rigSeriesOpacityScale),
+          _opacityBaseStyles: {
+            borderColor: "#8b5cf6",
+            backgroundColor: "rgba(139, 92, 246, 0.16)",
+            pointBackgroundColor: "#8b5cf6",
+            pointBorderColor: "#ffffff"
+          },
           pointBorderWidth: 1.3,
-          pointRadius: 2.4,
-          pointHoverRadius: 5,
-          borderWidth: 2.2,
+          pointRadius: hideStaticPoints
+            ? (context => (context && context.active ? overviewHoverPointRadius : 0))
+            : 2.4,
+          pointHoverRadius: hideStaticPoints ? overviewHoverPointRadius : 5,
+          pointHitRadius: 12,
+          order: 10,
+          borderWidth: 1.8,
           tension: 0,
           fill: false
         },
@@ -18966,7 +19284,8 @@ function renderPerformanceCompositeCharts(records) {
           data: rigTrend,
           borderColor: "#6b7f99",
           borderDash: [8, 6],
-          borderWidth: 1.8,
+          order: 30,
+          borderWidth: 3.0,
           pointRadius: 0,
           tension: 0,
           fill: false
@@ -18974,14 +19293,24 @@ function renderPerformanceCompositeCharts(records) {
         {
           label: "Total songs hit",
           data: totalSongsHitValues,
-          borderColor: "#0ea5e9",
-          backgroundColor: "rgba(14, 165, 233, 0.15)",
-          pointBackgroundColor: "#0ea5e9",
-          pointBorderColor: "#ffffff",
+          borderColor: withSeriesOpacity("#0ea5e9", rigSeriesOpacityScale),
+          backgroundColor: withSeriesOpacity("rgba(14, 165, 233, 0.15)", rigSeriesOpacityScale),
+          pointBackgroundColor: withSeriesOpacity("#0ea5e9", rigSeriesOpacityScale),
+          pointBorderColor: withSeriesOpacity("#ffffff", rigSeriesOpacityScale),
+          _opacityBaseStyles: {
+            borderColor: "#0ea5e9",
+            backgroundColor: "rgba(14, 165, 233, 0.15)",
+            pointBackgroundColor: "#0ea5e9",
+            pointBorderColor: "#ffffff"
+          },
           pointBorderWidth: 1.3,
-          pointRadius: 2.4,
-          pointHoverRadius: 5,
-          borderWidth: 2.2,
+          pointRadius: hideStaticPoints
+            ? (context => (context && context.active ? overviewHoverPointRadius : 0))
+            : 2.4,
+          pointHoverRadius: hideStaticPoints ? overviewHoverPointRadius : 5,
+          pointHitRadius: 12,
+          order: 11,
+          borderWidth: 1.8,
           tension: 0,
           fill: false
         },
@@ -18990,7 +19319,8 @@ function renderPerformanceCompositeCharts(records) {
           data: totalHitTrend,
           borderColor: "#6b7f99",
           borderDash: [8, 6],
-          borderWidth: 1.8,
+          order: 31,
+          borderWidth: 3.0,
           pointRadius: 0,
           tension: 0,
           fill: false
@@ -19069,7 +19399,10 @@ function renderPerformanceCompositeCharts(records) {
       }
     }
   });
-  attachTrendZoomBrush(rigAnalysisChart, "rigAnalysisChart", labels.length);
+  attachTrendZoomBrush(rigAnalysisChart, "rigAnalysisChart", labels.length, {
+    metaElement: document.getElementById("rigFoundGames"),
+    metaUnit: "tours"
+  });
 
   renderGuessRateVsAvg8Chart(records);
 }
@@ -19229,7 +19562,8 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
     labels,
     values,
     "Guess Rate (%)",
-    "Guess rate (%)"
+    "Guess rate (%)",
+    { metaElementId: "foundGames", metaUnit: "tours" }
   );
 }
 
