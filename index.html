@@ -3,9 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AMQ Tracker Login</title>
+  <title>AMQ Relearn Tracker</title>
+  <link rel="icon" type="image/jpeg" href="data/tabicon.jpeg">
   <link rel="preload" href="https://pub-d42861e79d364f02841015cca59918a2.r2.dev/final_compressed.mp4" as="video" type="video/mp4" crossorigin>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .login-username-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    .login-username-inline-suggestion {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      pointer-events: none;
+      white-space: pre;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #94a3b8;
+      z-index: 2;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    .login-username-inline-typed {
+      color: transparent;
+    }
+  </style>
 </head>
 <body class="login-page">
 
@@ -19,7 +48,10 @@
       </p>
 
       <form id="loginForm" novalidate>
-        <input id="username" placeholder="Enter username" autocomplete="username" autofocus>
+        <div class="login-username-wrap">
+          <input id="username" placeholder="Enter username" autocomplete="username" autofocus>
+          <div id="loginUsernameSuggestion" class="login-username-inline-suggestion" aria-hidden="true"></div>
+        </div>
         <button type="submit">Enter Dashboard</button>
       </form>
 
@@ -119,7 +151,7 @@ function initializeLoginBackgroundToggle() {
     toggleBtn.setAttribute("aria-pressed", "true");
     toggleBtn.textContent = "Back";
     if (dataUpToEl) {
-      dataUpToEl.innerText = "Desmos Tracing / Total 32 hrs";
+      dataUpToEl.innerText = "Desmos Tracing / Total 36 hrs";
     }
     if (creditLineEl) {
       creditLineEl.innerText = "";
@@ -253,12 +285,147 @@ async function updateLoginDataUpTo() {
 }
 
 async function loadPlayers() {
-  const res = await fetch(dataUrl("players.json"));
-  if (!res.ok) {
-    throw new Error("Could not load data/players.json");
+  if (Array.isArray(window.__cachedPlayersData)) {
+    return window.__cachedPlayersData;
   }
-  const players = await res.json();
-  return Array.isArray(players) ? players : [];
+  if (window.__cachedPlayersPromise) {
+    return window.__cachedPlayersPromise;
+  }
+
+  window.__cachedPlayersPromise = (async () => {
+  const res = await fetch(dataUrl("players.json"));
+    if (!res.ok) {
+      throw new Error("Could not load data/players.json");
+    }
+    const players = await res.json();
+    window.__cachedPlayersData = Array.isArray(players) ? players : [];
+    window.__cachedPlayersPromise = null;
+    return window.__cachedPlayersData;
+  })();
+
+  return window.__cachedPlayersPromise;
+}
+
+function normalizeLoginName(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function findLoginSuggestion(rawInput, players) {
+  const input = String(rawInput || "");
+  const normalizedInput = normalizeLoginName(input);
+  if (!normalizedInput || !Array.isArray(players) || !players.length) {
+    return "";
+  }
+
+  let bestDisplayName = "";
+  for (const player of players) {
+    const displayName = String(player && player.displayName ? player.displayName : "");
+    if (!displayName) continue;
+    const normalizedDisplayName = normalizeLoginName(displayName);
+    if (!normalizedDisplayName.startsWith(normalizedInput)) continue;
+    if (normalizedDisplayName === normalizedInput) continue;
+    bestDisplayName = displayName;
+    break;
+  }
+  if (bestDisplayName) {
+    return bestDisplayName;
+  }
+
+  for (const player of players) {
+    const altNames = Array.isArray(player && player.altnames) ? player.altnames : [];
+    for (const alt of altNames) {
+      const altName = String(alt || "");
+      const normalizedAltName = normalizeLoginName(altName);
+      if (!normalizedAltName.startsWith(normalizedInput)) continue;
+      if (normalizedAltName === normalizedInput) continue;
+      return altName;
+    }
+  }
+
+  return "";
+}
+
+function initializeLoginUsernameAutocomplete() {
+  const inputEl = document.getElementById("username");
+  const suggestionEl = document.getElementById("loginUsernameSuggestion");
+  if (!inputEl) return;
+
+  let currentSuggestion = "";
+
+  const syncSuggestionMetrics = () => {
+    if (!suggestionEl) return;
+    const cs = window.getComputedStyle(inputEl);
+    suggestionEl.style.font = cs.font;
+    suggestionEl.style.letterSpacing = cs.letterSpacing;
+    suggestionEl.style.lineHeight = cs.lineHeight;
+    suggestionEl.style.paddingLeft = cs.paddingLeft;
+    suggestionEl.style.paddingRight = cs.paddingRight;
+  };
+
+  const renderSuggestion = () => {
+    if (!suggestionEl) return;
+    const typed = inputEl.value || "";
+    if (!currentSuggestion) {
+      suggestionEl.innerHTML = "";
+      return;
+    }
+    if (!currentSuggestion.toLowerCase().startsWith(typed.toLowerCase())) {
+      suggestionEl.innerHTML = "";
+      return;
+    }
+    if (typed.length >= currentSuggestion.length) {
+      suggestionEl.innerHTML = "";
+      return;
+    }
+    const remaining = currentSuggestion.slice(typed.length);
+    suggestionEl.innerHTML = `<span class="login-username-inline-typed">${escapeHtml(typed)}</span>${escapeHtml(remaining)}`;
+  };
+
+  const refreshSuggestion = async () => {
+    const typed = inputEl.value || "";
+    if (!typed.trim()) {
+      currentSuggestion = "";
+      renderSuggestion();
+      return;
+    }
+    try {
+      const players = await loadPlayers();
+      if ((inputEl.value || "") !== typed) {
+        return;
+      }
+      currentSuggestion = findLoginSuggestion(typed, players);
+      renderSuggestion();
+    } catch (err) {
+      currentSuggestion = "";
+      renderSuggestion();
+    }
+  };
+
+  inputEl.addEventListener("input", refreshSuggestion);
+  inputEl.addEventListener("focus", refreshSuggestion);
+  window.addEventListener("resize", syncSuggestionMetrics);
+  inputEl.addEventListener("keydown", event => {
+    if (event.key !== "Tab" || !currentSuggestion) return;
+    const typed = inputEl.value || "";
+    if (!currentSuggestion.toLowerCase().startsWith(typed.toLowerCase())) return;
+    if (typed.length >= currentSuggestion.length) return;
+    event.preventDefault();
+    inputEl.value = currentSuggestion;
+    currentSuggestion = "";
+    renderSuggestion();
+  });
+
+  syncSuggestionMetrics();
+  loadPlayers().catch(() => {});
 }
 
 async function login() {
@@ -306,6 +473,7 @@ document.getElementById("loginForm").addEventListener("submit", event => {
 
 initializeLoginBackgroundToggle();
 updateLoginDataUpTo();
+initializeLoginUsernameAutocomplete();
 </script>
 
 </body>

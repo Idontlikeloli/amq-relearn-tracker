@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Player</title>
+  <link rel="icon" type="image/jpeg" href="data/tabicon.jpeg">
   <link rel="stylesheet" href="style.css">
   <style>
     html,
@@ -430,6 +431,13 @@
       gap: 18px !important;
     }
 
+    body.performance-nav-mode #performanceSection .chart-wrap {
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+    }
+
     body.unified-nav-mode .page-title {
       color: #2a4158 !important;
       font-family: "Segoe UI", "Avenir Next", "Trebuchet MS", sans-serif !important;
@@ -681,7 +689,7 @@
 
     #knowledgeByEraView .by-era-season-body {
       display: grid !important;
-      grid-template-columns: minmax(520px, 1.5fr) minmax(420px, 1fr) !important;
+      grid-template-columns: minmax(640px, 1.95fr) minmax(300px, 0.75fr) !important;
       gap: 22px !important;
       align-items: start !important;
     }
@@ -711,7 +719,7 @@
     }
 
     #knowledgeByEraView .by-era-season-chart-wrap {
-      height: 420px !important;
+      height: 500px !important;
       background: transparent !important;
       border-color: transparent !important;
       box-shadow: none !important;
@@ -773,11 +781,30 @@
       flex-direction: column !important;
       gap: 12px !important;
       min-width: 0 !important;
+      height: 500px !important;
+      box-sizing: border-box !important;
       border: 0 !important;
       border-radius: 0 !important;
       background: transparent !important;
-      padding: 0 !important;
+      padding: 26px 0 0 !important;
       box-shadow: none !important;
+    }
+
+    #knowledgeByEraView .by-era-season-selection-meta {
+      display: inline-flex !important;
+      align-items: center !important;
+      width: fit-content !important;
+      padding: 4px 10px !important;
+      border-radius: 999px !important;
+      border: 1px solid #93c5fd !important;
+      background: #eaf4ff !important;
+      box-shadow: 0 1px 2px rgba(59, 130, 246, 0.12) !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+      color: #1e3a5f !important;
+      text-align: left !important;
+      margin-bottom: 0 !important;
+      letter-spacing: 0.01em !important;
     }
 
     #knowledgeByEraView .by-era-season-search-input {
@@ -800,12 +827,14 @@
 
     #knowledgeByEraView .by-era-season-checkbox-list {
       display: grid !important;
-      grid-template-columns: repeat(2, minmax(120px, 1fr)) !important;
-      gap: 10px 14px !important;
-      max-height: 420px !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      gap: 8px 10px !important;
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
       overflow-y: auto !important;
       margin: 0 !important;
-      padding: 12px 14px 14px !important;
+      padding: 10px 12px !important;
       border: 1px solid rgba(148, 163, 184, 0.40) !important;
       border-radius: 12px !important;
       background: rgba(245, 249, 254, 0.96) !important;
@@ -843,7 +872,7 @@
 
     #knowledgeArtistView .artist-familiarity-layout {
       display: grid !important;
-      grid-template-columns: minmax(300px, 0.85fr) minmax(380px, 1.15fr) !important;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
       gap: 14px !important;
       align-items: stretch !important;
     }
@@ -888,6 +917,8 @@
 
     #knowledgeArtistView .artist-familiarity-attempts-group {
       position: relative !important;
+      display: flex !important;
+      flex-direction: column !important;
       padding-top: 56px !important;
     }
 
@@ -1124,8 +1155,10 @@
     #knowledgeArtistView .artist-familiarity-bars-chart-wrap {
       position: relative !important;
       width: 100% !important;
-      min-height: 260px !important;
-      max-height: 560px !important;
+      height: 360px !important;
+      min-height: 360px !important;
+      max-height: 360px !important;
+      margin-top: auto !important;
       border: 1px solid #e2e8f0 !important;
       border-radius: 10px !important;
       background: #f8fafc !important;
@@ -1137,7 +1170,7 @@
       height: 360px !important;
       min-height: 360px !important;
       max-height: 360px !important;
-      margin: 0 !important;
+      margin: auto 0 0 !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
@@ -1152,6 +1185,7 @@
     #knowledgeArtistView .artist-familiarity-compare-radar-group {
       display: flex !important;
       flex-direction: column !important;
+      flex: 1 1 auto !important;
       min-height: 100% !important;
     }
 
@@ -1643,6 +1677,7 @@
       font-weight: 600 !important;
     }
 
+
     #overviewSection .current-rank-tier-label {
       margin-top: 6px !important;
       font-size: 11px !important;
@@ -1761,6 +1796,14 @@
       font-weight: 600 !important;
       line-height: 1.2 !important;
       color: #64748b !important;
+      text-align: center !important;
+    }
+
+    #overviewStatsSummaryView #overviewGenreInfo {
+      margin-top: 8px !important;
+      font-size: 12px !important;
+      color: #64748b !important;
+      line-height: 1.4 !important;
       text-align: center !important;
     }
 
@@ -1967,13 +2010,13 @@
     }
 
     #insightsSection .relearn-table-wrap {
-      overflow-x: auto !important;
+      overflow-x: hidden !important;
     }
 
     #insightsSection .relearn-table {
       width: 100% !important;
       border-collapse: collapse !important;
-      min-width: 760px !important;
+      min-width: 0 !important;
       table-layout: fixed !important;
     }
 
@@ -2006,8 +2049,8 @@
 
     #insightsSection #relearnSongsTable th:nth-child(2),
     #insightsSection #relearnSongsTable td:nth-child(2) {
-      width: 220px !important;
-      max-width: 220px !important;
+      width: var(--relearn-anime-col-width, 185px) !important;
+      max-width: var(--relearn-anime-col-width, 185px) !important;
       white-space: nowrap !important;
       overflow: hidden !important;
       text-overflow: ellipsis !important;
@@ -2015,8 +2058,8 @@
 
     #insightsSection #relearnSongsTable th:nth-child(4),
     #insightsSection #relearnSongsTable td:nth-child(4) {
-      width: 132px !important;
-      max-width: 132px !important;
+      width: var(--relearn-artist-col-width, 130px) !important;
+      max-width: var(--relearn-artist-col-width, 130px) !important;
       white-space: nowrap !important;
       overflow: hidden !important;
       text-overflow: ellipsis !important;
@@ -2024,22 +2067,39 @@
 
     #insightsSection #relearnSongsTable th:nth-child(5),
     #insightsSection #relearnSongsTable td:nth-child(5) {
-      width: 70px !important;
+      width: 54px !important;
       white-space: nowrap !important;
     }
 
     #insightsSection #relearnSongsTable th:nth-child(6),
     #insightsSection #relearnSongsTable td:nth-child(6) {
-      width: 92px !important;
+      width: var(--relearn-pattern-col-width, 160px) !important;
+      max-width: var(--relearn-pattern-col-width, 160px) !important;
       text-align: left !important;
-      white-space: nowrap !important;
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      word-break: break-all !important;
+      overflow-wrap: anywhere !important;
+      line-height: 1.2 !important;
+    }
+
+    #insightsSection #relearnSongsTable td:nth-child(6) .pattern-square-list {
+      width: max-content !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      justify-content: flex-start !important;
+    }
+
+    #insightsSection #relearnSongsTable td:nth-child(6) .pattern-square-list.multiline {
+      align-items: flex-start !important;
     }
 
     #insightsSection #relearnSongsTable th:nth-child(7),
     #insightsSection #relearnSongsTable td:nth-child(7),
     #insightsSection #relearnSongsTable th:nth-child(8),
     #insightsSection #relearnSongsTable td:nth-child(8) {
-      width: 92px !important;
+      width: 78px !important;
       text-align: center !important;
       white-space: nowrap !important;
     }
@@ -2153,6 +2213,32 @@
       text-overflow: ellipsis !important;
     }
 
+    #insightsWrongGuessView .relearn-table,
+    #insightsNeverCorrectView .relearn-table,
+    #insightsPopularityView .relearn-table,
+    #insightsPCorrectView .relearn-table {
+      table-layout: auto !important;
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+
+    #insightsWrongGuessView .relearn-table th,
+    #insightsWrongGuessView .relearn-table td,
+    #insightsNeverCorrectView .relearn-table th,
+    #insightsNeverCorrectView .relearn-table td,
+    #insightsPopularityView .relearn-table th,
+    #insightsPopularityView .relearn-table td,
+    #insightsPCorrectView .relearn-table th,
+    #insightsPCorrectView .relearn-table td {
+      width: auto !important;
+      max-width: none !important;
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+    }
+
     #otherToolsSection #otherToolsSearchSongsView .relearn-table {
       width: 100% !important;
       table-layout: fixed !important;
@@ -2169,31 +2255,50 @@
     #otherToolsSection #otherToolsSearchSongsView .relearn-table td:nth-child(3),
     #otherToolsSection #otherToolsSearchSongsView .relearn-table th:nth-child(4),
     #otherToolsSection #otherToolsSearchSongsView .relearn-table td:nth-child(4) {
-      width: 220px !important;
-      max-width: 220px !important;
-      white-space: nowrap !important;
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
+      width: var(--search-text-col-width, 150px) !important;
+      max-width: var(--search-text-col-width, 150px) !important;
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
     }
 
     #otherToolsSection #otherToolsSearchSongsView .relearn-table th:nth-child(5),
     #otherToolsSection #otherToolsSearchSongsView .relearn-table td:nth-child(5) {
-      width: 70px !important;
+      width: 54px !important;
       white-space: nowrap !important;
     }
 
     #otherToolsSection #otherToolsSearchSongsView .relearn-table th:nth-child(6),
     #otherToolsSection #otherToolsSearchSongsView .relearn-table td:nth-child(6) {
-      width: 92px !important;
+      width: var(--search-pattern-col-width, 130px) !important;
+      max-width: var(--search-pattern-col-width, 130px) !important;
       text-align: left !important;
-      white-space: nowrap !important;
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      word-break: break-all !important;
+      overflow-wrap: anywhere !important;
+      line-height: 1.2 !important;
+    }
+
+    #otherToolsSection #otherToolsSearchSongsView .relearn-table td:nth-child(6) .pattern-square-list {
+      width: max-content !important;
+      margin-left: 0 !important;
+      margin-right: auto !important;
+      justify-content: flex-start !important;
+    }
+
+    #otherToolsSection #otherToolsSearchSongsView .relearn-table td:nth-child(6) .pattern-square-list.multiline {
+      align-items: flex-start !important;
     }
 
     #otherToolsSection #otherToolsSearchSongsView .relearn-table th:nth-child(7),
     #otherToolsSection #otherToolsSearchSongsView .relearn-table td:nth-child(7),
     #otherToolsSection #otherToolsSearchSongsView .relearn-table th:nth-child(8),
     #otherToolsSection #otherToolsSearchSongsView .relearn-table td:nth-child(8) {
-      width: 92px !important;
+      width: 68px !important;
       text-align: center !important;
       white-space: nowrap !important;
     }
@@ -2538,13 +2643,13 @@
     }
 
     #otherToolsSection .relearn-table-wrap {
-      overflow-x: auto !important;
+      overflow-x: hidden !important;
     }
 
     #otherToolsSection .relearn-table {
       width: 100% !important;
       border-collapse: collapse !important;
-      min-width: 760px !important;
+      min-width: 0 !important;
     }
 
     #otherToolsSection .relearn-table th,
@@ -2754,15 +2859,26 @@
       background: #f8fafc !important;
     }
 
+    #otherToolsSection {
+      position: relative !important;
+    }
+
     #otherToolsRigAnalysisView {
+      position: static !important;
       border: 0 !important;
+      border-radius: 0 !important;
       background: transparent !important;
       box-shadow: none !important;
       padding: 0 !important;
       margin-top: 12px !important;
     }
 
-    #otherToolsSection .rig-analysis-year-section {
+    #socialSection #otherToolsRigAnalysisView {
+      position: relative !important;
+    }
+
+    #otherToolsSection .rig-analysis-year-section ,
+    #socialSection .rig-analysis-year-section {
       border: 0 !important;
       border-radius: 0 !important;
       background: transparent !important;
@@ -2771,7 +2887,8 @@
       text-align: center !important;
     }
 
-    #otherToolsSection .rig-analysis-year-title {
+    #otherToolsSection .rig-analysis-year-title ,
+    #socialSection .rig-analysis-year-title {
       font-size: 30px !important;
       font-weight: 800 !important;
       color: #1e293b !important;
@@ -2781,7 +2898,8 @@
       margin-bottom: 10px !important;
     }
 
-    #otherToolsSection .rig-analysis-year-value {
+    #otherToolsSection .rig-analysis-year-value ,
+    #socialSection .rig-analysis-year-value {
       font-size: 34px !important;
       font-weight: 800 !important;
       color: #0f172a !important;
@@ -2789,7 +2907,8 @@
       margin-bottom: 12px !important;
     }
 
-    #otherToolsSection .rig-analysis-year-bar {
+    #otherToolsSection .rig-analysis-year-bar ,
+    #socialSection .rig-analysis-year-bar {
       position: relative !important;
       width: 100% !important;
       height: 86px !important;
@@ -2797,16 +2916,19 @@
       max-width: 100% !important;
     }
 
-    #otherToolsSection .rig-analysis-year-bar::after {
+    #otherToolsSection .rig-analysis-year-bar::after ,
+    #socialSection .rig-analysis-year-bar::after {
       content: none !important;
     }
 
-    #otherToolsSection .rig-analysis-year-section {
+    #otherToolsSection .rig-analysis-year-section ,
+    #socialSection .rig-analysis-year-section {
       --rig-year-mean-color: #2563eb !important;
       --rig-year-median-color: #f59e0b !important;
     }
 
-    #otherToolsSection .rig-analysis-year-track {
+    #otherToolsSection .rig-analysis-year-track ,
+    #socialSection .rig-analysis-year-track {
       position: absolute !important;
       top: 16px !important;
       left: 0 !important;
@@ -2818,7 +2940,8 @@
       box-sizing: border-box !important;
     }
 
-    #otherToolsSection .rig-analysis-year-marker {
+    #otherToolsSection .rig-analysis-year-marker ,
+    #socialSection .rig-analysis-year-marker {
       position: absolute !important;
       top: 22px !important;
       bottom: auto !important;
@@ -2831,7 +2954,8 @@
       z-index: 1 !important;
     }
 
-    #otherToolsSection .rig-analysis-year-marker::before {
+    #otherToolsSection .rig-analysis-year-marker::before ,
+    #socialSection .rig-analysis-year-marker::before {
       content: "" !important;
       width: 2px !important;
       height: 12px !important;
@@ -2841,26 +2965,31 @@
       margin-bottom: -2px !important;
     }
 
-    #otherToolsSection .rig-analysis-year-marker.mean::before {
+    #otherToolsSection .rig-analysis-year-marker.mean::before ,
+    #socialSection .rig-analysis-year-marker.mean::before {
       background: var(--rig-year-mean-color) !important;
       height: 40px !important;
     }
 
-    #otherToolsSection .rig-analysis-year-marker.mean {
+    #otherToolsSection .rig-analysis-year-marker.mean ,
+    #socialSection .rig-analysis-year-marker.mean {
       z-index: 0 !important;
     }
 
-    #otherToolsSection .rig-analysis-year-marker.median {
+    #otherToolsSection .rig-analysis-year-marker.median ,
+    #socialSection .rig-analysis-year-marker.median {
       top: 22px !important;
       z-index: 2 !important;
     }
 
-    #otherToolsSection .rig-analysis-year-marker.median::before {
+    #otherToolsSection .rig-analysis-year-marker.median::before ,
+    #socialSection .rig-analysis-year-marker.median::before {
       background: var(--rig-year-median-color) !important;
       height: 12px !important;
     }
 
-    #otherToolsSection .rig-analysis-year-tag {
+    #otherToolsSection .rig-analysis-year-tag ,
+    #socialSection .rig-analysis-year-tag {
       display: inline-block !important;
       position: relative !important;
       z-index: 3 !important;
@@ -2875,20 +3004,23 @@
       border: 1px solid rgba(15, 23, 42, 0.2) !important;
     }
 
-    #otherToolsSection .rig-analysis-year-marker.mean .rig-analysis-year-tag {
+    #otherToolsSection .rig-analysis-year-marker.mean .rig-analysis-year-tag ,
+    #socialSection .rig-analysis-year-marker.mean .rig-analysis-year-tag {
       color: #0f172a !important;
       background: var(--rig-year-mean-color) !important;
       filter: brightness(0.86) !important;
       transform: none !important;
     }
 
-    #otherToolsSection .rig-analysis-year-marker.median .rig-analysis-year-tag {
+    #otherToolsSection .rig-analysis-year-marker.median .rig-analysis-year-tag ,
+    #socialSection .rig-analysis-year-marker.median .rig-analysis-year-tag {
       color: #0f172a !important;
       background: var(--rig-year-median-color) !important;
       transform: none !important;
     }
 
-    #otherToolsSection .rig-analysis-year-ends {
+    #otherToolsSection .rig-analysis-year-ends ,
+    #socialSection .rig-analysis-year-ends {
       position: absolute !important;
       left: 0 !important;
       right: 0 !important;
@@ -2903,7 +3035,8 @@
       pointer-events: none !important;
     }
 
-    #otherToolsSection .rig-analysis-year-range {
+    #otherToolsSection .rig-analysis-year-range ,
+    #socialSection .rig-analysis-year-range {
       margin-top: 6px !important;
       font-size: 12px !important;
       font-weight: 700 !important;
@@ -2911,7 +3044,8 @@
       text-align: center !important;
     }
 
-    #otherToolsSection .rig-analysis-year-percentiles {
+    #otherToolsSection .rig-analysis-year-percentiles ,
+    #socialSection .rig-analysis-year-percentiles {
       position: absolute !important;
       left: 0 !important;
       right: 0 !important;
@@ -2922,7 +3056,8 @@
       z-index: 3 !important;
     }
 
-    #otherToolsSection .rig-analysis-year-percentile-label {
+    #otherToolsSection .rig-analysis-year-percentile-label ,
+    #socialSection .rig-analysis-year-percentile-label {
       position: absolute !important;
       top: 0 !important;
       transform: translateX(-50%) !important;
@@ -2933,7 +3068,8 @@
       white-space: nowrap !important;
     }
 
-    #otherToolsSection .rig-analysis-year-percentile-label::after {
+    #otherToolsSection .rig-analysis-year-percentile-label::after ,
+    #socialSection .rig-analysis-year-percentile-label::after {
       content: "" !important;
       position: absolute !important;
       left: 50% !important;
@@ -2947,27 +3083,32 @@
       opacity: 0.9 !important;
     }
 
-    #otherToolsSection .rig-analysis-year-percentile-label.start {
+    #otherToolsSection .rig-analysis-year-percentile-label.start ,
+    #socialSection .rig-analysis-year-percentile-label.start {
       transform: none !important;
       left: 0 !important;
     }
 
-    #otherToolsSection .rig-analysis-year-percentile-label.start::after {
+    #otherToolsSection .rig-analysis-year-percentile-label.start::after ,
+    #socialSection .rig-analysis-year-percentile-label.start::after {
       left: 0 !important;
       transform: none !important;
     }
 
-    #otherToolsSection .rig-analysis-year-percentile-label.end {
+    #otherToolsSection .rig-analysis-year-percentile-label.end ,
+    #socialSection .rig-analysis-year-percentile-label.end {
       left: 100% !important;
       transform: translateX(-100%) !important;
     }
 
-    #otherToolsSection .rig-analysis-year-percentile-label.end::after {
+    #otherToolsSection .rig-analysis-year-percentile-label.end::after ,
+    #socialSection .rig-analysis-year-percentile-label.end::after {
       left: 100% !important;
       transform: translateX(-100%) !important;
     }
 
-    #otherToolsSection .rig-analysis-year-legend {
+    #otherToolsSection .rig-analysis-year-legend ,
+    #socialSection .rig-analysis-year-legend {
       margin-top: 4px !important;
       margin-bottom: 2px !important;
       display: inline-flex !important;
@@ -2980,14 +3121,16 @@
       color: #475569 !important;
     }
 
-    #otherToolsSection .rig-analysis-year-legend-item {
+    #otherToolsSection .rig-analysis-year-legend-item ,
+    #socialSection .rig-analysis-year-legend-item {
       display: inline-flex !important;
       align-items: center !important;
       gap: 4px !important;
       white-space: nowrap !important;
     }
 
-    #otherToolsSection .rig-analysis-year-legend-swatch {
+    #otherToolsSection .rig-analysis-year-legend-swatch ,
+    #socialSection .rig-analysis-year-legend-swatch {
       width: 10px !important;
       height: 10px !important;
       border-radius: 2px !important;
@@ -2996,7 +3139,8 @@
       box-sizing: border-box !important;
     }
 
-    #otherToolsSection .rig-analysis-year-sub {
+    #otherToolsSection .rig-analysis-year-sub ,
+    #socialSection .rig-analysis-year-sub {
       margin-top: 8px !important;
       font-size: 13px !important;
       color: #64748b !important;
@@ -3004,22 +3148,23 @@
       text-align: center !important;
     }
 
-    #otherToolsSection .rig-analysis-wrap {
-      display: grid !important;
-      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-      gap: 16px !important;
+    #otherToolsSection .rig-analysis-wrap ,
+    #socialSection .rig-analysis-wrap {
+      display: block !important;
+      padding-top: 0 !important;
       margin-bottom: 12px !important;
     }
 
-    #otherToolsSection .rig-analysis-section-difficulty {
-      grid-column: 1 / -1 !important;
+    #otherToolsSection .rig-analysis-section-difficulty ,
+    #socialSection .rig-analysis-section-difficulty {
       min-height: 0 !important;
       padding: 14px 14px 12px !important;
       border: 0 !important;
       margin-top: 12px !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-bar {
+    #otherToolsSection .rig-analysis-difficulty-bar ,
+    #socialSection .rig-analysis-difficulty-bar {
       position: relative !important;
       width: calc(100% + 28px) !important;
       height: 86px !important;
@@ -3028,7 +3173,8 @@
       --rig-difficulty-marker-color: #86efac !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-track {
+    #otherToolsSection .rig-analysis-difficulty-track ,
+    #socialSection .rig-analysis-difficulty-track {
       position: absolute !important;
       top: 16px !important;
       left: 0 !important;
@@ -3040,7 +3186,8 @@
       box-sizing: border-box !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-ends {
+    #otherToolsSection .rig-analysis-difficulty-ends ,
+    #socialSection .rig-analysis-difficulty-ends {
       position: absolute !important;
       left: 0 !important;
       right: 0 !important;
@@ -3055,7 +3202,8 @@
       pointer-events: none !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-percentiles {
+    #otherToolsSection .rig-analysis-difficulty-percentiles ,
+    #socialSection .rig-analysis-difficulty-percentiles {
       position: absolute !important;
       left: 0 !important;
       right: 0 !important;
@@ -3066,7 +3214,8 @@
       z-index: 3 !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-percentile-label {
+    #otherToolsSection .rig-analysis-difficulty-percentile-label ,
+    #socialSection .rig-analysis-difficulty-percentile-label {
       position: absolute !important;
       top: 0 !important;
       transform: translateX(-50%) !important;
@@ -3077,7 +3226,8 @@
       white-space: nowrap !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-percentile-label::after {
+    #otherToolsSection .rig-analysis-difficulty-percentile-label::after ,
+    #socialSection .rig-analysis-difficulty-percentile-label::after {
       content: "" !important;
       position: absolute !important;
       left: 50% !important;
@@ -3091,27 +3241,32 @@
       opacity: 0.9 !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-percentile-label.start {
+    #otherToolsSection .rig-analysis-difficulty-percentile-label.start ,
+    #socialSection .rig-analysis-difficulty-percentile-label.start {
       transform: none !important;
       left: 0 !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-percentile-label.start::after {
+    #otherToolsSection .rig-analysis-difficulty-percentile-label.start::after ,
+    #socialSection .rig-analysis-difficulty-percentile-label.start::after {
       left: 0 !important;
       transform: none !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-percentile-label.end {
+    #otherToolsSection .rig-analysis-difficulty-percentile-label.end ,
+    #socialSection .rig-analysis-difficulty-percentile-label.end {
       left: 100% !important;
       transform: translateX(-100%) !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-percentile-label.end::after {
+    #otherToolsSection .rig-analysis-difficulty-percentile-label.end::after ,
+    #socialSection .rig-analysis-difficulty-percentile-label.end::after {
       left: 100% !important;
       transform: translateX(-100%) !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-marker {
+    #otherToolsSection .rig-analysis-difficulty-marker ,
+    #socialSection .rig-analysis-difficulty-marker {
       position: absolute !important;
       top: 22px !important;
       bottom: auto !important;
@@ -3124,7 +3279,8 @@
       z-index: 2 !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-marker::before {
+    #otherToolsSection .rig-analysis-difficulty-marker::before ,
+    #socialSection .rig-analysis-difficulty-marker::before {
       content: "" !important;
       width: 2px !important;
       height: 12px !important;
@@ -3133,7 +3289,8 @@
       display: block !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-tag {
+    #otherToolsSection .rig-analysis-difficulty-tag ,
+    #socialSection .rig-analysis-difficulty-tag {
       display: inline-block !important;
       border-radius: 999px !important;
       padding: 2px 8px !important;
@@ -3147,7 +3304,8 @@
       transform: none !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-range {
+    #otherToolsSection .rig-analysis-difficulty-range ,
+    #socialSection .rig-analysis-difficulty-range {
       margin-top: 6px !important;
       font-size: 12px !important;
       font-weight: 700 !important;
@@ -3155,7 +3313,8 @@
       text-align: center !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-legend {
+    #otherToolsSection .rig-analysis-difficulty-legend ,
+    #socialSection .rig-analysis-difficulty-legend {
       margin-top: 4px !important;
       margin-bottom: 2px !important;
       display: inline-flex !important;
@@ -3168,14 +3327,16 @@
       color: #475569 !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-legend-item {
+    #otherToolsSection .rig-analysis-difficulty-legend-item ,
+    #socialSection .rig-analysis-difficulty-legend-item {
       display: inline-flex !important;
       align-items: center !important;
       gap: 4px !important;
       white-space: nowrap !important;
     }
 
-    #otherToolsSection .rig-analysis-difficulty-legend-swatch {
+    #otherToolsSection .rig-analysis-difficulty-legend-swatch ,
+    #socialSection .rig-analysis-difficulty-legend-swatch {
       width: 10px !important;
       height: 10px !important;
       border-radius: 2px !important;
@@ -3184,10 +3345,12 @@
       box-sizing: border-box !important;
     }
 
-    #otherToolsSection .rig-analysis-section {
+    #otherToolsSection .rig-analysis-section ,
+    #socialSection .rig-analysis-section {
       border: 1px solid #dbe3ee !important;
       border-radius: 12px !important;
-      background: transparent !important;
+      background: linear-gradient(145deg, #f8fbff 0%, #eef4fb 100%) !important;
+      box-shadow: 0 4px 12px rgba(71, 102, 112, 0.08) !important;
       padding: 16px 14px !important;
       min-height: 180px !important;
       display: flex !important;
@@ -3197,12 +3360,15 @@
       text-align: center !important;
     }
 
-    #otherToolsSection .rig-analysis-section.rig-analysis-section-difficulty {
+    #otherToolsSection .rig-analysis-section.rig-analysis-section-difficulty ,
+    #socialSection .rig-analysis-section.rig-analysis-section-difficulty {
       border: 0 !important;
+      background: transparent !important;
       box-shadow: none !important;
     }
 
-    #otherToolsSection .rig-analysis-section-title {
+    #otherToolsSection .rig-analysis-section-title ,
+    #socialSection .rig-analysis-section-title {
       font-size: 30px !important;
       font-weight: 800 !important;
       color: #1e293b !important;
@@ -3212,7 +3378,8 @@
       width: 100% !important;
     }
 
-    #otherToolsSection .rig-analysis-section-value {
+    #otherToolsSection .rig-analysis-section-value ,
+    #socialSection .rig-analysis-section-value {
       font-size: 28px !important;
       font-weight: 800 !important;
       color: #0f172a !important;
@@ -3220,33 +3387,115 @@
       text-align: center !important;
     }
 
-    #otherToolsSection .rig-analysis-section-sub {
+    #otherToolsSection .rig-analysis-section-sub ,
+    #socialSection .rig-analysis-section-sub {
       margin-top: 8px !important;
       font-size: 13px !important;
       color: #64748b !important;
       text-align: center !important;
     }
 
+    #otherToolsSection .rig-analysis-section-rigavg ,
+    #socialSection .rig-analysis-section-rigavg {
+      position: absolute !important;
+      top: 6px !important;
+      right: 182px !important;
+      z-index: 6 !important;
+      width: 156px !important;
+      border: 1px solid #c7d9eb !important;
+      background: #eef4fb !important;
+      box-shadow: none !important;
+      min-height: 60px !important;
+      padding: 4px 8px !important;
+    }
+
+    #otherToolsSection .rig-analysis-section-rigavg .rig-analysis-section-title ,
+    #socialSection .rig-analysis-section-rigavg .rig-analysis-section-title {
+      font-size: 12px !important;
+      margin-bottom: 2px !important;
+      color: #314f69 !important;
+    }
+
+    #otherToolsSection .rig-analysis-section-rigavg .rig-analysis-section-value ,
+    #socialSection .rig-analysis-section-rigavg .rig-analysis-section-value {
+      font-size: 16px !important;
+      color: #234565 !important;
+    }
+
+    #otherToolsSection .rig-analysis-section-rigavg .rig-analysis-section-sub ,
+    #socialSection .rig-analysis-section-rigavg .rig-analysis-section-sub {
+      display: none !important;
+    }
+
+    #otherToolsSection .rig-analysis-section-rigpct ,
+    #socialSection .rig-analysis-section-rigpct {
+      position: absolute !important;
+      top: 6px !important;
+      right: 0 !important;
+      z-index: 6 !important;
+      width: 156px !important;
+      border: 1px solid #c7d9eb !important;
+      background: #eef4fb !important;
+      box-shadow: none !important;
+      min-height: 60px !important;
+      padding: 4px 8px !important;
+    }
+
+    #otherToolsSection .rig-analysis-section-rigpct .rig-analysis-section-title ,
+    #socialSection .rig-analysis-section-rigpct .rig-analysis-section-title {
+      font-size: 12px !important;
+      margin-bottom: 2px !important;
+      color: #314f69 !important;
+    }
+
+    #otherToolsSection .rig-analysis-section-rigpct .rig-analysis-section-value ,
+    #socialSection .rig-analysis-section-rigpct .rig-analysis-section-value {
+      font-size: 16px !important;
+      color: #234565 !important;
+    }
+
+    #otherToolsSection .rig-analysis-section-rigpct .rig-analysis-section-sub ,
+    #socialSection .rig-analysis-section-rigpct .rig-analysis-section-sub {
+      display: none !important;
+    }
+
+    #socialSection .rig-analysis-section-rigavg,
+    #socialSection .rig-analysis-section-rigpct {
+      top: -78px !important;
+      background: #f5f9ff !important;
+      border-color: #d2e2f4 !important;
+    }
+
     @media (max-width: 900px) {
-      #otherToolsSection .rig-analysis-year-title {
+      #otherToolsSection .rig-analysis-year-title ,
+      #socialSection .rig-analysis-year-title {
         font-size: 24px !important;
       }
-      #otherToolsSection .rig-analysis-year-value {
+      #otherToolsSection .rig-analysis-year-value ,
+    #socialSection .rig-analysis-year-value {
         font-size: 28px !important;
       }
-      #otherToolsSection .rig-analysis-wrap {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      #otherToolsSection .rig-analysis-wrap ,
+    #socialSection .rig-analysis-wrap {
+        display: block !important;
       }
     }
 
     @media (max-width: 900px) {
-      #otherToolsSection .rig-analysis-wrap {
-        grid-template-columns: minmax(0, 1fr) !important;
+      #otherToolsSection .rig-analysis-section-rigavg,
+    #socialSection .rig-analysis-section-rigavg,
+      #otherToolsSection .rig-analysis-section-rigpct ,
+    #socialSection .rig-analysis-section-rigpct {
+        position: static !important;
+        width: auto !important;
+        margin-top: 10px !important;
       }
-      #otherToolsSection .rig-analysis-section-title {
+      #otherToolsSection .rig-analysis-section-title ,
+    #socialSection .rig-analysis-section-title {
         font-size: 24px !important;
       }
-      #otherToolsSection .rig-analysis-section-value {
+      #otherToolsSection .rig-analysis-section-value ,
+    #socialSection .rig-analysis-section-value {
         font-size: 24px !important;
       }
     }
@@ -3446,6 +3695,19 @@
       flex-wrap: nowrap !important;
     }
 
+    #insightsSection .table-text-clamp-3,
+    #otherToolsSection .table-text-clamp-3 {
+      display: -webkit-box !important;
+      -webkit-line-clamp: 3 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: normal !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+      line-height: 1.2 !important;
+    }
+
     #otherToolsSection .relearn-cover-placeholder {
       width: 52px !important;
       height: 72px !important;
@@ -3497,6 +3759,132 @@
       font-size: 13px !important;
       color: #4f6377 !important;
       line-height: 1.35 !important;
+    }
+
+    #otherToolsSection .convert-estimator-grid {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 16px !important;
+      margin-top: 10px !important;
+    }
+
+    #otherToolsSection .convert-estimator-card {
+      border: 1px solid #dbe3ee !important;
+      border-radius: 12px !important;
+      padding: 12px !important;
+      background: #f8fafc !important;
+    }
+
+    #otherToolsSection .convert-estimator-title {
+      font-size: 15px !important;
+      font-weight: 700 !important;
+      color: #1e293b !important;
+      margin-bottom: 8px !important;
+    }
+
+    #otherToolsSection .convert-estimator-row {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      margin-bottom: 8px !important;
+      flex-wrap: wrap !important;
+    }
+
+    #otherToolsSection .convert-estimator-input {
+      flex: 1 1 180px !important;
+      min-width: 180px !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 10px !important;
+      padding: 8px 10px !important;
+      font-size: 13px !important;
+      color: #0f172a !important;
+      background: #ffffff !important;
+      box-sizing: border-box !important;
+    }
+
+    #otherToolsSection .convert-estimator-input:focus {
+      outline: 2px solid #93c5fd !important;
+      outline-offset: 1px !important;
+      border-color: #93c5fd !important;
+    }
+
+    #otherToolsSection .convert-estimator-btn {
+      border: 1px solid #cbd5e1 !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+      border-radius: 8px !important;
+      padding: 8px 12px !important;
+      cursor: pointer !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      white-space: nowrap !important;
+    }
+
+    #otherToolsSection .convert-estimator-btn:hover {
+      background: #f1f5f9 !important;
+    }
+
+    #otherToolsSection .convert-estimator-result {
+      font-size: 14px !important;
+      color: #0f172a !important;
+      font-weight: 700 !important;
+      min-height: 20px !important;
+    }
+
+    #otherToolsSection .convert-estimator-help {
+      font-size: 12px !important;
+      color: #64748b !important;
+      line-height: 1.35 !important;
+    }
+
+    #otherToolsSection .convert-estimator-accuracy {
+      margin-bottom: 8px !important;
+      font-size: 12px !important;
+      color: #64748b !important;
+      font-weight: 400 !important;
+    }
+
+    #otherToolsSection .convert-estimator-closest {
+      margin-top: 8px !important;
+      font-size: 12px !important;
+      color: #334155 !important;
+      line-height: 1.4 !important;
+    }
+
+    #otherToolsSection .convert-estimator-closest-item {
+      margin-top: 4px !important;
+    }
+
+    #otherToolsSection .convert-estimator-quote {
+      margin: 0 0 20px !important;
+      padding: 0 !important;
+      border: 0 !important;
+      background: transparent !important;
+      color: #1e293b !important;
+      font-size: 34px !important;
+      line-height: 1.2 !important;
+      font-style: italic !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.01em !important;
+      text-align: center !important;
+    }
+
+    #otherToolsConvertRankUsefulnessView {
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin-top: 12px !important;
+    }
+
+    @media (max-width: 980px) {
+      #otherToolsSection .convert-estimator-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+
+      #otherToolsSection .convert-estimator-quote {
+        font-size: 24px !important;
+      }
     }
 
     #otherToolsSection .original-tour-layout {
@@ -3832,6 +4220,10 @@
       border-color: #93c5fd !important;
     }
 
+    #socialSection #socialSynergyPlayerSearchInput {
+      margin-bottom: 10px !important;
+    }
+
     #socialSection .social-rivals-checkbox-list {
       display: grid !important;
       grid-template-columns: minmax(0, 1fr) !important;
@@ -3878,15 +4270,15 @@
 
     #socialSection .social-synergy-single-left,
     #socialSection .social-synergy-single-right {
-      border: 1px solid #e2e8f0 !important;
-      border-radius: 10px !important;
-      background: #f8fafc !important;
-      padding: 10px !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      padding: 0 !important;
       min-width: 0 !important;
     }
 
     #socialSection .social-synergy-single-picker-list {
-      margin-top: 8px !important;
+      margin-top: 0 !important;
       display: flex !important;
       flex-direction: column !important;
       gap: 6px !important;
@@ -3896,6 +4288,12 @@
       border-radius: 8px !important;
       background: #ffffff !important;
       padding: 6px !important;
+    }
+
+    #socialSection #socialSynergySingleCompare {
+      max-height: 220px !important;
+      overflow-y: auto !important;
+      padding-right: 2px !important;
     }
 
     #socialSection .social-synergy-single-picker-item {
@@ -4815,6 +5213,7 @@
             <div class="chart-title">Genre</div>
           </div>
           <div class="chart-wrap overview-genre-radar-wrap"><canvas id="genreRadarChart"></canvas></div>
+          <div id="overviewGenreInfo" class="knowledge-disclaimer">Hover a genre to see details.</div>
         </div>
         <div class="chart-card">
         <div class="chart-header">
@@ -4871,7 +5270,7 @@
     <h1 class="page-title">Guess Rate</h1>
 
     <div id="performanceGuessRateView" class="performance-charts">
-      <div class="chart-card">
+      <div id="opGuessRateTrendCard" class="chart-card">
         <div class="chart-header">
           <div class="chart-title">OP Guess Rate Trend</div>
           <div class="chart-meta">
@@ -5044,9 +5443,6 @@
               <button id="artistFamiliarityRightModeCompareBtn" class="artist-familiarity-right-mode-btn" type="button">Compare another artist</button>
             </div>
             <div id="artistFamiliarityBars" class="artist-familiarity-bars"></div>
-            <div id="artistFamiliarityAttemptsDisclaimer" class="knowledge-disclaimer">
-              Songs share one chart; each song row has two bars across attempts (X-axis): top pattern (green/red), bottom rig (blue/gray, half thickness).
-            </div>
           </div>
         </div>
       </div>
@@ -5080,7 +5476,6 @@
           <div class="chart-meta">
             <span id="byEraSeasonGamesIncluded">Found 0 games</span>
             <button id="byEraSeasonDataToggle" type="button">Data: Count</button>
-            <span id="byEraSeasonSelectionMeta">Selected 0 seasons</span>
           </div>
         </div>
         <div class="by-era-season-body">
@@ -5089,6 +5484,7 @@
             <div class="chart-wrap by-era-season-chart-wrap"><canvas id="byEraSeasonCompareChart"></canvas></div>
           </div>
           <div class="by-era-season-controls-pane">
+            <span id="byEraSeasonSelectionMeta" class="by-era-season-selection-meta">Selected 0 seasons</span>
             <input id="byEraSeasonSearchInput" class="by-era-season-search-input" type="text" placeholder="Search seasons...">
             <div id="byEraSeasonCheckboxList" class="by-era-season-checkbox-list"></div>
           </div>
@@ -5272,7 +5668,6 @@
       </div>
       <div class="social-synergy-single-layout">
         <div class="social-synergy-single-left">
-          <div class="chart-title" style="font-size:13px;">Select Player</div>
           <input id="socialSynergyPlayerSearchInput" class="social-rivals-search-input" type="text" placeholder="Search player...">
           <div id="socialSynergyPlayerSearchList" class="social-synergy-single-picker-list"></div>
         </div>
@@ -5280,30 +5675,6 @@
           <div class="chart-title" style="font-size:13px;">Single Comparison</div>
           <div id="socialSynergySingleCompare" class="social-synergy-list"></div>
         </div>
-      </div>
-      <div class="social-synergy-table-wrap">
-        <table class="social-synergy-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Player</th>
-              <th>Target only</th>
-              <th>Overlap</th>
-              <th>Rival only</th>
-              <th>Target rigs</th>
-              <th>Rival rigs</th>
-            </tr>
-          </thead>
-          <tbody id="socialSynergyTableBody"></tbody>
-        </table>
-      </div>
-      <div class="social-synergy-pagination">
-        <button id="socialSynergyPrevPageBtn" class="social-synergy-page-button" type="button" aria-label="Previous page">◀</button>
-        <span id="socialSynergyPageMeta" class="social-synergy-page-meta">Page 1/1</span>
-        <button id="socialSynergyNextPageBtn" class="social-synergy-page-button" type="button" aria-label="Next page">▶</button>
-      </div>
-      <div class="knowledge-disclaimer">
-        Gray = target/other count base. Yellow = overlap count.
       </div>
     </div>
     <div id="socialRivalsTopLayout" class="social-rivals-top-layout" style="display:none;">
@@ -5389,6 +5760,60 @@
       <div class="knowledge-disclaimer">
         Ranking tie-break: for Lives taken/saved/usefulness: metric, then (Lives taken + Lives saved), then Usefulness. All other metrics: metric, then Usefulness.
       </div>
+    </div>
+    <div id="otherToolsRigAnalysisView" class="chart-card" style="display:none;">
+      <section class="rig-analysis-year-section">
+        <div class="rig-analysis-year-title">Average Year</div>
+        <div id="rigAnalysisYearValue" class="rig-analysis-year-value">—</div>
+        <div class="rig-analysis-year-bar">
+          <div class="rig-analysis-year-ends" aria-hidden="true">
+            <span>boomer</span>
+            <span>zoomer</span>
+          </div>
+          <div id="rigAnalysisYearPercentiles" class="rig-analysis-year-percentiles"></div>
+          <div id="rigAnalysisYearTrack" class="rig-analysis-year-track"></div>
+          <div id="rigAnalysisYearMeanMarker" class="rig-analysis-year-marker mean">
+            <span id="rigAnalysisYearMeanTag" class="rig-analysis-year-tag">Mean year: — (—)</span>
+          </div>
+          <div id="rigAnalysisYearMedianMarker" class="rig-analysis-year-marker median">
+            <span id="rigAnalysisYearMedianTag" class="rig-analysis-year-tag">Median year: — (—)</span>
+          </div>
+        </div>
+        <div id="rigAnalysisYearRange" class="rig-analysis-year-range">No data</div>
+        <div id="rigAnalysisYearLegend" class="rig-analysis-year-legend"></div>
+        <div id="rigAnalysisYearSub" class="rig-analysis-year-sub">No data</div>
+      </section>
+      <div id="rigAnalysisWrap" class="rig-analysis-wrap">
+        <section class="rig-analysis-section rig-analysis-section-difficulty">
+          <div class="rig-analysis-section-title">Median Difficulty</div>
+          <div id="rigAnalysisDifficultyValue" class="rig-analysis-section-value">—</div>
+          <div class="rig-analysis-difficulty-bar">
+            <div class="rig-analysis-difficulty-ends" aria-hidden="true">
+              <span>impossible</span>
+              <span>free</span>
+            </div>
+            <div id="rigAnalysisDifficultyPercentiles" class="rig-analysis-difficulty-percentiles"></div>
+            <div id="rigAnalysisDifficultyTrack" class="rig-analysis-difficulty-track"></div>
+            <div id="rigAnalysisDifficultyMarker" class="rig-analysis-difficulty-marker">
+              <span id="rigAnalysisDifficultyTag" class="rig-analysis-difficulty-tag">Median Difficulty: —%</span>
+            </div>
+          </div>
+          <div id="rigAnalysisDifficultyRange" class="rig-analysis-difficulty-range">No range</div>
+          <div id="rigAnalysisDifficultyLegend" class="rig-analysis-difficulty-legend"></div>
+          <div id="rigAnalysisDifficultySub" class="rig-analysis-section-sub">No data</div>
+        </section>
+        <section class="rig-analysis-section rig-analysis-section-rigavg">
+          <div class="rig-analysis-section-title">Average Rig</div>
+          <div id="rigAnalysisAvgRigValue" class="rig-analysis-section-value">—</div>
+          <div id="rigAnalysisAvgRigSub" class="rig-analysis-section-sub">No data</div>
+        </section>
+        <section class="rig-analysis-section rig-analysis-section-rigpct">
+          <div class="rig-analysis-section-title">Average Rig %</div>
+          <div id="rigAnalysisAvgRigPctValue" class="rig-analysis-section-value">—</div>
+          <div id="rigAnalysisAvgRigPctSub" class="rig-analysis-section-sub">No data</div>
+        </section>
+      </div>
+      <div id="rigAnalysisEmpty" class="relearn-empty" style="display:none;"></div>
     </div>
     <div id="socialPlaceholderView" class="placeholder-card" style="display:none;"></div>
   </div>
@@ -5498,59 +5923,40 @@
         <button id="searchSongFrequencyNextPageBtn" class="relearn-page-button" type="button" aria-label="Next page">▶</button>
       </div>
     </div>
-    <div id="otherToolsRigAnalysisView" class="chart-card" style="display:none;">
-      <section class="rig-analysis-year-section">
-        <div class="rig-analysis-year-title">Average Year</div>
-        <div id="rigAnalysisYearValue" class="rig-analysis-year-value">—</div>
-        <div class="rig-analysis-year-bar">
-          <div class="rig-analysis-year-ends" aria-hidden="true">
-            <span>boomer</span>
-            <span>zoomer</span>
+    <div id="otherToolsConvertRankUsefulnessView" style="display:none;">
+      <blockquote class="convert-estimator-quote">"All models are wrong, but some are useful"</blockquote>
+      <div class="convert-estimator-grid">
+        <div class="convert-estimator-card">
+          <div class="convert-estimator-title">Rank converter</div>
+          <div id="convertRankAccuracy" class="convert-estimator-accuracy">Accuracy: —</div>
+          <div class="convert-estimator-row">
+            <input id="convertOldRankInput" class="convert-estimator-input" type="text" placeholder="Old rank (e.g. 41.2)">
+            <button id="convertRankBtn" class="convert-estimator-btn" type="button">Convert</button>
           </div>
-          <div id="rigAnalysisYearPercentiles" class="rig-analysis-year-percentiles"></div>
-          <div id="rigAnalysisYearTrack" class="rig-analysis-year-track"></div>
-          <div id="rigAnalysisYearMeanMarker" class="rig-analysis-year-marker mean">
-            <span id="rigAnalysisYearMeanTag" class="rig-analysis-year-tag">Mean year: — (—)</span>
-          </div>
-          <div id="rigAnalysisYearMedianMarker" class="rig-analysis-year-marker median">
-            <span id="rigAnalysisYearMedianTag" class="rig-analysis-year-tag">Median year: — (—)</span>
+          <div id="convertRankResult" class="convert-estimator-result">New rank: —</div>
+          <div id="convertRankClosest" class="convert-estimator-closest">
+            <div class="convert-estimator-closest-item"><strong>Closest examples:</strong></div>
+            <div class="convert-estimator-closest-item">1. —</div>
+            <div class="convert-estimator-closest-item">2. —</div>
+            <div class="convert-estimator-closest-item">3. —</div>
           </div>
         </div>
-        <div id="rigAnalysisYearRange" class="rig-analysis-year-range">No data</div>
-        <div id="rigAnalysisYearLegend" class="rig-analysis-year-legend"></div>
-        <div id="rigAnalysisYearSub" class="rig-analysis-year-sub">No data</div>
-      </section>
-      <div id="rigAnalysisWrap" class="rig-analysis-wrap">
-        <section class="rig-analysis-section rig-analysis-section-difficulty">
-          <div class="rig-analysis-section-title">Average Difficulty</div>
-          <div id="rigAnalysisDifficultyValue" class="rig-analysis-section-value">—</div>
-          <div class="rig-analysis-difficulty-bar">
-            <div class="rig-analysis-difficulty-ends" aria-hidden="true">
-              <span>hard</span>
-              <span>easy</span>
-            </div>
-            <div id="rigAnalysisDifficultyPercentiles" class="rig-analysis-difficulty-percentiles"></div>
-            <div id="rigAnalysisDifficultyTrack" class="rig-analysis-difficulty-track"></div>
-            <div id="rigAnalysisDifficultyMarker" class="rig-analysis-difficulty-marker">
-              <span id="rigAnalysisDifficultyTag" class="rig-analysis-difficulty-tag">Difficulty: —%</span>
-            </div>
+        <div class="convert-estimator-card">
+          <div class="convert-estimator-title">Usefulness converter</div>
+          <div id="convertUsefulnessAccuracy" class="convert-estimator-accuracy">Accuracy: —</div>
+          <div class="convert-estimator-row">
+            <input id="convertOldUsefulnessInput" class="convert-estimator-input" type="text" placeholder="Old usefulness (single value or 3-5 values with space in between)">
+            <button id="convertUsefulnessBtn" class="convert-estimator-btn" type="button">Convert</button>
           </div>
-          <div id="rigAnalysisDifficultyRange" class="rig-analysis-difficulty-range">No range</div>
-          <div id="rigAnalysisDifficultyLegend" class="rig-analysis-difficulty-legend"></div>
-          <div id="rigAnalysisDifficultySub" class="rig-analysis-section-sub">No data</div>
-        </section>
-        <section class="rig-analysis-section">
-          <div class="rig-analysis-section-title">Average Rig</div>
-          <div id="rigAnalysisAvgRigValue" class="rig-analysis-section-value">—</div>
-          <div id="rigAnalysisAvgRigSub" class="rig-analysis-section-sub">No data</div>
-        </section>
-        <section class="rig-analysis-section">
-          <div class="rig-analysis-section-title">Average Rig %</div>
-          <div id="rigAnalysisAvgRigPctValue" class="rig-analysis-section-value">—</div>
-          <div id="rigAnalysisAvgRigPctSub" class="rig-analysis-section-sub">No data</div>
-        </section>
+          <div id="convertUsefulnessResult" class="convert-estimator-result">New usefulness: —</div>
+          <div id="convertUsefulnessClosest" class="convert-estimator-closest">
+            <div class="convert-estimator-closest-item"><strong>Closest examples:</strong></div>
+            <div class="convert-estimator-closest-item">1. —</div>
+            <div class="convert-estimator-closest-item">2. —</div>
+            <div class="convert-estimator-closest-item">3. —</div>
+          </div>
+        </div>
       </div>
-      <div id="rigAnalysisEmpty" class="relearn-empty" style="display:none;"></div>
     </div>
     <div id="otherToolsOriginalTourCalendarView" class="chart-card" style="display:none;">
       <div class="chart-header">
@@ -5738,6 +6144,9 @@ if (window.Chart) {
       let bestDistanceSquared = thresholdSquared;
 
       for (let datasetIndex = 0; datasetIndex < chart.data.datasets.length; datasetIndex += 1) {
+        const dataset = chart.data.datasets[datasetIndex] || {};
+        const datasetLabel = String(dataset.label || "").trim().toLowerCase();
+        if (datasetLabel === "trend") continue;
         const meta = chart.getDatasetMeta(datasetIndex);
         if (!meta || meta.hidden || meta.type !== "line") continue;
         const points = meta.data || [];
@@ -5789,8 +6198,43 @@ if (window.Chart) {
       ctx.restore();
     }
   };
+  const overviewActivePointPlugin = {
+    id: "overviewActivePointPlugin",
+    afterDraw(chart) {
+      if (!chart || !chart.canvas) return;
+      const datasets = chart.data && Array.isArray(chart.data.datasets) ? chart.data.datasets : [];
+      const hasTrendCompanion = datasets.length >= 2 && String(datasets[1] && datasets[1].label || "").trim().toLowerCase() === "trend";
+      if (!hasTrendCompanion) return;
+      const tooltip = chart.tooltip;
+      if (!tooltip || tooltip.opacity === 0) return;
+      const activeElements = typeof tooltip.getActiveElements === "function"
+        ? tooltip.getActiveElements()
+        : [];
+      if (!Array.isArray(activeElements) || !activeElements.length) return;
+      const activeIndex = Number(activeElements[0] && activeElements[0].index);
+      if (!Number.isFinite(activeIndex) || activeIndex < 0) return;
 
-  Chart.register(trendCrosshairPlugin);
+      const meta = chart.getDatasetMeta(0);
+      const point = meta && Array.isArray(meta.data) ? meta.data[activeIndex] : null;
+      if (!point || point.skip || !Number.isFinite(point.x) || !Number.isFinite(point.y)) return;
+      const primaryDataset = datasets[0] || {};
+      const markerColor = String(
+        primaryDataset.pointBackgroundColor
+        || primaryDataset.borderColor
+        || "#2563eb"
+      );
+
+      const ctx = chart.ctx;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, 4.5, 0, Math.PI * 2);
+      ctx.fillStyle = markerColor;
+      ctx.fill();
+      ctx.restore();
+    }
+  };
+
+  Chart.register(trendCrosshairPlugin, overviewActivePointPlugin);
 }
 
 const sections = {
@@ -5939,6 +6383,13 @@ let searchSongFrequencyPageIndex = 0;
 let pcorrectDifficultySelect = null;
 let searchSongFrequencyLoaded = false;
 let searchSongFrequencyLoadPromise = null;
+let convertRankEstimator = null;
+let convertUsefulnessEstimator = null;
+let convertEstimatorsLoadPromise = null;
+let convertEstimatorUIBound = false;
+let convertRankClosestRows = [];
+let convertUsefulnessClosestRows = [];
+let convertExamplesLoadPromise = null;
 const rigAnalysisCacheByMode = new Map();
 const rigAnalysisLoadPromisesByMode = new Map();
 const rigAnalysisAllowedModes = ["all", "10", "20", "50", "week", "month", "2months", "3months", "6months"];
@@ -5971,6 +6422,7 @@ let socialRivalSearchQuery = "";
 let socialSynergySingleSearchQuery = "";
 let socialSynergySingleSelectedRivalKey = "";
 let socialRivalsMetricKey = "guess_rate";
+let socialRivalsSelectionOwnerKey = "";
 let socialSynergyRequestId = 0;
 let overviewSynergyRequestId = 0;
 let socialSynergyCachePromise = null;
@@ -6010,6 +6462,7 @@ const PCORRECT_FILE_BY_CAP = {
   "35": "pcorrect/pcorrect_0_35.json"
 };
 const MAX_SELECTED_TAGS = 8;
+const MIN_SELECTED_TAGS = 3;
 const MAX_SELECTED_BY_ERA_SEASONS = 6;
 const MAX_SELECTED_SOCIAL_RIVALS = 4;
 const RELEARN_PAGE_SIZE = 20;
@@ -6101,8 +6554,8 @@ const secondaryNavBySection = {
   performance: ["Guess Rate", "Lives Taken / Saved", "Onlist/Offlist", "Composite charts", "Other Metrics"],
   knowledge: ["Artist Familiarity", "Tag Familiarity", "Seasonal Comparison", "Other Metrics"],
   insights: ["Relearn Tracker", "By never correct", "By Wrong Guess", "By Popularity", "By % correct", "Other Metrics"],
-  social: ["Synergy", "Rivals", "Team Contributions"],
-  otherTools: ["Search songs", "Search song frequency", "Rig/List analysis", "Original Tour data(Calendar)", "Changelog"]
+  social: ["Synergy", "Rivals", "Team Contributions", "Rig / List analysis"],
+  otherTools: ["Search songs", "Search song frequency", "Convert rank/usefulness", "Original Tour data(Calendar)", "Changelog"]
 };
 
 function scheduleBackgroundTask(taskKey, taskFn, delayMs = 0) {
@@ -6243,6 +6696,8 @@ function preloadOtherSubtabsForSection(sectionKey, displayName) {
       await Promise.allSettled([
         ensureSearchSongFrequencyData(),
         ensureRigAnalysisData(),
+        ensureConvertEstimatorsLoaded(),
+        ensureConvertExamplesLoaded(),
         ensureOriginalTourCalendarData(),
         renderOtherToolsChangelog()
       ]);
@@ -6758,6 +7213,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     const rivalsView = document.getElementById("socialRivalsView");
     const rivalsBubbleView = document.getElementById("socialRivalsBubbleView");
     const teamContributionView = document.getElementById("socialTeamContributionView");
+    const rigAnalysisView = document.getElementById("otherToolsRigAnalysisView");
     const placeholderView = document.getElementById("socialPlaceholderView");
 
     if (subSection === "Synergy") {
@@ -6767,6 +7223,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       rivalsView.style.display = "none";
       rivalsBubbleView.style.display = "none";
       teamContributionView.style.display = "none";
+      rigAnalysisView.style.display = "none";
       placeholderView.style.display = "none";
       renderSocialSynergyView();
       return;
@@ -6779,7 +7236,17 @@ function renderSubSectionContent(sectionKey, subSection) {
       rivalsView.style.display = "block";
       rivalsBubbleView.style.display = "block";
       teamContributionView.style.display = "none";
+      rigAnalysisView.style.display = "none";
       placeholderView.style.display = "none";
+
+      const availableEntries = getAvailableSocialRivalEntries();
+      const autoClosestKeys = getClosestAvailableRivalKeys(
+        currentStatKey,
+        availableEntries,
+        MAX_SELECTED_SOCIAL_RIVALS
+      );
+      selectedSocialRivalKeys = autoClosestKeys.slice(0, MAX_SELECTED_SOCIAL_RIVALS);
+
       renderSocialRivalFilter();
       renderSocialRivalsChart();
       return;
@@ -6792,8 +7259,24 @@ function renderSubSectionContent(sectionKey, subSection) {
       rivalsView.style.display = "none";
       rivalsBubbleView.style.display = "none";
       teamContributionView.style.display = "block";
+      rigAnalysisView.style.display = "none";
       placeholderView.style.display = "none";
       renderSocialTeamContributionView();
+      return;
+    }
+
+    if (subSection === "Rig / List analysis") {
+      synergyView.style.display = "none";
+      rivalsTopLayout.style.display = "none";
+      rivalsFilterView.style.display = "none";
+      rivalsView.style.display = "none";
+      rivalsBubbleView.style.display = "none";
+      teamContributionView.style.display = "none";
+      rigAnalysisView.style.display = "block";
+      placeholderView.style.display = "none";
+      ensureRigAnalysisData();
+      renderRigAnalysisView();
+      prefetchRigAnalysisDataInBackground();
       return;
     }
 
@@ -6803,6 +7286,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     rivalsView.style.display = "none";
     rivalsBubbleView.style.display = "none";
     teamContributionView.style.display = "none";
+    rigAnalysisView.style.display = "none";
     placeholderView.style.display = "block";
     placeholderView.innerText = `${subSection} view coming soon.`;
     return;
@@ -6811,7 +7295,7 @@ function renderSubSectionContent(sectionKey, subSection) {
   if (sectionKey === "otherTools") {
     const searchSongsView = document.getElementById("otherToolsSearchSongsView");
     const searchSongFrequencyView = document.getElementById("otherToolsSearchSongFrequencyView");
-    const rigAnalysisView = document.getElementById("otherToolsRigAnalysisView");
+    const convertView = document.getElementById("otherToolsConvertRankUsefulnessView");
     const originalTourView = document.getElementById("otherToolsOriginalTourCalendarView");
     const changelogView = document.getElementById("otherToolsChangelogView");
     const placeholderView = document.getElementById("otherToolsPlaceholderView");
@@ -6819,7 +7303,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     if (subSection === "Search songs") {
       searchSongsView.style.display = "block";
       searchSongFrequencyView.style.display = "none";
-      rigAnalysisView.style.display = "none";
+      convertView.style.display = "none";
       originalTourView.style.display = "none";
       changelogView.style.display = "none";
       placeholderView.style.display = "none";
@@ -6830,7 +7314,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     if (subSection === "Search song frequency") {
       searchSongsView.style.display = "none";
       searchSongFrequencyView.style.display = "block";
-      rigAnalysisView.style.display = "none";
+      convertView.style.display = "none";
       originalTourView.style.display = "none";
       changelogView.style.display = "none";
       placeholderView.style.display = "none";
@@ -6839,23 +7323,23 @@ function renderSubSectionContent(sectionKey, subSection) {
       return;
     }
 
-    if (subSection === "Rig/List analysis") {
+    if (subSection === "Convert rank/usefulness") {
       searchSongsView.style.display = "none";
       searchSongFrequencyView.style.display = "none";
-      rigAnalysisView.style.display = "block";
+      convertView.style.display = "block";
       originalTourView.style.display = "none";
       changelogView.style.display = "none";
       placeholderView.style.display = "none";
-      ensureRigAnalysisData();
-      renderRigAnalysisView();
-      prefetchRigAnalysisDataInBackground();
+      bindConvertEstimatorControlsOnce();
+      ensureConvertEstimatorsLoaded();
+      ensureConvertExamplesLoaded();
       return;
     }
 
     if (subSection === "Original Tour data(Calendar)") {
       searchSongsView.style.display = "none";
       searchSongFrequencyView.style.display = "none";
-      rigAnalysisView.style.display = "none";
+      convertView.style.display = "none";
       originalTourView.style.display = "block";
       changelogView.style.display = "none";
       placeholderView.style.display = "none";
@@ -6867,7 +7351,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     if (subSection === "Changelog") {
       searchSongsView.style.display = "none";
       searchSongFrequencyView.style.display = "none";
-      rigAnalysisView.style.display = "none";
+      convertView.style.display = "none";
       originalTourView.style.display = "none";
       changelogView.style.display = "block";
       placeholderView.style.display = "none";
@@ -6877,7 +7361,7 @@ function renderSubSectionContent(sectionKey, subSection) {
 
     searchSongsView.style.display = "none";
     searchSongFrequencyView.style.display = "none";
-    rigAnalysisView.style.display = "none";
+    convertView.style.display = "none";
     originalTourView.style.display = "none";
     changelogView.style.display = "none";
     placeholderView.style.display = "block";
@@ -6894,13 +7378,12 @@ function updateDataRangeControlState(sectionKey, subSection) {
   const isSocialTeamContributions = sectionKey === "social" && subSection === "Team Contributions";
   const isRecommendationsSection = sectionKey === "insights";
   const isOtherToolsSection = sectionKey === "otherTools";
-  const isOtherToolsRigListAnalysis = isOtherToolsSection && subSection === "Rig/List analysis";
 
   const shouldHidePastGameOptions =
     (sectionKey === "overview" && overviewActiveView === "statsSummary")
     || (sectionKey === "knowledge" && (subSection === "Tag Familiarity" || subSection === "Seasonal Comparison" || subSection === "Artist Familiarity"))
     || isRecommendationsSection
-    || (isOtherToolsSection && !isOtherToolsRigListAnalysis);
+    || isOtherToolsSection;
 
   const allowedOptions = shouldHidePastGameOptions
     ? DATA_RANGE_OPTIONS.filter(opt => !DATA_RANGE_EXCLUDED_VALUES_FOR_NO_PAST_GAMES.has(opt.value))
@@ -6918,7 +7401,7 @@ function updateDataRangeControlState(sectionKey, subSection) {
     isSocialSynergy
     || isSocialTeamContributions
     || isRecommendationsSection
-    || (isOtherToolsSection && !isOtherToolsRigListAnalysis)
+    || isOtherToolsSection
     || isKnowledgeArtistFamiliarity;
   dataRangeSelect.disabled = shouldLockToAll;
   if (dataRangeWrap) {
@@ -8100,6 +8583,31 @@ function drawByEraSeasonComparisonChart() {
       }
     }
   });
+
+  syncByEraSeasonControlsToZeroAxis();
+}
+
+let byEraSeasonControlsResizeBound = false;
+function syncByEraSeasonControlsToZeroAxis() {
+  const controlsPane = document.querySelector("#knowledgeByEraView .by-era-season-controls-pane");
+  const chartWrap = document.querySelector("#knowledgeByEraView .by-era-season-chart-wrap");
+  const canvas = document.getElementById("byEraSeasonCompareChart");
+  if (!controlsPane || !chartWrap || !canvas || !byEraSeasonCompareChart || !byEraSeasonCompareChart.chartArea) return;
+
+  const chartAreaBottom = Number(byEraSeasonCompareChart.chartArea.bottom || 0);
+  if (!Number.isFinite(chartAreaBottom) || chartAreaBottom <= 0) return;
+
+  const axisBottomY = chartWrap.offsetTop + canvas.offsetTop + chartAreaBottom;
+  const paneTopY = controlsPane.offsetTop;
+  const targetHeight = Math.max(220, Math.round(axisBottomY - paneTopY));
+  controlsPane.style.setProperty("height", `${targetHeight}px`, "important");
+
+  if (!byEraSeasonControlsResizeBound) {
+    window.addEventListener("resize", () => {
+      window.requestAnimationFrame(syncByEraSeasonControlsToZeroAxis);
+    });
+    byEraSeasonControlsResizeBound = true;
+  }
 }
 
 if (byEraSeasonSearchInput) {
@@ -8534,8 +9042,6 @@ function renderArtistPatternRigMatrix(rows, pageIndex, pageSize) {
       ${rowsHtml}
     </div>
     <div class="artist-familiarity-track-legend">
-      <span><span class="dot pattern-correct"></span>Pattern Correct</span>
-      <span><span class="dot pattern-wrong"></span>Pattern Wrong</span>
       <span><span class="dot rig-yes"></span>Rig</span>
       <span><span class="dot rig-no"></span>Non-rig</span>
     </div>
@@ -8783,7 +9289,7 @@ function renderArtistFamiliarityBarsChart(rows) {
           stacked: true,
           offset: true,
           ticks: {
-            display: false,
+            display: true,
             color: "#1f2937",
             font: {
               size: 11,
@@ -9297,10 +9803,6 @@ function renderArtistFamiliarityView() {
       </div>
       <div id="artistFamiliarityPatternRows"></div>
     </div>
-    <div class="artist-familiarity-track-legend">
-      <span><span class="dot pattern-correct"></span>Pattern Correct</span>
-      <span><span class="dot pattern-wrong"></span>Pattern Wrong</span>
-    </div>
     <div class="artist-familiarity-pagination">
       <button id="artistFamiliarityPrevPageBtn" class="artist-familiarity-page-button" type="button" aria-label="Previous page">◀</button>
       <span id="artistFamiliarityPageMeta" class="artist-familiarity-page-meta">Page 1/1</span>
@@ -9450,20 +9952,27 @@ function getCurrentUserIdentitySet() {
 }
 
 function getCurrentUserStatsRowsForSelectedMode() {
-  const sourceKeys = Array.isArray(currentStatSourceKeys) && currentStatSourceKeys.length
-    ? currentStatSourceKeys
-    : (currentStatKey ? [currentStatKey] : []);
-  const rows = sourceKeys
-    .flatMap(key => Array.isArray(allPlayerStatsData && allPlayerStatsData[key]) ? allPlayerStatsData[key] : [])
-    .filter(row => row && typeof row === "object");
-  const identitySet = getCurrentUserIdentitySet();
-
-  const targetRows = rows.filter(row => {
-    const playerName = String(row && row["Player name"] || "").trim().toLowerCase();
-    if (!playerName) return true;
-    return identitySet.has(playerName);
+  const currentRows = Array.isArray(fullUserData) && fullUserData.length
+    ? fullUserData
+    : getCurrentUserRecords();
+  const dedupeSeenKeys = new Set();
+  const dedupedRows = currentRows.filter(row => {
+    if (!row || typeof row !== "object") return false;
+    const dedupeKey = [
+      String(row.Timestamp || ""),
+      String(row["Guess rate"] || ""),
+      String(row["OP guess rate"] || ""),
+      String(row["ED guess rate"] || ""),
+      String(row["IN guess rate"] || ""),
+      String(row["Rank"] || ""),
+      String(row["Lives saved"] || ""),
+      String(row["Lives taken"] || "")
+    ].join("|");
+    if (dedupeSeenKeys.has(dedupeKey)) return false;
+    dedupeSeenKeys.add(dedupeKey);
+    return true;
   });
-  const sortedRows = sortRecordsByTimestamp(targetRows);
+  const sortedRows = sortRecordsByTimestamp(dedupedRows);
   return getVisibleUserData(sortedRows);
 }
 
@@ -10613,10 +11122,22 @@ function renderSocialTeamContributionRankings() {
   }
 
   wrap.innerHTML = "";
+  const targetIdentitySet = getCurrentUserIdentitySet();
   const isCurrentUserEntry = entry => {
-    const normalizedName = String(entry && entry.playerName || "").toLowerCase();
-    return normalizedName === String(currentStatKey || "").toLowerCase()
-      || normalizedName === String(currentDisplayName || "").toLowerCase();
+    const normalizedName = String(entry && entry.playerName || "").trim().toLowerCase();
+    if (!normalizedName) return false;
+    if (targetIdentitySet.has(normalizedName)) return true;
+
+    const directoryEntry = getPlayerEntryFromCacheByName(normalizedName);
+    if (!directoryEntry || typeof directoryEntry !== "object") return false;
+
+    const candidateKeys = [
+      directoryEntry.username,
+      directoryEntry.playerName,
+      directoryEntry.displayName,
+      ...(Array.isArray(directoryEntry.altnames) ? directoryEntry.altnames : [])
+    ];
+    return candidateKeys.some(value => targetIdentitySet.has(String(value || "").trim().toLowerCase()));
   };
   const metricCards = availableMetrics.map((metric, metricIndex) => {
     const ranking = buildSocialTeamContributionRanking(players, metric);
@@ -10811,6 +11332,11 @@ function getLatestRankForPlayer(playerKeyOrRecords, recordsMaybe = null) {
   return Number.isFinite(rank) ? rank : null;
 }
 
+function getLatestValidRankForPlayer(playerKeyOrRecords, recordsMaybe = null) {
+  const rankValue = Number(getLatestRankForPlayer(playerKeyOrRecords, recordsMaybe));
+  return Number.isFinite(rankValue) && rankValue >= MIN_VALID_RANK ? rankValue : null;
+}
+
 function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = null) {
   if (!Array.isArray(records) || !records.length) {
     return { latestRank: null, latestTimestamp: Number.NEGATIVE_INFINITY };
@@ -10826,7 +11352,7 @@ function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = nul
       ? playerEntry.altnames
       : [];
     const mappedRank = resolveLatestRankFromMap(latestRankByPlayerKey, canonicalName, playerKey, altNames);
-    if (Number.isFinite(mappedRank)) {
+    if (Number.isFinite(mappedRank) && mappedRank >= MIN_VALID_RANK) {
       return {
         latestRank: mappedRank,
         latestTimestamp: Number.POSITIVE_INFINITY
@@ -10839,10 +11365,13 @@ function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = nul
   records.forEach(row => {
     const timestampValue = getSortableTimestampValue(row && row.Timestamp);
     if (!Number.isFinite(timestampValue)) return;
-    const rankValue = Number(row && row["Rank"]);
+    const rankValueRaw = Number(row && row["Rank"]);
+    const rankValue = Number.isFinite(rankValueRaw) && rankValueRaw >= MIN_VALID_RANK
+      ? rankValueRaw
+      : null;
     if (timestampValue > latestTimestamp) {
       latestTimestamp = timestampValue;
-      latestRank = Number.isFinite(rankValue) ? rankValue : null;
+      latestRank = rankValue;
       return;
     }
     if (timestampValue === latestTimestamp && Number.isFinite(rankValue) && !Number.isFinite(latestRank)) {
@@ -10851,7 +11380,7 @@ function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = nul
   });
 
   if (!Number.isFinite(latestRank)) {
-    latestRank = getLatestRankForPlayer(records);
+    latestRank = getLatestValidRankForPlayer(records);
   }
   return {
     latestRank: Number.isFinite(latestRank) ? latestRank : null,
@@ -10861,10 +11390,16 @@ function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = nul
 
 function getClosestRivalKeys(targetKey, count = 4) {
   if (!targetKey || !allPlayerStatsData || typeof allPlayerStatsData !== "object") return [];
-  const targetRecords = targetKey === currentStatKey ? getCurrentUserRecords() : allPlayerStatsData[targetKey];
+  const targetRecordsFromMap = Array.isArray(allPlayerStatsData[targetKey]) ? allPlayerStatsData[targetKey] : [];
+  const targetRecords = targetRecordsFromMap.length
+    ? targetRecordsFromMap
+    : (targetKey === currentStatKey ? getCurrentUserRecords() : []);
   const targetPlayerEntry = getPlayerEntryFromCacheByName(targetKey);
   const targetRankSnapshot = getLatestRankSnapshotForRows(targetRecords, targetKey, targetPlayerEntry);
-  const targetRank = targetRankSnapshot.latestRank;
+  const fallbackTargetRank = getLatestValidRankForPlayer(targetKey, targetRecords);
+  const targetRank = Number.isFinite(targetRankSnapshot.latestRank)
+    ? targetRankSnapshot.latestRank
+    : fallbackTargetRank;
   if (!Number.isFinite(targetRank)) return [];
 
   const rivals = Object.entries(allPlayerStatsData)
@@ -10925,7 +11460,51 @@ function getClosestRivalKeys(targetKey, count = 4) {
     return a.key.localeCompare(b.key);
   });
 
-  return dedupedRivals.slice(0, count).map(item => item.key);
+  const closestKeys = dedupedRivals.slice(0, count).map(item => item.key);
+  if (closestKeys.length >= count) return closestKeys;
+
+  const seen = new Set(closestKeys);
+  for (let i = 0; i < dedupedRivals.length && closestKeys.length < count; i += 1) {
+    const key = dedupedRivals[i] && dedupedRivals[i].key;
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    closestKeys.push(key);
+  }
+  return closestKeys;
+}
+
+function getClosestAvailableRivalKeys(targetKey, availableEntries, count = 4) {
+  const entries = Array.isArray(availableEntries) ? availableEntries : [];
+  if (!targetKey || !entries.length) return [];
+
+  const targetRecordsFromMap = Array.isArray(allPlayerStatsData && allPlayerStatsData[targetKey])
+    ? allPlayerStatsData[targetKey]
+    : [];
+  const targetRecords = targetRecordsFromMap.length
+    ? targetRecordsFromMap
+    : (targetKey === currentStatKey ? getCurrentUserRecords() : []);
+  const targetPlayerEntry = getPlayerEntryFromCacheByName(targetKey);
+  const targetRankSnapshot = getLatestRankSnapshotForRows(targetRecords, targetKey, targetPlayerEntry);
+  const fallbackTargetRank = getLatestValidRankForPlayer(targetKey, targetRecords);
+  const targetRank = Number.isFinite(targetRankSnapshot.latestRank)
+    ? targetRankSnapshot.latestRank
+    : fallbackTargetRank;
+  if (!Number.isFinite(targetRank)) return [];
+
+  return entries
+    .filter(entry => Number.isFinite(entry && entry.latestRank))
+    .map(entry => ({
+      key: entry.key,
+      latestRank: entry.latestRank,
+      rankDistance: Math.abs(entry.latestRank - targetRank)
+    }))
+    .sort((a, b) => {
+      if (a.rankDistance !== b.rankDistance) return a.rankDistance - b.rankDistance;
+      if (a.latestRank !== b.latestRank) return a.latestRank - b.latestRank;
+      return a.key.localeCompare(b.key);
+    })
+    .slice(0, count)
+    .map(entry => entry.key);
 }
 
 function formatSocialRankLabel(rankValue) {
@@ -11213,7 +11792,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
   allSeenTitle.style.margin = "0 0 8px 0";
   allSeenTitle.style.fontWeight = "400";
   allSeenTitle.style.fontSize = "12px";
-  allSeenTitle.textContent = "Single Comparison—All seen songs";
+  allSeenTitle.textContent = "All seen songs";
   compareWrap.appendChild(allSeenTitle);
   compareWrap.appendChild(createSocialSynergyRowElement(selectedRow.classic || selectedRow, targetLabel));
 
@@ -11222,7 +11801,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
   sharedSeenTitle.style.margin = "14px 0 8px 0";
   sharedSeenTitle.style.fontWeight = "400";
   sharedSeenTitle.style.fontSize = "12px";
-  sharedSeenTitle.textContent = "Single Comparison—Shared seen songs";
+  sharedSeenTitle.textContent = "Shared seen songs";
   compareWrap.appendChild(sharedSeenTitle);
   if (selectedRow.shared) {
     compareWrap.appendChild(createSocialSynergyRowElement(selectedRow.shared, targetLabel));
@@ -11412,6 +11991,13 @@ async function renderOverviewSynergySummary() {
 
 function getAvailableSocialRivalEntries() {
   if (!currentStatKey || !allPlayerStatsData || typeof allPlayerStatsData !== "object") return [];
+  const currentPlayerEntry = getPlayerEntryFromCacheByName(currentStatKey || currentDisplayName || "");
+  const currentPlayerIdResolved = String(
+    currentPlayerId
+    || (currentPlayerEntry && currentPlayerEntry.playerId)
+    || ""
+  ).trim();
+
   const rawEntries = Object.entries(allPlayerStatsData)
     .filter(([key, rows]) => !isCurrentUserStatKey(key) && Array.isArray(rows) && rows.length)
     .map(([key, rows]) => {
@@ -11426,6 +12012,10 @@ function getAvailableSocialRivalEntries() {
         playerId,
         displayLabel: formatPlayerDisplayWithAliases(playerEntry, key)
       };
+    })
+    .filter(item => {
+      if (!currentPlayerIdResolved || !item.playerId) return true;
+      return item.playerId !== currentPlayerIdResolved;
     })
     .filter(item => Number.isFinite(item.latestRank));
 
@@ -11507,15 +12097,21 @@ function renderSocialRivalFilter() {
   const meta = document.getElementById("socialRivalsSelectionMeta");
   if (!list || !meta) return;
 
+  const ownerKey = String(currentStatKey || "").toLowerCase();
+  if (ownerKey && socialRivalsSelectionOwnerKey !== ownerKey) {
+    selectedSocialRivalKeys = [];
+    socialRivalsSelectionOwnerKey = ownerKey;
+  }
+
   const entries = getAvailableSocialRivalEntries();
   const entriesByKey = new Map(entries.map(entry => [entry.key, entry]));
   selectedSocialRivalKeys = selectedSocialRivalKeys.filter(key => entriesByKey.has(key));
   if (!selectedSocialRivalKeys.length && entries.length) {
-    const closestKeys = getClosestRivalKeys(currentStatKey, MAX_SELECTED_SOCIAL_RIVALS);
-    selectedSocialRivalKeys = closestKeys.filter(key => entriesByKey.has(key));
-    if (!selectedSocialRivalKeys.length) {
-      selectedSocialRivalKeys = entries.slice(0, MAX_SELECTED_SOCIAL_RIVALS).map(entry => entry.key);
-    }
+    selectedSocialRivalKeys = getClosestAvailableRivalKeys(
+      currentStatKey,
+      entries,
+      MAX_SELECTED_SOCIAL_RIVALS
+    );
   }
 
   meta.innerText = selectedSocialRivalKeys.length >= MAX_SELECTED_SOCIAL_RIVALS
@@ -11624,7 +12220,12 @@ function renderSocialRivalsChart() {
     return;
   }
 
-  const targetLatestRank = getLatestRankForPlayer(currentStatKey, targetRows);
+  const targetRankSnapshot = getLatestRankSnapshotForRows(
+    targetRows,
+    currentStatKey,
+    getPlayerEntryFromCacheByName(currentStatKey)
+  );
+  const targetLatestRank = targetRankSnapshot.latestRank;
   const selectedKeys = selectedSocialRivalKeys
     .filter(key => !isCurrentUserStatKey(key) && Array.isArray(allPlayerStatsData[key]) && allPlayerStatsData[key].length)
     .slice(0, MAX_SELECTED_SOCIAL_RIVALS);
@@ -11646,11 +12247,11 @@ function renderSocialRivalsChart() {
   ];
 
   const seriesData = seriesPlayers.map(player => {
-    const sourceRows = player.key === currentStatKey
+    const allRows = player.key === currentStatKey
       ? sortRecordsByTimestamp(targetRows)
       : sortRecordsByTimestamp(allPlayerStatsData[player.key] || []);
-    const visibleRows = getVisibleUserData(sourceRows);
-    return { ...player, rows: visibleRows };
+    const visibleRows = getVisibleUserData(allRows);
+    return { ...player, rows: visibleRows, allRows };
   });
 
   const timestampSet = new Set();
@@ -11676,9 +12277,7 @@ function renderSocialRivalsChart() {
     return;
   }
 
-  const rivalNames = seriesPlayers.slice(1).map(player => player.label).join(", ");
-  const rankText = Number.isFinite(targetLatestRank) ? `Target rank ${targetLatestRank.toFixed(3)}` : "Target rank N/A";
-  meta.innerText = `${rankText} | Metric: ${metricConfig.label} | Rivals: ${rivalNames}`;
+  meta.innerText = "";
   bubbleMeta.innerText = "X: latest rank | Y: average guess rate | Bubble size: avg usefulness (selected range)";
 
   const toRgba = (hexColor, alpha) => {
@@ -11835,7 +12434,12 @@ function renderSocialRivalsChart() {
 
   const bubblePlayers = seriesData
     .map((player, index) => {
-      const modeRows = player.rows;
+      const primaryRows = Array.isArray(player.rows) ? player.rows : [];
+      const fallbackRows = Array.isArray(player.allRows) ? player.allRows : [];
+      const primaryGuessRates = primaryRows
+        .map(row => Number(row && row["Guess rate"]))
+        .filter(value => Number.isFinite(value));
+      const modeRows = primaryGuessRates.length ? primaryRows : fallbackRows;
       const guessRateValues = modeRows
         .map(row => Number(row && row["Guess rate"]))
         .filter(value => Number.isFinite(value));
@@ -11851,8 +12455,13 @@ function renderSocialRivalsChart() {
       const gamesCount = guessRateValues.length;
       const averageGuessRate = gamesCount
         ? guessRateValues.reduce((sum, value) => sum + value, 0) / gamesCount
-        : null;
-      const latestRank = getLatestRankForPlayer(player.key, allPlayerStatsData[player.key] || []);
+        : 0;
+      const latestRank = player.key === currentStatKey
+        ? targetLatestRank
+        : (
+          Number(rivalEntriesByKey.get(player.key) && rivalEntriesByKey.get(player.key).latestRank)
+          || getLatestValidRankForPlayer(player.key, allPlayerStatsData[player.key] || [])
+        );
       const usefulness = usefulnessValues.length
         ? usefulnessValues.reduce((sum, value) => sum + value, 0) / usefulnessValues.length
         : 0;
@@ -11865,7 +12474,7 @@ function renderSocialRivalsChart() {
         usefulness
       };
     })
-    .filter(player => Number.isFinite(player.latestRank) && Number.isFinite(player.averageGuessRate));
+    .filter(player => Number.isFinite(player.latestRank));
 
   if (!bubblePlayers.length) {
     bubbleMeta.innerText = "No bubble data in selected range";
@@ -12174,6 +12783,81 @@ function renderTrendChart(
     ...PERFORMANCE_LINE_PALETTES.default,
     ...(palette || {})
   };
+  const hideStaticPoints = true;
+  const overviewHoverPointRadius = 5;
+  const allSeriesValues = [...values, ...trend].filter(value => Number.isFinite(Number(value)));
+  const valueMin = allSeriesValues.length ? Math.min(...allSeriesValues) : 0;
+  const valueMax = allSeriesValues.length ? Math.max(...allSeriesValues) : 0;
+  const rawRange = valueMax - valueMin;
+  const isPercentSeries = suffix === "%";
+  const isLivesSeries = canvasId === "takenLivesChart" || canvasId === "savedLivesChart";
+  const isWeightedSeries = canvasId === "weightedGuessRateChart";
+  const clampMinToZero = isLivesSeries || (isPercentSeries && canvasId !== "weightedGuessRateChart");
+  const getNiceStep = rawStep => {
+    if (!Number.isFinite(rawStep) || rawStep <= 0) return 1;
+    const exponent = Math.floor(Math.log10(rawStep));
+    const base = Math.pow(10, exponent);
+    const normalized = rawStep / base;
+    if (normalized <= 1) return 1 * base;
+    if (normalized <= 2) return 2 * base;
+    if (normalized <= 5) return 5 * base;
+    return 10 * base;
+  };
+
+  let yMin = valueMin;
+  let yMax = valueMax;
+  if (!Number.isFinite(yMin) || !Number.isFinite(yMax)) {
+    yMin = 0;
+    yMax = integerTicks ? 2 : 10;
+  }
+  if (rawRange <= 0) {
+    const delta = integerTicks ? 1 : 0.5;
+    yMin -= delta;
+    yMax += delta;
+  }
+  const paddedRange = Math.max(rawRange, yMax - yMin);
+  const padding = integerTicks
+    ? Math.max(1, paddedRange * 0.15)
+    : Math.max(0.5, paddedRange * 0.15);
+  yMin -= padding;
+  yMax += padding;
+  if (clampMinToZero) {
+    yMin = Math.max(0, yMin);
+  }
+  let yTickStep = getNiceStep((yMax - yMin) / 8);
+  if (integerTicks) {
+    yTickStep = Math.max(1, Math.round(yTickStep));
+  }
+  yMin = Math.floor(yMin / yTickStep) * yTickStep;
+  yMax = Math.ceil(yMax / yTickStep) * yTickStep;
+  if (clampMinToZero) {
+    yMin = Math.max(0, yMin);
+  }
+  if (yMax <= yMin) {
+    yMax = yMin + (yTickStep * 2);
+  }
+  if (isLivesSeries) {
+    const rawLivesValues = values
+      .map(value => Number(value))
+      .filter(value => Number.isFinite(value));
+    const livesMaxValue = rawLivesValues.length ? Math.max(...rawLivesValues) : 0;
+    yMin = 0;
+    yMax = Math.max(1, Math.ceil(livesMaxValue));
+    yTickStep = 1;
+  }
+  if (isWeightedSeries) {
+    const weightedRange = Math.max(1e-6, valueMax - valueMin);
+    const weightedPadding = Math.max(0.35, weightedRange * 0.03);
+    const rawWeightedMin = valueMin - weightedPadding;
+    const rawWeightedMax = valueMax + weightedPadding;
+    const weightedStep = getNiceStep((rawWeightedMax - rawWeightedMin) / 7);
+    yTickStep = weightedStep;
+    yMin = Math.floor(rawWeightedMin / weightedStep) * weightedStep;
+    yMax = Math.ceil(rawWeightedMax / weightedStep) * weightedStep;
+    if (yMax <= yMin) {
+      yMax = yMin + 1;
+    }
+  }
 
   if (existingChart) {
     if (typeof existingChart.$trendZoomBrushCleanup === "function") {
@@ -12195,8 +12879,10 @@ function renderTrendChart(
           pointBackgroundColor: resolvedPalette.line,
           pointBorderColor: "#ffffff",
           pointBorderWidth: 1.5,
-          pointRadius: 2.2,
-          pointHoverRadius: 5,
+          pointRadius: hideStaticPoints
+            ? (context => (context && context.active ? overviewHoverPointRadius : 0))
+            : 2.2,
+          pointHoverRadius: hideStaticPoints ? overviewHoverPointRadius : 5,
           borderWidth: 2.4,
           tension: 0,
           fill: false
@@ -12265,6 +12951,8 @@ function renderTrendChart(
           }
         },
         y: {
+          min: yMin,
+          max: yMax,
           title: {
             display: true,
             text: yTitle,
@@ -12276,6 +12964,7 @@ function renderTrendChart(
           },
           ticks: {
             color: "#5d7087",
+            stepSize: yTickStep || undefined,
             ...(integerTicks ? { stepSize: 1, precision: 0 } : {})
           },
           grid: {
@@ -12292,11 +12981,36 @@ function renderTrendChart(
 }
 
 function renderKnowledgeGenreRadar() {
+  let activeGenreIndex = 0;
+
+  function updateOverviewGenreInfo(index) {
+    const infoEl = document.getElementById("overviewGenreInfo");
+    if (!infoEl) return;
+    const fallbackIndex = Number.isFinite(genreRadarChart && genreRadarChart.$activeGenreIndex)
+      ? Number(genreRadarChart.$activeGenreIndex)
+      : activeGenreIndex;
+    const resolvedIndex = Number.isFinite(index) && index >= 0 && index < genres.length
+      ? index
+      : fallbackIndex;
+    if (!Number.isFinite(resolvedIndex) || resolvedIndex < 0 || resolvedIndex >= genres.length) {
+      infoEl.innerText = "Hover a genre to see details.";
+      return;
+    }
+    const genreName = labels[resolvedIndex];
+    const genreEntry = genres[resolvedIndex] && genres[resolvedIndex][1] ? genres[resolvedIndex][1] : {};
+    const guessRate = Number(genreEntry.guessRate);
+    const total = Number(genreEntry.total);
+    const roundedGuessRate = Math.round(Number.isFinite(guessRate) ? guessRate : 0);
+    const safeTotal = Number.isFinite(total) ? total : 0;
+    infoEl.innerText = `${genreName}: ${roundedGuessRate}% guess rate across ${safeTotal} songs`;
+  }
+
   if (!cachedGenreData || typeof cachedGenreData !== "object") {
     if (genreRadarChart) {
       genreRadarChart.destroy();
       genreRadarChart = null;
     }
+    updateOverviewGenreInfo(-1);
     return;
   }
 
@@ -12309,6 +13023,7 @@ function renderKnowledgeGenreRadar() {
       genreRadarChart.destroy();
       genreRadarChart = null;
     }
+    updateOverviewGenreInfo(-1);
     return;
   }
 
@@ -12321,21 +13036,62 @@ function renderKnowledgeGenreRadar() {
   }
 
   const axisHighlightColor = "#ff7a00";
-  function getTooltipAxisIndex(chart) {
-    const tooltip = chart && chart.tooltip;
-    if (!tooltip || tooltip.opacity === 0) {
-      return -1;
-    }
-    const activeElements = typeof tooltip.getActiveElements === "function"
-      ? tooltip.getActiveElements()
-      : [];
-    return Array.isArray(activeElements) && activeElements.length
-      ? Number(activeElements[0].index)
-      : -1;
-  }
+  const genreRadarTickLabelPlugin = {
+    id: "genreRadarTickLabelPlugin",
+    afterDraw(chart) {
+      const scale = chart && chart.scales ? chart.scales.r : null;
+      if (!scale || !Array.isArray(scale.ticks) || !scale.ticks.length) return;
 
+      const ctx = chart.ctx;
+      const labelAngleDegrees = -48;
+      const rightShiftSteps = 1;
+      const sectorStep = (Math.PI * 2) / Math.max(1, (chart.data && Array.isArray(chart.data.labels) ? chart.data.labels.length : 1));
+      const labelAngle = (labelAngleDegrees * Math.PI) / 180 + sectorStep * rightShiftSteps;
+      const labelOffset = 6;
+
+      ctx.save();
+      ctx.font = "10px Arial";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.fillStyle = "#6b7280";
+
+      scale.ticks.forEach(tick => {
+        const value = Number(tick && tick.value);
+        if (!Number.isFinite(value) || value <= 0) return;
+        const radius = scale.getDistanceFromCenterForValue(value);
+        if (!Number.isFinite(radius)) return;
+        const textX = scale.xCenter + Math.cos(labelAngle) * radius + labelOffset;
+        const textY = scale.yCenter + Math.sin(labelAngle) * radius;
+        ctx.fillText(`${Math.round(value)}%`, textX, textY);
+      });
+
+      ctx.restore();
+    }
+  };
+  const genrePersistentSelectionPlugin = {
+    id: "genrePersistentSelectionPlugin",
+    beforeInit(chart) {
+      chart.$activeGenreIndex = Number.isFinite(activeGenreIndex) ? activeGenreIndex : 0;
+    },
+    afterEvent(chart, args) {
+      const event = args && args.event ? args.event : null;
+      if (!event) return;
+      const elements = chart.getElementsAtEventForMode(event, "nearest", { intersect: false }, false);
+      if (Array.isArray(elements) && elements.length) {
+        const idx = Number(elements[0].index);
+        if (Number.isFinite(idx) && idx >= 0) {
+          chart.$activeGenreIndex = idx;
+          activeGenreIndex = idx;
+          updateOverviewGenreInfo(idx);
+        }
+      } else if (Number.isFinite(chart.$activeGenreIndex) && chart.$activeGenreIndex >= 0) {
+        updateOverviewGenreInfo(chart.$activeGenreIndex);
+      }
+    }
+  };
   genreRadarChart = new Chart(document.getElementById("genreRadarChart"), {
     type: "radar",
+    plugins: [genreRadarTickLabelPlugin, genrePersistentSelectionPlugin],
     data: {
       labels,
       datasets: [
@@ -12378,7 +13134,24 @@ function renderKnowledgeGenreRadar() {
         }
       },
       onHover: (event, activeElements, chart) => {
+        const hoveredIndex = Array.isArray(activeElements) && activeElements.length
+          ? Number(activeElements[0].index)
+          : -1;
+        if (Number.isFinite(hoveredIndex) && hoveredIndex >= 0 && hoveredIndex !== activeGenreIndex) {
+          activeGenreIndex = hoveredIndex;
+          updateOverviewGenreInfo(activeGenreIndex);
+        }
         chart.draw();
+      },
+      onClick: (event, activeElements, chart) => {
+        const clickedIndex = Array.isArray(activeElements) && activeElements.length
+          ? Number(activeElements[0].index)
+          : -1;
+        if (Number.isFinite(clickedIndex) && clickedIndex >= 0 && clickedIndex !== activeGenreIndex) {
+          activeGenreIndex = clickedIndex;
+          updateOverviewGenreInfo(activeGenreIndex);
+          chart.draw();
+        }
       },
       interaction: {
         mode: "nearest",
@@ -12417,10 +13190,10 @@ function renderKnowledgeGenreRadar() {
           ticks: {
             stepSize: radarScale.stepSize,
             precision: 0,
-            color: "#555",
-            backdropColor: "transparent",
-            callback: function(value) {
-              return `${Math.round(Number(value))}%`;
+            color: "rgba(0, 0, 0, 0)",
+            showLabelBackdrop: false,
+            callback: function() {
+              return "";
             }
           },
           grid: {
@@ -12440,7 +13213,7 @@ function renderKnowledgeGenreRadar() {
           },
           angleLines: {
             color: function(context) {
-              const activeAxisIndex = getTooltipAxisIndex(context && context.chart);
+              const activeAxisIndex = Number(context && context.chart && context.chart.$activeGenreIndex);
               const idx = Number(context && context.index);
               if (Number.isFinite(idx) && idx === activeAxisIndex) {
                 return axisHighlightColor;
@@ -12450,7 +13223,7 @@ function renderKnowledgeGenreRadar() {
           },
           pointLabels: {
             color: function(context) {
-              const activeAxisIndex = getTooltipAxisIndex(context && context.chart);
+              const activeAxisIndex = Number(context && context.chart && context.chart.$activeGenreIndex);
               const idx = Number(context && context.index);
               return Number.isFinite(idx) && idx === activeAxisIndex
                 ? axisHighlightColor
@@ -12462,6 +13235,10 @@ function renderKnowledgeGenreRadar() {
       }
     }
   });
+  if (genreRadarChart) {
+    genreRadarChart.$activeGenreIndex = activeGenreIndex;
+  }
+  updateOverviewGenreInfo(activeGenreIndex);
 }
 
 function renderKnowledgeTagRadar() {
@@ -12504,6 +13281,17 @@ function renderKnowledgeTagRadar() {
     }
     if (!selectedTagNames.length) {
       selectedTagNames = tagEntries.slice(0, MAX_SELECTED_TAGS).map(([name]) => name);
+    }
+  }
+
+  const minRequiredTags = Math.min(MIN_SELECTED_TAGS, tagEntries.length);
+  if (selectedTagNames.length < minRequiredTags) {
+    const selectedTagSet = new Set(selectedTagNames);
+    for (const [tagName] of tagEntries) {
+      if (selectedTagSet.has(tagName)) continue;
+      selectedTagNames.push(tagName);
+      selectedTagSet.add(tagName);
+      if (selectedTagNames.length >= minRequiredTags) break;
     }
   }
 
@@ -12555,6 +13343,11 @@ function renderKnowledgeTagRadar() {
         }
         selectedTagNames = [...selectedTagNames, changedTag];
       } else {
+        const minRequiredSelection = Math.min(MIN_SELECTED_TAGS, tagEntries.length);
+        if (selectedTagNames.length <= minRequiredSelection) {
+          event.target.checked = true;
+          return;
+        }
         selectedTagNames = selectedTagNames.filter(name => name !== changedTag);
       }
       drawTagRadarFromSelection();
@@ -12788,6 +13581,10 @@ function renderKnowledgeByEraDecadeChart() {
 }
 
 function drawTagRadarFromSelection() {
+  const totalTagOptions = Object.values(cachedTagData || {}).filter(
+    value => value && typeof value.guessRate === "number"
+  ).length;
+  const minRequiredSelection = Math.min(MIN_SELECTED_TAGS, totalTagOptions);
   const selectedEntries = selectedTagNames
     .map(tag => [tag, cachedTagData[tag]])
     .filter(([, value]) => value && typeof value.guessRate === "number");
@@ -12795,7 +13592,8 @@ function drawTagRadarFromSelection() {
 
   const meta = document.getElementById("tagSelectionMeta");
   const maxSuffix = selectedEntries.length >= MAX_SELECTED_TAGS ? " (maximum)" : "";
-  meta.innerText = `Selected ${selectedEntries.length} tags${maxSuffix}`;
+  const minSuffix = selectedEntries.length === minRequiredSelection ? " (minimum)" : "";
+  meta.innerText = `Selected ${selectedEntries.length} tags${minSuffix}${maxSuffix}`;
 
   if (!selectedEntries.length) {
     if (tagRadarChart) {
@@ -12814,6 +13612,60 @@ function drawTagRadarFromSelection() {
   }
 
   const axisHighlightColor = "#ff7a00";
+  const tagRadarTickLabelPlugin = {
+    id: "tagRadarTickLabelPlugin",
+    afterDraw(chart) {
+      const scale = chart && chart.scales ? chart.scales.r : null;
+      if (!scale || !Array.isArray(scale.ticks) || !scale.ticks.length) return;
+
+      const ctx = chart.ctx;
+      const labelsCount = Math.max(1, (chart.data && Array.isArray(chart.data.labels) ? chart.data.labels.length : 1));
+      const shouldUseVerticalQuadrantOneAxis = labelsCount === 3 || labelsCount === 4;
+      const shouldUseFiveGenreAdjust = labelsCount === 5;
+      const targetAngle = (-48 * Math.PI) / 180;
+      let labelAngle = 0;
+      let bestDiff = Number.POSITIVE_INFINITY;
+      if (shouldUseVerticalQuadrantOneAxis) {
+        labelAngle = (-90 * Math.PI) / 180;
+      }
+      for (let i = 0; i < labelsCount; i += 1) {
+        const point = scale.getPointPositionForValue(i, scale.max);
+        if (!point || !Number.isFinite(point.x) || !Number.isFinite(point.y)) continue;
+        const dx = point.x - scale.xCenter;
+        const dy = point.y - scale.yCenter;
+        if (!(dx > 0 && dy < 0)) continue; // first quadrant (top-right)
+        const axisAngle = Math.atan2(dy, dx);
+        const diff = shouldUseVerticalQuadrantOneAxis
+          ? Math.abs(Math.atan2(Math.sin(axisAngle - ((-90 * Math.PI) / 180)), Math.cos(axisAngle - ((-90 * Math.PI) / 180))))
+          : Math.abs(Math.atan2(Math.sin(axisAngle - targetAngle), Math.cos(axisAngle - targetAngle)));
+        if (diff < bestDiff) {
+          bestDiff = diff;
+          labelAngle = axisAngle;
+        }
+      }
+      const labelOffset = 6;
+      const extraUpwardOffset = shouldUseVerticalQuadrantOneAxis ? 2 : shouldUseFiveGenreAdjust ? -4 : 0;
+      const extraRightOffset = shouldUseVerticalQuadrantOneAxis ? 2 : shouldUseFiveGenreAdjust ? 4 : 0;
+
+      ctx.save();
+      ctx.font = "10px Arial";
+      ctx.textAlign = "left";
+      ctx.textBaseline = shouldUseVerticalQuadrantOneAxis ? "bottom" : "middle";
+      ctx.fillStyle = "#6b7280";
+
+      scale.ticks.forEach(tick => {
+        const value = Number(tick && tick.value);
+        if (!Number.isFinite(value) || value <= 0) return;
+        const radius = scale.getDistanceFromCenterForValue(value);
+        if (!Number.isFinite(radius)) return;
+        const textX = scale.xCenter + Math.cos(labelAngle) * radius + labelOffset + extraRightOffset;
+        const textY = scale.yCenter + Math.sin(labelAngle) * radius - extraUpwardOffset;
+        ctx.fillText(`${Math.round(value)}%`, textX, textY);
+      });
+
+      ctx.restore();
+    }
+  };
   function getTooltipAxisIndex(chart) {
     const tooltip = chart && chart.tooltip;
     if (!tooltip || tooltip.opacity === 0) {
@@ -12829,6 +13681,7 @@ function drawTagRadarFromSelection() {
 
   tagRadarChart = new Chart(document.getElementById("tagRadarChart"), {
     type: "radar",
+    plugins: [tagRadarTickLabelPlugin],
     data: {
       labels,
       datasets: [
@@ -12852,7 +13705,7 @@ function drawTagRadarFromSelection() {
       layout: {
         padding: {
           left: 0,
-          right: 44,
+          right: 0,
           top: 0,
           bottom: 0
         }
@@ -12887,10 +13740,10 @@ function drawTagRadarFromSelection() {
           ticks: {
             stepSize: radarScale.stepSize,
             precision: 0,
-            color: "#555",
-            backdropColor: "transparent",
-            callback: function(value) {
-              return `${Math.round(Number(value))}%`;
+            color: "rgba(0, 0, 0, 0)",
+            showLabelBackdrop: false,
+            callback: function() {
+              return "";
             }
           },
           grid: {
@@ -12957,6 +13810,13 @@ function renderSelectedTagButtons(tagNames) {
     removeBtn.innerText = "−";
     removeBtn.title = `Deselect ${tag}`;
     removeBtn.addEventListener("click", () => {
+      const totalAvailableTags = Object.values(cachedTagData || {}).filter(
+        value => value && typeof value.guessRate === "number"
+      ).length;
+      const minRequiredSelection = Math.min(MIN_SELECTED_TAGS, totalAvailableTags);
+      if (selectedTagNames.length <= minRequiredSelection) {
+        return;
+      }
       selectedTagNames = selectedTagNames.filter(name => name !== tag);
       const checkboxWrap = document.getElementById("tagCheckboxList");
       checkboxWrap.querySelectorAll('input[type="checkbox"]').forEach(input => {
@@ -14292,7 +15152,7 @@ async function loadPopularityDataForUser(displayName) {
 
     const popularityPayload = await popularityRes.json();
     const popularityRows = Array.isArray(popularityPayload) ? popularityPayload : [];
-    cachedPopularitySongs = await hydrateSongRowsWithSongKey(popularityRows);
+    cachedPopularitySongs = await hydrateSongRowsWithSongKey(popularityRows.slice(0, 1500));
     popularityPageIndex = 0;
     renderInsightsPopularity();
   } catch (err) {
@@ -14431,6 +15291,383 @@ async function ensureSearchSongFrequencyData() {
   await searchSongFrequencyLoadPromise;
 }
 
+function parseEstimatorInputValues(rawText) {
+  const text = String(rawText || "").trim();
+  if (!text) return [];
+  return text
+    .split(/[,\s]+/)
+    .map(token => Number(token))
+    .filter(value => Number.isFinite(value));
+}
+
+function buildEstimatorFeatureRow(values, featureNames) {
+  const names = Array.isArray(featureNames) ? featureNames : [];
+  if (!names.length) return values.slice();
+  const base = values.slice();
+  while (base.length < 5) {
+    if (!base.length) break;
+    base.unshift(base[0]);
+  }
+  const selected = base.length > 5 ? base.slice(-5) : base.slice();
+  if (selected.length < 5 && selected.length > 0) {
+    while (selected.length < 5) selected.unshift(selected[0]);
+  }
+
+  const out = [];
+  names.forEach((name, index) => {
+    const key = String(name || "");
+    if (key.startsWith("old_rank_") || key.startsWith("old_usefulness_")) {
+      const m = key.match(/_(\d+)$/);
+      if (m) {
+        const oneBased = Number(m[1]);
+        if (Number.isFinite(oneBased) && oneBased >= 1 && oneBased <= selected.length) {
+          out.push(selected[oneBased - 1]);
+          return;
+        }
+      }
+      out.push(Number.isFinite(selected[index]) ? selected[index] : selected[selected.length - 1]);
+      return;
+    }
+
+    const mean = selected.length ? (selected.reduce((acc, cur) => acc + cur, 0) / selected.length) : 0;
+    const min = selected.length ? Math.min(...selected) : 0;
+    const max = selected.length ? Math.max(...selected) : 0;
+    const range = max - min;
+    const slope = selected.length > 1 ? (selected[selected.length - 1] - selected[0]) / (selected.length - 1) : 0;
+    const deltaRecent = selected.length > 1 ? selected[selected.length - 1] - selected[selected.length - 2] : 0;
+    const variance = selected.length
+      ? selected.reduce((acc, cur) => acc + ((cur - mean) ** 2), 0) / selected.length
+      : 0;
+    const std = Math.sqrt(Math.max(0, variance));
+
+    if (key.includes("_mean")) out.push(mean);
+    else if (key.includes("_std")) out.push(std);
+    else if (key.includes("_slope")) out.push(slope);
+    else if (key.includes("_min")) out.push(min);
+    else if (key.includes("_max")) out.push(max);
+    else if (key.includes("_range")) out.push(range);
+    else if (key.includes("delta_recent")) out.push(deltaRecent);
+    else out.push(Number.isFinite(selected[index]) ? selected[index] : selected[selected.length - 1]);
+  });
+  return out;
+}
+
+function predictFromEstimator(estimator, values) {
+  if (!estimator || typeof estimator !== "object") return null;
+  const variant = String(estimator.model_variant || "ols").toLowerCase();
+  const featureNames = Array.isArray(estimator.feature_names) ? estimator.feature_names : [];
+  const features = buildEstimatorFeatureRow(values, featureNames);
+  if (!features.length) return null;
+
+  if (variant === "knn" && Array.isArray(estimator.train_x) && Array.isArray(estimator.train_y)) {
+    const means = Array.isArray(estimator.feature_means) ? estimator.feature_means : [];
+    const stds = Array.isArray(estimator.feature_stds) ? estimator.feature_stds : [];
+    const x = features.map((value, idx) => {
+      const mean = Number.isFinite(Number(means[idx])) ? Number(means[idx]) : 0;
+      const std = Number.isFinite(Number(stds[idx])) && Number(stds[idx]) !== 0 ? Number(stds[idx]) : 1;
+      return (value - mean) / std;
+    });
+    const kRaw = Number(estimator.k);
+    const k = Number.isFinite(kRaw) && kRaw > 0 ? Math.floor(kRaw) : 3;
+    const distances = [];
+    for (let i = 0; i < estimator.train_x.length; i += 1) {
+      const tx = Array.isArray(estimator.train_x[i]) ? estimator.train_x[i] : [];
+      const ty = Number(estimator.train_y[i]);
+      if (!Number.isFinite(ty) || tx.length !== x.length) continue;
+      let distSq = 0;
+      for (let j = 0; j < x.length; j += 1) {
+        const d = x[j] - Number(tx[j] || 0);
+        distSq += d * d;
+      }
+      distances.push({ distSq, y: ty });
+    }
+    if (!distances.length) return null;
+    distances.sort((a, b) => a.distSq - b.distSq);
+    const used = distances.slice(0, Math.max(1, Math.min(k, distances.length)));
+    return used.reduce((acc, row) => acc + row.y, 0) / used.length;
+  }
+
+  const intercept = Number(estimator.intercept);
+  const coefficients = Array.isArray(estimator.coefficients) ? estimator.coefficients.map(Number) : [];
+  if (!Number.isFinite(intercept) || !coefficients.length) return null;
+  const score = intercept + coefficients.reduce((acc, coeff, idx) => {
+    const x = Number(features[idx]);
+    if (!Number.isFinite(coeff) || !Number.isFinite(x)) return acc;
+    return acc + (coeff * x);
+  }, 0);
+  return Number.isFinite(score) ? score : null;
+}
+
+function renderEstimatorAccuracyLine(elementId, estimator) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  const r2 = Number(estimator && estimator.r2);
+  const accuracyText = Number.isFinite(r2)
+    ? `${Math.max(0, Math.min(100, r2 * 100)).toFixed(1)}%`
+    : "—";
+  el.innerText = `Accuracy: ${accuracyText}`;
+}
+
+async function ensureConvertEstimatorsLoaded() {
+  if (convertRankEstimator && convertUsefulnessEstimator) return;
+  if (convertEstimatorsLoadPromise) {
+    await convertEstimatorsLoadPromise;
+    return;
+  }
+  convertEstimatorsLoadPromise = (async () => {
+    const [rankRes, usefulnessRes] = await Promise.allSettled([
+      loadJSON("rank_estimator/rank_estimator.json"),
+      loadJSON("usefulness_estimator/usefulness_estimator.json")
+    ]);
+    convertRankEstimator = rankRes.status === "fulfilled" ? rankRes.value : null;
+    convertUsefulnessEstimator = usefulnessRes.status === "fulfilled" ? usefulnessRes.value : null;
+    const meta = document.getElementById("convertEstimatorMeta");
+    if (meta) {
+      if (convertRankEstimator && convertUsefulnessEstimator) {
+        meta.innerText = "Estimators loaded";
+      } else if (convertRankEstimator || convertUsefulnessEstimator) {
+        meta.innerText = "Partially loaded (one estimator missing)";
+      } else {
+        meta.innerText = "Failed to load estimator files";
+      }
+    }
+    renderEstimatorAccuracyLine("convertRankAccuracy", convertRankEstimator);
+    renderEstimatorAccuracyLine("convertUsefulnessAccuracy", convertUsefulnessEstimator);
+  })();
+  try {
+    await convertEstimatorsLoadPromise;
+  } finally {
+    convertEstimatorsLoadPromise = null;
+  }
+}
+
+function parseCsvLine(line) {
+  const out = [];
+  let cur = "";
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i += 1) {
+    const ch = line[i];
+    if (ch === "\"") {
+      const next = line[i + 1];
+      if (inQuotes && next === "\"") {
+        cur += "\"";
+        i += 1;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+    if (ch === "," && !inQuotes) {
+      out.push(cur);
+      cur = "";
+      continue;
+    }
+    cur += ch;
+  }
+  out.push(cur);
+  return out;
+}
+
+function parseSimpleCsv(text) {
+  const lines = String(text || "").split(/\r?\n/).filter(line => line.trim().length > 0);
+  if (!lines.length) return [];
+  const headers = parseCsvLine(lines[0]).map(h => String(h || "").trim());
+  const rows = [];
+  for (let i = 1; i < lines.length; i += 1) {
+    const cols = parseCsvLine(lines[i]);
+    const row = {};
+    headers.forEach((h, idx) => {
+      row[h] = String(cols[idx] || "").trim();
+    });
+    rows.push(row);
+  }
+  return rows;
+}
+
+function normalizeTransitionExamples(payload, oldKey, newKey) {
+  if (!payload || typeof payload !== "object") return [];
+  const out = [];
+  Object.entries(payload).forEach(([name, value]) => {
+    if (!value || typeof value !== "object") return;
+    const oldValue = Number(value[oldKey]);
+    const newValue = Number(value[newKey]);
+    if (!Number.isFinite(oldValue) || !Number.isFinite(newValue)) return;
+    out.push({ name, oldValue, newValue, source: "transition" });
+  });
+  return out;
+}
+
+function normalizeTrainingExamples(rows, prefix, targetKey, namePrefix) {
+  if (!Array.isArray(rows)) return [];
+  return rows.map((row, idx) => {
+    const oldCandidates = [
+      Number(row[`${prefix}_mean`]),
+      Number(row[`${prefix}_5`]),
+      Number(row[`${prefix}_4`]),
+      Number(row[`${prefix}_3`]),
+      Number(row[`${prefix}_2`]),
+      Number(row[`${prefix}_1`])
+    ].filter(value => Number.isFinite(value));
+    const oldValue = oldCandidates.length ? oldCandidates[0] : NaN;
+    const newValue = Number(row[targetKey]);
+    if (!Number.isFinite(oldValue) || !Number.isFinite(newValue)) return null;
+    return {
+      name: `${namePrefix} #${idx + 1}`,
+      oldValue,
+      newValue,
+      source: "training"
+    };
+  }).filter(Boolean);
+}
+
+async function ensureConvertExamplesLoaded() {
+  if (convertRankClosestRows.length && convertUsefulnessClosestRows.length) return;
+  if (convertExamplesLoadPromise) {
+    await convertExamplesLoadPromise;
+    return;
+  }
+
+  convertExamplesLoadPromise = (async () => {
+    const rankTransition = await loadJSON("rank_estimator/rank_transition_output.json").catch(() => null);
+    const usefulnessTransition = await loadJSON("usefulness_estimator/usefulness_transition_output.json").catch(() => null);
+
+    convertRankClosestRows = normalizeTransitionExamples(rankTransition, "final_old_rank", "final_new_rank");
+    convertUsefulnessClosestRows = normalizeTransitionExamples(usefulnessTransition, "final_old_usefulness", "final_new_usefulness");
+
+    if (!convertRankClosestRows.length) {
+      const rankCsvRes = await fetch(dataUrl("rank_estimator/rank_training_data.csv")).catch(() => null);
+      if (rankCsvRes && rankCsvRes.ok) {
+        const rankText = await rankCsvRes.text();
+        const rankRows = parseSimpleCsv(rankText);
+        convertRankClosestRows = normalizeTrainingExamples(rankRows, "old_rank", "target_new_rank", "rank row");
+      }
+    }
+    if (!convertUsefulnessClosestRows.length) {
+      const usefulCsvRes = await fetch(dataUrl("usefulness_estimator/usefulness_training_data.csv")).catch(() => null);
+      if (usefulCsvRes && usefulCsvRes.ok) {
+        const usefulText = await usefulCsvRes.text();
+        const usefulRows = parseSimpleCsv(usefulText);
+        convertUsefulnessClosestRows = normalizeTrainingExamples(usefulRows, "old_usefulness", "target_new_usefulness", "usefulness row");
+      }
+    }
+  })();
+
+  try {
+    await convertExamplesLoadPromise;
+  } finally {
+    convertExamplesLoadPromise = null;
+  }
+}
+
+function findClosestExamples(rows, targetOldValue, limit = 3) {
+  if (!Array.isArray(rows) || !rows.length || !Number.isFinite(targetOldValue)) return [];
+  return rows
+    .map(row => ({ ...row, diff: Math.abs(row.oldValue - targetOldValue) }))
+    .sort((a, b) => {
+      if (a.diff !== b.diff) return a.diff - b.diff;
+      return a.oldValue - b.oldValue;
+    })
+    .slice(0, limit);
+}
+
+function renderClosestExamples(containerEl, examples, labelText) {
+  if (!containerEl) return;
+  const renderPlaceholders = () => {
+    containerEl.innerHTML = [
+      "<div class=\"convert-estimator-closest-item\"><strong>Closest examples:</strong></div>",
+      "<div class=\"convert-estimator-closest-item\">1. —</div>",
+      "<div class=\"convert-estimator-closest-item\">2. —</div>",
+      "<div class=\"convert-estimator-closest-item\">3. —</div>"
+    ].join("");
+  };
+  if (!examples.length) {
+    renderPlaceholders();
+    return;
+  }
+  const lines = examples.map((ex, idx) => {
+    return `<div class="convert-estimator-closest-item">${idx + 1}. ${ex.name}: ${ex.oldValue.toFixed(3)} -> ${ex.newValue.toFixed(3)} (${labelText} ${ex.diff.toFixed(3)})</div>`;
+  });
+  while (lines.length < 3) {
+    lines.push(`<div class="convert-estimator-closest-item">${lines.length + 1}. —</div>`);
+  }
+  containerEl.innerHTML = `<div class="convert-estimator-closest-item"><strong>Closest examples:</strong></div>${lines.join("")}`;
+}
+
+function bindConvertEstimatorControlsOnce() {
+  if (convertEstimatorUIBound) return;
+  const rankInput = document.getElementById("convertOldRankInput");
+  const rankBtn = document.getElementById("convertRankBtn");
+  const rankResult = document.getElementById("convertRankResult");
+  const rankClosest = document.getElementById("convertRankClosest");
+  const usefulInput = document.getElementById("convertOldUsefulnessInput");
+  const usefulBtn = document.getElementById("convertUsefulnessBtn");
+  const usefulResult = document.getElementById("convertUsefulnessResult");
+  const usefulClosest = document.getElementById("convertUsefulnessClosest");
+  if (!rankInput || !rankBtn || !rankResult || !rankClosest || !usefulInput || !usefulBtn || !usefulResult || !usefulClosest) return;
+
+  const handleRankConvert = async () => {
+    await ensureConvertEstimatorsLoaded();
+    await ensureConvertExamplesLoaded();
+    const values = parseEstimatorInputValues(rankInput.value);
+    if (!values.length) {
+      rankResult.innerText = "New rank: invalid input";
+      renderClosestExamples(rankClosest, [], "old diff");
+      return;
+    }
+    if (!convertRankEstimator) {
+      rankResult.innerText = "New rank: rank estimator unavailable";
+      renderClosestExamples(rankClosest, [], "old diff");
+      return;
+    }
+    const predicted = predictFromEstimator(convertRankEstimator, values);
+    rankResult.innerText = Number.isFinite(predicted)
+      ? `New rank: ${predicted.toFixed(3)}`
+      : "New rank: prediction failed";
+    const targetOld = values.reduce((acc, cur) => acc + cur, 0) / values.length;
+    const examples = findClosestExamples(convertRankClosestRows, targetOld, 3);
+    renderClosestExamples(rankClosest, examples, "old diff");
+  };
+
+  const handleUsefulnessConvert = async () => {
+    await ensureConvertEstimatorsLoaded();
+    await ensureConvertExamplesLoaded();
+    const values = parseEstimatorInputValues(usefulInput.value);
+    if (!values.length) {
+      usefulResult.innerText = "New usefulness: invalid input";
+      renderClosestExamples(usefulClosest, [], "old diff");
+      return;
+    }
+    if (!convertUsefulnessEstimator) {
+      usefulResult.innerText = "New usefulness: usefulness estimator unavailable";
+      renderClosestExamples(usefulClosest, [], "old diff");
+      return;
+    }
+    const predicted = predictFromEstimator(convertUsefulnessEstimator, values);
+    usefulResult.innerText = Number.isFinite(predicted)
+      ? `New usefulness: ${predicted.toFixed(3)}`
+      : "New usefulness: prediction failed";
+    const targetOld = values.reduce((acc, cur) => acc + cur, 0) / values.length;
+    const examples = findClosestExamples(convertUsefulnessClosestRows, targetOld, 3);
+    renderClosestExamples(usefulClosest, examples, "old diff");
+  };
+
+  rankBtn.addEventListener("click", handleRankConvert);
+  usefulBtn.addEventListener("click", handleUsefulnessConvert);
+  rankInput.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleRankConvert();
+    }
+  });
+  usefulInput.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleUsefulnessConvert();
+    }
+  });
+  convertEstimatorUIBound = true;
+}
+
 function getRigAnalysisModeValue() {
   const rawValue = String(dataRangeSelect && dataRangeSelect.value ? dataRangeSelect.value : "all");
   const allowedValues = new Set(rigAnalysisAllowedModes);
@@ -14528,8 +15765,8 @@ async function ensureRigAnalysisDataForMode(modeValue, options = {}) {
       rigAnalysisLoadPromisesByMode.delete(modeValue);
       if (
         shouldRerender
-        && activeSection === "otherTools"
-        && activeSubSectionBySection.otherTools === "Rig/List analysis"
+        && activeSection === "social"
+        && activeSubSectionBySection.social === "Rig / List analysis"
         && getRigAnalysisModeValue() === modeValue
       ) {
         renderRigAnalysisView();
@@ -14615,12 +15852,12 @@ function renderRigAnalysisView() {
     difficultyLegendEl.innerHTML = "";
     difficultyTrackEl.style.setProperty("background", "#e2e8f0", "important");
     difficultyMarkerEl.style.display = "none";
-    difficultyTagEl.innerText = "Difficulty: —%";
+    difficultyTagEl.innerText = "Median Difficulty: —%";
     difficultySubEl.innerText = "Loading...";
     avgRigValueEl.innerText = "—";
-    avgRigSubEl.innerText = "Loading...";
+    avgRigSubEl.innerText = "";
     avgRigPctValueEl.innerText = "—";
-    avgRigPctSubEl.innerText = "Loading...";
+    avgRigPctSubEl.innerText = "";
     emptyEl.style.display = "block";
     emptyEl.innerText = "Loading rig analysis...";
     return;
@@ -14651,12 +15888,12 @@ function renderRigAnalysisView() {
     difficultyLegendEl.innerHTML = "";
     difficultyTrackEl.style.setProperty("background", "#e2e8f0", "important");
     difficultyMarkerEl.style.display = "none";
-    difficultyTagEl.innerText = "Difficulty: —%";
+    difficultyTagEl.innerText = "Median Difficulty: —%";
     difficultySubEl.innerText = "No data";
     avgRigValueEl.innerText = "—";
-    avgRigSubEl.innerText = "No data";
+    avgRigSubEl.innerText = "";
     avgRigPctValueEl.innerText = "—";
-    avgRigPctSubEl.innerText = "No data";
+    avgRigPctSubEl.innerText = "";
     emptyEl.style.display = "block";
     emptyEl.innerText = "No rig analysis data for this player in the selected mode.";
     return;
@@ -14686,10 +15923,13 @@ function renderRigAnalysisView() {
   }
   const difficultyPercentile = computePercentileFromValues(difficultyValue, difficultyValues);
   const difficultyRank = computeRankFromValues(difficultyValue, difficultyValues, "desc");
-  let difficultyLabel = "medium";
+  let difficultyLabel = "normal";
   if (Number.isFinite(difficultyPercentile)) {
-    if (difficultyPercentile >= 75) difficultyLabel = "easy";
-    else if (difficultyPercentile <= 25) difficultyLabel = "hard";
+    if (difficultyPercentile <= 20) difficultyLabel = "impossible";
+    else if (difficultyPercentile <= 40) difficultyLabel = "relatively impossible";
+    else if (difficultyPercentile < 60) difficultyLabel = "normal";
+    else if (difficultyPercentile < 80) difficultyLabel = "relatively free";
+    else difficultyLabel = "free";
   }
 
   const medianSeasonIndexValue = Number(vintageEntry && vintageEntry.medianSeasonIndex);
@@ -14708,10 +15948,12 @@ function renderRigAnalysisView() {
     minYearValue -= 1;
     maxYearValue += 1;
   }
-  let eraLabel = "mixed-era";
+  let eraLabel = "relatively boomer";
   if (Number.isFinite(medianSeasonPercentile)) {
-    if (medianSeasonPercentile >= 75) eraLabel = "zoomer";
-    else if (medianSeasonPercentile <= 25) eraLabel = "boomer";
+    if (medianSeasonPercentile <= 25) eraLabel = "boomer";
+    else if (medianSeasonPercentile <= 50) eraLabel = "relatively boomer";
+    else if (medianSeasonPercentile < 75) eraLabel = "relatively zoomer";
+    else eraLabel = "zoomer";
   }
 
   const preferredYearValue = Number.isFinite(medianYearValue) ? medianYearValue : averageYearValue;
@@ -14827,7 +16069,10 @@ function renderRigAnalysisView() {
     yearMedianMarkerEl.style.display = "none";
     yearMedianTagEl.innerText = "Median year: — (—)";
   }
-  yearSubEl.innerHTML = `Era rank (older→newer): ${seasonRank != null ? `${seasonRank}/${medianSeasonValues.length}` : "—"} | Percentile ${Number.isFinite(medianSeasonPercentile) ? `${medianSeasonPercentile.toFixed(1)}%` : "—"} | ${escapeHtml(eraLabel)}`;
+  yearSubEl.innerHTML = [
+    `Era rank (older→newer): ${seasonRank != null ? `${seasonRank}/${medianSeasonValues.length}` : "—"} | Percentile ${Number.isFinite(medianSeasonPercentile) ? `${medianSeasonPercentile.toFixed(1)}%` : "—"}`,
+    `You have a ${escapeHtml(eraLabel)} list`
+  ].join("<br>");
 
   const difficultyRangeSource = difficultyRawValues.length
     ? [...difficultyRawValues]
@@ -14913,16 +16158,15 @@ function renderRigAnalysisView() {
   if (Number.isFinite(difficultyMarkerLeftPct) && Number.isFinite(difficultyValue)) {
     difficultyMarkerEl.style.display = "flex";
     difficultyMarkerEl.style.left = `${difficultyMarkerLeftPct.toFixed(2)}%`;
-    difficultyTagEl.innerText = `Difficulty: ${difficultyValue.toFixed(1)}%`;
+    difficultyTagEl.innerText = `Median Difficulty: ${difficultyValue.toFixed(1)}%`;
   } else {
     difficultyMarkerEl.style.display = "none";
-    difficultyTagEl.innerText = "Difficulty: —%";
+    difficultyTagEl.innerText = "Median Difficulty: —%";
   }
 
   difficultyValueEl.innerText = difficultyText;
   difficultySubEl.innerHTML = [
     `Difficulty rank (easiest→hardest): ${difficultyRank != null ? `${difficultyRank}/${difficultyValues.length}` : "—"} | Percentile ${Number.isFinite(difficultyPercentile) ? `${difficultyPercentile.toFixed(1)}%` : "—"}`,
-    `All non-null difficulty values included`,
     `Your list is ${escapeHtml(difficultyLabel)}`
   ].join("<br>");
 
@@ -14948,16 +16192,10 @@ function renderRigAnalysisView() {
     : null;
 
   avgRigValueEl.innerText = Number.isFinite(averageRig) ? averageRig.toFixed(2) : "—";
-  avgRigSubEl.innerHTML = [
-    `Samples: ${averageRigValues.length}`,
-    `${escapeHtml(selectedModeLabel)}`
-  ].join("<br>");
+  avgRigSubEl.innerText = "";
 
   avgRigPctValueEl.innerText = Number.isFinite(averageRigPct) ? `${averageRigPct.toFixed(1)}%` : "—";
-  avgRigPctSubEl.innerHTML = [
-    `Samples: ${averageRigPctValues.length}`,
-    `${escapeHtml(selectedModeLabel)}`
-  ].join("<br>");
+  avgRigPctSubEl.innerText = "";
 }
 
 function computeOverviewSongsSeenAndGotten() {
@@ -14999,49 +16237,79 @@ function buildInsightsCoverNode(song) {
   if (imageUrl) {
     const image = document.createElement("img");
     image.className = "relearn-cover";
-    image.src = imageUrl;
     image.alt = String(song && (song.anime || song.animeName) ? (song.anime || song.animeName) : "Anime");
     image.loading = "eager";
     image.decoding = "async";
     image.referrerPolicy = "no-referrer";
     image.dataset.loadState = "loading";
 
+    const maxAttempts = 3;
+    let attempt = 0;
     let settled = false;
-    const markLoaded = () => {
-      if (settled) return;
-      settled = true;
-      image.dataset.loadState = "loaded";
+    let timeoutId = null;
+
+    const clearPendingTimeout = () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
     };
-    const markError = (state) => {
+
+    const finalize = (state) => {
       if (settled) return;
       settled = true;
+      clearPendingTimeout();
       image.dataset.loadState = state;
     };
 
-    image.addEventListener("load", () => {
-      if (image.naturalWidth > 0 && image.naturalHeight > 0) {
-        markLoaded();
-      } else {
-        markError("error");
-      }
-    }, { once: true });
-    image.addEventListener("error", () => {
-      markError("error");
-    }, { once: true });
+    const buildRetryUrl = (baseUrl, attemptNumber) => {
+      if (attemptNumber <= 1) return baseUrl;
+      const separator = baseUrl.includes("?") ? "&" : "?";
+      return `${baseUrl}${separator}retry=${attemptNumber}&ts=${Date.now()}`;
+    };
 
-    if (image.complete) {
-      if (image.naturalWidth > 0 && image.naturalHeight > 0) {
-        markLoaded();
-      } else {
-        markError("error");
-      }
-    } else {
-      setTimeout(() => {
-        if (!settled) {
-          markError("timeout");
+    const scheduleAttempt = () => {
+      if (settled) return;
+      attempt += 1;
+      image.dataset.loadState = `loading-${attempt}`;
+      clearPendingTimeout();
+
+      const attemptUrl = buildRetryUrl(imageUrl, attempt);
+      image.src = attemptUrl;
+
+      timeoutId = setTimeout(() => {
+        if (settled) return;
+        if (attempt < maxAttempts) {
+          scheduleAttempt();
+          return;
         }
+        finalize("timeout");
       }, 7000);
-    }
+    };
+
+    image.onload = () => {
+      if (settled) return;
+      if (image.naturalWidth > 0 && image.naturalHeight > 0) {
+        finalize("loaded");
+        return;
+      }
+      if (attempt < maxAttempts) {
+        scheduleAttempt();
+        return;
+      }
+      finalize("error");
+    };
+
+    image.onerror = () => {
+      if (settled) return;
+      if (attempt < maxAttempts) {
+        scheduleAttempt();
+        return;
+      }
+      finalize("error");
+    };
+
+    scheduleAttempt();
 
     return image;
   }
@@ -15485,6 +16753,27 @@ function renderInsightsRelearnTracker() {
   const start = relearnPageIndex * RELEARN_PAGE_SIZE;
   const end = start + RELEARN_PAGE_SIZE;
   const pageSongs = songs.slice(start, end);
+  const relearnTableEl = document.getElementById("relearnSongsTable");
+  const getPatternMarkerCount = patternRaw => {
+    const text = String(patternRaw == null ? "" : patternRaw).trim();
+    if (!text) return 0;
+    const marks = Array.from(text).filter(ch => /[✅✔☑🟩🟢❌✖✗🟥🔴⬜◻◽▫]/.test(ch));
+    if (marks.length) return marks.length;
+    return /^[01]+$/.test(text) ? text.length : 0;
+  };
+  if (relearnTableEl) {
+    const maxPatternCount = pageSongs.reduce((maxValue, song) => {
+      return Math.max(maxValue, getPatternMarkerCount(song && song.pattern));
+    }, 0);
+    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1));
+    const patternWidth = Math.max(72, Math.min(160, 16 + (boundedCount * 14)));
+    const extraSpace = 160 - patternWidth;
+    const animeWidth = 185 + Math.round(extraSpace * 0.65);
+    const artistWidth = 130 + Math.round(extraSpace * 0.35);
+    relearnTableEl.style.setProperty("--relearn-pattern-col-width", `${patternWidth}px`);
+    relearnTableEl.style.setProperty("--relearn-anime-col-width", `${animeWidth}px`);
+    relearnTableEl.style.setProperty("--relearn-artist-col-width", `${artistWidth}px`);
+  }
   pageMeta.innerText = `Page ${relearnPageIndex + 1}/${pageCount}`;
   prevPageBtn.disabled = relearnPageIndex <= 0;
   nextPageBtn.disabled = relearnPageIndex >= pageCount - 1;
@@ -15500,6 +16789,13 @@ function renderInsightsRelearnTracker() {
     return;
   }
 
+  const appendClampText = (cell, value) => {
+    const textNode = document.createElement("div");
+    textNode.className = "table-text-clamp-3";
+    textNode.innerText = String(value == null ? "—" : value);
+    cell.appendChild(textNode);
+  };
+
   pageSongs.forEach(song => {
     const row = document.createElement("tr");
 
@@ -15508,15 +16804,15 @@ function renderInsightsRelearnTracker() {
     row.appendChild(imageCell);
 
     const animeCell = document.createElement("td");
-    animeCell.innerText = getLanguageAwareAnimeName(song);
+    appendClampText(animeCell, getLanguageAwareAnimeName(song));
     row.appendChild(animeCell);
 
     const songCell = document.createElement("td");
-    songCell.innerText = String(song && (song.songName || song.title) ? (song.songName || song.title) : "—");
+    appendClampText(songCell, String(song && (song.songName || song.title) ? (song.songName || song.title) : "—"));
     row.appendChild(songCell);
 
     const artistCell = document.createElement("td");
-    artistCell.innerText = String(song && song.artist ? song.artist : "—");
+    appendClampText(artistCell, String(song && song.artist ? song.artist : "—"));
     row.appendChild(artistCell);
 
     const typeCell = document.createElement("td");
@@ -15524,7 +16820,7 @@ function renderInsightsRelearnTracker() {
     row.appendChild(typeCell);
 
     const patternCell = document.createElement("td");
-    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, { maxPerRow: 13 }));
+    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, { maxPerRow: 10 }));
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
@@ -15997,6 +17293,25 @@ function renderInsightsSearchSongs() {
   const start = searchSongsPageIndex * SEARCH_SONGS_PAGE_SIZE;
   const end = start + SEARCH_SONGS_PAGE_SIZE;
   const pageSongs = filteredSongs.slice(start, end);
+  const searchSongsTableEl = tbody.closest("table");
+  const getPatternMarkerCount = patternRaw => {
+    const text = String(patternRaw == null ? "" : patternRaw).trim();
+    if (!text) return 0;
+    const marks = Array.from(text).filter(ch => /[✅✔☑🟩🟢❌✖✗🟥🔴⬜◻◽▫]/.test(ch));
+    if (marks.length) return marks.length;
+    return /^[01]+$/.test(text) ? text.length : 0;
+  };
+  if (searchSongsTableEl) {
+    const maxPatternCount = pageSongs.reduce((maxValue, song) => {
+      return Math.max(maxValue, getPatternMarkerCount(song && song.pattern));
+    }, 0);
+    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1));
+    const patternWidth = Math.max(72, Math.min(130, 16 + (boundedCount * 11)));
+    const extraSpace = 130 - patternWidth;
+    const textWidth = 150 + Math.round(extraSpace / 3);
+    searchSongsTableEl.style.setProperty("--search-pattern-col-width", `${patternWidth}px`);
+    searchSongsTableEl.style.setProperty("--search-text-col-width", `${textWidth}px`);
+  }
   pageMeta.innerText = `Page ${searchSongsPageIndex + 1}/${pageCount}`;
   prevPageBtn.disabled = searchSongsPageIndex <= 0;
   nextPageBtn.disabled = searchSongsPageIndex >= pageCount - 1;
@@ -16014,6 +17329,13 @@ function renderInsightsSearchSongs() {
     return;
   }
 
+  const appendClampText = (cell, value) => {
+    const textNode = document.createElement("div");
+    textNode.className = "table-text-clamp-3";
+    textNode.innerText = String(value == null ? "—" : value);
+    cell.appendChild(textNode);
+  };
+
   pageSongs.forEach(song => {
     const row = document.createElement("tr");
 
@@ -16022,15 +17344,15 @@ function renderInsightsSearchSongs() {
     row.appendChild(imageCell);
 
     const animeCell = document.createElement("td");
-    animeCell.innerText = getLanguageAwareAnimeName(song);
+    appendClampText(animeCell, getLanguageAwareAnimeName(song));
     row.appendChild(animeCell);
 
     const songCell = document.createElement("td");
-    songCell.innerText = formatSearchSongTitle(song);
+    appendClampText(songCell, formatSearchSongTitle(song));
     row.appendChild(songCell);
 
     const artistCell = document.createElement("td");
-    artistCell.innerText = String(song && song.artist ? song.artist : "—");
+    appendClampText(artistCell, String(song && song.artist ? song.artist : "—"));
     row.appendChild(artistCell);
 
     const typeCell = document.createElement("td");
@@ -16038,7 +17360,7 @@ function renderInsightsSearchSongs() {
     row.appendChild(typeCell);
 
     const patternCell = document.createElement("td");
-    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, { maxPerRow: 13 }));
+    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, { maxPerRow: 10 }));
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
@@ -16332,8 +17654,8 @@ function buildPatternSquareNode(patternRaw, options = {}) {
     states.forEach(state => appendSquare(container, state));
   }
 
-  container.title = originalText || "Unknown pattern";
-  container.setAttribute("aria-label", originalText || "Unknown pattern");
+  container.removeAttribute("title");
+  container.setAttribute("aria-label", "Pattern");
   return container;
 }
 
@@ -16903,6 +18225,22 @@ function renderPerformanceGuessRate(records) {
     rollingYMin = Math.max(0, center - 2);
     rollingYMax = Math.min(100, center + 2);
   }
+  const getNiceStep = rawStep => {
+    if (!Number.isFinite(rawStep) || rawStep <= 0) return 1;
+    const exponent = Math.floor(Math.log10(rawStep));
+    const base = Math.pow(10, exponent);
+    const normalized = rawStep / base;
+    if (normalized <= 1) return 1 * base;
+    if (normalized <= 2) return 2 * base;
+    if (normalized <= 5) return 5 * base;
+    return 10 * base;
+  };
+  const rollingStep = Math.max(1, getNiceStep((rollingYMax - rollingYMin) / 6));
+  rollingYMin = Math.max(0, Math.floor(rollingYMin / rollingStep) * rollingStep);
+  rollingYMax = Math.min(100, Math.ceil(rollingYMax / rollingStep) * rollingStep);
+  if (rollingYMax <= rollingYMin) {
+    rollingYMax = Math.min(100, rollingYMin + rollingStep * 2);
+  }
 
   if (guessRateRollingChart) {
     if (typeof guessRateRollingChart.$trendZoomBrushCleanup === "function") {
@@ -16995,8 +18333,9 @@ function renderPerformanceGuessRate(records) {
           },
           ticks: {
             color: "#5d7087",
+            stepSize: rollingStep,
             callback: function(value) {
-              return `${Number(value).toFixed(0)}%`;
+              return `${Number(value).toFixed(rollingStep % 1 ? 1 : 0)}%`;
             }
           },
           grid: { color: "rgba(148, 163, 184, 0.24)" }
@@ -17782,7 +19121,7 @@ if (dataRangeSelect) {
     if (activeSection === "social" && activeSubSectionBySection.social === "Team Contributions") {
       renderSocialTeamContributionView();
     }
-    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Rig/List analysis") {
+    if (activeSection === "social" && activeSubSectionBySection.social === "Rig / List analysis") {
       ensureRigAnalysisData();
       renderRigAnalysisView();
       prefetchRigAnalysisDataInBackground();
@@ -18205,7 +19544,19 @@ loadStatsData()
   .then(async statsResult => {
     const data = statsResult && typeof statsResult === "object" ? (statsResult.data || {}) : {};
     const latestRankMapPromise = loadLatestRankMap();
-    allPlayerStatsData = (data && typeof data === "object") ? data : {};
+    let globalSocialData = null;
+    try {
+      const loadedGlobalData = await loadGlobalStatsData();
+      const normalizedGlobalData = normalizeStatsMapFromPayload(loadedGlobalData);
+      if (normalizedGlobalData && typeof normalizedGlobalData === "object") {
+        globalSocialData = normalizedGlobalData;
+      }
+    } catch (globalLoadErr) {
+      console.warn("Global stats load failed for social views; using current scoped dataset as fallback", globalLoadErr);
+    }
+    allPlayerStatsData = (globalSocialData && typeof globalSocialData === "object")
+      ? globalSocialData
+      : ((data && typeof data === "object") ? data : {});
     cachedWeightedGuessRateSeriesByPlayerId = new Map();
     weightedGuessRateRequestId = 0;
     const normalizedUser = String(username || "").trim().toLowerCase();
@@ -18240,6 +19591,7 @@ loadStatsData()
 
     const canonicalName = (playerEntry && playerEntry.displayName) ? playerEntry.displayName : matchedKey;
     document.getElementById("usernameDisplay").innerText = canonicalName;
+    document.title = canonicalName;
     let cleanedAltNames = applyUsernameAkaUi(canonicalName, playerEntry);
 
     if (!playerEntry) {
@@ -18250,6 +19602,7 @@ loadStatsData()
         if (displayEl) {
           displayEl.innerText = nextCanonical;
         }
+        document.title = nextCanonical;
         cleanedAltNames = applyUsernameAkaUi(nextCanonical, entry);
       }).catch(err => {
         console.warn("Deferred player alias load failed", err);
@@ -18267,9 +19620,25 @@ loadStatsData()
     if (!sourceKeys.length) {
       sourceKeys = [matchedKey];
     }
-    const mergedUserData = sourceKeys
+    const mergedUserDataRaw = sourceKeys
       .flatMap(key => Array.isArray(data[key]) ? data[key] : [])
       .filter(row => row && typeof row === "object");
+    const dedupeSeenKeys = new Set();
+    const mergedUserData = mergedUserDataRaw.filter(row => {
+      const dedupeKey = [
+        String(row.Timestamp || ""),
+        String(row["Guess rate"] || ""),
+        String(row["OP guess rate"] || ""),
+        String(row["ED guess rate"] || ""),
+        String(row["IN guess rate"] || ""),
+        String(row["Rank"] || ""),
+        String(row["Lives saved"] || ""),
+        String(row["Lives taken"] || "")
+      ].join("|");
+      if (dedupeSeenKeys.has(dedupeKey)) return false;
+      dedupeSeenKeys.add(dedupeKey);
+      return true;
+    });
 
     currentDisplayName = canonicalName;
     currentStatKey = matchedKey;
