@@ -29,10 +29,20 @@
       display: flex;
       align-items: center;
       box-sizing: border-box;
+      line-height: 1.35;
     }
 
     .login-username-inline-typed {
       color: transparent;
+    }
+
+    .login-username-inline-tail {
+      color: #8fa2b8;
+      letter-spacing: normal;
+      word-spacing: normal;
+      font-weight: 500;
+      display: inline-block;
+      margin-left: 0.12em;
     }
   </style>
 </head>
@@ -387,7 +397,7 @@ function initializeLoginUsernameAutocomplete() {
       return;
     }
     const remaining = currentSuggestion.slice(typed.length);
-    suggestionEl.innerHTML = `<span class="login-username-inline-typed">${escapeHtml(typed)}</span>${escapeHtml(remaining)}`;
+    suggestionEl.innerHTML = `<span class="login-username-inline-typed">${escapeHtml(typed)}</span><span class="login-username-inline-tail">${escapeHtml(remaining)}</span>`;
   };
 
   const refreshSuggestion = async () => {
