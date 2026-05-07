@@ -19942,11 +19942,14 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
   const resolvedRank = overviewDataSourceMode === "usual"
     ? (Number.isFinite(Number(latestRankOverride)) ? Number(latestRankOverride) : null)
     : (Number.isFinite(Number(latestRankOverride)) ? Number(latestRankOverride) : Number(latest["Rank"]));
+  const isWatchedUnassignedRank = overviewDataSourceMode !== "usual"
+    && Number.isFinite(resolvedRank)
+    && resolvedRank < MIN_VALID_RANK;
   document.getElementById("rank").innerText = Number.isFinite(resolvedRank)
     ? resolvedRank.toFixed(3)
     : "-";
   let resolvedPercentile = Number(latestRankPercentileOverride);
-  if (!Number.isFinite(resolvedPercentile) && Number.isFinite(resolvedRank)) {
+  if (!isWatchedUnassignedRank && !Number.isFinite(resolvedPercentile) && Number.isFinite(resolvedRank)) {
     let rankRows = [];
     if (overviewDataSourceMode === "usual") {
       const usualRankMap = getLatestRankCacheForMode("usual").map;
@@ -19973,7 +19976,11 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
         : ((rankRows.length - 1 - position) / (rankRows.length - 1)) * 100;
     }
   }
-  applyCurrentRankCardStyle(resolvedPercentile, latestRankIsTopThreeOverride);
+  applyCurrentRankCardStyle(
+    resolvedPercentile,
+    latestRankIsTopThreeOverride,
+    isWatchedUnassignedRank ? "rank-tier-silver" : ""
+  );
   document.getElementById("guess").innerText = Number.isFinite(averageGuessRate)
     ? `${averageGuessRate.toFixed(3)}%`
     : "-";
@@ -20336,7 +20343,7 @@ function resolveLatestRankPercentileFromMap(canonicalName, matchedKey, altNames 
   return null;
 }
 
-function applyCurrentRankCardStyle(percentile, isTopThree = false) {
+function applyCurrentRankCardStyle(percentile, isTopThree = false, forceTierClass = "") {
   const card = document.getElementById("currentRankCard");
   const tierLabel = document.getElementById("currentRankTierLabel");
   const overviewCardsRow = document.querySelector("#overviewSection .overview-cards-row");
@@ -20353,6 +20360,17 @@ function applyCurrentRankCardStyle(percentile, isTopThree = false) {
   tierClasses.forEach(className => card.classList.remove(className));
   if (overviewCardsRow) {
     tierClasses.forEach(className => overviewCardsRow.classList.remove(className));
+  }
+
+  if (forceTierClass && tierClasses.includes(forceTierClass)) {
+    card.classList.add(forceTierClass);
+    if (overviewCardsRow) {
+      overviewCardsRow.classList.add(forceTierClass);
+    }
+    if (tierLabel) {
+      tierLabel.innerText = "";
+    }
+    return;
   }
 
   if (!Number.isFinite(percentile)) {
