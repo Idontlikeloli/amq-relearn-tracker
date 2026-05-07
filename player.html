@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Player</title>
-  <link rel="icon" type="image/jpeg" href="data/tabicon.jpeg">
+  <link rel="icon" type="image/jpeg" href="https://pub-d42861e79d364f02841015cca59918a2.r2.dev/tabicon.jpeg">
   <link rel="stylesheet" href="style.css">
   <style>
     html,
@@ -37,28 +37,38 @@
       white-space: nowrap !important;
     }
 
-    .topbar-data-range.locked .data-range-lock-badge {
-      display: inline-block !important;
-      visibility: visible !important;
-    }
-
-    .topbar-data-range.locked.label-lock-mode .data-range-label {
+    .topbar-data-range.locked .topbar-using-data-label {
       display: none !important;
     }
 
-    .topbar-data-range.locked.label-lock-mode .data-range-lock-badge {
+    .topbar-data-range.locked #dataRangeLockBadge {
       display: inline-block !important;
       visibility: visible !important;
       margin-left: 0 !important;
-      order: 0 !important;
+      margin-right: 8px !important;
     }
 
-    .topbar-data-range.locked.label-lock-mode .data-range-select {
-      order: 1 !important;
+    .topbar-data-range .topbar-tour-type-label {
+      color: #a8b4c3 !important;
+      font-weight: 700 !important;
+      white-space: nowrap !important;
+      margin-left: 2px !important;
+      margin-right: 2px !important;
     }
 
-    .topbar-data-range.locked.label-lock-mode .language-toggle {
-      order: 2 !important;
+    .topbar-data-range.tour-type-lock-mode .topbar-tour-type-label {
+      display: none !important;
+    }
+
+    .topbar-data-range #tourTypeLockBadge {
+      display: none !important;
+      margin-left: 0 !important;
+      margin-right: 2px !important;
+    }
+
+    .topbar-data-range.tour-type-lock-mode #tourTypeLockBadge {
+      display: inline-block !important;
+      visibility: visible !important;
     }
 
     body.performance-nav-mode {
@@ -639,6 +649,10 @@
       transform: translateX(100%) !important;
     }
 
+    .topbar-data-range .language-toggle.is-usual::before {
+      transform: translateX(100%) !important;
+    }
+
     .topbar-data-range .language-toggle-btn {
       position: relative !important;
       z-index: 1 !important;
@@ -664,6 +678,16 @@
       color: #3f5368 !important;
     }
 
+    .topbar-data-range .topbar-control-separator {
+      display: inline-block !important;
+      width: 3px !important;
+      height: 22px !important;
+      background: #1f2933 !important;
+      margin: 0 2px !important;
+      border-radius: 999px !important;
+      align-self: center !important;
+    }
+
     body.unified-nav-mode .subnav .language-toggle {
       border-color: #8d99a6 !important;
       background: #5a646f !important;
@@ -685,6 +709,10 @@
 
     body.unified-nav-mode .subnav .language-toggle-btn:not(.active):hover {
       color: #ffe3a1 !important;
+    }
+
+    body.unified-nav-mode .subnav .topbar-control-separator {
+      background: #1f2933 !important;
     }
 
     #knowledgeByEraView .by-era-season-body {
@@ -1063,6 +1091,8 @@
     #knowledgeArtistView .artist-familiarity-search-wrap {
       position: relative !important;
       display: flex !important;
+      flex: 1 1 auto !important;
+      min-width: 0 !important;
       align-items: center !important;
       border: 1px solid #cbd5e1 !important;
       border-radius: 10px !important;
@@ -1073,10 +1103,37 @@
       height: 36px !important;
     }
 
+    #knowledgeArtistView .artist-familiarity-search-btn {
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 8px !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      padding: 0 10px !important;
+      height: 36px !important;
+      line-height: 34px !important;
+      cursor: pointer !important;
+      flex: 0 0 auto !important;
+      white-space: nowrap !important;
+    }
+
+    #knowledgeArtistView .artist-familiarity-search-btn:hover {
+      background: #f8fafc !important;
+    }
+
     #knowledgeArtistView .artist-familiarity-search-wrap:focus-within {
       outline: 2px solid #93c5fd !important;
       outline-offset: 1px !important;
       border-color: #93c5fd !important;
+    }
+
+    #knowledgeArtistView .artist-familiarity-search-row {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      width: 100% !important;
+      min-width: 0 !important;
     }
 
     #knowledgeArtistView .artist-familiarity-inline-suggestion {
@@ -1170,10 +1227,10 @@
       height: 360px !important;
       min-height: 360px !important;
       max-height: 360px !important;
-      margin: auto 0 0 !important;
+      margin: 0 !important;
       display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
+      align-items: flex-start !important;
+      justify-content: flex-start !important;
       flex: 0 0 auto !important;
     }
 
@@ -1182,11 +1239,28 @@
       height: 100% !important;
     }
 
+    #knowledgeArtistView .artist-familiarity-metric-definition-line {
+      margin-top: auto !important;
+      padding-top: 8px !important;
+      min-height: 18px !important;
+      font-size: 12px !important;
+      line-height: 1.35 !important;
+      color: #64748b !important;
+      text-align: left !important;
+      white-space: normal !important;
+    }
+
     #knowledgeArtistView .artist-familiarity-compare-radar-group {
       display: flex !important;
       flex-direction: column !important;
       flex: 1 1 auto !important;
-      min-height: 100% !important;
+      min-height: 0 !important;
+    }
+
+    #knowledgeArtistView .artist-familiarity-compare-radar-group .artist-radar-wrap {
+      margin: auto 0 0 !important;
+      align-items: center !important;
+      justify-content: center !important;
     }
 
     @media (max-width: 900px) {
@@ -3855,6 +3929,14 @@
       padding: 0 2px !important;
     }
 
+    #otherToolsSection .changelog-highlight-green {
+      background: #bbf7d0 !important;
+      color: #14532d !important;
+      font-weight: 700 !important;
+      border-radius: 4px !important;
+      padding: 0 2px !important;
+    }
+
     #otherToolsSection .changelog-subtitle {
       margin-top: 4px !important;
       font-size: 13px !important;
@@ -5177,7 +5259,8 @@
     <div id="subnavLinks" class="subnav-links"></div>
     <div class="subnav-right">
       <div class="topbar-data-range">
-        <label for="dataRangeSelect" class="data-range-label">Using data</label>
+        <label for="dataRangeSelect" class="data-range-label topbar-using-data-label">Using data</label>
+        <span id="dataRangeLockBadge" class="data-range-lock-badge">Locked</span>
         <select id="dataRangeSelect" class="data-range-select">
           <option value="all">All tours</option>
           <option value="week">Past week</option>
@@ -5189,11 +5272,18 @@
           <option value="20">Past 20 tours</option>
           <option value="50">Past 50 tours</option>
         </select>
+        <span class="topbar-control-separator" aria-hidden="true"></span>
+        <span id="tourTypeLabel" class="data-range-label topbar-tour-type-label">Tour type</span>
+        <span id="tourTypeLockBadge" class="data-range-lock-badge">Locked</span>
+        <div id="overviewDataSourceToggle" class="language-toggle" role="group" aria-label="Data source toggle">
+          <button id="overviewDataSourceWatchedBtn" class="language-toggle-btn active" type="button" data-source="watched" aria-pressed="true">W</button>
+          <button id="overviewDataSourceUsualBtn" class="language-toggle-btn" type="button" data-source="usual" aria-pressed="false">U</button>
+        </div>
+        <span class="topbar-control-separator" aria-hidden="true"></span>
         <div id="overviewLanguageToggle" class="language-toggle" role="group" aria-label="Language toggle">
           <button id="overviewLanguageEnBtn" class="language-toggle-btn active" type="button" data-lang="en" aria-pressed="true">EN</button>
           <button id="overviewLanguageJpBtn" class="language-toggle-btn" type="button" data-lang="jp" aria-pressed="false">JP</button>
         </div>
-        <span id="dataRangeLockBadge" class="data-range-lock-badge">Locked</span>
       </div>
     </div>
   </div>
@@ -5435,7 +5525,7 @@
 
       <div class="chart-card">
         <div class="chart-header">
-          <div class="chart-title">Weighted Guess Rate Trend</div>
+          <div class="chart-title">Weighted Guess Rate Trend (Watched)</div>
           <div class="chart-meta">
             <span id="weightedGuessRateFound">Found 0 games</span>
             <span id="weightedGuessRateSlope">Slope: 0.00% per game</span>
@@ -5529,14 +5619,18 @@
           <div class="artist-familiarity-group artist-familiarity-radar-group">
             <div class="artist-familiarity-radar-title">Artist Familiarity Radar</div>
             <div class="artist-familiarity-toolbar">
-              <div class="artist-familiarity-search-wrap">
-                <div id="artistFamiliarityInlineSuggestion" class="artist-familiarity-inline-suggestion"></div>
-                <input id="artistFamiliaritySearchInput" class="artist-familiarity-search-input" type="text" placeholder="Search artist...">
+              <div class="artist-familiarity-search-row">
+                <div class="artist-familiarity-search-wrap">
+                  <div id="artistFamiliarityInlineSuggestion" class="artist-familiarity-inline-suggestion"></div>
+                  <input id="artistFamiliaritySearchInput" class="artist-familiarity-search-input" type="text" placeholder="Search artist...">
+                </div>
+                <button id="artistFamiliaritySearchBtn" class="artist-familiarity-search-btn" type="button">Search</button>
               </div>
               <div id="artistFamiliaritySuggestions" class="artist-familiarity-suggestions"></div>
               <div id="artistFamiliaritySelected" class="artist-familiarity-selected">No artist selected</div>
             </div>
             <div class="chart-wrap artist-radar-wrap"><canvas id="artistFamiliarityRadarChart"></canvas></div>
+            <div id="artistFamiliarityRadarLabelTooltip" class="artist-familiarity-metric-definition-line">Metric Definitions (hover over metric to view)</div>
           </div>
           <div class="artist-familiarity-group artist-familiarity-attempts-group">
             <div id="artistFamiliarityRightModeToggle" class="artist-familiarity-right-mode-toggle">
@@ -6439,6 +6533,9 @@ const byEraDataToggle = document.getElementById("byEraDataToggle");
 const byEraScaleToggle = document.getElementById("byEraScaleToggle");
 const byEraSeasonDataToggle = document.getElementById("byEraSeasonDataToggle");
 const overviewDataToggle = document.getElementById("overviewDataToggle");
+const overviewDataSourceToggle = document.getElementById("overviewDataSourceToggle");
+const overviewDataSourceWatchedBtn = document.getElementById("overviewDataSourceWatchedBtn");
+const overviewDataSourceUsualBtn = document.getElementById("overviewDataSourceUsualBtn");
 const overviewLanguageToggle = document.getElementById("overviewLanguageToggle");
 const overviewLanguageEnBtn = document.getElementById("overviewLanguageEnBtn");
 const overviewLanguageJpBtn = document.getElementById("overviewLanguageJpBtn");
@@ -6447,6 +6544,7 @@ const socialRivalSearchInput = document.getElementById("socialRivalSearchInput")
 const socialSynergyPlayerSearchInput = document.getElementById("socialSynergyPlayerSearchInput");
 const socialRivalsMetricSelect = document.getElementById("socialRivalsMetricSelect");
 const artistFamiliaritySearchInput = document.getElementById("artistFamiliaritySearchInput");
+const artistFamiliaritySearchBtn = document.getElementById("artistFamiliaritySearchBtn");
 const artistFamiliaritySuggestions = document.getElementById("artistFamiliaritySuggestions");
 const artistFamiliarityInlineSuggestion = document.getElementById("artistFamiliarityInlineSuggestion");
 const artistFamiliarityRightModeToggle = document.getElementById("artistFamiliarityRightModeToggle");
@@ -6491,6 +6589,7 @@ let byEraSeasonCompareChart = null;
 let artistFamiliarityRadarChart = null;
 let artistFamiliarityCompareRadarChart = null;
 let artistFamiliarityBarsChart = null;
+let artistRadarHoveredLabelIndex = -1;
 let activeSection = initialSection;
 let overviewActiveView = "overview";
 const activeSubSectionBySection = {};
@@ -6573,6 +6672,8 @@ let byEraDataMode = "count";
 let byEraScaleType = "linear";
 let byEraSeasonDataMode = "count";
 let overviewDataMode = "count";
+let overviewDataSourceMode = "watched";
+let isTourTypeToggleLocked = false;
 let overviewLanguageMode = "en";
 let selectedByEraSeasonLabels = [];
 let byEraSeasonSearchQuery = "";
@@ -6596,6 +6697,10 @@ let currentStatSourceKeys = [];
 let currentLatestRankValue = null;
 let currentLatestRankPercentile = null;
 let currentLatestRankIsTopThree = false;
+let usualUserData = [];
+let currentUsualLatestRankValue = null;
+let currentUsualLatestRankPercentile = null;
+let currentUsualLatestRankIsTopThree = false;
 let allPlayerStatsData = {};
 let artistFamiliarityEntries = [];
 let artistFamiliaritySearchQuery = "";
@@ -6609,10 +6714,22 @@ let selectedCompareArtistName = "";
 let artistFamiliarityCompareSearchQuery = "";
 let overviewLoadRequestId = 0;
 let socialSynergyPageIndex = 0;
-let latestRankByPlayerKey = null;
-let latestRankPercentileByPlayerKey = null;
-let latestRankTimestampByPlayerKey = null;
-let latestRankLoadPromise = null;
+const latestRankByPlayerKeyByMode = {
+  watched: null,
+  usual: null
+};
+const latestRankPercentileByPlayerKeyByMode = {
+  watched: null,
+  usual: null
+};
+const latestRankTimestampByPlayerKeyByMode = {
+  watched: null,
+  usual: null
+};
+const latestRankLoadPromiseByMode = {
+  watched: null,
+  usual: null
+};
 let playersDirectoryPromise = null;
 let playersDirectoryByLookup = new Map();
 const preloadTaskStatus = new Set();
@@ -6879,8 +6996,9 @@ function preloadFirstSubtabForSection(sectionKey, displayName) {
   const taskKey = `section-first:${sectionKey}:${displayName}`;
   scheduleBackgroundTask(taskKey, async () => {
     if (sectionKey === "performance") {
-      if (Array.isArray(fullUserData) && fullUserData.length) {
-        renderPerformanceGuessRate(getVisibleUserData(fullUserData));
+      const performanceRows = getPerformanceRowsForActiveMode();
+      if (performanceRows.length) {
+        renderPerformanceGuessRate(getVisibleUserData(performanceRows));
       }
       return;
     }
@@ -6919,11 +7037,13 @@ function preloadOtherSubtabsForSection(sectionKey, displayName) {
   const taskKey = `section-rest:${sectionKey}:${displayName}`;
   scheduleBackgroundTask(taskKey, async () => {
     if (sectionKey === "performance") {
-      if (Array.isArray(fullUserData) && fullUserData.length) {
-        const visible = getVisibleUserData(fullUserData);
+      const performanceRows = getPerformanceRowsForActiveMode();
+      if (performanceRows.length) {
+        const visible = getVisibleUserData(performanceRows);
         renderPerformanceLivesTakenSaved(visible);
-        renderPerformanceRigAnalysis(visible);
-        renderPerformanceCompositeCharts(visible);
+        const watchedVisible = getVisibleUserData(fullUserData);
+        renderPerformanceRigAnalysis(watchedVisible);
+        renderPerformanceCompositeCharts(watchedVisible);
       }
       return;
     }
@@ -7247,7 +7367,7 @@ async function renderOtherToolsChangelog() {
 function renderChangelogContent(container, content) {
   container.innerHTML = "";
   const text = String(content || "");
-  const highlightRegex = /__(.+?)__/g;
+  const highlightRegex = /__(.+?)__|_(.+?)_/g;
   let cursor = 0;
   let match = highlightRegex.exec(text);
 
@@ -7257,8 +7377,15 @@ function renderChangelogContent(container, content) {
     }
 
     const highlighted = document.createElement("span");
-    highlighted.className = "changelog-highlight";
-    highlighted.textContent = String(match[1] || "");
+    const yellowText = String(match[1] || "");
+    const greenText = String(match[2] || "");
+    if (yellowText) {
+      highlighted.className = "changelog-highlight";
+      highlighted.textContent = yellowText;
+    } else {
+      highlighted.className = "changelog-highlight-green";
+      highlighted.textContent = greenText;
+    }
     container.appendChild(highlighted);
 
     cursor = highlightRegex.lastIndex;
@@ -7295,8 +7422,9 @@ function renderSubSectionContent(sectionKey, subSection) {
       compositeChartsView.style.display = "none";
       placeholderView.style.display = "none";
 
-      if (fullUserData.length) {
-        renderPerformanceGuessRate(getVisibleUserData(fullUserData));
+      const performanceRows = getPerformanceRowsForActiveMode();
+      if (performanceRows.length) {
+        renderPerformanceGuessRate(getVisibleUserData(performanceRows));
       }
       return;
     }
@@ -7308,8 +7436,9 @@ function renderSubSectionContent(sectionKey, subSection) {
       compositeChartsView.style.display = "none";
       placeholderView.style.display = "none";
 
-      if (fullUserData.length) {
-        renderPerformanceLivesTakenSaved(getVisibleUserData(fullUserData));
+      const performanceRows = getPerformanceRowsForActiveMode();
+      if (performanceRows.length) {
+        renderPerformanceLivesTakenSaved(getVisibleUserData(performanceRows));
       }
       return;
     }
@@ -7630,11 +7759,15 @@ function updateDataRangeControlState(sectionKey, subSection) {
   if (!dataRangeSelect) return;
   const dataRangeWrap = dataRangeSelect.closest(".topbar-data-range");
   const dataRangeLockBadge = document.getElementById("dataRangeLockBadge");
+  const tourTypeLockBadge = document.getElementById("tourTypeLockBadge");
   const isKnowledgeArtistFamiliarity = sectionKey === "knowledge" && subSection === "Artist Familiarity";
   const isSocialSynergy = sectionKey === "social" && subSection === "Synergy";
   const isSocialTeamContributions = sectionKey === "social" && subSection === "Team Contributions";
   const isRecommendationsSection = sectionKey === "insights";
   const isOtherToolsSection = sectionKey === "otherTools";
+  const isTourTypeEditableView =
+    (sectionKey === "overview" && overviewActiveView === "overview")
+    || (sectionKey === "performance" && (subSection === "Guess Rate" || subSection === "Lives Taken / Saved"));
 
   const shouldHidePastGameOptions =
     (sectionKey === "overview" && overviewActiveView === "statsSummary")
@@ -7660,14 +7793,25 @@ function updateDataRangeControlState(sectionKey, subSection) {
     || isRecommendationsSection
     || isOtherToolsSection
     || isKnowledgeArtistFamiliarity;
+  const shouldLockTourType = !isTourTypeEditableView;
+  isTourTypeToggleLocked = shouldLockTourType;
   dataRangeSelect.disabled = shouldLockToAll;
   if (dataRangeWrap) {
     dataRangeWrap.classList.toggle("locked", shouldLockToAll);
-    dataRangeWrap.classList.toggle("label-lock-mode", shouldLockToAll);
+    dataRangeWrap.classList.toggle("tour-type-lock-mode", shouldLockTourType);
   }
+  if (shouldLockTourType && overviewDataSourceMode !== "watched") {
+    overviewDataSourceMode = "watched";
+  }
+  updateOverviewDataSourceToggleUI();
   if (dataRangeLockBadge) {
     dataRangeLockBadge.title = shouldLockToAll
       ? "This view requires All tours."
+      : "";
+  }
+  if (tourTypeLockBadge) {
+    tourTypeLockBadge.title = shouldLockTourType
+      ? "Tour type is fixed to Watched in this view."
       : "";
   }
   if (shouldLockToAll && dataRangeSelect.value !== "all") {
@@ -8338,8 +8482,9 @@ if (overviewDataToggle) {
     overviewDataMode = overviewDataMode === "count" ? "percentage" : "count";
     updateOverviewDataToggleLabel();
     renderOverviewAnimeTypeCharts();
-    if (activeSection === "performance" && activeSubSectionBySection.performance === "Guess Rate" && fullUserData.length) {
-      renderPerformanceGuessRate(getVisibleUserData(fullUserData));
+    const performanceRows = getPerformanceRowsForActiveMode();
+    if (activeSection === "performance" && activeSubSectionBySection.performance === "Guess Rate" && performanceRows.length) {
+      renderPerformanceGuessRate(getVisibleUserData(performanceRows));
     }
   });
 }
@@ -8361,6 +8506,70 @@ function updateOverviewLanguageToggleUI() {
   }
 }
 
+function getOverviewRowsForActiveMode() {
+  if (overviewDataSourceMode === "usual" && Array.isArray(usualUserData) && usualUserData.length) {
+    return usualUserData;
+  }
+  return Array.isArray(fullUserData) ? fullUserData : [];
+}
+
+function getPerformanceRowsForActiveMode() {
+  if (overviewDataSourceMode === "usual" && Array.isArray(usualUserData) && usualUserData.length) {
+    return usualUserData;
+  }
+  return Array.isArray(fullUserData) ? fullUserData : [];
+}
+
+function getOverviewRankMetaForActiveMode() {
+  if (overviewDataSourceMode === "usual" && Array.isArray(usualUserData) && usualUserData.length) {
+    return {
+      rank: currentUsualLatestRankValue,
+      percentile: currentUsualLatestRankPercentile,
+      isTopThree: currentUsualLatestRankIsTopThree
+    };
+  }
+  return {
+    rank: currentLatestRankValue,
+    percentile: currentLatestRankPercentile,
+    isTopThree: currentLatestRankIsTopThree
+  };
+}
+
+function renderOverviewForActiveMode() {
+  const sourceRows = getOverviewRowsForActiveMode();
+  if (!Array.isArray(sourceRows) || !sourceRows.length) return;
+  const visibleRecords = getVisibleUserData(sourceRows);
+  const rankMeta = getOverviewRankMetaForActiveMode();
+  renderOverview(
+    visibleRecords,
+    rankMeta.rank,
+    rankMeta.percentile,
+    rankMeta.isTopThree,
+    sourceRows
+  );
+}
+
+function updateOverviewDataSourceToggleUI() {
+  if (overviewDataSourceToggle) {
+    const isUsual = overviewDataSourceMode === "usual";
+    overviewDataSourceToggle.classList.toggle("is-usual", isUsual);
+  }
+  if (overviewDataSourceWatchedBtn) {
+    const isActive = overviewDataSourceMode === "watched";
+    overviewDataSourceWatchedBtn.classList.toggle("active", isActive);
+    overviewDataSourceWatchedBtn.setAttribute("aria-pressed", isActive ? "true" : "false");
+    overviewDataSourceWatchedBtn.disabled = isTourTypeToggleLocked;
+    overviewDataSourceWatchedBtn.setAttribute("aria-disabled", isTourTypeToggleLocked ? "true" : "false");
+  }
+  if (overviewDataSourceUsualBtn) {
+    const isActive = overviewDataSourceMode === "usual";
+    overviewDataSourceUsualBtn.classList.toggle("active", isActive);
+    overviewDataSourceUsualBtn.setAttribute("aria-pressed", isActive ? "true" : "false");
+    overviewDataSourceUsualBtn.disabled = isTourTypeToggleLocked;
+    overviewDataSourceUsualBtn.setAttribute("aria-disabled", isTourTypeToggleLocked ? "true" : "false");
+  }
+}
+
 if (overviewLanguageEnBtn && overviewLanguageJpBtn) {
   updateOverviewLanguageToggleUI();
   overviewLanguageEnBtn.addEventListener("click", () => {
@@ -8374,6 +8583,38 @@ if (overviewLanguageEnBtn && overviewLanguageJpBtn) {
     overviewLanguageMode = "jp";
     updateOverviewLanguageToggleUI();
     scheduleLanguageRerender();
+  });
+}
+
+if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
+  updateOverviewDataSourceToggleUI();
+  overviewDataSourceWatchedBtn.addEventListener("click", () => {
+    if (isTourTypeToggleLocked) return;
+    if (overviewDataSourceMode === "watched") return;
+    overviewDataSourceMode = "watched";
+    updateOverviewDataSourceToggleUI();
+    renderOverviewForActiveMode();
+    const performanceRows = getPerformanceRowsForActiveMode();
+    if (activeSection === "performance" && activeSubSectionBySection.performance === "Guess Rate" && performanceRows.length) {
+      renderPerformanceGuessRate(getVisibleUserData(performanceRows));
+    }
+    if (activeSection === "performance" && activeSubSectionBySection.performance === "Lives Taken / Saved" && performanceRows.length) {
+      renderPerformanceLivesTakenSaved(getVisibleUserData(performanceRows));
+    }
+  });
+  overviewDataSourceUsualBtn.addEventListener("click", () => {
+    if (isTourTypeToggleLocked) return;
+    if (overviewDataSourceMode === "usual") return;
+    overviewDataSourceMode = "usual";
+    updateOverviewDataSourceToggleUI();
+    renderOverviewForActiveMode();
+    const performanceRows = getPerformanceRowsForActiveMode();
+    if (activeSection === "performance" && activeSubSectionBySection.performance === "Guess Rate" && performanceRows.length) {
+      renderPerformanceGuessRate(getVisibleUserData(performanceRows));
+    }
+    if (activeSection === "performance" && activeSubSectionBySection.performance === "Lives Taken / Saved" && performanceRows.length) {
+      renderPerformanceLivesTakenSaved(getVisibleUserData(performanceRows));
+    }
   });
 }
 
@@ -9019,6 +9260,51 @@ function applySelectedCompareArtist(artistName) {
   if (!entry) return;
   selectedCompareArtistName = entry.name;
   renderArtistFamiliarityView();
+}
+
+function submitArtistSearch(typedValue) {
+  const typed = String(typedValue || "").trim();
+  if (!typed) {
+    hideArtistSuggestions();
+    return;
+  }
+  const prefixSuggestion = getArtistPrefixSuggestion(typed);
+  if (prefixSuggestion && prefixSuggestion.name) {
+    applySelectedArtist(prefixSuggestion.name);
+    return;
+  }
+  const suggestions = getArtistSuggestions();
+  if (suggestions.length) {
+    applySelectedArtist(suggestions[0].name);
+  } else if (artistFamiliarityEntries.length) {
+    applySelectedArtist(artistFamiliarityEntries[0].name);
+  }
+}
+
+function submitArtistCompareSearch(compareInput, compareInlineSuggestion) {
+  if (!compareInput) return;
+  const typed = String(compareInput.value || "").trim();
+  if (!typed) {
+    hideArtistCompareSuggestions();
+    return;
+  }
+  const prefixSuggestion = getArtistPrefixSuggestion(typed);
+  if (prefixSuggestion && prefixSuggestion.name) {
+    artistFamiliarityCompareSearchQuery = prefixSuggestion.name;
+    applySelectedCompareArtist(prefixSuggestion.name);
+    return;
+  }
+  const suggestions = getArtistSuggestionsForQuery(typed);
+  if (suggestions.length) {
+    const exactMatch = suggestions.find(
+      entry => String(entry.name || "").toLowerCase() === typed.toLowerCase()
+    );
+    const chosenName = (exactMatch || suggestions[0]).name;
+    artistFamiliarityCompareSearchQuery = chosenName;
+    applySelectedCompareArtist(chosenName);
+    return;
+  }
+  if (compareInlineSuggestion) compareInlineSuggestion.innerHTML = "";
 }
 
 function hideArtistCompareSuggestions() {
@@ -9704,14 +9990,23 @@ function calculateArtistRadarMetrics(events) {
 
 function buildArtistFamiliarityRadarConfig(metrics) {
   const metricRows = [
-    { label: "Non-rig Accuracy", value: Number(metrics.nonRigAccuracy || 0) * 100, include: metrics.hasNonRigAccuracy !== false },
+    {
+      label: metrics.hasNonRigAccuracy === false
+        ? ["Non-rig Accuracy", "(does not exist)"]
+        : "Non-rig Accuracy",
+      value: Number(metrics.nonRigAccuracy || 0) * 100,
+      include: true,
+      hidePoint: metrics.hasNonRigAccuracy === false,
+      missingLabelColor: "#c2410c"
+    },
     {
       label: metrics.hasRigAccuracy === false
         ? ["Rig Accuracy", "(does not exist)"]
         : "Rig Accuracy",
       value: Number(metrics.rigAccuracy || 0) * 100,
       include: true,
-      hidePoint: metrics.hasRigAccuracy === false
+      hidePoint: metrics.hasRigAccuracy === false,
+      missingLabelColor: "#b45353"
     },
     { label: "Diversity", value: Number(metrics.diversity || 0) * 100, include: metrics.hasDiversity !== false },
     { label: "Coverage", value: Number(metrics.coverage || 0) * 100, include: metrics.hasCoverage !== false },
@@ -9771,7 +10066,14 @@ function buildArtistFamiliarityRadarConfig(metrics) {
           grid: { color: "#e5e7eb", circular: false },
           angleLines: { color: "#dbe4f2" },
           pointLabels: {
-            color: context => metricRows[Number(context?.index)]?.hidePoint ? "#b45353" : "#334155",
+            color: context => {
+              const row = metricRows[Number(context?.index)];
+              if (context?.chart?.canvas?.id === "artistFamiliarityRadarChart" && Number(context?.index) === artistRadarHoveredLabelIndex) {
+                return "#f97316";
+              }
+              if (row?.hidePoint) return row.missingLabelColor || "#b45353";
+              return "#334155";
+            },
             font: { size: 11 }
           }
         }
@@ -9780,11 +10082,97 @@ function buildArtistFamiliarityRadarConfig(metrics) {
   };
 }
 
+const artistRadarMetricDefinitions = {
+  "Non-rig Accuracy": "nonRigCorrect / nonRigTotal for this artist's non-rig rounds.",
+  "Rig Accuracy": "rigCorrect / rigTotal for this artist's rig rounds.",
+  "Diversity": "Shannon diversity over this artist's song-attempt distribution: (-Σ p·ln p) / ln(uniqueSongs), where p = songAttempts / totalAttempts.",
+  "Coverage": "songsGotAtLeastOnce / uniqueSongs for this artist.",
+  "Stability": "1 - (stabilityFlips / stabilityTransitions), where a flip is correct↔wrong between adjacent attempts on the same song.",
+  "Consistency": "1 - min(1, variance(rollingAvg5(weightedCorrect)) / 0.25), where weightedCorrect = 1 for non-rig correct, 0.7 for rig correct, 0 for wrong."
+};
+
+function getRadarLabelText(rawLabel) {
+  if (Array.isArray(rawLabel)) {
+    return rawLabel.map(part => String(part || "").trim()).filter(Boolean).join(" ");
+  }
+  return String(rawLabel || "").trim();
+}
+
+function getArtistRadarDefinition(labelText) {
+  const normalized = String(labelText || "").toLowerCase();
+  if (!normalized) return "";
+  if (normalized.includes("non-rig") && normalized.includes("accuracy")) return artistRadarMetricDefinitions["Non-rig Accuracy"];
+  if (normalized.includes("rig") && normalized.includes("accuracy")) return artistRadarMetricDefinitions["Rig Accuracy"];
+  if (normalized.includes("diversity")) return artistRadarMetricDefinitions["Diversity"];
+  if (normalized.includes("coverage")) return artistRadarMetricDefinitions["Coverage"];
+  if (normalized.includes("stability")) return artistRadarMetricDefinitions["Stability"];
+  if (normalized.includes("consistency")) return artistRadarMetricDefinitions["Consistency"];
+  return artistRadarMetricDefinitions[labelText] || "";
+}
+
+function hideArtistRadarLabelTooltip() {
+  const tooltip = document.getElementById("artistFamiliarityRadarLabelTooltip");
+  if (tooltip) tooltip.textContent = "Metric Definitions (hover over metric to view)";
+  artistRadarHoveredLabelIndex = -1;
+  if (artistFamiliarityRadarChart) artistFamiliarityRadarChart.update("none");
+}
+
+function bindArtistRadarLabelHover(chartInstance) {
+  if (!chartInstance || chartInstance.canvas?.id !== "artistFamiliarityRadarChart") return;
+  const canvas = chartInstance.canvas;
+  const tooltip = document.getElementById("artistFamiliarityRadarLabelTooltip");
+  if (!canvas || !tooltip) return;
+
+  const onMove = event => {
+    const scale = chartInstance.scales?.r;
+    const labelItems = scale?._pointLabelItems;
+    if (!Array.isArray(labelItems) || !labelItems.length) {
+      hideArtistRadarLabelTooltip();
+      return;
+    }
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    let hoveredIndex = -1;
+    for (let i = 0; i < labelItems.length; i++) {
+      const item = labelItems[i];
+      if (!item) continue;
+      if (x >= item.left && x <= item.right && y >= item.top && y <= item.bottom) {
+        hoveredIndex = i;
+        break;
+      }
+    }
+
+    if (hoveredIndex < 0) {
+      hideArtistRadarLabelTooltip();
+      return;
+    }
+
+    artistRadarHoveredLabelIndex = hoveredIndex;
+    const rawLabel = chartInstance.data?.labels?.[hoveredIndex];
+    const labelText = getRadarLabelText(rawLabel);
+    const definition = getArtistRadarDefinition(labelText);
+    if (definition) {
+      tooltip.textContent = `${labelText}: ${definition}`;
+    } else {
+      tooltip.textContent = "Metric Definitions (hover over metric to view)";
+    }
+    chartInstance.update("none");
+  };
+
+  const onLeave = () => hideArtistRadarLabelTooltip();
+  canvas.addEventListener("mousemove", onMove);
+  canvas.addEventListener("mouseleave", onLeave);
+}
+
 function renderArtistFamiliarityRadarOnCanvas(metrics, canvasId, existingChart) {
   if (existingChart) existingChart.destroy();
   const canvas = document.getElementById(canvasId);
   if (!canvas) return null;
-  return new Chart(canvas, buildArtistFamiliarityRadarConfig(metrics));
+  const chartInstance = new Chart(canvas, buildArtistFamiliarityRadarConfig(metrics));
+  if (canvasId === "artistFamiliarityRadarChart") bindArtistRadarLabelHover(chartInstance);
+  return chartInstance;
 }
 
 function renderArtistFamiliarityRadar(metrics) {
@@ -9822,9 +10210,12 @@ function renderArtistCompareRadarPanel(rightPanelHost, primaryEntry) {
     <div class="artist-familiarity-compare-radar-group">
       <div class="artist-familiarity-radar-title artist-familiarity-compare-title">Compare another artist</div>
       <div class="artist-familiarity-toolbar">
-        <div class="artist-familiarity-search-wrap">
-          <div id="artistFamiliarityCompareInlineSuggestion" class="artist-familiarity-inline-suggestion"></div>
-          <input id="artistFamiliarityCompareSearchInput" class="artist-familiarity-search-input" type="text" placeholder="Search artist...">
+        <div class="artist-familiarity-search-row">
+          <div class="artist-familiarity-search-wrap">
+            <div id="artistFamiliarityCompareInlineSuggestion" class="artist-familiarity-inline-suggestion"></div>
+            <input id="artistFamiliarityCompareSearchInput" class="artist-familiarity-search-input" type="text" placeholder="Search artist...">
+          </div>
+          <button id="artistFamiliarityCompareSearchBtn" class="artist-familiarity-search-btn" type="button">Search</button>
         </div>
         <div id="artistFamiliarityCompareSuggestions" class="artist-familiarity-suggestions"></div>
         <div id="artistFamiliarityCompareSelected" class="artist-familiarity-selected">No artist selected</div>
@@ -9834,10 +10225,11 @@ function renderArtistCompareRadarPanel(rightPanelHost, primaryEntry) {
   `;
 
   const compareInput = document.getElementById("artistFamiliarityCompareSearchInput");
+  const compareSearchBtn = document.getElementById("artistFamiliarityCompareSearchBtn");
   const compareSuggestions = document.getElementById("artistFamiliarityCompareSuggestions");
   const compareInlineSuggestion = document.getElementById("artistFamiliarityCompareInlineSuggestion");
   const compareSelected = document.getElementById("artistFamiliarityCompareSelected");
-  if (!compareInput || !compareSuggestions || !compareInlineSuggestion || !compareSelected) return;
+  if (!compareInput || !compareSearchBtn || !compareSuggestions || !compareInlineSuggestion || !compareSelected) return;
 
   if (!selectedCompareArtistName || !getArtistEntryByNameFromCache(selectedCompareArtistName)) {
     const fallbackCompareEntry = artistFamiliarityEntries.find(entry => entry.name !== String(primaryEntry?.name || ""))
@@ -9887,38 +10279,24 @@ function renderArtistCompareRadarPanel(rightPanelHost, primaryEntry) {
       const suggestion = getArtistPrefixSuggestion(typed);
       if (suggestion && suggestion.name && suggestion.name.toLowerCase() !== typed.toLowerCase()) {
         event.preventDefault();
-        applySelectedCompareArtist(suggestion.name);
+        compareInput.value = suggestion.name;
+        artistFamiliarityCompareSearchQuery = suggestion.name;
+        renderArtistCompareSuggestions(compareInput, compareSuggestions, compareInlineSuggestion);
       }
       return;
     }
     if (event.key === "Enter") {
       event.preventDefault();
-      const typed = String(compareInput.value || "").trim();
-      if (!typed) {
-        hideArtistCompareSuggestions();
-        return;
-      }
-      const prefixSuggestion = getArtistPrefixSuggestion(typed);
-      if (prefixSuggestion && prefixSuggestion.name) {
-        artistFamiliarityCompareSearchQuery = prefixSuggestion.name;
-        applySelectedCompareArtist(prefixSuggestion.name);
-        return;
-      }
-      const suggestions = getArtistSuggestionsForQuery(typed);
-      if (suggestions.length) {
-        const exactMatch = suggestions.find(
-          entry => String(entry.name || "").toLowerCase() === typed.toLowerCase()
-        );
-        const chosenName = (exactMatch || suggestions[0]).name;
-        artistFamiliarityCompareSearchQuery = chosenName;
-        applySelectedCompareArtist(chosenName);
-      }
+      submitArtistCompareSearch(compareInput, compareInlineSuggestion);
       return;
     }
     if (event.key === "Escape") {
       compareInlineSuggestion.innerHTML = "";
       hideArtistCompareSuggestions();
     }
+  });
+  compareSearchBtn.addEventListener("click", () => {
+    submitArtistCompareSearch(compareInput, compareInlineSuggestion);
   });
 }
 
@@ -11601,8 +11979,9 @@ function getLatestRankForPlayer(playerKeyOrRecords, recordsMaybe = null) {
   const playerKey = hasExplicitKey ? String(playerKeyOrRecords || "") : "";
   const records = hasExplicitKey ? recordsMaybe : playerKeyOrRecords;
 
-  if (playerKey && latestRankByPlayerKey instanceof Map) {
-    const mappedRank = Number(latestRankByPlayerKey.get(playerKey.toLowerCase()));
+  const watchedRankMap = latestRankByPlayerKeyByMode.watched;
+  if (playerKey && watchedRankMap instanceof Map) {
+    const mappedRank = Number(watchedRankMap.get(playerKey.toLowerCase()));
     if (Number.isFinite(mappedRank)) return mappedRank;
   }
 
@@ -11623,7 +12002,8 @@ function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = nul
     return { latestRank: null, latestTimestamp: Number.NEGATIVE_INFINITY };
   }
 
-  if (latestRankByPlayerKey instanceof Map && latestRankByPlayerKey.size) {
+  const watchedRankMapForSnapshot = latestRankByPlayerKeyByMode.watched;
+  if (watchedRankMapForSnapshot instanceof Map && watchedRankMapForSnapshot.size) {
     const canonicalName = String(
       playerEntry && playerEntry.displayName
         ? playerEntry.displayName
@@ -11632,7 +12012,7 @@ function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = nul
     const altNames = Array.isArray(playerEntry && playerEntry.altnames)
       ? playerEntry.altnames
       : [];
-    const mappedRank = resolveLatestRankFromMap(latestRankByPlayerKey, canonicalName, playerKey, altNames);
+    const mappedRank = resolveLatestRankFromMap(watchedRankMapForSnapshot, canonicalName, playerKey, altNames, "watched");
     if (Number.isFinite(mappedRank) && mappedRank >= MIN_VALID_RANK) {
       return {
         latestRank: mappedRank,
@@ -15537,7 +15917,7 @@ async function loadSearchSongsDataForUser(displayName) {
       searchSongsPageIndex = 0;
       renderInsightsSearchSongs();
       if (fullUserData.length) {
-        renderOverview(getVisibleUserData(fullUserData), currentLatestRankValue, currentLatestRankPercentile, currentLatestRankIsTopThree);
+        renderOverviewForActiveMode();
       }
       return;
     }
@@ -15549,7 +15929,7 @@ async function loadSearchSongsDataForUser(displayName) {
         searchSongsPageIndex = 0;
         renderInsightsSearchSongs();
         if (fullUserData.length) {
-          renderOverview(getVisibleUserData(fullUserData), currentLatestRankValue, currentLatestRankPercentile, currentLatestRankIsTopThree);
+          renderOverviewForActiveMode();
         }
         return;
       }
@@ -15565,7 +15945,7 @@ async function loadSearchSongsDataForUser(displayName) {
       searchSongsPageIndex = 0;
       renderInsightsSearchSongs();
       if (fullUserData.length) {
-        renderOverview(getVisibleUserData(fullUserData), currentLatestRankValue, currentLatestRankPercentile, currentLatestRankIsTopThree);
+        renderOverviewForActiveMode();
       }
       return;
     }
@@ -15580,7 +15960,7 @@ async function loadSearchSongsDataForUser(displayName) {
     renderInsightsPopularity();
     renderInsightsPCorrect();
     if (fullUserData.length) {
-      renderOverview(getVisibleUserData(fullUserData), currentLatestRankValue, currentLatestRankPercentile, currentLatestRankIsTopThree);
+      renderOverviewForActiveMode();
     }
   } catch (err) {
     console.error("Failed loading search songs data", err);
@@ -15588,7 +15968,7 @@ async function loadSearchSongsDataForUser(displayName) {
     searchSongsPageIndex = 0;
     renderInsightsSearchSongs();
     if (fullUserData.length) {
-      renderOverview(getVisibleUserData(fullUserData), currentLatestRankValue, currentLatestRankPercentile, currentLatestRankIsTopThree);
+      renderOverviewForActiveMode();
     }
   }
 }
@@ -18282,7 +18662,7 @@ function renderPerformanceGuessRate(records) {
     });
   };
 
-  renderWeightedGuessRateChart(records);
+  renderWeightedGuessRateChart(getVisibleUserData(fullUserData));
 
   if (!records.length) {
     if (combinedGuessAreaChart) {
@@ -18300,18 +18680,6 @@ function renderPerformanceGuessRate(records) {
     const rollingMeta = document.getElementById("rollingFoundGames");
     if (rollingMeta) {
       rollingMeta.innerText = "Found 0 tours";
-    }
-    const weightedMeta = document.getElementById("weightedGuessRateFound");
-    if (weightedMeta) {
-      weightedMeta.innerText = "Found 0 games";
-    }
-    const weightedSlope = document.getElementById("weightedGuessRateSlope");
-    if (weightedSlope) {
-      weightedSlope.innerText = "Slope: 0.00% per game";
-    }
-    if (weightedGuessRateChart) {
-      weightedGuessRateChart.destroy();
-      weightedGuessRateChart = null;
     }
     return;
   }
@@ -19407,7 +19775,7 @@ function renderPerformanceCompositeCharts(records) {
   renderGuessRateVsAvg8Chart(records);
 }
 
-function renderOverview(records, latestRankOverride = null, latestRankPercentileOverride = null, latestRankIsTopThreeOverride = false) {
+function renderOverview(records, latestRankOverride = null, latestRankPercentileOverride = null, latestRankIsTopThreeOverride = false, allRecordsOverride = null) {
   const songCounters = computeOverviewSongsSeenAndGotten();
   const songsSeenEl = document.getElementById("overviewSongsSeen");
   const songsGottenEl = document.getElementById("overviewSongsGotten");
@@ -19415,7 +19783,9 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
   if (songsGottenEl) songsGottenEl.innerText = String(songCounters.gotten);
 
   const momentumEl = document.getElementById("overviewMomentum");
-  const momentumSourceRows = Array.isArray(fullUserData) && fullUserData.length ? fullUserData : records;
+  const momentumSourceRows = Array.isArray(allRecordsOverride) && allRecordsOverride.length
+    ? allRecordsOverride
+    : (Array.isArray(fullUserData) && fullUserData.length ? fullUserData : records);
   const momentumGuessValues = momentumSourceRows
     .map(row => Number(row && row["Guess rate"]))
     .filter(value => Number.isFinite(value));
@@ -19453,7 +19823,9 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
   renderOverviewTypeMixBalance(records);
   renderOverviewSynergySummary();
 
-  const statsSourceRows = Array.isArray(fullUserData) && fullUserData.length ? fullUserData : records;
+  const statsSourceRows = Array.isArray(allRecordsOverride) && allRecordsOverride.length
+    ? allRecordsOverride
+    : (Array.isArray(fullUserData) && fullUserData.length ? fullUserData : records);
   const lastTenRows = Array.isArray(statsSourceRows) ? statsSourceRows.slice(-10) : [];
   const netLivesContributionEl = document.getElementById("overviewNetLivesContribution");
   const averageRigLast10El = document.getElementById("overviewAverageRigLast10");
@@ -19479,9 +19851,13 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
     ? averageRigValues.reduce((sum, value) => sum + value, 0) / averageRigValues.length
     : null;
   if (averageRigLast10El) {
-    averageRigLast10El.innerText = Number.isFinite(averageRigLast10)
-      ? String(Math.round(averageRigLast10))
-      : "-";
+    if (overviewDataSourceMode === "usual") {
+      averageRigLast10El.innerText = "N/A";
+    } else {
+      averageRigLast10El.innerText = Number.isFinite(averageRigLast10)
+        ? String(Math.round(averageRigLast10))
+        : "-";
+    }
   }
 
   const averageRigPctValues = lastTenRows
@@ -19497,9 +19873,13 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
     ? averageRigPctValues.reduce((sum, value) => sum + value, 0) / averageRigPctValues.length
     : null;
   if (averageRigPctLast10El) {
-    averageRigPctLast10El.innerText = Number.isFinite(averageRigPctLast10)
-      ? `${averageRigPctLast10.toFixed(1)}%`
-      : "-";
+    if (overviewDataSourceMode === "usual") {
+      averageRigPctLast10El.innerText = "N/A";
+    } else {
+      averageRigPctLast10El.innerText = Number.isFinite(averageRigPctLast10)
+        ? `${averageRigPctLast10.toFixed(1)}%`
+        : "-";
+    }
   }
 
   const percentileGuessRateValues = lastTenRows
@@ -19531,7 +19911,9 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
 
   const latest = records[records.length - 1];
   const values = records.map(x => Number(x["Guess rate"]));
-  const averageSourceRows = Array.isArray(fullUserData) && fullUserData.length ? fullUserData : records;
+  const averageSourceRows = Array.isArray(allRecordsOverride) && allRecordsOverride.length
+    ? allRecordsOverride
+    : (Array.isArray(fullUserData) && fullUserData.length ? fullUserData : records);
   const averageGuessValues = averageSourceRows
     .slice(-10)
     .map(row => Number(row && row["Guess rate"]))
@@ -19540,13 +19922,41 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
     ? averageGuessValues.reduce((sum, value) => sum + value, 0) / averageGuessValues.length
     : null;
 
-  const resolvedRank = Number.isFinite(Number(latestRankOverride))
-    ? Number(latestRankOverride)
-    : Number(latest["Rank"]);
+  const resolvedRank = overviewDataSourceMode === "usual"
+    ? (Number.isFinite(Number(latestRankOverride)) ? Number(latestRankOverride) : null)
+    : (Number.isFinite(Number(latestRankOverride)) ? Number(latestRankOverride) : Number(latest["Rank"]));
   document.getElementById("rank").innerText = Number.isFinite(resolvedRank)
     ? resolvedRank.toFixed(3)
     : "-";
-  applyCurrentRankCardStyle(latestRankPercentileOverride, latestRankIsTopThreeOverride);
+  let resolvedPercentile = Number(latestRankPercentileOverride);
+  if (!Number.isFinite(resolvedPercentile) && Number.isFinite(resolvedRank)) {
+    let rankRows = [];
+    if (overviewDataSourceMode === "usual") {
+      const usualRankMap = getLatestRankCacheForMode("usual").map;
+      if (usualRankMap instanceof Map && usualRankMap.size) {
+        rankRows = Array.from(usualRankMap.values())
+          .map(value => Number(value))
+          .filter(value => Number.isFinite(value))
+          .sort((a, b) => b - a);
+      }
+    }
+    if (!rankRows.length && overviewDataSourceMode !== "usual") {
+      rankRows = (Array.isArray(allRecordsOverride) && allRecordsOverride.length
+        ? allRecordsOverride
+        : (Array.isArray(fullUserData) && fullUserData.length ? fullUserData : records))
+        .map(row => Number(row && row["Rank"]))
+        .filter(value => Number.isFinite(value) && value >= MIN_VALID_RANK)
+        .sort((a, b) => b - a);
+    }
+    if (rankRows.length) {
+      let position = rankRows.findIndex(value => resolvedRank >= value);
+      if (position < 0) position = rankRows.length - 1;
+      resolvedPercentile = rankRows.length <= 1
+        ? 100
+        : ((rankRows.length - 1 - position) / (rankRows.length - 1)) * 100;
+    }
+  }
+  applyCurrentRankCardStyle(resolvedPercentile, latestRankIsTopThreeOverride);
   document.getElementById("guess").innerText = Number.isFinite(averageGuessRate)
     ? `${averageGuessRate.toFixed(3)}%`
     : "-";
@@ -19570,20 +19980,20 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
 if (dataRangeSelect) {
   dataRangeSelect.addEventListener("change", () => {
     if (!fullUserData.length) return;
-    const visibleRecords = getVisibleUserData(fullUserData);
-    renderOverview(visibleRecords, currentLatestRankValue, currentLatestRankPercentile, currentLatestRankIsTopThree);
+    const performanceVisibleRecords = getVisibleUserData(getPerformanceRowsForActiveMode());
+    renderOverviewForActiveMode();
 
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Guess Rate") {
-      renderPerformanceGuessRate(visibleRecords);
+      renderPerformanceGuessRate(performanceVisibleRecords);
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Lives Taken / Saved") {
-      renderPerformanceLivesTakenSaved(visibleRecords);
+      renderPerformanceLivesTakenSaved(performanceVisibleRecords);
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Onlist/Offlist") {
-      renderPerformanceRigAnalysis(visibleRecords);
+      renderPerformanceRigAnalysis(getVisibleUserData(fullUserData));
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Composite charts") {
-      renderPerformanceCompositeCharts(visibleRecords);
+      renderPerformanceCompositeCharts(getVisibleUserData(fullUserData));
     }
     if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
       renderSocialRivalFilter();
@@ -19637,24 +20047,15 @@ if (artistFamiliaritySearchInput) {
       const suggestion = getArtistPrefixSuggestion(typed);
       if (suggestion && suggestion.name && suggestion.name.toLowerCase() !== typed.toLowerCase()) {
         event.preventDefault();
-        applySelectedArtist(suggestion.name);
+        artistFamiliaritySearchInput.value = suggestion.name;
+        artistFamiliaritySearchQuery = suggestion.name;
+        renderArtistSuggestions();
       }
       return;
     }
     if (event.key === "Enter") {
       event.preventDefault();
-      const typed = String(artistFamiliaritySearchInput.value || "");
-      const prefixSuggestion = getArtistPrefixSuggestion(typed);
-      if (prefixSuggestion && prefixSuggestion.name) {
-        applySelectedArtist(prefixSuggestion.name);
-        return;
-      }
-      const suggestions = getArtistSuggestions();
-      if (suggestions.length) {
-        applySelectedArtist(suggestions[0].name);
-      } else if (artistFamiliarityEntries.length) {
-        applySelectedArtist(artistFamiliarityEntries[0].name);
-      }
+      submitArtistSearch(artistFamiliaritySearchInput.value);
       return;
     }
     if (event.key === "Escape") {
@@ -19663,6 +20064,13 @@ if (artistFamiliaritySearchInput) {
       }
       hideArtistSuggestions();
     }
+  });
+}
+
+if (artistFamiliaritySearchBtn) {
+  artistFamiliaritySearchBtn.addEventListener("click", () => {
+    const typed = artistFamiliaritySearchInput ? artistFamiliaritySearchInput.value : "";
+    submitArtistSearch(typed);
   });
 }
 
@@ -19759,32 +20167,45 @@ function csvToPlayerStats(csvText) {
   return output;
 }
 
-async function loadLatestRankMap() {
-  if (latestRankByPlayerKey instanceof Map) {
-    return latestRankByPlayerKey;
+function getLatestRankCacheForMode(mode = "watched") {
+  const resolvedMode = mode === "usual" ? "usual" : "watched";
+  return {
+    mode: resolvedMode,
+    map: latestRankByPlayerKeyByMode[resolvedMode],
+    percentileMap: latestRankPercentileByPlayerKeyByMode[resolvedMode],
+    timestampMap: latestRankTimestampByPlayerKeyByMode[resolvedMode],
+    loadPromise: latestRankLoadPromiseByMode[resolvedMode]
+  };
+}
+
+async function loadLatestRankMap(mode = "watched") {
+  const cache = getLatestRankCacheForMode(mode);
+  if (cache.map instanceof Map) {
+    return cache.map;
   }
-  if (latestRankLoadPromise) {
-    return latestRankLoadPromise;
+  if (cache.loadPromise) {
+    return cache.loadPromise;
   }
 
-  latestRankLoadPromise = (async () => {
+  latestRankLoadPromiseByMode[cache.mode] = (async () => {
     const map = new Map();
     const percentileMap = new Map();
     const timestampMap = new Map();
+    const latestRankFile = cache.mode === "usual" ? "latest_rank_usual.json" : "latest_rank.json";
     try {
-      const latestRankRes = await fetch(dataUrl("latest_rank.json"));
+      const latestRankRes = await fetch(dataUrl(latestRankFile));
       if (!latestRankRes.ok) {
-        latestRankByPlayerKey = map;
-        latestRankPercentileByPlayerKey = percentileMap;
-        latestRankTimestampByPlayerKey = timestampMap;
+        latestRankByPlayerKeyByMode[cache.mode] = map;
+        latestRankPercentileByPlayerKeyByMode[cache.mode] = percentileMap;
+        latestRankTimestampByPlayerKeyByMode[cache.mode] = timestampMap;
         return map;
       }
 
       const payload = await latestRankRes.json();
       if (!Array.isArray(payload)) {
-        latestRankByPlayerKey = map;
-        latestRankPercentileByPlayerKey = percentileMap;
-        latestRankTimestampByPlayerKey = timestampMap;
+        latestRankByPlayerKeyByMode[cache.mode] = map;
+        latestRankPercentileByPlayerKeyByMode[cache.mode] = percentileMap;
+        latestRankTimestampByPlayerKeyByMode[cache.mode] = timestampMap;
         return map;
       }
 
@@ -19809,7 +20230,8 @@ async function loadLatestRankMap() {
         }
       });
 
-      const percentileEligibleRows = normalizedRows.filter(entry => entry.rankValue >= MIN_VALID_RANK);
+      const rankCutoff = cache.mode === "watched" ? MIN_VALID_RANK : Number.NEGATIVE_INFINITY;
+      const percentileEligibleRows = normalizedRows.filter(entry => entry.rankValue >= rankCutoff);
       const sortedRows = percentileEligibleRows.slice().sort((a, b) => {
         if (a.rankValue !== b.rankValue) return b.rankValue - a.rankValue;
         return a.playerKey.localeCompare(b.playerKey);
@@ -19822,19 +20244,19 @@ async function loadLatestRankMap() {
         percentileMap.set(entry.playerKey, Math.max(0, Math.min(100, percentile)));
       });
     } catch (error) {
-      console.warn("Failed to load data/latest_rank.json:", error);
+      console.warn(`Failed to load data/${latestRankFile}:`, error);
     }
 
-    latestRankByPlayerKey = map;
-    latestRankPercentileByPlayerKey = percentileMap;
-    latestRankTimestampByPlayerKey = timestampMap;
+    latestRankByPlayerKeyByMode[cache.mode] = map;
+    latestRankPercentileByPlayerKeyByMode[cache.mode] = percentileMap;
+    latestRankTimestampByPlayerKeyByMode[cache.mode] = timestampMap;
     return map;
   })();
 
-  return latestRankLoadPromise;
+  return latestRankLoadPromiseByMode[cache.mode];
 }
 
-function resolveLatestRankFromMap(latestRankMap, canonicalName, matchedKey, altNames = []) {
+function resolveLatestRankFromMap(latestRankMap, canonicalName, matchedKey, altNames = [], mode = "watched") {
   if (!(latestRankMap instanceof Map) || !latestRankMap.size) return null;
 
   const candidates = [canonicalName, matchedKey, ...(Array.isArray(altNames) ? altNames : [])];
@@ -19847,8 +20269,9 @@ function resolveLatestRankFromMap(latestRankMap, canonicalName, matchedKey, altN
     uniqueCandidates.push(key);
   });
 
-  const timestampMap = latestRankTimestampByPlayerKey instanceof Map
-    ? latestRankTimestampByPlayerKey
+  const cache = getLatestRankCacheForMode(mode);
+  const timestampMap = cache.timestampMap instanceof Map
+    ? cache.timestampMap
     : null;
   let bestRank = null;
   let bestTimestamp = Number.NEGATIVE_INFINITY;
@@ -19880,15 +20303,17 @@ function resolveLatestRankFromMap(latestRankMap, canonicalName, matchedKey, altN
   return null;
 }
 
-function resolveLatestRankPercentileFromMap(canonicalName, matchedKey, altNames = []) {
-  if (!(latestRankPercentileByPlayerKey instanceof Map) || !latestRankPercentileByPlayerKey.size) return null;
+function resolveLatestRankPercentileFromMap(canonicalName, matchedKey, altNames = [], mode = "watched") {
+  const cache = getLatestRankCacheForMode(mode);
+  const percentileMap = cache.percentileMap;
+  if (!(percentileMap instanceof Map) || !percentileMap.size) return null;
 
   const candidates = [canonicalName, matchedKey, ...(Array.isArray(altNames) ? altNames : [])];
   for (const name of candidates) {
     const key = String(name || "").trim().toLowerCase();
     if (!key) continue;
-    if (!latestRankPercentileByPlayerKey.has(key)) continue;
-    const percentile = Number(latestRankPercentileByPlayerKey.get(key));
+    if (!percentileMap.has(key)) continue;
+    const percentile = Number(percentileMap.get(key));
     if (Number.isFinite(percentile)) return percentile;
   }
   return null;
@@ -19946,20 +20371,24 @@ function applyCurrentRankCardStyle(percentile, isTopThree = false) {
   }
 }
 
-async function loadGlobalStatsData() {
-  const jsonRes = await fetch(dataUrl("stats.json"));
+async function loadGlobalStatsData(mode = "watched") {
+  const resolvedMode = mode === "usual" ? "usual" : "watched";
+  const jsonFile = resolvedMode === "usual" ? "stats_usual.json" : "stats.json";
+  const csvFile = resolvedMode === "usual" ? "stats_usual.csv" : "stats.csv";
+
+  const jsonRes = await fetch(dataUrl(jsonFile));
   if (jsonRes.ok) {
     return jsonRes.json();
   }
 
-  const legacyJsonRes = await fetch("stats.json");
+  const legacyJsonRes = await fetch(jsonFile);
   if (legacyJsonRes.ok) {
     return legacyJsonRes.json();
   }
 
-  const csvRes = await fetch(dataUrl("stats.csv"));
+  const csvRes = await fetch(dataUrl(csvFile));
   if (!csvRes.ok) {
-    throw new Error("Could not load stats data from data/stats.json, stats.json, or data/stats.csv");
+    throw new Error(`Could not load stats data from data/${jsonFile}, ${jsonFile}, or data/${csvFile}`);
   }
 
   const csvText = await csvRes.text();
@@ -19974,12 +20403,13 @@ function normalizeStatsMapFromPayload(payload) {
   return payload;
 }
 
-async function loadScopedStatsDataForCurrentUser() {
+async function loadScopedStatsDataForCurrentUser(mode = "watched") {
   const playerEntry = await getPlayerEntryByName(username || "");
   const playerId = String(playerEntry && playerEntry.playerId || "").trim();
   if (!playerId) return null;
 
-  const scopedRes = await fetch(dataUrl(`players/${playerId}/stat.json`));
+  const scopedFile = mode === "usual" ? "stat_usual.json" : "stat.json";
+  const scopedRes = await fetch(dataUrl(`players/${playerId}/${scopedFile}`));
   if (!scopedRes.ok) return null;
   const scopedPayload = await scopedRes.json();
   const scopedStats = normalizeStatsMapFromPayload(scopedPayload);
@@ -19989,9 +20419,9 @@ async function loadScopedStatsDataForCurrentUser() {
   };
 }
 
-async function loadStatsData() {
+async function loadStatsData(mode = "watched") {
   try {
-    const scoped = await loadScopedStatsDataForCurrentUser();
+    const scoped = await loadScopedStatsDataForCurrentUser(mode);
     if (scoped && scoped.data && Object.keys(scoped.data).length) {
       return {
         data: scoped.data,
@@ -20000,10 +20430,10 @@ async function loadStatsData() {
       };
     }
   } catch (err) {
-    console.warn("Scoped stat.json load failed, falling back to stats.json", err);
+    console.warn("Scoped stats load failed, falling back to global stats", err);
   }
 
-  const globalData = await loadGlobalStatsData();
+  const globalData = await loadGlobalStatsData(mode);
   return {
     data: globalData,
     playerEntry: null,
@@ -20014,13 +20444,21 @@ async function loadStatsData() {
 /* -------------------------
    FETCH DATA
 ------------------------- */
-loadStatsData()
-  .then(async statsResult => {
-    const data = statsResult && typeof statsResult === "object" ? (statsResult.data || {}) : {};
-    const latestRankMapPromise = loadLatestRankMap();
+Promise.all([
+  loadStatsData("watched"),
+  loadStatsData("usual").catch(err => {
+    console.warn("Usual stats load failed; keeping watched-only mode", err);
+    return { data: {}, playerEntry: null, source: "global" };
+  })
+])
+  .then(async ([watchedStatsResult, usualStatsResult]) => {
+    const data = watchedStatsResult && typeof watchedStatsResult === "object" ? (watchedStatsResult.data || {}) : {};
+    const usualData = usualStatsResult && typeof usualStatsResult === "object" ? (usualStatsResult.data || {}) : {};
+    const latestRankMapPromise = loadLatestRankMap("watched");
+    const latestRankUsualMapPromise = loadLatestRankMap("usual");
     let globalSocialData = null;
     try {
-      const loadedGlobalData = await loadGlobalStatsData();
+      const loadedGlobalData = await loadGlobalStatsData("watched");
       const normalizedGlobalData = normalizeStatsMapFromPayload(loadedGlobalData);
       if (normalizedGlobalData && typeof normalizedGlobalData === "object") {
         globalSocialData = normalizedGlobalData;
@@ -20036,7 +20474,7 @@ loadStatsData()
     const normalizedUser = String(username || "").trim().toLowerCase();
     const statKeys = Object.keys(data);
     let matchedKey = statKeys.find(key => key.toLowerCase() === normalizedUser);
-    let playerEntry = statsResult && statsResult.playerEntry ? statsResult.playerEntry : await getPlayerEntryByName(username || "");
+    let playerEntry = watchedStatsResult && watchedStatsResult.playerEntry ? watchedStatsResult.playerEntry : await getPlayerEntryByName(username || "");
 
     // If the direct username lookup misses, try using the matched stats key as a lookup
     // so aliases from players.json still resolve to a canonical player identity.
@@ -20120,6 +20558,9 @@ loadStatsData()
     currentLatestRankValue = null;
     currentLatestRankPercentile = null;
     currentLatestRankIsTopThree = false;
+    currentUsualLatestRankValue = null;
+    currentUsualLatestRankPercentile = null;
+    currentUsualLatestRankIsTopThree = false;
     selectedSocialRivalKeys = [];
     socialRivalSearchQuery = "";
     currentPlayerId = null;
@@ -20137,22 +20578,44 @@ loadStatsData()
     });
 
     fullUserData = mergedUserData;
-    const visibleRecords = getVisibleUserData(fullUserData);
-    renderOverview(visibleRecords, currentLatestRankValue, currentLatestRankPercentile, currentLatestRankIsTopThree);
+    const performanceVisibleRecords = getVisibleUserData(getPerformanceRowsForActiveMode());
+    const usualMergedUserDataRaw = sourceKeys
+      .flatMap(key => Array.isArray(usualData[key]) ? usualData[key] : [])
+      .filter(row => row && typeof row === "object");
+    const usualDedupeSeenKeys = new Set();
+    usualUserData = usualMergedUserDataRaw.filter(row => {
+      const dedupeKey = [
+        String(row.Timestamp || ""),
+        String(row["Guess rate"] || ""),
+        String(row["OP guess rate"] || ""),
+        String(row["ED guess rate"] || ""),
+        String(row["IN guess rate"] || ""),
+        String(row["Rank"] || ""),
+        String(row["Lives saved"] || ""),
+        String(row["Lives taken"] || "")
+      ].join("|");
+      if (usualDedupeSeenKeys.has(dedupeKey)) return false;
+      usualDedupeSeenKeys.add(dedupeKey);
+      return true;
+    });
+    usualUserData.sort((a, b) => {
+      return new Date(a.Timestamp.replace(" ", "T")) - new Date(b.Timestamp.replace(" ", "T"));
+    });
+    renderOverviewForActiveMode();
     preloadFirstSubtabsForAllSections(canonicalName);
     preloadOtherSubtabsForSection("overview", canonicalName);
 
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Guess Rate") {
-      renderPerformanceGuessRate(visibleRecords);
+      renderPerformanceGuessRate(performanceVisibleRecords);
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Lives Taken / Saved") {
-      renderPerformanceLivesTakenSaved(visibleRecords);
+      renderPerformanceLivesTakenSaved(performanceVisibleRecords);
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Onlist/Offlist") {
-      renderPerformanceRigAnalysis(visibleRecords);
+      renderPerformanceRigAnalysis(getVisibleUserData(fullUserData));
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Composite charts") {
-      renderPerformanceCompositeCharts(visibleRecords);
+      renderPerformanceCompositeCharts(getVisibleUserData(fullUserData));
     }
     if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
       renderSocialRivalFilter();
@@ -20170,25 +20633,41 @@ loadStatsData()
         latestRankMap,
         canonicalName,
         matchedKey,
-        cleanedAltNames
+        cleanedAltNames,
+        "watched"
       );
       currentLatestRankPercentile = resolveLatestRankPercentileFromMap(
         canonicalName,
         matchedKey,
-        cleanedAltNames
+        cleanedAltNames,
+        "watched"
       );
       const latestTopThreeSet = new Set(Array.from(latestRankMap.keys()).slice(0, 3));
       currentLatestRankIsTopThree = Array.from(identityNames).some(name => latestTopThreeSet.has(name));
-      if (Array.isArray(fullUserData) && fullUserData.length) {
-        renderOverview(
-          getVisibleUserData(fullUserData),
-          currentLatestRankValue,
-          currentLatestRankPercentile,
-          currentLatestRankIsTopThree
-        );
-      }
+      renderOverviewForActiveMode();
     }).catch(err => {
       console.warn("Deferred latest rank load failed", err);
+    });
+
+    latestRankUsualMapPromise.then(latestRankMap => {
+      currentUsualLatestRankValue = resolveLatestRankFromMap(
+        latestRankMap,
+        canonicalName,
+        matchedKey,
+        cleanedAltNames,
+        "usual"
+      );
+      currentUsualLatestRankPercentile = resolveLatestRankPercentileFromMap(
+        canonicalName,
+        matchedKey,
+        cleanedAltNames,
+        "usual"
+      );
+      const latestTopThreeSet = new Set(Array.from(latestRankMap.keys()).slice(0, 3));
+      currentUsualLatestRankIsTopThree = Array.from(identityNames).some(name => latestTopThreeSet.has(name));
+      renderOverviewForActiveMode();
+    }).catch(err => {
+      console.warn("Deferred latest usual rank load failed", err);
     });
   })
   .catch(err => {
