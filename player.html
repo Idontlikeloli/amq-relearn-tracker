@@ -10660,7 +10660,24 @@ function isCurrentUserStatKey(key) {
 }
 
 function getSortableTimestampValue(value) {
-  const timestamp = String(value || "");
+  const timestamp = String(value || "").trim();
+  if (!timestamp) return Number.NEGATIVE_INFINITY;
+
+  // Legacy historical rows can be DD-MM-YYYY (optionally with HH:mm[:ss]).
+  const legacyDmyMatch = timestamp.match(
+    /^(\d{1,2})-(\d{1,2})-(\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?)?$/
+  );
+  if (legacyDmyMatch) {
+    const day = Number(legacyDmyMatch[1]);
+    const month = Number(legacyDmyMatch[2]);
+    const year = Number(legacyDmyMatch[3]);
+    const hour = Number(legacyDmyMatch[4] || 0);
+    const minute = Number(legacyDmyMatch[5] || 0);
+    const second = Number(legacyDmyMatch[6] || 0);
+    const parsedLegacy = new Date(year, month - 1, day, hour, minute, second);
+    return Number.isNaN(parsedLegacy.getTime()) ? Number.NEGATIVE_INFINITY : parsedLegacy.getTime();
+  }
+
   const parsedDate = new Date(timestamp.replace(" ", "T"));
   return Number.isNaN(parsedDate.getTime()) ? Number.NEGATIVE_INFINITY : parsedDate.getTime();
 }
@@ -20572,12 +20589,10 @@ Promise.all([
       return;
     }
 
-    // Sort by time
-    mergedUserData.sort((a, b) => {
-      return new Date(a.Timestamp.replace(" ", "T")) - new Date(b.Timestamp.replace(" ", "T"));
-    });
+    // Sort by timestamp using shared parser (supports legacy DD-MM-YYYY rows too).
+    const sortedMergedUserData = sortRecordsByTimestamp(mergedUserData);
 
-    fullUserData = mergedUserData;
+    fullUserData = sortedMergedUserData;
     const performanceVisibleRecords = getVisibleUserData(getPerformanceRowsForActiveMode());
     const usualMergedUserDataRaw = sourceKeys
       .flatMap(key => Array.isArray(usualData[key]) ? usualData[key] : [])
@@ -20598,9 +20613,7 @@ Promise.all([
       usualDedupeSeenKeys.add(dedupeKey);
       return true;
     });
-    usualUserData.sort((a, b) => {
-      return new Date(a.Timestamp.replace(" ", "T")) - new Date(b.Timestamp.replace(" ", "T"));
-    });
+    usualUserData = sortRecordsByTimestamp(usualUserData);
     renderOverviewForActiveMode();
     preloadFirstSubtabsForAllSections(canonicalName);
     preloadOtherSubtabsForSection("overview", canonicalName);
