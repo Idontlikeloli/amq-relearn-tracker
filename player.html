@@ -7755,6 +7755,33 @@ function renderSubSectionContent(sectionKey, subSection) {
   }
 }
 
+function normalizeTourTypeLockRow(row) {
+  if (!row || typeof row !== "object") return "";
+  return [
+    String(row.Timestamp || ""),
+    String(row["Guess rate"] || ""),
+    String(row["OP guess rate"] || ""),
+    String(row["ED guess rate"] || ""),
+    String(row["IN guess rate"] || ""),
+    String(row["Rank"] || ""),
+    String(row["Lives saved"] || ""),
+    String(row["Lives taken"] || "")
+  ].join("|");
+}
+
+function areRowsEquivalentForTourTypeLock(rowsA, rowsB) {
+  if (!Array.isArray(rowsA) || !Array.isArray(rowsB)) return false;
+  if (!rowsA.length || !rowsB.length) return false;
+  if (rowsA.length !== rowsB.length) return false;
+
+  const normalizedA = rowsA.map(normalizeTourTypeLockRow).sort();
+  const normalizedB = rowsB.map(normalizeTourTypeLockRow).sort();
+  for (let i = 0; i < normalizedA.length; i += 1) {
+    if (normalizedA[i] !== normalizedB[i]) return false;
+  }
+  return true;
+}
+
 function updateDataRangeControlState(sectionKey, subSection) {
   if (!dataRangeSelect) return;
   const dataRangeWrap = dataRangeSelect.closest(".topbar-data-range");
@@ -7793,15 +7820,22 @@ function updateDataRangeControlState(sectionKey, subSection) {
     || isRecommendationsSection
     || isOtherToolsSection
     || isKnowledgeArtistFamiliarity;
-  const shouldLockTourType = !isTourTypeEditableView;
+  const hasWatchedRows = Array.isArray(fullUserData) && fullUserData.length > 0;
+  const hasUsualRows = Array.isArray(usualUserData) && usualUserData.length > 0;
+  const noWatchedDataAvailable = hasUsualRows && (
+    !hasWatchedRows
+    || areRowsEquivalentForTourTypeLock(fullUserData, usualUserData)
+  );
+  const shouldLockTourType = !isTourTypeEditableView || noWatchedDataAvailable;
+  const lockedTourTypeMode = noWatchedDataAvailable ? "usual" : "watched";
   isTourTypeToggleLocked = shouldLockTourType;
   dataRangeSelect.disabled = shouldLockToAll;
   if (dataRangeWrap) {
     dataRangeWrap.classList.toggle("locked", shouldLockToAll);
     dataRangeWrap.classList.toggle("tour-type-lock-mode", shouldLockTourType);
   }
-  if (shouldLockTourType && overviewDataSourceMode !== "watched") {
-    overviewDataSourceMode = "watched";
+  if (shouldLockTourType && overviewDataSourceMode !== lockedTourTypeMode) {
+    overviewDataSourceMode = lockedTourTypeMode;
   }
   updateOverviewDataSourceToggleUI();
   if (dataRangeLockBadge) {
@@ -7810,9 +7844,13 @@ function updateDataRangeControlState(sectionKey, subSection) {
       : "";
   }
   if (tourTypeLockBadge) {
-    tourTypeLockBadge.title = shouldLockTourType
-      ? "Tour type is fixed to Watched in this view."
-      : "";
+    if (!shouldLockTourType) {
+      tourTypeLockBadge.title = "";
+    } else if (noWatchedDataAvailable) {
+      tourTypeLockBadge.title = "Watched data is unavailable for this user.";
+    } else {
+      tourTypeLockBadge.title = `Tour type is fixed to ${lockedTourTypeMode === "usual" ? "Usual" : "Watched"} in this view.`;
+    }
   }
   if (shouldLockToAll && dataRangeSelect.value !== "all") {
     dataRangeSelect.value = "all";
@@ -8537,7 +8575,35 @@ function getOverviewRankMetaForActiveMode() {
 
 function renderOverviewForActiveMode() {
   const sourceRows = getOverviewRowsForActiveMode();
-  if (!Array.isArray(sourceRows) || !sourceRows.length) return;
+  if (!Array.isArray(sourceRows) || !sourceRows.length) {
+    const rankEl = document.getElementById("rank");
+    const guessEl = document.getElementById("guess");
+    const foundEl = document.getElementById("foundGames");
+    const slopeEl = document.getElementById("slopeInfo");
+    const momentumEl = document.getElementById("overviewMomentum");
+    const consistencyEl = document.getElementById("overviewConsistency");
+    const typeMixEl = document.getElementById("overviewTypeMixBalance");
+    const netLivesEl = document.getElementById("overviewNetLivesContribution");
+    if (rankEl) rankEl.innerText = "-";
+    if (guessEl) guessEl.innerText = "-";
+    if (foundEl) foundEl.innerText = "Found 0 tours";
+    if (slopeEl) slopeEl.innerText = "Slope: -";
+    if (momentumEl) momentumEl.innerText = "N/A";
+    if (consistencyEl) consistencyEl.innerText = "N/A";
+    if (typeMixEl) typeMixEl.innerText = "N/A";
+    if (netLivesEl) netLivesEl.innerText = "N/A";
+
+    if (guessChart) {
+      if (typeof guessChart.$trendZoomBrushCleanup === "function") {
+        guessChart.$trendZoomBrushCleanup();
+      }
+      guessChart.destroy();
+      guessChart = null;
+    }
+
+    applyCurrentRankCardStyle(null, false, "");
+    return;
+  }
   const visibleRecords = getVisibleUserData(sourceRows);
   const rankMeta = getOverviewRankMetaForActiveMode();
   renderOverview(
@@ -20489,6 +20555,7 @@ Promise.all([
   .then(async ([watchedStatsResult, usualStatsResult]) => {
     const data = watchedStatsResult && typeof watchedStatsResult === "object" ? (watchedStatsResult.data || {}) : {};
     const usualData = usualStatsResult && typeof usualStatsResult === "object" ? (usualStatsResult.data || {}) : {};
+    const usualStatKeys = Object.keys(usualData);
     const latestRankMapPromise = loadLatestRankMap("watched");
     const latestRankUsualMapPromise = loadLatestRankMap("usual");
     let globalSocialData = null;
@@ -20528,7 +20595,14 @@ Promise.all([
       ].filter(Boolean));
       if (aliasCandidates.size) {
         matchedKey = statKeys.find(key => aliasCandidates.has(String(key || "").trim().toLowerCase()));
+        if (!matchedKey) {
+          matchedKey = usualStatKeys.find(key => aliasCandidates.has(String(key || "").trim().toLowerCase()));
+        }
       }
+    }
+
+    if (!matchedKey) {
+      matchedKey = usualStatKeys.find(key => String(key || "").trim().toLowerCase() === normalizedUser);
     }
 
     if (!matchedKey) {
@@ -20563,7 +20637,10 @@ Promise.all([
       ...altNames,
       ...cleanedAltNames.map(name => String(name || "").trim().toLowerCase())
     ].filter(Boolean));
-    let sourceKeys = statKeys.filter(key => identityNames.has(String(key || "").trim().toLowerCase()));
+    let sourceKeys = Array.from(new Set([
+      ...statKeys.filter(key => identityNames.has(String(key || "").trim().toLowerCase())),
+      ...usualStatKeys.filter(key => identityNames.has(String(key || "").trim().toLowerCase()))
+    ]));
     if (!sourceKeys.length) {
       sourceKeys = [matchedKey];
     }
@@ -20602,16 +20679,6 @@ Promise.all([
     preloadOverviewGeneralForUser(canonicalName, { immediate: true });
     preloadOverviewStatsSummaryForUser(canonicalName, { immediate: true });
 
-    if (!mergedUserData.length) {
-      alert("No records found for this user");
-      return;
-    }
-
-    // Sort by timestamp using shared parser (supports legacy DD-MM-YYYY rows too).
-    const sortedMergedUserData = sortRecordsByTimestamp(mergedUserData);
-
-    fullUserData = sortedMergedUserData;
-    const performanceVisibleRecords = getVisibleUserData(getPerformanceRowsForActiveMode());
     const usualMergedUserDataRaw = sourceKeys
       .flatMap(key => Array.isArray(usualData[key]) ? usualData[key] : [])
       .filter(row => row && typeof row === "object");
@@ -20632,6 +20699,22 @@ Promise.all([
       return true;
     });
     usualUserData = sortRecordsByTimestamp(usualUserData);
+
+    if (!mergedUserData.length && !usualUserData.length) {
+      alert("No records found for this user");
+      return;
+    }
+
+    // Sort by timestamp using shared parser (supports legacy DD-MM-YYYY rows too).
+    const sortedMergedUserData = sortRecordsByTimestamp(mergedUserData);
+
+    fullUserData = sortedMergedUserData;
+    if (!fullUserData.length && usualUserData.length) {
+      // Usual-only user: default to usual data source on first load.
+      overviewDataSourceMode = "usual";
+    }
+    updateDataRangeControlState(activeSection, activeSubSectionBySection[activeSection] || "");
+    const performanceVisibleRecords = getVisibleUserData(getPerformanceRowsForActiveMode());
     renderOverviewForActiveMode();
     preloadFirstSubtabsForAllSections(canonicalName);
     preloadOtherSubtabsForSection("overview", canonicalName);
