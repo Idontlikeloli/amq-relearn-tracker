@@ -1377,6 +1377,41 @@
       text-overflow: ellipsis !important;
     }
 
+    #knowledgeArtistView .artist-familiarity-matrix-label .song .anime-part {
+      color: #000000 !important;
+      font-weight: 400 !important;
+      position: relative !important;
+      cursor: default !important;
+      border-radius: 4px !important;
+      padding: 0 2px !important;
+      transition: background-color 120ms ease !important;
+    }
+
+    #knowledgeArtistView .artist-familiarity-matrix-label .song .anime-part:hover {
+      background: #e2e8f0 !important;
+    }
+
+    #knowledgeArtistView #artistAnimeHoverTooltip {
+      position: fixed !important;
+      width: fit-content !important;
+      max-width: min(70vw, 560px) !important;
+      border-radius: 8px !important;
+      border: 1px solid rgba(148, 163, 184, 0.55) !important;
+      background: rgba(15, 23, 42, 0.96) !important;
+      color: #e2e8f0 !important;
+      font-size: 11px !important;
+      font-weight: 400 !important;
+      line-height: 1.35 !important;
+      padding: 7px 8px !important;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
+      white-space: pre-wrap !important;
+      overflow-wrap: anywhere !important;
+      pointer-events: none !important;
+      z-index: 140 !important;
+      opacity: 0;
+      visibility: hidden;
+    }
+
     #knowledgeArtistView .artist-familiarity-matrix-label .meta {
       display: block !important;
       margin-top: 2px !important;
@@ -2162,6 +2197,125 @@
       visibility: visible !important;
     }
 
+    #insightsSection .info-hover-wrap {
+      position: relative !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      flex: 0 0 auto !important;
+    }
+
+    #insightsSection .info-hover-btn {
+      width: 15px !important;
+      height: 15px !important;
+      border-radius: 999px !important;
+      border: 1px solid #94a3b8 !important;
+      background: #ffffff !important;
+      color: #475569 !important;
+      font-size: 10px !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      padding: 0 !important;
+    }
+
+    #insightsSection .info-hover-tooltip {
+      position: absolute !important;
+      left: calc(100% + 8px) !important;
+      right: auto !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      min-width: 260px !important;
+      max-width: min(70vw, 520px) !important;
+      border-radius: 8px !important;
+      border: 1px solid rgba(148, 163, 184, 0.55) !important;
+      background: rgba(15, 23, 42, 0.96) !important;
+      color: #e2e8f0 !important;
+      font-size: 11px !important;
+      font-weight: 400 !important;
+      line-height: 1.35 !important;
+      padding: 7px 8px !important;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
+      white-space: normal !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      z-index: 30 !important;
+    }
+
+    #insightsSection .info-hover-wrap.open-left .info-hover-tooltip {
+      right: calc(100% + 8px) !important;
+      left: auto !important;
+    }
+
+    #insightsSection .info-hover-wrap:hover .info-hover-tooltip,
+    #insightsSection .info-hover-wrap:focus-within .info-hover-tooltip {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    #socialSection .info-hover-wrap {
+      position: relative !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      flex: 0 0 auto !important;
+    }
+
+    #socialSection .info-hover-btn {
+      width: 15px !important;
+      height: 15px !important;
+      border-radius: 999px !important;
+      border: 1px solid #94a3b8 !important;
+      background: #ffffff !important;
+      color: #475569 !important;
+      font-size: 10px !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      padding: 0 !important;
+    }
+
+    #socialSection .info-hover-tooltip {
+      position: absolute !important;
+      left: calc(100% + 8px) !important;
+      right: auto !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      min-width: 280px !important;
+      max-width: min(75vw, 620px) !important;
+      border-radius: 8px !important;
+      border: 1px solid rgba(148, 163, 184, 0.55) !important;
+      background: rgba(15, 23, 42, 0.96) !important;
+      color: #e2e8f0 !important;
+      font-size: 11px !important;
+      font-weight: 400 !important;
+      line-height: 1.35 !important;
+      padding: 7px 8px !important;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
+      white-space: normal !important;
+      text-align: left !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      z-index: 30 !important;
+    }
+
+    #socialSection .info-hover-wrap.open-left .info-hover-tooltip {
+      right: calc(100% + 8px) !important;
+      left: auto !important;
+    }
+
+    #socialSection .info-hover-wrap:hover .info-hover-tooltip,
+    #socialSection .info-hover-wrap:focus-within .info-hover-tooltip {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
     #insightsSection .relearn-table-wrap {
       overflow-x: hidden !important;
     }
@@ -2847,25 +3001,6 @@
 
     #insightsSection .search-songs-button:hover {
       background: #f8fafc !important;
-    }
-
-    #insightsPCorrectView #pcorrectDifficultySelect {
-      border: 1px solid #cbd5e1 !important;
-      border-radius: 8px !important;
-      background: #ffffff !important;
-      color: #0f172a !important;
-      font-size: 12px !important;
-      font-weight: 600 !important;
-      padding: 4px 8px !important;
-      height: 30px !important;
-      cursor: pointer !important;
-    }
-
-    #insightsPCorrectView label[for="pcorrectDifficultySelect"] {
-      font-size: 12px !important;
-      color: #334155 !important;
-      font-weight: 600 !important;
-      white-space: nowrap !important;
     }
 
     #insightsSection .relearn-cover-placeholder {
@@ -4561,7 +4696,7 @@
 
     #socialSection #socialSynergySingleCompare {
       max-height: 220px !important;
-      overflow-y: auto !important;
+      overflow: visible !important;
       padding-right: 2px !important;
     }
 
@@ -5485,7 +5620,7 @@
               Top Doubles
               <span class="info-hover-wrap">
                 <button class="info-hover-btn" type="button" aria-label="Top doubles info">i</button>
-                <span class="info-hover-tooltip">Display top 30% of doubles for each category(with a cap of 100 songs): All, Their Rig &amp; You Blocked, Your Rig &amp; They Blocked</span>
+                <span class="info-hover-tooltip">Displays top 20% of doubles (max 50) from each category: All, Their Rig &amp; You Blocked, Your Rig &amp; They Blocked</span>
               </span>
             </div>
             <span id="overviewTopDoublesMeta">Found 0 songs</span>
@@ -5816,7 +5951,13 @@
     <h1 class="page-title">By Wrong Guess</h1>
     <div id="insightsRelearnTrackerView" class="chart-card" style="display:none;">
       <div class="chart-header">
-        <div class="chart-title">Relearn Tracker</div>
+        <div class="chart-title">
+          Relearn Tracker
+          <span class="info-hover-wrap">
+            <button class="info-hover-btn" type="button" aria-label="About Relearn Tracker">i</button>
+            <span class="info-hover-tooltip">Shows songs you previously got correct but got wrong in your latest attempt. The Relearn Tracker is ordered as follows:<br>1. smaller distance from the last ✅ to the end of the pattern wins<br>2. if tied, higher totalCorrect wins<br>3. if still tied, later lastAttemptDate wins</span>
+          </span>
+        </div>
         <div class="chart-meta">
           <span id="relearnSongsMeta">Found 0 songs</span>
         </div>
@@ -5941,12 +6082,6 @@
         <div class="chart-title">By % correct</div>
         <div class="chart-meta">
           <span id="pcorrectSongsMeta">Found 0 songs</span>
-          <label for="pcorrectDifficultySelect">Difficulty</label>
-          <select id="pcorrectDifficultySelect" class="search-songs-mode-select">
-            <option value="45">0-45</option>
-            <option value="40">0-40</option>
-            <option value="35">0-35</option>
-          </select>
         </div>
       </div>
       <div class="relearn-table-wrap">
@@ -5991,7 +6126,13 @@
           <div id="socialSynergyPlayerSearchList" class="social-synergy-single-picker-list"></div>
         </div>
         <div class="social-synergy-single-right">
-          <div class="chart-title" style="font-size:13px;">Single Comparison</div>
+          <div class="chart-title" style="font-size:13px;">
+            Single Comparison
+            <span class="info-hover-wrap">
+              <button class="info-hover-btn" type="button" aria-label="About Synergy Comparison">i</button>
+              <span class="info-hover-tooltip">Shows overlap between you and the target player. Overlap is measured by what you both got correct(thus it is NOT rig overlap). The left displays unique songs you got correct, while the right displays unique songs the target player got correct.</span>
+            </span>
+          </div>
           <div id="socialSynergySingleCompare" class="social-synergy-list"></div>
         </div>
       </div>
@@ -6359,6 +6500,28 @@ function dataUrl(path) {
     .replace(/^data\//, "")
     .replace(/^\/+/, "");
   return `${DATA_BASE_URL}/${cleanPath}`;
+}
+
+function getActiveDataSourceMode() {
+  return overviewDataSourceMode === "usual" ? "usual" : "watched";
+}
+
+function buildPlayerModePath(playerId, relativePath, mode = getActiveDataSourceMode()) {
+  const cleanPlayerId = String(playerId || "").trim();
+  const cleanRelative = String(relativePath || "").replace(/^\/+/, "");
+  const resolvedMode = mode === "usual" ? "usual" : "watched";
+  return `players/${cleanPlayerId}/${resolvedMode}/${cleanRelative}`;
+}
+
+async function fetchPlayerScopedResponse(playerId, relativePath, mode = getActiveDataSourceMode()) {
+  const modePath = buildPlayerModePath(playerId, relativePath, mode);
+  const legacyPath = `players/${String(playerId || "").trim()}/${String(relativePath || "").replace(/^\/+/, "")}`;
+  const candidates = Array.from(new Set([modePath, legacyPath]));
+  for (const candidate of candidates) {
+    const res = await fetch(dataUrl(candidate));
+    if (res.ok) return res;
+  }
+  return null;
 }
 
 async function loadJSON(path) {
@@ -6760,7 +6923,6 @@ let wrongGuessPageIndex = 0;
 let neverCorrectPageIndex = 0;
 let popularityPageIndex = 0;
 let pcorrectPageIndex = 0;
-let pcorrectDifficultyCap = "45";
 let searchSongsQuery = "";
 let searchSongsExactMatch = false;
 let searchSongsMode = "all";
@@ -6768,9 +6930,9 @@ let searchSongsPageIndex = 0;
 let searchSongFrequencyQuery = "";
 let searchSongFrequencyExactMatch = false;
 let searchSongFrequencyPageIndex = 0;
-let pcorrectDifficultySelect = null;
 let searchSongFrequencyLoaded = false;
 let searchSongFrequencyLoadPromise = null;
+let searchSongFrequencyLoadedMode = null;
 let convertRankEstimator = null;
 let convertUsefulnessEstimator = null;
 let convertEstimatorsLoadPromise = null;
@@ -6815,9 +6977,8 @@ let socialRivalsMetricKey = "guess_rate";
 let socialRivalsSelectionOwnerKey = "";
 let socialSynergyRequestId = 0;
 let overviewSynergyRequestId = 0;
-let socialSynergyCachePromise = null;
-let cachedSocialSynergyByPlayer = null;
-let cachedSocialSynergyPlayerId = null;
+const socialSynergyCacheByKey = new Map();
+const socialSynergyCachePromiseByKey = new Map();
 let cachedSocialSynergyRows = [];
 let currentDisplayName = null;
 let currentPlayerId = null;
@@ -6863,11 +7024,6 @@ const latestRankLoadPromiseByMode = {
 let playersDirectoryPromise = null;
 let playersDirectoryByLookup = new Map();
 const preloadTaskStatus = new Set();
-const PCORRECT_FILE_BY_CAP = {
-  "45": "pcorrect/pcorrect_0_45.json",
-  "40": "pcorrect/pcorrect_0_40.json",
-  "35": "pcorrect/pcorrect_0_35.json"
-};
 const MAX_SELECTED_TAGS = 8;
 const MIN_SELECTED_TAGS = 3;
 const MAX_SELECTED_BY_ERA_SEASONS = 6;
@@ -7213,6 +7369,48 @@ function preloadOtherSubtabsForSection(sectionKey, displayName) {
       ]);
     }
   }, 140);
+}
+
+function loadInsightsDataForSubSection(subSection, displayName) {
+  const resolvedName = String(displayName || currentDisplayName || currentStatKey || "").trim();
+  if (!resolvedName) return;
+
+  if (subSection === "Relearn Tracker") {
+    loadRelearnDataForUser(resolvedName);
+    return;
+  }
+  if (subSection === "By never correct") {
+    loadNeverCorrectDataForUser(resolvedName);
+    return;
+  }
+  if (subSection === "By Wrong Guess") {
+    loadWrongGuessDataForUser(resolvedName);
+    return;
+  }
+  if (subSection === "By Popularity") {
+    loadPopularityDataForUser(resolvedName);
+    return;
+  }
+  if (subSection === "By % correct") {
+    loadPCorrectDataForUser(resolvedName);
+  }
+}
+
+function loadKnowledgeDataForSubSection(subSection, displayName) {
+  const resolvedName = String(displayName || currentDisplayName || currentStatKey || "").trim();
+  if (!resolvedName) return;
+
+  if (subSection === "Artist Familiarity") {
+    loadArtistDataForUser(resolvedName);
+    return;
+  }
+  if (subSection === "Tag Familiarity") {
+    loadTagDataForUser(resolvedName);
+    return;
+  }
+  if (subSection === "Seasonal Comparison") {
+    loadByEraDataForUser(resolvedName);
+  }
 }
 
 function setSectionTitle(sectionKey, title) {
@@ -7928,7 +8126,10 @@ function updateDataRangeControlState(sectionKey, subSection) {
   const isTourTypeEditableView =
     (sectionKey === "overview" && overviewActiveView === "overview")
     || (sectionKey === "performance" && (subSection === "Guess Rate" || subSection === "Lives Taken / Saved"))
-    || (sectionKey === "social" && subSection === "Rivals");
+    || (sectionKey === "social" && (subSection === "Rivals" || subSection === "Synergy"))
+    || (sectionKey === "knowledge" && (subSection === "Artist Familiarity" || subSection === "Tag Familiarity" || subSection === "Seasonal Comparison"))
+    || sectionKey === "insights"
+    || (sectionKey === "otherTools" && subSection !== "Original Tour data(Calendar)");
 
   const shouldHidePastGameOptions =
     (sectionKey === "overview" && overviewActiveView === "statsSummary")
@@ -7956,11 +8157,9 @@ function updateDataRangeControlState(sectionKey, subSection) {
     || isKnowledgeArtistFamiliarity;
   const hasWatchedRows = Array.isArray(fullUserData) && fullUserData.length > 0;
   const hasUsualRows = Array.isArray(usualUserData) && usualUserData.length > 0;
-  const noWatchedDataAvailable = hasUsualRows && (
-    !hasWatchedRows
-    || areRowsEquivalentForTourTypeLock(fullUserData, usualUserData)
-  );
-  const shouldLockTourType = !isTourTypeEditableView || noWatchedDataAvailable;
+  const noWatchedDataAvailable = hasUsualRows && !hasWatchedRows;
+  const noUsualDataAvailable = hasWatchedRows && !hasUsualRows;
+  const shouldLockTourType = !isTourTypeEditableView || noWatchedDataAvailable || noUsualDataAvailable;
   const lockedTourTypeMode = noWatchedDataAvailable ? "usual" : "watched";
   isTourTypeToggleLocked = shouldLockTourType;
   dataRangeSelect.disabled = shouldLockToAll;
@@ -7982,6 +8181,8 @@ function updateDataRangeControlState(sectionKey, subSection) {
       tourTypeLockBadge.title = "";
     } else if (noWatchedDataAvailable) {
       tourTypeLockBadge.title = "Watched data is unavailable for this user.";
+    } else if (noUsualDataAvailable) {
+      tourTypeLockBadge.title = "Usual data is unavailable for this user.";
     } else {
       tourTypeLockBadge.title = `Tour type is fixed to ${lockedTourTypeMode === "usual" ? "Usual" : "Watched"} in this view.`;
     }
@@ -8006,6 +8207,10 @@ function setActiveSubSection(sectionKey, subSection) {
 
   updateDataRangeControlState(sectionKey, subSection);
   renderSubSectionContent(sectionKey, subSection);
+  if (sectionKey === "insights") {
+    loadInsightsDataForSubSection(subSection, currentDisplayName || currentStatKey || "");
+    setTimeout(retryFailedInsightCoverImages, 700);
+  }
   preloadOtherSubtabsForSection(sectionKey, currentDisplayName || currentStatKey || "");
 }
 
@@ -8266,7 +8471,6 @@ const popularityPrevPageBtn = document.getElementById("popularityPrevPageBtn");
 const popularityNextPageBtn = document.getElementById("popularityNextPageBtn");
 const pcorrectPrevPageBtn = document.getElementById("pcorrectPrevPageBtn");
 const pcorrectNextPageBtn = document.getElementById("pcorrectNextPageBtn");
-pcorrectDifficultySelect = document.getElementById("pcorrectDifficultySelect");
 const socialSynergyPrevPageBtn = document.getElementById("socialSynergyPrevPageBtn");
 const socialSynergyNextPageBtn = document.getElementById("socialSynergyNextPageBtn");
 if (relearnPrevPageBtn) {
@@ -8327,14 +8531,6 @@ if (pcorrectNextPageBtn) {
   pcorrectNextPageBtn.addEventListener("click", () => {
     pcorrectPageIndex += 1;
     renderInsightsPCorrect();
-  });
-}
-if (pcorrectDifficultySelect) {
-  pcorrectDifficultySelect.addEventListener("change", event => {
-    const selected = String(event.target && event.target.value ? event.target.value : "45");
-    pcorrectDifficultyCap = PCORRECT_FILE_BY_CAP[selected] ? selected : "45";
-    pcorrectPageIndex = 0;
-    loadPCorrectDataForUser(currentDisplayName || "");
   });
 }
 if (socialSynergyPrevPageBtn) {
@@ -8770,6 +8966,25 @@ function updateOverviewDataSourceToggleUI() {
   }
 }
 
+function refreshOverviewModeScopedCards(displayName) {
+  const resolvedName = String(displayName || currentDisplayName || "").trim();
+  if (!resolvedName) return;
+
+  loadOverviewTopSolosForUser(resolvedName);
+  loadOverviewTopRigSongsForUser(resolvedName);
+  loadOverviewTopDoublesForUser(resolvedName, { kind: "general" });
+  loadOverviewTopDoublesForUser(resolvedName, { kind: "their_rig_you_blocked" });
+  loadOverviewTopDoublesForUser(resolvedName, { kind: "your_rig_they_blocked" });
+
+  if (overviewActiveView === "statsSummary") {
+    loadOverviewAnimeTypeDataForUser(resolvedName);
+    loadGenreDataForUser(resolvedName);
+    loadTagDataForUser(resolvedName);
+    loadByEraDataForUser(resolvedName);
+    loadArtistDataForUser(resolvedName);
+  }
+}
+
 if (overviewLanguageEnBtn && overviewLanguageJpBtn) {
   updateOverviewLanguageToggleUI();
   overviewLanguageEnBtn.addEventListener("click", () => {
@@ -8793,6 +9008,7 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (overviewDataSourceMode === "watched") return;
     overviewDataSourceMode = "watched";
     updateOverviewDataSourceToggleUI();
+    refreshOverviewModeScopedCards(currentDisplayName);
     renderOverviewForActiveMode();
     const performanceRows = getPerformanceRowsForActiveMode();
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Guess Rate" && performanceRows.length) {
@@ -8804,6 +9020,23 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
       renderSocialRivalFilter();
       renderSocialRivalsChart();
+    }
+    if (activeSection === "social" && activeSubSectionBySection.social === "Synergy") {
+      renderSocialSynergyView();
+    }
+    if (activeSection === "knowledge") {
+      loadKnowledgeDataForSubSection(activeSubSectionBySection.knowledge || "", currentDisplayName || currentStatKey || "");
+    }
+    if (activeSection === "insights") {
+      loadInsightsDataForSubSection(activeSubSectionBySection.insights || "", currentDisplayName || currentStatKey || "");
+      setTimeout(retryFailedInsightCoverImages, 700);
+    }
+    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Search songs") {
+      loadSearchSongsDataForUser(currentDisplayName || currentStatKey || "");
+    }
+    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Search song frequency") {
+      ensureSearchSongFrequencyData();
+      renderSearchSongFrequency();
     }
   });
   overviewDataSourceUsualBtn.addEventListener("click", () => {
@@ -8811,6 +9044,7 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (overviewDataSourceMode === "usual") return;
     overviewDataSourceMode = "usual";
     updateOverviewDataSourceToggleUI();
+    refreshOverviewModeScopedCards(currentDisplayName);
     renderOverviewForActiveMode();
     const performanceRows = getPerformanceRowsForActiveMode();
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Guess Rate" && performanceRows.length) {
@@ -8822,6 +9056,23 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
       renderSocialRivalFilter();
       renderSocialRivalsChart();
+    }
+    if (activeSection === "social" && activeSubSectionBySection.social === "Synergy") {
+      renderSocialSynergyView();
+    }
+    if (activeSection === "knowledge") {
+      loadKnowledgeDataForSubSection(activeSubSectionBySection.knowledge || "", currentDisplayName || currentStatKey || "");
+    }
+    if (activeSection === "insights") {
+      loadInsightsDataForSubSection(activeSubSectionBySection.insights || "", currentDisplayName || currentStatKey || "");
+      setTimeout(retryFailedInsightCoverImages, 700);
+    }
+    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Search songs") {
+      loadSearchSongsDataForUser(currentDisplayName || currentStatKey || "");
+    }
+    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Search song frequency") {
+      ensureSearchSongFrequencyData();
+      renderSearchSongFrequency();
     }
   });
 }
@@ -8939,6 +9190,13 @@ function rerenderRecommendationsForLanguage() {
     if (activeSubSection === "Search song frequency") {
       renderSearchSongFrequency();
       return;
+    }
+  }
+
+  if (activeSection === "knowledge") {
+    const activeSubSection = activeSubSectionBySection.knowledge || "";
+    if (activeSubSection === "Artist Familiarity") {
+      renderArtistFamiliarityView();
     }
   }
 }
@@ -9276,6 +9534,7 @@ function drawByEraSeasonComparisonChart() {
           label: "Wrong",
           data: wrongData,
           stack: "seasonTotals",
+          hidden: true,
           backgroundColor: "rgba(239, 68, 68, 0.62)",
           borderColor: "#dc2626",
           borderWidth: 1.4,
@@ -9609,6 +9868,9 @@ function renderArtistCompareSuggestions(inputEl, suggestionsEl, inlineEl) {
 function collectArtistEvents(entry) {
   if (!entry || typeof entry !== "object") return [];
   const events = Array.isArray(entry.events) ? entry.events : [];
+  const songKeyById = cachedSongKeyById && typeof cachedSongKeyById === "object"
+    ? cachedSongKeyById
+    : {};
   const normalizeArtistSongType = raw => {
     const text = String(raw || "").trim().toLowerCase();
     if (!text) return "";
@@ -9620,6 +9882,24 @@ function collectArtistEvents(entry) {
   return events
     .map((event, index) => {
       if (Array.isArray(event)) {
+        const numericSongId = Number(event[1]);
+        const hasSongIdField = Number.isFinite(numericSongId) && numericSongId > 0;
+        if (hasSongIdField) {
+          const songid = Math.trunc(numericSongId);
+          const keyRow = songKeyById[String(songid)] || null;
+          return {
+            timestamp: String(event[0] || ""),
+            songid,
+            songName: String((keyRow && keyRow.songName) || "Unknown song"),
+            animeName: String((keyRow && (keyRow.animeEnglish || keyRow.animeName || keyRow.anime)) || ""),
+            animeRomaji: String((keyRow && keyRow.animeRomaji) || ""),
+            correct: Number(event[2] || 0) > 0,
+            rig: Number(event[3] || 0) > 0,
+            songType: normalizeArtistSongType((keyRow && keyRow.type) || event[4]),
+            index
+          };
+        }
+
         const hasAnimeField = typeof event[2] === "string" || event[2] == null;
         const correctValue = hasAnimeField ? event[3] : event[2];
         const rigValue = hasAnimeField ? event[4] : event[3];
@@ -9635,6 +9915,7 @@ function collectArtistEvents(entry) {
           timestamp: String(event[0] || ""),
           songName: String(event[1] || "Unknown song"),
           animeName: hasAnimeField ? String(event[2] || "") : "",
+          animeRomaji: "",
           correct: Number(correctValue || 0) > 0,
           rig: Number(rigValue || 0) > 0,
           songType,
@@ -9642,17 +9923,24 @@ function collectArtistEvents(entry) {
         };
       }
       if (event && typeof event === "object") {
+        const numericSongId = Number(event.songid != null ? event.songid : event.songId);
+        const hasSongIdField = Number.isFinite(numericSongId) && numericSongId > 0;
+        const songid = hasSongIdField ? Math.trunc(numericSongId) : null;
+        const keyRow = songid != null ? (songKeyById[String(songid)] || null) : null;
         const songType = normalizeArtistSongType(
           event.songType
           || event.type
           || event.song_type
           || event.songTypeShort
           || event.kind
+          || (keyRow && keyRow.type)
         );
         return {
           timestamp: String(event.timestamp || event.date || ""),
-          songName: String(event.songName || event.song || "Unknown song"),
-          animeName: String(event.animeName || event.anime || ""),
+          songid,
+          songName: String(event.songName || event.song || (keyRow && keyRow.songName) || "Unknown song"),
+          animeName: String(event.animeName || event.anime || (keyRow && (keyRow.animeEnglish || keyRow.animeName || keyRow.anime)) || ""),
+          animeRomaji: String(event.animeRomaji || (keyRow && keyRow.animeRomaji) || ""),
           correct: Number(event.correct || 0) > 0,
           rig: Number(event.rig || 0) > 0,
           songType,
@@ -9664,17 +9952,34 @@ function collectArtistEvents(entry) {
     .filter(Boolean);
 }
 
+function getArtistRowAnimeName(row) {
+  const english = String(row && row.animeName || "").trim();
+  const romaji = String(row && row.animeRomaji || "").trim();
+  if (overviewLanguageMode === "jp") {
+    return romaji || english;
+  }
+  return english || romaji;
+}
+
+function getArtistRowLabel(row) {
+  const song = String(row && row.songName || "Unknown song");
+  const anime = getArtistRowAnimeName(row);
+  return anime ? `${song} [${anime}]` : song;
+}
+
 function buildArtistSongBars(entry) {
   const grouped = new Map();
   const events = collectArtistEvents(entry);
   events.forEach(event => {
     const songName = String(event.songName || "Unknown song");
     const animeName = String(event.animeName || "");
-    const groupedKey = `${songName}||${animeName}`;
+    const animeRomaji = String(event.animeRomaji || "");
+    const groupedKey = `${songName}||${animeName}||${animeRomaji}`;
     if (!grouped.has(groupedKey)) {
       grouped.set(groupedKey, {
         songName,
         animeName,
+        animeRomaji,
         marks: [],
         rigMarks: [],
         attemptTimestamps: [],
@@ -9700,8 +10005,8 @@ function buildArtistSongBars(entry) {
 
   return [...grouped.values()].sort((a, b) => {
     if (a.total !== b.total) return b.total - a.total;
-    const nameA = `${a.songName} ${a.animeName}`;
-    const nameB = `${b.songName} ${b.animeName}`;
+    const nameA = `${a.songName} ${getArtistRowAnimeName(a)}`;
+    const nameB = `${b.songName} ${getArtistRowAnimeName(b)}`;
     return nameA.localeCompare(nameB);
   });
 }
@@ -9741,7 +10046,8 @@ function filterAndSortArtistSongRows(rows, filterQuery, sortMode) {
     ? rows.filter(row => {
       const songText = String(row && row.songName || "").toLowerCase();
       const animeText = String(row && row.animeName || "").toLowerCase();
-      return songText.includes(normalizedFilter) || animeText.includes(normalizedFilter);
+      const animeRomajiText = String(row && row.animeRomaji || "").toLowerCase();
+      return songText.includes(normalizedFilter) || animeText.includes(normalizedFilter) || animeRomajiText.includes(normalizedFilter);
     })
     : rows.slice();
 
@@ -9782,8 +10088,8 @@ function filterAndSortArtistSongRows(rows, filterQuery, sortMode) {
     }
 
     if (a.total !== b.total) return b.total - a.total;
-    const nameA = `${String(a.songName || "")} ${String(a.animeName || "")}`;
-    const nameB = `${String(b.songName || "")} ${String(b.animeName || "")}`;
+    const nameA = `${String(a.songName || "")} ${getArtistRowAnimeName(a)}`;
+    const nameB = `${String(b.songName || "")} ${getArtistRowAnimeName(b)}`;
     return nameA.localeCompare(nameB);
   });
 
@@ -9808,9 +10114,7 @@ function renderArtistPatternRigMatrix(rows, pageIndex, pageSize) {
   }
 
   const rowsHtml = pagedRows.map(row => {
-    const songLabel = row.animeName
-      ? `${escapeHtml(row.songName)} [${escapeHtml(row.animeName)}]`
-      : escapeHtml(row.songName);
+    const songLabelHtml = buildArtistSongLabelHtml(row);
 
     const patternCells = row.marks.map(mark => {
       const cls = mark === "✅" ? "pattern-correct" : "pattern-wrong";
@@ -9825,7 +10129,7 @@ function renderArtistPatternRigMatrix(rows, pageIndex, pageSize) {
     return `
       <div class="artist-familiarity-matrix-row">
         <div class="artist-familiarity-matrix-label">
-          <span class="song">${songLabel}</span>
+          <span class="song">${songLabelHtml}</span>
           <span class="meta">Songs played ${row.total} | Rig ${row.rigCount}</span>
         </div>
         <div class="artist-familiarity-matrix-track">
@@ -9874,9 +10178,69 @@ function getArtistSongRowsPage(rows, pageIndex, pageSize) {
 }
 
 function buildArtistSongLabel(row) {
+  return getArtistRowLabel(row);
+}
+
+function buildArtistSongLabelHtml(row) {
   const song = String(row && row.songName || "Unknown song");
-  const anime = String(row && row.animeName || "").trim();
-  return anime ? `${song} [${anime}]` : song;
+  const anime = getArtistRowAnimeName(row);
+  if (!anime) {
+    return escapeHtml(song);
+  }
+  const animeEscaped = escapeHtml(anime);
+  return `${escapeHtml(song)} <span class="anime-part" data-full-title="${animeEscaped}">[${animeEscaped}]</span>`;
+}
+
+function bindArtistAnimeHoverTooltip() {
+  const host = document.getElementById("knowledgeArtistView");
+  if (!host) return;
+  let tooltip = document.getElementById("artistAnimeHoverTooltip");
+  if (!tooltip) {
+    tooltip = document.createElement("div");
+    tooltip.id = "artistAnimeHoverTooltip";
+    host.appendChild(tooltip);
+  }
+
+  const hideTooltip = () => {
+    tooltip.style.opacity = "0";
+    tooltip.style.visibility = "hidden";
+  };
+
+  const placeTooltip = event => {
+    const margin = 10;
+    const rect = tooltip.getBoundingClientRect();
+    const maxLeft = Math.max(margin, window.innerWidth - rect.width - margin);
+    const left = Math.min(Math.max(margin, event.clientX - rect.width / 2), maxLeft);
+    const top = Math.max(margin, event.clientY - rect.height - 10);
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
+  };
+
+  const animeNodes = document.querySelectorAll("#knowledgeArtistView .artist-familiarity-matrix-label .anime-part");
+  animeNodes.forEach(node => {
+    const labelNode = node.closest(".artist-familiarity-matrix-label");
+    if (labelNode) {
+      labelNode.querySelectorAll("[title]").forEach(el => el.removeAttribute("title"));
+      labelNode.removeAttribute("title");
+    }
+    node.removeAttribute("title");
+    const songNode = node.closest(".song");
+    if (songNode) songNode.removeAttribute("title");
+    node.addEventListener("mouseenter", event => {
+      let current = node;
+      while (current && current !== host) {
+        if (typeof current.removeAttribute === "function") current.removeAttribute("title");
+        current = current.parentElement;
+      }
+      const fullTitle = String(node.getAttribute("data-full-title") || "").trim();
+      if (!fullTitle) return;
+      tooltip.textContent = fullTitle;
+      tooltip.style.opacity = "1";
+      tooltip.style.visibility = "visible";
+      placeTooltip(event);
+    });
+    node.addEventListener("mouseleave", hideTooltip);
+  });
 }
 
 function truncateArtistSongLabel(label, maxLength = 54) {
@@ -9904,7 +10268,7 @@ function renderArtistFamiliarityBarsChart(rows) {
 
   const rowParts = rows.map(row => {
     const song = truncateArtistSongLabel(String(row && row.songName || "Unknown song"), 32);
-    const anime = truncateArtistSongLabel(String(row && row.animeName || "").trim(), 36);
+    const anime = truncateArtistSongLabel(getArtistRowAnimeName(row), 36);
     return { song, anime };
   });
   const trackRows = [];
@@ -10712,11 +11076,8 @@ function renderArtistFamiliarityView() {
     pageResult.pagedRows.forEach(row => {
       const label = document.createElement("div");
       label.className = "artist-familiarity-matrix-label";
-      const songLabel = row.animeName
-        ? `${row.songName} [${row.animeName}]`
-        : row.songName;
       label.innerHTML = `
-        <span class="song">${escapeHtml(songLabel)}</span>
+        <span class="song">${buildArtistSongLabelHtml(row)}</span>
         <span class="meta">Songs played ${row.total} | Rig ${row.rigCount}</span>
       `;
 
@@ -10755,6 +11116,8 @@ function renderArtistFamiliarityView() {
     filterInput.setSelectionRange(length, length);
     artistFamiliarityAttemptsShouldRefocusInput = false;
   }
+
+  bindArtistAnimeHoverTooltip();
 
   const prevBtn = document.getElementById("artistFamiliarityPrevPageBtn");
   const nextBtn = document.getElementById("artistFamiliarityNextPageBtn");
@@ -12478,46 +12841,49 @@ function matchesSocialRatingFilter(rankValue, parsedFilter) {
   }
 }
 
-async function loadSocialSynergyData(playerId) {
+async function loadSocialSynergyData(playerId, modeOverride = null) {
   const targetPlayerId = String(playerId || "").trim();
   if (!targetPlayerId) return null;
+  const activeMode = modeOverride === "usual" ? "usual" : (modeOverride === "watched" ? "watched" : getActiveDataSourceMode());
+  const cacheKey = `${targetPlayerId}:${activeMode}`;
 
-  if (cachedSocialSynergyByPlayer && cachedSocialSynergyPlayerId === targetPlayerId) {
-    return cachedSocialSynergyByPlayer;
+  if (socialSynergyCacheByKey.has(cacheKey)) {
+    return socialSynergyCacheByKey.get(cacheKey);
   }
-  if (socialSynergyCachePromise && cachedSocialSynergyPlayerId === targetPlayerId) {
-    return socialSynergyCachePromise;
+  if (socialSynergyCachePromiseByKey.has(cacheKey)) {
+    return socialSynergyCachePromiseByKey.get(cacheKey);
   }
 
-  cachedSocialSynergyPlayerId = targetPlayerId;
-  socialSynergyCachePromise = (async () => {
+  const requestPromise = (async () => {
     try {
       const [classicRes, sharedRes] = await Promise.allSettled([
-        fetch(dataUrl(`players/${targetPlayerId}/synergy/synergy_count.json`)),
-        fetch(dataUrl(`players/${targetPlayerId}/synergy/synergy_samesongsseen.json`))
+        fetchPlayerScopedResponse(targetPlayerId, "synergy/synergy_count.json", activeMode),
+        fetchPlayerScopedResponse(targetPlayerId, "synergy/synergy_samesongsseen.json", activeMode)
       ]);
       const parsePayload = async (result) => {
-        if (!result || result.status !== "fulfilled" || !result.value || !result.value.ok) return null;
+        if (!result || result.status !== "fulfilled" || !result.value) return null;
         const payload = await result.value.json();
         return payload && typeof payload === "object" ? payload : null;
       };
       const classicPayload = await parsePayload(classicRes);
       const sharedPayload = await parsePayload(sharedRes);
-      cachedSocialSynergyByPlayer = {
+      const payload = {
         classic: classicPayload,
         shared: sharedPayload
       };
-      return cachedSocialSynergyByPlayer;
+      socialSynergyCacheByKey.set(cacheKey, payload);
+      return payload;
     } catch (err) {
       console.error("Failed loading social synergy data", err);
-      cachedSocialSynergyByPlayer = null;
-      return cachedSocialSynergyByPlayer;
+      socialSynergyCacheByKey.delete(cacheKey);
+      return null;
     } finally {
-      socialSynergyCachePromise = null;
+      socialSynergyCachePromiseByKey.delete(cacheKey);
     }
   })();
 
-  return socialSynergyCachePromise;
+  socialSynergyCachePromiseByKey.set(cacheKey, requestPromise);
+  return requestPromise;
 }
 
 function getSocialSynergyComparableKey(row) {
@@ -12533,20 +12899,26 @@ function mapSynergyComparisons(payload) {
     const rivalKey = String(entry && entry.otherPlayerId || "").trim();
     const rivalLabel = String(entry && entry.otherDisplayName || rivalKey || "Unknown");
     if (!rivalKey && !rivalLabel) return;
+    const hasTargetRigCount = Object.prototype.hasOwnProperty.call(entry || {}, "targetRigCount");
+    const hasOtherRigCount = Object.prototype.hasOwnProperty.call(entry || {}, "otherRigCount");
+    const hasRigMetrics = hasTargetRigCount && hasOtherRigCount;
     map.set((rivalKey || rivalLabel).toLowerCase(), {
       rivalKey,
       rivalLabel,
       targetOnlyCount: Math.max(0, Number(entry && entry.targetOnlyCount || 0)),
       otherOnlyCount: Math.max(0, Number(entry && entry.otherOnlyCount || 0)),
       overlapCount: Math.max(0, Number(entry && entry.overlapCount || 0)),
-      targetRigCount: Math.max(0, Number(entry && entry.targetRigCount || 0)),
-      otherRigCount: Math.max(0, Number(entry && entry.otherRigCount || 0))
+      targetRigCount: hasTargetRigCount ? Math.max(0, Number(entry && entry.targetRigCount || 0)) : 0,
+      otherRigCount: hasOtherRigCount ? Math.max(0, Number(entry && entry.otherRigCount || 0)) : 0,
+      hasRigMetrics
     });
   });
   return map;
 }
 
-function buildMergedSocialSynergyRows(synergyPayload) {
+function buildMergedSocialSynergyRows(synergyPayload, modeOverride = null) {
+  const activeMode = modeOverride === "usual" ? "usual" : (modeOverride === "watched" ? "watched" : getActiveDataSourceMode());
+  const includeRigMetrics = activeMode !== "usual";
   const classicMap = mapSynergyComparisons(synergyPayload && synergyPayload.classic);
   const sharedMap = mapSynergyComparisons(synergyPayload && synergyPayload.shared);
   const allKeys = new Set([...classicMap.keys(), ...sharedMap.keys()]);
@@ -12564,8 +12936,13 @@ function buildMergedSocialSynergyRows(synergyPayload) {
       overlapCount: Math.max(0, Number(classic ? classic.overlapCount : (shared ? shared.overlapCount : 0))),
       targetOnlyCount: Math.max(0, Number(classic ? classic.targetOnlyCount : (shared ? shared.targetOnlyCount : 0))),
       otherOnlyCount: Math.max(0, Number(classic ? classic.otherOnlyCount : (shared ? shared.otherOnlyCount : 0))),
-      targetRigCount: Math.max(0, Number(classic ? classic.targetRigCount : (shared ? shared.targetRigCount : 0))),
-      otherRigCount: Math.max(0, Number(classic ? classic.otherRigCount : (shared ? shared.otherRigCount : 0))),
+      targetRigCount: includeRigMetrics
+        ? Math.max(0, Number(classic ? classic.targetRigCount : (shared ? shared.targetRigCount : 0)))
+        : 0,
+      otherRigCount: includeRigMetrics
+        ? Math.max(0, Number(classic ? classic.otherRigCount : (shared ? shared.otherRigCount : 0)))
+        : 0,
+      hasRigMetrics: includeRigMetrics && Boolean((classic && classic.hasRigMetrics) || (shared && shared.hasRigMetrics)),
       classic,
       shared
     });
@@ -12579,6 +12956,7 @@ function createSocialSynergyRowElement(row, targetLabel, rankText = "") {
   const overlapCount = Math.max(0, Number(row && row.overlapCount || 0));
   const targetRigTotal = Math.max(0, Number(row && row.targetRigCount || 0));
   const rivalRigTotal = Math.max(0, Number(row && row.otherRigCount || 0));
+  const hasRigMetrics = Boolean(row && row.hasRigMetrics);
   const union = Math.max(1, leftExclusive + overlapCount + rightExclusive);
   const leftPct = (leftExclusive / union) * 100;
   const overlapPct = (overlapCount / union) * 100;
@@ -12589,8 +12967,11 @@ function createSocialSynergyRowElement(row, targetLabel, rankText = "") {
 
   const head = document.createElement("div");
   head.className = "social-synergy-row-head";
+  const rigLabelHtml = hasRigMetrics
+    ? ` <span class="social-synergy-rig-count target">(Rig ${targetRigTotal})</span> × <span class="social-synergy-rival-label">${escapeHtml(row && row.rivalLabel || "Unknown")}</span> <span class="social-synergy-rig-count rival">(Rig ${rivalRigTotal})</span>`
+    : ` × <span class="social-synergy-rival-label">${escapeHtml(row && row.rivalLabel || "Unknown")}</span>`;
   head.innerHTML = `
-    <div class="name">${rankText ? `${rankText} ` : ""}<span class="social-synergy-target-label">${escapeHtml(targetLabel)}</span> <span class="social-synergy-rig-count target">(Rig ${targetRigTotal})</span> × <span class="social-synergy-rival-label">${escapeHtml(row && row.rivalLabel || "Unknown")}</span> <span class="social-synergy-rig-count rival">(Rig ${rivalRigTotal})</span></div>
+    <div class="name">${rankText ? `${rankText} ` : ""}<span class="social-synergy-target-label">${escapeHtml(targetLabel)}</span>${rigLabelHtml}</div>
     <div class="stats">${leftExclusive} | <span class="social-synergy-overlap-pill">${overlapCount}</span> | ${rightExclusive}</div>
   `;
 
@@ -12623,14 +13004,16 @@ function createSocialSynergyRowElement(row, targetLabel, rankText = "") {
   bar.appendChild(overlap);
   bar.appendChild(right);
 
-  const targetRigLine = document.createElement("div");
-  targetRigLine.className = "social-synergy-rig-left-total";
-  targetRigLine.style.width = `${Math.min(100, (targetRigTotal / union) * 100)}%`;
-  const rivalRigLine = document.createElement("div");
-  rivalRigLine.className = "social-synergy-rig-right-total";
-  rivalRigLine.style.width = `${Math.min(100, (rivalRigTotal / union) * 100)}%`;
-  bar.appendChild(targetRigLine);
-  bar.appendChild(rivalRigLine);
+  if (hasRigMetrics) {
+    const targetRigLine = document.createElement("div");
+    targetRigLine.className = "social-synergy-rig-left-total";
+    targetRigLine.style.width = `${Math.min(100, (targetRigTotal / union) * 100)}%`;
+    const rivalRigLine = document.createElement("div");
+    rivalRigLine.className = "social-synergy-rig-right-total";
+    rivalRigLine.style.width = `${Math.min(100, (rivalRigTotal / union) * 100)}%`;
+    bar.appendChild(targetRigLine);
+    bar.appendChild(rivalRigLine);
+  }
 
   container.appendChild(head);
   container.appendChild(bar);
@@ -12716,7 +13099,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
     }
     btn.innerHTML = `
       <span>${escapeHtml(row.rivalLabel || row.rivalKey || "Unknown")}</span>
-      <span class="meta">Overlap ${Number(row.overlapCount || 0)} | Rig ${Number(row.targetRigCount || 0)} / ${Number(row.otherRigCount || 0)}</span>
+      <span class="meta">Overlap ${Number(row.overlapCount || 0)}${row && row.hasRigMetrics ? ` | Rig ${Number(row.targetRigCount || 0)} / ${Number(row.otherRigCount || 0)}` : ""}</span>
     `;
     btn.addEventListener("click", () => {
       socialSynergySingleSelectedRivalKey = rowKey;
@@ -12729,19 +13112,39 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
 
   const allSeenTitle = document.createElement("div");
   allSeenTitle.className = "chart-meta";
-  allSeenTitle.style.margin = "0 0 8px 0";
-  allSeenTitle.style.fontWeight = "400";
-  allSeenTitle.style.fontSize = "12px";
-  allSeenTitle.textContent = "All seen songs";
+  allSeenTitle.style.setProperty("margin", "0 0 8px 0", "important");
+  allSeenTitle.style.setProperty("font-weight", "400", "important");
+  allSeenTitle.style.setProperty("font-size", "12px", "important");
+  allSeenTitle.style.setProperty("text-align", "center", "important");
+  allSeenTitle.style.setProperty("white-space", "nowrap", "important");
+  allSeenTitle.innerHTML = `
+    <span style="display:inline !important; white-space:nowrap !important;">
+      All seen songs
+      <span class="info-hover-wrap open-left" style="display:inline-flex !important; vertical-align:middle !important; margin-left:6px !important;">
+        <button class="info-hover-btn" type="button" aria-label="About all seen songs" style="display:inline-flex !important;">i</button>
+        <span class="info-hover-tooltip">All seen songs: data pool uses all songs either you or the target player has seen. This means, if you or the target player has played more tours, it is likely that numbers may be inflated just because they have seen more songs.</span>
+      </span>
+    </span>
+  `;
   compareWrap.appendChild(allSeenTitle);
   compareWrap.appendChild(createSocialSynergyRowElement(selectedRow.classic || selectedRow, targetLabel));
 
   const sharedSeenTitle = document.createElement("div");
   sharedSeenTitle.className = "chart-meta";
-  sharedSeenTitle.style.margin = "14px 0 8px 0";
-  sharedSeenTitle.style.fontWeight = "400";
-  sharedSeenTitle.style.fontSize = "12px";
-  sharedSeenTitle.textContent = "Shared seen songs";
+  sharedSeenTitle.style.setProperty("margin", "14px 0 8px 0", "important");
+  sharedSeenTitle.style.setProperty("font-weight", "400", "important");
+  sharedSeenTitle.style.setProperty("font-size", "12px", "important");
+  sharedSeenTitle.style.setProperty("text-align", "center", "important");
+  sharedSeenTitle.style.setProperty("white-space", "nowrap", "important");
+  sharedSeenTitle.innerHTML = `
+    <span style="display:inline !important; white-space:nowrap !important;">
+      Shared seen songs
+      <span class="info-hover-wrap open-left" style="display:inline-flex !important; vertical-align:middle !important; margin-left:6px !important;">
+        <button class="info-hover-btn" type="button" aria-label="About shared seen songs" style="display:inline-flex !important;">i</button>
+        <span class="info-hover-tooltip">Shared seen songs: data pool uses only songs that both of you have seen. This more accurately measures skill on equal terms.</span>
+      </span>
+    </span>
+  `;
   compareWrap.appendChild(sharedSeenTitle);
   if (selectedRow.shared) {
     compareWrap.appendChild(createSocialSynergyRowElement(selectedRow.shared, targetLabel));
@@ -12781,8 +13184,8 @@ function renderSocialSynergyTableRows(allRows) {
       <td>${Number(row.targetOnlyCount || 0)}</td>
       <td class="search-song-frequency-percentile"><span class="social-synergy-overlap-count-text">${Number(row.overlapCount || 0)}</span></td>
       <td>${Number(row.otherOnlyCount || 0)}</td>
-      <td>${Number(row.targetRigCount || 0)}</td>
-      <td>${Number(row.otherRigCount || 0)}</td>
+      <td>${row && row.hasRigMetrics ? Number(row.targetRigCount || 0) : "-"}</td>
+      <td>${row && row.hasRigMetrics ? Number(row.otherRigCount || 0) : "-"}</td>
     </tr>
   `).join("");
 
@@ -12795,6 +13198,8 @@ async function renderSocialSynergyView() {
   const list = document.getElementById("socialSynergyList");
   const meta = document.getElementById("socialSynergyMeta");
   if (!list || !meta) return;
+  const requestId = ++socialSynergyRequestId;
+  const modeSnapshot = getActiveDataSourceMode();
 
   if (!currentStatKey) {
     meta.innerText = "No player selected";
@@ -12809,6 +13214,7 @@ async function renderSocialSynergyView() {
 
   if (!currentPlayerId) {
     const playerEntry = await getPlayerEntryByName(currentDisplayName || currentStatKey);
+    if (requestId !== socialSynergyRequestId || modeSnapshot !== getActiveDataSourceMode()) return;
     if (playerEntry && playerEntry.playerId) {
       currentPlayerId = String(playerEntry.playerId);
       if (!currentDisplayName) {
@@ -12828,15 +13234,14 @@ async function renderSocialSynergyView() {
     return;
   }
 
-  const requestId = ++socialSynergyRequestId;
   meta.innerText = "Calculating top overlap...";
   list.innerHTML = '<div class="social-synergy-empty">Calculating top overlap...</div>';
 
-  const synergyPayload = await loadSocialSynergyData(currentPlayerId);
-  if (requestId !== socialSynergyRequestId) return;
+  const synergyPayload = await loadSocialSynergyData(currentPlayerId, modeSnapshot);
+  if (requestId !== socialSynergyRequestId || modeSnapshot !== getActiveDataSourceMode()) return;
 
   const targetLabel = currentDisplayName || currentStatKey;
-  const mergedRows = buildMergedSocialSynergyRows(synergyPayload);
+  const mergedRows = buildMergedSocialSynergyRows(synergyPayload, modeSnapshot);
   if (!mergedRows.length) {
     meta.innerText = "Found 0 players";
     list.innerHTML = '<div class="social-synergy-empty">No synergy count data found for this player.</div>';
@@ -12875,6 +13280,8 @@ async function renderOverviewSynergySummary() {
   const list = document.getElementById("overviewSynergyList");
   const meta = document.getElementById("overviewSynergyMeta");
   if (!list || !meta) return;
+  const requestId = ++overviewSynergyRequestId;
+  const modeSnapshot = getActiveDataSourceMode();
 
   if (!currentStatKey) {
     meta.innerText = "No player selected";
@@ -12884,6 +13291,7 @@ async function renderOverviewSynergySummary() {
 
   if (!currentPlayerId) {
     const playerEntry = await getPlayerEntryByName(currentDisplayName || currentStatKey);
+    if (requestId !== overviewSynergyRequestId || modeSnapshot !== getActiveDataSourceMode()) return;
     if (playerEntry && playerEntry.playerId) {
       currentPlayerId = String(playerEntry.playerId);
       if (!currentDisplayName) {
@@ -12898,15 +13306,14 @@ async function renderOverviewSynergySummary() {
     return;
   }
 
-  const requestId = ++overviewSynergyRequestId;
   meta.innerText = "Calculating top overlap...";
   list.innerHTML = '<div class="social-synergy-empty">Calculating top overlap...</div>';
 
-  const synergyPayload = await loadSocialSynergyData(currentPlayerId);
-  if (requestId !== overviewSynergyRequestId) return;
+  const synergyPayload = await loadSocialSynergyData(currentPlayerId, modeSnapshot);
+  if (requestId !== overviewSynergyRequestId || modeSnapshot !== getActiveDataSourceMode()) return;
 
   const targetLabel = currentDisplayName || currentStatKey;
-  const mergedRows = buildMergedSocialSynergyRows(synergyPayload);
+  const mergedRows = buildMergedSocialSynergyRows(synergyPayload, modeSnapshot);
   if (!mergedRows.length) {
     meta.innerText = "Found 0 players";
     list.innerHTML = '<div class="social-synergy-empty">No synergy count data found for this player.</div>';
@@ -14645,8 +15052,11 @@ function drawTagRadarFromSelection() {
     return;
   }
 
-  const labels = selectedEntries.map(([tag]) => tag);
-  const values = selectedEntries.map(([, value]) => Number(value.guessRate));
+  const radarEntriesAlphabetical = [...selectedEntries].sort((a, b) =>
+    String(a[0]).localeCompare(String(b[0]), undefined, { sensitivity: "base" })
+  );
+  const labels = radarEntriesAlphabetical.map(([tag]) => tag);
+  const values = radarEntriesAlphabetical.map(([, value]) => Number(value.guessRate));
   const radarScale = buildRadarScale(values);
 
   if (tagRadarChart) {
@@ -14708,6 +15118,18 @@ function drawTagRadarFromSelection() {
       ctx.restore();
     }
   };
+  const fixedTagRadarRadiusPlugin = {
+    id: "fixedTagRadarRadiusPlugin",
+    afterLayout(chart) {
+      const radialScale = chart && chart.scales ? chart.scales.r : null;
+      if (!radialScale || !Number.isFinite(radialScale.drawingArea)) return;
+      radialScale.drawingArea = Math.min(radialScale.drawingArea, 178);
+      if (chart && chart.chartArea) {
+        radialScale.xCenter = (chart.chartArea.left + chart.chartArea.right) / 2;
+        radialScale.yCenter = (chart.chartArea.top + chart.chartArea.bottom) / 2;
+      }
+    }
+  };
   function getTooltipAxisIndex(chart) {
     const tooltip = chart && chart.tooltip;
     if (!tooltip || tooltip.opacity === 0) {
@@ -14723,7 +15145,7 @@ function drawTagRadarFromSelection() {
 
   tagRadarChart = new Chart(document.getElementById("tagRadarChart"), {
     type: "radar",
-    plugins: [tagRadarTickLabelPlugin],
+    plugins: [tagRadarTickLabelPlugin, fixedTagRadarRadiusPlugin],
     data: {
       labels,
       datasets: [
@@ -15068,8 +15490,8 @@ async function loadWeightedGuessRateSeriesForCurrentPlayer() {
   }
 
   try {
-    const response = await fetch(dataUrl(`players/${playerId}/weighted_guess_rate/weighted_guess_rate.json`));
-    if (!response.ok) {
+    const response = await fetchPlayerScopedResponse(playerId, "weighted_guess_rate/weighted_guess_rate.json");
+    if (!response) {
       cachedWeightedGuessRateSeriesByPlayerId.set(playerId, []);
       return [];
     }
@@ -15184,8 +15606,8 @@ async function loadGenreDataForUser(displayName) {
     }
 
     const windowFile = getKnowledgeWindowFileName();
-    const genresRes = await fetch(dataUrl(`players/${currentPlayerId}/genres/${windowFile}`));
-    if (!genresRes.ok) {
+    const genresRes = await fetchPlayerScopedResponse(currentPlayerId, `genres/${windowFile}`);
+    if (!genresRes) {
       cachedGenreData = null;
       renderKnowledgeGenreRadar();
       return;
@@ -15222,8 +15644,8 @@ async function loadTagDataForUser(displayName) {
     }
 
     const windowFile = getKnowledgeWindowFileName();
-    const tagsRes = await fetch(dataUrl(`players/${currentPlayerId}/tags/${windowFile}`));
-    if (!tagsRes.ok) {
+    const tagsRes = await fetchPlayerScopedResponse(currentPlayerId, `tags/${windowFile}`);
+    if (!tagsRes) {
       cachedTagData = null;
       selectedTagNames = [];
       renderKnowledgeTagRadar();
@@ -15264,8 +15686,8 @@ async function loadByEraDataForUser(displayName) {
     }
 
     const windowFile = getKnowledgeWindowFileName();
-    const byEraRes = await fetch(dataUrl(`players/${currentPlayerId}/by_era/${windowFile}`));
-    if (!byEraRes.ok) {
+    const byEraRes = await fetchPlayerScopedResponse(currentPlayerId, `by_era/${windowFile}`);
+    if (!byEraRes) {
       if (requestSeq !== byEraDataRequestSeq) return;
       cachedByEraData = null;
       selectedByEraSeasonLabels = [];
@@ -15311,8 +15733,8 @@ async function loadArtistDataForUser(displayName) {
       currentDisplayName = displayName;
     }
 
-    const artistsRes = await fetch(dataUrl(`players/${currentPlayerId}/artists.json`));
-    if (!artistsRes.ok) {
+    const artistsRes = await fetchPlayerScopedResponse(currentPlayerId, "artists.json");
+    if (!artistsRes) {
       cachedArtistsData = null;
       artistFamiliarityEntries = [];
       selectedArtistName = "";
@@ -15321,6 +15743,7 @@ async function loadArtistDataForUser(displayName) {
     }
 
     const artistsPayload = await artistsRes.json();
+    await loadSongKeyById();
     cachedArtistsData = artistsPayload && typeof artistsPayload === "object" ? artistsPayload.data || null : null;
 
     const entries = cachedArtistsData && typeof cachedArtistsData === "object"
@@ -15639,7 +16062,7 @@ function applyTopDoublesDisplayLimit(rows) {
 
 function renderOverviewTopDoubles() {
   const mode = String(overviewTopDoublesMode || "general");
-  const rows = applyTopDoublesDisplayLimit(getOverviewTopDoublesRowsForMode(mode));
+  const rows = getOverviewTopDoublesRowsForMode(mode);
   updateOverviewTopDoublesTypeToggleUI();
   renderOverviewTopDoublesByIds({
     stripId: "overviewTopDoublesStrip",
@@ -15900,8 +16323,8 @@ async function loadOverviewAnimeTypeDataForUser(displayName) {
     for (const fileName of fileCandidates) {
       if (tried.has(fileName)) continue;
       tried.add(fileName);
-      const overviewRes = await fetch(dataUrl(`players/${currentPlayerId}/overview/${fileName}`));
-      if (!overviewRes.ok) continue;
+      const overviewRes = await fetchPlayerScopedResponse(currentPlayerId, `overview/${fileName}`);
+      if (!overviewRes) continue;
       overviewPayload = await overviewRes.json();
       break;
     }
@@ -15952,8 +16375,8 @@ async function loadOverviewTopSolosForUser(displayName) {
 
     await loadMalImageCache();
 
-    const solosRes = await fetch(dataUrl(`players/${currentPlayerId}/overview/top_solos.json`));
-    if (!solosRes.ok) {
+    const solosRes = await fetchPlayerScopedResponse(currentPlayerId, "overview/top_solos.json");
+    if (!solosRes) {
       cachedOverviewTopSolos = [];
       renderOverviewTopSolos();
       return;
@@ -15991,8 +16414,8 @@ async function loadOverviewTopRigSongsForUser(displayName) {
 
     await loadMalImageCache();
 
-    const rigSongsRes = await fetch(dataUrl(`players/${currentPlayerId}/overview/top_songs_by_rig.json`));
-    if (!rigSongsRes.ok) {
+    const rigSongsRes = await fetchPlayerScopedResponse(currentPlayerId, "overview/top_songs_by_rig.json");
+    if (!rigSongsRes) {
       cachedOverviewTopRigSongs = [];
       renderOverviewTopRigSongs();
       return;
@@ -16054,8 +16477,8 @@ async function loadOverviewTopDoublesForUser(displayName, { kind = "general" } =
 
     let payload = null;
     for (const fileName of fileCandidates) {
-      const res = await fetch(dataUrl(`players/${currentPlayerId}/overview/${fileName}`));
-      if (!res.ok) continue;
+      const res = await fetchPlayerScopedResponse(currentPlayerId, `overview/${fileName}`);
+      if (!res) continue;
       payload = await res.json();
       break;
     }
@@ -16231,8 +16654,8 @@ async function loadRelearnDataForUser(displayName) {
 
     await loadMalImageCache();
 
-    const relearnRes = await fetch(dataUrl(`players/${currentPlayerId}/relearn_tracker/relearn_songs.json`));
-    if (!relearnRes.ok) {
+    const relearnRes = await fetchPlayerScopedResponse(currentPlayerId, "relearn_tracker/relearn_songs.json");
+    if (!relearnRes) {
       cachedRelearnSongs = [];
       renderInsightsRelearnTracker();
       return;
@@ -16271,8 +16694,8 @@ async function loadWrongGuessDataForUser(displayName) {
 
     await loadMalImageCache();
 
-    const wrongGuessRes = await fetch(dataUrl(`players/${currentPlayerId}/recommendations_by_wrong_guess/top_200.json`));
-    if (!wrongGuessRes.ok) {
+    const wrongGuessRes = await fetchPlayerScopedResponse(currentPlayerId, "recommendations_by_wrong_guess/top_200.json");
+    if (!wrongGuessRes) {
       cachedWrongGuessSongs = [];
       renderInsightsWrongGuess();
       return;
@@ -16311,8 +16734,8 @@ async function loadNeverCorrectDataForUser(displayName) {
 
     await loadMalImageCache();
 
-    const neverCorrectRes = await fetch(dataUrl(`players/${currentPlayerId}/recommendations_never_correct/top_30.json`));
-    if (!neverCorrectRes.ok) {
+    const neverCorrectRes = await fetchPlayerScopedResponse(currentPlayerId, "recommendations_never_correct/top_30.json");
+    if (!neverCorrectRes) {
       cachedNeverCorrectSongs = [];
       renderInsightsNeverCorrect();
       return;
@@ -16351,8 +16774,15 @@ async function loadPopularityDataForUser(displayName) {
 
     await loadMalImageCache();
 
-    const popularityRes = await fetch(dataUrl("recommendations_by_popularity.json"));
-    if (!popularityRes.ok) {
+    const activeMode = getActiveDataSourceMode();
+    const popularityPath = activeMode === "usual"
+      ? "recommendations_by_popularity__usual.json"
+      : "recommendations_by_popularity__watched.json";
+    const popularityRes = await (async () => {
+      const globalRes = await fetch(dataUrl(popularityPath));
+      return globalRes.ok ? globalRes : null;
+    })();
+    if (!popularityRes) {
       cachedPopularitySongs = [];
       renderInsightsPopularity();
       return;
@@ -16360,7 +16790,7 @@ async function loadPopularityDataForUser(displayName) {
 
     const popularityPayload = await popularityRes.json();
     const popularityRows = Array.isArray(popularityPayload) ? popularityPayload : [];
-    cachedPopularitySongs = await hydrateSongRowsWithSongKey(popularityRows.slice(0, 1500));
+    cachedPopularitySongs = await hydrateSongRowsWithSongKey(popularityRows.slice(0, 300));
     popularityPageIndex = 0;
     renderInsightsPopularity();
   } catch (err) {
@@ -16372,20 +16802,35 @@ async function loadPopularityDataForUser(displayName) {
 
 async function loadPCorrectDataForUser(displayName) {
   try {
-    if (pcorrectDifficultySelect) {
-      const selected = String(pcorrectDifficultySelect.value || "45");
-      pcorrectDifficultyCap = PCORRECT_FILE_BY_CAP[selected] ? selected : "45";
-      pcorrectDifficultySelect.value = pcorrectDifficultyCap;
-    } else if (!PCORRECT_FILE_BY_CAP[pcorrectDifficultyCap]) {
-      pcorrectDifficultyCap = "45";
+    if (!displayName) {
+      cachedPCorrectSongs = [];
+      renderInsightsPCorrect();
+      return;
+    }
+
+    if (!currentPlayerId || currentDisplayName !== displayName) {
+      const playerEntry = await getPlayerEntryByName(displayName);
+      if (!playerEntry || !playerEntry.playerId) {
+        cachedPCorrectSongs = [];
+        renderInsightsPCorrect();
+        return;
+      }
+      currentPlayerId = String(playerEntry.playerId);
+      currentDisplayName = displayName;
     }
 
     await loadMalImageCache();
     await loadSongKeyById();
 
-    const pcorrectPath = PCORRECT_FILE_BY_CAP[pcorrectDifficultyCap] || PCORRECT_FILE_BY_CAP["45"];
-    const pcorrectRes = await fetch(dataUrl(pcorrectPath));
-    if (!pcorrectRes.ok) {
+    const activeMode = getActiveDataSourceMode();
+    const pcorrectPath = activeMode === "usual"
+      ? "pcorrect/pcorrect_usual.json"
+      : "pcorrect/pcorrect_watched.json";
+    const pcorrectRes = await (async () => {
+      const globalRes = await fetch(dataUrl(pcorrectPath));
+      return globalRes.ok ? globalRes : null;
+    })();
+    if (!pcorrectRes) {
       cachedPCorrectSongs = [];
       renderInsightsPCorrect();
       return;
@@ -16393,7 +16838,7 @@ async function loadPCorrectDataForUser(displayName) {
 
     const pcorrectPayload = await pcorrectRes.json();
     const pcorrectRows = Array.isArray(pcorrectPayload) ? pcorrectPayload : [];
-    cachedPCorrectSongs = await hydrateSongRowsWithSongKey(pcorrectRows);
+    cachedPCorrectSongs = await hydrateSongRowsWithSongKey(pcorrectRows.slice(0, 300));
     pcorrectPageIndex = 0;
     renderInsightsPCorrect();
   } catch (err) {
@@ -16432,8 +16877,15 @@ async function loadSearchSongsDataForUser(displayName) {
 
     await loadMalImageCache();
 
-    const searchSongsRes = await fetch(dataUrl(`players/${currentPlayerId}/search_songs/search_songs.json`));
-    if (!searchSongsRes.ok) {
+    const activeMode = getActiveDataSourceMode();
+    const modeScopedSearchSongsPath = `${activeMode}/search_songs/search_songs.json`;
+    const searchSongsRes =
+      await (async () => {
+        const res = await fetch(dataUrl(modeScopedSearchSongsPath));
+        return res.ok ? res : null;
+      })()
+      || await fetchPlayerScopedResponse(currentPlayerId, "search_songs/search_songs.json");
+    if (!searchSongsRes) {
       cachedSearchSongs = [];
       searchSongsPageIndex = 0;
       renderInsightsSearchSongs();
@@ -16467,7 +16919,8 @@ async function loadSearchSongsDataForUser(displayName) {
 }
 
 async function ensureSearchSongFrequencyData() {
-  if (searchSongFrequencyLoaded) return;
+  const activeMode = getActiveDataSourceMode();
+  if (searchSongFrequencyLoaded && searchSongFrequencyLoadedMode === activeMode) return;
   if (searchSongFrequencyLoadPromise) {
     await searchSongFrequencyLoadPromise;
     return;
@@ -16475,20 +16928,26 @@ async function ensureSearchSongFrequencyData() {
 
   searchSongFrequencyLoadPromise = (async () => {
     try {
-      const response = await fetch(dataUrl("recommendations_by_popularity.json"));
+      const frequencyPath = activeMode === "usual"
+        ? "recommendations_by_popularity__usual.json"
+        : "recommendations_by_popularity__watched.json";
+      const response = await fetch(dataUrl(frequencyPath));
       if (!response.ok) {
         cachedSearchSongFrequencyRows = [];
         searchSongFrequencyPageIndex = 0;
+        searchSongFrequencyLoadedMode = activeMode;
         return;
       }
       const payload = await response.json();
       const rows = Array.isArray(payload) ? payload : [];
       cachedSearchSongFrequencyRows = await hydrateSongRowsWithSongKey(rows);
       searchSongFrequencyPageIndex = 0;
+      searchSongFrequencyLoadedMode = activeMode;
     } catch (err) {
       console.error("Failed loading song frequency data", err);
       cachedSearchSongFrequencyRows = [];
       searchSongFrequencyPageIndex = 0;
+      searchSongFrequencyLoadedMode = activeMode;
     } finally {
       searchSongFrequencyLoaded = true;
       searchSongFrequencyLoadPromise = null;
@@ -17539,6 +17998,33 @@ function logTableImageLoadStatus(tableBodyId, label) {
     return acc;
   }, {});
   console.debug(`[image-status] ${label}`, summary);
+}
+
+function retryFailedInsightCoverImages() {
+  const tableIds = [
+    "relearnSongsTableBody",
+    "wrongGuessSongsTableBody",
+    "neverCorrectSongsTableBody",
+    "popularitySongsTableBody",
+    "pcorrectSongsTableBody"
+  ];
+  tableIds.forEach(tableId => {
+    const tableBody = document.getElementById(tableId);
+    if (!tableBody) return;
+    const failedImages = Array.from(tableBody.querySelectorAll("img.relearn-cover"))
+      .filter(img => {
+        const state = String(img.dataset.loadState || "").toLowerCase();
+        return state.includes("error") || state.includes("timeout");
+      });
+    failedImages.forEach((img, idx) => {
+      const currentSrc = String(img.getAttribute("src") || "").trim();
+      if (!currentSrc) return;
+      const cleanSrc = currentSrc.replace(/([?&])retry=\d+/g, "$1").replace(/([?&])ts=\d+/g, "$1").replace(/[?&]$/, "");
+      const separator = cleanSrc.includes("?") ? "&" : "?";
+      img.dataset.loadState = "reloading";
+      img.src = `${cleanSrc}${separator}retry_manual=1&ts=${Date.now()}_${idx}`;
+    });
+  });
 }
 
 function setRelearnInlineToggleState(toggleBtn, isPlaying) {
@@ -20922,15 +21408,29 @@ async function loadScopedStatsDataForCurrentUser(mode = "watched") {
   const playerId = String(playerEntry && playerEntry.playerId || "").trim();
   if (!playerId) return null;
 
-  const scopedFile = mode === "usual" ? "stat_usual.json" : "stat.json";
-  const scopedRes = await fetch(dataUrl(`players/${playerId}/${scopedFile}`));
-  if (!scopedRes.ok) return null;
-  const scopedPayload = await scopedRes.json();
-  const scopedStats = normalizeStatsMapFromPayload(scopedPayload);
-  return {
-    data: scopedStats,
-    playerEntry
-  };
+  const resolvedMode = mode === "usual" ? "usual" : "watched";
+  const scopedPaths = resolvedMode === "usual"
+    ? [
+      `players/${playerId}/usual/stat.json`,
+      `players/${playerId}/stat_usual.json`
+    ]
+    : [
+      `players/${playerId}/watched/stat.json`,
+      `players/${playerId}/stat.json`
+    ];
+
+  for (const scopedPath of scopedPaths) {
+    const scopedRes = await fetch(dataUrl(scopedPath));
+    if (!scopedRes.ok) continue;
+    const scopedPayload = await scopedRes.json();
+    const scopedStats = normalizeStatsMapFromPayload(scopedPayload);
+    return {
+      data: scopedStats,
+      playerEntry
+    };
+  }
+
+  return null;
 }
 
 async function loadStatsData(mode = "watched") {
@@ -21140,6 +21640,7 @@ Promise.all([
       overviewDataSourceMode = "usual";
     }
     updateDataRangeControlState(activeSection, activeSubSectionBySection[activeSection] || "");
+    refreshOverviewModeScopedCards(canonicalName);
     const performanceVisibleRecords = getVisibleUserData(getPerformanceRowsForActiveMode());
     renderOverviewForActiveMode();
     preloadFirstSubtabsForAllSections(canonicalName);
