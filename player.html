@@ -4449,6 +4449,26 @@
       cursor: pointer !important;
       font-size: 12px !important;
       font-weight: 700 !important;
+      transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease, border-color 120ms ease !important;
+    }
+
+    #otherToolsSection .original-tour-select-btn:hover:not(:disabled) {
+      border-color: #93c5fd !important;
+      background: #eff6ff !important;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.18) !important;
+    }
+
+    #otherToolsSection .original-tour-select-btn:active:not(:disabled) {
+      transform: translateY(1px) !important;
+      box-shadow: 0 1px 4px rgba(37, 99, 235, 0.2) inset !important;
+    }
+
+    #otherToolsSection .original-tour-select-btn:disabled {
+      cursor: not-allowed !important;
+      opacity: 0.55 !important;
+      background: #f8fafc !important;
+      border-color: #dbe3ee !important;
+      color: #64748b !important;
     }
 
     #otherToolsSection .original-tour-raw-wrap {
@@ -4520,6 +4540,7 @@
     }
 
     #socialSection .social-rivals-top-layout {
+      --social-rivals-top-card-height: 520px !important;
       display: grid !important;
       grid-template-columns: minmax(240px, 0.75fr) minmax(420px, 1.45fr) !important;
       gap: 14px !important;
@@ -4527,18 +4548,54 @@
       margin-bottom: 14px !important;
     }
 
+    #socialSection:not([data-social-subsection="Rivals"]) #socialRivalsTopLayout,
+    #socialSection:not([data-social-subsection="Rivals"]) #socialRivalsFilterView,
+    #socialSection:not([data-social-subsection="Rivals"]) #socialRivalsBubbleView,
+    #socialSection:not([data-social-subsection="Rivals"]) #socialRivalsView {
+      display: none !important;
+    }
+
     #socialSection .social-rivals-filter-card {
+      height: var(--social-rivals-top-card-height) !important;
       margin-bottom: 0 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
+    }
+
+    #socialSection #socialRivalsBubbleView {
+      height: var(--social-rivals-top-card-height) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
     }
 
     #socialSection #socialRivalsBubbleView .chart-meta {
       display: none !important;
     }
 
+    #socialSection #socialRivalsBubbleView .chart-wrap {
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      height: auto !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+
+    #socialSection #socialRivalsBubbleView .chart-wrap canvas {
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+    }
+
     #socialSection .social-rivals-filter-body {
       display: grid !important;
       grid-template-columns: minmax(0, 1fr) !important;
       gap: 10px !important;
+      flex: 1 1 auto !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
     }
 
     #socialSection .social-rivals-selected-inline {
@@ -4615,7 +4672,8 @@
       display: grid !important;
       grid-template-columns: minmax(0, 1fr) !important;
       gap: 10px 14px !important;
-      max-height: 320px !important;
+      max-height: none !important;
+      min-height: 0 !important;
       overflow-y: auto !important;
       margin: 0 !important;
       padding: 12px 14px 14px !important;
@@ -5112,7 +5170,7 @@
       display: grid !important;
       grid-template-columns: minmax(260px, 1fr) minmax(380px, 1.4fr) !important;
       gap: 14px !important;
-      align-items: start !important;
+      align-items: stretch !important;
       margin-top: 8px !important;
     }
 
@@ -5123,6 +5181,11 @@
       background: #f8fafc !important;
       padding: 10px !important;
       min-width: 0 !important;
+    }
+
+    #socialSection .social-team-selector-left {
+      display: flex !important;
+      flex-direction: column !important;
     }
 
     #socialSection .social-team-search-input {
@@ -5138,7 +5201,8 @@
     }
 
     #socialSection .social-team-game-list {
-      max-height: 220px !important;
+      flex: 0 0 auto !important;
+      max-height: calc(10 * 34px) !important;
       overflow-y: auto !important;
       border: 1px solid #e5e7eb !important;
       border-radius: 10px !important;
@@ -5170,8 +5234,11 @@
 
     #socialSection .social-team-select-row {
       display: flex !important;
-      justify-content: flex-end !important;
-      margin-bottom: 8px !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 10px !important;
+      margin-top: auto !important;
+      margin-bottom: 0 !important;
     }
 
     #socialSection .social-team-select-btn {
@@ -5183,12 +5250,34 @@
       cursor: pointer !important;
       font-size: 12px !important;
       font-weight: 700 !important;
+      transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease, border-color 120ms ease !important;
+    }
+
+    #socialSection .social-team-select-btn:hover:not(:disabled) {
+      border-color: #93c5fd !important;
+      background: #eff6ff !important;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.18) !important;
+    }
+
+    #socialSection .social-team-select-btn:active:not(:disabled) {
+      transform: translateY(1px) !important;
+      box-shadow: 0 1px 4px rgba(37, 99, 235, 0.2) inset !important;
+    }
+
+    #socialSection .social-team-select-btn:disabled {
+      cursor: not-allowed !important;
+      opacity: 0.55 !important;
+      background: #f8fafc !important;
+      border-color: #dbe3ee !important;
+      color: #64748b !important;
     }
 
     #socialSection .social-team-selected-game {
       font-size: 12px !important;
       color: #475569 !important;
       min-height: 18px !important;
+      margin: 0 !important;
+      min-width: 0 !important;
     }
 
     #socialSection .social-team-calendar-head {
@@ -6153,7 +6242,13 @@
       </div>
       <div id="socialRivalsBubbleView" class="chart-card" style="display:none;">
         <div class="chart-header">
-          <div class="chart-title">Average Guess Rate vs Rank vs Usefulness (usefulness bugged/old usefulness)</div>
+          <div class="chart-title">
+            Average Guess Rate vs Rank vs Usefulness
+            <span class="info-hover-wrap">
+              <button class="info-hover-btn" type="button" aria-label="About Bubble Axes">i</button>
+              <span class="info-hover-tooltip">Average Guess Rate and Usefulness are calculated from last 5 tours. Old Usefulness is automatically converted to New Usefulness using the model in Other Tools > Convert Rank/Usefulness</span>
+            </span>
+          </div>
           <div class="chart-meta">
             <span id="socialRivalsBubbleMeta">Found 0 players</span>
           </div>
@@ -6201,9 +6296,9 @@
           >
           <div id="socialTeamGameList" class="social-team-game-list"></div>
           <div class="social-team-select-row">
+            <div id="socialTeamSelectedGame" class="social-team-selected-game">Selected game: none</div>
             <button id="socialTeamSelectBtn" class="social-team-select-btn" type="button">Select Game</button>
           </div>
-          <div id="socialTeamSelectedGame" class="social-team-selected-game">Selected game: none</div>
         </div>
         <div class="social-team-selector-right">
           <div class="social-team-calendar-head">
@@ -6949,6 +7044,7 @@ let otherToolsCalendarGames = [];
 let otherToolsCalendarFilteredGames = [];
 let otherToolsCalendarSearchQuery = "";
 let otherToolsCalendarSelectedTimestamp = null;
+let otherToolsCalendarAppliedTimestamp = null;
 let otherToolsCalendarMonthCursor = null;
 let socialTeamRowsByTimestamp = null;
 let socialTeamGames = [];
@@ -7923,7 +8019,15 @@ function renderSubSectionContent(sectionKey, subSection) {
     return;
   }
 
+  if (sectionKey !== "social") {
+    stopSocialRivalsHeightSync();
+  }
+
   if (sectionKey === "social") {
+    const socialSectionEl = document.getElementById("socialSection");
+    if (socialSectionEl) {
+      socialSectionEl.setAttribute("data-social-subsection", String(subSection || ""));
+    }
     const synergyView = document.getElementById("socialSynergyView");
     const rivalsTopLayout = document.getElementById("socialRivalsTopLayout");
     const rivalsFilterView = document.getElementById("socialRivalsFilterView");
@@ -7934,6 +8038,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     const placeholderView = document.getElementById("socialPlaceholderView");
 
     if (subSection === "Synergy") {
+      stopSocialRivalsHeightSync();
       synergyView.style.display = "block";
       rivalsTopLayout.style.display = "none";
       rivalsFilterView.style.display = "none";
@@ -7955,6 +8060,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       teamContributionView.style.display = "none";
       rigAnalysisView.style.display = "none";
       placeholderView.style.display = "none";
+      startSocialRivalsHeightSync();
 
       const availableEntries = getAvailableSocialRivalEntries();
       const autoClosestKeys = getClosestAvailableRivalKeys(
@@ -7970,6 +8076,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     }
 
     if (subSection === "Team Contributions") {
+      stopSocialRivalsHeightSync();
       synergyView.style.display = "none";
       rivalsTopLayout.style.display = "none";
       rivalsFilterView.style.display = "none";
@@ -7983,6 +8090,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     }
 
     if (subSection === "Rig / List analysis") {
+      stopSocialRivalsHeightSync();
       synergyView.style.display = "none";
       rivalsTopLayout.style.display = "none";
       rivalsFilterView.style.display = "none";
@@ -8745,7 +8853,8 @@ if (originalTourNextMonthBtn) {
 }
 if (originalTourSelectBtn) {
   originalTourSelectBtn.addEventListener("click", () => {
-    renderOriginalTourRawDataTable();
+    otherToolsCalendarAppliedTimestamp = otherToolsCalendarSelectedTimestamp;
+    renderOriginalTourCalendarView();
   });
 }
 
@@ -8781,12 +8890,20 @@ if (socialTeamNextMonthBtn) {
 
 window.addEventListener("resize", () => {
   updateOriginalTourRawStickyColumnOffsets();
+  syncSocialRivalsBubbleHeight();
 });
 if (socialTeamSelectBtn) {
   socialTeamSelectBtn.addEventListener("click", () => {
     socialTeamAppliedTimestamp = socialTeamSelectedTimestamp;
     renderSocialTeamContributionView();
   });
+}
+
+function updateSocialTeamSelectButtonState() {
+  if (!socialTeamSelectBtn) return;
+  const hasSelected = Boolean(socialTeamSelectedTimestamp);
+  const hasPendingSelection = socialTeamSelectedTimestamp !== socialTeamAppliedTimestamp;
+  socialTeamSelectBtn.disabled = !hasSelected || !hasPendingSelection;
 }
 
 function updateByEraDataToggleLabel() {
@@ -11390,10 +11507,14 @@ function ensureOriginalTourCalendarData() {
     if (!otherToolsCalendarSelectedTimestamp || !otherToolsCalendarFilteredGames.some(game => game.timestamp === otherToolsCalendarSelectedTimestamp)) {
       otherToolsCalendarSelectedTimestamp = defaultGame.timestamp;
     }
+    if (!otherToolsCalendarAppliedTimestamp || !otherToolsCalendarFilteredGames.some(game => game.timestamp === otherToolsCalendarAppliedTimestamp)) {
+      otherToolsCalendarAppliedTimestamp = otherToolsCalendarSelectedTimestamp;
+    }
     const selectedGame = otherToolsCalendarFilteredGames.find(game => game.timestamp === otherToolsCalendarSelectedTimestamp) || defaultGame;
     otherToolsCalendarMonthCursor = new Date(selectedGame.dateObj.getFullYear(), selectedGame.dateObj.getMonth(), 1);
   } else {
     otherToolsCalendarSelectedTimestamp = null;
+    otherToolsCalendarAppliedTimestamp = null;
     otherToolsCalendarMonthCursor = new Date();
   }
 }
@@ -11421,8 +11542,8 @@ function filterOriginalTourGames() {
 
 function getSelectedOriginalTourRows() {
   if (!otherToolsRowsByTimestamp || !(otherToolsRowsByTimestamp instanceof Map)) return [];
-  if (!otherToolsCalendarSelectedTimestamp) return [];
-  return otherToolsRowsByTimestamp.get(otherToolsCalendarSelectedTimestamp) || [];
+  if (!otherToolsCalendarAppliedTimestamp) return [];
+  return otherToolsRowsByTimestamp.get(otherToolsCalendarAppliedTimestamp) || [];
 }
 
 function getTeamLabelFromRow(row) {
@@ -11439,7 +11560,7 @@ function renderOriginalTourPlayersPanel() {
   if (!rows.length) {
     wrap.innerHTML = `
       <div class="original-tour-players-title">Players</div>
-      <div class="relearn-empty">Select a game to view players.</div>
+      <div class="relearn-empty">Select a date/game, then press Select.</div>
     `;
     return;
   }
@@ -11764,7 +11885,6 @@ function updateOriginalTourRawStickyColumnOffsets(wrapEl = null) {
 
 function renderOriginalTourCalendarView() {
   const meta = document.getElementById("originalTourMeta");
-  const rawWrap = document.getElementById("originalTourRawDataWrap");
 
   if (!otherToolsCalendarFilteredGames.some(game => game.timestamp === otherToolsCalendarSelectedTimestamp)) {
     const fallback = otherToolsCalendarFilteredGames.length
@@ -11779,15 +11899,22 @@ function renderOriginalTourCalendarView() {
   if (meta) {
     meta.innerText = `Found ${otherToolsCalendarFilteredGames.length} games`;
   }
-  if (rawWrap) {
-    rawWrap.style.display = "none";
-    rawWrap.innerHTML = "";
+  if (!otherToolsCalendarFilteredGames.some(game => game.timestamp === otherToolsCalendarAppliedTimestamp)) {
+    otherToolsCalendarAppliedTimestamp = otherToolsCalendarSelectedTimestamp;
   }
 
   renderOriginalTourGameList();
   renderOriginalTourPlayersPanel();
   renderOriginalTourCalendarGrid();
   renderOriginalTourRawDataTable();
+  updateOriginalTourSelectButtonState();
+}
+
+function updateOriginalTourSelectButtonState() {
+  if (!originalTourSelectBtn) return;
+  const hasSelected = Boolean(otherToolsCalendarSelectedTimestamp);
+  const hasPendingSelection = otherToolsCalendarSelectedTimestamp !== otherToolsCalendarAppliedTimestamp;
+  originalTourSelectBtn.disabled = !hasSelected || !hasPendingSelection;
 }
 
 function resolveNumericMetricValue(row, key) {
@@ -12613,6 +12740,7 @@ function renderSocialTeamContributionView() {
   renderSocialTeamOriginalPlacementText();
   renderSocialTeamContributionSummaryCards();
   renderSocialTeamContributionRankings();
+  updateSocialTeamSelectButtonState();
 }
 
 function getLatestRankForPlayer(playerKeyOrRecords, recordsMaybe = null) {
@@ -13441,6 +13569,18 @@ function renderSelectedSocialRivalButtons(entriesByKey) {
 }
 
 function renderSocialRivalFilter() {
+  if (!(activeSection === "social" && activeSubSectionBySection.social === "Rivals")) {
+    const rivalsTopLayout = document.getElementById("socialRivalsTopLayout");
+    const rivalsFilterView = document.getElementById("socialRivalsFilterView");
+    const rivalsBubbleView = document.getElementById("socialRivalsBubbleView");
+    const rivalsView = document.getElementById("socialRivalsView");
+    if (rivalsTopLayout) rivalsTopLayout.style.display = "none";
+    if (rivalsFilterView) rivalsFilterView.style.display = "none";
+    if (rivalsBubbleView) rivalsBubbleView.style.display = "none";
+    if (rivalsView) rivalsView.style.display = "none";
+    return;
+  }
+
   const list = document.getElementById("socialRivalCheckboxList");
   const meta = document.getElementById("socialRivalsSelectionMeta");
   if (!list || !meta) return;
@@ -13548,6 +13688,8 @@ function renderSocialRivalFilter() {
       }
     });
   });
+
+  requestAnimationFrame(syncSocialRivalsBubbleHeight);
 }
 
 function getSelectedSocialRivalsMetricConfig() {
@@ -13568,7 +13710,73 @@ function getSocialRivalMainDisplayName(label, fallbackKey) {
   return main || raw;
 }
 
+function syncSocialRivalsBubbleHeight() {
+  const layout = document.getElementById("socialRivalsTopLayout");
+  const filterView = document.getElementById("socialRivalsFilterView");
+  const bubbleView = document.getElementById("socialRivalsBubbleView");
+  if (!layout || !filterView || !bubbleView) return;
+
+  const layoutVisible = layout.style.display !== "none";
+  const filterVisible = filterView.style.display !== "none";
+  const bubbleVisible = bubbleView.style.display !== "none";
+  if (!layoutVisible || !filterVisible || !bubbleVisible) {
+    bubbleView.style.height = "";
+    return;
+  }
+
+  const measuredHeight = Math.ceil(filterView.getBoundingClientRect().height);
+  if (!Number.isFinite(measuredHeight) || measuredHeight <= 0) {
+    bubbleView.style.height = "";
+    return;
+  }
+
+  bubbleView.style.height = `${measuredHeight}px`;
+}
+
+let socialRivalsHeightObserver = null;
+function startSocialRivalsHeightSync() {
+  const filterView = document.getElementById("socialRivalsFilterView");
+  if (!filterView) return;
+  if (socialRivalsHeightObserver) {
+    socialRivalsHeightObserver.disconnect();
+    socialRivalsHeightObserver = null;
+  }
+  if (typeof ResizeObserver === "function") {
+    socialRivalsHeightObserver = new ResizeObserver(() => {
+      syncSocialRivalsBubbleHeight();
+    });
+    socialRivalsHeightObserver.observe(filterView);
+  }
+  syncSocialRivalsBubbleHeight();
+}
+
+function stopSocialRivalsHeightSync() {
+  if (socialRivalsHeightObserver) {
+    socialRivalsHeightObserver.disconnect();
+    socialRivalsHeightObserver = null;
+  }
+  const bubbleView = document.getElementById("socialRivalsBubbleView");
+  if (bubbleView) {
+    bubbleView.style.height = "";
+  }
+}
+
 function renderSocialRivalsChart() {
+  if (!(activeSection === "social" && activeSubSectionBySection.social === "Rivals")) {
+    const rivalsTopLayout = document.getElementById("socialRivalsTopLayout");
+    const rivalsBubbleView = document.getElementById("socialRivalsBubbleView");
+    const rivalsView = document.getElementById("socialRivalsView");
+    if (rivalsTopLayout) rivalsTopLayout.style.display = "none";
+    if (rivalsBubbleView) rivalsBubbleView.style.display = "none";
+    if (rivalsView) rivalsView.style.display = "none";
+    return;
+  }
+
+  requestAnimationFrame(syncSocialRivalsBubbleHeight);
+  const shouldConvertLegacyUsefulness = getActiveDataSourceMode() === "watched";
+  if (shouldConvertLegacyUsefulness && !convertUsefulnessEstimator) {
+    ensureConvertEstimatorsLoaded().catch(() => {});
+  }
   const meta = document.getElementById("socialRivalsMeta");
   const title = document.getElementById("socialRivalsChartTitle");
   const canvas = document.getElementById("socialRivalsChart");
@@ -13857,18 +14065,19 @@ function renderSocialRivalsChart() {
       const guessRateValues = modeRows
         .map(row => Number(row && row["Guess rate"]))
         .filter(value => Number.isFinite(value));
+      const recentGuessRateValues = guessRateValues.slice(-5);
       const usefulnessValues = modeRows
         .map(row => {
           const raw = row && Object.prototype.hasOwnProperty.call(row, "Usefulness")
             ? row.Usefulness
             : (row ? row.usefulness : undefined);
-          const value = Number(raw);
-          return Number.isFinite(value) ? value : null;
+          return convertLegacyUsefulnessValue(raw, shouldConvertLegacyUsefulness);
         })
         .filter(value => value != null);
-      const gamesCount = guessRateValues.length;
+      const recentUsefulnessValues = usefulnessValues.slice(-5);
+      const gamesCount = recentGuessRateValues.length;
       const averageGuessRate = gamesCount
-        ? guessRateValues.reduce((sum, value) => sum + value, 0) / gamesCount
+        ? recentGuessRateValues.reduce((sum, value) => sum + value, 0) / gamesCount
         : 0;
       const latestRank = player.key === currentStatKey
         ? targetLatestRank
@@ -13876,8 +14085,8 @@ function renderSocialRivalsChart() {
           Number(rivalEntriesByKey.get(player.key) && rivalEntriesByKey.get(player.key).latestRank)
           || getLatestValidRankForPlayer(player.key, activeStatsData[player.key] || [])
         );
-      const usefulness = usefulnessValues.length
-        ? usefulnessValues.reduce((sum, value) => sum + value, 0) / usefulnessValues.length
+      const usefulness = recentUsefulnessValues.length
+        ? recentUsefulnessValues.reduce((sum, value) => sum + value, 0) / recentUsefulnessValues.length
         : 0;
       return {
         ...player,
@@ -13949,7 +14158,15 @@ function renderSocialRivalsChart() {
   const minBubbleRank = Math.min(...bubbleRanks);
   const maxBubbleRank = Math.max(...bubbleRanks);
   const bubbleRankRange = maxBubbleRank - minBubbleRank;
-  const bubbleRankPadding = Math.max(0.25, bubbleRankRange * 0.2);
+  const bubbleRankPadding = Math.max(1, bubbleRankRange * 0.12);
+  let bubbleXMin = Math.floor(minBubbleRank);
+  let bubbleXMax = Math.ceil(maxBubbleRank + bubbleRankPadding);
+  if (bubbleXMax <= bubbleXMin) {
+    bubbleXMin -= 1;
+    bubbleXMax += 1;
+  }
+  const bubbleXSpan = bubbleXMax - bubbleXMin;
+  const bubbleXTickStep = Math.max(1, Math.ceil(bubbleXSpan / 8));
 
   socialRivalsBubbleChart = new Chart(bubbleCanvas, {
     type: "bubble",
@@ -13973,15 +14190,15 @@ function renderSocialRivalsChart() {
               const avg = Number(point.y);
               const games = Number(point.gamesCount || 0);
               const usefulness = Number(point.usefulness || 0);
-              return `${context.dataset.label}: Rank ${rank.toFixed(3)}, Avg ${avg.toFixed(2)}%, Usefulness ${usefulness.toFixed(3)}, Games ${games}`;
+              return `${context.dataset.label}: Rank ${Math.round(rank)}, Avg ${Math.round(avg)}%, Usefulness ${usefulness.toFixed(3)}, Games ${games}`;
             }
           }
         }
       },
       scales: {
         x: {
-          min: minBubbleRank - bubbleRankPadding,
-          max: maxBubbleRank + bubbleRankPadding,
+          min: bubbleXMin,
+          max: bubbleXMax,
           title: {
             display: true,
             text: "Latest Rank",
@@ -13990,8 +14207,10 @@ function renderSocialRivalsChart() {
           },
           ticks: {
             color: "#555",
+            stepSize: bubbleXTickStep,
+            precision: 0,
             callback: function(value) {
-              return Number(value).toFixed(2);
+              return `${Math.round(Number(value))}`;
             }
           },
           grid: { color: "#e5e7eb" }
@@ -14009,7 +14228,7 @@ function renderSocialRivalsChart() {
             color: "#555",
             stepSize: bubbleYTickStep,
             callback: function(value) {
-              return `${Number(value).toFixed(1)}%`;
+              return `${Math.round(Number(value))}%`;
             }
           },
           grid: { color: "#e5e7eb" }
@@ -14017,6 +14236,7 @@ function renderSocialRivalsChart() {
       }
     }
   });
+  requestAnimationFrame(syncSocialRivalsBubbleHeight);
 }
 
 function buildTrend(values) {
@@ -17063,6 +17283,16 @@ function predictFromEstimator(estimator, values) {
     return acc + (coeff * x);
   }, 0);
   return Number.isFinite(score) ? score : null;
+}
+
+function convertLegacyUsefulnessValue(value, shouldConvert = true) {
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return null;
+  if (!shouldConvert) return numericValue;
+  if (numericValue >= 30) return numericValue;
+  if (!convertUsefulnessEstimator) return numericValue;
+  const predicted = predictFromEstimator(convertUsefulnessEstimator, [numericValue]);
+  return Number.isFinite(predicted) ? predicted : numericValue;
 }
 
 function renderEstimatorAccuracyLine(elementId, estimator) {
