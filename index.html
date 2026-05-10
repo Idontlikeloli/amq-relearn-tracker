@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AMQ Relearn Tracker</title>
-  <link rel="icon" type="image/jpeg" href="https://pub-d42861e79d364f02841015cca59918a2.r2.dev/tabicon.jpeg">
-  <link rel="preload" href="https://pub-d42861e79d364f02841015cca59918a2.r2.dev/final_compressed.mp4" as="video" type="video/mp4" crossorigin>
+  <link rel="icon" type="image/jpeg" href="https://amq-stats-api.yarthepro.workers.dev/tabicon.jpeg">
+  <link rel="preload" href="https://amq-stats-api.yarthepro.workers.dev/final_compressed.mp4" as="video" type="video/mp4" crossorigin>
   <link rel="stylesheet" href="style.css">
   <style>
     .login-username-wrap {
@@ -83,7 +83,7 @@
 const DATA_BASE_URL =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
     ? "./data"
-    : "https://pub-d42861e79d364f02841015cca59918a2.r2.dev";
+    : "https://amq-stats-api.yarthepro.workers.dev";
 
 function dataUrl(path) {
   const cleanPath = String(path || "")
@@ -110,7 +110,7 @@ function initializeLoginBackgroundToggle() {
     return;
   }
 
-  const loginVideoUrl = "https://pub-d42861e79d364f02841015cca59918a2.r2.dev/final_compressed.mp4";
+  const loginVideoUrl = "https://amq-stats-api.yarthepro.workers.dev/final_compressed.mp4";
 
   if (dataUpToEl && !dataUpToEl.dataset.defaultText) {
     dataUpToEl.dataset.defaultText = dataUpToEl.innerText;
