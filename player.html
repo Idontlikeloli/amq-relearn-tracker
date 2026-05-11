@@ -5633,7 +5633,7 @@
 
         <div class="card">
           <div class="card-title">Momentum</div>
-          <div class="card-subtitle">last 5 vs last 20</div>
+          <div class="card-subtitle">last 3 vs last 10 tours</div>
           <div class="card-value" id="overviewMomentum">-</div>
         </div>
 
@@ -6993,6 +6993,7 @@ let cachedNeverCorrectSongs = [];
 let cachedPopularitySongs = [];
 let cachedPCorrectSongs = [];
 let cachedSearchSongs = [];
+let cachedOverviewCombinedSearchSongs = [];
 let cachedSearchSongFrequencyRows = [];
 let cachedWeightedGuessRateSeriesByPlayerId = new Map();
 let cachedMalImageCache = null;
@@ -7127,8 +7128,8 @@ const MAX_SELECTED_SOCIAL_RIVALS = 4;
 const RELEARN_PAGE_SIZE = 20;
 const ARTIST_FAMILIARITY_PAGE_SIZE = 8;
 const SEARCH_SONGS_PAGE_SIZE = 20;
-const MOMENTUM_SHORT_WINDOW = 5;
-const MOMENTUM_LONG_WINDOW = 20;
+const MOMENTUM_SHORT_WINDOW = 3;
+const MOMENTUM_LONG_WINDOW = 10;
 const CONSISTENCY_WINDOW = 10;
 const SOCIAL_SYNERGY_PAGE_SIZE = 20;
 const SOCIAL_TEAM_FIXED_TIER_COUNT = 4;
@@ -8443,7 +8444,7 @@ function addOverviewInfoButtons() {
     },
     "Momentum": {
       meaning: "Displays your short term form.",
-      calculation: "Calculated by comparing the average of your last 5 guess rate against the average of your last 20 guess rate."
+      calculation: "Calculated by comparing the average of your last 3 guess rate against the average of your last 10 guess rate."
     },
     "Consistency": {
       meaning: "Shows how stable your recent performance is.",
@@ -17072,6 +17073,7 @@ async function loadSearchSongsDataForUser(displayName) {
   try {
     if (!displayName) {
       cachedSearchSongs = [];
+      cachedOverviewCombinedSearchSongs = [];
       searchSongsPageIndex = 0;
       renderInsightsSearchSongs();
       if (fullUserData.length) {
@@ -17084,6 +17086,7 @@ async function loadSearchSongsDataForUser(displayName) {
       const playerEntry = await getPlayerEntryByName(displayName);
       if (!playerEntry || !playerEntry.playerId) {
         cachedSearchSongs = [];
+        cachedOverviewCombinedSearchSongs = [];
         searchSongsPageIndex = 0;
         renderInsightsSearchSongs();
         if (fullUserData.length) {
@@ -17107,6 +17110,7 @@ async function loadSearchSongsDataForUser(displayName) {
       || await fetchPlayerScopedResponse(currentPlayerId, "search_songs/search_songs.json");
     if (!searchSongsRes) {
       cachedSearchSongs = [];
+      cachedOverviewCombinedSearchSongs = [];
       searchSongsPageIndex = 0;
       renderInsightsSearchSongs();
       if (fullUserData.length) {
@@ -17118,6 +17122,29 @@ async function loadSearchSongsDataForUser(displayName) {
     const searchSongsPayload = await searchSongsRes.json();
     const searchRows = Array.isArray(searchSongsPayload.searchSongs) ? searchSongsPayload.searchSongs : [];
     cachedSearchSongs = await hydrateSongRowsWithSongKey(searchRows);
+
+    const overviewCombinedRows = [];
+    for (const mode of ["watched", "usual"]) {
+      try {
+        const modeResponse = await fetchPlayerScopedResponse(
+          currentPlayerId,
+          "search_songs/search_songs.json",
+          mode
+        );
+        if (!modeResponse) continue;
+        const modePayload = await modeResponse.json();
+        const modeRows = Array.isArray(modePayload && modePayload.searchSongs) ? modePayload.searchSongs : [];
+        if (modeRows.length) {
+          overviewCombinedRows.push(...modeRows);
+        }
+      } catch (modeErr) {
+        console.warn(`Failed loading ${mode} search songs for overview`, modeErr);
+      }
+    }
+    cachedOverviewCombinedSearchSongs = overviewCombinedRows.length
+      ? await hydrateSongRowsWithSongKey(overviewCombinedRows)
+      : cachedSearchSongs;
+
     searchSongsPageIndex = 0;
     renderInsightsSearchSongs();
     renderInsightsWrongGuess();
@@ -17130,6 +17157,7 @@ async function loadSearchSongsDataForUser(displayName) {
   } catch (err) {
     console.error("Failed loading search songs data", err);
     cachedSearchSongs = [];
+    cachedOverviewCombinedSearchSongs = [];
     searchSongsPageIndex = 0;
     renderInsightsSearchSongs();
     if (fullUserData.length) {
@@ -18096,7 +18124,9 @@ function renderRigAnalysisView() {
 }
 
 function computeOverviewSongsSeenAndGotten() {
-  const songs = Array.isArray(cachedSearchSongs) ? cachedSearchSongs : [];
+  const songs = (Array.isArray(cachedOverviewCombinedSearchSongs) && cachedOverviewCombinedSearchSongs.length)
+    ? cachedOverviewCombinedSearchSongs
+    : (Array.isArray(cachedSearchSongs) ? cachedSearchSongs : []);
   return songs.reduce((acc, song) => {
     const pattern = String(song && song.pattern ? song.pattern : "");
     if (!pattern) return acc;
