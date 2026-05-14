@@ -5685,7 +5685,7 @@
       padding: 8px 10px !important;
       font-size: 13px !important;
       color: #0f172a !important;
-      background: #ffffff !important;
+      background: #f3f7fc !important;
     }
 
     #socialSection .social-rivals-search-input:focus {
@@ -5696,6 +5696,27 @@
 
     #socialSection #socialSynergyPlayerSearchInput {
       margin-bottom: 10px !important;
+    }
+
+    #socialSection .social-synergy-select-row {
+      margin-top: 20px !important;
+      padding-top: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+    }
+
+    #socialSection .social-synergy-selected-player {
+      font-size: 12px !important;
+      color: #475569 !important;
+      min-height: 18px !important;
+      line-height: 1.25 !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      min-width: 0 !important;
+      flex: 1 1 auto !important;
     }
 
     #socialSection .social-rivals-checkbox-list {
@@ -5757,11 +5778,23 @@
       gap: 12px !important;
       margin-top: 12px !important;
       margin-bottom: 12px !important;
-      align-items: start !important;
+      align-items: stretch !important;
+      min-height: 380px !important;
+      padding: 14px !important;
+      border: 1px solid #c9d6e5 !important;
+      border-radius: 14px !important;
+      background:
+        radial-gradient(circle at 10% 12%, rgba(201, 228, 221, 0.45), rgba(201, 228, 221, 0) 42%),
+        radial-gradient(circle at 8% 10%, rgba(214, 230, 247, 0.75), rgba(214, 230, 247, 0) 40%),
+        radial-gradient(circle at 92% 92%, rgba(201, 228, 221, 0.5), rgba(201, 228, 221, 0) 44%),
+        linear-gradient(145deg, #edf4fc 0%, #e8f0f9 52%, #e3edf8 100%) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 8px 18px rgba(81, 105, 132, 0.08) !important;
     }
 
     #socialSection .social-synergy-single-left,
     #socialSection .social-synergy-single-right {
+      display: flex !important;
+      flex-direction: column !important;
       border: 0 !important;
       border-radius: 0 !important;
       background: transparent !important;
@@ -5769,30 +5802,219 @@
       min-width: 0 !important;
     }
 
+    #socialSection .social-synergy-single-left {
+      display: flex !important;
+      flex-direction: column !important;
+      min-height: 100% !important;
+    }
+
+    #socialSection .social-synergy-single-title {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      margin: 0 0 8px 0 !important;
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      line-height: 1.2 !important;
+      color: #334155 !important;
+      white-space: nowrap !important;
+    }
+
+    #socialSection .social-synergy-single-title .info-hover-wrap {
+      align-self: center !important;
+      vertical-align: middle !important;
+    }
+
     #socialSection .social-synergy-single-picker-list {
       margin-top: 0 !important;
       display: flex !important;
       flex-direction: column !important;
       gap: 6px !important;
-      max-height: 220px !important;
+      height: 260px !important;
+      max-height: 260px !important;
+      min-height: 260px !important;
       overflow-y: auto !important;
-      border: 1px solid #e5e7eb !important;
+      border: 1px solid #d6e0ec !important;
       border-radius: 8px !important;
-      background: #ffffff !important;
+      background: #eef4fb !important;
       padding: 6px !important;
     }
 
     #socialSection #socialSynergySingleCompare {
-      max-height: 220px !important;
-      overflow: visible !important;
+      margin-top: 4px !important;
+      height: 380px !important;
+      min-height: 380px !important;
+      max-height: 380px !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
       padding-right: 2px !important;
+    }
+
+    #socialSection .social-synergy-single-right .chart-title {
+      font-size: 30px !important;
+      line-height: 1.08 !important;
+      font-weight: 800 !important;
+    }
+
+    #socialSection .social-synergy-extra-grid {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      gap: 12px !important;
+      margin-top: 12px !important;
+    }
+
+    #socialSection:not([data-social-subsection="Synergy"]) #socialSynergyExtraGrid,
+    #socialSection:not([data-social-subsection="Synergy"]) #socialTargetToOtherRigCard,
+    #socialSection:not([data-social-subsection="Synergy"]) #socialOtherToTargetRigCard {
+      display: none !important;
+    }
+
+    #socialSection .social-synergy-extra-card .chart-header {
+      margin-bottom: 8px !important;
+    }
+
+    #socialSection .social-synergy-rig-mode-toggle {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      padding: 3px !important;
+      border: 1px solid #9db8b5 !important;
+      border-radius: 10px !important;
+      background: #dbeceb !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.52) !important;
+      margin-bottom: 5px !important;
+    }
+
+    #socialSection .social-synergy-rig-mode-btn {
+      border: 0 !important;
+      border-radius: 8px !important;
+      background: transparent !important;
+      color: #4f6d72 !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.02em !important;
+      line-height: 1 !important;
+      padding: 7px 10px !important;
+      cursor: pointer !important;
+      white-space: nowrap !important;
+      transition: background-color 120ms ease, color 120ms ease, box-shadow 120ms ease !important;
+    }
+
+    #socialSection .social-synergy-rig-mode-btn:hover {
+      color: #2f4d52 !important;
+      background: rgba(255, 255, 255, 0.42) !important;
+    }
+
+    #socialSection .social-synergy-rig-mode-btn.active {
+      background: #f4faf9 !important;
+      color: #234247 !important;
+      box-shadow: 0 1px 3px rgba(61, 95, 101, 0.22) !important;
+    }
+
+    #socialSection .social-synergy-extra-card .chart-title {
+      font-size: 18px !important;
+      font-weight: 800 !important;
+      line-height: 1.3 !important;
+    }
+
+    #socialSection .social-synergy-extra-card {
+      border: 1px solid #bcd8d4 !important;
+      background: linear-gradient(145deg, #eef7f6 0%, #e6f1ef 52%, #ddebea 100%) !important;
+      box-shadow: 0 4px 10px rgba(71, 102, 112, 0.10) !important;
+    }
+
+    #socialSection .overview-rig-top-songs-wrap {
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      margin-top: 8px !important;
+      padding-bottom: 6px !important;
+    }
+
+    #socialSection .overview-rig-top-songs-strip {
+      display: inline-flex !important;
+      align-items: stretch !important;
+      gap: 10px !important;
+      min-width: 100% !important;
+    }
+
+    #socialSection .overview-rig-top-song-card {
+      width: 178px !important;
+      min-width: 178px !important;
+      border: 1px solid #C8DBEA !important;
+      border-radius: 10px !important;
+      background: #E9F2FA !important;
+      box-shadow: 0 3px 8px rgba(95, 76, 66, 0.12) !important;
+      padding: 8px !important;
+      box-sizing: border-box !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 6px !important;
+    }
+
+    #socialSection .overview-rig-top-song-rank {
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      color: #475569 !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+    }
+
+    #socialSection .overview-rig-top-song-cover {
+      width: 100% !important;
+      height: auto !important;
+      aspect-ratio: 2 / 3 !important;
+      border-radius: 8px !important;
+      object-fit: contain !important;
+      object-position: center center !important;
+      border: 0 !important;
+      background: transparent !important;
+      display: block !important;
+      flex: 0 0 auto !important;
+    }
+
+    #socialSection .overview-rig-top-song-anime,
+    #socialSection .overview-rig-top-song-name,
+    #socialSection .overview-rig-top-song-type,
+    #socialSection .overview-rig-top-song-submeta {
+      margin: 0 !important;
+      font-size: 13px !important;
+      line-height: 1.3 !important;
+      color: #4a3a33 !important;
+      word-break: break-word !important;
+      overflow-wrap: anywhere !important;
+    }
+
+    #socialSection .overview-rig-top-song-anime {
+      font-weight: 700 !important;
+    }
+
+    #socialSection .overview-rig-top-song-type {
+      color: #6a564e !important;
+      font-weight: 700 !important;
+    }
+
+    #socialSection .overview-rig-top-song-submeta {
+      color: #7b685f !important;
+      font-weight: 600 !important;
+    }
+
+    #socialSection .overview-rig-top-songs-empty {
+      color: #64748b !important;
+      font-size: 13px !important;
+      padding: 8px 2px !important;
+    }
+
+    @media (max-width: 1200px) {
+      #socialSection .social-synergy-extra-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
     }
 
     #socialSection .social-synergy-single-picker-item {
       width: 100% !important;
-      border: 1px solid #cbd5e1 !important;
+      border: 1px solid #c5d7e9 !important;
       border-radius: 8px !important;
-      background: #ffffff !important;
+      background: #e8eff8 !important;
       color: #0f172a !important;
       text-align: left !important;
       padding: 7px 8px !important;
@@ -5802,13 +6024,13 @@
     }
 
     #socialSection .social-synergy-single-picker-item:hover {
-      background: #f8fafc !important;
+      background: #e2ebf6 !important;
       border-color: #94a3b8 !important;
     }
 
     #socialSection .social-synergy-single-picker-item.active {
       border-color: #93c5fd !important;
-      background: #eff6ff !important;
+      background: #dfeafb !important;
       font-weight: 700 !important;
     }
 
@@ -5821,10 +6043,31 @@
     }
 
     #socialSection .social-synergy-row {
-      border: 1px solid #e2e8f0 !important;
+      border: 1px solid #d4deea !important;
       border-radius: 10px !important;
-      background: #f8fafc !important;
+      background: #edf3fa !important;
       padding: 10px 12px !important;
+    }
+
+    #socialSection .social-synergy-stats-card {
+      border-color: #b8c7da !important;
+      background: #dce4ef !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48) !important;
+    }
+
+    #socialSection .social-synergy-stats-card .social-synergy-row-meta {
+      color: #3c4f67 !important;
+    }
+
+    #socialSection .social-synergy-stats-card .social-synergy-row-meta strong {
+      color: #24364d !important;
+    }
+
+    #socialSection #socialSynergyView {
+      border: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      padding: 0 !important;
     }
 
     #socialSection .social-synergy-row-head {
@@ -5845,13 +6088,9 @@
       white-space: nowrap !important;
     }
 
-    #socialSection .social-synergy-target-label {
-      color: #2563eb !important;
-      font-weight: 700 !important;
-    }
-
+    #socialSection .social-synergy-target-label,
     #socialSection .social-synergy-rival-label {
-      color: #dc2626 !important;
+      color: #334155 !important;
       font-weight: 700 !important;
     }
 
@@ -5978,6 +6217,7 @@
       color: #64748b !important;
       font-size: 13px !important;
       padding: 8px 2px !important;
+      margin-top: 30px !important;
     }
 
     #socialSection .social-synergy-table-wrap {
@@ -6079,13 +6319,9 @@
       white-space: nowrap !important;
     }
 
-    #overviewSection .social-synergy-target-label {
-      color: #2563eb !important;
-      font-weight: 700 !important;
-    }
-
+    #overviewSection .social-synergy-target-label,
     #overviewSection .social-synergy-rival-label {
-      color: #dc2626 !important;
+      color: #334155 !important;
       font-weight: 700 !important;
     }
 
@@ -6280,6 +6516,8 @@
       cursor: pointer !important;
       font-size: 12px !important;
       font-weight: 700 !important;
+      line-height: 1 !important;
+      min-height: 32px !important;
       transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease, border-color 120ms ease !important;
     }
 
@@ -6504,6 +6742,7 @@
 
       #socialSection .social-synergy-single-layout {
         grid-template-columns: minmax(0, 1fr) !important;
+        min-height: 0 !important;
       }
 
       #knowledgeGenreView .tag-familiarity-body {
@@ -7348,18 +7587,64 @@
       </div>
       <div class="social-synergy-single-layout">
         <div class="social-synergy-single-left">
-          <input id="socialSynergyPlayerSearchInput" class="social-rivals-search-input" type="text" placeholder="Search player...">
-          <div id="socialSynergyPlayerSearchList" class="social-synergy-single-picker-list"></div>
-        </div>
-        <div class="social-synergy-single-right">
-          <div class="chart-title" style="font-size:13px;">
+          <div class="social-synergy-single-title">
             Single Comparison
             <span class="info-hover-wrap">
               <button class="info-hover-btn" type="button" aria-label="About Synergy Comparison">i</button>
               <span class="info-hover-tooltip">Shows overlap between you and the target player. Overlap is measured by what you both got correct(thus it is NOT rig overlap). The left displays unique songs you got correct, while the right displays unique songs the target player got correct.</span>
             </span>
           </div>
+          <input id="socialSynergyPlayerSearchInput" class="social-rivals-search-input" type="text" placeholder="Search player...">
+          <div id="socialSynergyPlayerSearchList" class="social-synergy-single-picker-list"></div>
+          <div class="social-synergy-select-row">
+            <div id="socialSynergySelectedPlayer" class="social-synergy-selected-player">Selected player</div>
+            <button id="socialSynergySelectBtn" class="social-team-select-btn" type="button">Select</button>
+          </div>
+        </div>
+        <div class="social-synergy-single-right">
           <div id="socialSynergySingleCompare" class="social-synergy-list"></div>
+        </div>
+      </div>
+    </div>
+    <div id="socialSynergyExtraGrid" class="social-synergy-extra-grid" style="display:none;">
+      <div id="socialTargetToOtherRigCard" class="chart-card social-synergy-extra-card" style="display:none;">
+        <div class="chart-header">
+          <div class="chart-title">
+            Their rig, you hit (sorted by most dog)
+            <span class="info-hover-wrap">
+              <button class="info-hover-btn" type="button" aria-label="About Their rig, you hit">i</button>
+              <span class="info-hover-tooltip">Songs from their rig that you answered correctly. For "Unique rig", shows only songs that you got unique to their list. For "Include shared rig", it can include songs from your list that are in the selected player's list. Both players don't have to be in the same game.</span>
+            </span>
+          </div>
+          <div class="chart-meta">
+            <div class="social-synergy-rig-mode-toggle">
+              <button id="socialTargetRigUniqueBtn" class="social-synergy-rig-mode-btn active" type="button">Unique rig</button>
+              <button id="socialTargetRigSharedBtn" class="social-synergy-rig-mode-btn" type="button">Include shared rig</button>
+            </div>
+          </div>
+        </div>
+        <div class="overview-rig-top-songs-wrap">
+          <div id="socialTargetToOtherRigStrip" class="overview-rig-top-songs-strip"></div>
+        </div>
+      </div>
+      <div id="socialOtherToTargetRigCard" class="chart-card social-synergy-extra-card" style="display:none;">
+        <div class="chart-header">
+          <div class="chart-title">
+            Your rig, they hit (sorted by most dog)
+            <span class="info-hover-wrap">
+              <button class="info-hover-btn" type="button" aria-label="About Your rig, they hit">i</button>
+              <span class="info-hover-tooltip">Songs from your rig that they answered correctly. For "Unique rig", shows only songs that they got unique to your list. For "Include shared rig", it can include songs from their list that are in your list. Both players don't have to be in the same game.</span>
+            </span>
+          </div>
+          <div class="chart-meta">
+            <div class="social-synergy-rig-mode-toggle">
+              <button id="socialOtherRigUniqueBtn" class="social-synergy-rig-mode-btn active" type="button">Unique rig</button>
+              <button id="socialOtherRigSharedBtn" class="social-synergy-rig-mode-btn" type="button">Include shared rig</button>
+            </div>
+          </div>
+        </div>
+        <div class="overview-rig-top-songs-wrap">
+          <div id="socialOtherToTargetRigStrip" class="overview-rig-top-songs-strip"></div>
         </div>
       </div>
     </div>
@@ -8063,6 +8348,7 @@ const overviewLanguageJpBtn = document.getElementById("overviewLanguageJpBtn");
 const byEraSeasonSearchInput = document.getElementById("byEraSeasonSearchInput");
 const socialRivalSearchInput = document.getElementById("socialRivalSearchInput");
 const socialSynergyPlayerSearchInput = document.getElementById("socialSynergyPlayerSearchInput");
+const socialSynergySelectBtn = document.getElementById("socialSynergySelectBtn");
 const socialRivalsMetricSelect = document.getElementById("socialRivalsMetricSelect");
 const artistFamiliaritySearchInput = document.getElementById("artistFamiliaritySearchInput");
 const artistFamiliaritySearchBtn = document.getElementById("artistFamiliaritySearchBtn");
@@ -8208,6 +8494,9 @@ let selectedSocialRivalKeys = [];
 let socialRivalSearchQuery = "";
 let socialSynergySingleSearchQuery = "";
 let socialSynergySingleSelectedRivalKey = "";
+let socialSynergySinglePendingRivalKey = "";
+let socialSynergyTargetRigMode = "unique";
+let socialSynergyOtherRigMode = "unique";
 let socialRivalsMetricKey = "guess_rate";
 let socialRivalsSelectionOwnerKey = "";
 let socialSynergyRequestId = 0;
@@ -8215,6 +8504,8 @@ let overviewSynergyRequestId = 0;
 const socialSynergyCacheByKey = new Map();
 const socialSynergyCachePromiseByKey = new Map();
 let cachedSocialSynergyRows = [];
+let cachedSocialSynergyRigTables = null;
+let cachedSocialSynergyRigStats = null;
 let currentDisplayName = null;
 let currentPlayerId = null;
 let currentStatKey = null;
@@ -9184,6 +9475,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       socialSectionEl.setAttribute("data-social-subsection", String(subSection || ""));
     }
     const synergyView = document.getElementById("socialSynergyView");
+    const synergyExtraGrid = document.getElementById("socialSynergyExtraGrid");
     const rivalsTopLayout = document.getElementById("socialRivalsTopLayout");
     const rivalsFilterView = document.getElementById("socialRivalsFilterView");
     const rivalsView = document.getElementById("socialRivalsView");
@@ -9195,6 +9487,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     if (subSection === "Synergy") {
       stopSocialRivalsHeightSync();
       synergyView.style.display = "block";
+      if (synergyExtraGrid) synergyExtraGrid.style.display = "none";
       rivalsTopLayout.style.display = "none";
       rivalsFilterView.style.display = "none";
       rivalsView.style.display = "none";
@@ -9208,6 +9501,7 @@ function renderSubSectionContent(sectionKey, subSection) {
 
     if (subSection === "Rivals") {
       synergyView.style.display = "none";
+      if (synergyExtraGrid) synergyExtraGrid.style.display = "none";
       rivalsTopLayout.style.display = "grid";
       rivalsFilterView.style.display = "block";
       rivalsView.style.display = "block";
@@ -9233,6 +9527,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     if (subSection === "Team Contributions") {
       stopSocialRivalsHeightSync();
       synergyView.style.display = "none";
+      if (synergyExtraGrid) synergyExtraGrid.style.display = "none";
       rivalsTopLayout.style.display = "none";
       rivalsFilterView.style.display = "none";
       rivalsView.style.display = "none";
@@ -9247,6 +9542,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     if (subSection === "Rig / List analysis") {
       stopSocialRivalsHeightSync();
       synergyView.style.display = "none";
+      if (synergyExtraGrid) synergyExtraGrid.style.display = "none";
       rivalsTopLayout.style.display = "none";
       rivalsFilterView.style.display = "none";
       rivalsView.style.display = "none";
@@ -9261,6 +9557,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     }
 
     synergyView.style.display = "none";
+    if (synergyExtraGrid) synergyExtraGrid.style.display = "none";
     rivalsTopLayout.style.display = "none";
     rivalsFilterView.style.display = "none";
     rivalsView.style.display = "none";
@@ -9835,6 +10132,33 @@ if (socialSynergyPlayerSearchInput) {
     socialSynergySingleSearchQuery = String(event.target.value || "").toLowerCase();
     renderSocialSynergySinglePicker(cachedSocialSynergyRows, currentDisplayName || currentStatKey || "You");
   });
+}
+
+if (socialSynergySelectBtn) {
+  socialSynergySelectBtn.addEventListener("click", () => {
+    if (!socialSynergySinglePendingRivalKey) return;
+    socialSynergySingleSelectedRivalKey = socialSynergySinglePendingRivalKey;
+    renderSocialSynergySinglePicker(cachedSocialSynergyRows, currentDisplayName || currentStatKey || "You");
+    renderSocialSynergyRigTables();
+  });
+}
+
+const socialTargetRigUniqueBtn = document.getElementById("socialTargetRigUniqueBtn");
+const socialTargetRigSharedBtn = document.getElementById("socialTargetRigSharedBtn");
+const socialOtherRigUniqueBtn = document.getElementById("socialOtherRigUniqueBtn");
+const socialOtherRigSharedBtn = document.getElementById("socialOtherRigSharedBtn");
+
+if (socialTargetRigUniqueBtn) {
+  socialTargetRigUniqueBtn.addEventListener("click", () => setSocialSynergyRigMode("target", "unique"));
+}
+if (socialTargetRigSharedBtn) {
+  socialTargetRigSharedBtn.addEventListener("click", () => setSocialSynergyRigMode("target", "shared"));
+}
+if (socialOtherRigUniqueBtn) {
+  socialOtherRigUniqueBtn.addEventListener("click", () => setSocialSynergyRigMode("other", "unique"));
+}
+if (socialOtherRigSharedBtn) {
+  socialOtherRigSharedBtn.addEventListener("click", () => setSocialSynergyRigMode("other", "shared"));
 }
 
 if (socialRivalsMetricSelect) {
@@ -11007,6 +11331,15 @@ function rerenderRecommendationsForLanguage() {
     const activeSubSection = activeSubSectionBySection.knowledge || "";
     if (activeSubSection === "Artist Familiarity") {
       renderArtistFamiliarityView();
+    }
+    return;
+  }
+
+  if (activeSection === "social") {
+    const activeSubSection = activeSubSectionBySection.social || "";
+    if (activeSubSection === "Synergy") {
+      renderSocialSynergySinglePicker(cachedSocialSynergyRows, currentDisplayName || currentStatKey || "You");
+      renderSocialSynergyRigTables();
     }
   }
 }
@@ -14669,6 +15002,15 @@ async function loadSocialSynergyData(playerId, modeOverride = null) {
         fetchPlayerScopedResponse(targetPlayerId, "synergy/synergy_count.json", activeMode),
         fetchPlayerScopedResponse(targetPlayerId, "synergy/synergy_samesongsseen.json", activeMode)
       ]);
+      const [targetToOtherRigRes, otherToTargetRigRes, targetToOtherRigNoDuplicatesRes, otherToTargetRigNoDuplicatesRes, rigStatsRes] = activeMode === "watched"
+        ? await Promise.allSettled([
+            fetchPlayerScopedResponse(targetPlayerId, "synergy/target_to_other_rig_top50.json", activeMode),
+            fetchPlayerScopedResponse(targetPlayerId, "synergy/other_to_target_rig_top50.json", activeMode),
+            fetchPlayerScopedResponse(targetPlayerId, "synergy/target_to_other_rig_top50_no_duplicates.json", activeMode),
+            fetchPlayerScopedResponse(targetPlayerId, "synergy/other_to_target_rig_top50_no_duplicates.json", activeMode),
+            fetchPlayerScopedResponse(targetPlayerId, "synergy/synergy_rigstats.json", activeMode)
+          ])
+        : [null, null, null, null, null];
       const parsePayload = async (result) => {
         if (!result || result.status !== "fulfilled" || !result.value) return null;
         const payload = await result.value.json();
@@ -14676,9 +15018,19 @@ async function loadSocialSynergyData(playerId, modeOverride = null) {
       };
       const classicPayload = await parsePayload(classicRes);
       const sharedPayload = await parsePayload(sharedRes);
+      const targetToOtherRigPayload = await parsePayload(targetToOtherRigRes);
+      const otherToTargetRigPayload = await parsePayload(otherToTargetRigRes);
+      const targetToOtherRigNoDuplicatesPayload = await parsePayload(targetToOtherRigNoDuplicatesRes);
+      const otherToTargetRigNoDuplicatesPayload = await parsePayload(otherToTargetRigNoDuplicatesRes);
+      const rigStatsPayload = await parsePayload(rigStatsRes);
       const payload = {
         classic: classicPayload,
-        shared: sharedPayload
+        shared: sharedPayload,
+        targetToOtherRig: targetToOtherRigPayload,
+        otherToTargetRig: otherToTargetRigPayload,
+        targetToOtherRigNoDuplicates: targetToOtherRigNoDuplicatesPayload,
+        otherToTargetRigNoDuplicates: otherToTargetRigNoDuplicatesPayload,
+        rigStats: rigStatsPayload
       };
       socialSynergyCacheByKey.set(cacheKey, payload);
       return payload;
@@ -14695,6 +15047,223 @@ async function loadSocialSynergyData(playerId, modeOverride = null) {
   return requestPromise;
 }
 
+function getSongRowsFromRigSongIds(songIds, songKeyById) {
+  if (!Array.isArray(songIds) || !songKeyById || typeof songKeyById !== "object") return [];
+  const fallbackMalByAnime = new Map();
+  Object.values(songKeyById).forEach((row) => {
+    if (!row || typeof row !== "object") return;
+    const malIdValue = row.malId != null ? String(row.malId).trim() : "";
+    if (!malIdValue) return;
+    const animeEnglish = String(row.animeEnglish || "").trim().toLowerCase();
+    const animeRomaji = String(row.animeRomaji || "").trim().toLowerCase();
+    if (animeEnglish && !fallbackMalByAnime.has(animeEnglish)) fallbackMalByAnime.set(animeEnglish, malIdValue);
+    if (animeRomaji && !fallbackMalByAnime.has(animeRomaji)) fallbackMalByAnime.set(animeRomaji, malIdValue);
+  });
+
+  const rows = songIds
+    .map((songId, index) => {
+      const numericId = Number(songId);
+      if (!Number.isFinite(numericId)) return null;
+      const keyRow = songKeyById[Math.trunc(numericId)];
+      if (!keyRow || typeof keyRow !== "object") return null;
+      const animeEnglish = String(keyRow.animeEnglish || "");
+      const animeRomaji = String(keyRow.animeRomaji || "");
+      const directMalId = keyRow.malId != null ? String(keyRow.malId).trim() : "";
+      const fallbackMalId = fallbackMalByAnime.get(animeEnglish.trim().toLowerCase())
+        || fallbackMalByAnime.get(animeRomaji.trim().toLowerCase())
+        || "";
+      return {
+        rank: index + 1,
+        malId: directMalId || fallbackMalId || null,
+        anime: String(animeEnglish || animeRomaji || ""),
+        animeName: String(animeEnglish || animeRomaji || ""),
+        animeEnglish,
+        animeRomaji,
+        songName: String(keyRow.songName || ""),
+        type: String(keyRow.type || ""),
+        correctPct: Number(keyRow.correctPct)
+      };
+    })
+    .filter(Boolean);
+  return rows;
+}
+
+function renderSocialSynergyRigStripById(config) {
+  const { cardId, stripId, rows, emptyMessage } = config || {};
+  const card = document.getElementById(cardId);
+  const strip = document.getElementById(stripId);
+  if (!card || !strip) return;
+
+  const safeRows = Array.isArray(rows) ? rows : [];
+  card.style.display = "";
+  if (!safeRows.length) {
+    strip.innerHTML = `<div class="overview-rig-top-songs-empty">${escapeHtml(emptyMessage || "No data found.")}</div>`;
+    return;
+  }
+
+  strip.innerHTML = "";
+  safeRows.forEach((row, index) => {
+    const cardNode = document.createElement("div");
+    cardNode.className = "overview-rig-top-song-card";
+
+    const rank = document.createElement("p");
+    rank.className = "overview-rig-top-song-rank";
+    rank.innerText = `#${Number(row.rank) || (index + 1)}`;
+    cardNode.appendChild(rank);
+
+    const coverNode = buildInsightsCoverNode(row);
+    coverNode.classList.add("overview-rig-top-song-cover");
+    cardNode.appendChild(coverNode);
+
+    const anime = document.createElement("p");
+    anime.className = "overview-rig-top-song-anime";
+    anime.innerText = getLanguageAwareAnimeName(row);
+    cardNode.appendChild(anime);
+
+    const songName = document.createElement("p");
+    songName.className = "overview-rig-top-song-name";
+    songName.innerText = String(row && row.songName ? row.songName : "—");
+    cardNode.appendChild(songName);
+
+    const type = document.createElement("p");
+    type.className = "overview-rig-top-song-type";
+    type.innerText = String(row && row.type ? row.type : "—");
+    cardNode.appendChild(type);
+
+    const sub = document.createElement("p");
+    sub.className = "overview-rig-top-song-submeta";
+    sub.innerText = Number.isFinite(row.correctPct) ? `${row.correctPct.toFixed(1)}% correct` : "—";
+    cardNode.appendChild(sub);
+
+    strip.appendChild(cardNode);
+  });
+}
+
+function syncSocialSynergyRigModeButtons() {
+  const targetUniqueActive = socialSynergyTargetRigMode === "unique";
+  const otherUniqueActive = socialSynergyOtherRigMode === "unique";
+  const buttonPairs = [
+    ["socialTargetRigUniqueBtn", targetUniqueActive],
+    ["socialTargetRigSharedBtn", !targetUniqueActive],
+    ["socialOtherRigUniqueBtn", otherUniqueActive],
+    ["socialOtherRigSharedBtn", !otherUniqueActive]
+  ];
+  buttonPairs.forEach(([id, isActive]) => {
+    const button = document.getElementById(id);
+    if (!button) return;
+    button.classList.toggle("active", Boolean(isActive));
+  });
+}
+
+function setSocialSynergyRigMode(side, mode, options = {}) {
+  const nextMode = mode === "shared" ? "shared" : "unique";
+  const normalizedSide = side === "other" ? "other" : "target";
+  if (normalizedSide === "target") {
+    socialSynergyTargetRigMode = nextMode;
+  } else {
+    socialSynergyOtherRigMode = nextMode;
+  }
+  syncSocialSynergyRigModeButtons();
+  if (options && options.rerender === false) return;
+  renderSocialSynergyRigTables();
+}
+
+async function renderSocialSynergyRigTables(modeOverride = null) {
+  const extraGrid = document.getElementById("socialSynergyExtraGrid");
+  const targetCard = document.getElementById("socialTargetToOtherRigCard");
+  const otherCard = document.getElementById("socialOtherToTargetRigCard");
+  if (!extraGrid || !targetCard || !otherCard) return;
+  const socialSectionEl = document.getElementById("socialSection");
+  const activeSocialSubsection = socialSectionEl ? String(socialSectionEl.getAttribute("data-social-subsection") || "") : "";
+  if (activeSocialSubsection !== "Synergy") {
+    extraGrid.style.display = "none";
+    targetCard.style.display = "none";
+    otherCard.style.display = "none";
+    return;
+  }
+  syncSocialSynergyRigModeButtons();
+
+  const activeMode = modeOverride === "usual" ? "usual" : (modeOverride === "watched" ? "watched" : getActiveDataSourceMode());
+  if (activeMode !== "watched") {
+    extraGrid.style.display = "none";
+    targetCard.style.display = "none";
+    otherCard.style.display = "none";
+    return;
+  }
+
+  extraGrid.style.display = "";
+  targetCard.style.display = "";
+  otherCard.style.display = "";
+
+  const noSelection = '<div class="overview-rig-top-songs-empty">Select a player to see songs.</div>';
+  const targetStrip = document.getElementById("socialTargetToOtherRigStrip");
+  const otherStrip = document.getElementById("socialOtherToTargetRigStrip");
+  if (!targetStrip || !otherStrip) return;
+
+  if (!socialSynergySingleSelectedRivalKey || !cachedSocialSynergyRigTables) {
+    targetStrip.innerHTML = noSelection;
+    otherStrip.innerHTML = noSelection;
+    return;
+  }
+
+  const selectedRow = (Array.isArray(cachedSocialSynergyRows) ? cachedSocialSynergyRows : [])
+    .find(row => getSocialSynergyComparableKey(row) === socialSynergySingleSelectedRivalKey);
+  if (!selectedRow) {
+    targetStrip.innerHTML = noSelection;
+    otherStrip.innerHTML = noSelection;
+    return;
+  }
+
+  const keyCandidates = [];
+  const rivalLabel = String(selectedRow.rivalLabel || "").trim();
+  const rivalKey = String(selectedRow.rivalKey || "").trim();
+  if (rivalLabel) keyCandidates.push(rivalLabel);
+  if (rivalKey && !keyCandidates.includes(rivalKey)) keyCandidates.push(rivalKey);
+
+  const useTargetUniqueRig = socialSynergyTargetRigMode !== "shared";
+  const useOtherUniqueRig = socialSynergyOtherRigMode !== "shared";
+  const targetToOtherSource = useTargetUniqueRig
+    ? (cachedSocialSynergyRigTables.targetToOtherNoDuplicates || cachedSocialSynergyRigTables.targetToOther)
+    : cachedSocialSynergyRigTables.targetToOther;
+  const otherToTargetSource = useOtherUniqueRig
+    ? (cachedSocialSynergyRigTables.otherToTargetNoDuplicates || cachedSocialSynergyRigTables.otherToTarget)
+    : cachedSocialSynergyRigTables.otherToTarget;
+
+  const targetToOtherOthers = targetToOtherSource && targetToOtherSource.others
+    ? targetToOtherSource.others
+    : {};
+  const otherToTargetOthers = otherToTargetSource && otherToTargetSource.others
+    ? otherToTargetSource.others
+    : {};
+
+  const pickSongIds = (bucket) => {
+    for (const key of keyCandidates) {
+      if (Object.prototype.hasOwnProperty.call(bucket, key) && Array.isArray(bucket[key])) {
+        return bucket[key];
+      }
+    }
+    return [];
+  };
+
+  await loadMalImageCache();
+  const keyById = await loadSongKeyById();
+  const targetToOtherRows = getSongRowsFromRigSongIds(pickSongIds(targetToOtherOthers), keyById);
+  const otherToTargetRows = getSongRowsFromRigSongIds(pickSongIds(otherToTargetOthers), keyById);
+
+  renderSocialSynergyRigStripById({
+    cardId: "socialTargetToOtherRigCard",
+    stripId: "socialTargetToOtherRigStrip",
+    rows: targetToOtherRows,
+    emptyMessage: "No songs found for this player pair."
+  });
+  renderSocialSynergyRigStripById({
+    cardId: "socialOtherToTargetRigCard",
+    stripId: "socialOtherToTargetRigStrip",
+    rows: otherToTargetRows,
+    emptyMessage: "No songs found for this player pair."
+  });
+}
+
 function getSocialSynergyComparableKey(row) {
   const rivalKey = String(row && row.rivalKey || "").trim();
   if (rivalKey) return rivalKey.toLowerCase();
@@ -14707,6 +15276,9 @@ function mapSynergyComparisons(payload) {
   comparisons.forEach((entry) => {
     const rivalKey = String(entry && entry.otherPlayerId || "").trim();
     const rivalLabel = String(entry && entry.otherDisplayName || rivalKey || "Unknown");
+    const rivalAltNames = Array.isArray(entry && entry.otherAltNames)
+      ? entry.otherAltNames.map(name => String(name || "").trim()).filter(Boolean)
+      : [];
     if (!rivalKey && !rivalLabel) return;
     const hasTargetRigCount = Object.prototype.hasOwnProperty.call(entry || {}, "targetRigCount");
     const hasOtherRigCount = Object.prototype.hasOwnProperty.call(entry || {}, "otherRigCount");
@@ -14714,6 +15286,7 @@ function mapSynergyComparisons(payload) {
     map.set((rivalKey || rivalLabel).toLowerCase(), {
       rivalKey,
       rivalLabel,
+      rivalAltNames,
       targetOnlyCount: Math.max(0, Number(entry && entry.targetOnlyCount || 0)),
       otherOnlyCount: Math.max(0, Number(entry && entry.otherOnlyCount || 0)),
       overlapCount: Math.max(0, Number(entry && entry.overlapCount || 0)),
@@ -14740,6 +15313,7 @@ function buildMergedSocialSynergyRows(synergyPayload, modeOverride = null) {
     rows.push({
       rivalKey: base.rivalKey,
       rivalLabel: base.rivalLabel,
+      rivalAltNames: Array.isArray(base.rivalAltNames) ? base.rivalAltNames.slice() : [],
       targetKnown: Math.max(0, (classic ? classic.targetOnlyCount + classic.overlapCount : 0)),
       rivalKnown: Math.max(0, (classic ? classic.otherOnlyCount + classic.overlapCount : 0)),
       overlapCount: Math.max(0, Number(classic ? classic.overlapCount : (shared ? shared.overlapCount : 0))),
@@ -14776,9 +15350,7 @@ function createSocialSynergyRowElement(row, targetLabel, rankText = "") {
 
   const head = document.createElement("div");
   head.className = "social-synergy-row-head";
-  const rigLabelHtml = hasRigMetrics
-    ? ` <span class="social-synergy-rig-count target">(Rig ${targetRigTotal})</span> × <span class="social-synergy-rival-label">${escapeHtml(row && row.rivalLabel || "Unknown")}</span> <span class="social-synergy-rig-count rival">(Rig ${rivalRigTotal})</span>`
-    : ` × <span class="social-synergy-rival-label">${escapeHtml(row && row.rivalLabel || "Unknown")}</span>`;
+  const rigLabelHtml = ` × <span class="social-synergy-rival-label">${escapeHtml(row && row.rivalLabel || "Unknown")}</span>`;
   head.innerHTML = `
     <div class="name">${rankText ? `${rankText} ` : ""}<span class="social-synergy-target-label">${escapeHtml(targetLabel)}</span>${rigLabelHtml}</div>
     <div class="stats">${leftExclusive} | <span class="social-synergy-overlap-pill">${overlapCount}</span> | ${rightExclusive}</div>
@@ -14813,16 +15385,7 @@ function createSocialSynergyRowElement(row, targetLabel, rankText = "") {
   bar.appendChild(overlap);
   bar.appendChild(right);
 
-  if (hasRigMetrics) {
-    const targetRigLine = document.createElement("div");
-    targetRigLine.className = "social-synergy-rig-left-total";
-    targetRigLine.style.width = `${Math.min(100, (targetRigTotal / union) * 100)}%`;
-    const rivalRigLine = document.createElement("div");
-    rivalRigLine.className = "social-synergy-rig-right-total";
-    rivalRigLine.style.width = `${Math.min(100, (rivalRigTotal / union) * 100)}%`;
-    bar.appendChild(targetRigLine);
-    bar.appendChild(rivalRigLine);
-  }
+  // Rig marker overlays intentionally hidden in Synergy bars.
 
   container.appendChild(head);
   container.appendChild(bar);
@@ -14867,6 +15430,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
   const searchInput = document.getElementById("socialSynergyPlayerSearchInput");
   const list = document.getElementById("socialSynergyPlayerSearchList");
   const compareWrap = document.getElementById("socialSynergySingleCompare");
+  const selectedPlayerText = document.getElementById("socialSynergySelectedPlayer");
   if (!list || !compareWrap) return;
   if (searchInput && String(searchInput.value || "").toLowerCase() !== socialSynergySingleSearchQuery) {
     searchInput.value = socialSynergySingleSearchQuery;
@@ -14876,6 +15440,8 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
   if (!sourceRows.length) {
     list.innerHTML = '<div class="social-synergy-empty">No players available.</div>';
     compareWrap.innerHTML = '<div class="social-synergy-empty">No comparison selected.</div>';
+    if (selectedPlayerText) selectedPlayerText.innerText = "Selected player";
+    renderSocialSynergyRigTables();
     return;
   }
 
@@ -14884,44 +15450,108 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
     if (!query) return true;
     const rivalLabel = String(row && row.rivalLabel || "").toLowerCase();
     const rivalKey = String(row && row.rivalKey || "").toLowerCase();
-    return rivalLabel.includes(query) || rivalKey.includes(query);
+    const altNameMatch = Array.isArray(row && row.rivalAltNames)
+      && row.rivalAltNames.some(name => String(name || "").toLowerCase().includes(query));
+    return rivalLabel.includes(query) || rivalKey.includes(query) || altNameMatch;
   });
+
+  let selectedRow = sourceRows.find(
+    row => getSocialSynergyComparableKey(row) === socialSynergySingleSelectedRivalKey
+  ) || null;
+
+  if (!selectedRow && sourceRows.length) {
+    const firstRowKey = getSocialSynergyComparableKey(sourceRows[0]);
+    socialSynergySingleSelectedRivalKey = firstRowKey;
+    socialSynergySinglePendingRivalKey = firstRowKey;
+    selectedRow = sourceRows[0];
+  }
+
+  if (!socialSynergySinglePendingRivalKey && filteredRows.length) {
+    socialSynergySinglePendingRivalKey = getSocialSynergyComparableKey(filteredRows[0]);
+  }
+  if (selectedPlayerText) {
+    if (selectedRow) {
+      const selectedRowLabel = selectedRow.rivalLabel || selectedRow.rivalKey || "Selected player";
+      selectedPlayerText.innerText = `Selected player: ${selectedRowLabel}`;
+    } else {
+      selectedPlayerText.innerText = "Selected player";
+    }
+  }
 
   if (!filteredRows.length) {
     list.innerHTML = '<div class="social-synergy-empty">No players match your search.</div>';
-    compareWrap.innerHTML = '<div class="social-synergy-empty">No comparison selected.</div>';
+  } else {
+    list.innerHTML = "";
+    filteredRows.forEach(row => {
+      const rowKey = getSocialSynergyComparableKey(row);
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "social-synergy-single-picker-item";
+      if (rowKey === socialSynergySinglePendingRivalKey) {
+        btn.classList.add("active");
+      }
+      btn.innerHTML = `
+        <span>${escapeHtml(row.rivalLabel || row.rivalKey || "Unknown")}</span>
+        <span class="meta">Overlap ${Number(row.overlapCount || 0)}</span>
+      `;
+      btn.addEventListener("click", () => {
+        socialSynergySinglePendingRivalKey = rowKey;
+        renderSocialSynergySinglePicker(sourceRows, targetLabel);
+      });
+      list.appendChild(btn);
+    });
+    const pickerItems = Array.from(list.querySelectorAll(".social-synergy-single-picker-item"));
+    if (!pickerItems.length) {
+      list.innerHTML = '<div class="social-synergy-empty">No players match your search.</div>';
+    }
+  }
+
+  compareWrap.innerHTML = "";
+  if (!selectedRow) {
+    compareWrap.innerHTML = '<div class="social-synergy-empty">No comparison selected. Click a player then press Select.</div>';
     return;
   }
 
-  const selectedRow = filteredRows.find(row => getSocialSynergyComparableKey(row) === socialSynergySingleSelectedRivalKey)
-    || filteredRows[0];
-  socialSynergySingleSelectedRivalKey = getSocialSynergyComparableKey(selectedRow);
-
-  list.innerHTML = "";
-  filteredRows.forEach(row => {
-    const rowKey = getSocialSynergyComparableKey(row);
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "social-synergy-single-picker-item";
-    if (rowKey === socialSynergySingleSelectedRivalKey) {
-      btn.classList.add("active");
-    }
-    btn.innerHTML = `
-      <span>${escapeHtml(row.rivalLabel || row.rivalKey || "Unknown")}</span>
-      <span class="meta">Overlap ${Number(row.overlapCount || 0)}${row && row.hasRigMetrics ? ` | Rig ${Number(row.targetRigCount || 0)} / ${Number(row.otherRigCount || 0)}` : ""}</span>
+  const selectedRivalId = String(selectedRow && selectedRow.rivalKey || "").trim();
+  const selectedRivalLabel = String(selectedRow && selectedRow.rivalLabel || "").trim().toLowerCase();
+  const rigStatsComparisons = Array.isArray(cachedSocialSynergyRigStats && cachedSocialSynergyRigStats.comparisons)
+    ? cachedSocialSynergyRigStats.comparisons
+    : [];
+  const selectedRigStats = rigStatsComparisons.find((entry) => {
+    const otherId = String(entry && entry.otherPlayerId || "").trim();
+    if (selectedRivalId && otherId && otherId === selectedRivalId) return true;
+    const otherName = String(entry && entry.otherDisplayName || "").trim().toLowerCase();
+    return Boolean(selectedRivalLabel && otherName && otherName === selectedRivalLabel);
+  }) || null;
+  const formatRigPct = (value) => {
+    const num = Number(value);
+    if (!Number.isFinite(num)) return "0%";
+    return `${num.toFixed(3).replace(/\\.0+$/, "").replace(/(\\.\\d*?)0+$/, "$1")}%`;
+  };
+  if (selectedRigStats || (cachedSocialSynergyRigStats && typeof cachedSocialSynergyRigStats === "object")) {
+    const rigStatsCard = document.createElement("div");
+    rigStatsCard.className = "social-synergy-row social-synergy-stats-card";
+    rigStatsCard.style.setProperty("padding", "10px 12px", "important");
+    rigStatsCard.style.setProperty("margin-top", "26px", "important");
+    rigStatsCard.style.setProperty("margin-bottom", "10px", "important");
+    const targetSelfKnownPct = Number(cachedSocialSynergyRigStats && cachedSocialSynergyRigStats.targetSelfKnownPct || 0);
+    const otherKnownPct = Number(selectedRigStats && selectedRigStats.otherKnownPct || 0);
+    const otherSelfKnownPct = Number(selectedRigStats && selectedRigStats.otherSelfKnownPct || 0);
+    const targetKnownPct = Number(selectedRigStats && selectedRigStats.targetKnownPct || 0);
+    rigStatsCard.innerHTML = `
+      <div class="social-synergy-row-meta" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 12px;font-size:12px;line-height:1.35;">
+        <div><strong>Your Onlist:</strong> ${formatRigPct(targetSelfKnownPct)}</div>
+        <div><strong>Their Onlist:</strong> ${formatRigPct(otherSelfKnownPct)}</div>
+        <div><strong>Them on your list:</strong> ${formatRigPct(otherKnownPct)}</div>
+        <div><strong>You on their list:</strong> ${formatRigPct(targetKnownPct)}</div>
+      </div>
     `;
-    btn.addEventListener("click", () => {
-      socialSynergySingleSelectedRivalKey = rowKey;
-      renderSocialSynergySinglePicker(sourceRows, targetLabel);
-    });
-    list.appendChild(btn);
-  });
-
-  compareWrap.innerHTML = "";
+    compareWrap.appendChild(rigStatsCard);
+  }
 
   const allSeenTitle = document.createElement("div");
   allSeenTitle.className = "chart-meta";
-  allSeenTitle.style.setProperty("margin", "0 0 8px 0", "important");
+  allSeenTitle.style.setProperty("margin", "12px 0 8px 0", "important");
   allSeenTitle.style.setProperty("font-weight", "400", "important");
   allSeenTitle.style.setProperty("font-size", "12px", "important");
   allSeenTitle.style.setProperty("text-align", "center", "important");
@@ -15007,6 +15637,9 @@ async function renderSocialSynergyView() {
   const list = document.getElementById("socialSynergyList");
   const meta = document.getElementById("socialSynergyMeta");
   if (!list || !meta) return;
+  socialSynergyTargetRigMode = "unique";
+  socialSynergyOtherRigMode = "unique";
+  syncSocialSynergyRigModeButtons();
   const requestId = ++socialSynergyRequestId;
   const modeSnapshot = getActiveDataSourceMode();
 
@@ -15015,9 +15648,13 @@ async function renderSocialSynergyView() {
     list.innerHTML = '<div class="social-synergy-empty">No player selected.</div>';
     cachedSocialSynergyRows = [];
     socialSynergySingleSelectedRivalKey = "";
+    socialSynergySinglePendingRivalKey = "";
     socialSynergyPageIndex = 0;
     renderSocialSynergySinglePicker(cachedSocialSynergyRows, currentDisplayName || currentStatKey || "You");
     renderSocialSynergyTableRows(cachedSocialSynergyRows);
+    cachedSocialSynergyRigTables = null;
+    cachedSocialSynergyRigStats = null;
+    await renderSocialSynergyRigTables(modeSnapshot);
     return;
   }
 
@@ -15037,9 +15674,13 @@ async function renderSocialSynergyView() {
     list.innerHTML = '<div class="social-synergy-empty">Could not resolve player ID for synergy data.</div>';
     cachedSocialSynergyRows = [];
     socialSynergySingleSelectedRivalKey = "";
+    socialSynergySinglePendingRivalKey = "";
     socialSynergyPageIndex = 0;
     renderSocialSynergySinglePicker(cachedSocialSynergyRows, currentDisplayName || currentStatKey || "You");
     renderSocialSynergyTableRows(cachedSocialSynergyRows);
+    cachedSocialSynergyRigTables = null;
+    cachedSocialSynergyRigStats = null;
+    await renderSocialSynergyRigTables(modeSnapshot);
     return;
   }
 
@@ -15056,9 +15697,18 @@ async function renderSocialSynergyView() {
     list.innerHTML = '<div class="social-synergy-empty">No synergy count data found for this player.</div>';
     cachedSocialSynergyRows = [];
     socialSynergySingleSelectedRivalKey = "";
+    socialSynergySinglePendingRivalKey = "";
     socialSynergyPageIndex = 0;
     renderSocialSynergySinglePicker(cachedSocialSynergyRows, targetLabel);
     renderSocialSynergyTableRows(cachedSocialSynergyRows);
+    cachedSocialSynergyRigTables = {
+      targetToOther: synergyPayload && synergyPayload.targetToOtherRig ? synergyPayload.targetToOtherRig : null,
+      otherToTarget: synergyPayload && synergyPayload.otherToTargetRig ? synergyPayload.otherToTargetRig : null,
+      targetToOtherNoDuplicates: synergyPayload && synergyPayload.targetToOtherRigNoDuplicates ? synergyPayload.targetToOtherRigNoDuplicates : null,
+      otherToTargetNoDuplicates: synergyPayload && synergyPayload.otherToTargetRigNoDuplicates ? synergyPayload.otherToTargetRigNoDuplicates : null
+    };
+    cachedSocialSynergyRigStats = synergyPayload && synergyPayload.rigStats ? synergyPayload.rigStats : null;
+    await renderSocialSynergyRigTables(modeSnapshot);
     return;
   }
 
@@ -15077,12 +15727,20 @@ async function renderSocialSynergyView() {
   meta.innerText = `Found ${sortedRows.length} players`;
   renderSocialSynergyRows(topRows, targetLabel);
   cachedSocialSynergyRows = sortedRows;
-  if (!socialSynergySingleSelectedRivalKey && sortedRows.length) {
-    socialSynergySingleSelectedRivalKey = getSocialSynergyComparableKey(sortedRows[0]);
+  if (!socialSynergySinglePendingRivalKey && sortedRows.length) {
+    socialSynergySinglePendingRivalKey = getSocialSynergyComparableKey(sortedRows[0]);
   }
   renderSocialSynergySinglePicker(cachedSocialSynergyRows, targetLabel);
   socialSynergyPageIndex = 0;
   renderSocialSynergyTableRows(cachedSocialSynergyRows);
+  cachedSocialSynergyRigTables = {
+    targetToOther: synergyPayload && synergyPayload.targetToOtherRig ? synergyPayload.targetToOtherRig : null,
+    otherToTarget: synergyPayload && synergyPayload.otherToTargetRig ? synergyPayload.otherToTargetRig : null,
+    targetToOtherNoDuplicates: synergyPayload && synergyPayload.targetToOtherRigNoDuplicates ? synergyPayload.targetToOtherRigNoDuplicates : null,
+    otherToTargetNoDuplicates: synergyPayload && synergyPayload.otherToTargetRigNoDuplicates ? synergyPayload.otherToTargetRigNoDuplicates : null
+  };
+  cachedSocialSynergyRigStats = synergyPayload && synergyPayload.rigStats ? synergyPayload.rigStats : null;
+  await renderSocialSynergyRigTables(modeSnapshot);
 }
 
 async function renderOverviewSynergySummary() {
@@ -16198,7 +16856,7 @@ function renderTrendChart(
       yMax = yMin + 1;
     }
   }
-  if (isPercentSeries) {
+  if (isPercentSeries && !isWeightedSeries) {
     yMin = Math.max(0, yMin);
     yMax = Math.min(100, yMax);
     if (yMax <= yMin) {
@@ -18129,15 +18787,6 @@ function renderOverviewAnimeTypeCharts() {
     }
   });
 
-  const minGuessRate = guessRates.length ? Math.min(...guessRates) : 0;
-  const maxGuessRate = guessRates.length ? Math.max(...guessRates) : 0;
-  const guessRateRange = maxGuessRate - minGuessRate;
-  const guessRatePadding = Math.max(1, guessRateRange * 0.2);
-  const rawGuessRateMax = Math.min(100, maxGuessRate + guessRatePadding);
-  const guessRateTickStep = rawGuessRateMax <= 30 ? 5 : 10;
-  let guessRateMax = Math.ceil(rawGuessRateMax / guessRateTickStep) * guessRateTickStep;
-  guessRateMax = Math.min(100, Math.max(guessRateTickStep, guessRateMax));
-
   overviewGuessRateChart = new Chart(document.getElementById("overviewGuessRateChart"), {
     type: "bar",
     data: {
@@ -18179,12 +18828,9 @@ function renderOverviewAnimeTypeCharts() {
           }
         },
         y: {
-          beginAtZero: true,
-          min: 0,
-          max: guessRateMax,
+          beginAtZero: false,
           ticks: {
             color: "#475569",
-            stepSize: guessRateTickStep,
             callback: function(value) {
               return `${Number(value).toFixed(1)}%`;
             }
