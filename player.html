@@ -5622,6 +5622,7 @@
     #socialSection .social-rivals-filter-body {
       display: grid !important;
       grid-template-columns: minmax(0, 1fr) !important;
+      grid-template-rows: auto auto minmax(0, 1fr) !important;
       gap: 10px !important;
       flex: 1 1 auto !important;
       min-height: 0 !important;
@@ -5848,6 +5849,21 @@
       overflow-y: auto !important;
       overflow-x: hidden !important;
       padding-right: 2px !important;
+      position: relative !important;
+      z-index: 1 !important;
+    }
+
+    #socialSection #socialSynergySingleCompare.usual-mode {
+      overflow: visible !important;
+      z-index: 300 !important;
+    }
+
+    #socialSection #socialSynergySingleCompare .social-synergy-hover-layer {
+      z-index: 400 !important;
+    }
+
+    #socialSection #socialSynergySingleCompare .social-synergy-hover-layer .info-hover-tooltip {
+      z-index: 10000 !important;
     }
 
     #socialSection .social-synergy-single-right .chart-title {
@@ -7306,7 +7322,7 @@
     <div id="performanceCompositeChartsView" class="performance-charts" style="display:none;">
       <div class="chart-card">
         <div class="chart-header">
-          <div class="chart-title">Rig vs Total Songs Over Time</div>
+          <div class="chart-title">Rig vs Total Songs Hit Over Time</div>
           <div class="chart-meta">
             <span id="rigFoundGames">Found 0 tours</span>
             <span id="rigSlopeInfo">Rigs slope: 0.00% per game</span>
@@ -7513,7 +7529,13 @@
     </div>
     <div id="insightsPopularityView" class="chart-card" style="display:none;">
       <div class="chart-header">
-        <div class="chart-title">By Popularity</div>
+        <div class="chart-title">
+          By Popularity
+          <span class="info-hover-wrap">
+            <button class="info-hover-btn" type="button" aria-label="About By Popularity">i</button>
+            <span class="info-hover-tooltip">Orders songs by how often they appear across all tours. Correct% displays the average correct across all players.</span>
+          </span>
+        </div>
         <div class="chart-meta">
           <span id="popularitySongsMeta">Found 0 songs</span>
         </div>
@@ -8145,7 +8167,7 @@ if (window.Chart) {
       for (let datasetIndex = 0; datasetIndex < chart.data.datasets.length; datasetIndex += 1) {
         const dataset = chart.data.datasets[datasetIndex] || {};
         const datasetLabel = String(dataset.label || "").trim().toLowerCase();
-        if (datasetLabel === "trend") continue;
+        if (isTrendDatasetLabel(datasetLabel)) continue;
         const meta = chart.getDatasetMeta(datasetIndex);
         if (!meta || meta.hidden || meta.type !== "line") continue;
         const points = meta.data || [];
@@ -8202,7 +8224,7 @@ if (window.Chart) {
     afterDraw(chart) {
       if (!chart || !chart.canvas) return;
       const datasets = chart.data && Array.isArray(chart.data.datasets) ? chart.data.datasets : [];
-      const hasTrendCompanion = datasets.length >= 2 && String(datasets[1] && datasets[1].label || "").trim().toLowerCase() === "trend";
+      const hasTrendCompanion = datasets.length >= 2 && isTrendDatasetLabel(datasets[1] && datasets[1].label);
       if (!hasTrendCompanion) return;
       const tooltip = chart.tooltip;
       if (!tooltip || tooltip.opacity === 0) return;
@@ -8579,6 +8601,11 @@ const CONSISTENCY_WINDOW = 10;
 const SOCIAL_SYNERGY_PAGE_SIZE = 20;
 const SOCIAL_TEAM_FIXED_TIER_COUNT = 4;
 const MIN_VALID_RANK = 25;
+function isValidRankForMode(rankValue, mode = getActiveDataSourceMode()) {
+  const numericRank = Number(rankValue);
+  if (!Number.isFinite(numericRank)) return false;
+  return mode === "usual" ? true : numericRank >= MIN_VALID_RANK;
+}
 const SOCIAL_TEAM_CONTRIBUTION_METRICS = [
   "Lives taken",
   "Lives saved",
@@ -8587,7 +8614,6 @@ const SOCIAL_TEAM_CONTRIBUTION_METRICS = [
   "OP guess rate",
   "ED guess rate",
   "IN guess rate",
-  "Total hit",
   "Onlist",
   "Offlist"
 ];
@@ -8607,6 +8633,7 @@ const SOCIAL_RIVALS_METRICS = {
   lives_taken: { label: "Lives taken", field: "Lives taken", isPercent: false, axisLabel: "Lives taken" },
   lives_saved: { label: "Lives saved", field: "Lives saved", isPercent: false, axisLabel: "Lives saved" }
 };
+const SOCIAL_RIVALS_USUAL_HIDDEN_METRICS = new Set(["onlist_guess_rate", "offlist_guess_rate"]);
 const PERFORMANCE_LINE_PALETTES = {
   op: {
     line: "#2f6df6",
@@ -9687,6 +9714,7 @@ function updateDataRangeControlState(sectionKey, subSection) {
   const isPerformanceOnlistOfflist = sectionKey === "performance" && subSection === "Onlist/Offlist";
   const isPerformanceCompositeCharts = sectionKey === "performance" && subSection === "Composite charts";
   const isKnowledgeSeasonalComparison = sectionKey === "knowledge" && subSection === "Seasonal Comparison";
+  const isSocialRigAnalysis = sectionKey === "social" && subSection === "Rig / List analysis";
   const shouldUnlockUsingData =
     isOverviewGeneral
     || isOverviewStatsSummary
@@ -9694,7 +9722,8 @@ function updateDataRangeControlState(sectionKey, subSection) {
     || isPerformanceLives
     || isPerformanceOnlistOfflist
     || isPerformanceCompositeCharts
-    || isKnowledgeSeasonalComparison;
+    || isKnowledgeSeasonalComparison
+    || isSocialRigAnalysis;
 
   const shouldHidePastGameOptions =
     (sectionKey === "overview" && (overviewActiveView === "statsSummary" || overviewActiveView === "weekly"))
@@ -9719,9 +9748,12 @@ function updateDataRangeControlState(sectionKey, subSection) {
   const hasUsualRows = Array.isArray(usualUserData) && usualUserData.length > 0;
   const noWatchedDataAvailable = hasUsualRows && !hasWatchedRows;
   const noUsualDataAvailable = hasWatchedRows && !hasUsualRows;
-  const shouldLockTourType = false;
-  const lockedTourTypeMode = noWatchedDataAvailable ? "usual" : "watched";
+  const shouldLockTourType = isSocialRigAnalysis;
+  const lockedTourTypeMode = "watched";
   isTourTypeToggleLocked = shouldLockTourType;
+  if (shouldLockTourType && overviewDataSourceMode !== lockedTourTypeMode) {
+    overviewDataSourceMode = lockedTourTypeMode;
+  }
   dataRangeSelect.disabled = shouldLockToAll;
   if (dataRangeWrap) {
     dataRangeWrap.classList.toggle("locked", shouldLockToAll);
@@ -10162,12 +10194,13 @@ if (socialOtherRigSharedBtn) {
 }
 
 if (socialRivalsMetricSelect) {
-  socialRivalsMetricSelect.value = socialRivalsMetricKey;
+  syncSocialRivalsMetricOptionsForMode();
   socialRivalsMetricSelect.addEventListener("change", event => {
     const nextValue = String(event.target.value || "guess_rate");
-    socialRivalsMetricKey = Object.prototype.hasOwnProperty.call(SOCIAL_RIVALS_METRICS, nextValue)
+    socialRivalsMetricKey = isSocialRivalsMetricAvailableForActiveMode(nextValue)
       ? nextValue
       : "guess_rate";
+    syncSocialRivalsMetricOptionsForMode();
     if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
       renderSocialRivalsChart();
     }
@@ -11084,15 +11117,15 @@ function updateOverviewDataSourceToggleUI() {
     const isActive = overviewDataSourceMode === "watched";
     overviewDataSourceWatchedBtn.classList.toggle("active", isActive);
     overviewDataSourceWatchedBtn.setAttribute("aria-pressed", isActive ? "true" : "false");
-    overviewDataSourceWatchedBtn.disabled = false;
-    overviewDataSourceWatchedBtn.setAttribute("aria-disabled", "false");
+    overviewDataSourceWatchedBtn.disabled = isTourTypeToggleLocked;
+    overviewDataSourceWatchedBtn.setAttribute("aria-disabled", isTourTypeToggleLocked ? "true" : "false");
   }
   if (overviewDataSourceUsualBtn) {
     const isActive = overviewDataSourceMode === "usual";
     overviewDataSourceUsualBtn.classList.toggle("active", isActive);
     overviewDataSourceUsualBtn.setAttribute("aria-pressed", isActive ? "true" : "false");
-    overviewDataSourceUsualBtn.disabled = false;
-    overviewDataSourceUsualBtn.setAttribute("aria-disabled", "false");
+    overviewDataSourceUsualBtn.disabled = isTourTypeToggleLocked;
+    overviewDataSourceUsualBtn.setAttribute("aria-disabled", isTourTypeToggleLocked ? "true" : "false");
   }
 }
 
@@ -11134,6 +11167,7 @@ if (overviewLanguageEnBtn && overviewLanguageJpBtn) {
 if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
   updateOverviewDataSourceToggleUI();
   overviewDataSourceWatchedBtn.addEventListener("click", () => {
+    if (isTourTypeToggleLocked) return;
     if (overviewDataSourceMode === "watched") return;
     overviewDataSourceMode = "watched";
     updateOverviewDataSourceToggleUI();
@@ -11156,6 +11190,9 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (activeSection === "social" && activeSubSectionBySection.social === "Synergy") {
       renderSocialSynergyView();
     }
+    if (activeSection === "social" && activeSubSectionBySection.social === "Team Contributions") {
+      renderSocialTeamContributionView();
+    }
     if (activeSection === "knowledge") {
       loadKnowledgeDataForSubSection(activeSubSectionBySection.knowledge || "", currentDisplayName || currentStatKey || "");
     }
@@ -11170,8 +11207,13 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
       ensureSearchSongFrequencyData();
       renderSearchSongFrequency();
     }
+    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Original Tour data(Calendar)") {
+      ensureOriginalTourCalendarData();
+      renderOriginalTourCalendarView();
+    }
   });
   overviewDataSourceUsualBtn.addEventListener("click", () => {
+    if (isTourTypeToggleLocked) return;
     if (overviewDataSourceMode === "usual") return;
     overviewDataSourceMode = "usual";
     updateOverviewDataSourceToggleUI();
@@ -11194,6 +11236,9 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (activeSection === "social" && activeSubSectionBySection.social === "Synergy") {
       renderSocialSynergyView();
     }
+    if (activeSection === "social" && activeSubSectionBySection.social === "Team Contributions") {
+      renderSocialTeamContributionView();
+    }
     if (activeSection === "knowledge") {
       loadKnowledgeDataForSubSection(activeSubSectionBySection.knowledge || "", currentDisplayName || currentStatKey || "");
     }
@@ -11207,6 +11252,10 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Search song frequency") {
       ensureSearchSongFrequencyData();
       renderSearchSongFrequency();
+    }
+    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Original Tour data(Calendar)") {
+      ensureOriginalTourCalendarData();
+      renderOriginalTourCalendarView();
     }
   });
 }
@@ -13477,9 +13526,10 @@ function normalizeDateQuery(query) {
 
 function buildRowsByTimestampIndex() {
   const index = new Map();
-  if (!allPlayerStatsData || typeof allPlayerStatsData !== "object") return index;
+  const activeStatsData = getSocialStatsDataForActiveMode();
+  if (!activeStatsData || typeof activeStatsData !== "object") return index;
 
-  Object.values(allPlayerStatsData).forEach(rows => {
+  Object.values(activeStatsData).forEach(rows => {
     if (!Array.isArray(rows)) return;
     rows.forEach(row => {
       if (!row || typeof row !== "object") return;
@@ -13979,7 +14029,7 @@ function ensureSocialTeamContributionData() {
     socialTeamSelectedTimestamp = latestVisibleGame ? latestVisibleGame.timestamp : null;
   }
 
-  if (!socialTeamAppliedTimestamp) {
+  if (!socialTeamAppliedTimestamp || !socialTeamFilteredGames.some(game => game.timestamp === socialTeamAppliedTimestamp)) {
     socialTeamAppliedTimestamp = socialTeamSelectedTimestamp;
   }
 
@@ -14043,7 +14093,7 @@ function getCurrentSocialTeamPlayerRow(players, timestamp) {
   addCandidateName(currentDisplayName);
   addCandidateName(currentStatKey);
 
-  const currentRecords = getCurrentUserRecords();
+  const currentRecords = getCurrentUserRecordsForActiveMode();
   const exactCurrentRecord = currentRecords.find(row => String(row && row.Timestamp || "").trim() === String(timestamp || "").trim());
   if (exactCurrentRecord) {
     addCandidateName(exactCurrentRecord["Player name"]);
@@ -14219,12 +14269,13 @@ function parseSocialTeamRankNumber(value) {
 function resolveSocialTeamRankFromStatsRow(playerName, timestamp) {
   const normalizedName = String(playerName || "").trim().toLowerCase();
   if (!normalizedName) return Number.NEGATIVE_INFINITY;
-  if (!allPlayerStatsData || typeof allPlayerStatsData !== "object") return Number.NEGATIVE_INFINITY;
+  const activeStatsData = getSocialStatsDataForActiveMode();
+  if (!activeStatsData || typeof activeStatsData !== "object") return Number.NEGATIVE_INFINITY;
 
-  const matchedKey = Object.keys(allPlayerStatsData).find(key => String(key || "").trim().toLowerCase() === normalizedName);
+  const matchedKey = Object.keys(activeStatsData).find(key => String(key || "").trim().toLowerCase() === normalizedName);
   if (!matchedKey) return Number.NEGATIVE_INFINITY;
 
-  const records = Array.isArray(allPlayerStatsData[matchedKey]) ? allPlayerStatsData[matchedKey] : [];
+  const records = Array.isArray(activeStatsData[matchedKey]) ? activeStatsData[matchedKey] : [];
   if (!records.length) return Number.NEGATIVE_INFINITY;
 
   const targetTimestamp = String(timestamp || "").trim();
@@ -14293,7 +14344,7 @@ function getSocialTeamOriginalPlacementLevel(timestamp) {
   addCandidateName(currentDisplayName);
   addCandidateName(currentStatKey);
 
-  const currentRecords = getCurrentUserRecords();
+  const currentRecords = getCurrentUserRecordsForActiveMode();
   const exactCurrentRecord = currentRecords.find(row => String(row && row.Timestamp || "").trim() === String(timestamp || "").trim());
   if (exactCurrentRecord) {
     addCandidateName(exactCurrentRecord["Player name"]);
@@ -14366,7 +14417,7 @@ function renderSocialTeamOriginalPlacementText() {
     return;
   }
 
-  const currentRecords = getCurrentUserRecords();
+  const currentRecords = getCurrentUserRecordsForActiveMode();
   const hasCurrentRecordAtTimestamp = ts =>
     !!String(ts || "").trim()
     && currentRecords.some(row => String(row && row.Timestamp || "").trim() === String(ts || "").trim());
@@ -14757,16 +14808,22 @@ function renderSocialTeamContributionView() {
   updateSocialTeamSelectButtonState();
 }
 
-function getLatestRankForPlayer(playerKeyOrRecords, recordsMaybe = null) {
+function getLatestRankForPlayer(playerKeyOrRecords, recordsMaybe = null, mode = getActiveDataSourceMode()) {
   const hasExplicitKey = typeof playerKeyOrRecords === "string";
   const playerKey = hasExplicitKey ? String(playerKeyOrRecords || "") : "";
   const records = hasExplicitKey ? recordsMaybe : playerKeyOrRecords;
 
-  const watchedRankMap = latestRankByPlayerKeyByMode.watched;
-  if (playerKey && watchedRankMap instanceof Map) {
-    const mappedRank = Number(watchedRankMap.get(playerKey.toLowerCase()));
-    if (Number.isFinite(mappedRank)) return mappedRank;
-  }
+  const primaryMode = mode === "usual" ? "usual" : "watched";
+  const tryRankMap = (resolvedMode) => {
+    const cache = getLatestRankCacheForMode(resolvedMode);
+    const rankMap = cache.map;
+    if (!(playerKey && rankMap instanceof Map)) return null;
+    const mappedRank = Number(rankMap.get(playerKey.toLowerCase()));
+    return Number.isFinite(mappedRank) ? mappedRank : null;
+  };
+
+  const primaryMappedRank = tryRankMap(primaryMode);
+  if (Number.isFinite(primaryMappedRank)) return primaryMappedRank;
 
   if (!Array.isArray(records) || !records.length) return null;
   const sorted = sortRecordsByTimestamp(records);
@@ -14775,18 +14832,21 @@ function getLatestRankForPlayer(playerKeyOrRecords, recordsMaybe = null) {
   return Number.isFinite(rank) ? rank : null;
 }
 
-function getLatestValidRankForPlayer(playerKeyOrRecords, recordsMaybe = null) {
-  const rankValue = Number(getLatestRankForPlayer(playerKeyOrRecords, recordsMaybe));
-  return Number.isFinite(rankValue) && rankValue >= MIN_VALID_RANK ? rankValue : null;
+function getLatestValidRankForPlayer(playerKeyOrRecords, recordsMaybe = null, mode = getActiveDataSourceMode()) {
+  const rankValue = Number(getLatestRankForPlayer(playerKeyOrRecords, recordsMaybe, mode));
+  return isValidRankForMode(rankValue, mode) ? rankValue : null;
 }
 
-function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = null) {
+function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = null, mode = getActiveDataSourceMode()) {
   if (!Array.isArray(records) || !records.length) {
     return { latestRank: null, latestTimestamp: Number.NEGATIVE_INFINITY };
   }
 
-  const watchedRankMapForSnapshot = latestRankByPlayerKeyByMode.watched;
-  if (watchedRankMapForSnapshot instanceof Map && watchedRankMapForSnapshot.size) {
+  const primaryMode = mode === "usual" ? "usual" : "watched";
+  const tryResolveFromMode = (resolvedMode) => {
+    const cache = getLatestRankCacheForMode(resolvedMode);
+    const rankMapForSnapshot = cache.map;
+    if (!(rankMapForSnapshot instanceof Map && rankMapForSnapshot.size)) return null;
     const canonicalName = String(
       playerEntry && playerEntry.displayName
         ? playerEntry.displayName
@@ -14795,14 +14855,18 @@ function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = nul
     const altNames = Array.isArray(playerEntry && playerEntry.altnames)
       ? playerEntry.altnames
       : [];
-    const mappedRank = resolveLatestRankFromMap(watchedRankMapForSnapshot, canonicalName, playerKey, altNames, "watched");
-    if (Number.isFinite(mappedRank) && mappedRank >= MIN_VALID_RANK) {
+    const mappedRank = resolveLatestRankFromMap(rankMapForSnapshot, canonicalName, playerKey, altNames, resolvedMode);
+    if (isValidRankForMode(mappedRank, resolvedMode)) {
       return {
         latestRank: mappedRank,
         latestTimestamp: Number.POSITIVE_INFINITY
       };
     }
-  }
+    return null;
+  };
+
+  const primarySnapshot = tryResolveFromMode(primaryMode);
+  if (primarySnapshot) return primarySnapshot;
 
   let latestTimestamp = Number.NEGATIVE_INFINITY;
   let latestRank = null;
@@ -14810,7 +14874,7 @@ function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = nul
     const timestampValue = getSortableTimestampValue(row && row.Timestamp);
     if (!Number.isFinite(timestampValue)) return;
     const rankValueRaw = Number(row && row["Rank"]);
-    const rankValue = Number.isFinite(rankValueRaw) && rankValueRaw >= MIN_VALID_RANK
+    const rankValue = isValidRankForMode(rankValueRaw, primaryMode)
       ? rankValueRaw
       : null;
     if (timestampValue > latestTimestamp) {
@@ -14824,7 +14888,7 @@ function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = nul
   });
 
   if (!Number.isFinite(latestRank)) {
-    latestRank = getLatestValidRankForPlayer(records);
+    latestRank = getLatestValidRankForPlayer(records, null, mode);
   }
   return {
     latestRank: Number.isFinite(latestRank) ? latestRank : null,
@@ -14835,16 +14899,20 @@ function getLatestRankSnapshotForRows(records, playerKey = "", playerEntry = nul
 function getClosestRivalKeys(targetKey, count = 4) {
   const activeStatsData = getSocialStatsDataForActiveMode();
   if (!targetKey || !activeStatsData || typeof activeStatsData !== "object") return [];
+  const activeMode = getActiveDataSourceMode();
   const targetRecordsFromMap = Array.isArray(activeStatsData[targetKey]) ? activeStatsData[targetKey] : [];
   const targetRecords = targetRecordsFromMap.length
     ? targetRecordsFromMap
     : (targetKey === currentStatKey ? getCurrentUserRecordsForActiveMode() : []);
   const targetPlayerEntry = getPlayerEntryFromCacheByName(targetKey);
-  const targetRankSnapshot = getLatestRankSnapshotForRows(targetRecords, targetKey, targetPlayerEntry);
-  const fallbackTargetRank = getLatestValidRankForPlayer(targetKey, targetRecords);
-  const targetRank = Number.isFinite(targetRankSnapshot.latestRank)
-    ? targetRankSnapshot.latestRank
-    : fallbackTargetRank;
+  const targetRankSnapshot = getLatestRankSnapshotForRows(targetRecords, targetKey, targetPlayerEntry, activeMode);
+  const targetRowLatestRank = getLatestValidRankForPlayer(targetRecords, null, activeMode);
+  const fallbackTargetRank = getLatestValidRankForPlayer(targetKey, targetRecords, activeMode);
+  const targetRank = Number.isFinite(targetRowLatestRank)
+    ? targetRowLatestRank
+    : (Number.isFinite(targetRankSnapshot.latestRank)
+      ? targetRankSnapshot.latestRank
+      : fallbackTargetRank);
   if (!Number.isFinite(targetRank)) return [];
 
   const rivals = Object.entries(activeStatsData)
@@ -14856,7 +14924,7 @@ function getClosestRivalKeys(targetKey, count = 4) {
     ))
     .map(([key, rows]) => {
       const playerEntry = getPlayerEntryFromCacheByName(key);
-      const rankSnapshot = getLatestRankSnapshotForRows(rows, key, playerEntry);
+      const rankSnapshot = getLatestRankSnapshotForRows(rows, key, playerEntry, activeMode);
       const latestRank = rankSnapshot.latestRank;
       return {
         key,
@@ -14921,19 +14989,24 @@ function getClosestRivalKeys(targetKey, count = 4) {
 function getClosestAvailableRivalKeys(targetKey, availableEntries, count = 4) {
   const entries = Array.isArray(availableEntries) ? availableEntries : [];
   if (!targetKey || !entries.length) return [];
+  const activeMode = getActiveDataSourceMode();
+  const activeStatsData = getSocialStatsDataForActiveMode();
 
-  const targetRecordsFromMap = Array.isArray(allPlayerStatsData && allPlayerStatsData[targetKey])
-    ? allPlayerStatsData[targetKey]
+  const targetRecordsFromMap = Array.isArray(activeStatsData && activeStatsData[targetKey])
+    ? activeStatsData[targetKey]
     : [];
   const targetRecords = targetRecordsFromMap.length
     ? targetRecordsFromMap
-    : (targetKey === currentStatKey ? getCurrentUserRecords() : []);
+    : (targetKey === currentStatKey ? getCurrentUserRecordsForActiveMode() : []);
   const targetPlayerEntry = getPlayerEntryFromCacheByName(targetKey);
-  const targetRankSnapshot = getLatestRankSnapshotForRows(targetRecords, targetKey, targetPlayerEntry);
-  const fallbackTargetRank = getLatestValidRankForPlayer(targetKey, targetRecords);
-  const targetRank = Number.isFinite(targetRankSnapshot.latestRank)
-    ? targetRankSnapshot.latestRank
-    : fallbackTargetRank;
+  const targetRankSnapshot = getLatestRankSnapshotForRows(targetRecords, targetKey, targetPlayerEntry, activeMode);
+  const targetRowLatestRank = getLatestValidRankForPlayer(targetRecords, null, activeMode);
+  const fallbackTargetRank = getLatestValidRankForPlayer(targetKey, targetRecords, activeMode);
+  const targetRank = Number.isFinite(targetRowLatestRank)
+    ? targetRowLatestRank
+    : (Number.isFinite(targetRankSnapshot.latestRank)
+      ? targetRankSnapshot.latestRank
+      : fallbackTargetRank);
   if (!Number.isFinite(targetRank)) return [];
 
   return entries
@@ -15432,6 +15505,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
   const compareWrap = document.getElementById("socialSynergySingleCompare");
   const selectedPlayerText = document.getElementById("socialSynergySelectedPlayer");
   if (!list || !compareWrap) return;
+  compareWrap.classList.toggle("usual-mode", getActiveDataSourceMode() === "usual");
   if (searchInput && String(searchInput.value || "").toLowerCase() !== socialSynergySingleSearchQuery) {
     searchInput.value = socialSynergySingleSearchQuery;
   }
@@ -15528,7 +15602,8 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
     if (!Number.isFinite(num)) return "0%";
     return `${num.toFixed(3).replace(/\\.0+$/, "").replace(/(\\.\\d*?)0+$/, "$1")}%`;
   };
-  if (selectedRigStats || (cachedSocialSynergyRigStats && typeof cachedSocialSynergyRigStats === "object")) {
+  const shouldShowWatchedRigStats = getActiveDataSourceMode() === "watched";
+  if (shouldShowWatchedRigStats && (selectedRigStats || (cachedSocialSynergyRigStats && typeof cachedSocialSynergyRigStats === "object"))) {
     const rigStatsCard = document.createElement("div");
     rigStatsCard.className = "social-synergy-row social-synergy-stats-card";
     rigStatsCard.style.setProperty("padding", "10px 12px", "important");
@@ -15559,7 +15634,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
   allSeenTitle.innerHTML = `
     <span style="display:inline !important; white-space:nowrap !important;">
       All seen songs
-      <span class="info-hover-wrap open-left" style="display:inline-flex !important; vertical-align:middle !important; margin-left:6px !important;">
+      <span class="info-hover-wrap open-left social-synergy-hover-layer" style="display:inline-flex !important; vertical-align:middle !important; margin-left:6px !important;">
         <button class="info-hover-btn" type="button" aria-label="About all seen songs" style="display:inline-flex !important;">i</button>
         <span class="info-hover-tooltip">All seen songs: data pool uses all songs either you or the target player has seen. This means, if you or the target player has played more tours, it is likely that numbers may be inflated just because they have seen more songs.</span>
       </span>
@@ -15578,7 +15653,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
   sharedSeenTitle.innerHTML = `
     <span style="display:inline !important; white-space:nowrap !important;">
       Shared seen songs
-      <span class="info-hover-wrap open-left" style="display:inline-flex !important; vertical-align:middle !important; margin-left:6px !important;">
+      <span class="info-hover-wrap open-left social-synergy-hover-layer" style="display:inline-flex !important; vertical-align:middle !important; margin-left:6px !important;">
         <button class="info-hover-btn" type="button" aria-label="About shared seen songs" style="display:inline-flex !important;">i</button>
         <span class="info-hover-tooltip">Shared seen songs: data pool uses only songs that both of you have seen. This more accurately measures skill on equal terms.</span>
       </span>
@@ -15692,6 +15767,13 @@ async function renderSocialSynergyView() {
 
   const targetLabel = currentDisplayName || currentStatKey;
   const mergedRows = buildMergedSocialSynergyRows(synergyPayload, modeSnapshot);
+  cachedSocialSynergyRigTables = {
+    targetToOther: synergyPayload && synergyPayload.targetToOtherRig ? synergyPayload.targetToOtherRig : null,
+    otherToTarget: synergyPayload && synergyPayload.otherToTargetRig ? synergyPayload.otherToTargetRig : null,
+    targetToOtherNoDuplicates: synergyPayload && synergyPayload.targetToOtherRigNoDuplicates ? synergyPayload.targetToOtherRigNoDuplicates : null,
+    otherToTargetNoDuplicates: synergyPayload && synergyPayload.otherToTargetRigNoDuplicates ? synergyPayload.otherToTargetRigNoDuplicates : null
+  };
+  cachedSocialSynergyRigStats = modeSnapshot === "watched" && synergyPayload && synergyPayload.rigStats ? synergyPayload.rigStats : null;
   if (!mergedRows.length) {
     meta.innerText = "Found 0 players";
     list.innerHTML = '<div class="social-synergy-empty">No synergy count data found for this player.</div>';
@@ -15701,13 +15783,6 @@ async function renderSocialSynergyView() {
     socialSynergyPageIndex = 0;
     renderSocialSynergySinglePicker(cachedSocialSynergyRows, targetLabel);
     renderSocialSynergyTableRows(cachedSocialSynergyRows);
-    cachedSocialSynergyRigTables = {
-      targetToOther: synergyPayload && synergyPayload.targetToOtherRig ? synergyPayload.targetToOtherRig : null,
-      otherToTarget: synergyPayload && synergyPayload.otherToTargetRig ? synergyPayload.otherToTargetRig : null,
-      targetToOtherNoDuplicates: synergyPayload && synergyPayload.targetToOtherRigNoDuplicates ? synergyPayload.targetToOtherRigNoDuplicates : null,
-      otherToTargetNoDuplicates: synergyPayload && synergyPayload.otherToTargetRigNoDuplicates ? synergyPayload.otherToTargetRigNoDuplicates : null
-    };
-    cachedSocialSynergyRigStats = synergyPayload && synergyPayload.rigStats ? synergyPayload.rigStats : null;
     await renderSocialSynergyRigTables(modeSnapshot);
     return;
   }
@@ -15733,13 +15808,6 @@ async function renderSocialSynergyView() {
   renderSocialSynergySinglePicker(cachedSocialSynergyRows, targetLabel);
   socialSynergyPageIndex = 0;
   renderSocialSynergyTableRows(cachedSocialSynergyRows);
-  cachedSocialSynergyRigTables = {
-    targetToOther: synergyPayload && synergyPayload.targetToOtherRig ? synergyPayload.targetToOtherRig : null,
-    otherToTarget: synergyPayload && synergyPayload.otherToTargetRig ? synergyPayload.otherToTargetRig : null,
-    targetToOtherNoDuplicates: synergyPayload && synergyPayload.targetToOtherRigNoDuplicates ? synergyPayload.targetToOtherRigNoDuplicates : null,
-    otherToTargetNoDuplicates: synergyPayload && synergyPayload.otherToTargetRigNoDuplicates ? synergyPayload.otherToTargetRigNoDuplicates : null
-  };
-  cachedSocialSynergyRigStats = synergyPayload && synergyPayload.rigStats ? synergyPayload.rigStats : null;
   await renderSocialSynergyRigTables(modeSnapshot);
 }
 
@@ -15806,6 +15874,7 @@ async function renderOverviewSynergySummary() {
 function getAvailableSocialRivalEntries() {
   const activeStatsData = getSocialStatsDataForActiveMode();
   if (!currentStatKey || !activeStatsData || typeof activeStatsData !== "object") return [];
+  const activeMode = getActiveDataSourceMode();
   const currentPlayerEntry = getPlayerEntryFromCacheByName(currentStatKey || currentDisplayName || "");
   const currentPlayerIdResolved = String(
     currentPlayerId
@@ -15817,13 +15886,25 @@ function getAvailableSocialRivalEntries() {
     .filter(([key, rows]) => !isCurrentUserStatKey(key) && Array.isArray(rows) && rows.length)
     .map(([key, rows]) => {
       const playerEntry = getPlayerEntryFromCacheByName(key);
-      const rankSnapshot = getLatestRankSnapshotForRows(rows, key, playerEntry);
-      const latestRank = rankSnapshot.latestRank;
+      const rankSnapshot = getLatestRankSnapshotForRows(rows, key, playerEntry, activeMode);
+      const rowLatestRank = getLatestValidRankForPlayer(rows, null, activeMode);
+      let rowLatestTimestamp = Number.NEGATIVE_INFINITY;
+      rows.forEach(row => {
+        const timestampValue = getSortableTimestampValue(row && row.Timestamp);
+        if (Number.isFinite(timestampValue) && timestampValue > rowLatestTimestamp) {
+          rowLatestTimestamp = timestampValue;
+        }
+      });
+      const latestRank = Number.isFinite(rowLatestRank)
+        ? rowLatestRank
+        : rankSnapshot.latestRank;
       const playerId = String(playerEntry && playerEntry.playerId || "").trim();
       return {
         key,
         latestRank,
-        latestTimestamp: rankSnapshot.latestTimestamp,
+        latestTimestamp: Number.isFinite(rowLatestRank)
+          ? rowLatestTimestamp
+          : rankSnapshot.latestTimestamp,
         playerId,
         displayLabel: formatPlayerDisplayWithAliases(playerEntry, key)
       };
@@ -16033,10 +16114,40 @@ function renderSocialRivalFilter() {
 
 function getSelectedSocialRivalsMetricConfig() {
   const selectedKey = String(socialRivalsMetricKey || "guess_rate");
-  if (Object.prototype.hasOwnProperty.call(SOCIAL_RIVALS_METRICS, selectedKey)) {
+  if (isSocialRivalsMetricAvailableForActiveMode(selectedKey)) {
     return SOCIAL_RIVALS_METRICS[selectedKey];
   }
+  socialRivalsMetricKey = "guess_rate";
   return SOCIAL_RIVALS_METRICS.guess_rate;
+}
+
+function isSocialRivalsMetricAvailableForActiveMode(metricKey) {
+  const key = String(metricKey || "");
+  if (!Object.prototype.hasOwnProperty.call(SOCIAL_RIVALS_METRICS, key)) return false;
+  return !(getActiveDataSourceMode() === "usual" && SOCIAL_RIVALS_USUAL_HIDDEN_METRICS.has(key));
+}
+
+function syncSocialRivalsMetricOptionsForMode() {
+  if (!socialRivalsMetricSelect) return;
+
+  const availableMetricEntries = Object.entries(SOCIAL_RIVALS_METRICS)
+    .filter(([key]) => isSocialRivalsMetricAvailableForActiveMode(key));
+  const nextMetricKey = isSocialRivalsMetricAvailableForActiveMode(socialRivalsMetricKey)
+    ? socialRivalsMetricKey
+    : "guess_rate";
+
+  if (socialRivalsMetricKey !== nextMetricKey) {
+    socialRivalsMetricKey = nextMetricKey;
+  }
+
+  socialRivalsMetricSelect.innerHTML = "";
+  availableMetricEntries.forEach(([key, config]) => {
+    const option = document.createElement("option");
+    option.value = key;
+    option.innerText = config.label;
+    socialRivalsMetricSelect.appendChild(option);
+  });
+  socialRivalsMetricSelect.value = socialRivalsMetricKey;
 }
 
 function getSocialRivalMainDisplayName(label, fallbackKey) {
@@ -16123,12 +16234,10 @@ function renderSocialRivalsChart() {
   const bubbleCanvas = document.getElementById("socialRivalsBubbleChart");
   if (!meta || !canvas || !bubbleMeta || !bubbleCanvas) return;
 
+  syncSocialRivalsMetricOptionsForMode();
   const metricConfig = getSelectedSocialRivalsMetricConfig();
   if (title) {
     title.innerText = `Rivals ${metricConfig.label} Comparison`;
-  }
-  if (socialRivalsMetricSelect && socialRivalsMetricSelect.value !== socialRivalsMetricKey) {
-    socialRivalsMetricSelect.value = socialRivalsMetricKey;
   }
 
   if (socialRivalsChart) {
@@ -16144,6 +16253,7 @@ function renderSocialRivalsChart() {
   }
 
   const activeStatsData = getSocialStatsDataForActiveMode();
+  const activeMode = getActiveDataSourceMode();
   const targetRows = getCurrentUserRecordsForActiveMode();
   if (!currentStatKey || !targetRows.length) {
     meta.innerText = "No player selected";
@@ -16154,9 +16264,13 @@ function renderSocialRivalsChart() {
   const targetRankSnapshot = getLatestRankSnapshotForRows(
     targetRows,
     currentStatKey,
-    getPlayerEntryFromCacheByName(currentStatKey)
+    getPlayerEntryFromCacheByName(currentStatKey),
+    activeMode
   );
-  const targetLatestRank = targetRankSnapshot.latestRank;
+  const targetRowLatestRank = getLatestValidRankForPlayer(targetRows, null, activeMode);
+  const targetLatestRank = Number.isFinite(targetRowLatestRank)
+    ? targetRowLatestRank
+    : targetRankSnapshot.latestRank;
   const selectedKeys = selectedSocialRivalKeys
     .filter(key => !isCurrentUserStatKey(key) && Array.isArray(activeStatsData[key]) && activeStatsData[key].length)
     .slice(0, MAX_SELECTED_SOCIAL_RIVALS);
@@ -16418,11 +16532,19 @@ function renderSocialRivalsChart() {
       const averageGuessRate = gamesCount
         ? recentGuessRateValues.reduce((sum, value) => sum + value, 0) / gamesCount
         : 0;
+      const rivalRows = Array.isArray(activeStatsData[player.key]) ? activeStatsData[player.key] : [];
+      const rivalRowLatestRank = getLatestValidRankForPlayer(rivalRows, null, activeMode);
+      const rivalEntry = rivalEntriesByKey.get(player.key);
       const latestRank = player.key === currentStatKey
         ? targetLatestRank
         : (
-          Number(rivalEntriesByKey.get(player.key) && rivalEntriesByKey.get(player.key).latestRank)
-          || getLatestValidRankForPlayer(player.key, activeStatsData[player.key] || [])
+          Number.isFinite(rivalRowLatestRank)
+            ? rivalRowLatestRank
+            : (
+              Number.isFinite(Number(rivalEntry && rivalEntry.latestRank))
+                ? Number(rivalEntry.latestRank)
+                : getLatestValidRankForPlayer(player.key, rivalRows, activeMode)
+            )
         );
       const usefulness = recentUsefulnessValues.length
         ? recentUsefulnessValues.reduce((sum, value) => sum + value, 0) / recentUsefulnessValues.length
@@ -16609,6 +16731,162 @@ function buildTrend(values) {
   };
 }
 
+function solveThreeByThree(matrix, vector) {
+  const a = matrix.map(row => row.slice());
+  const b = vector.slice();
+
+  for (let col = 0; col < 3; col += 1) {
+    let pivotRow = col;
+    for (let row = col + 1; row < 3; row += 1) {
+      if (Math.abs(a[row][col]) > Math.abs(a[pivotRow][col])) {
+        pivotRow = row;
+      }
+    }
+    if (Math.abs(a[pivotRow][col]) < 1e-9) return null;
+    if (pivotRow !== col) {
+      [a[col], a[pivotRow]] = [a[pivotRow], a[col]];
+      [b[col], b[pivotRow]] = [b[pivotRow], b[col]];
+    }
+
+    for (let row = col + 1; row < 3; row += 1) {
+      const factor = a[row][col] / a[col][col];
+      for (let nextCol = col; nextCol < 3; nextCol += 1) {
+        a[row][nextCol] -= factor * a[col][nextCol];
+      }
+      b[row] -= factor * b[col];
+    }
+  }
+
+  const result = [0, 0, 0];
+  for (let row = 2; row >= 0; row -= 1) {
+    let sum = b[row];
+    for (let col = row + 1; col < 3; col += 1) {
+      sum -= a[row][col] * result[col];
+    }
+    result[row] = sum / a[row][row];
+  }
+  return result;
+}
+
+function buildQuadraticTrend(values) {
+  const points = values
+    .map((value, index) => ({ x: index, y: Number(value) }))
+    .filter(point => Number.isFinite(point.y));
+  if (points.length < 3) {
+    return { trend: buildTrend(values).trend };
+  }
+
+  const sums = points.reduce((acc, point) => {
+    const x2 = point.x * point.x;
+    const x3 = x2 * point.x;
+    const x4 = x2 * x2;
+    acc.count += 1;
+    acc.x += point.x;
+    acc.x2 += x2;
+    acc.x3 += x3;
+    acc.x4 += x4;
+    acc.y += point.y;
+    acc.xy += point.x * point.y;
+    acc.x2y += x2 * point.y;
+    return acc;
+  }, { count: 0, x: 0, x2: 0, x3: 0, x4: 0, y: 0, xy: 0, x2y: 0 });
+
+  const coefficients = solveThreeByThree(
+    [
+      [sums.count, sums.x, sums.x2],
+      [sums.x, sums.x2, sums.x3],
+      [sums.x2, sums.x3, sums.x4]
+    ],
+    [sums.y, sums.xy, sums.x2y]
+  );
+
+  if (!coefficients) {
+    return { trend: buildTrend(values).trend };
+  }
+
+  const [intercept, linear, quadratic] = coefficients;
+  return {
+    trend: values.map((_, index) => intercept + linear * index + quadratic * index * index),
+    quadratic,
+    linear,
+    intercept
+  };
+}
+
+function buildSquareRootTrend(values) {
+  const points = values
+    .map((value, index) => ({ x: Math.sqrt(index), y: Number(value) }))
+    .filter(point => Number.isFinite(point.y));
+  if (points.length < 2) {
+    return { trend: buildTrend(values).trend };
+  }
+
+  let sumX = 0;
+  let sumY = 0;
+  let sumXY = 0;
+  let sumXX = 0;
+  points.forEach(point => {
+    sumX += point.x;
+    sumY += point.y;
+    sumXY += point.x * point.y;
+    sumXX += point.x * point.x;
+  });
+
+  const n = points.length;
+  const denominator = n * sumXX - sumX * sumX;
+  let slope = 0;
+  let intercept = points[0] ? points[0].y : 0;
+  if (Math.abs(denominator) >= 1e-9) {
+    slope = (n * sumXY - sumX * sumY) / denominator;
+    intercept = (sumY - slope * sumX) / n;
+  }
+
+  return {
+    trend: values.map((_, index) => intercept + slope * Math.sqrt(index)),
+    slope,
+    intercept
+  };
+}
+
+function calculateTrendError(values, trend) {
+  let squaredError = 0;
+  let count = 0;
+  values.forEach((value, index) => {
+    const actual = Number(value);
+    const predicted = Number(trend && trend[index]);
+    if (!Number.isFinite(actual) || !Number.isFinite(predicted)) return;
+    const delta = actual - predicted;
+    squaredError += delta * delta;
+    count += 1;
+  });
+
+  return {
+    squaredError: count ? squaredError : Number.POSITIVE_INFINITY,
+    count
+  };
+}
+
+function buildBestCurveTrend(values) {
+  const quadratic = buildQuadraticTrend(values);
+  const squareRoot = buildSquareRootTrend(values);
+  const quadraticError = calculateTrendError(values, quadratic.trend);
+  const squareRootError = calculateTrendError(values, squareRoot.trend);
+
+  if (squareRootError.squaredError < quadraticError.squaredError) {
+    return {
+      ...squareRoot,
+      model: "Square Root",
+      error: squareRootError
+    };
+  }
+
+  return {
+    ...quadratic,
+    model: "Parabola",
+    error: quadraticError
+  };
+}
+
 function buildRadarScale(values, ringCount = 5) {
   const maxValue = Math.max(0, ...values);
   const safeRingCount = Math.max(1, ringCount);
@@ -16773,17 +17051,29 @@ function renderTrendChart(
     integerTicks = false,
     palette = null,
     metaElementId = null,
-    metaUnit = "tours"
+    metaUnit = "tours",
+    showCurvedTrend = false
   } = {}
 ) {
-  const { trend } = buildTrend(values);
+  const linearTrendResult = buildTrend(values);
+  const { trend } = linearTrendResult;
+  const curvedTrendResult = showCurvedTrend ? buildBestCurveTrend(values) : null;
+  const curvedTrend = curvedTrendResult ? curvedTrendResult.trend : [];
+  const linearTrendError = showCurvedTrend ? calculateTrendError(values, trend) : null;
+  const useCurvedTrend = Boolean(
+    showCurvedTrend
+    && curvedTrendResult
+    && curvedTrendResult.error
+    && linearTrendError
+    && curvedTrendResult.error.squaredError < linearTrendError.squaredError
+  );
   const resolvedPalette = {
     ...PERFORMANCE_LINE_PALETTES.default,
     ...(palette || {})
   };
   const hideStaticPoints = true;
   const overviewHoverPointRadius = 5;
-  const allSeriesValues = [...values, ...trend].filter(value => Number.isFinite(Number(value)));
+  const allSeriesValues = [...values, ...trend, ...curvedTrend].filter(value => Number.isFinite(Number(value)));
   const valueMin = allSeriesValues.length ? Math.min(...allSeriesValues) : 0;
   const valueMax = allSeriesValues.length ? Math.max(...allSeriesValues) : 0;
   const rawRange = valueMax - valueMin;
@@ -16913,9 +17203,26 @@ function renderTrendChart(
           order: 30,
           borderWidth: 3.2,
           pointRadius: 0,
+          pointHoverRadius: 0,
+          pointHitRadius: 0,
+          hidden: showCurvedTrend && useCurvedTrend,
           tension: 0,
           fill: false
-        }
+        },
+        ...(showCurvedTrend ? [{
+          label: "Curve Trend",
+          data: curvedTrend,
+          borderColor: resolvedPalette.trend,
+          borderDash: [8, 6],
+          order: 31,
+          borderWidth: 3.2,
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          pointHitRadius: 0,
+          hidden: !useCurvedTrend,
+          tension: 0,
+          fill: false
+        }] : [])
       ]
     },
     options: {
@@ -23483,9 +23790,10 @@ function renderPerformanceGuessRate(records) {
           backgroundColor: "rgba(217, 70, 239, 0.20)",
           pointBackgroundColor: "#d946ef",
           pointBorderColor: "#ffffff",
-          pointBorderWidth: 1.4,
-          pointRadius: 3.2,
-          pointHoverRadius: 4.8,
+          pointBorderWidth: 0,
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          pointHitRadius: 10,
           borderWidth: 2.3
         }
       ]
@@ -24327,7 +24635,7 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
     values,
     "Guess Rate (%)",
     "Guess rate (%)",
-    { metaElementId: "foundGames", metaUnit: "tours" }
+    { metaElementId: "foundGames", metaUnit: "tours", showCurvedTrend: true }
   );
 }
 
