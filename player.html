@@ -5133,6 +5133,10 @@
       margin-top: 8px !important;
     }
 
+    #otherToolsSection .changelog-data-box {
+      margin-top: 8px !important;
+    }
+
     #otherToolsSection .changelog-post {
       border: 1px solid #dbe3ee !important;
       border-radius: 12px !important;
@@ -7319,6 +7323,39 @@
       </div>
     </div>
 
+    <div id="performanceRigsMissedView" class="performance-charts" style="display:none;">
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">OP Rigs Missed Trend</div>
+          <div class="chart-meta">
+            <span id="opRigsMissedFoundGames">Found 0 tours</span>
+            <span id="opRigsMissedSlopeInfo">Slope: 0.00 per game</span>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="opRigsMissedChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">ED Rigs Missed Trend</div>
+          <div class="chart-meta">
+            <span id="edRigsMissedFoundGames">Found 0 tours</span>
+            <span id="edRigsMissedSlopeInfo">Slope: 0.00 per game</span>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="edRigsMissedChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">IN Rigs Missed Trend</div>
+          <div class="chart-meta">
+            <span id="inRigsMissedFoundGames">Found 0 tours</span>
+            <span id="inRigsMissedSlopeInfo">Slope: 0.00 per game</span>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="inRigsMissedChart"></canvas></div>
+      </div>
+    </div>
+
     <div id="performanceCompositeChartsView" class="performance-charts" style="display:none;">
       <div class="chart-card">
         <div class="chart-header">
@@ -7996,6 +8033,10 @@
           <div id="otherToolsChangelogSubtitle" class="changelog-subtitle">Feel free to dm me about any bugs or features you want added! (or use <a href="https://forms.gle/VqiTvvUPwTTyCTb96" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">this link</a> to fill out a feedback form!)</div>
         </div>
       </div>
+      <div id="otherToolsChangelogDataBox" class="changelog-post changelog-data-box">
+        <div class="changelog-post-title">Most Recent Data</div>
+        <div id="otherToolsChangelogDataContent" class="changelog-post-content">Loading...</div>
+      </div>
       <div id="otherToolsChangelogList" class="changelog-list"></div>
     </div>
     <div id="otherToolsPlaceholderView" class="placeholder-card" style="display:none;"></div>
@@ -8406,6 +8447,9 @@ let savedLivesChart = null;
 let rigAnalysisChart = null;
 let onlistAnalysisChart = null;
 let offlistAnalysisChart = null;
+let opRigsMissedChart = null;
+let edRigsMissedChart = null;
+let inRigsMissedChart = null;
 let socialRivalsChart = null;
 let socialRivalsBubbleChart = null;
 let socialTeamMetricCharts = [];
@@ -8419,6 +8463,7 @@ let artistFamiliarityRadarChart = null;
 let artistFamiliarityCompareRadarChart = null;
 let artistFamiliarityBarsChart = null;
 let artistRadarHoveredLabelIndex = -1;
+const trendZoomCharts = new Set();
 let activeSection = initialSection;
 let overviewActiveView = "overview";
 const activeSubSectionBySection = {};
@@ -8450,6 +8495,8 @@ let weightedGuessRateRequestId = 0;
 let overviewLanguageRerenderHandle = null;
 let cachedChangelogPosts = null;
 let changelogLoadPromise = null;
+let cachedChangelogDataText = null;
+let changelogDataLoadPromise = null;
 let overviewTopDoublesMode = "general";
 let relearnAudioElement = null;
 let relearnActiveToggleButton = null;
@@ -8780,9 +8827,9 @@ const knowledgeWindowFileByRange = {
 ------------------------- */
 const secondaryNavBySection = {
   overview: [],
-  performance: ["Guess Rate", "Lives Taken / Saved", "Onlist/Offlist", "Composite charts", "Other Metrics"],
-  knowledge: ["Artist Familiarity", "Tag Familiarity", "Seasonal Comparison", "Other Metrics"],
-  insights: ["Relearn Tracker", "By never correct", "By Wrong Guess", "By Popularity", "By % correct", "Other Metrics"],
+  performance: ["Guess Rate", "Lives Taken / Saved", "Onlist/Offlist", "Rigs Missed", "Composite charts"],
+  knowledge: ["Artist Familiarity", "Tag Familiarity", "Seasonal Comparison"],
+  insights: ["Relearn Tracker", "By never correct", "By Wrong Guess", "By Popularity", "By % correct"],
   social: ["Synergy", "Rivals", "Team Contributions", "Rig / List analysis"],
   otherTools: ["Search songs", "Search song frequency", "Convert rank/usefulness", "Original Tour data(Calendar)", "Changelog"]
 };
@@ -8901,6 +8948,7 @@ function preloadOtherSubtabsForSection(sectionKey, displayName) {
         renderPerformanceLivesTakenSaved(visible);
         const watchedVisible = getVisibleUserData(fullUserData);
         renderPerformanceRigAnalysis(watchedVisible);
+        renderPerformanceRigsMissed(watchedVisible);
         renderPerformanceCompositeCharts(watchedVisible);
       }
       return;
@@ -9057,7 +9105,7 @@ async function fetchChangelogFileNames() {
         : (indexPayload && Array.isArray(indexPayload.files) ? indexPayload.files : []);
       return files
         .map(file => String(file || "").trim())
-        .filter(file => /\.txt$/i.test(file));
+        .filter(file => /\.txt$/i.test(file) && !/^data\.txt$/i.test(file));
     }
   } catch (err) {
     console.warn("Unable to load changelog index.json", err);
@@ -9077,7 +9125,7 @@ async function fetchChangelogFileNames() {
       if (!rawHref || rawHref.endsWith("/")) return;
       const cleanHref = rawHref.split("#")[0].split("?")[0];
       const fileName = decodeURIComponent(cleanHref.split("/").pop() || "");
-      if (/\.txt$/i.test(fileName)) {
+      if (/\.txt$/i.test(fileName) && !/^data\.txt$/i.test(fileName)) {
         fileSet.add(fileName);
       }
     });
@@ -9111,7 +9159,7 @@ async function fetchChangelogFileNames() {
           : (scopedIndexPayload && Array.isArray(scopedIndexPayload.files) ? scopedIndexPayload.files : []);
         const parsed = files
           .map(file => String(file || "").trim())
-          .filter(file => /\.txt$/i.test(file));
+          .filter(file => /\.txt$/i.test(file) && !/^data\.txt$/i.test(file));
         if (parsed.length) {
           return parsed;
         }
@@ -9135,7 +9183,7 @@ async function fetchChangelogFileNames() {
             return "";
           })
           .map(file => file.split("/").pop() || "")
-          .filter(file => /\.txt$/i.test(file));
+          .filter(file => /\.txt$/i.test(file) && !/^data\.txt$/i.test(file));
         if (parsed.length) {
           return parsed;
         }
@@ -9220,6 +9268,53 @@ async function loadChangelogPosts(forceReload = false) {
   }
 }
 
+function parseChangelogDataText(rawText) {
+  return String(rawText || "").replace(/\r\n/g, "\n").replace(/\r/g, "\n").trim();
+}
+
+async function loadChangelogDataText(forceReload = false) {
+  if (!forceReload && cachedChangelogDataText != null) {
+    return cachedChangelogDataText;
+  }
+  if (!forceReload && changelogDataLoadPromise) {
+    return changelogDataLoadPromise;
+  }
+
+  changelogDataLoadPromise = (async () => {
+    try {
+      const res = await fetchChangelogFromAnyBase("changelog/data.txt");
+      if (!res || !res.ok) {
+        cachedChangelogDataText = "";
+        return cachedChangelogDataText;
+      }
+      cachedChangelogDataText = parseChangelogDataText(await res.text());
+      return cachedChangelogDataText;
+    } catch (err) {
+      console.warn("Unable to load changelog data.txt", err);
+      cachedChangelogDataText = "";
+      return cachedChangelogDataText;
+    }
+  })();
+
+  try {
+    return await changelogDataLoadPromise;
+  } finally {
+    changelogDataLoadPromise = null;
+  }
+}
+
+async function renderOtherToolsChangelogData() {
+  const contentEl = document.getElementById("otherToolsChangelogDataContent");
+  if (!contentEl) return;
+
+  const dataText = await loadChangelogDataText();
+  if (dataText) {
+    renderChangelogContent(contentEl, dataText);
+  } else {
+    contentEl.innerText = "No recent data information available.";
+  }
+}
+
 async function renderOtherToolsChangelog() {
   const titleEl = document.getElementById("otherToolsChangelogTitle");
   const subtitleEl = document.getElementById("otherToolsChangelogSubtitle");
@@ -9230,6 +9325,7 @@ async function renderOtherToolsChangelog() {
   if (subtitleEl) {
     subtitleEl.innerHTML = "Feel free to dm me about any bugs or features you want added! (or use <a href=\"https://forms.gle/VqiTvvUPwTTyCTb96\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"text-decoration: underline;\">this link</a> to fill out a feedback form!)";
   }
+  renderOtherToolsChangelogData();
   if (!listEl) return;
 
   const posts = await loadChangelogPosts();
@@ -9312,6 +9408,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     const guessRateView = document.getElementById("performanceGuessRateView");
     const livesView = document.getElementById("performanceLivesView");
     const rigAnalysisView = document.getElementById("performanceRigAnalysisView");
+    const rigsMissedView = document.getElementById("performanceRigsMissedView");
     const compositeChartsView = document.getElementById("performanceCompositeChartsView");
     const placeholderView = document.getElementById("performancePlaceholderView");
 
@@ -9319,6 +9416,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       guessRateView.style.display = "grid";
       livesView.style.display = "none";
       rigAnalysisView.style.display = "none";
+      rigsMissedView.style.display = "none";
       compositeChartsView.style.display = "none";
       placeholderView.style.display = "none";
 
@@ -9333,6 +9431,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       guessRateView.style.display = "none";
       livesView.style.display = "grid";
       rigAnalysisView.style.display = "none";
+      rigsMissedView.style.display = "none";
       compositeChartsView.style.display = "none";
       placeholderView.style.display = "none";
 
@@ -9347,6 +9446,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       guessRateView.style.display = "none";
       livesView.style.display = "none";
       rigAnalysisView.style.display = "grid";
+      rigsMissedView.style.display = "none";
       compositeChartsView.style.display = "none";
       placeholderView.style.display = "none";
 
@@ -9356,10 +9456,23 @@ function renderSubSectionContent(sectionKey, subSection) {
       return;
     }
 
+    if (subSection === "Rigs Missed") {
+      guessRateView.style.display = "none";
+      livesView.style.display = "none";
+      rigAnalysisView.style.display = "none";
+      rigsMissedView.style.display = "grid";
+      compositeChartsView.style.display = "none";
+      placeholderView.style.display = "none";
+
+      renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
+      return;
+    }
+
     if (subSection === "Composite charts") {
       guessRateView.style.display = "none";
       livesView.style.display = "none";
       rigAnalysisView.style.display = "none";
+      rigsMissedView.style.display = "none";
       compositeChartsView.style.display = "grid";
       placeholderView.style.display = "none";
 
@@ -9372,6 +9485,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     guessRateView.style.display = "none";
     livesView.style.display = "none";
     rigAnalysisView.style.display = "none";
+    rigsMissedView.style.display = "none";
     compositeChartsView.style.display = "none";
     placeholderView.style.display = "block";
     placeholderView.innerText = `${subSection} view coming soon.`;
@@ -9700,6 +9814,21 @@ function areRowsEquivalentForTourTypeLock(rowsA, rowsB) {
   return true;
 }
 
+function selectWatchedTourTypeForLock() {
+  overviewDataSourceMode = "watched";
+  if (overviewDataSourceToggle) {
+    overviewDataSourceToggle.classList.remove("is-usual");
+  }
+  if (overviewDataSourceWatchedBtn) {
+    overviewDataSourceWatchedBtn.classList.add("active");
+    overviewDataSourceWatchedBtn.setAttribute("aria-pressed", "true");
+  }
+  if (overviewDataSourceUsualBtn) {
+    overviewDataSourceUsualBtn.classList.remove("active");
+    overviewDataSourceUsualBtn.setAttribute("aria-pressed", "false");
+  }
+}
+
 function updateDataRangeControlState(sectionKey, subSection) {
   if (!dataRangeSelect) return;
   const dataRangeWrap = dataRangeSelect.closest(".topbar-data-range");
@@ -9712,6 +9841,7 @@ function updateDataRangeControlState(sectionKey, subSection) {
   const isPerformanceGuessRate = sectionKey === "performance" && subSection === "Guess Rate";
   const isPerformanceLives = sectionKey === "performance" && subSection === "Lives Taken / Saved";
   const isPerformanceOnlistOfflist = sectionKey === "performance" && subSection === "Onlist/Offlist";
+  const isPerformanceRigsMissed = sectionKey === "performance" && subSection === "Rigs Missed";
   const isPerformanceCompositeCharts = sectionKey === "performance" && subSection === "Composite charts";
   const isKnowledgeSeasonalComparison = sectionKey === "knowledge" && subSection === "Seasonal Comparison";
   const isSocialRigAnalysis = sectionKey === "social" && subSection === "Rig / List analysis";
@@ -9721,6 +9851,7 @@ function updateDataRangeControlState(sectionKey, subSection) {
     || isPerformanceGuessRate
     || isPerformanceLives
     || isPerformanceOnlistOfflist
+    || isPerformanceRigsMissed
     || isPerformanceCompositeCharts
     || isKnowledgeSeasonalComparison
     || isSocialRigAnalysis;
@@ -9748,11 +9879,11 @@ function updateDataRangeControlState(sectionKey, subSection) {
   const hasUsualRows = Array.isArray(usualUserData) && usualUserData.length > 0;
   const noWatchedDataAvailable = hasUsualRows && !hasWatchedRows;
   const noUsualDataAvailable = hasWatchedRows && !hasUsualRows;
-  const shouldLockTourType = isSocialRigAnalysis;
+  const shouldLockTourType = isSocialRigAnalysis || isPerformanceOnlistOfflist || isPerformanceRigsMissed;
   const lockedTourTypeMode = "watched";
   isTourTypeToggleLocked = shouldLockTourType;
-  if (shouldLockTourType && overviewDataSourceMode !== lockedTourTypeMode) {
-    overviewDataSourceMode = lockedTourTypeMode;
+  if (shouldLockTourType) {
+    selectWatchedTourTypeForLock();
   }
   dataRangeSelect.disabled = shouldLockToAll;
   if (dataRangeWrap) {
@@ -9822,7 +9953,8 @@ function buildSecondaryNav(sectionKey) {
     return `<a href="#" class="subnav-link" data-item="${item}">${item}</a>`;
   }).join("");
 
-  const selected = activeSubSectionBySection[sectionKey] || items[0];
+  const savedSelection = activeSubSectionBySection[sectionKey];
+  const selected = items.includes(savedSelection) ? savedSelection : items[0];
 
   subnavLinks.querySelectorAll(".subnav-link").forEach(link => {
     link.addEventListener("click", event => {
@@ -10261,7 +10393,8 @@ if (searchSongsInput) {
         event.preventDefault();
         searchSongsInput.value = suggestion.value;
         searchSongsQuery = suggestion.value;
-        applySearchSongsFilters();
+        renderSearchSongsInlineSuggestion();
+        hideSearchSongsSuggestions();
       }
       return;
     }
@@ -11183,6 +11316,9 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Lives Taken / Saved" && performanceRows.length) {
       renderPerformanceLivesTakenSaved(getVisibleUserData(performanceRows));
     }
+    if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
+      renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
+    }
     if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
       renderSocialRivalFilter();
       renderSocialRivalsChart();
@@ -11228,6 +11364,9 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Lives Taken / Saved" && performanceRows.length) {
       renderPerformanceLivesTakenSaved(getVisibleUserData(performanceRows));
+    }
+    if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
+      renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
     }
     if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
       renderSocialRivalFilter();
@@ -14230,10 +14369,9 @@ function getSocialTeamTierPalette(tierIndex, tierCount) {
 }
 
 function getSocialTeamBarTone(entry) {
-  const withinTierIndex = Number(entry && entry.withinTierIndex || 0);
-  const tierSize = Math.max(1, Number(entry && entry.tierSize || 1));
-  if (withinTierIndex === 0) return "bright";
-  if (withinTierIndex === tierSize - 1) return "dark";
+  const tierSlot = String(entry && entry.tierSlot || "").trim().toLowerCase();
+  if (tierSlot === "high") return "bright";
+  if (tierSlot === "low") return "dark";
   return "normal";
 }
 
@@ -16700,19 +16838,41 @@ function renderSocialRivalsChart() {
   requestAnimationFrame(syncSocialRivalsBubbleHeight);
 }
 
+function toFiniteTrendValue(value) {
+  if (value == null || value === "") return null;
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? numeric : null;
+}
+
 function buildTrend(values) {
-  const n = values.length;
+  const points = values
+    .map((value, index) => ({ x: index, y: toFiniteTrendValue(value) }))
+    .filter(point => point.y != null);
+  const n = points.length;
+  if (!n) {
+    return {
+      trend: values.map(() => null),
+      slope: 0
+    };
+  }
+  if (n === 1) {
+    return {
+      trend: values.map((_, index) => (index === points[0].x ? points[0].y : null)),
+      slope: 0
+    };
+  }
+
   let sumX = 0;
   let sumY = 0;
   let sumXY = 0;
   let sumXX = 0;
 
-  for (let i = 0; i < n; i++) {
-    sumX += i;
-    sumY += values[i];
-    sumXY += i * values[i];
-    sumXX += i * i;
-  }
+  points.forEach(point => {
+    sumX += point.x;
+    sumY += point.y;
+    sumXY += point.x * point.y;
+    sumXX += point.x * point.x;
+  });
 
   const denominator = n * sumXX - sumX * sumX;
   let slope = 0;
@@ -16722,7 +16882,7 @@ function buildTrend(values) {
     slope = (n * sumXY - sumX * sumY) / denominator;
     intercept = (sumY - slope * sumX) / n;
   } else {
-    intercept = values[0] || 0;
+    intercept = points[0].y;
   }
 
   return {
@@ -16770,8 +16930,8 @@ function solveThreeByThree(matrix, vector) {
 
 function buildQuadraticTrend(values) {
   const points = values
-    .map((value, index) => ({ x: index, y: Number(value) }))
-    .filter(point => Number.isFinite(point.y));
+    .map((value, index) => ({ x: index, y: toFiniteTrendValue(value) }))
+    .filter(point => point.y != null);
   if (points.length < 3) {
     return { trend: buildTrend(values).trend };
   }
@@ -16815,8 +16975,8 @@ function buildQuadraticTrend(values) {
 
 function buildSquareRootTrend(values) {
   const points = values
-    .map((value, index) => ({ x: Math.sqrt(index), y: Number(value) }))
-    .filter(point => Number.isFinite(point.y));
+    .map((value, index) => ({ x: Math.sqrt(index), y: toFiniteTrendValue(value) }))
+    .filter(point => point.y != null);
   if (points.length < 2) {
     return { trend: buildTrend(values).trend };
   }
@@ -16852,9 +17012,9 @@ function calculateTrendError(values, trend) {
   let squaredError = 0;
   let count = 0;
   values.forEach((value, index) => {
-    const actual = Number(value);
-    const predicted = Number(trend && trend[index]);
-    if (!Number.isFinite(actual) || !Number.isFinite(predicted)) return;
+    const actual = toFiniteTrendValue(value);
+    const predicted = toFiniteTrendValue(trend && trend[index]);
+    if (actual == null || predicted == null) return;
     const delta = actual - predicted;
     squaredError += delta * delta;
     count += 1;
@@ -16935,14 +17095,27 @@ function attachTrendZoomBrush(chart, canvasId, pointCount, options = {}) {
   const resetBtn = ensureTrendZoomResetButton(chart, canvasId);
   if (!resetBtn) return;
   applyTrendZoomSelectionState(chart, pointCount, pointCount, options);
-  resetBtn.onclick = () => {
-    if (!chart || !chart.options || !chart.options.scales || !chart.options.scales.x) return;
-    chart.options.scales.x.min = undefined;
-    chart.options.scales.x.max = undefined;
+  const resetTrendZoom = () => {
+    if (!chart || !chart.options || !chart.options.scales || !chart.options.scales.x) return false;
+    const xScaleOptions = chart.options.scales.x;
+    const wasZoomed =
+      xScaleOptions.min !== undefined ||
+      xScaleOptions.max !== undefined ||
+      resetBtn.style.display !== "none";
+    if (!wasZoomed) {
+      resetBtn.style.display = "none";
+      return false;
+    }
+    xScaleOptions.min = undefined;
+    xScaleOptions.max = undefined;
     applyTrendZoomSelectionState(chart, pointCount, pointCount, options);
     chart.update("none");
     resetBtn.style.display = "none";
+    return wasZoomed;
   };
+  chart.$resetTrendZoom = resetTrendZoom;
+  trendZoomCharts.add(chart);
+  resetBtn.onclick = resetTrendZoom;
   const wrap = canvas.parentElement;
   if (getComputedStyle(wrap).position === "static") {
     wrap.style.position = "relative";
@@ -17034,8 +17207,22 @@ function attachTrendZoomBrush(chart, canvasId, pointCount, options = {}) {
     canvas.removeEventListener("mousedown", onMouseDown);
     window.removeEventListener("mousemove", onMouseMove);
     window.removeEventListener("mouseup", onMouseUp);
+    trendZoomCharts.delete(chart);
+    delete chart.$resetTrendZoom;
     brush.style.display = "none";
   };
+}
+
+function resetAllTrendZoomCharts() {
+  let didReset = false;
+  Array.from(trendZoomCharts).forEach(chart => {
+    if (!chart || typeof chart.$resetTrendZoom !== "function") {
+      trendZoomCharts.delete(chart);
+      return;
+    }
+    didReset = chart.$resetTrendZoom() || didReset;
+  });
+  return didReset;
 }
 
 function renderTrendChart(
@@ -17073,14 +17260,17 @@ function renderTrendChart(
   };
   const hideStaticPoints = true;
   const overviewHoverPointRadius = 5;
-  const allSeriesValues = [...values, ...trend, ...curvedTrend].filter(value => Number.isFinite(Number(value)));
+  const allSeriesValues = [...values, ...trend, ...curvedTrend]
+    .map(toFiniteTrendValue)
+    .filter(value => value != null);
   const valueMin = allSeriesValues.length ? Math.min(...allSeriesValues) : 0;
   const valueMax = allSeriesValues.length ? Math.max(...allSeriesValues) : 0;
   const rawRange = valueMax - valueMin;
   const isPercentSeries = suffix === "%";
   const isLivesSeries = canvasId === "takenLivesChart" || canvasId === "savedLivesChart";
+  const isRigsMissedSeries = canvasId === "opRigsMissedChart" || canvasId === "edRigsMissedChart" || canvasId === "inRigsMissedChart";
   const isWeightedSeries = canvasId === "weightedGuessRateChart";
-  const clampMinToZero = isLivesSeries || (isPercentSeries && canvasId !== "weightedGuessRateChart");
+  const clampMinToZero = isLivesSeries || isRigsMissedSeries || (isPercentSeries && canvasId !== "weightedGuessRateChart");
   const getNiceStep = rawStep => {
     if (!Number.isFinite(rawStep) || rawStep <= 0) return 1;
     const exponent = Math.floor(Math.log10(rawStep));
@@ -17124,13 +17314,13 @@ function renderTrendChart(
   if (yMax <= yMin) {
     yMax = yMin + (yTickStep * 2);
   }
-  if (isLivesSeries) {
-    const rawLivesValues = values
-      .map(value => Number(value))
-      .filter(value => Number.isFinite(value));
-    const livesMaxValue = rawLivesValues.length ? Math.max(...rawLivesValues) : 0;
+  if (isLivesSeries || isRigsMissedSeries) {
+    const rawCountValues = values
+      .map(toFiniteTrendValue)
+      .filter(value => value != null);
+    const countMaxValue = rawCountValues.length ? Math.max(...rawCountValues) : 0;
     yMin = 0;
-    yMax = Math.max(1, Math.ceil(livesMaxValue));
+    yMax = Math.max(1, Math.ceil(countMaxValue));
     yTickStep = 1;
   }
   if (isWeightedSeries) {
@@ -17196,7 +17386,7 @@ function renderTrendChart(
           fill: false
         },
         {
-          label: "Trend",
+          label: "Linear Trend",
           data: trend,
           borderColor: resolvedPalette.trend,
           borderDash: [8, 6],
@@ -17249,7 +17439,8 @@ function renderTrendChart(
           bodyColor: "#d8e4f3",
           callbacks: {
             label: function(context) {
-              return context.dataset.label + ": " + Number(context.raw).toFixed(decimals) + suffix;
+              const value = toFiniteTrendValue(context.raw);
+              return context.dataset.label + ": " + (value == null ? "N/A" : value.toFixed(decimals) + suffix);
             },
             labelColor: function(context) {
               const color = context.dataset && context.dataset.borderColor
@@ -21452,6 +21643,13 @@ document.addEventListener("keydown", event => {
 });
 
 document.addEventListener("keydown", event => {
+  if (event.key !== "Escape") return;
+  if (resetAllTrendZoomCharts()) {
+    event.preventDefault();
+  }
+});
+
+document.addEventListener("keydown", event => {
   if (event.key !== " " && event.code !== "Space") return;
 
   const target = event.target;
@@ -24226,6 +24424,103 @@ function renderPerformanceRigAnalysis(records) {
   );
 }
 
+function renderPerformanceRigsMissed(records) {
+  const metricConfigs = [
+    {
+      field: "OP Rigs Missed",
+      canvasId: "opRigsMissedChart",
+      metaId: "opRigsMissedFoundGames",
+      slopeId: "opRigsMissedSlopeInfo",
+      label: "OP Rigs Missed",
+      palette: PERFORMANCE_LINE_PALETTES.op,
+      getChart: () => opRigsMissedChart,
+      setChart: chart => { opRigsMissedChart = chart; }
+    },
+    {
+      field: "ED Rigs Missed",
+      canvasId: "edRigsMissedChart",
+      metaId: "edRigsMissedFoundGames",
+      slopeId: "edRigsMissedSlopeInfo",
+      label: "ED Rigs Missed",
+      palette: PERFORMANCE_LINE_PALETTES.ed,
+      getChart: () => edRigsMissedChart,
+      setChart: chart => { edRigsMissedChart = chart; }
+    },
+    {
+      field: "IN Rigs Missed",
+      canvasId: "inRigsMissedChart",
+      metaId: "inRigsMissedFoundGames",
+      slopeId: "inRigsMissedSlopeInfo",
+      label: "IN Rigs Missed",
+      palette: PERFORMANCE_LINE_PALETTES.insert,
+      getChart: () => inRigsMissedChart,
+      setChart: chart => { inRigsMissedChart = chart; }
+    }
+  ];
+
+  const destroyChartForConfig = config => {
+    const chart = config.getChart();
+    if (chart) {
+      if (typeof chart.$trendZoomBrushCleanup === "function") {
+        chart.$trendZoomBrushCleanup();
+      }
+      chart.destroy();
+      config.setChart(null);
+    }
+  };
+
+  if (!records.length) {
+    metricConfigs.forEach(config => {
+      const metaEl = document.getElementById(config.metaId);
+      const slopeEl = document.getElementById(config.slopeId);
+      if (metaEl) metaEl.innerText = "Found 0 tours";
+      if (slopeEl) slopeEl.innerText = "Slope: 0.00 per game";
+      destroyChartForConfig(config);
+    });
+    return;
+  }
+
+  metricConfigs.forEach(config => {
+    const availablePoints = records.map(row => {
+      const resolved = resolveNumericMetricValue(row, config.field);
+      return Number.isFinite(resolved)
+        ? { label: row.Timestamp, value: resolved }
+        : null;
+    }).filter(point => point != null);
+    const metaEl = document.getElementById(config.metaId);
+    const slopeEl = document.getElementById(config.slopeId);
+    if (!availablePoints.length) {
+      if (metaEl) metaEl.innerText = "Found 0 tours";
+      if (slopeEl) slopeEl.innerText = "Slope: 0.00 per game";
+      destroyChartForConfig(config);
+      return;
+    }
+
+    const labels = availablePoints.map(point => point.label);
+    const values = availablePoints.map(point => point.value);
+    const { slope } = buildTrend(values);
+    if (metaEl) metaEl.innerText = `Found ${availablePoints.length} tours`;
+    if (slopeEl) slopeEl.innerText = `Slope: ${slope >= 0 ? "+" : ""}${slope.toFixed(2)} per game`;
+
+    config.setChart(renderTrendChart(
+      config.getChart(),
+      config.canvasId,
+      labels,
+      values,
+      config.label,
+      config.label,
+      {
+        suffix: "",
+        decimals: 0,
+        integerTicks: true,
+        palette: config.palette,
+        metaElementId: config.metaId,
+        metaUnit: "tours"
+      }
+    ));
+  });
+}
+
 function renderPerformanceCompositeCharts(records) {
   if (!records.length) {
     const rigFoundGames = document.getElementById("rigFoundGames");
@@ -24650,6 +24945,9 @@ if (dataRangeSelect) {
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Lives Taken / Saved") {
       renderPerformanceLivesTakenSaved(performanceVisibleRecords);
+    }
+    if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
+      renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Onlist/Offlist") {
       renderPerformanceRigAnalysis(getVisibleUserData(fullUserData));
@@ -25382,6 +25680,9 @@ Promise.all([
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Lives Taken / Saved") {
       renderPerformanceLivesTakenSaved(performanceVisibleRecords);
+    }
+    if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
+      renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Onlist/Offlist") {
       renderPerformanceRigAnalysis(getVisibleUserData(fullUserData));

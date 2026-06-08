@@ -174,30 +174,24 @@ function initializeLoginBackgroundToggle() {
   });
 }
 
-function parseDataDateFromChangelogText(text) {
+function parseDataUpToLineFromChangelogText(text) {
   const lines = String(text || "").split(/\r?\n/);
-  let inDataSection = false;
   for (const rawLine of lines) {
     const line = rawLine.trim();
     if (!line) {
       continue;
     }
     if (/^__\s*data\s*__$/i.test(line)) {
-      inDataSection = true;
       continue;
     }
-    if (/^__.*__$/.test(line) && inDataSection) {
+    if (/^__.*__$/.test(line)) {
       break;
     }
-    if (!inDataSection) {
-      continue;
-    }
-    const isoMatch = line.match(/\b(\d{4}-\d{2}-\d{2})\b/);
-    if (isoMatch) {
-      return isoMatch[1];
+    if (/^data\s+up\s+to\b/i.test(line)) {
+      return line;
     }
   }
-  return null;
+  return "";
 }
 
 function compareVersionFileNamesDesc(a, b) {
@@ -270,27 +264,20 @@ async function updateLoginDataUpTo() {
     return;
   }
 
-  const fileNames = await listChangelogFiles();
-  const sortedFiles = [...fileNames].sort(compareVersionFileNamesDesc);
-  for (const fileName of sortedFiles) {
-    try {
-      const res = await fetch(dataUrl(`changelog/${encodeURIComponent(fileName)}`));
-      if (!res.ok) {
-        continue;
-      }
-      const text = await res.text();
-      const isoDate = parseDataDateFromChangelogText(text);
-      if (isoDate) {
-        const defaultText = `Data up to ${formatIsoDate(isoDate)}`;
-        dataUpToEl.dataset.defaultText = defaultText;
-        if (!document.body.classList.contains("is-video-view")) {
-          dataUpToEl.innerText = defaultText;
-        }
-        return;
-      }
-    } catch (err) {
-      console.warn(`Unable to load changelog file: ${fileName}`, err);
+  try {
+    const res = await fetch(dataUrl("changelog/data.txt"));
+    if (!res.ok) {
+      return;
     }
+    const dataUpToLine = parseDataUpToLineFromChangelogText(await res.text());
+    if (dataUpToLine) {
+      dataUpToEl.dataset.defaultText = dataUpToLine;
+      if (!document.body.classList.contains("is-video-view")) {
+        dataUpToEl.innerText = dataUpToLine;
+      }
+    }
+  } catch (err) {
+    console.warn("Unable to load changelog data.txt", err);
   }
 }
 
