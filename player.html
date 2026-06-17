@@ -1802,21 +1802,22 @@
       min-width: 180px !important;
       max-width: 260px !important;
       border-radius: 8px !important;
-      border: 1px solid rgba(148, 163, 184, 0.55) !important;
-      background: rgba(15, 23, 42, 0.96) !important;
-      color: #e2e8f0 !important;
+      border: 2px solid #94a3b8 !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
       font-size: 11px !important;
       font-weight: 400 !important;
       line-height: 1.35 !important;
       letter-spacing: 0 !important;
       text-transform: none !important;
+      text-align: left !important;
       padding: 7px 8px !important;
       white-space: normal !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
-      z-index: 20 !important;
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
+      z-index: 2147483647 !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
     }
 
     #overviewWeeklyView .weekly-performance-cards .card:nth-child(3) .weekly-card-info-tooltip,
@@ -1877,21 +1878,22 @@
       min-width: 240px !important;
       max-width: min(66vw, 420px) !important;
       border-radius: 9px !important;
-      border: 1px solid rgba(148, 163, 184, 0.55) !important;
-      background: rgba(15, 23, 42, 0.96) !important;
-      color: #e2e8f0 !important;
+      border: 2px solid #94a3b8 !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
       font-size: 11px !important;
       font-weight: 400 !important;
       line-height: 1.35 !important;
       letter-spacing: 0 !important;
       text-transform: none !important;
+      text-align: left !important;
       padding: 8px 9px !important;
       white-space: normal !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
-      z-index: 9999 !important;
-      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.26) !important;
+      z-index: 2147483647 !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
       text-shadow: none !important;
     }
 
@@ -2837,11 +2839,26 @@
       text-align: center !important;
     }
 
+    #overviewStatsSummaryView .overview-z-score-wrap {
+      height: 430px !important;
+      min-height: 430px !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 12px !important;
+      padding: 10px 12px !important;
+      box-sizing: border-box !important;
+    }
+
     #overviewStatsSummaryView .chart-wrap {
       margin-top: 0 !important;
       background: transparent !important;
       border-color: transparent !important;
       box-shadow: none !important;
+    }
+
+    #overviewStatsSummaryView .chart-wrap.overview-z-score-wrap {
+      background: transparent !important;
+      border-color: transparent !important;
     }
 
     #overviewStatsSummaryView #overviewGenreSummaryCard .info-hover-tooltip {
@@ -2850,10 +2867,18 @@
       font-size: 10.5px !important;
       line-height: 1.5 !important;
       letter-spacing: 0.005em !important;
-      color: #cbd5e1 !important;
+      color: #0f172a !important;
       text-shadow: none !important;
       -webkit-font-smoothing: antialiased !important;
       -moz-osx-font-smoothing: grayscale !important;
+    }
+
+    #overviewSection #overviewStatsSummaryView .standardized-metrics-info-tooltip {
+      text-align: left !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
+      border-color: #94a3b8 !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
     }
 
     #overviewStatsSummaryView .overview-genre-radar-wrap {
@@ -3033,19 +3058,20 @@
       min-width: 180px !important;
       max-width: 240px !important;
       border-radius: 8px !important;
-      border: 1px solid rgba(148, 163, 184, 0.55) !important;
-      background: rgba(15, 23, 42, 0.96) !important;
-      color: #e2e8f0 !important;
+      border: 2px solid #94a3b8 !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
       font-size: 11px !important;
       font-weight: 400 !important;
       line-height: 1.35 !important;
+      text-align: left !important;
       padding: 7px 8px !important;
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
-      white-space: normal !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
+      white-space: pre-line !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
-      z-index: 30 !important;
+      z-index: 2147483647 !important;
     }
 
     #overviewSection .info-hover-wrap.open-left .info-hover-tooltip {
@@ -3092,19 +3118,20 @@
       min-width: 260px !important;
       max-width: min(70vw, 520px) !important;
       border-radius: 8px !important;
-      border: 1px solid rgba(148, 163, 184, 0.55) !important;
-      background: rgba(15, 23, 42, 0.96) !important;
-      color: #e2e8f0 !important;
+      border: 2px solid #94a3b8 !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
       font-size: 11px !important;
       font-weight: 400 !important;
       line-height: 1.35 !important;
+      text-align: left !important;
       padding: 7px 8px !important;
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
       white-space: normal !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
-      z-index: 30 !important;
+      z-index: 2147483647 !important;
     }
 
     #insightsSection .info-hover-wrap.open-left .info-hover-tooltip {
@@ -3151,20 +3178,20 @@
       min-width: 280px !important;
       max-width: min(75vw, 620px) !important;
       border-radius: 8px !important;
-      border: 1px solid rgba(148, 163, 184, 0.55) !important;
-      background: rgba(15, 23, 42, 0.96) !important;
-      color: #e2e8f0 !important;
+      border: 2px solid #94a3b8 !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
       font-size: 11px !important;
       font-weight: 400 !important;
       line-height: 1.35 !important;
       padding: 7px 8px !important;
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
       white-space: normal !important;
       text-align: left !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
-      z-index: 30 !important;
+      z-index: 2147483647 !important;
     }
 
     #socialSection .info-hover-wrap.open-left .info-hover-tooltip {
@@ -3176,6 +3203,57 @@
     #socialSection .info-hover-wrap:focus-within .info-hover-tooltip {
       opacity: 1 !important;
       visibility: visible !important;
+    }
+
+    #overviewSection :is(.chart-card, .card):has(.info-hover-wrap:hover),
+    #overviewSection :is(.chart-card, .card):has(.info-hover-wrap:focus-within),
+    #overviewSection :is(.chart-card, .card):has(.weekly-card-info:hover),
+    #overviewSection :is(.chart-card, .card):has(.weekly-card-info:focus-within),
+    #insightsSection :is(.chart-card, .card):has(.info-hover-wrap:hover),
+    #insightsSection :is(.chart-card, .card):has(.info-hover-wrap:focus-within),
+    #socialSection :is(.chart-card, .card):has(.info-hover-wrap:hover),
+    #socialSection :is(.chart-card, .card):has(.info-hover-wrap:focus-within) {
+      position: relative !important;
+      z-index: 2147483645 !important;
+      overflow: visible !important;
+    }
+
+    #overviewSection :is(.chart-header, .chart-title, .card-title):has(.info-hover-wrap:hover),
+    #overviewSection :is(.chart-header, .chart-title, .card-title):has(.info-hover-wrap:focus-within),
+    #overviewSection :is(.chart-header, .chart-title, .card-title):has(.weekly-card-info:hover),
+    #overviewSection :is(.chart-header, .chart-title, .card-title):has(.weekly-card-info:focus-within),
+    #insightsSection :is(.chart-header, .chart-title, .card-title):has(.info-hover-wrap:hover),
+    #insightsSection :is(.chart-header, .chart-title, .card-title):has(.info-hover-wrap:focus-within),
+    #socialSection :is(.chart-header, .chart-title, .card-title):has(.info-hover-wrap:hover),
+    #socialSection :is(.chart-header, .chart-title, .card-title):has(.info-hover-wrap:focus-within),
+    #overviewSection :is(.info-hover-wrap, .weekly-card-info):hover,
+    #overviewSection :is(.info-hover-wrap, .weekly-card-info):focus-within,
+    #insightsSection .info-hover-wrap:hover,
+    #insightsSection .info-hover-wrap:focus-within,
+    #socialSection .info-hover-wrap:hover,
+    #socialSection .info-hover-wrap:focus-within {
+      position: relative !important;
+      z-index: 2147483646 !important;
+      overflow: visible !important;
+    }
+
+    #overviewSection .info-hover-tooltip,
+    #insightsSection .info-hover-tooltip,
+    #socialSection .info-hover-tooltip,
+    #overviewWeeklyView .weekly-card-info-tooltip {
+      width: min(72vw, 300px) !important;
+      max-width: min(72vw, 300px) !important;
+      text-wrap: pretty !important;
+    }
+
+    #overviewWeeklyView .weekly-performance-cards .card-title .weekly-card-info-tooltip {
+      width: min(72vw, 300px) !important;
+      max-width: min(72vw, 300px) !important;
+    }
+
+    #overviewWeeklyView .chart-title .weekly-card-info .weekly-card-info-tooltip {
+      width: min(72vw, 340px) !important;
+      max-width: min(72vw, 340px) !important;
     }
 
     #insightsSection .relearn-table-wrap {
@@ -5601,11 +5679,24 @@
       height: var(--social-rivals-top-card-height) !important;
       display: flex !important;
       flex-direction: column !important;
-      overflow: hidden !important;
+      overflow: visible !important;
     }
 
     #socialSection #socialRivalsBubbleView .chart-meta {
       display: none !important;
+    }
+
+    #socialSection #socialRivalsBubbleView .chart-header {
+      position: relative !important;
+      z-index: 2147483646 !important;
+      overflow: visible !important;
+    }
+
+    #socialSection #socialRivalsBubbleView .chart-title,
+    #socialSection #socialRivalsBubbleView .info-hover-wrap {
+      position: relative !important;
+      z-index: 2147483646 !important;
+      overflow: visible !important;
     }
 
     #socialSection #socialRivalsBubbleView .chart-wrap {
@@ -5614,6 +5705,7 @@
       height: auto !important;
       position: relative !important;
       overflow: hidden !important;
+      z-index: 1 !important;
     }
 
     #socialSection #socialRivalsBubbleView .chart-wrap canvas {
@@ -5788,11 +5880,7 @@
       padding: 14px !important;
       border: 1px solid #c9d6e5 !important;
       border-radius: 14px !important;
-      background:
-        radial-gradient(circle at 10% 12%, rgba(201, 228, 221, 0.45), rgba(201, 228, 221, 0) 42%),
-        radial-gradient(circle at 8% 10%, rgba(214, 230, 247, 0.75), rgba(214, 230, 247, 0) 40%),
-        radial-gradient(circle at 92% 92%, rgba(201, 228, 221, 0.5), rgba(201, 228, 221, 0) 44%),
-        linear-gradient(145deg, #edf4fc 0%, #e8f0f9 52%, #e3edf8 100%) !important;
+      background: #edf4fc !important;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 8px 18px rgba(81, 105, 132, 0.08) !important;
     }
 
@@ -5867,7 +5955,7 @@
     }
 
     #socialSection #socialSynergySingleCompare .social-synergy-hover-layer .info-hover-tooltip {
-      z-index: 10000 !important;
+      z-index: 2147483647 !important;
     }
 
     #socialSection .social-synergy-single-right .chart-title {
@@ -6063,9 +6151,9 @@
     }
 
     #socialSection .social-synergy-row {
-      border: 1px solid #d4deea !important;
+      border: 1px solid #c8d9ef !important;
       border-radius: 10px !important;
-      background: #edf3fa !important;
+      background: #e7f0fc !important;
       padding: 10px 12px !important;
     }
 
@@ -6907,7 +6995,7 @@
           <div class="card-title">Average Guess Rate</div>
           <div class="card-subtitle">last 10 tours</div>
           <div class="card-value" id="guess">-</div>
-          <div class="card-footnote" id="overviewGuessQuartilesText">P25: - | P75: -</div>
+          <div class="card-footnote" id="overviewGuessQuartilesText">Target Range: - — -</div>
         </div>
       </div>
 
@@ -7035,6 +7123,18 @@
       </div>
       </div>
       <div id="overviewStatsSummaryView" style="display:none;">
+        <div id="overviewZScoreCard" class="chart-card" style="display:none;">
+          <div class="chart-header">
+            <div class="chart-title">
+              Standardized Metrics
+              <span class="info-hover-wrap">
+                <button class="info-hover-btn" type="button" aria-label="Standardized metrics info">i</button>
+                <span class="info-hover-tooltip standardized-metrics-info-tooltip">Compares your recent average for each stat against all players. 0 is average, +1 is one standard deviation better, and -1 is one standard deviation below average. Avg / 8 is flipped so lower values score higher.</span>
+              </span>
+            </div>
+          </div>
+          <div class="chart-wrap overview-z-score-wrap"><canvas id="overviewZScoreChart"></canvas></div>
+        </div>
         <div id="overviewGenreSummaryCard" class="chart-card">
           <div class="chart-header">
             <div class="chart-title">
@@ -7473,7 +7573,7 @@
           Relearn Tracker
           <span class="info-hover-wrap">
             <button class="info-hover-btn" type="button" aria-label="About Relearn Tracker">i</button>
-            <span class="info-hover-tooltip">Shows songs you previously got correct but got wrong in your latest attempt. The Relearn Tracker is ordered as follows:<br>1. smaller distance from the last ✅ to the end of the pattern wins<br>2. if tied, higher totalCorrect wins<br>3. if still tied, later lastAttemptDate wins</span>
+            <span class="info-hover-tooltip">Shows songs you previously got correct but got wrong in your latest attempt. Sorted by most recent.</span>
           </span>
         </div>
         <div class="chart-meta">
@@ -8074,12 +8174,26 @@ const isLocalDataContext =
 const DATA_BASE_URL = isLocalDataContext
   ? "./data"
   : "https://amq-stats-api.yarthepro.workers.dev";
+const DATA_ASSET_VERSION = (() => {
+  const modifiedTime = Date.parse(document.lastModified || "");
+  return Number.isFinite(modifiedTime) ? String(modifiedTime) : "unversioned";
+})();
+
+function shouldVersionDataRequest(path) {
+  const cleanPath = String(path || "").split("?")[0].toLowerCase();
+  return /\.(json|csv|txt)$/.test(cleanPath);
+}
 
 function dataUrl(path) {
   const cleanPath = String(path || "")
     .replace(/^data\//, "")
     .replace(/^\/+/, "");
-  return `${DATA_BASE_URL}/${cleanPath}`;
+  const url = `${DATA_BASE_URL}/${cleanPath}`;
+  if (!isLocalDataContext && shouldVersionDataRequest(cleanPath)) {
+    const separator = url.includes("?") ? "&" : "?";
+    return `${url}${separator}v=${encodeURIComponent(DATA_ASSET_VERSION)}`;
+  }
+  return url;
 }
 
 function getActiveDataSourceMode() {
@@ -8455,6 +8569,7 @@ let socialRivalsBubbleChart = null;
 let socialTeamMetricCharts = [];
 let overviewSongsPlayedChart = null;
 let overviewGuessRateChart = null;
+let overviewZScoreChart = null;
 let genreRadarChart = null;
 let tagRadarChart = null;
 let byEraDecadeChart = null;
@@ -8471,6 +8586,7 @@ let cachedGenreData = null;
 let cachedTagData = null;
 let cachedByEraData = null;
 let cachedArtistsData = null;
+let cachedOverviewZScoreData = null;
 let cachedOverviewAnimeTypeRows = [];
 let cachedOverviewGamesCounted = 0;
 let cachedOverviewTopSolos = [];
@@ -8615,6 +8731,7 @@ let artistFamiliarityRightMode = "attempts";
 let selectedCompareArtistName = "";
 let artistFamiliarityCompareSearchQuery = "";
 let overviewLoadRequestId = 0;
+let overviewZScoreLoadRequestId = 0;
 let socialSynergyPageIndex = 0;
 const latestRankByPlayerKeyByMode = {
   watched: null,
@@ -8885,6 +9002,7 @@ function preloadOverviewStatsSummaryForUser(displayName, { immediate = false } =
   if (!displayName) return;
   const task = async () => {
     await Promise.allSettled([
+      loadOverviewZScoreDataForUser(displayName),
       loadGenreDataForUser(displayName),
       loadByEraDataForUser(displayName)
     ]);
@@ -10016,6 +10134,7 @@ function renderOverviewSubView() {
     if (currentDisplayName) {
       preloadOverviewStatsSummaryForUser(currentDisplayName);
     }
+    renderOverviewZScoreChart();
     renderKnowledgeGenreRadar();
     renderKnowledgeByEraDecadeChart();
     renderOverviewAnimeTypeCharts();
@@ -10168,6 +10287,35 @@ function addOverviewInfoButtons() {
   });
 }
 
+function getRankPoolSizeForMode(mode = "watched") {
+  const cache = getLatestRankCacheForMode(mode);
+  const rankMap = cache.map;
+  if (!(rankMap instanceof Map) || !rankMap.size) {
+    return null;
+  }
+
+  const values = Array.from(rankMap.values())
+    .map(value => Number(value))
+    .filter(value => isValidRankForMode(value, mode));
+  return values.length;
+}
+
+function updateCurrentRankInfoTooltip(rankPoolSize) {
+  const tooltip = document.querySelector("#currentRankCard .card-title .info-hover-tooltip");
+  if (!tooltip) {
+    return;
+  }
+
+  if (!tooltip.dataset.baseText) {
+    tooltip.dataset.baseText = String(tooltip.textContent || "").trim();
+  }
+
+  const baseText = tooltip.dataset.baseText || "";
+  tooltip.textContent = Number.isFinite(rankPoolSize) && rankPoolSize > 0
+    ? `${baseText}\nRanked out of ${Math.round(rankPoolSize)} players`
+    : baseText;
+}
+
 document.querySelectorAll(".topbar-link").forEach(link => {
   link.addEventListener("click", event => {
     event.preventDefault();
@@ -10300,7 +10448,7 @@ if (socialSynergyPlayerSearchInput) {
 
 if (socialSynergySelectBtn) {
   socialSynergySelectBtn.addEventListener("click", () => {
-    if (!socialSynergySinglePendingRivalKey) return;
+    if (!socialSynergySinglePendingRivalKey || socialSynergySinglePendingRivalKey === socialSynergySingleSelectedRivalKey) return;
     socialSynergySingleSelectedRivalKey = socialSynergySinglePendingRivalKey;
     renderSocialSynergySinglePicker(cachedSocialSynergyRows, currentDisplayName || currentStatKey || "You");
     renderSocialSynergyRigTables();
@@ -10556,6 +10704,13 @@ function updateSocialTeamSelectButtonState() {
   const hasSelected = Boolean(socialTeamSelectedTimestamp);
   const hasPendingSelection = socialTeamSelectedTimestamp !== socialTeamAppliedTimestamp;
   socialTeamSelectBtn.disabled = !hasSelected || !hasPendingSelection;
+}
+
+function updateSocialSynergySelectButtonState() {
+  if (!socialSynergySelectBtn) return;
+  const hasPendingSelection = Boolean(socialSynergySinglePendingRivalKey);
+  const hasChangedSelection = socialSynergySinglePendingRivalKey !== socialSynergySingleSelectedRivalKey;
+  socialSynergySelectBtn.disabled = !hasPendingSelection || !hasChangedSelection;
 }
 
 function updateByEraDataToggleLabel() {
@@ -11274,6 +11429,7 @@ function refreshOverviewModeScopedCards(displayName) {
 
   if (overviewActiveView === "statsSummary") {
     loadOverviewAnimeTypeDataForUser(resolvedName);
+    loadOverviewZScoreDataForUser(resolvedName);
     loadGenreDataForUser(resolvedName);
     loadTagDataForUser(resolvedName);
     loadByEraDataForUser(resolvedName);
@@ -15653,6 +15809,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
     list.innerHTML = '<div class="social-synergy-empty">No players available.</div>';
     compareWrap.innerHTML = '<div class="social-synergy-empty">No comparison selected.</div>';
     if (selectedPlayerText) selectedPlayerText.innerText = "Selected player";
+    updateSocialSynergySelectButtonState();
     renderSocialSynergyRigTables();
     return;
   }
@@ -15689,6 +15846,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
       selectedPlayerText.innerText = "Selected player";
     }
   }
+  updateSocialSynergySelectButtonState();
 
   if (!filteredRows.length) {
     list.innerHTML = '<div class="social-synergy-empty">No players match your search.</div>';
@@ -17554,6 +17712,18 @@ function renderKnowledgeGenreRadar() {
   }
 
   const axisHighlightColor = "#ff7a00";
+  function isPointerInsideGenreRadar(chart, event) {
+    const scale = chart && chart.scales ? chart.scales.r : null;
+    if (!scale || !event || event.type === "mouseout") return false;
+    const x = Number(event.x);
+    const y = Number(event.y);
+    const centerX = Number(scale.xCenter);
+    const centerY = Number(scale.yCenter);
+    const radius = Number(scale.drawingArea);
+    if (![x, y, centerX, centerY, radius].every(Number.isFinite) || radius <= 0) return false;
+    return Math.hypot(x - centerX, y - centerY) <= radius;
+  }
+
   const genreRadarTickLabelPlugin = {
     id: "genreRadarTickLabelPlugin",
     afterDraw(chart) {
@@ -17594,6 +17764,11 @@ function renderKnowledgeGenreRadar() {
     afterEvent(chart, args) {
       const event = args && args.event ? args.event : null;
       if (!event) return;
+      chart.$isPointerInsideRadar = isPointerInsideGenreRadar(chart, event);
+      if (!chart.$isPointerInsideRadar) {
+        args.changed = true;
+        return;
+      }
       const elements = chart.getElementsAtEventForMode(event, "nearest", { intersect: false }, false);
       if (Array.isArray(elements) && elements.length) {
         const idx = Number(elements[0].index);
@@ -17652,6 +17827,11 @@ function renderKnowledgeGenreRadar() {
         }
       },
       onHover: (event, activeElements, chart) => {
+        chart.$isPointerInsideRadar = isPointerInsideGenreRadar(chart, event);
+        if (!chart.$isPointerInsideRadar) {
+          chart.draw();
+          return;
+        }
         const hoveredIndex = Array.isArray(activeElements) && activeElements.length
           ? Number(activeElements[0].index)
           : -1;
@@ -17662,6 +17842,7 @@ function renderKnowledgeGenreRadar() {
         chart.draw();
       },
       onClick: (event, activeElements, chart) => {
+        if (!isPointerInsideGenreRadar(chart, event)) return;
         const clickedIndex = Array.isArray(activeElements) && activeElements.length
           ? Number(activeElements[0].index)
           : -1;
@@ -17687,6 +17868,7 @@ function renderKnowledgeGenreRadar() {
           }
         },
         tooltip: {
+          enabled: false,
           filter: function(context) {
             return context && context.datasetIndex === 0;
           },
@@ -17731,6 +17913,10 @@ function renderKnowledgeGenreRadar() {
           },
           angleLines: {
             color: function(context) {
+              const isPointerInsideRadar = Boolean(context && context.chart && context.chart.$isPointerInsideRadar);
+              if (!isPointerInsideRadar) {
+                return "rgba(148, 163, 184, 0.40)";
+              }
               const activeAxisIndex = Number(context && context.chart && context.chart.$activeGenreIndex);
               const idx = Number(context && context.index);
               if (Number.isFinite(idx) && idx === activeAxisIndex) {
@@ -17741,9 +17927,10 @@ function renderKnowledgeGenreRadar() {
           },
           pointLabels: {
             color: function(context) {
+              const isPointerInsideRadar = Boolean(context && context.chart && context.chart.$isPointerInsideRadar);
               const activeAxisIndex = Number(context && context.chart && context.chart.$activeGenreIndex);
               const idx = Number(context && context.index);
-              return Number.isFinite(idx) && idx === activeAxisIndex
+              return isPointerInsideRadar && Number.isFinite(idx) && idx === activeAxisIndex
                 ? axisHighlightColor
                 : "#374151";
             },
@@ -17755,6 +17942,7 @@ function renderKnowledgeGenreRadar() {
   });
   if (genreRadarChart) {
     genreRadarChart.$activeGenreIndex = activeGenreIndex;
+    genreRadarChart.$isPointerInsideRadar = false;
   }
   updateOverviewGenreInfo(activeGenreIndex);
 }
@@ -18691,6 +18879,46 @@ async function loadGenreDataForUser(displayName) {
   }
 }
 
+async function loadOverviewZScoreDataForUser(displayName) {
+  const requestId = ++overviewZScoreLoadRequestId;
+  try {
+    if (!displayName) {
+      cachedOverviewZScoreData = null;
+      renderOverviewZScoreChart();
+      return;
+    }
+
+    if (!currentPlayerId || currentDisplayName !== displayName) {
+      const playerEntry = await getPlayerEntryByName(displayName);
+      if (!playerEntry || !playerEntry.playerId) {
+        cachedOverviewZScoreData = null;
+        renderOverviewZScoreChart();
+        return;
+      }
+      currentPlayerId = String(playerEntry.playerId);
+      currentDisplayName = displayName;
+    }
+
+    const fileCandidates = ["z-score.json", "z_score.json"];
+    let payload = null;
+    for (const fileName of fileCandidates) {
+      const res = await fetchPlayerScopedResponse(currentPlayerId, `overview/${fileName}`, "watched");
+      if (!res) continue;
+      payload = await res.json();
+      break;
+    }
+
+    if (requestId !== overviewZScoreLoadRequestId) return;
+    cachedOverviewZScoreData = payload && typeof payload === "object" ? payload : null;
+    renderOverviewZScoreChart();
+  } catch (err) {
+    console.error("Failed loading overview z-score data", err);
+    if (requestId !== overviewZScoreLoadRequestId) return;
+    cachedOverviewZScoreData = null;
+    renderOverviewZScoreChart();
+  }
+}
+
 async function loadTagDataForUser(displayName) {
   try {
     if (!displayName) {
@@ -19215,6 +19443,237 @@ function renderOverviewTopRigSongs() {
     }
 
     strip.appendChild(card);
+  });
+}
+
+function extractOverviewZScoreRows(payload) {
+  const chartMetrics = payload && Array.isArray(payload.chart_metrics)
+    ? payload.chart_metrics
+    : [];
+  const metricDetails = payload && payload.metrics && typeof payload.metrics === "object"
+    ? payload.metrics
+    : {};
+  return chartMetrics
+    .map(item => {
+      const value = Number(item && item.value);
+      const averageValue = Number(item && item.average_value);
+      const baselinePlayerCount = Number(item && item.baseline_player_count);
+      const key = String(item && item.key || "");
+      const detail = key && metricDetails[key] && typeof metricDetails[key] === "object"
+        ? metricDetails[key]
+        : {};
+      const globalMean = Number(
+        item && item.global_mean != null
+          ? item.global_mean
+          : detail.global_mean
+      );
+      return {
+        key,
+        label: String(item && item.label || item && item.key || "Metric"),
+        value,
+        averageValue: Number.isFinite(averageValue) ? averageValue : null,
+        globalMean: Number.isFinite(globalMean) ? globalMean : null,
+        direction: String(item && item.direction || "higher"),
+        baselinePlayerCount: Number.isFinite(baselinePlayerCount) ? baselinePlayerCount : 0
+      };
+    })
+    .filter(item => item.label && Number.isFinite(item.value));
+}
+
+function formatOverviewZScoreNumber(value, digits = 2) {
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return "-";
+  return numericValue.toFixed(digits);
+}
+
+function ensureOverviewZScoreTooltipPositioner() {
+  const tooltipApi = window.Chart && window.Chart.Tooltip;
+  const positioners = tooltipApi && tooltipApi.positioners;
+  if (!positioners) return false;
+  if (positioners.overviewZScoreOppositeZero) return true;
+
+  positioners.overviewZScoreOppositeZero = function(activeElements) {
+    if (!activeElements || !activeElements.length) return false;
+
+    const active = activeElements[0];
+    const chart = this.chart;
+    const xScale = chart && chart.scales && chart.scales.x;
+    const chartArea = chart && chart.chartArea;
+    if (!chart || !xScale || !chartArea || typeof xScale.getPixelForValue !== "function") {
+      return false;
+    }
+
+    const dataset = chart.data && chart.data.datasets && chart.data.datasets[active.datasetIndex];
+    const rawValue = Number(dataset && dataset.data ? dataset.data[active.index] : NaN);
+    const zeroX = xScale.getPixelForValue(0);
+    const gap = 8;
+    const x = rawValue >= 0
+      ? Math.max(chartArea.left + gap, zeroX - gap)
+      : Math.min(chartArea.right - gap, zeroX + gap);
+    const y = active.element && Number.isFinite(active.element.y)
+      ? active.element.y
+      : (chartArea.top + chartArea.bottom) / 2;
+
+    return {
+      x,
+      y,
+      xAlign: rawValue >= 0 ? "right" : "left",
+      yAlign: "center"
+    };
+  };
+
+  return true;
+}
+
+function renderOverviewZScoreChart() {
+  const card = document.getElementById("overviewZScoreCard");
+  const canvas = document.getElementById("overviewZScoreChart");
+  const wrap = canvas ? canvas.closest(".overview-z-score-wrap") : null;
+  if (!card || !canvas) return;
+
+  if (overviewZScoreChart) {
+    overviewZScoreChart.destroy();
+    overviewZScoreChart = null;
+  }
+
+  const rows = extractOverviewZScoreRows(cachedOverviewZScoreData);
+  if (!rows.length) {
+    card.style.display = "none";
+    return;
+  }
+
+  card.style.display = "";
+  if (wrap) {
+    const chartHeight = `${Math.max(360, rows.length * 30 + 86)}px`;
+    wrap.style.setProperty("height", chartHeight, "important");
+    wrap.style.setProperty("min-height", chartHeight, "important");
+  }
+
+  const labels = rows.map(row => row.label);
+  const values = rows.map(row => Number(row.value));
+  const finiteValues = values.filter(value => Number.isFinite(value));
+  const zTickStep = 0.5;
+  const maxAbsValue = finiteValues.reduce((max, value) => Math.max(max, Math.abs(value)), 0);
+  const axisMax = Math.max(zTickStep, Math.ceil(maxAbsValue / zTickStep) * zTickStep);
+  const barColors = values.map(value => value >= 0 ? "rgba(22, 163, 74, 0.74)" : "rgba(220, 38, 38, 0.70)");
+  const borderColors = values.map(value => value >= 0 ? "#15803d" : "#b91c1c");
+  const tooltipPosition = ensureOverviewZScoreTooltipPositioner()
+    ? "overviewZScoreOppositeZero"
+    : "nearest";
+
+  overviewZScoreChart = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "score",
+          data: values,
+          backgroundColor: barColors,
+          borderColor: borderColors,
+          borderWidth: 1.1,
+          borderRadius: 5,
+          barPercentage: 0.74,
+          categoryPercentage: 0.78
+        }
+      ]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          position: tooltipPosition,
+          xAlign: function(context) {
+            const tooltip = context && context.tooltip;
+            const point = tooltip && tooltip.dataPoints && tooltip.dataPoints[0];
+            const value = Number(point && point.raw);
+            return value >= 0 ? "right" : "left";
+          },
+          yAlign: "center",
+          caretPadding: 0,
+          backgroundColor: "rgba(17, 26, 40, 0.94)",
+          borderColor: "rgba(148, 163, 184, 0.28)",
+          borderWidth: 1,
+          padding: 10,
+          titleColor: "#e5edf7",
+          bodyColor: "#d8e4f3",
+          callbacks: {
+            label: function(context) {
+              const value = Number(context.raw);
+              return `Score: ${Number.isFinite(value) ? value.toFixed(2) : "-"}`;
+            },
+            afterLabel: function(context) {
+              const row = rows[Number(context.dataIndex)] || {};
+              const lines = [];
+              if (Number.isFinite(row.averageValue)) {
+                lines.push(`Your average: ${formatOverviewZScoreNumber(row.averageValue, 3)}`);
+              }
+              if (Number.isFinite(row.globalMean)) {
+                lines.push(`Population average: ${formatOverviewZScoreNumber(row.globalMean, 3)}`);
+              }
+              if (Number.isFinite(row.baselinePlayerCount) && row.baselinePlayerCount > 0) {
+                lines.push(`Baseline: ${row.baselinePlayerCount} players`);
+              }
+              return lines;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          min: -axisMax,
+          max: axisMax,
+          border: {
+            display: false
+          },
+          ticks: {
+            color: "#475569",
+            stepSize: zTickStep,
+            callback: function(value) {
+              return Number(value).toFixed(1);
+            }
+          },
+          title: {
+            display: true,
+            text: "Standardized score",
+            color: "#334155",
+            font: {
+              size: 12,
+              weight: "bold"
+            }
+          },
+          grid: {
+            color: function(context) {
+              return Number(context.tick && context.tick.value) === 0
+                ? "rgba(15, 23, 42, 0.42)"
+                : "rgba(148, 163, 184, 0.22)";
+            },
+            lineWidth: function(context) {
+              return Number(context.tick && context.tick.value) === 0 ? 1.6 : 1;
+            }
+          }
+        },
+        y: {
+          border: {
+            display: false
+          },
+          ticks: {
+            color: "#334155",
+            autoSkip: false,
+            font: {
+              size: 12,
+              weight: "600"
+            }
+          },
+          grid: {
+            display: false
+          }
+        }
+      }
+    }
   });
 }
 
@@ -24854,7 +25313,7 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
   if (guessQuartilesTextEl) {
     const p25Text = Number.isFinite(guessRateP25) ? `${guessRateP25.toFixed(3)}%` : "-";
     const p75Text = Number.isFinite(guessRateP75) ? `${guessRateP75.toFixed(3)}%` : "-";
-    guessQuartilesTextEl.innerText = `P25: ${p25Text} | P75: ${p75Text}`;
+    guessQuartilesTextEl.innerText = `Target Range: ${p25Text} — ${p75Text}`;
   }
 
   if (!records.length) return;
@@ -24875,6 +25334,7 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
   const resolvedRank = overviewDataSourceMode === "usual"
     ? (Number.isFinite(Number(latestRankOverride)) ? Number(latestRankOverride) : null)
     : (Number.isFinite(Number(latestRankOverride)) ? Number(latestRankOverride) : Number(latest["Rank"]));
+  updateCurrentRankInfoTooltip(getRankPoolSizeForMode(overviewDataSourceMode));
   const isWatchedUnassignedRank = overviewDataSourceMode !== "usual"
     && Number.isFinite(resolvedRank)
     && resolvedRank < MIN_VALID_RANK;
@@ -24977,6 +25437,7 @@ if (dataRangeSelect) {
       loadOverviewTopDoublesForUser(currentDisplayName, { kind: "their_rig_you_blocked" });
       loadOverviewTopDoublesForUser(currentDisplayName, { kind: "your_rig_they_blocked" });
       loadOverviewTopRigSongsForUser(currentDisplayName);
+      loadOverviewZScoreDataForUser(currentDisplayName);
       loadGenreDataForUser(currentDisplayName);
       loadTagDataForUser(currentDisplayName);
       loadByEraDataForUser(currentDisplayName);
@@ -25318,6 +25779,7 @@ function applyCurrentRankCardStyle(percentile, isTopThree = false, forceTierClas
   }
 
   const value = Math.max(0, Math.min(100, Number(percentile)));
+  const displayValue = Math.max(0, Math.min(100, 100 - value));
   let tierClass = "rank-tier-bronze";
   if (value >= 80) {
     tierClass = "rank-tier-platinum";
@@ -25336,12 +25798,12 @@ function applyCurrentRankCardStyle(percentile, isTopThree = false, forceTierClas
   if (isTopThree) {
     card.classList.add("rank-top-3-badge");
     if (tierLabel) {
-      tierLabel.innerText = `Top ${value.toFixed(1)}% • Top 3`;
+      tierLabel.innerText = `Top ${displayValue.toFixed(1)}% • Top 3`;
     }
     return;
   }
   if (tierLabel) {
-    tierLabel.innerText = `Top ${value.toFixed(1)}%`;
+    tierLabel.innerText = `Top ${displayValue.toFixed(1)}%`;
   }
 }
 
