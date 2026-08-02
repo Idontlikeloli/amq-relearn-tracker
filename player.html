@@ -1791,7 +1791,7 @@
       font-size: 9px !important;
       font-weight: 700 !important;
       line-height: 1 !important;
-      cursor: help !important;
+      cursor: default !important;
       text-transform: none !important;
       letter-spacing: 0 !important;
       margin-left: 4px !important;
@@ -1852,7 +1852,7 @@
       font-style: normal !important;
       font-weight: 800 !important;
       line-height: 1 !important;
-      cursor: help !important;
+      cursor: default !important;
       margin-left: 6px !important;
       transform: none !important;
       padding: 0 !important;
@@ -1969,7 +1969,7 @@
       position: relative !important;
       display: inline-flex !important;
       align-items: baseline !important;
-      cursor: help !important;
+      cursor: default !important;
     }
 
     #overviewWeeklyView .weekly-performance-cards .card-line .weekly-hover-tooltip-box {
@@ -3048,7 +3048,7 @@
       display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
-      cursor: help !important;
+      cursor: default !important;
       padding: 0 !important;
     }
 
@@ -3088,14 +3088,16 @@
       visibility: visible !important;
     }
 
-    #insightsSection .info-hover-wrap {
+    #insightsSection .info-hover-wrap,
+    #otherToolsSection .info-hover-wrap {
       position: relative !important;
       display: inline-flex !important;
       align-items: center !important;
       flex: 0 0 auto !important;
     }
 
-    #insightsSection .info-hover-btn {
+    #insightsSection .info-hover-btn,
+    #otherToolsSection .info-hover-btn {
       width: 15px !important;
       height: 15px !important;
       border-radius: 999px !important;
@@ -3112,7 +3114,8 @@
       padding: 0 !important;
     }
 
-    #insightsSection .info-hover-tooltip {
+    #insightsSection .info-hover-tooltip,
+    #otherToolsSection .info-hover-tooltip {
       position: absolute !important;
       left: calc(100% + 8px) !important;
       right: auto !important;
@@ -3137,13 +3140,16 @@
       z-index: 2147483647 !important;
     }
 
-    #insightsSection .info-hover-wrap.open-left .info-hover-tooltip {
+    #insightsSection .info-hover-wrap.open-left .info-hover-tooltip,
+    #otherToolsSection .info-hover-wrap.open-left .info-hover-tooltip {
       right: calc(100% + 8px) !important;
       left: auto !important;
     }
 
     #insightsSection .info-hover-wrap:hover .info-hover-tooltip,
-    #insightsSection .info-hover-wrap:focus-within .info-hover-tooltip {
+    #insightsSection .info-hover-wrap:focus-within .info-hover-tooltip,
+    #otherToolsSection .info-hover-wrap:hover .info-hover-tooltip,
+    #otherToolsSection .info-hover-wrap:focus-within .info-hover-tooltip {
       opacity: 1 !important;
       visibility: visible !important;
     }
@@ -3246,7 +3252,13 @@
     #overviewWeeklyView .weekly-card-info-tooltip {
       width: min(72vw, 300px) !important;
       max-width: min(72vw, 300px) !important;
-      text-wrap: pretty !important;
+      text-wrap: balance !important;
+    }
+
+    #overviewSection .info-hover-tooltip.fill-tooltip-text {
+      text-align: justify !important;
+      text-align-last: auto !important;
+      text-wrap: wrap !important;
     }
 
     #overviewWeeklyView .weekly-performance-cards .card-title .weekly-card-info-tooltip {
@@ -3640,7 +3652,7 @@
       display: inline-block !important;
       color: #3b82b8 !important;
       font-weight: 700 !important;
-      cursor: help !important;
+      cursor: default !important;
       text-decoration: underline !important;
       text-decoration-color: rgba(59, 130, 184, 0.45) !important;
       text-underline-offset: 2px !important;
@@ -3651,7 +3663,7 @@
       display: inline-block !important;
       color: inherit !important;
       font-weight: inherit !important;
-      cursor: help !important;
+      cursor: default !important;
       text-decoration: underline !important;
       text-decoration-color: currentColor !important;
       text-underline-offset: 2px !important;
@@ -3672,7 +3684,7 @@
       display: inline-block !important;
       color: #3b82b8 !important;
       font-weight: 700 !important;
-      cursor: help !important;
+      cursor: default !important;
       text-decoration: underline !important;
       text-decoration-color: rgba(59, 130, 184, 0.45) !important;
       text-underline-offset: 2px !important;
@@ -3683,7 +3695,7 @@
       display: inline-block !important;
       color: inherit !important;
       font-weight: inherit !important;
-      cursor: help !important;
+      cursor: default !important;
       text-decoration: underline !important;
       text-decoration-color: currentColor !important;
       text-underline-offset: 2px !important;
@@ -3806,6 +3818,43 @@
     #insightsSection #relearnSongsTable .relearn-audio-controls {
       justify-content: center !important;
       width: 100% !important;
+    }
+
+    #insightsSection .relearn-onlist-filter-toggle {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 4px !important;
+      padding: 3px !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 10px !important;
+      background: #eef4fb !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.64) !important;
+    }
+
+    #insightsSection .relearn-onlist-filter-btn {
+      border: 0 !important;
+      border-radius: 8px !important;
+      background: transparent !important;
+      color: #4f6377 !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.02em !important;
+      line-height: 1 !important;
+      padding: 7px 10px !important;
+      cursor: pointer !important;
+      white-space: nowrap !important;
+      transition: background-color 120ms ease, color 120ms ease, box-shadow 120ms ease !important;
+    }
+
+    #insightsSection .relearn-onlist-filter-btn:hover {
+      color: #1f3a55 !important;
+      background: rgba(255, 255, 255, 0.52) !important;
+    }
+
+    #insightsSection .relearn-onlist-filter-btn.active {
+      background: #ffffff !important;
+      color: #173c5b !important;
+      box-shadow: 0 1px 3px rgba(51, 65, 85, 0.18) !important;
     }
 
     #insightsSection .relearn-cover {
@@ -5057,6 +5106,27 @@
       white-space: nowrap !important;
     }
 
+    #searchSongFrequencyTitleHoverTooltip {
+      position: fixed !important;
+      width: fit-content !important;
+      max-width: min(70vw, 560px) !important;
+      border-radius: 8px !important;
+      border: 1px solid rgba(148, 163, 184, 0.55) !important;
+      background: rgba(15, 23, 42, 0.96) !important;
+      color: #e2e8f0 !important;
+      font-size: 11px !important;
+      font-weight: 400 !important;
+      line-height: 1.35 !important;
+      padding: 7px 8px !important;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
+      white-space: pre-wrap !important;
+      overflow-wrap: anywhere !important;
+      pointer-events: none !important;
+      z-index: 140 !important;
+      opacity: 0;
+      visibility: hidden;
+    }
+
     #insightsSection .relearn-table td.search-song-frequency-correct,
     #otherToolsSection .relearn-table td.search-song-frequency-correct {
       white-space: nowrap !important;
@@ -5188,6 +5258,36 @@
       align-items: center !important;
       gap: 2px !important;
       flex-wrap: nowrap !important;
+    }
+
+    #insightsSection .pattern-square.has-pattern-date,
+    #otherToolsSection .pattern-square.has-pattern-date {
+      cursor: default !important;
+    }
+
+    #patternDateHoverTooltip {
+      position: fixed !important;
+      left: 0 !important;
+      top: 0 !important;
+      padding: 5px 7px !important;
+      border-radius: 7px !important;
+      border: 1px solid rgba(148, 163, 184, 0.55) !important;
+      background: rgba(15, 23, 42, 0.96) !important;
+      color: #e2e8f0 !important;
+      font-size: 11px !important;
+      line-height: 1.2 !important;
+      font-weight: 700 !important;
+      white-space: nowrap !important;
+      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.22) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      z-index: 2147483647 !important;
+    }
+
+    #patternDateHoverTooltip.visible {
+      opacity: 1 !important;
+      visibility: visible !important;
     }
 
     #insightsSection .table-text-clamp-3,
@@ -7581,11 +7681,15 @@
           Relearn Tracker
           <span class="info-hover-wrap">
             <button class="info-hover-btn" type="button" aria-label="About Relearn Tracker">i</button>
-            <span class="info-hover-tooltip">Shows songs you previously got correct but got wrong in your latest attempt. Sorted by most recent.</span>
+            <span class="info-hover-tooltip">Shows songs you previously got correct but got wrong in your latest attempt. Sorted by most recent. "Play sample" plays the latest sample you got wrong.</span>
           </span>
         </div>
         <div class="chart-meta">
-          <span id="relearnSongsMeta">Found 0 songs</span>
+          <div id="relearnOnlistFilterToggle" class="relearn-onlist-filter-toggle" role="group" aria-label="Relearn list filter">
+            <button class="relearn-onlist-filter-btn active" type="button" data-relearn-onlist-filter="all" aria-pressed="true">All</button>
+            <button class="relearn-onlist-filter-btn" type="button" data-relearn-onlist-filter="onlist" aria-pressed="false">Onlist</button>
+            <button class="relearn-onlist-filter-btn" type="button" data-relearn-onlist-filter="offlist" aria-pressed="false">Offlist</button>
+          </div>
         </div>
       </div>
       <div class="relearn-table-wrap">
@@ -7939,7 +8043,7 @@
             <div id="rigAnalysisDifficultyPercentiles" class="rig-analysis-difficulty-percentiles"></div>
             <div id="rigAnalysisDifficultyTrack" class="rig-analysis-difficulty-track"></div>
             <div id="rigAnalysisDifficultyMarker" class="rig-analysis-difficulty-marker">
-              <span id="rigAnalysisDifficultyTag" class="rig-analysis-difficulty-tag">Median Difficulty: —%</span>
+              <span id="rigAnalysisDifficultyTag" class="rig-analysis-difficulty-tag">Mean Difficulty: —%</span>
             </div>
           </div>
           <div id="rigAnalysisDifficultyRange" class="rig-analysis-difficulty-range">No range</div>
@@ -7967,7 +8071,13 @@
     <h1 class="page-title">Other tools</h1>
     <div id="otherToolsSearchSongsView" class="chart-card" style="display:none;">
       <div class="chart-header">
-        <div class="chart-title">Search songs</div>
+        <div class="chart-title">
+          Search songs
+          <span class="info-hover-wrap">
+            <button class="info-hover-btn" type="button" aria-label="About Search Songs patterns">i</button>
+            <span class="info-hover-tooltip">Complete database of songs you've seen. Only shows latest 30 attempts (maximum). Hover a square to see the attempt date.</span>
+          </span>
+        </div>
         <div class="chart-meta">
           <span id="searchSongsMeta">Found 0 songs</span>
         </div>
@@ -8632,6 +8742,7 @@ let relearnAudioLastNonZeroPercentValue = 100;
 let isRelearnVolumePopoverOpen = false;
 let relearnVolumePopoverFadeTimer = null;
 let relearnPageIndex = 0;
+let relearnOnlistFilterMode = "all";
 let wrongGuessPageIndex = 0;
 let neverCorrectPageIndex = 0;
 let popularityPageIndex = 0;
@@ -10274,6 +10385,9 @@ function addOverviewInfoButtons() {
 
     const tooltip = document.createElement("span");
     tooltip.className = "info-hover-tooltip";
+    if (tooltipText.length >= 80) {
+      tooltip.classList.add("fill-tooltip-text");
+    }
     tooltip.innerText = tooltipText;
 
     wrap.appendChild(button);
@@ -10372,6 +10486,14 @@ if (relearnNextPageBtn) {
     renderInsightsRelearnTracker();
   });
 }
+document.querySelectorAll("[data-relearn-onlist-filter]").forEach(button => {
+  button.addEventListener("click", () => {
+    const nextMode = button.dataset.relearnOnlistFilter;
+    relearnOnlistFilterMode = ["all", "onlist", "offlist"].includes(nextMode) ? nextMode : "all";
+    relearnPageIndex = 0;
+    renderInsightsRelearnTracker();
+  });
+});
 if (wrongGuessPrevPageBtn) {
   wrongGuessPrevPageBtn.addEventListener("click", () => {
     wrongGuessPageIndex = Math.max(0, wrongGuessPageIndex - 1);
@@ -11706,7 +11828,7 @@ function rerenderInsightsRelearnTrackerLanguageOnly() {
     return;
   }
 
-  const songs = Array.isArray(cachedRelearnSongs) ? cachedRelearnSongs : [];
+  const songs = getFilteredRelearnSongs();
   const start = relearnPageIndex * RELEARN_PAGE_SIZE;
   const end = start + RELEARN_PAGE_SIZE;
   const pageSongs = songs.slice(start, end);
@@ -12689,14 +12811,23 @@ function bindArtistAnimeHoverTooltip() {
     tooltip.style.visibility = "hidden";
   };
 
-  const placeTooltip = event => {
+  const placeTooltip = node => {
     const margin = 10;
+    const gap = 6;
+    const anchorRect = node.getBoundingClientRect();
+    const clipRect = node.closest(".song")?.getBoundingClientRect();
+    const visibleLeft = clipRect ? Math.max(anchorRect.left, clipRect.left) : anchorRect.left;
+    const visibleRight = clipRect ? Math.min(anchorRect.right, clipRect.right) : anchorRect.right;
     const rect = tooltip.getBoundingClientRect();
     const maxLeft = Math.max(margin, window.innerWidth - rect.width - margin);
-    const left = Math.min(Math.max(margin, event.clientX - rect.width / 2), maxLeft);
-    const top = Math.max(margin, event.clientY - rect.height - 10);
+    const anchorX = visibleLeft + Math.max(0, visibleRight - visibleLeft) / 2;
+    const left = Math.min(Math.max(margin, anchorX - rect.width / 2), maxLeft);
+    let top = anchorRect.top - rect.height - gap;
+    if (top < margin) {
+      top = Math.min(window.innerHeight - rect.height - margin, anchorRect.bottom + gap);
+    }
     tooltip.style.left = `${left}px`;
-    tooltip.style.top = `${top}px`;
+    tooltip.style.top = `${Math.max(margin, top)}px`;
   };
 
   const animeNodes = document.querySelectorAll("#knowledgeArtistView .artist-familiarity-matrix-label .anime-part");
@@ -12709,7 +12840,7 @@ function bindArtistAnimeHoverTooltip() {
     node.removeAttribute("title");
     const songNode = node.closest(".song");
     if (songNode) songNode.removeAttribute("title");
-    node.addEventListener("mouseenter", event => {
+    node.addEventListener("mouseenter", () => {
       let current = node;
       while (current && current !== host) {
         if (typeof current.removeAttribute === "function") current.removeAttribute("title");
@@ -12720,7 +12851,7 @@ function bindArtistAnimeHoverTooltip() {
       tooltip.textContent = fullTitle;
       tooltip.style.opacity = "1";
       tooltip.style.visibility = "visible";
-      placeTooltip(event);
+      placeTooltip(node);
     });
     node.addEventListener("mouseleave", hideTooltip);
   });
@@ -17458,22 +17589,14 @@ function renderTrendChart(
   const linearTrendResult = buildTrend(values);
   const { trend } = linearTrendResult;
   const curvedTrendResult = showCurvedTrend ? buildBestCurveTrend(values) : null;
-  const curvedTrend = curvedTrendResult ? curvedTrendResult.trend : [];
-  const linearTrendError = showCurvedTrend ? calculateTrendError(values, trend) : null;
-  const useCurvedTrend = Boolean(
-    showCurvedTrend
-    && curvedTrendResult
-    && curvedTrendResult.error
-    && linearTrendError
-    && curvedTrendResult.error.squaredError < linearTrendError.squaredError
-  );
+  const displayedTrend = showCurvedTrend && curvedTrendResult ? curvedTrendResult.trend : trend;
   const resolvedPalette = {
     ...PERFORMANCE_LINE_PALETTES.default,
     ...(palette || {})
   };
   const hideStaticPoints = true;
   const overviewHoverPointRadius = 5;
-  const allSeriesValues = [...values, ...trend, ...curvedTrend]
+  const allSeriesValues = [...values, ...displayedTrend]
     .map(toFiniteTrendValue)
     .filter(value => value != null);
   const valueMin = allSeriesValues.length ? Math.min(...allSeriesValues) : 0;
@@ -17599,8 +17722,8 @@ function renderTrendChart(
           fill: false
         },
         {
-          label: "Linear Trend",
-          data: trend,
+          label: showCurvedTrend ? "Trend" : "Linear Trend",
+          data: displayedTrend,
           borderColor: resolvedPalette.trend,
           borderDash: [8, 6],
           order: 30,
@@ -17608,24 +17731,9 @@ function renderTrendChart(
           pointRadius: 0,
           pointHoverRadius: 0,
           pointHitRadius: 0,
-          hidden: showCurvedTrend && useCurvedTrend,
           tension: 0,
           fill: false
-        },
-        ...(showCurvedTrend ? [{
-          label: "Curve Trend",
-          data: curvedTrend,
-          borderColor: resolvedPalette.trend,
-          borderDash: [8, 6],
-          order: 31,
-          borderWidth: 3.2,
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          pointHitRadius: 0,
-          hidden: !useCurvedTrend,
-          tension: 0,
-          fill: false
-        }] : [])
+        }
       ]
     },
     options: {
@@ -20345,10 +20453,50 @@ async function hydrateSongRowsWithSongKey(rows) {
   return hydrated;
 }
 
+function resolveRelearnRowsWithSearchSongs(relearnRows, searchRows) {
+  const inputRows = Array.isArray(relearnRows) ? relearnRows : [];
+  const sourceRows = Array.isArray(searchRows) ? searchRows : [];
+
+  return inputRows.map((row, index) => {
+    const refIndex = Number(row && row.searchSongIndex);
+    const hasSearchSongRef = Number.isInteger(refIndex) && refIndex >= 0 && refIndex < sourceRows.length;
+    const searchSongRow = hasSearchSongRef ? sourceRows[refIndex] : null;
+    const mergedRow = searchSongRow && typeof searchSongRow === "object"
+      ? { ...searchSongRow, ...(row && typeof row === "object" ? row : {}) }
+      : (row && typeof row === "object" ? { ...row } : {});
+
+    if (mergedRow.rank == null) mergedRow.rank = index + 1;
+    return mergedRow;
+  });
+}
+
+function resolveSearchSongDatePoolRows(rows, datePool) {
+  const inputRows = Array.isArray(rows) ? rows : [];
+  const pool = Array.isArray(datePool) ? datePool : [];
+  if (!inputRows.length || !pool.length) return inputRows;
+
+  return inputRows.map(rawRow => {
+    if (!rawRow || typeof rawRow !== "object") return rawRow;
+    const dateIndexes = Array.isArray(rawRow.dates) ? rawRow.dates : [];
+    if (!dateIndexes.length) return rawRow;
+
+    const patternDates = dateIndexes.map(indexRaw => {
+      const index = Number(indexRaw);
+      if (!Number.isInteger(index) || index < 0 || index >= pool.length) return null;
+      const dateValue = String(pool[index] == null ? "" : pool[index]).trim();
+      return dateValue || null;
+    });
+
+    return { ...rawRow, patternDates };
+  });
+}
+
 async function loadRelearnDataForUser(displayName) {
   try {
     if (!displayName) {
       cachedRelearnSongs = [];
+      relearnOnlistFilterMode = "all";
+      relearnPageIndex = 0;
       renderInsightsRelearnTracker();
       return;
     }
@@ -20357,6 +20505,8 @@ async function loadRelearnDataForUser(displayName) {
       const playerEntry = await getPlayerEntryByName(displayName);
       if (!playerEntry || !playerEntry.playerId) {
         cachedRelearnSongs = [];
+        relearnOnlistFilterMode = "all";
+        relearnPageIndex = 0;
         renderInsightsRelearnTracker();
         return;
       }
@@ -20365,22 +20515,48 @@ async function loadRelearnDataForUser(displayName) {
     }
 
     await loadMalImageCache();
+    const activeMode = getActiveDataSourceMode();
+    let hydratedSearchRows = [];
+    try {
+      const searchSongsRes = await fetchPlayerScopedResponse(
+        currentPlayerId,
+        "search_songs/search_songs.json",
+        activeMode
+      );
+      if (searchSongsRes) {
+        const searchSongsPayload = await searchSongsRes.json();
+        const searchRows = resolveSearchSongDatePoolRows(
+          Array.isArray(searchSongsPayload.searchSongs) ? searchSongsPayload.searchSongs : [],
+          searchSongsPayload.datePool
+        );
+        hydratedSearchRows = await hydrateSongRowsWithSongKey(searchRows);
+      }
+    } catch (searchErr) {
+      console.warn("Failed loading search songs for relearn refs", searchErr);
+      hydratedSearchRows = [];
+    }
 
     const relearnRes = await fetchPlayerScopedResponse(currentPlayerId, "relearn_tracker/relearn_songs.json");
     if (!relearnRes) {
       cachedRelearnSongs = [];
+      relearnOnlistFilterMode = "all";
+      relearnPageIndex = 0;
       renderInsightsRelearnTracker();
       return;
     }
 
     const relearnPayload = await relearnRes.json();
     const relearnRows = Array.isArray(relearnPayload.relearnSongs) ? relearnPayload.relearnSongs : [];
-    cachedRelearnSongs = await hydrateSongRowsWithSongKey(relearnRows);
+    const resolvedRelearnRows = resolveRelearnRowsWithSearchSongs(relearnRows, hydratedSearchRows);
+    cachedRelearnSongs = await hydrateSongRowsWithSongKey(resolvedRelearnRows);
+    relearnOnlistFilterMode = "all";
     relearnPageIndex = 0;
     renderInsightsRelearnTracker();
   } catch (err) {
     console.error("Failed loading relearn tracker data", err);
     cachedRelearnSongs = [];
+    relearnOnlistFilterMode = "all";
+    relearnPageIndex = 0;
     renderInsightsRelearnTracker();
   }
 }
@@ -20611,7 +20787,10 @@ async function loadSearchSongsDataForUser(displayName) {
     }
 
     const searchSongsPayload = await searchSongsRes.json();
-    const searchRows = Array.isArray(searchSongsPayload.searchSongs) ? searchSongsPayload.searchSongs : [];
+    const searchRows = resolveSearchSongDatePoolRows(
+      Array.isArray(searchSongsPayload.searchSongs) ? searchSongsPayload.searchSongs : [],
+      searchSongsPayload.datePool
+    );
     cachedSearchSongs = await hydrateSongRowsWithSongKey(searchRows);
 
     const overviewCombinedRows = [];
@@ -20624,7 +20803,10 @@ async function loadSearchSongsDataForUser(displayName) {
         );
         if (!modeResponse) continue;
         const modePayload = await modeResponse.json();
-        const modeRows = Array.isArray(modePayload && modePayload.searchSongs) ? modePayload.searchSongs : [];
+        const modeRows = resolveSearchSongDatePoolRows(
+          Array.isArray(modePayload && modePayload.searchSongs) ? modePayload.searchSongs : [],
+          modePayload && modePayload.datePool
+        );
         if (modeRows.length) {
           overviewCombinedRows.push(...modeRows);
         }
@@ -21268,7 +21450,7 @@ function renderRigAnalysisView() {
     difficultyLegendEl.innerHTML = "";
     difficultyTrackEl.style.setProperty("background", "#e2e8f0", "important");
     difficultyMarkerEl.style.display = "none";
-    difficultyTagEl.innerText = "Median Difficulty: —%";
+    difficultyTagEl.innerText = "Mean Difficulty: —%";
     difficultySubEl.innerText = "Loading...";
     avgRigValueEl.innerText = "—";
     avgRigSubEl.innerText = "";
@@ -21281,8 +21463,8 @@ function renderRigAnalysisView() {
 
   const vintageEntry = getRigAnalysisPlayerEntry(modeData.vintagePayload);
   const difficultyEntry = getRigAnalysisPlayerEntry(modeData.difficultyPayload);
-  const sampleCountVintage = Number(vintageEntry && vintageEntry.sampleCount);
-  const sampleCountDifficulty = Number(difficultyEntry && difficultyEntry.sampleCount);
+  const songCountVintage = Number(vintageEntry && vintageEntry.songCount);
+  const songCountDifficulty = Number(difficultyEntry && difficultyEntry.songCount);
   const hasAnyData = (
     (vintageEntry && typeof vintageEntry === "object")
     || (difficultyEntry && typeof difficultyEntry === "object")
@@ -21304,7 +21486,7 @@ function renderRigAnalysisView() {
     difficultyLegendEl.innerHTML = "";
     difficultyTrackEl.style.setProperty("background", "#e2e8f0", "important");
     difficultyMarkerEl.style.display = "none";
-    difficultyTagEl.innerText = "Median Difficulty: —%";
+    difficultyTagEl.innerText = "Mean Difficulty: —%";
     difficultySubEl.innerText = "No data";
     avgRigValueEl.innerText = "—";
     avgRigSubEl.innerText = "";
@@ -21338,7 +21520,7 @@ function renderRigAnalysisView() {
     difficultyValues.push(difficultyValue);
   }
   const difficultyPercentile = computePercentileFromValues(difficultyValue, difficultyValues);
-  const difficultyRank = computeRankFromValues(difficultyValue, difficultyValues, "desc");
+  const difficultyRank = computeRankFromValues(difficultyValue, difficultyValues, "asc");
   let difficultyLabel = "normal";
   if (Number.isFinite(difficultyPercentile)) {
     if (difficultyPercentile <= 20) difficultyLabel = "impossible";
@@ -21574,15 +21756,15 @@ function renderRigAnalysisView() {
   if (Number.isFinite(difficultyMarkerLeftPct) && Number.isFinite(difficultyValue)) {
     difficultyMarkerEl.style.display = "flex";
     difficultyMarkerEl.style.left = `${difficultyMarkerLeftPct.toFixed(2)}%`;
-    difficultyTagEl.innerText = `Median Difficulty: ${difficultyValue.toFixed(1)}%`;
+    difficultyTagEl.innerText = `Mean Difficulty: ${difficultyValue.toFixed(1)}%`;
   } else {
     difficultyMarkerEl.style.display = "none";
-    difficultyTagEl.innerText = "Median Difficulty: —%";
+    difficultyTagEl.innerText = "Mean Difficulty: —%";
   }
 
   difficultyValueEl.innerText = difficultyText;
   difficultySubEl.innerHTML = [
-    `Difficulty rank (easiest→hardest): ${difficultyRank != null ? `${difficultyRank}/${difficultyValues.length}` : "—"} | Percentile ${Number.isFinite(difficultyPercentile) ? `${difficultyPercentile.toFixed(1)}%` : "—"}`,
+    `Difficulty rank (hardest→easiest): ${difficultyRank != null ? `${difficultyRank}/${difficultyValues.length}` : "—"} | Percentile ${Number.isFinite(difficultyPercentile) ? `${difficultyPercentile.toFixed(1)}%` : "—"}`,
     `Your list is ${escapeHtml(difficultyLabel)}`
   ].join("<br>");
 
@@ -22188,16 +22370,35 @@ document.addEventListener("visibilitychange", () => {
   stopAndResetRelearnAudio();
 });
 
+function getFilteredRelearnSongs() {
+  const songs = Array.isArray(cachedRelearnSongs) ? cachedRelearnSongs : [];
+  if (relearnOnlistFilterMode === "onlist") {
+    return songs.filter(song => song && song.isOnlist === true);
+  }
+  if (relearnOnlistFilterMode === "offlist") {
+    return songs.filter(song => song && song.isOnlist === false);
+  }
+  return songs;
+}
+
+function updateRelearnOnlistFilterButtons() {
+  const buttons = document.querySelectorAll("[data-relearn-onlist-filter]");
+  buttons.forEach(button => {
+    const isActive = button.dataset.relearnOnlistFilter === relearnOnlistFilterMode;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+}
+
 function renderInsightsRelearnTracker() {
   const tbody = document.getElementById("relearnSongsTableBody");
-  const meta = document.getElementById("relearnSongsMeta");
   const pageMeta = document.getElementById("relearnPageMeta");
   const prevPageBtn = document.getElementById("relearnPrevPageBtn");
   const nextPageBtn = document.getElementById("relearnNextPageBtn");
-  if (!tbody || !meta || !pageMeta || !prevPageBtn || !nextPageBtn) return;
+  if (!tbody || !pageMeta || !prevPageBtn || !nextPageBtn) return;
 
-  const songs = Array.isArray(cachedRelearnSongs) ? cachedRelearnSongs : [];
-  meta.innerText = `Found ${songs.length} songs`;
+  updateRelearnOnlistFilterButtons();
+  const songs = getFilteredRelearnSongs();
   tbody.innerHTML = "";
 
   const pageCount = Math.max(1, Math.ceil(songs.length / RELEARN_PAGE_SIZE));
@@ -22217,7 +22418,7 @@ function renderInsightsRelearnTracker() {
     const maxPatternCount = pageSongs.reduce((maxValue, song) => {
       return Math.max(maxValue, getPatternMarkerCount(song && song.pattern));
     }, 0);
-    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1));
+    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1, 30));
     const patternWidth = Math.max(72, Math.min(160, 16 + (boundedCount * 14)));
     const extraSpace = 160 - patternWidth;
     const animeWidth = 185 + Math.round(extraSpace * 0.65);
@@ -22233,7 +22434,7 @@ function renderInsightsRelearnTracker() {
   if (!pageSongs.length) {
     const row = document.createElement("tr");
     const cell = document.createElement("td");
-    cell.colSpan = 9;
+    cell.colSpan = 8;
     cell.className = "relearn-empty";
     cell.innerText = "No relearn songs found for this user.";
     row.appendChild(cell);
@@ -22376,7 +22577,11 @@ function renderInsightsRelearnTracker() {
     row.appendChild(typeCell);
 
     const patternCell = document.createElement("td");
-    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, { maxPerRow: 10 }));
+    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, {
+      maxPerRow: 10,
+      maxCount: 30,
+      dates: song && song.patternDates
+    }));
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
@@ -22539,12 +22744,17 @@ function renderInsightsWrongGuess() {
     row.appendChild(correctPctCell);
 
     const difficultyCell = document.createElement("td");
-    const difficultyValue = Number(song && song.difficulty);
-    difficultyCell.innerText = Number.isFinite(difficultyValue) ? difficultyValue.toFixed(3) : "—";
+    difficultyCell.innerText = formatInsightsDifficulty(song && song.difficulty);
     row.appendChild(difficultyCell);
 
     tbody.appendChild(row);
   });
+}
+
+function formatInsightsDifficulty(value) {
+  if (value == null || value === "") return "—";
+  const difficultyValue = Number(value);
+  return Number.isFinite(difficultyValue) ? difficultyValue.toFixed(3) : "—";
 }
 
 function appendInsightsClampText(cell, value) {
@@ -22885,8 +23095,7 @@ function renderInsightsNeverCorrect() {
     row.appendChild(wrongCell);
 
     const difficultyCell = document.createElement("td");
-    const difficultyValue = Number(song && song.difficulty);
-    difficultyCell.innerText = Number.isFinite(difficultyValue) ? difficultyValue.toFixed(3) : "—";
+    difficultyCell.innerText = formatInsightsDifficulty(song && song.difficulty);
     row.appendChild(difficultyCell);
 
     tbody.appendChild(row);
@@ -22979,8 +23188,7 @@ function renderInsightsPopularity() {
     row.appendChild(correctPctCell);
 
     const difficultyCell = document.createElement("td");
-    const difficultyValue = Number(song && song.difficulty);
-    difficultyCell.innerText = Number.isFinite(difficultyValue) ? difficultyValue.toFixed(3) : "—";
+    difficultyCell.innerText = formatInsightsDifficulty(song && song.difficulty);
     row.appendChild(difficultyCell);
 
     tbody.appendChild(row);
@@ -23077,8 +23285,7 @@ function renderInsightsPCorrect() {
     row.appendChild(attemptsCell);
 
     const difficultyCell = document.createElement("td");
-    const difficultyValue = Number(song && song.difficulty);
-    difficultyCell.innerText = Number.isFinite(difficultyValue) ? difficultyValue.toFixed(3) : "—";
+    difficultyCell.innerText = formatInsightsDifficulty(song && song.difficulty);
     row.appendChild(difficultyCell);
 
     tbody.appendChild(row);
@@ -23138,7 +23345,7 @@ function renderInsightsSearchSongs() {
     const maxPatternCount = pageSongs.reduce((maxValue, song) => {
       return Math.max(maxValue, getPatternMarkerCount(song && song.pattern));
     }, 0);
-    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1));
+    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1, 30));
     const patternWidth = Math.max(72, Math.min(130, 16 + (boundedCount * 11)));
     const extraSpace = 130 - patternWidth;
     const textWidth = 150 + Math.round(extraSpace / 3);
@@ -23446,7 +23653,11 @@ function renderInsightsSearchSongs() {
     row.appendChild(typeCell);
 
     const patternCell = document.createElement("td");
-    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, { maxPerRow: 10 }));
+    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, {
+      maxPerRow: 10,
+      maxCount: 30,
+      dates: song && song.patternDates
+    }));
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
@@ -23567,6 +23778,57 @@ function renderSearchSongFrequency() {
   prevPageBtn.disabled = searchSongFrequencyPageIndex <= 0;
   nextPageBtn.disabled = searchSongFrequencyPageIndex >= pageCount - 1;
 
+  const hideFrequencyTitleTooltip = () => {
+    const tooltip = document.getElementById("searchSongFrequencyTitleHoverTooltip");
+    if (!tooltip) return;
+    tooltip.style.opacity = "0";
+    tooltip.style.visibility = "hidden";
+  };
+
+  const getFrequencyTitleTooltip = () => {
+    let tooltip = document.getElementById("searchSongFrequencyTitleHoverTooltip");
+    if (!tooltip) {
+      tooltip = document.createElement("div");
+      tooltip.id = "searchSongFrequencyTitleHoverTooltip";
+      document.body.appendChild(tooltip);
+    }
+    return tooltip;
+  };
+
+  const placeFrequencyTitleTooltip = (tooltip, cell) => {
+    const margin = 10;
+    const gap = -5;
+    const cellRect = cell.getBoundingClientRect();
+    const rect = tooltip.getBoundingClientRect();
+    const maxLeft = Math.max(margin, window.innerWidth - rect.width - margin);
+    const anchorX = cellRect.left + cellRect.width / 2;
+    const left = Math.min(Math.max(margin, anchorX - rect.width / 2), maxLeft);
+    let top = cellRect.top - rect.height - gap;
+    if (top < margin) {
+      top = Math.min(window.innerHeight - rect.height - margin, cellRect.bottom + gap);
+    }
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${Math.max(margin, top)}px`;
+  };
+
+  const bindFrequencyTitleTooltip = (cell, text) => {
+    cell.removeAttribute("title");
+    cell.removeAttribute("aria-label");
+    cell.addEventListener("mouseenter", () => {
+      cell.removeAttribute("title");
+      cell.removeAttribute("aria-label");
+      if (cell.scrollWidth <= cell.clientWidth + 1) return;
+      const tooltip = getFrequencyTitleTooltip();
+      tooltip.textContent = text;
+      tooltip.style.opacity = "1";
+      tooltip.style.visibility = "visible";
+      placeFrequencyTitleTooltip(tooltip, cell);
+    });
+    cell.addEventListener("mouseleave", hideFrequencyTitleTooltip);
+  };
+
+  hideFrequencyTitleTooltip();
+
   if (!filteredSongs.length) {
     const row = document.createElement("tr");
     const cell = document.createElement("td");
@@ -23587,12 +23849,20 @@ function renderSearchSongFrequency() {
     rankCell.innerText = String(song && song.rank != null ? song.rank : "—");
     row.appendChild(rankCell);
 
+    const appendHoverTitleText = (cell, value) => {
+      const text = String(value == null || value === "" ? "—" : value);
+      cell.innerText = text;
+      if (text !== "—") {
+        bindFrequencyTitleTooltip(cell, text);
+      }
+    };
+
     const animeCell = document.createElement("td");
-    animeCell.innerText = getLanguageAwareAnimeName(song);
+    appendHoverTitleText(animeCell, getLanguageAwareAnimeName(song));
     row.appendChild(animeCell);
 
     const songCell = document.createElement("td");
-    songCell.innerText = String(song && song.songName ? song.songName : "—");
+    appendHoverTitleText(songCell, song && song.songName ? song.songName : "—");
     row.appendChild(songCell);
 
     const typeCell = document.createElement("td");
@@ -23600,7 +23870,8 @@ function renderSearchSongFrequency() {
     row.appendChild(typeCell);
 
     const artistCell = document.createElement("td");
-    artistCell.innerText = String(
+    appendHoverTitleText(
+      artistCell,
       song && (song.artist || song.songArtist || song.artistName)
         ? (song.artist || song.songArtist || song.artistName)
         : "—"
@@ -23680,16 +23951,68 @@ function detectPatternState(patternRaw) {
   return "unknown";
 }
 
+function ensurePatternDateHoverTooltip() {
+  let tooltip = document.getElementById("patternDateHoverTooltip");
+  if (!tooltip) {
+    tooltip = document.createElement("div");
+    tooltip.id = "patternDateHoverTooltip";
+    document.body.appendChild(tooltip);
+  }
+  return tooltip;
+}
+
+function positionPatternDateHoverTooltip(tooltip, anchorRect) {
+  const margin = 8;
+  const offset = 7;
+  const rect = tooltip.getBoundingClientRect();
+  let left = anchorRect.left + (anchorRect.width / 2) - (rect.width / 2);
+  let top = anchorRect.top - rect.height - offset;
+
+  if (left < margin) left = margin;
+  if (left + rect.width > window.innerWidth - margin) {
+    left = window.innerWidth - rect.width - margin;
+  }
+  if (top < margin) {
+    top = anchorRect.bottom + offset;
+  }
+  if (top + rect.height > window.innerHeight - margin) {
+    top = window.innerHeight - rect.height - margin;
+  }
+
+  tooltip.style.setProperty("left", `${Math.max(margin, left)}px`, "important");
+  tooltip.style.setProperty("top", `${Math.max(margin, top)}px`, "important");
+}
+
+function showPatternDateHoverTooltip(anchor, dateValue) {
+  const text = String(dateValue == null ? "" : dateValue).trim();
+  if (!text) return;
+  const tooltip = ensurePatternDateHoverTooltip();
+  tooltip.innerText = text;
+  tooltip.classList.add("visible");
+  positionPatternDateHoverTooltip(tooltip, anchor.getBoundingClientRect());
+}
+
+function hidePatternDateHoverTooltip() {
+  const tooltip = document.getElementById("patternDateHoverTooltip");
+  if (!tooltip) return;
+  tooltip.classList.remove("visible");
+}
+
 function buildPatternSquareNode(patternRaw, options = {}) {
   const originalText = String(patternRaw == null ? "" : patternRaw).trim();
   const container = document.createElement("span");
   container.className = "pattern-square-list";
+  let patternDates = Array.isArray(options && options.dates) ? options.dates : [];
   const maxPerRowRaw = Number(options && options.maxPerRow);
   const maxPerRow = Number.isFinite(maxPerRowRaw) && maxPerRowRaw > 0
     ? Math.floor(maxPerRowRaw)
     : null;
+  const maxCountRaw = Number(options && options.maxCount);
+  const maxCount = Number.isFinite(maxCountRaw) && maxCountRaw > 0
+    ? Math.floor(maxCountRaw)
+    : null;
 
-  const states = [];
+  let states = [];
   const chars = Array.from(originalText);
   chars.forEach(ch => {
     if (/[✅✔☑🟩🟢]/.test(ch)) {
@@ -23722,9 +24045,28 @@ function buildPatternSquareNode(patternRaw, options = {}) {
     states.push("unknown");
   }
 
-  const appendSquare = (parent, state) => {
+  if (maxCount && states.length > maxCount) {
+    states = states.slice(-maxCount);
+    patternDates = patternDates.slice(-states.length);
+  }
+
+  const appendSquare = (parent, state, index) => {
     const square = document.createElement("span");
     square.className = `pattern-square pattern-${state}`;
+    const dateValue = String(patternDates[index] == null ? "" : patternDates[index]).trim();
+    if (dateValue) {
+      const stateLabel = state === "correct" ? "Correct" : (state === "wrong" ? "Wrong" : "Unknown");
+      square.classList.add("has-pattern-date");
+      square.setAttribute("aria-label", `${stateLabel} on ${dateValue}`);
+      square.addEventListener("mouseenter", () => showPatternDateHoverTooltip(square, dateValue));
+      square.addEventListener("mousemove", () => {
+        const tooltip = document.getElementById("patternDateHoverTooltip");
+        if (tooltip && tooltip.classList.contains("visible")) {
+          positionPatternDateHoverTooltip(tooltip, square.getBoundingClientRect());
+        }
+      });
+      square.addEventListener("mouseleave", hidePatternDateHoverTooltip);
+    }
     parent.appendChild(square);
   };
 
@@ -23733,11 +24075,11 @@ function buildPatternSquareNode(patternRaw, options = {}) {
     for (let i = 0; i < states.length; i += maxPerRow) {
       const row = document.createElement("span");
       row.className = "pattern-square-row";
-      states.slice(i, i + maxPerRow).forEach(state => appendSquare(row, state));
+      states.slice(i, i + maxPerRow).forEach((state, offset) => appendSquare(row, state, i + offset));
       container.appendChild(row);
     }
   } else {
-    states.forEach(state => appendSquare(container, state));
+    states.forEach((state, index) => appendSquare(container, state, index));
   }
 
   container.removeAttribute("title");

@@ -370,7 +370,7 @@ a {
   position: relative;
   display: inline;
   color: inherit;
-  cursor: help;
+  cursor: default;
   text-decoration-line: underline !important;
   text-decoration-style: solid !important;
   text-decoration-color: currentColor !important;
