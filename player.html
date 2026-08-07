@@ -1396,8 +1396,10 @@
 
     #knowledgeArtistView #artistAnimeHoverTooltip {
       position: fixed !important;
-      width: fit-content !important;
-      max-width: min(70vw, 560px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(560px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
       background: rgba(15, 23, 42, 0.96) !important;
@@ -1802,8 +1804,10 @@
       left: 50% !important;
       top: calc(100% + 8px) !important;
       transform: translateX(-50%) !important;
-      min-width: 180px !important;
-      max-width: 260px !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(420px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 2px solid #94a3b8 !important;
       background: #f8fafc !important;
@@ -1816,6 +1820,7 @@
       text-align: left !important;
       padding: 7px 8px !important;
       white-space: normal !important;
+      overflow-wrap: break-word !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
@@ -1878,8 +1883,10 @@
       position: absolute !important;
       left: 0 !important;
       top: calc(100% + 9px) !important;
-      min-width: 240px !important;
-      max-width: min(66vw, 420px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(460px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 9px !important;
       border: 2px solid #94a3b8 !important;
       background: #f8fafc !important;
@@ -1892,6 +1899,7 @@
       text-align: left !important;
       padding: 8px 9px !important;
       white-space: normal !important;
+      overflow-wrap: break-word !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
@@ -1977,8 +1985,10 @@
       left: 50% !important;
       top: calc(100% + 7px) !important;
       transform: translateX(-50%) !important;
-      min-width: 132px !important;
-      max-width: 220px !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(320px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       padding: 6px 7px !important;
       border-radius: 8px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
@@ -1986,7 +1996,8 @@
       color: #e2e8f0 !important;
       font-size: 11px !important;
       line-height: 1.3 !important;
-      white-space: nowrap !important;
+      white-space: normal !important;
+      overflow-wrap: break-word !important;
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
       opacity: 0 !important;
       visibility: hidden !important;
@@ -3058,8 +3069,10 @@
       right: auto !important;
       top: 50% !important;
       transform: translateY(-50%) !important;
-      min-width: 180px !important;
-      max-width: 240px !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(420px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 2px solid #94a3b8 !important;
       background: #f8fafc !important;
@@ -3071,6 +3084,7 @@
       padding: 7px 8px !important;
       box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
       white-space: pre-line !important;
+      overflow-wrap: break-word !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
@@ -3121,8 +3135,10 @@
       right: auto !important;
       top: 50% !important;
       transform: translateY(-50%) !important;
-      min-width: 260px !important;
-      max-width: min(70vw, 520px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(520px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 2px solid #94a3b8 !important;
       background: #f8fafc !important;
@@ -3134,6 +3150,7 @@
       padding: 7px 8px !important;
       box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
       white-space: normal !important;
+      overflow-wrap: break-word !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
@@ -3184,8 +3201,10 @@
       right: auto !important;
       top: 50% !important;
       transform: translateY(-50%) !important;
-      min-width: 280px !important;
-      max-width: min(75vw, 620px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(620px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 2px solid #94a3b8 !important;
       background: #f8fafc !important;
@@ -3196,6 +3215,7 @@
       padding: 7px 8px !important;
       box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
       white-space: normal !important;
+      overflow-wrap: break-word !important;
       text-align: left !important;
       opacity: 0 !important;
       visibility: hidden !important;
@@ -3246,13 +3266,20 @@
       overflow: visible !important;
     }
 
-    #overviewSection .info-hover-tooltip,
     #insightsSection .info-hover-tooltip,
-    #socialSection .info-hover-tooltip,
+    #socialSection .info-hover-tooltip {
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(72vw, 520px) !important;
+      text-wrap: wrap !important;
+    }
+
+    #overviewSection .info-hover-tooltip,
     #overviewWeeklyView .weekly-card-info-tooltip {
-      width: min(72vw, 300px) !important;
-      max-width: min(72vw, 300px) !important;
-      text-wrap: balance !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(72vw, 420px) !important;
+      text-wrap: wrap !important;
     }
 
     #overviewSection .info-hover-tooltip.fill-tooltip-text {
@@ -3262,13 +3289,15 @@
     }
 
     #overviewWeeklyView .weekly-performance-cards .card-title .weekly-card-info-tooltip {
-      width: min(72vw, 300px) !important;
-      max-width: min(72vw, 300px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(72vw, 420px) !important;
     }
 
     #overviewWeeklyView .chart-title .weekly-card-info .weekly-card-info-tooltip {
-      width: min(72vw, 340px) !important;
-      max-width: min(72vw, 340px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(72vw, 460px) !important;
     }
 
     #insightsSection .relearn-table-wrap {
@@ -3715,8 +3744,10 @@
       position: absolute !important;
       left: 0 !important;
       top: calc(100% + 8px) !important;
-      min-width: 170px !important;
-      max-width: 280px !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(360px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
       background: rgba(15, 23, 42, 0.96) !important;
@@ -3727,6 +3758,7 @@
       padding: 7px 8px !important;
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
       white-space: pre-line !important;
+      overflow-wrap: break-word !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
@@ -3742,7 +3774,10 @@
 
     #searchSongsArtistHoverTooltip {
       position: fixed !important;
-      max-width: min(72vw, 300px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(560px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
       background: rgba(15, 23, 42, 0.96) !important;
@@ -3754,6 +3789,7 @@
       padding: 7px 8px !important;
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
       white-space: pre-line !important;
+      overflow-wrap: break-word !important;
       pointer-events: none !important;
       z-index: 99999 !important;
       opacity: 0;
@@ -3762,7 +3798,10 @@
 
     #searchSongsAnimeHoverTooltip {
       position: fixed !important;
-      max-width: min(72vw, 300px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(560px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
       background: rgba(15, 23, 42, 0.96) !important;
@@ -3774,6 +3813,7 @@
       padding: 7px 8px !important;
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
       white-space: pre-line !important;
+      overflow-wrap: break-word !important;
       pointer-events: none !important;
       z-index: 99999 !important;
       opacity: 0;
@@ -5108,8 +5148,10 @@
 
     #searchSongFrequencyTitleHoverTooltip {
       position: fixed !important;
-      width: fit-content !important;
-      max-width: min(70vw, 560px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(560px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
       background: rgba(15, 23, 42, 0.96) !important;
@@ -5269,6 +5311,10 @@
       position: fixed !important;
       left: 0 !important;
       top: 0 !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(320px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       padding: 5px 7px !important;
       border-radius: 7px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
@@ -5278,6 +5324,7 @@
       line-height: 1.2 !important;
       font-weight: 700 !important;
       white-space: nowrap !important;
+      overflow-wrap: break-word !important;
       box-shadow: 0 8px 16px rgba(15, 23, 42, 0.22) !important;
       opacity: 0 !important;
       visibility: hidden !important;
@@ -5501,6 +5548,14 @@
       align-items: start !important;
     }
 
+    #otherToolsSection .original-tour-view-stack > .chart-card + .chart-card {
+      margin-top: 14px !important;
+    }
+
+    #otherToolsSection .original-tour-stats-card {
+      overflow: visible !important;
+    }
+
     #otherToolsSection .original-tour-left,
     #otherToolsSection .original-tour-right {
       border: 1px solid #e5e7eb !important;
@@ -5691,6 +5746,37 @@
       color: #64748b !important;
     }
 
+    #otherToolsSection .original-tour-color-label {
+      color: #475569 !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+    }
+
+    #otherToolsSection .original-tour-color-control {
+      display: inline-flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex-wrap: nowrap !important;
+      white-space: nowrap !important;
+    }
+
+    #otherToolsSection .original-tour-color-control .original-tour-color-label,
+    #otherToolsSection .original-tour-color-control .original-tour-color-select {
+      flex: 0 0 auto !important;
+    }
+
+    #otherToolsSection .original-tour-color-select {
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 8px !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+      padding: 6px 9px !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      cursor: pointer !important;
+    }
+
     #otherToolsSection .original-tour-raw-wrap {
       margin-top: 12px !important;
       border: 0 !important;
@@ -5705,7 +5791,8 @@
     #otherToolsSection .original-tour-raw-table {
       width: max-content !important;
       min-width: 100% !important;
-      border-collapse: collapse !important;
+      border-collapse: separate !important;
+      border-spacing: 0 !important;
       table-layout: auto !important;
     }
 
@@ -5740,7 +5827,7 @@
     #otherToolsSection .original-tour-raw-table th:nth-child(2),
     #otherToolsSection .original-tour-raw-table td:nth-child(2) {
       position: sticky !important;
-      left: var(--original-tour-sticky-col1-width, 0px) !important;
+      left: calc(var(--original-tour-sticky-col1-width, 0px) - 1px) !important;
       background: #ffffff !important;
       z-index: 3 !important;
     }
@@ -5748,10 +5835,31 @@
     #otherToolsSection .original-tour-raw-table th:nth-child(3),
     #otherToolsSection .original-tour-raw-table td:nth-child(3) {
       position: sticky !important;
-      left: calc(var(--original-tour-sticky-col1-width, 0px) + var(--original-tour-sticky-col2-width, 0px)) !important;
+      left: calc(var(--original-tour-sticky-col1-width, 0px) + var(--original-tour-sticky-col2-width, 0px) - 2px) !important;
       background: #ffffff !important;
       z-index: 3 !important;
       box-shadow: 2px 0 0 #e5e7eb !important;
+    }
+
+    #otherToolsSection .original-tour-raw-table th:nth-child(-n+3),
+    #otherToolsSection .original-tour-raw-table td:nth-child(-n+3) {
+      background-clip: padding-box !important;
+      overflow: visible !important;
+    }
+
+    #otherToolsSection .original-tour-raw-table th:nth-child(1)::after,
+    #otherToolsSection .original-tour-raw-table td:nth-child(1)::after,
+    #otherToolsSection .original-tour-raw-table th:nth-child(2)::after,
+    #otherToolsSection .original-tour-raw-table td:nth-child(2)::after {
+      content: "" !important;
+      position: absolute !important;
+      top: 0 !important;
+      right: -2px !important;
+      bottom: 0 !important;
+      width: 3px !important;
+      background: inherit !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
     }
 
     #otherToolsSection .original-tour-raw-table thead th:nth-child(-n+3) {
@@ -8212,37 +8320,51 @@
         </div>
       </div>
     </div>
-    <div id="otherToolsOriginalTourCalendarView" class="chart-card" style="display:none;">
-      <div class="chart-header">
-        <div class="chart-title">Original Tour data(Calendar)</div>
-        <div class="chart-meta">
-          <span id="originalTourMeta">Found 0 games</span>
-        </div>
-      </div>
-      <div class="original-tour-layout">
-        <div class="original-tour-left">
-          <input
-            id="originalTourSearchInput"
-            class="original-tour-search-input"
-            type="text"
-            placeholder="Search date (YYYY/MM/DD)"
-          >
-          <div id="originalTourGameList" class="original-tour-game-list"></div>
-          <div id="originalTourPlayers" class="original-tour-players"></div>
-        </div>
-        <div class="original-tour-right">
-          <div class="original-tour-calendar-head">
-            <button id="originalTourPrevMonthBtn" class="original-tour-month-nav" type="button">◀</button>
-            <div id="originalTourMonthLabel" class="original-tour-month-label">-</div>
-            <button id="originalTourNextMonthBtn" class="original-tour-month-nav" type="button">▶</button>
-          </div>
-          <div id="originalTourCalendarGrid" class="original-tour-calendar-grid"></div>
-          <div class="original-tour-select-row">
-            <button id="originalTourSelectBtn" class="original-tour-select-btn" type="button">Select</button>
+    <div id="otherToolsOriginalTourCalendarView" class="original-tour-view-stack" style="display:none;">
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">Original Tour data(Calendar)</div>
+          <div class="chart-meta">
+            <span id="originalTourMeta">Found 0 games</span>
           </div>
         </div>
+        <div class="original-tour-layout">
+          <div class="original-tour-left">
+            <input
+              id="originalTourSearchInput"
+              class="original-tour-search-input"
+              type="text"
+              placeholder="Search date (YYYY/MM/DD)"
+            >
+            <div id="originalTourGameList" class="original-tour-game-list"></div>
+            <div id="originalTourPlayers" class="original-tour-players"></div>
+          </div>
+          <div class="original-tour-right">
+            <div class="original-tour-calendar-head">
+              <button id="originalTourPrevMonthBtn" class="original-tour-month-nav" type="button">◀</button>
+              <div id="originalTourMonthLabel" class="original-tour-month-label">-</div>
+              <button id="originalTourNextMonthBtn" class="original-tour-month-nav" type="button">▶</button>
+            </div>
+            <div id="originalTourCalendarGrid" class="original-tour-calendar-grid"></div>
+            <div class="original-tour-select-row">
+              <button id="originalTourSelectBtn" class="original-tour-select-btn" type="button">Select</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="originalTourRawDataWrap" class="original-tour-raw-wrap"></div>
+      <div id="originalTourStatsSheetCard" class="chart-card original-tour-stats-card" style="display:none;">
+        <div class="chart-header">
+          <div id="originalTourStatsTitle" class="chart-title">Export Stats</div>
+          <div class="chart-meta original-tour-color-control">
+            <label class="original-tour-color-label" for="originalTourColorModeSelect">Color:</label>
+            <select id="originalTourColorModeSelect" class="original-tour-color-select" aria-label="Original tour color mode">
+              <option value="gradient">Gradient</option>
+              <option value="extremes" selected>Top/Bottom 3</option>
+            </select>
+          </div>
+        </div>
+        <div id="originalTourRawDataWrap" class="original-tour-raw-wrap"></div>
+      </div>
     </div>
     <div id="otherToolsChangelogView" class="chart-card" style="display:none;">
       <div class="chart-header">
@@ -8775,6 +8897,7 @@ let otherToolsCalendarSearchQuery = "";
 let otherToolsCalendarSelectedTimestamp = null;
 let otherToolsCalendarAppliedTimestamp = null;
 let otherToolsCalendarMonthCursor = null;
+let originalTourColorMode = "extremes";
 let socialTeamRowsByTimestamp = null;
 let socialTeamGames = [];
 let socialTeamFilteredGames = [];
@@ -8807,6 +8930,10 @@ let socialSynergyRequestId = 0;
 let overviewSynergyRequestId = 0;
 const socialSynergyCacheByKey = new Map();
 const socialSynergyCachePromiseByKey = new Map();
+const socialSynergyMergedRowsCacheByKey = new Map();
+let socialSubSectionRenderToken = 0;
+let insightsSubSectionRenderToken = 0;
+let insightsSubSectionLoadToken = 0;
 let cachedSocialSynergyRows = [];
 let cachedSocialSynergyRigTables = null;
 let cachedSocialSynergyRigStats = null;
@@ -9149,11 +9276,11 @@ function preloadFirstSubtabForSection(sectionKey, displayName) {
       return;
     }
     if (sectionKey === "insights") {
-      await loadRelearnDataForUser(displayName);
+      await loadRelearnDataForUser(displayName, { render: false });
       return;
     }
     if (sectionKey === "social") {
-      await renderSocialSynergyView();
+      await preloadSocialSynergyDataForUser(displayName);
       return;
     }
     if (sectionKey === "otherTools") {
@@ -9199,17 +9326,15 @@ function preloadOtherSubtabsForSection(sectionKey, displayName) {
     }
     if (sectionKey === "insights") {
       await Promise.allSettled([
-        loadWrongGuessDataForUser(displayName),
-        loadNeverCorrectDataForUser(displayName),
-        loadPopularityDataForUser(displayName),
-        loadPCorrectDataForUser(displayName)
+        loadWrongGuessDataForUser(displayName, { render: false }),
+        loadNeverCorrectDataForUser(displayName, { render: false }),
+        loadPopularityDataForUser(displayName, { render: false }),
+        loadPCorrectDataForUser(displayName, { render: false })
       ]);
       return;
     }
     if (sectionKey === "social") {
-      renderSocialRivalFilter();
-      renderSocialRivalsChart();
-      renderSocialTeamContributionView();
+      ensureSocialTeamContributionData();
       return;
     }
     if (sectionKey === "otherTools") {
@@ -9225,28 +9350,28 @@ function preloadOtherSubtabsForSection(sectionKey, displayName) {
   }, 140);
 }
 
-function loadInsightsDataForSubSection(subSection, displayName) {
+function loadInsightsDataForSubSection(subSection, displayName, options = {}) {
   const resolvedName = String(displayName || currentDisplayName || currentStatKey || "").trim();
   if (!resolvedName) return;
 
   if (subSection === "Relearn Tracker") {
-    loadRelearnDataForUser(resolvedName);
+    loadRelearnDataForUser(resolvedName, options);
     return;
   }
   if (subSection === "By never correct") {
-    loadNeverCorrectDataForUser(resolvedName);
+    loadNeverCorrectDataForUser(resolvedName, options);
     return;
   }
   if (subSection === "By Wrong Guess") {
-    loadWrongGuessDataForUser(resolvedName);
+    loadWrongGuessDataForUser(resolvedName, options);
     return;
   }
   if (subSection === "By Popularity") {
-    loadPopularityDataForUser(resolvedName);
+    loadPopularityDataForUser(resolvedName, options);
     return;
   }
   if (subSection === "By % correct") {
-    loadPCorrectDataForUser(resolvedName);
+    loadPCorrectDataForUser(resolvedName, options);
   }
 }
 
@@ -9640,6 +9765,128 @@ function updateSectionHeaderVisibility(sectionKey, subSection) {
   sectionHeader.style.display = hideForSeasonalComparison ? "none" : "";
 }
 
+function renderInsightsSubSectionNow(subSection) {
+  if (subSection === "Relearn Tracker") {
+    renderInsightsRelearnTracker();
+    return;
+  }
+
+  if (subSection === "By never correct") {
+    renderInsightsNeverCorrect();
+    return;
+  }
+
+  if (subSection === "By Wrong Guess") {
+    renderInsightsWrongGuess();
+    return;
+  }
+
+  if (subSection === "By Popularity") {
+    renderInsightsPopularity();
+    return;
+  }
+
+  if (subSection === "By % correct") {
+    renderInsightsPCorrect();
+  }
+}
+
+function scheduleInsightsSubSectionRender(subSection) {
+  const renderToken = ++insightsSubSectionRenderToken;
+  const runRender = () => {
+    if (
+      renderToken !== insightsSubSectionRenderToken
+      || activeSection !== "insights"
+      || activeSubSectionBySection.insights !== subSection
+    ) {
+      return;
+    }
+
+    renderInsightsSubSectionNow(subSection);
+  };
+
+  if (typeof requestAnimationFrame === "function") {
+    requestAnimationFrame(() => setTimeout(runRender, 0));
+  } else {
+    setTimeout(runRender, 0);
+  }
+}
+
+function scheduleInsightsSubSectionLoad(subSection, displayName) {
+  const loadToken = ++insightsSubSectionLoadToken;
+  const runLoad = () => {
+    if (
+      loadToken !== insightsSubSectionLoadToken
+      || activeSection !== "insights"
+      || activeSubSectionBySection.insights !== subSection
+    ) {
+      return;
+    }
+
+    loadInsightsDataForSubSection(subSection, displayName, {
+      shouldRender: () => (
+        activeSection === "insights"
+        && activeSubSectionBySection.insights === subSection
+      )
+    });
+    setTimeout(retryFailedInsightCoverImages, 700);
+  };
+
+  if (typeof requestAnimationFrame === "function") {
+    requestAnimationFrame(() => setTimeout(runLoad, 0));
+  } else {
+    setTimeout(runLoad, 0);
+  }
+}
+
+function scheduleSocialSubSectionRender(subSection) {
+  const renderToken = ++socialSubSectionRenderToken;
+  const runRender = () => {
+    if (
+      renderToken !== socialSubSectionRenderToken
+      || activeSection !== "social"
+      || activeSubSectionBySection.social !== subSection
+    ) {
+      return;
+    }
+
+    if (subSection === "Synergy") {
+      renderSocialSynergyView();
+      return;
+    }
+
+    if (subSection === "Rivals") {
+      const availableEntries = getAvailableSocialRivalEntries();
+      const autoClosestKeys = getClosestAvailableRivalKeys(
+        currentStatKey,
+        availableEntries,
+        MAX_SELECTED_SOCIAL_RIVALS
+      );
+      selectedSocialRivalKeys = autoClosestKeys.slice(0, MAX_SELECTED_SOCIAL_RIVALS);
+      renderSocialRivalFilter();
+      renderSocialRivalsChart();
+      return;
+    }
+
+    if (subSection === "Team Contributions") {
+      renderSocialTeamContributionView();
+      return;
+    }
+
+    if (subSection === "Rig / List analysis") {
+      ensureRigAnalysisData();
+      renderRigAnalysisView();
+      prefetchRigAnalysisDataInBackground();
+    }
+  };
+
+  if (typeof requestAnimationFrame === "function") {
+    requestAnimationFrame(() => setTimeout(runRender, 0));
+  } else {
+    setTimeout(runRender, 0);
+  }
+}
+
 function renderSubSectionContent(sectionKey, subSection) {
   if (sectionKey === "performance") {
     const guessRateView = document.getElementById("performanceGuessRateView");
@@ -9785,7 +10032,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       popularityView.style.display = "none";
       pcorrectView.style.display = "none";
       placeholderView.style.display = "none";
-      renderInsightsRelearnTracker();
+      scheduleInsightsSubSectionRender(subSection);
       return;
     }
 
@@ -9796,7 +10043,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       popularityView.style.display = "none";
       pcorrectView.style.display = "none";
       placeholderView.style.display = "none";
-      renderInsightsNeverCorrect();
+      scheduleInsightsSubSectionRender(subSection);
       return;
     }
 
@@ -9807,7 +10054,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       popularityView.style.display = "none";
       pcorrectView.style.display = "none";
       placeholderView.style.display = "none";
-      renderInsightsWrongGuess();
+      scheduleInsightsSubSectionRender(subSection);
       return;
     }
 
@@ -9818,7 +10065,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       popularityView.style.display = "block";
       pcorrectView.style.display = "none";
       placeholderView.style.display = "none";
-      renderInsightsPopularity();
+      scheduleInsightsSubSectionRender(subSection);
       return;
     }
 
@@ -9829,7 +10076,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       popularityView.style.display = "none";
       pcorrectView.style.display = "block";
       placeholderView.style.display = "none";
-      renderInsightsPCorrect();
+      scheduleInsightsSubSectionRender(subSection);
       return;
     }
 
@@ -9844,6 +10091,7 @@ function renderSubSectionContent(sectionKey, subSection) {
   }
 
   if (sectionKey !== "social") {
+    socialSubSectionRenderToken += 1;
     stopSocialRivalsHeightSync();
   }
 
@@ -9873,7 +10121,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       teamContributionView.style.display = "none";
       rigAnalysisView.style.display = "none";
       placeholderView.style.display = "none";
-      renderSocialSynergyView();
+      scheduleSocialSubSectionRender(subSection);
       return;
     }
 
@@ -9888,17 +10136,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       rigAnalysisView.style.display = "none";
       placeholderView.style.display = "none";
       startSocialRivalsHeightSync();
-
-      const availableEntries = getAvailableSocialRivalEntries();
-      const autoClosestKeys = getClosestAvailableRivalKeys(
-        currentStatKey,
-        availableEntries,
-        MAX_SELECTED_SOCIAL_RIVALS
-      );
-      selectedSocialRivalKeys = autoClosestKeys.slice(0, MAX_SELECTED_SOCIAL_RIVALS);
-
-      renderSocialRivalFilter();
-      renderSocialRivalsChart();
+      scheduleSocialSubSectionRender(subSection);
       return;
     }
 
@@ -9913,7 +10151,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       teamContributionView.style.display = "block";
       rigAnalysisView.style.display = "none";
       placeholderView.style.display = "none";
-      renderSocialTeamContributionView();
+      scheduleSocialSubSectionRender(subSection);
       return;
     }
 
@@ -9928,9 +10166,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       teamContributionView.style.display = "none";
       rigAnalysisView.style.display = "block";
       placeholderView.style.display = "none";
-      ensureRigAnalysisData();
-      renderRigAnalysisView();
-      prefetchRigAnalysisDataInBackground();
+      scheduleSocialSubSectionRender(subSection);
       return;
     }
 
@@ -10165,8 +10401,7 @@ function setActiveSubSection(sectionKey, subSection) {
   updateDataRangeControlState(sectionKey, subSection);
   renderSubSectionContent(sectionKey, subSection);
   if (sectionKey === "insights") {
-    loadInsightsDataForSubSection(subSection, currentDisplayName || currentStatKey || "");
-    setTimeout(retryFailedInsightCoverImages, 700);
+    scheduleInsightsSubSectionLoad(subSection, currentDisplayName || currentStatKey || "");
   }
   preloadOtherSubtabsForSection(sectionKey, currentDisplayName || currentStatKey || "");
 }
@@ -10612,7 +10847,7 @@ if (socialRivalsMetricSelect) {
       : "guess_rate";
     syncSocialRivalsMetricOptionsForMode();
     if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
-      renderSocialRivalsChart();
+      scheduleSocialSubSectionRender("Rivals");
     }
   });
 }
@@ -10632,6 +10867,7 @@ const originalTourSearchInput = document.getElementById("originalTourSearchInput
 const originalTourPrevMonthBtn = document.getElementById("originalTourPrevMonthBtn");
 const originalTourNextMonthBtn = document.getElementById("originalTourNextMonthBtn");
 const originalTourSelectBtn = document.getElementById("originalTourSelectBtn");
+const originalTourColorModeSelect = document.getElementById("originalTourColorModeSelect");
 const socialTeamSearchInput = document.getElementById("socialTeamSearchInput");
 const socialTeamPrevMonthBtn = document.getElementById("socialTeamPrevMonthBtn");
 const socialTeamNextMonthBtn = document.getElementById("socialTeamNextMonthBtn");
@@ -10785,6 +11021,14 @@ if (originalTourSelectBtn) {
   originalTourSelectBtn.addEventListener("click", () => {
     otherToolsCalendarAppliedTimestamp = otherToolsCalendarSelectedTimestamp;
     renderOriginalTourCalendarView();
+  });
+}
+if (originalTourColorModeSelect) {
+  originalTourColorModeSelect.addEventListener("change", event => {
+    const nextMode = String(event.target.value || "gradient");
+    originalTourColorMode = nextMode === "extremes" ? "extremes" : "gradient";
+    originalTourColorModeSelect.value = originalTourColorMode;
+    renderOriginalTourRawDataTable();
   });
 }
 
@@ -11605,22 +11849,14 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
       renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
     }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
-      renderSocialRivalFilter();
-      renderSocialRivalsChart();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Synergy") {
-      renderSocialSynergyView();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Team Contributions") {
-      renderSocialTeamContributionView();
+    if (activeSection === "social") {
+      scheduleSocialSubSectionRender(activeSubSectionBySection.social || "");
     }
     if (activeSection === "knowledge") {
       loadKnowledgeDataForSubSection(activeSubSectionBySection.knowledge || "", currentDisplayName || currentStatKey || "");
     }
     if (activeSection === "insights") {
-      loadInsightsDataForSubSection(activeSubSectionBySection.insights || "", currentDisplayName || currentStatKey || "");
-      setTimeout(retryFailedInsightCoverImages, 700);
+      scheduleInsightsSubSectionLoad(activeSubSectionBySection.insights || "", currentDisplayName || currentStatKey || "");
     }
     if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Search songs") {
       loadSearchSongsDataForUser(currentDisplayName || currentStatKey || "");
@@ -11654,22 +11890,14 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
       renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
     }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
-      renderSocialRivalFilter();
-      renderSocialRivalsChart();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Synergy") {
-      renderSocialSynergyView();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Team Contributions") {
-      renderSocialTeamContributionView();
+    if (activeSection === "social") {
+      scheduleSocialSubSectionRender(activeSubSectionBySection.social || "");
     }
     if (activeSection === "knowledge") {
       loadKnowledgeDataForSubSection(activeSubSectionBySection.knowledge || "", currentDisplayName || currentStatKey || "");
     }
     if (activeSection === "insights") {
-      loadInsightsDataForSubSection(activeSubSectionBySection.insights || "", currentDisplayName || currentStatKey || "");
-      setTimeout(retryFailedInsightCoverImages, 700);
+      scheduleInsightsSubSectionLoad(activeSubSectionBySection.insights || "", currentDisplayName || currentStatKey || "");
     }
     if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Search songs") {
       loadSearchSongsDataForUser(currentDisplayName || currentStatKey || "");
@@ -14044,6 +14272,19 @@ function getSelectedOriginalTourRows() {
   return otherToolsRowsByTimestamp.get(otherToolsCalendarAppliedTimestamp) || [];
 }
 
+function getOriginalTourAppliedDateLabel() {
+  const appliedTimestamp = String(otherToolsCalendarAppliedTimestamp || "").trim();
+  if (!appliedTimestamp) return "selected date";
+  const matchingGame = otherToolsCalendarGames.find(game => game.timestamp === appliedTimestamp);
+  if (matchingGame && matchingGame.dateKey) return matchingGame.dateKey;
+
+  const parsedDate = new Date(appliedTimestamp.replace(" ", "T"));
+  const dateKey = formatDateKeyNoZeroPadding(parsedDate);
+  if (dateKey) return dateKey;
+
+  return appliedTimestamp.split(/[ T]/)[0] || "selected date";
+}
+
 function getTeamLabelFromRow(row) {
   if (!row || typeof row !== "object") return "Unknown";
   const explicitTeam = Number(row.Team ?? row.team);
@@ -14227,13 +14468,19 @@ function renderOriginalTourCalendarGrid() {
 
 function renderOriginalTourRawDataTable() {
   const wrap = document.getElementById("originalTourRawDataWrap");
+  const statsCard = document.getElementById("originalTourStatsSheetCard");
+  const statsTitle = document.getElementById("originalTourStatsTitle");
   if (!wrap) return;
 
   const rows = getSelectedOriginalTourRows();
   if (!rows.length) {
+    if (statsCard) statsCard.style.display = "none";
     wrap.style.display = "none";
     wrap.innerHTML = "";
     return;
+  }
+  if (statsTitle) {
+    statsTitle.innerText = `Export Stats for ${getOriginalTourAppliedDateLabel()}`;
   }
 
   const parseNumericCellValue = (value) => {
@@ -14270,6 +14517,7 @@ function renderOriginalTourRawDataTable() {
     columns.push("size vs rig rate");
   }
   if (!columns.length) {
+    if (statsCard) statsCard.style.display = "none";
     wrap.style.display = "none";
     wrap.innerHTML = "";
     return;
@@ -14297,7 +14545,6 @@ function renderOriginalTourRawDataTable() {
     return String(a && a["Player name"] || "").localeCompare(String(b && b["Player name"] || ""));
   });
 
-  const numericStatsByColumn = new Map();
   const noHeatKeywords = [
     "rank",
     "total songs",
@@ -14330,6 +14577,7 @@ function renderOriginalTourRawDataTable() {
     "avg/8",
     "lose",
     "missed solos",
+    "rigs missed",
     "lives lost on rig",
     "lives lost on rigs",
     "lived lost on rig",
@@ -14341,6 +14589,29 @@ function renderOriginalTourRawDataTable() {
   const shouldInvertHeatForColumn = (columnName) => {
     const normalized = String(columnName || "").trim().toLowerCase();
     return inverseHeatKeywords.some(keyword => normalized.includes(keyword));
+  };
+  const shouldSkipExtremeColorForColumn = (columnName) => {
+    const normalized = String(columnName || "").trim().toLowerCase();
+    if (!normalized) return true;
+    if (["win", "lose", "tie", "size", "list size"].includes(normalized)) return true;
+    return [
+      "player",
+      "player name",
+      "name",
+      "rank",
+      "team",
+      "total hit",
+      "total hits",
+      "total song",
+      "total songs",
+      "timestamp",
+      "date",
+      "tourid",
+      "tour id",
+      "json",
+      "sheet",
+      "url"
+    ].some(keyword => normalized === keyword || normalized.includes(keyword));
   };
   const displayColumnName = (columnName) => {
     const original = String(columnName || "");
@@ -14356,21 +14627,39 @@ function renderOriginalTourRawDataTable() {
     }
     return sorted[mid];
   };
+  const getColumnNumericValues = (col) => sortedRows
+    .map(row => parseNumericCellValue(row && row[col]))
+    .filter(value => value != null);
+  const getExtremeStats = (values, invert) => {
+    if (!Array.isArray(values) || values.length < 3) return null;
+    const bestSorted = values.slice().sort((a, b) => invert ? a - b : b - a);
+    const worstSorted = values.slice().sort((a, b) => invert ? b - a : a - b);
+    const bestCutoff = bestSorted[Math.min(2, bestSorted.length - 1)];
+    const worstCutoff = worstSorted[Math.min(2, worstSorted.length - 1)];
+    return { bestCutoff, worstCutoff };
+  };
 
+  const numericStatsByColumn = new Map();
+  const extremeStatsByColumn = new Map();
   columns.forEach(col => {
-    if (shouldSkipHeatForColumn(col)) return;
-    const values = sortedRows
-      .map(row => parseNumericCellValue(row && row[col]))
-      .filter(value => value != null);
+    const values = getColumnNumericValues(col);
     if (!values.length) return;
 
-    const median = computeMedian(values);
-    if (median == null) return;
-    const maxAbsDelta = Math.max(...values.map(value => Math.abs(value - median)));
-    numericStatsByColumn.set(col, { median, maxAbsDelta });
+    if (!shouldSkipHeatForColumn(col)) {
+      const median = computeMedian(values);
+      if (median != null) {
+        const maxAbsDelta = Math.max(...values.map(value => Math.abs(value - median)));
+        numericStatsByColumn.set(col, { median, maxAbsDelta });
+      }
+    }
+
+    if (!shouldSkipExtremeColorForColumn(col)) {
+      const stats = getExtremeStats(values, shouldInvertHeatForColumn(col));
+      if (stats) extremeStatsByColumn.set(col, stats);
+    }
   });
 
-  const toHeatStyle = (col, rawValue) => {
+  const toGradientHeatStyle = (col, rawValue) => {
     if (shouldSkipHeatForColumn(col)) return "";
     const stats = numericStatsByColumn.get(col);
     if (!stats || !Number.isFinite(stats.maxAbsDelta) || stats.maxAbsDelta <= 0) return "";
@@ -14381,22 +14670,48 @@ function renderOriginalTourRawDataTable() {
     const effectiveDelta = shouldInvertHeatForColumn(col) ? -delta : delta;
     const strength = Math.min(1, Math.abs(effectiveDelta) / stats.maxAbsDelta);
     if (strength <= 0) return "";
-    // Keep extremes strongest, but ensure all non-average cells remain visible.
+    // Spread from white to the same endpoint colors used by Top/Bottom 3.
     const easedStrength = 0.18 + 0.82 * Math.pow(strength, 1.05);
-    const [targetR, targetG, targetB] = effectiveDelta >= 0 ? [22, 163, 74] : [220, 38, 38];
+    const [targetR, targetG, targetB] = effectiveDelta >= 0 ? [90, 189, 138] : [237, 122, 115];
     const r = Math.round(255 + (targetR - 255) * easedStrength);
     const g = Math.round(255 + (targetG - 255) * easedStrength);
     const b = Math.round(255 + (targetB - 255) * easedStrength);
-    const alpha = (0.12 + easedStrength * 0.34).toFixed(3);
-    return ` style="background-color: rgba(${r}, ${g}, ${b}, ${alpha});"`;
+    return `background-color: rgb(${r}, ${g}, ${b}) !important;`;
+  };
+  const toExtremeHeatStyle = (col, rawValue) => {
+    const stats = extremeStatsByColumn.get(col);
+    if (!stats) return "";
+    const numericValue = parseNumericCellValue(rawValue);
+    if (numericValue == null) return "";
+    const invert = shouldInvertHeatForColumn(col);
+    const isBest = invert
+      ? numericValue <= stats.bestCutoff
+      : numericValue >= stats.bestCutoff;
+    const isWorst = invert
+      ? numericValue >= stats.worstCutoff
+      : numericValue <= stats.worstCutoff;
+    if (isBest && !isWorst) return "background-color: #5abd8a !important;";
+    if (isWorst && !isBest) return "background-color: #ed7a73 !important;";
+    return "";
+  };
+  const toCellStyle = (col, rawValue, rowIndex) => {
+    const heatStyle = originalTourColorMode === "extremes"
+      ? toExtremeHeatStyle(col, rawValue)
+      : toGradientHeatStyle(col, rawValue);
+    if (heatStyle) return ` style="${heatStyle}"`;
+    if (originalTourColorMode === "extremes" && rowIndex % 2 === 1) {
+      return ' style="background-color: #E8E8E8 !important;"';
+    }
+    return "";
   };
 
   const thead = `<thead><tr>${columns.map(col => `<th>${escapeHtml(displayColumnName(col))}</th>`).join("")}</tr></thead>`;
-  const tbody = `<tbody>${sortedRows.map(row => `<tr>${columns.map(col => {
+  const tbody = `<tbody>${sortedRows.map((row, rowIndex) => `<tr>${columns.map(col => {
     const value = String(row && row[col] != null ? row[col] : "");
-    return `<td${toHeatStyle(col, value)}>${value}</td>`;
+    return `<td${toCellStyle(col, value, rowIndex)}>${value}</td>`;
   }).join("")}</tr>`).join("")}</tbody>`;
   wrap.innerHTML = `<table class="original-tour-raw-table">${thead}${tbody}</table>`;
+  if (statsCard) statsCard.style.display = "block";
   wrap.style.display = "block";
   updateOriginalTourRawStickyColumnOffsets(wrap);
 }
@@ -15600,6 +15915,50 @@ async function loadSocialSynergyData(playerId, modeOverride = null) {
   return requestPromise;
 }
 
+function getSocialSynergyMergedRowsFromCache(playerId, modeOverride, synergyPayload) {
+  const targetPlayerId = String(playerId || "").trim();
+  const activeMode = modeOverride === "usual" ? "usual" : (modeOverride === "watched" ? "watched" : getActiveDataSourceMode());
+  const cacheKey = `${targetPlayerId}:${activeMode}`;
+  if (targetPlayerId && socialSynergyMergedRowsCacheByKey.has(cacheKey)) {
+    return socialSynergyMergedRowsCacheByKey.get(cacheKey);
+  }
+  const mergedRows = buildMergedSocialSynergyRows(synergyPayload, activeMode);
+  if (targetPlayerId) {
+    socialSynergyMergedRowsCacheByKey.set(cacheKey, mergedRows);
+  }
+  return mergedRows;
+}
+
+async function preloadSocialSynergyDataForUser(displayName, modeOverride = null) {
+  const requestedName = String(displayName || currentDisplayName || currentStatKey || "").trim();
+  if (!requestedName) return null;
+  const activeMode = modeOverride === "usual" ? "usual" : (modeOverride === "watched" ? "watched" : getActiveDataSourceMode());
+  const currentName = String(currentDisplayName || currentStatKey || "").trim();
+  let targetPlayerId = requestedName === currentName ? String(currentPlayerId || "").trim() : "";
+
+  if (!targetPlayerId) {
+    const playerEntry = await getPlayerEntryByName(requestedName);
+    if (playerEntry && playerEntry.playerId) {
+      targetPlayerId = String(playerEntry.playerId);
+      if (requestedName === currentName) {
+        currentPlayerId = targetPlayerId;
+        if (!currentDisplayName) {
+          currentDisplayName = String(playerEntry.displayName || currentStatKey || requestedName);
+        }
+      }
+    }
+  }
+
+  if (!targetPlayerId) return null;
+  const synergyPayload = await loadSocialSynergyData(targetPlayerId, activeMode);
+  getSocialSynergyMergedRowsFromCache(targetPlayerId, activeMode, synergyPayload);
+  return synergyPayload;
+}
+
+function preloadSocialSynergyDataForCurrentPlayer(modeOverride = null) {
+  return preloadSocialSynergyDataForUser(currentDisplayName || currentStatKey || "", modeOverride);
+}
+
 function getSongRowsFromRigSongIds(songIds, songKeyById) {
   if (!Array.isArray(songIds) || !songKeyById || typeof songKeyById !== "object") return [];
   const fallbackMalByAnime = new Map();
@@ -16248,7 +16607,7 @@ async function renderSocialSynergyView() {
   if (requestId !== socialSynergyRequestId || modeSnapshot !== getActiveDataSourceMode()) return;
 
   const targetLabel = currentDisplayName || currentStatKey;
-  const mergedRows = buildMergedSocialSynergyRows(synergyPayload, modeSnapshot);
+  const mergedRows = getSocialSynergyMergedRowsFromCache(currentPlayerId, modeSnapshot, synergyPayload);
   cachedSocialSynergyRigTables = {
     targetToOther: synergyPayload && synergyPayload.targetToOtherRig ? synergyPayload.targetToOtherRig : null,
     otherToTarget: synergyPayload && synergyPayload.otherToTargetRig ? synergyPayload.otherToTargetRig : null,
@@ -16330,7 +16689,7 @@ async function renderOverviewSynergySummary() {
   if (requestId !== overviewSynergyRequestId || modeSnapshot !== getActiveDataSourceMode()) return;
 
   const targetLabel = currentDisplayName || currentStatKey;
-  const mergedRows = buildMergedSocialSynergyRows(synergyPayload, modeSnapshot);
+  const mergedRows = getSocialSynergyMergedRowsFromCache(currentPlayerId, modeSnapshot, synergyPayload);
   if (!mergedRows.length) {
     meta.innerText = "Found 0 players";
     list.innerHTML = '<div class="social-synergy-empty">No synergy count data found for this player.</div>';
@@ -20491,13 +20850,20 @@ function resolveSearchSongDatePoolRows(rows, datePool) {
   });
 }
 
-async function loadRelearnDataForUser(displayName) {
+async function loadRelearnDataForUser(displayName, options = {}) {
+  const shouldRender = () => {
+    if (options && options.render === false) return false;
+    return typeof options.shouldRender === "function" ? options.shouldRender() : true;
+  };
+  const renderLoadedRelearnTracker = () => {
+    if (shouldRender()) renderInsightsRelearnTracker();
+  };
   try {
     if (!displayName) {
       cachedRelearnSongs = [];
       relearnOnlistFilterMode = "all";
       relearnPageIndex = 0;
-      renderInsightsRelearnTracker();
+      renderLoadedRelearnTracker();
       return;
     }
 
@@ -20507,7 +20873,7 @@ async function loadRelearnDataForUser(displayName) {
         cachedRelearnSongs = [];
         relearnOnlistFilterMode = "all";
         relearnPageIndex = 0;
-        renderInsightsRelearnTracker();
+        renderLoadedRelearnTracker();
         return;
       }
       currentPlayerId = String(playerEntry.playerId);
@@ -20541,7 +20907,7 @@ async function loadRelearnDataForUser(displayName) {
       cachedRelearnSongs = [];
       relearnOnlistFilterMode = "all";
       relearnPageIndex = 0;
-      renderInsightsRelearnTracker();
+      renderLoadedRelearnTracker();
       return;
     }
 
@@ -20551,21 +20917,28 @@ async function loadRelearnDataForUser(displayName) {
     cachedRelearnSongs = await hydrateSongRowsWithSongKey(resolvedRelearnRows);
     relearnOnlistFilterMode = "all";
     relearnPageIndex = 0;
-    renderInsightsRelearnTracker();
+    renderLoadedRelearnTracker();
   } catch (err) {
     console.error("Failed loading relearn tracker data", err);
     cachedRelearnSongs = [];
     relearnOnlistFilterMode = "all";
     relearnPageIndex = 0;
-    renderInsightsRelearnTracker();
+    renderLoadedRelearnTracker();
   }
 }
 
-async function loadWrongGuessDataForUser(displayName) {
+async function loadWrongGuessDataForUser(displayName, options = {}) {
+  const shouldRender = () => {
+    if (options && options.render === false) return false;
+    return typeof options.shouldRender === "function" ? options.shouldRender() : true;
+  };
+  const renderLoadedWrongGuess = () => {
+    if (shouldRender()) renderInsightsWrongGuess();
+  };
   try {
     if (!displayName) {
       cachedWrongGuessSongs = [];
-      renderInsightsWrongGuess();
+      renderLoadedWrongGuess();
       return;
     }
 
@@ -20573,7 +20946,7 @@ async function loadWrongGuessDataForUser(displayName) {
       const playerEntry = await getPlayerEntryByName(displayName);
       if (!playerEntry || !playerEntry.playerId) {
         cachedWrongGuessSongs = [];
-        renderInsightsWrongGuess();
+        renderLoadedWrongGuess();
         return;
       }
       currentPlayerId = String(playerEntry.playerId);
@@ -20585,7 +20958,7 @@ async function loadWrongGuessDataForUser(displayName) {
     const wrongGuessRes = await fetchPlayerScopedResponse(currentPlayerId, "recommendations_by_wrong_guess/top_200.json");
     if (!wrongGuessRes) {
       cachedWrongGuessSongs = [];
-      renderInsightsWrongGuess();
+      renderLoadedWrongGuess();
       return;
     }
 
@@ -20593,19 +20966,26 @@ async function loadWrongGuessDataForUser(displayName) {
     const wrongGuessRows = Array.isArray(wrongGuessPayload) ? wrongGuessPayload : [];
     cachedWrongGuessSongs = await hydrateSongRowsWithSongKey(wrongGuessRows);
     wrongGuessPageIndex = 0;
-    renderInsightsWrongGuess();
+    renderLoadedWrongGuess();
   } catch (err) {
     console.error("Failed loading wrong guess recommendations", err);
     cachedWrongGuessSongs = [];
-    renderInsightsWrongGuess();
+    renderLoadedWrongGuess();
   }
 }
 
-async function loadNeverCorrectDataForUser(displayName) {
+async function loadNeverCorrectDataForUser(displayName, options = {}) {
+  const shouldRender = () => {
+    if (options && options.render === false) return false;
+    return typeof options.shouldRender === "function" ? options.shouldRender() : true;
+  };
+  const renderLoadedNeverCorrect = () => {
+    if (shouldRender()) renderInsightsNeverCorrect();
+  };
   try {
     if (!displayName) {
       cachedNeverCorrectSongs = [];
-      renderInsightsNeverCorrect();
+      renderLoadedNeverCorrect();
       return;
     }
 
@@ -20613,7 +20993,7 @@ async function loadNeverCorrectDataForUser(displayName) {
       const playerEntry = await getPlayerEntryByName(displayName);
       if (!playerEntry || !playerEntry.playerId) {
         cachedNeverCorrectSongs = [];
-        renderInsightsNeverCorrect();
+        renderLoadedNeverCorrect();
         return;
       }
       currentPlayerId = String(playerEntry.playerId);
@@ -20625,7 +21005,7 @@ async function loadNeverCorrectDataForUser(displayName) {
     const neverCorrectRes = await fetchPlayerScopedResponse(currentPlayerId, "recommendations_never_correct/top_30.json");
     if (!neverCorrectRes) {
       cachedNeverCorrectSongs = [];
-      renderInsightsNeverCorrect();
+      renderLoadedNeverCorrect();
       return;
     }
 
@@ -20633,19 +21013,26 @@ async function loadNeverCorrectDataForUser(displayName) {
     const neverCorrectRows = Array.isArray(neverCorrectPayload) ? neverCorrectPayload : [];
     cachedNeverCorrectSongs = await hydrateSongRowsWithSongKey(neverCorrectRows);
     neverCorrectPageIndex = 0;
-    renderInsightsNeverCorrect();
+    renderLoadedNeverCorrect();
   } catch (err) {
     console.error("Failed loading never-correct recommendations", err);
     cachedNeverCorrectSongs = [];
-    renderInsightsNeverCorrect();
+    renderLoadedNeverCorrect();
   }
 }
 
-async function loadPopularityDataForUser(displayName) {
+async function loadPopularityDataForUser(displayName, options = {}) {
+  const shouldRender = () => {
+    if (options && options.render === false) return false;
+    return typeof options.shouldRender === "function" ? options.shouldRender() : true;
+  };
+  const renderLoadedPopularity = () => {
+    if (shouldRender()) renderInsightsPopularity();
+  };
   try {
     if (!displayName) {
       cachedPopularitySongs = [];
-      renderInsightsPopularity();
+      renderLoadedPopularity();
       return;
     }
 
@@ -20653,7 +21040,7 @@ async function loadPopularityDataForUser(displayName) {
       const playerEntry = await getPlayerEntryByName(displayName);
       if (!playerEntry || !playerEntry.playerId) {
         cachedPopularitySongs = [];
-        renderInsightsPopularity();
+        renderLoadedPopularity();
         return;
       }
       currentPlayerId = String(playerEntry.playerId);
@@ -20672,7 +21059,7 @@ async function loadPopularityDataForUser(displayName) {
     })();
     if (!popularityRes) {
       cachedPopularitySongs = [];
-      renderInsightsPopularity();
+      renderLoadedPopularity();
       return;
     }
 
@@ -20680,19 +21067,26 @@ async function loadPopularityDataForUser(displayName) {
     const popularityRows = Array.isArray(popularityPayload) ? popularityPayload : [];
     cachedPopularitySongs = await hydrateSongRowsWithSongKey(popularityRows.slice(0, 300));
     popularityPageIndex = 0;
-    renderInsightsPopularity();
+    renderLoadedPopularity();
   } catch (err) {
     console.error("Failed loading popularity recommendations", err);
     cachedPopularitySongs = [];
-    renderInsightsPopularity();
+    renderLoadedPopularity();
   }
 }
 
-async function loadPCorrectDataForUser(displayName) {
+async function loadPCorrectDataForUser(displayName, options = {}) {
+  const shouldRender = () => {
+    if (options && options.render === false) return false;
+    return typeof options.shouldRender === "function" ? options.shouldRender() : true;
+  };
+  const renderLoadedPCorrect = () => {
+    if (shouldRender()) renderInsightsPCorrect();
+  };
   try {
     if (!displayName) {
       cachedPCorrectSongs = [];
-      renderInsightsPCorrect();
+      renderLoadedPCorrect();
       return;
     }
 
@@ -20700,7 +21094,7 @@ async function loadPCorrectDataForUser(displayName) {
       const playerEntry = await getPlayerEntryByName(displayName);
       if (!playerEntry || !playerEntry.playerId) {
         cachedPCorrectSongs = [];
-        renderInsightsPCorrect();
+        renderLoadedPCorrect();
         return;
       }
       currentPlayerId = String(playerEntry.playerId);
@@ -20720,7 +21114,7 @@ async function loadPCorrectDataForUser(displayName) {
     })();
     if (!pcorrectRes) {
       cachedPCorrectSongs = [];
-      renderInsightsPCorrect();
+      renderLoadedPCorrect();
       return;
     }
 
@@ -20728,11 +21122,11 @@ async function loadPCorrectDataForUser(displayName) {
     const pcorrectRows = Array.isArray(pcorrectPayload) ? pcorrectPayload : [];
     cachedPCorrectSongs = await hydrateSongRowsWithSongKey(pcorrectRows.slice(0, 300));
     pcorrectPageIndex = 0;
-    renderInsightsPCorrect();
+    renderLoadedPCorrect();
   } catch (err) {
     console.error("Failed loading pcorrect recommendations", err);
     cachedPCorrectSongs = [];
-    renderInsightsPCorrect();
+    renderLoadedPCorrect();
   }
 }
 
@@ -25812,20 +26206,8 @@ if (dataRangeSelect) {
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Composite charts") {
       renderPerformanceCompositeCharts(getVisibleUserData(fullUserData));
     }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
-      renderSocialRivalFilter();
-      renderSocialRivalsChart();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Synergy") {
-      renderSocialSynergyView();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Team Contributions") {
-      renderSocialTeamContributionView();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Rig / List analysis") {
-      ensureRigAnalysisData();
-      renderRigAnalysisView();
-      prefetchRigAnalysisDataInBackground();
+    if (activeSection === "social") {
+      scheduleSocialSubSectionRender(activeSubSectionBySection.social || "");
     }
     if (currentDisplayName) {
       loadOverviewAnimeTypeDataForUser(currentDisplayName);
@@ -25839,11 +26221,15 @@ if (dataRangeSelect) {
       loadTagDataForUser(currentDisplayName);
       loadByEraDataForUser(currentDisplayName);
       loadArtistDataForUser(currentDisplayName);
-      loadRelearnDataForUser(currentDisplayName);
-      loadWrongGuessDataForUser(currentDisplayName);
-      loadNeverCorrectDataForUser(currentDisplayName);
-      loadPopularityDataForUser(currentDisplayName);
-      loadPCorrectDataForUser(currentDisplayName);
+      if (activeSection === "insights") {
+        scheduleInsightsSubSectionLoad(activeSubSectionBySection.insights || "", currentDisplayName);
+      } else {
+        loadRelearnDataForUser(currentDisplayName, { render: false });
+        loadWrongGuessDataForUser(currentDisplayName, { render: false });
+        loadNeverCorrectDataForUser(currentDisplayName, { render: false });
+        loadPopularityDataForUser(currentDisplayName, { render: false });
+        loadPCorrectDataForUser(currentDisplayName, { render: false });
+      }
       loadSearchSongsDataForUser(currentDisplayName);
     }
   });
@@ -26549,15 +26935,8 @@ Promise.all([
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Composite charts") {
       renderPerformanceCompositeCharts(getVisibleUserData(fullUserData));
     }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
-      renderSocialRivalFilter();
-      renderSocialRivalsChart();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Synergy") {
-      renderSocialSynergyView();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Team Contributions") {
-      renderSocialTeamContributionView();
+    if (activeSection === "social") {
+      scheduleSocialSubSectionRender(activeSubSectionBySection.social || "");
     }
 
     latestRankMapPromise.then(latestRankMap => {
