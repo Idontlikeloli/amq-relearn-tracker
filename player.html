@@ -143,10 +143,12 @@
       position: absolute !important;
       left: 0 !important;
       top: calc(100% + 6px) !important;
-      min-width: 200px !important;
+      width: fit-content !important;
+      min-width: 0 !important;
       max-width: min(340px, 38vw) !important;
       max-height: 220px !important;
       overflow-y: auto !important;
+      box-sizing: border-box !important;
       padding: 8px 10px !important;
       border-radius: 8px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
@@ -160,6 +162,7 @@
       pointer-events: none !important;
       z-index: 40 !important;
       white-space: normal !important;
+      overflow-wrap: anywhere !important;
     }
 
     body.unified-nav-mode .topbar-left .username-block.has-aka:hover .username-aka-popover,
@@ -1393,8 +1396,10 @@
 
     #knowledgeArtistView #artistAnimeHoverTooltip {
       position: fixed !important;
-      width: fit-content !important;
-      max-width: min(70vw, 560px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(560px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
       background: rgba(15, 23, 42, 0.96) !important;
@@ -1788,7 +1793,7 @@
       font-size: 9px !important;
       font-weight: 700 !important;
       line-height: 1 !important;
-      cursor: help !important;
+      cursor: default !important;
       text-transform: none !important;
       letter-spacing: 0 !important;
       margin-left: 4px !important;
@@ -1799,24 +1804,28 @@
       left: 50% !important;
       top: calc(100% + 8px) !important;
       transform: translateX(-50%) !important;
-      min-width: 180px !important;
-      max-width: 260px !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(420px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
-      border: 1px solid rgba(148, 163, 184, 0.55) !important;
-      background: rgba(15, 23, 42, 0.96) !important;
-      color: #e2e8f0 !important;
+      border: 2px solid #94a3b8 !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
       font-size: 11px !important;
       font-weight: 400 !important;
       line-height: 1.35 !important;
       letter-spacing: 0 !important;
       text-transform: none !important;
+      text-align: left !important;
       padding: 7px 8px !important;
       white-space: normal !important;
+      overflow-wrap: break-word !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
-      z-index: 20 !important;
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
+      z-index: 2147483647 !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
     }
 
     #overviewWeeklyView .weekly-performance-cards .card:nth-child(3) .weekly-card-info-tooltip,
@@ -1848,7 +1857,7 @@
       font-style: normal !important;
       font-weight: 800 !important;
       line-height: 1 !important;
-      cursor: help !important;
+      cursor: default !important;
       margin-left: 6px !important;
       transform: none !important;
       padding: 0 !important;
@@ -1874,24 +1883,28 @@
       position: absolute !important;
       left: 0 !important;
       top: calc(100% + 9px) !important;
-      min-width: 240px !important;
-      max-width: min(66vw, 420px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(460px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 9px !important;
-      border: 1px solid rgba(148, 163, 184, 0.55) !important;
-      background: rgba(15, 23, 42, 0.96) !important;
-      color: #e2e8f0 !important;
+      border: 2px solid #94a3b8 !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
       font-size: 11px !important;
       font-weight: 400 !important;
       line-height: 1.35 !important;
       letter-spacing: 0 !important;
       text-transform: none !important;
+      text-align: left !important;
       padding: 8px 9px !important;
       white-space: normal !important;
+      overflow-wrap: break-word !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
-      z-index: 9999 !important;
-      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.26) !important;
+      z-index: 2147483647 !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
       text-shadow: none !important;
     }
 
@@ -1964,7 +1977,7 @@
       position: relative !important;
       display: inline-flex !important;
       align-items: baseline !important;
-      cursor: help !important;
+      cursor: default !important;
     }
 
     #overviewWeeklyView .weekly-performance-cards .card-line .weekly-hover-tooltip-box {
@@ -1972,8 +1985,10 @@
       left: 50% !important;
       top: calc(100% + 7px) !important;
       transform: translateX(-50%) !important;
-      min-width: 132px !important;
-      max-width: 220px !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(320px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       padding: 6px 7px !important;
       border-radius: 8px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
@@ -1981,7 +1996,8 @@
       color: #e2e8f0 !important;
       font-size: 11px !important;
       line-height: 1.3 !important;
-      white-space: nowrap !important;
+      white-space: normal !important;
+      overflow-wrap: break-word !important;
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
       opacity: 0 !important;
       visibility: hidden !important;
@@ -2837,11 +2853,26 @@
       text-align: center !important;
     }
 
+    #overviewStatsSummaryView .overview-z-score-wrap {
+      height: 430px !important;
+      min-height: 430px !important;
+      background: transparent !important;
+      border: 0 !important;
+      border-radius: 12px !important;
+      padding: 10px 12px !important;
+      box-sizing: border-box !important;
+    }
+
     #overviewStatsSummaryView .chart-wrap {
       margin-top: 0 !important;
       background: transparent !important;
       border-color: transparent !important;
       box-shadow: none !important;
+    }
+
+    #overviewStatsSummaryView .chart-wrap.overview-z-score-wrap {
+      background: transparent !important;
+      border-color: transparent !important;
     }
 
     #overviewStatsSummaryView #overviewGenreSummaryCard .info-hover-tooltip {
@@ -2850,10 +2881,18 @@
       font-size: 10.5px !important;
       line-height: 1.5 !important;
       letter-spacing: 0.005em !important;
-      color: #cbd5e1 !important;
+      color: #0f172a !important;
       text-shadow: none !important;
       -webkit-font-smoothing: antialiased !important;
       -moz-osx-font-smoothing: grayscale !important;
+    }
+
+    #overviewSection #overviewStatsSummaryView .standardized-metrics-info-tooltip {
+      text-align: left !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
+      border-color: #94a3b8 !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
     }
 
     #overviewStatsSummaryView .overview-genre-radar-wrap {
@@ -3020,7 +3059,7 @@
       display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
-      cursor: help !important;
+      cursor: default !important;
       padding: 0 !important;
     }
 
@@ -3030,22 +3069,26 @@
       right: auto !important;
       top: 50% !important;
       transform: translateY(-50%) !important;
-      min-width: 180px !important;
-      max-width: 240px !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(420px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
-      border: 1px solid rgba(148, 163, 184, 0.55) !important;
-      background: rgba(15, 23, 42, 0.96) !important;
-      color: #e2e8f0 !important;
+      border: 2px solid #94a3b8 !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
       font-size: 11px !important;
       font-weight: 400 !important;
       line-height: 1.35 !important;
+      text-align: left !important;
       padding: 7px 8px !important;
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
-      white-space: normal !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
+      white-space: pre-line !important;
+      overflow-wrap: break-word !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
-      z-index: 30 !important;
+      z-index: 2147483647 !important;
     }
 
     #overviewSection .info-hover-wrap.open-left .info-hover-tooltip {
@@ -3059,14 +3102,16 @@
       visibility: visible !important;
     }
 
-    #insightsSection .info-hover-wrap {
+    #insightsSection .info-hover-wrap,
+    #otherToolsSection .info-hover-wrap {
       position: relative !important;
       display: inline-flex !important;
       align-items: center !important;
       flex: 0 0 auto !important;
     }
 
-    #insightsSection .info-hover-btn {
+    #insightsSection .info-hover-btn,
+    #otherToolsSection .info-hover-btn {
       width: 15px !important;
       height: 15px !important;
       border-radius: 999px !important;
@@ -3083,37 +3128,45 @@
       padding: 0 !important;
     }
 
-    #insightsSection .info-hover-tooltip {
+    #insightsSection .info-hover-tooltip,
+    #otherToolsSection .info-hover-tooltip {
       position: absolute !important;
       left: calc(100% + 8px) !important;
       right: auto !important;
       top: 50% !important;
       transform: translateY(-50%) !important;
-      min-width: 260px !important;
-      max-width: min(70vw, 520px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(520px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
-      border: 1px solid rgba(148, 163, 184, 0.55) !important;
-      background: rgba(15, 23, 42, 0.96) !important;
-      color: #e2e8f0 !important;
+      border: 2px solid #94a3b8 !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
       font-size: 11px !important;
       font-weight: 400 !important;
       line-height: 1.35 !important;
+      text-align: left !important;
       padding: 7px 8px !important;
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
       white-space: normal !important;
+      overflow-wrap: break-word !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
-      z-index: 30 !important;
+      z-index: 2147483647 !important;
     }
 
-    #insightsSection .info-hover-wrap.open-left .info-hover-tooltip {
+    #insightsSection .info-hover-wrap.open-left .info-hover-tooltip,
+    #otherToolsSection .info-hover-wrap.open-left .info-hover-tooltip {
       right: calc(100% + 8px) !important;
       left: auto !important;
     }
 
     #insightsSection .info-hover-wrap:hover .info-hover-tooltip,
-    #insightsSection .info-hover-wrap:focus-within .info-hover-tooltip {
+    #insightsSection .info-hover-wrap:focus-within .info-hover-tooltip,
+    #otherToolsSection .info-hover-wrap:hover .info-hover-tooltip,
+    #otherToolsSection .info-hover-wrap:focus-within .info-hover-tooltip {
       opacity: 1 !important;
       visibility: visible !important;
     }
@@ -3148,23 +3201,26 @@
       right: auto !important;
       top: 50% !important;
       transform: translateY(-50%) !important;
-      min-width: 280px !important;
-      max-width: min(75vw, 620px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(620px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
-      border: 1px solid rgba(148, 163, 184, 0.55) !important;
-      background: rgba(15, 23, 42, 0.96) !important;
-      color: #e2e8f0 !important;
+      border: 2px solid #94a3b8 !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
       font-size: 11px !important;
       font-weight: 400 !important;
       line-height: 1.35 !important;
       padding: 7px 8px !important;
-      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
       white-space: normal !important;
+      overflow-wrap: break-word !important;
       text-align: left !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
-      z-index: 30 !important;
+      z-index: 2147483647 !important;
     }
 
     #socialSection .info-hover-wrap.open-left .info-hover-tooltip {
@@ -3176,6 +3232,72 @@
     #socialSection .info-hover-wrap:focus-within .info-hover-tooltip {
       opacity: 1 !important;
       visibility: visible !important;
+    }
+
+    #overviewSection :is(.chart-card, .card):has(.info-hover-wrap:hover),
+    #overviewSection :is(.chart-card, .card):has(.info-hover-wrap:focus-within),
+    #overviewSection :is(.chart-card, .card):has(.weekly-card-info:hover),
+    #overviewSection :is(.chart-card, .card):has(.weekly-card-info:focus-within),
+    #insightsSection :is(.chart-card, .card):has(.info-hover-wrap:hover),
+    #insightsSection :is(.chart-card, .card):has(.info-hover-wrap:focus-within),
+    #socialSection :is(.chart-card, .card):has(.info-hover-wrap:hover),
+    #socialSection :is(.chart-card, .card):has(.info-hover-wrap:focus-within) {
+      position: relative !important;
+      z-index: 2147483645 !important;
+      overflow: visible !important;
+    }
+
+    #overviewSection :is(.chart-header, .chart-title, .card-title):has(.info-hover-wrap:hover),
+    #overviewSection :is(.chart-header, .chart-title, .card-title):has(.info-hover-wrap:focus-within),
+    #overviewSection :is(.chart-header, .chart-title, .card-title):has(.weekly-card-info:hover),
+    #overviewSection :is(.chart-header, .chart-title, .card-title):has(.weekly-card-info:focus-within),
+    #insightsSection :is(.chart-header, .chart-title, .card-title):has(.info-hover-wrap:hover),
+    #insightsSection :is(.chart-header, .chart-title, .card-title):has(.info-hover-wrap:focus-within),
+    #socialSection :is(.chart-header, .chart-title, .card-title):has(.info-hover-wrap:hover),
+    #socialSection :is(.chart-header, .chart-title, .card-title):has(.info-hover-wrap:focus-within),
+    #overviewSection :is(.info-hover-wrap, .weekly-card-info):hover,
+    #overviewSection :is(.info-hover-wrap, .weekly-card-info):focus-within,
+    #insightsSection .info-hover-wrap:hover,
+    #insightsSection .info-hover-wrap:focus-within,
+    #socialSection .info-hover-wrap:hover,
+    #socialSection .info-hover-wrap:focus-within {
+      position: relative !important;
+      z-index: 2147483646 !important;
+      overflow: visible !important;
+    }
+
+    #insightsSection .info-hover-tooltip,
+    #socialSection .info-hover-tooltip {
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(72vw, 520px) !important;
+      text-wrap: wrap !important;
+    }
+
+    #overviewSection .info-hover-tooltip,
+    #overviewWeeklyView .weekly-card-info-tooltip {
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(72vw, 420px) !important;
+      text-wrap: wrap !important;
+    }
+
+    #overviewSection .info-hover-tooltip.fill-tooltip-text {
+      text-align: justify !important;
+      text-align-last: auto !important;
+      text-wrap: wrap !important;
+    }
+
+    #overviewWeeklyView .weekly-performance-cards .card-title .weekly-card-info-tooltip {
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(72vw, 420px) !important;
+    }
+
+    #overviewWeeklyView .chart-title .weekly-card-info .weekly-card-info-tooltip {
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(72vw, 460px) !important;
     }
 
     #insightsSection .relearn-table-wrap {
@@ -3559,7 +3681,7 @@
       display: inline-block !important;
       color: #3b82b8 !important;
       font-weight: 700 !important;
-      cursor: help !important;
+      cursor: default !important;
       text-decoration: underline !important;
       text-decoration-color: rgba(59, 130, 184, 0.45) !important;
       text-underline-offset: 2px !important;
@@ -3570,7 +3692,7 @@
       display: inline-block !important;
       color: inherit !important;
       font-weight: inherit !important;
-      cursor: help !important;
+      cursor: default !important;
       text-decoration: underline !important;
       text-decoration-color: currentColor !important;
       text-underline-offset: 2px !important;
@@ -3591,7 +3713,7 @@
       display: inline-block !important;
       color: #3b82b8 !important;
       font-weight: 700 !important;
-      cursor: help !important;
+      cursor: default !important;
       text-decoration: underline !important;
       text-decoration-color: rgba(59, 130, 184, 0.45) !important;
       text-underline-offset: 2px !important;
@@ -3602,7 +3724,7 @@
       display: inline-block !important;
       color: inherit !important;
       font-weight: inherit !important;
-      cursor: help !important;
+      cursor: default !important;
       text-decoration: underline !important;
       text-decoration-color: currentColor !important;
       text-underline-offset: 2px !important;
@@ -3622,8 +3744,10 @@
       position: absolute !important;
       left: 0 !important;
       top: calc(100% + 8px) !important;
-      min-width: 170px !important;
-      max-width: 280px !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(360px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
       background: rgba(15, 23, 42, 0.96) !important;
@@ -3634,6 +3758,7 @@
       padding: 7px 8px !important;
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
       white-space: pre-line !important;
+      overflow-wrap: break-word !important;
       opacity: 0 !important;
       visibility: hidden !important;
       pointer-events: none !important;
@@ -3649,7 +3774,10 @@
 
     #searchSongsArtistHoverTooltip {
       position: fixed !important;
-      max-width: min(72vw, 300px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(560px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
       background: rgba(15, 23, 42, 0.96) !important;
@@ -3661,6 +3789,7 @@
       padding: 7px 8px !important;
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
       white-space: pre-line !important;
+      overflow-wrap: break-word !important;
       pointer-events: none !important;
       z-index: 99999 !important;
       opacity: 0;
@@ -3669,7 +3798,10 @@
 
     #searchSongsAnimeHoverTooltip {
       position: fixed !important;
-      max-width: min(72vw, 300px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(560px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
       border-radius: 8px !important;
       border: 1px solid rgba(148, 163, 184, 0.55) !important;
       background: rgba(15, 23, 42, 0.96) !important;
@@ -3681,6 +3813,7 @@
       padding: 7px 8px !important;
       box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
       white-space: pre-line !important;
+      overflow-wrap: break-word !important;
       pointer-events: none !important;
       z-index: 99999 !important;
       opacity: 0;
@@ -3725,6 +3858,43 @@
     #insightsSection #relearnSongsTable .relearn-audio-controls {
       justify-content: center !important;
       width: 100% !important;
+    }
+
+    #insightsSection .relearn-onlist-filter-toggle {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 4px !important;
+      padding: 3px !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 10px !important;
+      background: #eef4fb !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.64) !important;
+    }
+
+    #insightsSection .relearn-onlist-filter-btn {
+      border: 0 !important;
+      border-radius: 8px !important;
+      background: transparent !important;
+      color: #4f6377 !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.02em !important;
+      line-height: 1 !important;
+      padding: 7px 10px !important;
+      cursor: pointer !important;
+      white-space: nowrap !important;
+      transition: background-color 120ms ease, color 120ms ease, box-shadow 120ms ease !important;
+    }
+
+    #insightsSection .relearn-onlist-filter-btn:hover {
+      color: #1f3a55 !important;
+      background: rgba(255, 255, 255, 0.52) !important;
+    }
+
+    #insightsSection .relearn-onlist-filter-btn.active {
+      background: #ffffff !important;
+      color: #173c5b !important;
+      box-shadow: 0 1px 3px rgba(51, 65, 85, 0.18) !important;
     }
 
     #insightsSection .relearn-cover {
@@ -4901,6 +5071,11 @@
       }
     }
 
+    #socialSection .rig-analysis-year-value,
+    #socialSection .rig-analysis-section-difficulty .rig-analysis-section-value {
+      font-size: 22px !important;
+    }
+
     #otherToolsSection #otherToolsSearchSongFrequencyView .relearn-table,
     #otherToolsSection #otherToolsSearchSongFrequencyView #searchSongFrequencyTable {
       width: 100% !important;
@@ -4969,6 +5144,29 @@
     #otherToolsSection #otherToolsSearchSongFrequencyView #searchSongFrequencyTable .search-song-frequency-correct-text {
       display: inline-block !important;
       white-space: nowrap !important;
+    }
+
+    #searchSongFrequencyTitleHoverTooltip {
+      position: fixed !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(560px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
+      border-radius: 8px !important;
+      border: 1px solid rgba(148, 163, 184, 0.55) !important;
+      background: rgba(15, 23, 42, 0.96) !important;
+      color: #e2e8f0 !important;
+      font-size: 11px !important;
+      font-weight: 400 !important;
+      line-height: 1.35 !important;
+      padding: 7px 8px !important;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.24) !important;
+      white-space: pre-wrap !important;
+      overflow-wrap: anywhere !important;
+      pointer-events: none !important;
+      z-index: 140 !important;
+      opacity: 0;
+      visibility: hidden;
     }
 
     #insightsSection .relearn-table td.search-song-frequency-correct,
@@ -5102,6 +5300,41 @@
       align-items: center !important;
       gap: 2px !important;
       flex-wrap: nowrap !important;
+    }
+
+    #insightsSection .pattern-square.has-pattern-date,
+    #otherToolsSection .pattern-square.has-pattern-date {
+      cursor: default !important;
+    }
+
+    #patternDateHoverTooltip {
+      position: fixed !important;
+      left: 0 !important;
+      top: 0 !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(320px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
+      padding: 5px 7px !important;
+      border-radius: 7px !important;
+      border: 1px solid rgba(148, 163, 184, 0.55) !important;
+      background: rgba(15, 23, 42, 0.96) !important;
+      color: #e2e8f0 !important;
+      font-size: 11px !important;
+      line-height: 1.2 !important;
+      font-weight: 700 !important;
+      white-space: nowrap !important;
+      overflow-wrap: break-word !important;
+      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.22) !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      z-index: 2147483647 !important;
+    }
+
+    #patternDateHoverTooltip.visible {
+      opacity: 1 !important;
+      visibility: visible !important;
     }
 
     #insightsSection .table-text-clamp-3,
@@ -5315,6 +5548,14 @@
       align-items: start !important;
     }
 
+    #otherToolsSection .original-tour-view-stack > .chart-card + .chart-card {
+      margin-top: 14px !important;
+    }
+
+    #otherToolsSection .original-tour-stats-card {
+      overflow: visible !important;
+    }
+
     #otherToolsSection .original-tour-left,
     #otherToolsSection .original-tour-right {
       border: 1px solid #e5e7eb !important;
@@ -5505,6 +5746,37 @@
       color: #64748b !important;
     }
 
+    #otherToolsSection .original-tour-color-label {
+      color: #475569 !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+    }
+
+    #otherToolsSection .original-tour-color-control {
+      display: inline-flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex-wrap: nowrap !important;
+      white-space: nowrap !important;
+    }
+
+    #otherToolsSection .original-tour-color-control .original-tour-color-label,
+    #otherToolsSection .original-tour-color-control .original-tour-color-select {
+      flex: 0 0 auto !important;
+    }
+
+    #otherToolsSection .original-tour-color-select {
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 8px !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+      padding: 6px 9px !important;
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      cursor: pointer !important;
+    }
+
     #otherToolsSection .original-tour-raw-wrap {
       margin-top: 12px !important;
       border: 0 !important;
@@ -5519,7 +5791,8 @@
     #otherToolsSection .original-tour-raw-table {
       width: max-content !important;
       min-width: 100% !important;
-      border-collapse: collapse !important;
+      border-collapse: separate !important;
+      border-spacing: 0 !important;
       table-layout: auto !important;
     }
 
@@ -5554,7 +5827,7 @@
     #otherToolsSection .original-tour-raw-table th:nth-child(2),
     #otherToolsSection .original-tour-raw-table td:nth-child(2) {
       position: sticky !important;
-      left: var(--original-tour-sticky-col1-width, 0px) !important;
+      left: calc(var(--original-tour-sticky-col1-width, 0px) - 1px) !important;
       background: #ffffff !important;
       z-index: 3 !important;
     }
@@ -5562,10 +5835,31 @@
     #otherToolsSection .original-tour-raw-table th:nth-child(3),
     #otherToolsSection .original-tour-raw-table td:nth-child(3) {
       position: sticky !important;
-      left: calc(var(--original-tour-sticky-col1-width, 0px) + var(--original-tour-sticky-col2-width, 0px)) !important;
+      left: calc(var(--original-tour-sticky-col1-width, 0px) + var(--original-tour-sticky-col2-width, 0px) - 2px) !important;
       background: #ffffff !important;
       z-index: 3 !important;
       box-shadow: 2px 0 0 #e5e7eb !important;
+    }
+
+    #otherToolsSection .original-tour-raw-table th:nth-child(-n+3),
+    #otherToolsSection .original-tour-raw-table td:nth-child(-n+3) {
+      background-clip: padding-box !important;
+      overflow: visible !important;
+    }
+
+    #otherToolsSection .original-tour-raw-table th:nth-child(1)::after,
+    #otherToolsSection .original-tour-raw-table td:nth-child(1)::after,
+    #otherToolsSection .original-tour-raw-table th:nth-child(2)::after,
+    #otherToolsSection .original-tour-raw-table td:nth-child(2)::after {
+      content: "" !important;
+      position: absolute !important;
+      top: 0 !important;
+      right: -2px !important;
+      bottom: 0 !important;
+      width: 3px !important;
+      background: inherit !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
     }
 
     #otherToolsSection .original-tour-raw-table thead th:nth-child(-n+3) {
@@ -5601,11 +5895,24 @@
       height: var(--social-rivals-top-card-height) !important;
       display: flex !important;
       flex-direction: column !important;
-      overflow: hidden !important;
+      overflow: visible !important;
     }
 
     #socialSection #socialRivalsBubbleView .chart-meta {
       display: none !important;
+    }
+
+    #socialSection #socialRivalsBubbleView .chart-header {
+      position: relative !important;
+      z-index: 2147483646 !important;
+      overflow: visible !important;
+    }
+
+    #socialSection #socialRivalsBubbleView .chart-title,
+    #socialSection #socialRivalsBubbleView .info-hover-wrap {
+      position: relative !important;
+      z-index: 2147483646 !important;
+      overflow: visible !important;
     }
 
     #socialSection #socialRivalsBubbleView .chart-wrap {
@@ -5614,6 +5921,7 @@
       height: auto !important;
       position: relative !important;
       overflow: hidden !important;
+      z-index: 1 !important;
     }
 
     #socialSection #socialRivalsBubbleView .chart-wrap canvas {
@@ -5788,11 +6096,7 @@
       padding: 14px !important;
       border: 1px solid #c9d6e5 !important;
       border-radius: 14px !important;
-      background:
-        radial-gradient(circle at 10% 12%, rgba(201, 228, 221, 0.45), rgba(201, 228, 221, 0) 42%),
-        radial-gradient(circle at 8% 10%, rgba(214, 230, 247, 0.75), rgba(214, 230, 247, 0) 40%),
-        radial-gradient(circle at 92% 92%, rgba(201, 228, 221, 0.5), rgba(201, 228, 221, 0) 44%),
-        linear-gradient(145deg, #edf4fc 0%, #e8f0f9 52%, #e3edf8 100%) !important;
+      background: #edf4fc !important;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 8px 18px rgba(81, 105, 132, 0.08) !important;
     }
 
@@ -5867,7 +6171,7 @@
     }
 
     #socialSection #socialSynergySingleCompare .social-synergy-hover-layer .info-hover-tooltip {
-      z-index: 10000 !important;
+      z-index: 2147483647 !important;
     }
 
     #socialSection .social-synergy-single-right .chart-title {
@@ -6063,9 +6367,9 @@
     }
 
     #socialSection .social-synergy-row {
-      border: 1px solid #d4deea !important;
+      border: 1px solid #c8d9ef !important;
       border-radius: 10px !important;
-      background: #edf3fa !important;
+      background: #e7f0fc !important;
       padding: 10px 12px !important;
     }
 
@@ -6907,7 +7211,7 @@
           <div class="card-title">Average Guess Rate</div>
           <div class="card-subtitle">last 10 tours</div>
           <div class="card-value" id="guess">-</div>
-          <div class="card-footnote" id="overviewGuessQuartilesText">P25: - | P75: -</div>
+          <div class="card-footnote" id="overviewGuessQuartilesText">Target Range: - — -</div>
         </div>
       </div>
 
@@ -7035,6 +7339,18 @@
       </div>
       </div>
       <div id="overviewStatsSummaryView" style="display:none;">
+        <div id="overviewZScoreCard" class="chart-card" style="display:none;">
+          <div class="chart-header">
+            <div class="chart-title">
+              Standardized Metrics
+              <span class="info-hover-wrap">
+                <button class="info-hover-btn" type="button" aria-label="Standardized metrics info">i</button>
+                <span class="info-hover-tooltip standardized-metrics-info-tooltip">Compares your recent average for each stat against all players. 0 is average, +1 is one standard deviation better, and -1 is one standard deviation below average. Avg / 8 is flipped so lower values score higher.</span>
+              </span>
+            </div>
+          </div>
+          <div class="chart-wrap overview-z-score-wrap"><canvas id="overviewZScoreChart"></canvas></div>
+        </div>
         <div id="overviewGenreSummaryCard" class="chart-card">
           <div class="chart-header">
             <div class="chart-title">
@@ -7473,11 +7789,15 @@
           Relearn Tracker
           <span class="info-hover-wrap">
             <button class="info-hover-btn" type="button" aria-label="About Relearn Tracker">i</button>
-            <span class="info-hover-tooltip">Shows songs you previously got correct but got wrong in your latest attempt. The Relearn Tracker is ordered as follows:<br>1. smaller distance from the last ✅ to the end of the pattern wins<br>2. if tied, higher totalCorrect wins<br>3. if still tied, later lastAttemptDate wins</span>
+            <span class="info-hover-tooltip">Shows songs you previously got correct but got wrong in your latest attempt. Sorted by most recent. "Play sample" plays the latest sample you got wrong.</span>
           </span>
         </div>
         <div class="chart-meta">
-          <span id="relearnSongsMeta">Found 0 songs</span>
+          <div id="relearnOnlistFilterToggle" class="relearn-onlist-filter-toggle" role="group" aria-label="Relearn list filter">
+            <button class="relearn-onlist-filter-btn active" type="button" data-relearn-onlist-filter="all" aria-pressed="true">All</button>
+            <button class="relearn-onlist-filter-btn" type="button" data-relearn-onlist-filter="onlist" aria-pressed="false">Onlist</button>
+            <button class="relearn-onlist-filter-btn" type="button" data-relearn-onlist-filter="offlist" aria-pressed="false">Offlist</button>
+          </div>
         </div>
       </div>
       <div class="relearn-table-wrap">
@@ -7669,7 +7989,7 @@
       <div id="socialTargetToOtherRigCard" class="chart-card social-synergy-extra-card" style="display:none;">
         <div class="chart-header">
           <div class="chart-title">
-            Their rig, you hit (sorted by most dog)
+            Their rig, you hit
             <span class="info-hover-wrap">
               <button class="info-hover-btn" type="button" aria-label="About Their rig, you hit">i</button>
               <span class="info-hover-tooltip">Songs from their rig that you answered correctly. For "Unique rig", shows only songs that you got unique to their list. For "Include shared rig", it can include songs from your list that are in the selected player's list. Both players don't have to be in the same game.</span>
@@ -7689,7 +8009,7 @@
       <div id="socialOtherToTargetRigCard" class="chart-card social-synergy-extra-card" style="display:none;">
         <div class="chart-header">
           <div class="chart-title">
-            Your rig, they hit (sorted by most dog)
+            Your rig, they hit
             <span class="info-hover-wrap">
               <button class="info-hover-btn" type="button" aria-label="About Your rig, they hit">i</button>
               <span class="info-hover-tooltip">Songs from your rig that they answered correctly. For "Unique rig", shows only songs that they got unique to your list. For "Include shared rig", it can include songs from their list that are in your list. Both players don't have to be in the same game.</span>
@@ -7831,7 +8151,7 @@
             <div id="rigAnalysisDifficultyPercentiles" class="rig-analysis-difficulty-percentiles"></div>
             <div id="rigAnalysisDifficultyTrack" class="rig-analysis-difficulty-track"></div>
             <div id="rigAnalysisDifficultyMarker" class="rig-analysis-difficulty-marker">
-              <span id="rigAnalysisDifficultyTag" class="rig-analysis-difficulty-tag">Median Difficulty: —%</span>
+              <span id="rigAnalysisDifficultyTag" class="rig-analysis-difficulty-tag">Mean Difficulty: —%</span>
             </div>
           </div>
           <div id="rigAnalysisDifficultyRange" class="rig-analysis-difficulty-range">No range</div>
@@ -7859,7 +8179,13 @@
     <h1 class="page-title">Other tools</h1>
     <div id="otherToolsSearchSongsView" class="chart-card" style="display:none;">
       <div class="chart-header">
-        <div class="chart-title">Search songs</div>
+        <div class="chart-title">
+          Search songs
+          <span class="info-hover-wrap">
+            <button class="info-hover-btn" type="button" aria-label="About Search Songs patterns">i</button>
+            <span class="info-hover-tooltip">Complete database of songs you've seen. Only shows latest 30 attempts (maximum). Hover a square to see the attempt date.</span>
+          </span>
+        </div>
         <div class="chart-meta">
           <span id="searchSongsMeta">Found 0 songs</span>
         </div>
@@ -7994,37 +8320,51 @@
         </div>
       </div>
     </div>
-    <div id="otherToolsOriginalTourCalendarView" class="chart-card" style="display:none;">
-      <div class="chart-header">
-        <div class="chart-title">Original Tour data(Calendar)</div>
-        <div class="chart-meta">
-          <span id="originalTourMeta">Found 0 games</span>
-        </div>
-      </div>
-      <div class="original-tour-layout">
-        <div class="original-tour-left">
-          <input
-            id="originalTourSearchInput"
-            class="original-tour-search-input"
-            type="text"
-            placeholder="Search date (YYYY/MM/DD)"
-          >
-          <div id="originalTourGameList" class="original-tour-game-list"></div>
-          <div id="originalTourPlayers" class="original-tour-players"></div>
-        </div>
-        <div class="original-tour-right">
-          <div class="original-tour-calendar-head">
-            <button id="originalTourPrevMonthBtn" class="original-tour-month-nav" type="button">◀</button>
-            <div id="originalTourMonthLabel" class="original-tour-month-label">-</div>
-            <button id="originalTourNextMonthBtn" class="original-tour-month-nav" type="button">▶</button>
-          </div>
-          <div id="originalTourCalendarGrid" class="original-tour-calendar-grid"></div>
-          <div class="original-tour-select-row">
-            <button id="originalTourSelectBtn" class="original-tour-select-btn" type="button">Select</button>
+    <div id="otherToolsOriginalTourCalendarView" class="original-tour-view-stack" style="display:none;">
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-title">Original Tour data(Calendar)</div>
+          <div class="chart-meta">
+            <span id="originalTourMeta">Found 0 games</span>
           </div>
         </div>
+        <div class="original-tour-layout">
+          <div class="original-tour-left">
+            <input
+              id="originalTourSearchInput"
+              class="original-tour-search-input"
+              type="text"
+              placeholder="Search date (YYYY/MM/DD)"
+            >
+            <div id="originalTourGameList" class="original-tour-game-list"></div>
+            <div id="originalTourPlayers" class="original-tour-players"></div>
+          </div>
+          <div class="original-tour-right">
+            <div class="original-tour-calendar-head">
+              <button id="originalTourPrevMonthBtn" class="original-tour-month-nav" type="button">◀</button>
+              <div id="originalTourMonthLabel" class="original-tour-month-label">-</div>
+              <button id="originalTourNextMonthBtn" class="original-tour-month-nav" type="button">▶</button>
+            </div>
+            <div id="originalTourCalendarGrid" class="original-tour-calendar-grid"></div>
+            <div class="original-tour-select-row">
+              <button id="originalTourSelectBtn" class="original-tour-select-btn" type="button">Select</button>
+            </div>
+          </div>
+        </div>
       </div>
-      <div id="originalTourRawDataWrap" class="original-tour-raw-wrap"></div>
+      <div id="originalTourStatsSheetCard" class="chart-card original-tour-stats-card" style="display:none;">
+        <div class="chart-header">
+          <div id="originalTourStatsTitle" class="chart-title">Export Stats</div>
+          <div class="chart-meta original-tour-color-control">
+            <label class="original-tour-color-label" for="originalTourColorModeSelect">Color:</label>
+            <select id="originalTourColorModeSelect" class="original-tour-color-select" aria-label="Original tour color mode">
+              <option value="gradient">Gradient</option>
+              <option value="extremes" selected>Top/Bottom 3</option>
+            </select>
+          </div>
+        </div>
+        <div id="originalTourRawDataWrap" class="original-tour-raw-wrap"></div>
+      </div>
     </div>
     <div id="otherToolsChangelogView" class="chart-card" style="display:none;">
       <div class="chart-header">
@@ -8074,12 +8414,26 @@ const isLocalDataContext =
 const DATA_BASE_URL = isLocalDataContext
   ? "./data"
   : "https://amq-stats-api.yarthepro.workers.dev";
+const DATA_ASSET_VERSION = (() => {
+  const modifiedTime = Date.parse(document.lastModified || "");
+  return Number.isFinite(modifiedTime) ? String(modifiedTime) : "unversioned";
+})();
+
+function shouldVersionDataRequest(path) {
+  const cleanPath = String(path || "").split("?")[0].toLowerCase();
+  return /\.(json|csv|txt)$/.test(cleanPath);
+}
 
 function dataUrl(path) {
   const cleanPath = String(path || "")
     .replace(/^data\//, "")
     .replace(/^\/+/, "");
-  return `${DATA_BASE_URL}/${cleanPath}`;
+  const url = `${DATA_BASE_URL}/${cleanPath}`;
+  if (!isLocalDataContext && shouldVersionDataRequest(cleanPath)) {
+    const separator = url.includes("?") ? "&" : "?";
+    return `${url}${separator}v=${encodeURIComponent(DATA_ASSET_VERSION)}`;
+  }
+  return url;
 }
 
 function getActiveDataSourceMode() {
@@ -8455,6 +8809,7 @@ let socialRivalsBubbleChart = null;
 let socialTeamMetricCharts = [];
 let overviewSongsPlayedChart = null;
 let overviewGuessRateChart = null;
+let overviewZScoreChart = null;
 let genreRadarChart = null;
 let tagRadarChart = null;
 let byEraDecadeChart = null;
@@ -8471,6 +8826,7 @@ let cachedGenreData = null;
 let cachedTagData = null;
 let cachedByEraData = null;
 let cachedArtistsData = null;
+let cachedOverviewZScoreData = null;
 let cachedOverviewAnimeTypeRows = [];
 let cachedOverviewGamesCounted = 0;
 let cachedOverviewTopSolos = [];
@@ -8508,6 +8864,7 @@ let relearnAudioLastNonZeroPercentValue = 100;
 let isRelearnVolumePopoverOpen = false;
 let relearnVolumePopoverFadeTimer = null;
 let relearnPageIndex = 0;
+let relearnOnlistFilterMode = "all";
 let wrongGuessPageIndex = 0;
 let neverCorrectPageIndex = 0;
 let popularityPageIndex = 0;
@@ -8540,6 +8897,7 @@ let otherToolsCalendarSearchQuery = "";
 let otherToolsCalendarSelectedTimestamp = null;
 let otherToolsCalendarAppliedTimestamp = null;
 let otherToolsCalendarMonthCursor = null;
+let originalTourColorMode = "extremes";
 let socialTeamRowsByTimestamp = null;
 let socialTeamGames = [];
 let socialTeamFilteredGames = [];
@@ -8572,6 +8930,10 @@ let socialSynergyRequestId = 0;
 let overviewSynergyRequestId = 0;
 const socialSynergyCacheByKey = new Map();
 const socialSynergyCachePromiseByKey = new Map();
+const socialSynergyMergedRowsCacheByKey = new Map();
+let socialSubSectionRenderToken = 0;
+let insightsSubSectionRenderToken = 0;
+let insightsSubSectionLoadToken = 0;
 let cachedSocialSynergyRows = [];
 let cachedSocialSynergyRigTables = null;
 let cachedSocialSynergyRigStats = null;
@@ -8615,6 +8977,7 @@ let artistFamiliarityRightMode = "attempts";
 let selectedCompareArtistName = "";
 let artistFamiliarityCompareSearchQuery = "";
 let overviewLoadRequestId = 0;
+let overviewZScoreLoadRequestId = 0;
 let socialSynergyPageIndex = 0;
 const latestRankByPlayerKeyByMode = {
   watched: null,
@@ -8885,6 +9248,7 @@ function preloadOverviewStatsSummaryForUser(displayName, { immediate = false } =
   if (!displayName) return;
   const task = async () => {
     await Promise.allSettled([
+      loadOverviewZScoreDataForUser(displayName),
       loadGenreDataForUser(displayName),
       loadByEraDataForUser(displayName)
     ]);
@@ -8912,11 +9276,11 @@ function preloadFirstSubtabForSection(sectionKey, displayName) {
       return;
     }
     if (sectionKey === "insights") {
-      await loadRelearnDataForUser(displayName);
+      await loadRelearnDataForUser(displayName, { render: false });
       return;
     }
     if (sectionKey === "social") {
-      await renderSocialSynergyView();
+      await preloadSocialSynergyDataForUser(displayName);
       return;
     }
     if (sectionKey === "otherTools") {
@@ -8962,17 +9326,15 @@ function preloadOtherSubtabsForSection(sectionKey, displayName) {
     }
     if (sectionKey === "insights") {
       await Promise.allSettled([
-        loadWrongGuessDataForUser(displayName),
-        loadNeverCorrectDataForUser(displayName),
-        loadPopularityDataForUser(displayName),
-        loadPCorrectDataForUser(displayName)
+        loadWrongGuessDataForUser(displayName, { render: false }),
+        loadNeverCorrectDataForUser(displayName, { render: false }),
+        loadPopularityDataForUser(displayName, { render: false }),
+        loadPCorrectDataForUser(displayName, { render: false })
       ]);
       return;
     }
     if (sectionKey === "social") {
-      renderSocialRivalFilter();
-      renderSocialRivalsChart();
-      renderSocialTeamContributionView();
+      ensureSocialTeamContributionData();
       return;
     }
     if (sectionKey === "otherTools") {
@@ -8988,28 +9350,28 @@ function preloadOtherSubtabsForSection(sectionKey, displayName) {
   }, 140);
 }
 
-function loadInsightsDataForSubSection(subSection, displayName) {
+function loadInsightsDataForSubSection(subSection, displayName, options = {}) {
   const resolvedName = String(displayName || currentDisplayName || currentStatKey || "").trim();
   if (!resolvedName) return;
 
   if (subSection === "Relearn Tracker") {
-    loadRelearnDataForUser(resolvedName);
+    loadRelearnDataForUser(resolvedName, options);
     return;
   }
   if (subSection === "By never correct") {
-    loadNeverCorrectDataForUser(resolvedName);
+    loadNeverCorrectDataForUser(resolvedName, options);
     return;
   }
   if (subSection === "By Wrong Guess") {
-    loadWrongGuessDataForUser(resolvedName);
+    loadWrongGuessDataForUser(resolvedName, options);
     return;
   }
   if (subSection === "By Popularity") {
-    loadPopularityDataForUser(resolvedName);
+    loadPopularityDataForUser(resolvedName, options);
     return;
   }
   if (subSection === "By % correct") {
-    loadPCorrectDataForUser(resolvedName);
+    loadPCorrectDataForUser(resolvedName, options);
   }
 }
 
@@ -9403,6 +9765,128 @@ function updateSectionHeaderVisibility(sectionKey, subSection) {
   sectionHeader.style.display = hideForSeasonalComparison ? "none" : "";
 }
 
+function renderInsightsSubSectionNow(subSection) {
+  if (subSection === "Relearn Tracker") {
+    renderInsightsRelearnTracker();
+    return;
+  }
+
+  if (subSection === "By never correct") {
+    renderInsightsNeverCorrect();
+    return;
+  }
+
+  if (subSection === "By Wrong Guess") {
+    renderInsightsWrongGuess();
+    return;
+  }
+
+  if (subSection === "By Popularity") {
+    renderInsightsPopularity();
+    return;
+  }
+
+  if (subSection === "By % correct") {
+    renderInsightsPCorrect();
+  }
+}
+
+function scheduleInsightsSubSectionRender(subSection) {
+  const renderToken = ++insightsSubSectionRenderToken;
+  const runRender = () => {
+    if (
+      renderToken !== insightsSubSectionRenderToken
+      || activeSection !== "insights"
+      || activeSubSectionBySection.insights !== subSection
+    ) {
+      return;
+    }
+
+    renderInsightsSubSectionNow(subSection);
+  };
+
+  if (typeof requestAnimationFrame === "function") {
+    requestAnimationFrame(() => setTimeout(runRender, 0));
+  } else {
+    setTimeout(runRender, 0);
+  }
+}
+
+function scheduleInsightsSubSectionLoad(subSection, displayName) {
+  const loadToken = ++insightsSubSectionLoadToken;
+  const runLoad = () => {
+    if (
+      loadToken !== insightsSubSectionLoadToken
+      || activeSection !== "insights"
+      || activeSubSectionBySection.insights !== subSection
+    ) {
+      return;
+    }
+
+    loadInsightsDataForSubSection(subSection, displayName, {
+      shouldRender: () => (
+        activeSection === "insights"
+        && activeSubSectionBySection.insights === subSection
+      )
+    });
+    setTimeout(retryFailedInsightCoverImages, 700);
+  };
+
+  if (typeof requestAnimationFrame === "function") {
+    requestAnimationFrame(() => setTimeout(runLoad, 0));
+  } else {
+    setTimeout(runLoad, 0);
+  }
+}
+
+function scheduleSocialSubSectionRender(subSection) {
+  const renderToken = ++socialSubSectionRenderToken;
+  const runRender = () => {
+    if (
+      renderToken !== socialSubSectionRenderToken
+      || activeSection !== "social"
+      || activeSubSectionBySection.social !== subSection
+    ) {
+      return;
+    }
+
+    if (subSection === "Synergy") {
+      renderSocialSynergyView();
+      return;
+    }
+
+    if (subSection === "Rivals") {
+      const availableEntries = getAvailableSocialRivalEntries();
+      const autoClosestKeys = getClosestAvailableRivalKeys(
+        currentStatKey,
+        availableEntries,
+        MAX_SELECTED_SOCIAL_RIVALS
+      );
+      selectedSocialRivalKeys = autoClosestKeys.slice(0, MAX_SELECTED_SOCIAL_RIVALS);
+      renderSocialRivalFilter();
+      renderSocialRivalsChart();
+      return;
+    }
+
+    if (subSection === "Team Contributions") {
+      renderSocialTeamContributionView();
+      return;
+    }
+
+    if (subSection === "Rig / List analysis") {
+      ensureRigAnalysisData();
+      renderRigAnalysisView();
+      prefetchRigAnalysisDataInBackground();
+    }
+  };
+
+  if (typeof requestAnimationFrame === "function") {
+    requestAnimationFrame(() => setTimeout(runRender, 0));
+  } else {
+    setTimeout(runRender, 0);
+  }
+}
+
 function renderSubSectionContent(sectionKey, subSection) {
   if (sectionKey === "performance") {
     const guessRateView = document.getElementById("performanceGuessRateView");
@@ -9548,7 +10032,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       popularityView.style.display = "none";
       pcorrectView.style.display = "none";
       placeholderView.style.display = "none";
-      renderInsightsRelearnTracker();
+      scheduleInsightsSubSectionRender(subSection);
       return;
     }
 
@@ -9559,7 +10043,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       popularityView.style.display = "none";
       pcorrectView.style.display = "none";
       placeholderView.style.display = "none";
-      renderInsightsNeverCorrect();
+      scheduleInsightsSubSectionRender(subSection);
       return;
     }
 
@@ -9570,7 +10054,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       popularityView.style.display = "none";
       pcorrectView.style.display = "none";
       placeholderView.style.display = "none";
-      renderInsightsWrongGuess();
+      scheduleInsightsSubSectionRender(subSection);
       return;
     }
 
@@ -9581,7 +10065,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       popularityView.style.display = "block";
       pcorrectView.style.display = "none";
       placeholderView.style.display = "none";
-      renderInsightsPopularity();
+      scheduleInsightsSubSectionRender(subSection);
       return;
     }
 
@@ -9592,7 +10076,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       popularityView.style.display = "none";
       pcorrectView.style.display = "block";
       placeholderView.style.display = "none";
-      renderInsightsPCorrect();
+      scheduleInsightsSubSectionRender(subSection);
       return;
     }
 
@@ -9607,6 +10091,7 @@ function renderSubSectionContent(sectionKey, subSection) {
   }
 
   if (sectionKey !== "social") {
+    socialSubSectionRenderToken += 1;
     stopSocialRivalsHeightSync();
   }
 
@@ -9636,7 +10121,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       teamContributionView.style.display = "none";
       rigAnalysisView.style.display = "none";
       placeholderView.style.display = "none";
-      renderSocialSynergyView();
+      scheduleSocialSubSectionRender(subSection);
       return;
     }
 
@@ -9651,17 +10136,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       rigAnalysisView.style.display = "none";
       placeholderView.style.display = "none";
       startSocialRivalsHeightSync();
-
-      const availableEntries = getAvailableSocialRivalEntries();
-      const autoClosestKeys = getClosestAvailableRivalKeys(
-        currentStatKey,
-        availableEntries,
-        MAX_SELECTED_SOCIAL_RIVALS
-      );
-      selectedSocialRivalKeys = autoClosestKeys.slice(0, MAX_SELECTED_SOCIAL_RIVALS);
-
-      renderSocialRivalFilter();
-      renderSocialRivalsChart();
+      scheduleSocialSubSectionRender(subSection);
       return;
     }
 
@@ -9676,7 +10151,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       teamContributionView.style.display = "block";
       rigAnalysisView.style.display = "none";
       placeholderView.style.display = "none";
-      renderSocialTeamContributionView();
+      scheduleSocialSubSectionRender(subSection);
       return;
     }
 
@@ -9691,9 +10166,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       teamContributionView.style.display = "none";
       rigAnalysisView.style.display = "block";
       placeholderView.style.display = "none";
-      ensureRigAnalysisData();
-      renderRigAnalysisView();
-      prefetchRigAnalysisDataInBackground();
+      scheduleSocialSubSectionRender(subSection);
       return;
     }
 
@@ -9928,8 +10401,7 @@ function setActiveSubSection(sectionKey, subSection) {
   updateDataRangeControlState(sectionKey, subSection);
   renderSubSectionContent(sectionKey, subSection);
   if (sectionKey === "insights") {
-    loadInsightsDataForSubSection(subSection, currentDisplayName || currentStatKey || "");
-    setTimeout(retryFailedInsightCoverImages, 700);
+    scheduleInsightsSubSectionLoad(subSection, currentDisplayName || currentStatKey || "");
   }
   preloadOtherSubtabsForSection(sectionKey, currentDisplayName || currentStatKey || "");
 }
@@ -10016,6 +10488,7 @@ function renderOverviewSubView() {
     if (currentDisplayName) {
       preloadOverviewStatsSummaryForUser(currentDisplayName);
     }
+    renderOverviewZScoreChart();
     renderKnowledgeGenreRadar();
     renderKnowledgeByEraDecadeChart();
     renderOverviewAnimeTypeCharts();
@@ -10147,6 +10620,9 @@ function addOverviewInfoButtons() {
 
     const tooltip = document.createElement("span");
     tooltip.className = "info-hover-tooltip";
+    if (tooltipText.length >= 80) {
+      tooltip.classList.add("fill-tooltip-text");
+    }
     tooltip.innerText = tooltipText;
 
     wrap.appendChild(button);
@@ -10166,6 +10642,35 @@ function addOverviewInfoButtons() {
 
     titleNode.appendChild(wrap);
   });
+}
+
+function getRankPoolSizeForMode(mode = "watched") {
+  const cache = getLatestRankCacheForMode(mode);
+  const rankMap = cache.map;
+  if (!(rankMap instanceof Map) || !rankMap.size) {
+    return null;
+  }
+
+  const values = Array.from(rankMap.values())
+    .map(value => Number(value))
+    .filter(value => isValidRankForMode(value, mode));
+  return values.length;
+}
+
+function updateCurrentRankInfoTooltip(rankPoolSize) {
+  const tooltip = document.querySelector("#currentRankCard .card-title .info-hover-tooltip");
+  if (!tooltip) {
+    return;
+  }
+
+  if (!tooltip.dataset.baseText) {
+    tooltip.dataset.baseText = String(tooltip.textContent || "").trim();
+  }
+
+  const baseText = tooltip.dataset.baseText || "";
+  tooltip.textContent = Number.isFinite(rankPoolSize) && rankPoolSize > 0
+    ? `${baseText}\nRanked out of ${Math.round(rankPoolSize)} players`
+    : baseText;
 }
 
 document.querySelectorAll(".topbar-link").forEach(link => {
@@ -10216,6 +10721,14 @@ if (relearnNextPageBtn) {
     renderInsightsRelearnTracker();
   });
 }
+document.querySelectorAll("[data-relearn-onlist-filter]").forEach(button => {
+  button.addEventListener("click", () => {
+    const nextMode = button.dataset.relearnOnlistFilter;
+    relearnOnlistFilterMode = ["all", "onlist", "offlist"].includes(nextMode) ? nextMode : "all";
+    relearnPageIndex = 0;
+    renderInsightsRelearnTracker();
+  });
+});
 if (wrongGuessPrevPageBtn) {
   wrongGuessPrevPageBtn.addEventListener("click", () => {
     wrongGuessPageIndex = Math.max(0, wrongGuessPageIndex - 1);
@@ -10300,7 +10813,7 @@ if (socialSynergyPlayerSearchInput) {
 
 if (socialSynergySelectBtn) {
   socialSynergySelectBtn.addEventListener("click", () => {
-    if (!socialSynergySinglePendingRivalKey) return;
+    if (!socialSynergySinglePendingRivalKey || socialSynergySinglePendingRivalKey === socialSynergySingleSelectedRivalKey) return;
     socialSynergySingleSelectedRivalKey = socialSynergySinglePendingRivalKey;
     renderSocialSynergySinglePicker(cachedSocialSynergyRows, currentDisplayName || currentStatKey || "You");
     renderSocialSynergyRigTables();
@@ -10334,7 +10847,7 @@ if (socialRivalsMetricSelect) {
       : "guess_rate";
     syncSocialRivalsMetricOptionsForMode();
     if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
-      renderSocialRivalsChart();
+      scheduleSocialSubSectionRender("Rivals");
     }
   });
 }
@@ -10354,6 +10867,7 @@ const originalTourSearchInput = document.getElementById("originalTourSearchInput
 const originalTourPrevMonthBtn = document.getElementById("originalTourPrevMonthBtn");
 const originalTourNextMonthBtn = document.getElementById("originalTourNextMonthBtn");
 const originalTourSelectBtn = document.getElementById("originalTourSelectBtn");
+const originalTourColorModeSelect = document.getElementById("originalTourColorModeSelect");
 const socialTeamSearchInput = document.getElementById("socialTeamSearchInput");
 const socialTeamPrevMonthBtn = document.getElementById("socialTeamPrevMonthBtn");
 const socialTeamNextMonthBtn = document.getElementById("socialTeamNextMonthBtn");
@@ -10509,6 +11023,14 @@ if (originalTourSelectBtn) {
     renderOriginalTourCalendarView();
   });
 }
+if (originalTourColorModeSelect) {
+  originalTourColorModeSelect.addEventListener("change", event => {
+    const nextMode = String(event.target.value || "gradient");
+    originalTourColorMode = nextMode === "extremes" ? "extremes" : "gradient";
+    originalTourColorModeSelect.value = originalTourColorMode;
+    renderOriginalTourRawDataTable();
+  });
+}
 
 if (socialTeamSearchInput) {
   socialTeamSearchInput.addEventListener("input", event => {
@@ -10556,6 +11078,13 @@ function updateSocialTeamSelectButtonState() {
   const hasSelected = Boolean(socialTeamSelectedTimestamp);
   const hasPendingSelection = socialTeamSelectedTimestamp !== socialTeamAppliedTimestamp;
   socialTeamSelectBtn.disabled = !hasSelected || !hasPendingSelection;
+}
+
+function updateSocialSynergySelectButtonState() {
+  if (!socialSynergySelectBtn) return;
+  const hasPendingSelection = Boolean(socialSynergySinglePendingRivalKey);
+  const hasChangedSelection = socialSynergySinglePendingRivalKey !== socialSynergySingleSelectedRivalKey;
+  socialSynergySelectBtn.disabled = !hasPendingSelection || !hasChangedSelection;
 }
 
 function updateByEraDataToggleLabel() {
@@ -11274,6 +11803,7 @@ function refreshOverviewModeScopedCards(displayName) {
 
   if (overviewActiveView === "statsSummary") {
     loadOverviewAnimeTypeDataForUser(resolvedName);
+    loadOverviewZScoreDataForUser(resolvedName);
     loadGenreDataForUser(resolvedName);
     loadTagDataForUser(resolvedName);
     loadByEraDataForUser(resolvedName);
@@ -11319,22 +11849,14 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
       renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
     }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
-      renderSocialRivalFilter();
-      renderSocialRivalsChart();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Synergy") {
-      renderSocialSynergyView();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Team Contributions") {
-      renderSocialTeamContributionView();
+    if (activeSection === "social") {
+      scheduleSocialSubSectionRender(activeSubSectionBySection.social || "");
     }
     if (activeSection === "knowledge") {
       loadKnowledgeDataForSubSection(activeSubSectionBySection.knowledge || "", currentDisplayName || currentStatKey || "");
     }
     if (activeSection === "insights") {
-      loadInsightsDataForSubSection(activeSubSectionBySection.insights || "", currentDisplayName || currentStatKey || "");
-      setTimeout(retryFailedInsightCoverImages, 700);
+      scheduleInsightsSubSectionLoad(activeSubSectionBySection.insights || "", currentDisplayName || currentStatKey || "");
     }
     if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Search songs") {
       loadSearchSongsDataForUser(currentDisplayName || currentStatKey || "");
@@ -11368,22 +11890,14 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
       renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
     }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
-      renderSocialRivalFilter();
-      renderSocialRivalsChart();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Synergy") {
-      renderSocialSynergyView();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Team Contributions") {
-      renderSocialTeamContributionView();
+    if (activeSection === "social") {
+      scheduleSocialSubSectionRender(activeSubSectionBySection.social || "");
     }
     if (activeSection === "knowledge") {
       loadKnowledgeDataForSubSection(activeSubSectionBySection.knowledge || "", currentDisplayName || currentStatKey || "");
     }
     if (activeSection === "insights") {
-      loadInsightsDataForSubSection(activeSubSectionBySection.insights || "", currentDisplayName || currentStatKey || "");
-      setTimeout(retryFailedInsightCoverImages, 700);
+      scheduleInsightsSubSectionLoad(activeSubSectionBySection.insights || "", currentDisplayName || currentStatKey || "");
     }
     if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Search songs") {
       loadSearchSongsDataForUser(currentDisplayName || currentStatKey || "");
@@ -11542,7 +12056,7 @@ function rerenderInsightsRelearnTrackerLanguageOnly() {
     return;
   }
 
-  const songs = Array.isArray(cachedRelearnSongs) ? cachedRelearnSongs : [];
+  const songs = getFilteredRelearnSongs();
   const start = relearnPageIndex * RELEARN_PAGE_SIZE;
   const end = start + RELEARN_PAGE_SIZE;
   const pageSongs = songs.slice(start, end);
@@ -12525,14 +13039,23 @@ function bindArtistAnimeHoverTooltip() {
     tooltip.style.visibility = "hidden";
   };
 
-  const placeTooltip = event => {
+  const placeTooltip = node => {
     const margin = 10;
+    const gap = 6;
+    const anchorRect = node.getBoundingClientRect();
+    const clipRect = node.closest(".song")?.getBoundingClientRect();
+    const visibleLeft = clipRect ? Math.max(anchorRect.left, clipRect.left) : anchorRect.left;
+    const visibleRight = clipRect ? Math.min(anchorRect.right, clipRect.right) : anchorRect.right;
     const rect = tooltip.getBoundingClientRect();
     const maxLeft = Math.max(margin, window.innerWidth - rect.width - margin);
-    const left = Math.min(Math.max(margin, event.clientX - rect.width / 2), maxLeft);
-    const top = Math.max(margin, event.clientY - rect.height - 10);
+    const anchorX = visibleLeft + Math.max(0, visibleRight - visibleLeft) / 2;
+    const left = Math.min(Math.max(margin, anchorX - rect.width / 2), maxLeft);
+    let top = anchorRect.top - rect.height - gap;
+    if (top < margin) {
+      top = Math.min(window.innerHeight - rect.height - margin, anchorRect.bottom + gap);
+    }
     tooltip.style.left = `${left}px`;
-    tooltip.style.top = `${top}px`;
+    tooltip.style.top = `${Math.max(margin, top)}px`;
   };
 
   const animeNodes = document.querySelectorAll("#knowledgeArtistView .artist-familiarity-matrix-label .anime-part");
@@ -12545,7 +13068,7 @@ function bindArtistAnimeHoverTooltip() {
     node.removeAttribute("title");
     const songNode = node.closest(".song");
     if (songNode) songNode.removeAttribute("title");
-    node.addEventListener("mouseenter", event => {
+    node.addEventListener("mouseenter", () => {
       let current = node;
       while (current && current !== host) {
         if (typeof current.removeAttribute === "function") current.removeAttribute("title");
@@ -12556,7 +13079,7 @@ function bindArtistAnimeHoverTooltip() {
       tooltip.textContent = fullTitle;
       tooltip.style.opacity = "1";
       tooltip.style.visibility = "visible";
-      placeTooltip(event);
+      placeTooltip(node);
     });
     node.addEventListener("mouseleave", hideTooltip);
   });
@@ -13749,6 +14272,19 @@ function getSelectedOriginalTourRows() {
   return otherToolsRowsByTimestamp.get(otherToolsCalendarAppliedTimestamp) || [];
 }
 
+function getOriginalTourAppliedDateLabel() {
+  const appliedTimestamp = String(otherToolsCalendarAppliedTimestamp || "").trim();
+  if (!appliedTimestamp) return "selected date";
+  const matchingGame = otherToolsCalendarGames.find(game => game.timestamp === appliedTimestamp);
+  if (matchingGame && matchingGame.dateKey) return matchingGame.dateKey;
+
+  const parsedDate = new Date(appliedTimestamp.replace(" ", "T"));
+  const dateKey = formatDateKeyNoZeroPadding(parsedDate);
+  if (dateKey) return dateKey;
+
+  return appliedTimestamp.split(/[ T]/)[0] || "selected date";
+}
+
 function getTeamLabelFromRow(row) {
   if (!row || typeof row !== "object") return "Unknown";
   const explicitTeam = Number(row.Team ?? row.team);
@@ -13932,24 +14468,19 @@ function renderOriginalTourCalendarGrid() {
 
 function renderOriginalTourRawDataTable() {
   const wrap = document.getElementById("originalTourRawDataWrap");
+  const statsCard = document.getElementById("originalTourStatsSheetCard");
+  const statsTitle = document.getElementById("originalTourStatsTitle");
   if (!wrap) return;
 
   const rows = getSelectedOriginalTourRows();
   if (!rows.length) {
+    if (statsCard) statsCard.style.display = "none";
     wrap.style.display = "none";
     wrap.innerHTML = "";
     return;
   }
-
-  const columnSet = new Set();
-  rows.forEach(row => {
-    Object.keys(row || {}).forEach(key => columnSet.add(key));
-  });
-  const columns = [...columnSet];
-  if (!columns.length) {
-    wrap.style.display = "none";
-    wrap.innerHTML = "";
-    return;
+  if (statsTitle) {
+    statsTitle.innerText = `Export Stats for ${getOriginalTourAppliedDateLabel()}`;
   }
 
   const parseNumericCellValue = (value) => {
@@ -13960,7 +14491,39 @@ function renderOriginalTourRawDataTable() {
     return Number.isFinite(numeric) ? numeric : null;
   };
 
-  const sortedRows = rows.slice().sort((a, b) => {
+  const derivedRows = rows.map(row => {
+    if (!row || typeof row !== "object") return row;
+    const nextRow = { ...row };
+    if (nextRow["size vs rig rate"] == null || nextRow["size vs rig rate"] === "") {
+      const size = parseNumericCellValue(nextRow.size);
+      const rigRate = parseNumericCellValue(nextRow["Rig %"]);
+      nextRow["size vs rig rate"] = size == null || rigRate == null || rigRate === 0
+        ? null
+        : Number((size / rigRate).toFixed(3));
+    }
+    return nextRow;
+  });
+
+  const columnSet = new Set();
+  derivedRows.forEach(row => {
+    Object.keys(row || {}).forEach(key => columnSet.add(key));
+  });
+  const columns = [...columnSet];
+  const sizeVsRigRateColumnIndex = columns.indexOf("size vs rig rate");
+  if (sizeVsRigRateColumnIndex >= 0) {
+    columns.splice(sizeVsRigRateColumnIndex, 1);
+  }
+  if (sizeVsRigRateColumnIndex >= 0 || derivedRows.some(row => row && (row.size != null || row["Rig %"] != null))) {
+    columns.push("size vs rig rate");
+  }
+  if (!columns.length) {
+    if (statsCard) statsCard.style.display = "none";
+    wrap.style.display = "none";
+    wrap.innerHTML = "";
+    return;
+  }
+
+  const sortedRows = derivedRows.slice().sort((a, b) => {
     const guessRateCandidates = ["Guess rate", "Guess Rate", "Guess rate (%)", "Guess Rate (%)"];
     const getGuessRateValue = (row) => {
       for (const key of guessRateCandidates) {
@@ -13982,7 +14545,6 @@ function renderOriginalTourRawDataTable() {
     return String(a && a["Player name"] || "").localeCompare(String(b && b["Player name"] || ""));
   });
 
-  const numericStatsByColumn = new Map();
   const noHeatKeywords = [
     "rank",
     "total songs",
@@ -13992,18 +14554,69 @@ function renderOriginalTourRawDataTable() {
     "avg/8 of your rigs",
     "team"
   ];
-  const forceHeatKeywords = ["offlist erigs", "lives lost on rig", "lives lost on rigs", "lived lost on rig"];
+  const forceHeatKeywords = [
+    "offlist erigs",
+    "lives lost on rig",
+    "lives lost on rigs",
+    "lived lost on rig",
+    "op rigs missed",
+    "ed rigs missed",
+    "in rigs missed"
+  ];
   const shouldSkipHeatForColumn = (columnName) => {
     const normalized = String(columnName || "").trim().toLowerCase();
     if (forceHeatKeywords.some(keyword => normalized.includes(keyword))) return false;
+    if (normalized === "size") return true;
     if (normalized === "rigs") return true;
     if (normalized.includes("rig %") || normalized.includes("rig%")) return true;
     return noHeatKeywords.some(keyword => normalized.includes(keyword));
   };
-  const inverseHeatKeywords = ["0/8s", "7/8s", "avg/8", "lose", "missed solos", "lives lost on rig", "lives lost on rigs", "lived lost on rig"];
+  const inverseHeatKeywords = [
+    "0/8s",
+    "7/8s",
+    "avg/8",
+    "lose",
+    "missed solos",
+    "rigs missed",
+    "lives lost on rig",
+    "lives lost on rigs",
+    "lived lost on rig",
+    "size vs rig rate",
+    "op rigs missed",
+    "ed rigs missed",
+    "in rigs missed"
+  ];
   const shouldInvertHeatForColumn = (columnName) => {
     const normalized = String(columnName || "").trim().toLowerCase();
     return inverseHeatKeywords.some(keyword => normalized.includes(keyword));
+  };
+  const shouldSkipExtremeColorForColumn = (columnName) => {
+    const normalized = String(columnName || "").trim().toLowerCase();
+    if (!normalized) return true;
+    if (["win", "lose", "tie", "size", "list size"].includes(normalized)) return true;
+    return [
+      "player",
+      "player name",
+      "name",
+      "rank",
+      "team",
+      "total hit",
+      "total hits",
+      "total song",
+      "total songs",
+      "timestamp",
+      "date",
+      "tourid",
+      "tour id",
+      "json",
+      "sheet",
+      "url"
+    ].some(keyword => normalized === keyword || normalized.includes(keyword));
+  };
+  const displayColumnName = (columnName) => {
+    const original = String(columnName || "");
+    const normalized = original.trim().toLowerCase();
+    return normalized === "size" ? "list size" : original;
   };
   const computeMedian = (values) => {
     if (!Array.isArray(values) || !values.length) return null;
@@ -14014,21 +14627,39 @@ function renderOriginalTourRawDataTable() {
     }
     return sorted[mid];
   };
+  const getColumnNumericValues = (col) => sortedRows
+    .map(row => parseNumericCellValue(row && row[col]))
+    .filter(value => value != null);
+  const getExtremeStats = (values, invert) => {
+    if (!Array.isArray(values) || values.length < 3) return null;
+    const bestSorted = values.slice().sort((a, b) => invert ? a - b : b - a);
+    const worstSorted = values.slice().sort((a, b) => invert ? b - a : a - b);
+    const bestCutoff = bestSorted[Math.min(2, bestSorted.length - 1)];
+    const worstCutoff = worstSorted[Math.min(2, worstSorted.length - 1)];
+    return { bestCutoff, worstCutoff };
+  };
 
+  const numericStatsByColumn = new Map();
+  const extremeStatsByColumn = new Map();
   columns.forEach(col => {
-    if (shouldSkipHeatForColumn(col)) return;
-    const values = sortedRows
-      .map(row => parseNumericCellValue(row && row[col]))
-      .filter(value => value != null);
+    const values = getColumnNumericValues(col);
     if (!values.length) return;
 
-    const median = computeMedian(values);
-    if (median == null) return;
-    const maxAbsDelta = Math.max(...values.map(value => Math.abs(value - median)));
-    numericStatsByColumn.set(col, { median, maxAbsDelta });
+    if (!shouldSkipHeatForColumn(col)) {
+      const median = computeMedian(values);
+      if (median != null) {
+        const maxAbsDelta = Math.max(...values.map(value => Math.abs(value - median)));
+        numericStatsByColumn.set(col, { median, maxAbsDelta });
+      }
+    }
+
+    if (!shouldSkipExtremeColorForColumn(col)) {
+      const stats = getExtremeStats(values, shouldInvertHeatForColumn(col));
+      if (stats) extremeStatsByColumn.set(col, stats);
+    }
   });
 
-  const toHeatStyle = (col, rawValue) => {
+  const toGradientHeatStyle = (col, rawValue) => {
     if (shouldSkipHeatForColumn(col)) return "";
     const stats = numericStatsByColumn.get(col);
     if (!stats || !Number.isFinite(stats.maxAbsDelta) || stats.maxAbsDelta <= 0) return "";
@@ -14039,22 +14670,48 @@ function renderOriginalTourRawDataTable() {
     const effectiveDelta = shouldInvertHeatForColumn(col) ? -delta : delta;
     const strength = Math.min(1, Math.abs(effectiveDelta) / stats.maxAbsDelta);
     if (strength <= 0) return "";
-    // Keep extremes strongest, but ensure all non-average cells remain visible.
+    // Spread from white to the same endpoint colors used by Top/Bottom 3.
     const easedStrength = 0.18 + 0.82 * Math.pow(strength, 1.05);
-    const [targetR, targetG, targetB] = effectiveDelta >= 0 ? [22, 163, 74] : [220, 38, 38];
+    const [targetR, targetG, targetB] = effectiveDelta >= 0 ? [90, 189, 138] : [237, 122, 115];
     const r = Math.round(255 + (targetR - 255) * easedStrength);
     const g = Math.round(255 + (targetG - 255) * easedStrength);
     const b = Math.round(255 + (targetB - 255) * easedStrength);
-    const alpha = (0.12 + easedStrength * 0.34).toFixed(3);
-    return ` style="background-color: rgba(${r}, ${g}, ${b}, ${alpha});"`;
+    return `background-color: rgb(${r}, ${g}, ${b}) !important;`;
+  };
+  const toExtremeHeatStyle = (col, rawValue) => {
+    const stats = extremeStatsByColumn.get(col);
+    if (!stats) return "";
+    const numericValue = parseNumericCellValue(rawValue);
+    if (numericValue == null) return "";
+    const invert = shouldInvertHeatForColumn(col);
+    const isBest = invert
+      ? numericValue <= stats.bestCutoff
+      : numericValue >= stats.bestCutoff;
+    const isWorst = invert
+      ? numericValue >= stats.worstCutoff
+      : numericValue <= stats.worstCutoff;
+    if (isBest && !isWorst) return "background-color: #5abd8a !important;";
+    if (isWorst && !isBest) return "background-color: #ed7a73 !important;";
+    return "";
+  };
+  const toCellStyle = (col, rawValue, rowIndex) => {
+    const heatStyle = originalTourColorMode === "extremes"
+      ? toExtremeHeatStyle(col, rawValue)
+      : toGradientHeatStyle(col, rawValue);
+    if (heatStyle) return ` style="${heatStyle}"`;
+    if (originalTourColorMode === "extremes" && rowIndex % 2 === 1) {
+      return ' style="background-color: #E8E8E8 !important;"';
+    }
+    return "";
   };
 
-  const thead = `<thead><tr>${columns.map(col => `<th>${col}</th>`).join("")}</tr></thead>`;
-  const tbody = `<tbody>${sortedRows.map(row => `<tr>${columns.map(col => {
+  const thead = `<thead><tr>${columns.map(col => `<th>${escapeHtml(displayColumnName(col))}</th>`).join("")}</tr></thead>`;
+  const tbody = `<tbody>${sortedRows.map((row, rowIndex) => `<tr>${columns.map(col => {
     const value = String(row && row[col] != null ? row[col] : "");
-    return `<td${toHeatStyle(col, value)}>${value}</td>`;
+    return `<td${toCellStyle(col, value, rowIndex)}>${value}</td>`;
   }).join("")}</tr>`).join("")}</tbody>`;
   wrap.innerHTML = `<table class="original-tour-raw-table">${thead}${tbody}</table>`;
+  if (statsCard) statsCard.style.display = "block";
   wrap.style.display = "block";
   updateOriginalTourRawStickyColumnOffsets(wrap);
 }
@@ -15258,6 +15915,50 @@ async function loadSocialSynergyData(playerId, modeOverride = null) {
   return requestPromise;
 }
 
+function getSocialSynergyMergedRowsFromCache(playerId, modeOverride, synergyPayload) {
+  const targetPlayerId = String(playerId || "").trim();
+  const activeMode = modeOverride === "usual" ? "usual" : (modeOverride === "watched" ? "watched" : getActiveDataSourceMode());
+  const cacheKey = `${targetPlayerId}:${activeMode}`;
+  if (targetPlayerId && socialSynergyMergedRowsCacheByKey.has(cacheKey)) {
+    return socialSynergyMergedRowsCacheByKey.get(cacheKey);
+  }
+  const mergedRows = buildMergedSocialSynergyRows(synergyPayload, activeMode);
+  if (targetPlayerId) {
+    socialSynergyMergedRowsCacheByKey.set(cacheKey, mergedRows);
+  }
+  return mergedRows;
+}
+
+async function preloadSocialSynergyDataForUser(displayName, modeOverride = null) {
+  const requestedName = String(displayName || currentDisplayName || currentStatKey || "").trim();
+  if (!requestedName) return null;
+  const activeMode = modeOverride === "usual" ? "usual" : (modeOverride === "watched" ? "watched" : getActiveDataSourceMode());
+  const currentName = String(currentDisplayName || currentStatKey || "").trim();
+  let targetPlayerId = requestedName === currentName ? String(currentPlayerId || "").trim() : "";
+
+  if (!targetPlayerId) {
+    const playerEntry = await getPlayerEntryByName(requestedName);
+    if (playerEntry && playerEntry.playerId) {
+      targetPlayerId = String(playerEntry.playerId);
+      if (requestedName === currentName) {
+        currentPlayerId = targetPlayerId;
+        if (!currentDisplayName) {
+          currentDisplayName = String(playerEntry.displayName || currentStatKey || requestedName);
+        }
+      }
+    }
+  }
+
+  if (!targetPlayerId) return null;
+  const synergyPayload = await loadSocialSynergyData(targetPlayerId, activeMode);
+  getSocialSynergyMergedRowsFromCache(targetPlayerId, activeMode, synergyPayload);
+  return synergyPayload;
+}
+
+function preloadSocialSynergyDataForCurrentPlayer(modeOverride = null) {
+  return preloadSocialSynergyDataForUser(currentDisplayName || currentStatKey || "", modeOverride);
+}
+
 function getSongRowsFromRigSongIds(songIds, songKeyById) {
   if (!Array.isArray(songIds) || !songKeyById || typeof songKeyById !== "object") return [];
   const fallbackMalByAnime = new Map();
@@ -15653,6 +16354,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
     list.innerHTML = '<div class="social-synergy-empty">No players available.</div>';
     compareWrap.innerHTML = '<div class="social-synergy-empty">No comparison selected.</div>';
     if (selectedPlayerText) selectedPlayerText.innerText = "Selected player";
+    updateSocialSynergySelectButtonState();
     renderSocialSynergyRigTables();
     return;
   }
@@ -15689,6 +16391,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
       selectedPlayerText.innerText = "Selected player";
     }
   }
+  updateSocialSynergySelectButtonState();
 
   if (!filteredRows.length) {
     list.innerHTML = '<div class="social-synergy-empty">No players match your search.</div>';
@@ -15904,7 +16607,7 @@ async function renderSocialSynergyView() {
   if (requestId !== socialSynergyRequestId || modeSnapshot !== getActiveDataSourceMode()) return;
 
   const targetLabel = currentDisplayName || currentStatKey;
-  const mergedRows = buildMergedSocialSynergyRows(synergyPayload, modeSnapshot);
+  const mergedRows = getSocialSynergyMergedRowsFromCache(currentPlayerId, modeSnapshot, synergyPayload);
   cachedSocialSynergyRigTables = {
     targetToOther: synergyPayload && synergyPayload.targetToOtherRig ? synergyPayload.targetToOtherRig : null,
     otherToTarget: synergyPayload && synergyPayload.otherToTargetRig ? synergyPayload.otherToTargetRig : null,
@@ -15986,7 +16689,7 @@ async function renderOverviewSynergySummary() {
   if (requestId !== overviewSynergyRequestId || modeSnapshot !== getActiveDataSourceMode()) return;
 
   const targetLabel = currentDisplayName || currentStatKey;
-  const mergedRows = buildMergedSocialSynergyRows(synergyPayload, modeSnapshot);
+  const mergedRows = getSocialSynergyMergedRowsFromCache(currentPlayerId, modeSnapshot, synergyPayload);
   if (!mergedRows.length) {
     meta.innerText = "Found 0 players";
     list.innerHTML = '<div class="social-synergy-empty">No synergy count data found for this player.</div>';
@@ -17245,22 +17948,14 @@ function renderTrendChart(
   const linearTrendResult = buildTrend(values);
   const { trend } = linearTrendResult;
   const curvedTrendResult = showCurvedTrend ? buildBestCurveTrend(values) : null;
-  const curvedTrend = curvedTrendResult ? curvedTrendResult.trend : [];
-  const linearTrendError = showCurvedTrend ? calculateTrendError(values, trend) : null;
-  const useCurvedTrend = Boolean(
-    showCurvedTrend
-    && curvedTrendResult
-    && curvedTrendResult.error
-    && linearTrendError
-    && curvedTrendResult.error.squaredError < linearTrendError.squaredError
-  );
+  const displayedTrend = showCurvedTrend && curvedTrendResult ? curvedTrendResult.trend : trend;
   const resolvedPalette = {
     ...PERFORMANCE_LINE_PALETTES.default,
     ...(palette || {})
   };
   const hideStaticPoints = true;
   const overviewHoverPointRadius = 5;
-  const allSeriesValues = [...values, ...trend, ...curvedTrend]
+  const allSeriesValues = [...values, ...displayedTrend]
     .map(toFiniteTrendValue)
     .filter(value => value != null);
   const valueMin = allSeriesValues.length ? Math.min(...allSeriesValues) : 0;
@@ -17386,8 +18081,8 @@ function renderTrendChart(
           fill: false
         },
         {
-          label: "Linear Trend",
-          data: trend,
+          label: showCurvedTrend ? "Trend" : "Linear Trend",
+          data: displayedTrend,
           borderColor: resolvedPalette.trend,
           borderDash: [8, 6],
           order: 30,
@@ -17395,24 +18090,9 @@ function renderTrendChart(
           pointRadius: 0,
           pointHoverRadius: 0,
           pointHitRadius: 0,
-          hidden: showCurvedTrend && useCurvedTrend,
           tension: 0,
           fill: false
-        },
-        ...(showCurvedTrend ? [{
-          label: "Curve Trend",
-          data: curvedTrend,
-          borderColor: resolvedPalette.trend,
-          borderDash: [8, 6],
-          order: 31,
-          borderWidth: 3.2,
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          pointHitRadius: 0,
-          hidden: !useCurvedTrend,
-          tension: 0,
-          fill: false
-        }] : [])
+        }
       ]
     },
     options: {
@@ -17554,6 +18234,18 @@ function renderKnowledgeGenreRadar() {
   }
 
   const axisHighlightColor = "#ff7a00";
+  function isPointerInsideGenreRadar(chart, event) {
+    const scale = chart && chart.scales ? chart.scales.r : null;
+    if (!scale || !event || event.type === "mouseout") return false;
+    const x = Number(event.x);
+    const y = Number(event.y);
+    const centerX = Number(scale.xCenter);
+    const centerY = Number(scale.yCenter);
+    const radius = Number(scale.drawingArea);
+    if (![x, y, centerX, centerY, radius].every(Number.isFinite) || radius <= 0) return false;
+    return Math.hypot(x - centerX, y - centerY) <= radius;
+  }
+
   const genreRadarTickLabelPlugin = {
     id: "genreRadarTickLabelPlugin",
     afterDraw(chart) {
@@ -17594,6 +18286,11 @@ function renderKnowledgeGenreRadar() {
     afterEvent(chart, args) {
       const event = args && args.event ? args.event : null;
       if (!event) return;
+      chart.$isPointerInsideRadar = isPointerInsideGenreRadar(chart, event);
+      if (!chart.$isPointerInsideRadar) {
+        args.changed = true;
+        return;
+      }
       const elements = chart.getElementsAtEventForMode(event, "nearest", { intersect: false }, false);
       if (Array.isArray(elements) && elements.length) {
         const idx = Number(elements[0].index);
@@ -17652,6 +18349,11 @@ function renderKnowledgeGenreRadar() {
         }
       },
       onHover: (event, activeElements, chart) => {
+        chart.$isPointerInsideRadar = isPointerInsideGenreRadar(chart, event);
+        if (!chart.$isPointerInsideRadar) {
+          chart.draw();
+          return;
+        }
         const hoveredIndex = Array.isArray(activeElements) && activeElements.length
           ? Number(activeElements[0].index)
           : -1;
@@ -17662,6 +18364,7 @@ function renderKnowledgeGenreRadar() {
         chart.draw();
       },
       onClick: (event, activeElements, chart) => {
+        if (!isPointerInsideGenreRadar(chart, event)) return;
         const clickedIndex = Array.isArray(activeElements) && activeElements.length
           ? Number(activeElements[0].index)
           : -1;
@@ -17687,6 +18390,7 @@ function renderKnowledgeGenreRadar() {
           }
         },
         tooltip: {
+          enabled: false,
           filter: function(context) {
             return context && context.datasetIndex === 0;
           },
@@ -17731,6 +18435,10 @@ function renderKnowledgeGenreRadar() {
           },
           angleLines: {
             color: function(context) {
+              const isPointerInsideRadar = Boolean(context && context.chart && context.chart.$isPointerInsideRadar);
+              if (!isPointerInsideRadar) {
+                return "rgba(148, 163, 184, 0.40)";
+              }
               const activeAxisIndex = Number(context && context.chart && context.chart.$activeGenreIndex);
               const idx = Number(context && context.index);
               if (Number.isFinite(idx) && idx === activeAxisIndex) {
@@ -17741,9 +18449,10 @@ function renderKnowledgeGenreRadar() {
           },
           pointLabels: {
             color: function(context) {
+              const isPointerInsideRadar = Boolean(context && context.chart && context.chart.$isPointerInsideRadar);
               const activeAxisIndex = Number(context && context.chart && context.chart.$activeGenreIndex);
               const idx = Number(context && context.index);
-              return Number.isFinite(idx) && idx === activeAxisIndex
+              return isPointerInsideRadar && Number.isFinite(idx) && idx === activeAxisIndex
                 ? axisHighlightColor
                 : "#374151";
             },
@@ -17755,6 +18464,7 @@ function renderKnowledgeGenreRadar() {
   });
   if (genreRadarChart) {
     genreRadarChart.$activeGenreIndex = activeGenreIndex;
+    genreRadarChart.$isPointerInsideRadar = false;
   }
   updateOverviewGenreInfo(activeGenreIndex);
 }
@@ -18691,6 +19401,46 @@ async function loadGenreDataForUser(displayName) {
   }
 }
 
+async function loadOverviewZScoreDataForUser(displayName) {
+  const requestId = ++overviewZScoreLoadRequestId;
+  try {
+    if (!displayName) {
+      cachedOverviewZScoreData = null;
+      renderOverviewZScoreChart();
+      return;
+    }
+
+    if (!currentPlayerId || currentDisplayName !== displayName) {
+      const playerEntry = await getPlayerEntryByName(displayName);
+      if (!playerEntry || !playerEntry.playerId) {
+        cachedOverviewZScoreData = null;
+        renderOverviewZScoreChart();
+        return;
+      }
+      currentPlayerId = String(playerEntry.playerId);
+      currentDisplayName = displayName;
+    }
+
+    const fileCandidates = ["z-score.json", "z_score.json"];
+    let payload = null;
+    for (const fileName of fileCandidates) {
+      const res = await fetchPlayerScopedResponse(currentPlayerId, `overview/${fileName}`, "watched");
+      if (!res) continue;
+      payload = await res.json();
+      break;
+    }
+
+    if (requestId !== overviewZScoreLoadRequestId) return;
+    cachedOverviewZScoreData = payload && typeof payload === "object" ? payload : null;
+    renderOverviewZScoreChart();
+  } catch (err) {
+    console.error("Failed loading overview z-score data", err);
+    if (requestId !== overviewZScoreLoadRequestId) return;
+    cachedOverviewZScoreData = null;
+    renderOverviewZScoreChart();
+  }
+}
+
 async function loadTagDataForUser(displayName) {
   try {
     if (!displayName) {
@@ -19215,6 +19965,237 @@ function renderOverviewTopRigSongs() {
     }
 
     strip.appendChild(card);
+  });
+}
+
+function extractOverviewZScoreRows(payload) {
+  const chartMetrics = payload && Array.isArray(payload.chart_metrics)
+    ? payload.chart_metrics
+    : [];
+  const metricDetails = payload && payload.metrics && typeof payload.metrics === "object"
+    ? payload.metrics
+    : {};
+  return chartMetrics
+    .map(item => {
+      const value = Number(item && item.value);
+      const averageValue = Number(item && item.average_value);
+      const baselinePlayerCount = Number(item && item.baseline_player_count);
+      const key = String(item && item.key || "");
+      const detail = key && metricDetails[key] && typeof metricDetails[key] === "object"
+        ? metricDetails[key]
+        : {};
+      const globalMean = Number(
+        item && item.global_mean != null
+          ? item.global_mean
+          : detail.global_mean
+      );
+      return {
+        key,
+        label: String(item && item.label || item && item.key || "Metric"),
+        value,
+        averageValue: Number.isFinite(averageValue) ? averageValue : null,
+        globalMean: Number.isFinite(globalMean) ? globalMean : null,
+        direction: String(item && item.direction || "higher"),
+        baselinePlayerCount: Number.isFinite(baselinePlayerCount) ? baselinePlayerCount : 0
+      };
+    })
+    .filter(item => item.label && Number.isFinite(item.value));
+}
+
+function formatOverviewZScoreNumber(value, digits = 2) {
+  const numericValue = Number(value);
+  if (!Number.isFinite(numericValue)) return "-";
+  return numericValue.toFixed(digits);
+}
+
+function ensureOverviewZScoreTooltipPositioner() {
+  const tooltipApi = window.Chart && window.Chart.Tooltip;
+  const positioners = tooltipApi && tooltipApi.positioners;
+  if (!positioners) return false;
+  if (positioners.overviewZScoreOppositeZero) return true;
+
+  positioners.overviewZScoreOppositeZero = function(activeElements) {
+    if (!activeElements || !activeElements.length) return false;
+
+    const active = activeElements[0];
+    const chart = this.chart;
+    const xScale = chart && chart.scales && chart.scales.x;
+    const chartArea = chart && chart.chartArea;
+    if (!chart || !xScale || !chartArea || typeof xScale.getPixelForValue !== "function") {
+      return false;
+    }
+
+    const dataset = chart.data && chart.data.datasets && chart.data.datasets[active.datasetIndex];
+    const rawValue = Number(dataset && dataset.data ? dataset.data[active.index] : NaN);
+    const zeroX = xScale.getPixelForValue(0);
+    const gap = 8;
+    const x = rawValue >= 0
+      ? Math.max(chartArea.left + gap, zeroX - gap)
+      : Math.min(chartArea.right - gap, zeroX + gap);
+    const y = active.element && Number.isFinite(active.element.y)
+      ? active.element.y
+      : (chartArea.top + chartArea.bottom) / 2;
+
+    return {
+      x,
+      y,
+      xAlign: rawValue >= 0 ? "right" : "left",
+      yAlign: "center"
+    };
+  };
+
+  return true;
+}
+
+function renderOverviewZScoreChart() {
+  const card = document.getElementById("overviewZScoreCard");
+  const canvas = document.getElementById("overviewZScoreChart");
+  const wrap = canvas ? canvas.closest(".overview-z-score-wrap") : null;
+  if (!card || !canvas) return;
+
+  if (overviewZScoreChart) {
+    overviewZScoreChart.destroy();
+    overviewZScoreChart = null;
+  }
+
+  const rows = extractOverviewZScoreRows(cachedOverviewZScoreData);
+  if (!rows.length) {
+    card.style.display = "none";
+    return;
+  }
+
+  card.style.display = "";
+  if (wrap) {
+    const chartHeight = `${Math.max(360, rows.length * 30 + 86)}px`;
+    wrap.style.setProperty("height", chartHeight, "important");
+    wrap.style.setProperty("min-height", chartHeight, "important");
+  }
+
+  const labels = rows.map(row => row.label);
+  const values = rows.map(row => Number(row.value));
+  const finiteValues = values.filter(value => Number.isFinite(value));
+  const zTickStep = 0.5;
+  const maxAbsValue = finiteValues.reduce((max, value) => Math.max(max, Math.abs(value)), 0);
+  const axisMax = Math.max(zTickStep, Math.ceil(maxAbsValue / zTickStep) * zTickStep);
+  const barColors = values.map(value => value >= 0 ? "rgba(22, 163, 74, 0.74)" : "rgba(220, 38, 38, 0.70)");
+  const borderColors = values.map(value => value >= 0 ? "#15803d" : "#b91c1c");
+  const tooltipPosition = ensureOverviewZScoreTooltipPositioner()
+    ? "overviewZScoreOppositeZero"
+    : "nearest";
+
+  overviewZScoreChart = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "score",
+          data: values,
+          backgroundColor: barColors,
+          borderColor: borderColors,
+          borderWidth: 1.1,
+          borderRadius: 5,
+          barPercentage: 0.74,
+          categoryPercentage: 0.78
+        }
+      ]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          position: tooltipPosition,
+          xAlign: function(context) {
+            const tooltip = context && context.tooltip;
+            const point = tooltip && tooltip.dataPoints && tooltip.dataPoints[0];
+            const value = Number(point && point.raw);
+            return value >= 0 ? "right" : "left";
+          },
+          yAlign: "center",
+          caretPadding: 0,
+          backgroundColor: "rgba(17, 26, 40, 0.94)",
+          borderColor: "rgba(148, 163, 184, 0.28)",
+          borderWidth: 1,
+          padding: 10,
+          titleColor: "#e5edf7",
+          bodyColor: "#d8e4f3",
+          callbacks: {
+            label: function(context) {
+              const value = Number(context.raw);
+              return `Score: ${Number.isFinite(value) ? value.toFixed(2) : "-"}`;
+            },
+            afterLabel: function(context) {
+              const row = rows[Number(context.dataIndex)] || {};
+              const lines = [];
+              if (Number.isFinite(row.averageValue)) {
+                lines.push(`Your average: ${formatOverviewZScoreNumber(row.averageValue, 3)}`);
+              }
+              if (Number.isFinite(row.globalMean)) {
+                lines.push(`Population average: ${formatOverviewZScoreNumber(row.globalMean, 3)}`);
+              }
+              if (Number.isFinite(row.baselinePlayerCount) && row.baselinePlayerCount > 0) {
+                lines.push(`Baseline: ${row.baselinePlayerCount} players`);
+              }
+              return lines;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          min: -axisMax,
+          max: axisMax,
+          border: {
+            display: false
+          },
+          ticks: {
+            color: "#475569",
+            stepSize: zTickStep,
+            callback: function(value) {
+              return Number(value).toFixed(1);
+            }
+          },
+          title: {
+            display: true,
+            text: "Standardized score",
+            color: "#334155",
+            font: {
+              size: 12,
+              weight: "bold"
+            }
+          },
+          grid: {
+            color: function(context) {
+              return Number(context.tick && context.tick.value) === 0
+                ? "rgba(15, 23, 42, 0.42)"
+                : "rgba(148, 163, 184, 0.22)";
+            },
+            lineWidth: function(context) {
+              return Number(context.tick && context.tick.value) === 0 ? 1.6 : 1;
+            }
+          }
+        },
+        y: {
+          border: {
+            display: false
+          },
+          ticks: {
+            color: "#334155",
+            autoSkip: false,
+            font: {
+              size: 12,
+              weight: "600"
+            }
+          },
+          grid: {
+            display: false
+          }
+        }
+      }
+    }
   });
 }
 
@@ -19831,11 +20812,58 @@ async function hydrateSongRowsWithSongKey(rows) {
   return hydrated;
 }
 
-async function loadRelearnDataForUser(displayName) {
+function resolveRelearnRowsWithSearchSongs(relearnRows, searchRows) {
+  const inputRows = Array.isArray(relearnRows) ? relearnRows : [];
+  const sourceRows = Array.isArray(searchRows) ? searchRows : [];
+
+  return inputRows.map((row, index) => {
+    const refIndex = Number(row && row.searchSongIndex);
+    const hasSearchSongRef = Number.isInteger(refIndex) && refIndex >= 0 && refIndex < sourceRows.length;
+    const searchSongRow = hasSearchSongRef ? sourceRows[refIndex] : null;
+    const mergedRow = searchSongRow && typeof searchSongRow === "object"
+      ? { ...searchSongRow, ...(row && typeof row === "object" ? row : {}) }
+      : (row && typeof row === "object" ? { ...row } : {});
+
+    if (mergedRow.rank == null) mergedRow.rank = index + 1;
+    return mergedRow;
+  });
+}
+
+function resolveSearchSongDatePoolRows(rows, datePool) {
+  const inputRows = Array.isArray(rows) ? rows : [];
+  const pool = Array.isArray(datePool) ? datePool : [];
+  if (!inputRows.length || !pool.length) return inputRows;
+
+  return inputRows.map(rawRow => {
+    if (!rawRow || typeof rawRow !== "object") return rawRow;
+    const dateIndexes = Array.isArray(rawRow.dates) ? rawRow.dates : [];
+    if (!dateIndexes.length) return rawRow;
+
+    const patternDates = dateIndexes.map(indexRaw => {
+      const index = Number(indexRaw);
+      if (!Number.isInteger(index) || index < 0 || index >= pool.length) return null;
+      const dateValue = String(pool[index] == null ? "" : pool[index]).trim();
+      return dateValue || null;
+    });
+
+    return { ...rawRow, patternDates };
+  });
+}
+
+async function loadRelearnDataForUser(displayName, options = {}) {
+  const shouldRender = () => {
+    if (options && options.render === false) return false;
+    return typeof options.shouldRender === "function" ? options.shouldRender() : true;
+  };
+  const renderLoadedRelearnTracker = () => {
+    if (shouldRender()) renderInsightsRelearnTracker();
+  };
   try {
     if (!displayName) {
       cachedRelearnSongs = [];
-      renderInsightsRelearnTracker();
+      relearnOnlistFilterMode = "all";
+      relearnPageIndex = 0;
+      renderLoadedRelearnTracker();
       return;
     }
 
@@ -19843,7 +20871,9 @@ async function loadRelearnDataForUser(displayName) {
       const playerEntry = await getPlayerEntryByName(displayName);
       if (!playerEntry || !playerEntry.playerId) {
         cachedRelearnSongs = [];
-        renderInsightsRelearnTracker();
+        relearnOnlistFilterMode = "all";
+        relearnPageIndex = 0;
+        renderLoadedRelearnTracker();
         return;
       }
       currentPlayerId = String(playerEntry.playerId);
@@ -19851,31 +20881,64 @@ async function loadRelearnDataForUser(displayName) {
     }
 
     await loadMalImageCache();
+    const activeMode = getActiveDataSourceMode();
+    let hydratedSearchRows = [];
+    try {
+      const searchSongsRes = await fetchPlayerScopedResponse(
+        currentPlayerId,
+        "search_songs/search_songs.json",
+        activeMode
+      );
+      if (searchSongsRes) {
+        const searchSongsPayload = await searchSongsRes.json();
+        const searchRows = resolveSearchSongDatePoolRows(
+          Array.isArray(searchSongsPayload.searchSongs) ? searchSongsPayload.searchSongs : [],
+          searchSongsPayload.datePool
+        );
+        hydratedSearchRows = await hydrateSongRowsWithSongKey(searchRows);
+      }
+    } catch (searchErr) {
+      console.warn("Failed loading search songs for relearn refs", searchErr);
+      hydratedSearchRows = [];
+    }
 
     const relearnRes = await fetchPlayerScopedResponse(currentPlayerId, "relearn_tracker/relearn_songs.json");
     if (!relearnRes) {
       cachedRelearnSongs = [];
-      renderInsightsRelearnTracker();
+      relearnOnlistFilterMode = "all";
+      relearnPageIndex = 0;
+      renderLoadedRelearnTracker();
       return;
     }
 
     const relearnPayload = await relearnRes.json();
     const relearnRows = Array.isArray(relearnPayload.relearnSongs) ? relearnPayload.relearnSongs : [];
-    cachedRelearnSongs = await hydrateSongRowsWithSongKey(relearnRows);
+    const resolvedRelearnRows = resolveRelearnRowsWithSearchSongs(relearnRows, hydratedSearchRows);
+    cachedRelearnSongs = await hydrateSongRowsWithSongKey(resolvedRelearnRows);
+    relearnOnlistFilterMode = "all";
     relearnPageIndex = 0;
-    renderInsightsRelearnTracker();
+    renderLoadedRelearnTracker();
   } catch (err) {
     console.error("Failed loading relearn tracker data", err);
     cachedRelearnSongs = [];
-    renderInsightsRelearnTracker();
+    relearnOnlistFilterMode = "all";
+    relearnPageIndex = 0;
+    renderLoadedRelearnTracker();
   }
 }
 
-async function loadWrongGuessDataForUser(displayName) {
+async function loadWrongGuessDataForUser(displayName, options = {}) {
+  const shouldRender = () => {
+    if (options && options.render === false) return false;
+    return typeof options.shouldRender === "function" ? options.shouldRender() : true;
+  };
+  const renderLoadedWrongGuess = () => {
+    if (shouldRender()) renderInsightsWrongGuess();
+  };
   try {
     if (!displayName) {
       cachedWrongGuessSongs = [];
-      renderInsightsWrongGuess();
+      renderLoadedWrongGuess();
       return;
     }
 
@@ -19883,7 +20946,7 @@ async function loadWrongGuessDataForUser(displayName) {
       const playerEntry = await getPlayerEntryByName(displayName);
       if (!playerEntry || !playerEntry.playerId) {
         cachedWrongGuessSongs = [];
-        renderInsightsWrongGuess();
+        renderLoadedWrongGuess();
         return;
       }
       currentPlayerId = String(playerEntry.playerId);
@@ -19895,7 +20958,7 @@ async function loadWrongGuessDataForUser(displayName) {
     const wrongGuessRes = await fetchPlayerScopedResponse(currentPlayerId, "recommendations_by_wrong_guess/top_200.json");
     if (!wrongGuessRes) {
       cachedWrongGuessSongs = [];
-      renderInsightsWrongGuess();
+      renderLoadedWrongGuess();
       return;
     }
 
@@ -19903,19 +20966,26 @@ async function loadWrongGuessDataForUser(displayName) {
     const wrongGuessRows = Array.isArray(wrongGuessPayload) ? wrongGuessPayload : [];
     cachedWrongGuessSongs = await hydrateSongRowsWithSongKey(wrongGuessRows);
     wrongGuessPageIndex = 0;
-    renderInsightsWrongGuess();
+    renderLoadedWrongGuess();
   } catch (err) {
     console.error("Failed loading wrong guess recommendations", err);
     cachedWrongGuessSongs = [];
-    renderInsightsWrongGuess();
+    renderLoadedWrongGuess();
   }
 }
 
-async function loadNeverCorrectDataForUser(displayName) {
+async function loadNeverCorrectDataForUser(displayName, options = {}) {
+  const shouldRender = () => {
+    if (options && options.render === false) return false;
+    return typeof options.shouldRender === "function" ? options.shouldRender() : true;
+  };
+  const renderLoadedNeverCorrect = () => {
+    if (shouldRender()) renderInsightsNeverCorrect();
+  };
   try {
     if (!displayName) {
       cachedNeverCorrectSongs = [];
-      renderInsightsNeverCorrect();
+      renderLoadedNeverCorrect();
       return;
     }
 
@@ -19923,7 +20993,7 @@ async function loadNeverCorrectDataForUser(displayName) {
       const playerEntry = await getPlayerEntryByName(displayName);
       if (!playerEntry || !playerEntry.playerId) {
         cachedNeverCorrectSongs = [];
-        renderInsightsNeverCorrect();
+        renderLoadedNeverCorrect();
         return;
       }
       currentPlayerId = String(playerEntry.playerId);
@@ -19935,7 +21005,7 @@ async function loadNeverCorrectDataForUser(displayName) {
     const neverCorrectRes = await fetchPlayerScopedResponse(currentPlayerId, "recommendations_never_correct/top_30.json");
     if (!neverCorrectRes) {
       cachedNeverCorrectSongs = [];
-      renderInsightsNeverCorrect();
+      renderLoadedNeverCorrect();
       return;
     }
 
@@ -19943,19 +21013,26 @@ async function loadNeverCorrectDataForUser(displayName) {
     const neverCorrectRows = Array.isArray(neverCorrectPayload) ? neverCorrectPayload : [];
     cachedNeverCorrectSongs = await hydrateSongRowsWithSongKey(neverCorrectRows);
     neverCorrectPageIndex = 0;
-    renderInsightsNeverCorrect();
+    renderLoadedNeverCorrect();
   } catch (err) {
     console.error("Failed loading never-correct recommendations", err);
     cachedNeverCorrectSongs = [];
-    renderInsightsNeverCorrect();
+    renderLoadedNeverCorrect();
   }
 }
 
-async function loadPopularityDataForUser(displayName) {
+async function loadPopularityDataForUser(displayName, options = {}) {
+  const shouldRender = () => {
+    if (options && options.render === false) return false;
+    return typeof options.shouldRender === "function" ? options.shouldRender() : true;
+  };
+  const renderLoadedPopularity = () => {
+    if (shouldRender()) renderInsightsPopularity();
+  };
   try {
     if (!displayName) {
       cachedPopularitySongs = [];
-      renderInsightsPopularity();
+      renderLoadedPopularity();
       return;
     }
 
@@ -19963,7 +21040,7 @@ async function loadPopularityDataForUser(displayName) {
       const playerEntry = await getPlayerEntryByName(displayName);
       if (!playerEntry || !playerEntry.playerId) {
         cachedPopularitySongs = [];
-        renderInsightsPopularity();
+        renderLoadedPopularity();
         return;
       }
       currentPlayerId = String(playerEntry.playerId);
@@ -19982,7 +21059,7 @@ async function loadPopularityDataForUser(displayName) {
     })();
     if (!popularityRes) {
       cachedPopularitySongs = [];
-      renderInsightsPopularity();
+      renderLoadedPopularity();
       return;
     }
 
@@ -19990,19 +21067,26 @@ async function loadPopularityDataForUser(displayName) {
     const popularityRows = Array.isArray(popularityPayload) ? popularityPayload : [];
     cachedPopularitySongs = await hydrateSongRowsWithSongKey(popularityRows.slice(0, 300));
     popularityPageIndex = 0;
-    renderInsightsPopularity();
+    renderLoadedPopularity();
   } catch (err) {
     console.error("Failed loading popularity recommendations", err);
     cachedPopularitySongs = [];
-    renderInsightsPopularity();
+    renderLoadedPopularity();
   }
 }
 
-async function loadPCorrectDataForUser(displayName) {
+async function loadPCorrectDataForUser(displayName, options = {}) {
+  const shouldRender = () => {
+    if (options && options.render === false) return false;
+    return typeof options.shouldRender === "function" ? options.shouldRender() : true;
+  };
+  const renderLoadedPCorrect = () => {
+    if (shouldRender()) renderInsightsPCorrect();
+  };
   try {
     if (!displayName) {
       cachedPCorrectSongs = [];
-      renderInsightsPCorrect();
+      renderLoadedPCorrect();
       return;
     }
 
@@ -20010,7 +21094,7 @@ async function loadPCorrectDataForUser(displayName) {
       const playerEntry = await getPlayerEntryByName(displayName);
       if (!playerEntry || !playerEntry.playerId) {
         cachedPCorrectSongs = [];
-        renderInsightsPCorrect();
+        renderLoadedPCorrect();
         return;
       }
       currentPlayerId = String(playerEntry.playerId);
@@ -20030,7 +21114,7 @@ async function loadPCorrectDataForUser(displayName) {
     })();
     if (!pcorrectRes) {
       cachedPCorrectSongs = [];
-      renderInsightsPCorrect();
+      renderLoadedPCorrect();
       return;
     }
 
@@ -20038,11 +21122,11 @@ async function loadPCorrectDataForUser(displayName) {
     const pcorrectRows = Array.isArray(pcorrectPayload) ? pcorrectPayload : [];
     cachedPCorrectSongs = await hydrateSongRowsWithSongKey(pcorrectRows.slice(0, 300));
     pcorrectPageIndex = 0;
-    renderInsightsPCorrect();
+    renderLoadedPCorrect();
   } catch (err) {
     console.error("Failed loading pcorrect recommendations", err);
     cachedPCorrectSongs = [];
-    renderInsightsPCorrect();
+    renderLoadedPCorrect();
   }
 }
 
@@ -20097,7 +21181,10 @@ async function loadSearchSongsDataForUser(displayName) {
     }
 
     const searchSongsPayload = await searchSongsRes.json();
-    const searchRows = Array.isArray(searchSongsPayload.searchSongs) ? searchSongsPayload.searchSongs : [];
+    const searchRows = resolveSearchSongDatePoolRows(
+      Array.isArray(searchSongsPayload.searchSongs) ? searchSongsPayload.searchSongs : [],
+      searchSongsPayload.datePool
+    );
     cachedSearchSongs = await hydrateSongRowsWithSongKey(searchRows);
 
     const overviewCombinedRows = [];
@@ -20110,7 +21197,10 @@ async function loadSearchSongsDataForUser(displayName) {
         );
         if (!modeResponse) continue;
         const modePayload = await modeResponse.json();
-        const modeRows = Array.isArray(modePayload && modePayload.searchSongs) ? modePayload.searchSongs : [];
+        const modeRows = resolveSearchSongDatePoolRows(
+          Array.isArray(modePayload && modePayload.searchSongs) ? modePayload.searchSongs : [],
+          modePayload && modePayload.datePool
+        );
         if (modeRows.length) {
           overviewCombinedRows.push(...modeRows);
         }
@@ -20754,7 +21844,7 @@ function renderRigAnalysisView() {
     difficultyLegendEl.innerHTML = "";
     difficultyTrackEl.style.setProperty("background", "#e2e8f0", "important");
     difficultyMarkerEl.style.display = "none";
-    difficultyTagEl.innerText = "Median Difficulty: —%";
+    difficultyTagEl.innerText = "Mean Difficulty: —%";
     difficultySubEl.innerText = "Loading...";
     avgRigValueEl.innerText = "—";
     avgRigSubEl.innerText = "";
@@ -20767,8 +21857,8 @@ function renderRigAnalysisView() {
 
   const vintageEntry = getRigAnalysisPlayerEntry(modeData.vintagePayload);
   const difficultyEntry = getRigAnalysisPlayerEntry(modeData.difficultyPayload);
-  const sampleCountVintage = Number(vintageEntry && vintageEntry.sampleCount);
-  const sampleCountDifficulty = Number(difficultyEntry && difficultyEntry.sampleCount);
+  const songCountVintage = Number(vintageEntry && vintageEntry.songCount);
+  const songCountDifficulty = Number(difficultyEntry && difficultyEntry.songCount);
   const hasAnyData = (
     (vintageEntry && typeof vintageEntry === "object")
     || (difficultyEntry && typeof difficultyEntry === "object")
@@ -20790,7 +21880,7 @@ function renderRigAnalysisView() {
     difficultyLegendEl.innerHTML = "";
     difficultyTrackEl.style.setProperty("background", "#e2e8f0", "important");
     difficultyMarkerEl.style.display = "none";
-    difficultyTagEl.innerText = "Median Difficulty: —%";
+    difficultyTagEl.innerText = "Mean Difficulty: —%";
     difficultySubEl.innerText = "No data";
     avgRigValueEl.innerText = "—";
     avgRigSubEl.innerText = "";
@@ -20824,7 +21914,7 @@ function renderRigAnalysisView() {
     difficultyValues.push(difficultyValue);
   }
   const difficultyPercentile = computePercentileFromValues(difficultyValue, difficultyValues);
-  const difficultyRank = computeRankFromValues(difficultyValue, difficultyValues, "desc");
+  const difficultyRank = computeRankFromValues(difficultyValue, difficultyValues, "asc");
   let difficultyLabel = "normal";
   if (Number.isFinite(difficultyPercentile)) {
     if (difficultyPercentile <= 20) difficultyLabel = "impossible";
@@ -21060,15 +22150,15 @@ function renderRigAnalysisView() {
   if (Number.isFinite(difficultyMarkerLeftPct) && Number.isFinite(difficultyValue)) {
     difficultyMarkerEl.style.display = "flex";
     difficultyMarkerEl.style.left = `${difficultyMarkerLeftPct.toFixed(2)}%`;
-    difficultyTagEl.innerText = `Median Difficulty: ${difficultyValue.toFixed(1)}%`;
+    difficultyTagEl.innerText = `Mean Difficulty: ${difficultyValue.toFixed(1)}%`;
   } else {
     difficultyMarkerEl.style.display = "none";
-    difficultyTagEl.innerText = "Median Difficulty: —%";
+    difficultyTagEl.innerText = "Mean Difficulty: —%";
   }
 
   difficultyValueEl.innerText = difficultyText;
   difficultySubEl.innerHTML = [
-    `Difficulty rank (easiest→hardest): ${difficultyRank != null ? `${difficultyRank}/${difficultyValues.length}` : "—"} | Percentile ${Number.isFinite(difficultyPercentile) ? `${difficultyPercentile.toFixed(1)}%` : "—"}`,
+    `Difficulty rank (hardest→easiest): ${difficultyRank != null ? `${difficultyRank}/${difficultyValues.length}` : "—"} | Percentile ${Number.isFinite(difficultyPercentile) ? `${difficultyPercentile.toFixed(1)}%` : "—"}`,
     `Your list is ${escapeHtml(difficultyLabel)}`
   ].join("<br>");
 
@@ -21674,16 +22764,35 @@ document.addEventListener("visibilitychange", () => {
   stopAndResetRelearnAudio();
 });
 
+function getFilteredRelearnSongs() {
+  const songs = Array.isArray(cachedRelearnSongs) ? cachedRelearnSongs : [];
+  if (relearnOnlistFilterMode === "onlist") {
+    return songs.filter(song => song && song.isOnlist === true);
+  }
+  if (relearnOnlistFilterMode === "offlist") {
+    return songs.filter(song => song && song.isOnlist === false);
+  }
+  return songs;
+}
+
+function updateRelearnOnlistFilterButtons() {
+  const buttons = document.querySelectorAll("[data-relearn-onlist-filter]");
+  buttons.forEach(button => {
+    const isActive = button.dataset.relearnOnlistFilter === relearnOnlistFilterMode;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+}
+
 function renderInsightsRelearnTracker() {
   const tbody = document.getElementById("relearnSongsTableBody");
-  const meta = document.getElementById("relearnSongsMeta");
   const pageMeta = document.getElementById("relearnPageMeta");
   const prevPageBtn = document.getElementById("relearnPrevPageBtn");
   const nextPageBtn = document.getElementById("relearnNextPageBtn");
-  if (!tbody || !meta || !pageMeta || !prevPageBtn || !nextPageBtn) return;
+  if (!tbody || !pageMeta || !prevPageBtn || !nextPageBtn) return;
 
-  const songs = Array.isArray(cachedRelearnSongs) ? cachedRelearnSongs : [];
-  meta.innerText = `Found ${songs.length} songs`;
+  updateRelearnOnlistFilterButtons();
+  const songs = getFilteredRelearnSongs();
   tbody.innerHTML = "";
 
   const pageCount = Math.max(1, Math.ceil(songs.length / RELEARN_PAGE_SIZE));
@@ -21703,7 +22812,7 @@ function renderInsightsRelearnTracker() {
     const maxPatternCount = pageSongs.reduce((maxValue, song) => {
       return Math.max(maxValue, getPatternMarkerCount(song && song.pattern));
     }, 0);
-    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1));
+    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1, 30));
     const patternWidth = Math.max(72, Math.min(160, 16 + (boundedCount * 14)));
     const extraSpace = 160 - patternWidth;
     const animeWidth = 185 + Math.round(extraSpace * 0.65);
@@ -21719,7 +22828,7 @@ function renderInsightsRelearnTracker() {
   if (!pageSongs.length) {
     const row = document.createElement("tr");
     const cell = document.createElement("td");
-    cell.colSpan = 9;
+    cell.colSpan = 8;
     cell.className = "relearn-empty";
     cell.innerText = "No relearn songs found for this user.";
     row.appendChild(cell);
@@ -21862,7 +22971,11 @@ function renderInsightsRelearnTracker() {
     row.appendChild(typeCell);
 
     const patternCell = document.createElement("td");
-    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, { maxPerRow: 10 }));
+    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, {
+      maxPerRow: 10,
+      maxCount: 30,
+      dates: song && song.patternDates
+    }));
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
@@ -22025,12 +23138,17 @@ function renderInsightsWrongGuess() {
     row.appendChild(correctPctCell);
 
     const difficultyCell = document.createElement("td");
-    const difficultyValue = Number(song && song.difficulty);
-    difficultyCell.innerText = Number.isFinite(difficultyValue) ? difficultyValue.toFixed(3) : "—";
+    difficultyCell.innerText = formatInsightsDifficulty(song && song.difficulty);
     row.appendChild(difficultyCell);
 
     tbody.appendChild(row);
   });
+}
+
+function formatInsightsDifficulty(value) {
+  if (value == null || value === "") return "—";
+  const difficultyValue = Number(value);
+  return Number.isFinite(difficultyValue) ? difficultyValue.toFixed(3) : "—";
 }
 
 function appendInsightsClampText(cell, value) {
@@ -22371,8 +23489,7 @@ function renderInsightsNeverCorrect() {
     row.appendChild(wrongCell);
 
     const difficultyCell = document.createElement("td");
-    const difficultyValue = Number(song && song.difficulty);
-    difficultyCell.innerText = Number.isFinite(difficultyValue) ? difficultyValue.toFixed(3) : "—";
+    difficultyCell.innerText = formatInsightsDifficulty(song && song.difficulty);
     row.appendChild(difficultyCell);
 
     tbody.appendChild(row);
@@ -22465,8 +23582,7 @@ function renderInsightsPopularity() {
     row.appendChild(correctPctCell);
 
     const difficultyCell = document.createElement("td");
-    const difficultyValue = Number(song && song.difficulty);
-    difficultyCell.innerText = Number.isFinite(difficultyValue) ? difficultyValue.toFixed(3) : "—";
+    difficultyCell.innerText = formatInsightsDifficulty(song && song.difficulty);
     row.appendChild(difficultyCell);
 
     tbody.appendChild(row);
@@ -22563,8 +23679,7 @@ function renderInsightsPCorrect() {
     row.appendChild(attemptsCell);
 
     const difficultyCell = document.createElement("td");
-    const difficultyValue = Number(song && song.difficulty);
-    difficultyCell.innerText = Number.isFinite(difficultyValue) ? difficultyValue.toFixed(3) : "—";
+    difficultyCell.innerText = formatInsightsDifficulty(song && song.difficulty);
     row.appendChild(difficultyCell);
 
     tbody.appendChild(row);
@@ -22624,7 +23739,7 @@ function renderInsightsSearchSongs() {
     const maxPatternCount = pageSongs.reduce((maxValue, song) => {
       return Math.max(maxValue, getPatternMarkerCount(song && song.pattern));
     }, 0);
-    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1));
+    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1, 30));
     const patternWidth = Math.max(72, Math.min(130, 16 + (boundedCount * 11)));
     const extraSpace = 130 - patternWidth;
     const textWidth = 150 + Math.round(extraSpace / 3);
@@ -22932,7 +24047,11 @@ function renderInsightsSearchSongs() {
     row.appendChild(typeCell);
 
     const patternCell = document.createElement("td");
-    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, { maxPerRow: 10 }));
+    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, {
+      maxPerRow: 10,
+      maxCount: 30,
+      dates: song && song.patternDates
+    }));
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
@@ -23053,6 +24172,57 @@ function renderSearchSongFrequency() {
   prevPageBtn.disabled = searchSongFrequencyPageIndex <= 0;
   nextPageBtn.disabled = searchSongFrequencyPageIndex >= pageCount - 1;
 
+  const hideFrequencyTitleTooltip = () => {
+    const tooltip = document.getElementById("searchSongFrequencyTitleHoverTooltip");
+    if (!tooltip) return;
+    tooltip.style.opacity = "0";
+    tooltip.style.visibility = "hidden";
+  };
+
+  const getFrequencyTitleTooltip = () => {
+    let tooltip = document.getElementById("searchSongFrequencyTitleHoverTooltip");
+    if (!tooltip) {
+      tooltip = document.createElement("div");
+      tooltip.id = "searchSongFrequencyTitleHoverTooltip";
+      document.body.appendChild(tooltip);
+    }
+    return tooltip;
+  };
+
+  const placeFrequencyTitleTooltip = (tooltip, cell) => {
+    const margin = 10;
+    const gap = -5;
+    const cellRect = cell.getBoundingClientRect();
+    const rect = tooltip.getBoundingClientRect();
+    const maxLeft = Math.max(margin, window.innerWidth - rect.width - margin);
+    const anchorX = cellRect.left + cellRect.width / 2;
+    const left = Math.min(Math.max(margin, anchorX - rect.width / 2), maxLeft);
+    let top = cellRect.top - rect.height - gap;
+    if (top < margin) {
+      top = Math.min(window.innerHeight - rect.height - margin, cellRect.bottom + gap);
+    }
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${Math.max(margin, top)}px`;
+  };
+
+  const bindFrequencyTitleTooltip = (cell, text) => {
+    cell.removeAttribute("title");
+    cell.removeAttribute("aria-label");
+    cell.addEventListener("mouseenter", () => {
+      cell.removeAttribute("title");
+      cell.removeAttribute("aria-label");
+      if (cell.scrollWidth <= cell.clientWidth + 1) return;
+      const tooltip = getFrequencyTitleTooltip();
+      tooltip.textContent = text;
+      tooltip.style.opacity = "1";
+      tooltip.style.visibility = "visible";
+      placeFrequencyTitleTooltip(tooltip, cell);
+    });
+    cell.addEventListener("mouseleave", hideFrequencyTitleTooltip);
+  };
+
+  hideFrequencyTitleTooltip();
+
   if (!filteredSongs.length) {
     const row = document.createElement("tr");
     const cell = document.createElement("td");
@@ -23073,12 +24243,20 @@ function renderSearchSongFrequency() {
     rankCell.innerText = String(song && song.rank != null ? song.rank : "—");
     row.appendChild(rankCell);
 
+    const appendHoverTitleText = (cell, value) => {
+      const text = String(value == null || value === "" ? "—" : value);
+      cell.innerText = text;
+      if (text !== "—") {
+        bindFrequencyTitleTooltip(cell, text);
+      }
+    };
+
     const animeCell = document.createElement("td");
-    animeCell.innerText = getLanguageAwareAnimeName(song);
+    appendHoverTitleText(animeCell, getLanguageAwareAnimeName(song));
     row.appendChild(animeCell);
 
     const songCell = document.createElement("td");
-    songCell.innerText = String(song && song.songName ? song.songName : "—");
+    appendHoverTitleText(songCell, song && song.songName ? song.songName : "—");
     row.appendChild(songCell);
 
     const typeCell = document.createElement("td");
@@ -23086,7 +24264,8 @@ function renderSearchSongFrequency() {
     row.appendChild(typeCell);
 
     const artistCell = document.createElement("td");
-    artistCell.innerText = String(
+    appendHoverTitleText(
+      artistCell,
       song && (song.artist || song.songArtist || song.artistName)
         ? (song.artist || song.songArtist || song.artistName)
         : "—"
@@ -23166,16 +24345,68 @@ function detectPatternState(patternRaw) {
   return "unknown";
 }
 
+function ensurePatternDateHoverTooltip() {
+  let tooltip = document.getElementById("patternDateHoverTooltip");
+  if (!tooltip) {
+    tooltip = document.createElement("div");
+    tooltip.id = "patternDateHoverTooltip";
+    document.body.appendChild(tooltip);
+  }
+  return tooltip;
+}
+
+function positionPatternDateHoverTooltip(tooltip, anchorRect) {
+  const margin = 8;
+  const offset = 7;
+  const rect = tooltip.getBoundingClientRect();
+  let left = anchorRect.left + (anchorRect.width / 2) - (rect.width / 2);
+  let top = anchorRect.top - rect.height - offset;
+
+  if (left < margin) left = margin;
+  if (left + rect.width > window.innerWidth - margin) {
+    left = window.innerWidth - rect.width - margin;
+  }
+  if (top < margin) {
+    top = anchorRect.bottom + offset;
+  }
+  if (top + rect.height > window.innerHeight - margin) {
+    top = window.innerHeight - rect.height - margin;
+  }
+
+  tooltip.style.setProperty("left", `${Math.max(margin, left)}px`, "important");
+  tooltip.style.setProperty("top", `${Math.max(margin, top)}px`, "important");
+}
+
+function showPatternDateHoverTooltip(anchor, dateValue) {
+  const text = String(dateValue == null ? "" : dateValue).trim();
+  if (!text) return;
+  const tooltip = ensurePatternDateHoverTooltip();
+  tooltip.innerText = text;
+  tooltip.classList.add("visible");
+  positionPatternDateHoverTooltip(tooltip, anchor.getBoundingClientRect());
+}
+
+function hidePatternDateHoverTooltip() {
+  const tooltip = document.getElementById("patternDateHoverTooltip");
+  if (!tooltip) return;
+  tooltip.classList.remove("visible");
+}
+
 function buildPatternSquareNode(patternRaw, options = {}) {
   const originalText = String(patternRaw == null ? "" : patternRaw).trim();
   const container = document.createElement("span");
   container.className = "pattern-square-list";
+  let patternDates = Array.isArray(options && options.dates) ? options.dates : [];
   const maxPerRowRaw = Number(options && options.maxPerRow);
   const maxPerRow = Number.isFinite(maxPerRowRaw) && maxPerRowRaw > 0
     ? Math.floor(maxPerRowRaw)
     : null;
+  const maxCountRaw = Number(options && options.maxCount);
+  const maxCount = Number.isFinite(maxCountRaw) && maxCountRaw > 0
+    ? Math.floor(maxCountRaw)
+    : null;
 
-  const states = [];
+  let states = [];
   const chars = Array.from(originalText);
   chars.forEach(ch => {
     if (/[✅✔☑🟩🟢]/.test(ch)) {
@@ -23208,9 +24439,28 @@ function buildPatternSquareNode(patternRaw, options = {}) {
     states.push("unknown");
   }
 
-  const appendSquare = (parent, state) => {
+  if (maxCount && states.length > maxCount) {
+    states = states.slice(-maxCount);
+    patternDates = patternDates.slice(-states.length);
+  }
+
+  const appendSquare = (parent, state, index) => {
     const square = document.createElement("span");
     square.className = `pattern-square pattern-${state}`;
+    const dateValue = String(patternDates[index] == null ? "" : patternDates[index]).trim();
+    if (dateValue) {
+      const stateLabel = state === "correct" ? "Correct" : (state === "wrong" ? "Wrong" : "Unknown");
+      square.classList.add("has-pattern-date");
+      square.setAttribute("aria-label", `${stateLabel} on ${dateValue}`);
+      square.addEventListener("mouseenter", () => showPatternDateHoverTooltip(square, dateValue));
+      square.addEventListener("mousemove", () => {
+        const tooltip = document.getElementById("patternDateHoverTooltip");
+        if (tooltip && tooltip.classList.contains("visible")) {
+          positionPatternDateHoverTooltip(tooltip, square.getBoundingClientRect());
+        }
+      });
+      square.addEventListener("mouseleave", hidePatternDateHoverTooltip);
+    }
     parent.appendChild(square);
   };
 
@@ -23219,11 +24469,11 @@ function buildPatternSquareNode(patternRaw, options = {}) {
     for (let i = 0; i < states.length; i += maxPerRow) {
       const row = document.createElement("span");
       row.className = "pattern-square-row";
-      states.slice(i, i + maxPerRow).forEach(state => appendSquare(row, state));
+      states.slice(i, i + maxPerRow).forEach((state, offset) => appendSquare(row, state, i + offset));
       container.appendChild(row);
     }
   } else {
-    states.forEach(state => appendSquare(container, state));
+    states.forEach((state, index) => appendSquare(container, state, index));
   }
 
   container.removeAttribute("title");
@@ -24854,7 +26104,7 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
   if (guessQuartilesTextEl) {
     const p25Text = Number.isFinite(guessRateP25) ? `${guessRateP25.toFixed(3)}%` : "-";
     const p75Text = Number.isFinite(guessRateP75) ? `${guessRateP75.toFixed(3)}%` : "-";
-    guessQuartilesTextEl.innerText = `P25: ${p25Text} | P75: ${p75Text}`;
+    guessQuartilesTextEl.innerText = `Target Range: ${p25Text} — ${p75Text}`;
   }
 
   if (!records.length) return;
@@ -24875,6 +26125,7 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
   const resolvedRank = overviewDataSourceMode === "usual"
     ? (Number.isFinite(Number(latestRankOverride)) ? Number(latestRankOverride) : null)
     : (Number.isFinite(Number(latestRankOverride)) ? Number(latestRankOverride) : Number(latest["Rank"]));
+  updateCurrentRankInfoTooltip(getRankPoolSizeForMode(overviewDataSourceMode));
   const isWatchedUnassignedRank = overviewDataSourceMode !== "usual"
     && Number.isFinite(resolvedRank)
     && resolvedRank < MIN_VALID_RANK;
@@ -24955,20 +26206,8 @@ if (dataRangeSelect) {
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Composite charts") {
       renderPerformanceCompositeCharts(getVisibleUserData(fullUserData));
     }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
-      renderSocialRivalFilter();
-      renderSocialRivalsChart();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Synergy") {
-      renderSocialSynergyView();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Team Contributions") {
-      renderSocialTeamContributionView();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Rig / List analysis") {
-      ensureRigAnalysisData();
-      renderRigAnalysisView();
-      prefetchRigAnalysisDataInBackground();
+    if (activeSection === "social") {
+      scheduleSocialSubSectionRender(activeSubSectionBySection.social || "");
     }
     if (currentDisplayName) {
       loadOverviewAnimeTypeDataForUser(currentDisplayName);
@@ -24977,15 +26216,20 @@ if (dataRangeSelect) {
       loadOverviewTopDoublesForUser(currentDisplayName, { kind: "their_rig_you_blocked" });
       loadOverviewTopDoublesForUser(currentDisplayName, { kind: "your_rig_they_blocked" });
       loadOverviewTopRigSongsForUser(currentDisplayName);
+      loadOverviewZScoreDataForUser(currentDisplayName);
       loadGenreDataForUser(currentDisplayName);
       loadTagDataForUser(currentDisplayName);
       loadByEraDataForUser(currentDisplayName);
       loadArtistDataForUser(currentDisplayName);
-      loadRelearnDataForUser(currentDisplayName);
-      loadWrongGuessDataForUser(currentDisplayName);
-      loadNeverCorrectDataForUser(currentDisplayName);
-      loadPopularityDataForUser(currentDisplayName);
-      loadPCorrectDataForUser(currentDisplayName);
+      if (activeSection === "insights") {
+        scheduleInsightsSubSectionLoad(activeSubSectionBySection.insights || "", currentDisplayName);
+      } else {
+        loadRelearnDataForUser(currentDisplayName, { render: false });
+        loadWrongGuessDataForUser(currentDisplayName, { render: false });
+        loadNeverCorrectDataForUser(currentDisplayName, { render: false });
+        loadPopularityDataForUser(currentDisplayName, { render: false });
+        loadPCorrectDataForUser(currentDisplayName, { render: false });
+      }
       loadSearchSongsDataForUser(currentDisplayName);
     }
   });
@@ -25318,6 +26562,7 @@ function applyCurrentRankCardStyle(percentile, isTopThree = false, forceTierClas
   }
 
   const value = Math.max(0, Math.min(100, Number(percentile)));
+  const displayValue = Math.max(0, Math.min(100, 100 - value));
   let tierClass = "rank-tier-bronze";
   if (value >= 80) {
     tierClass = "rank-tier-platinum";
@@ -25336,12 +26581,12 @@ function applyCurrentRankCardStyle(percentile, isTopThree = false, forceTierClas
   if (isTopThree) {
     card.classList.add("rank-top-3-badge");
     if (tierLabel) {
-      tierLabel.innerText = `Top ${value.toFixed(1)}% • Top 3`;
+      tierLabel.innerText = `Top ${displayValue.toFixed(1)}% • Top 3`;
     }
     return;
   }
   if (tierLabel) {
-    tierLabel.innerText = `Top ${value.toFixed(1)}%`;
+    tierLabel.innerText = `Top ${displayValue.toFixed(1)}%`;
   }
 }
 
@@ -25690,15 +26935,8 @@ Promise.all([
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Composite charts") {
       renderPerformanceCompositeCharts(getVisibleUserData(fullUserData));
     }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Rivals") {
-      renderSocialRivalFilter();
-      renderSocialRivalsChart();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Synergy") {
-      renderSocialSynergyView();
-    }
-    if (activeSection === "social" && activeSubSectionBySection.social === "Team Contributions") {
-      renderSocialTeamContributionView();
+    if (activeSection === "social") {
+      scheduleSocialSubSectionRender(activeSubSectionBySection.social || "");
     }
 
     latestRankMapPromise.then(latestRankMap => {
