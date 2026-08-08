@@ -1,0 +1,391 @@
+const DATA_BASE_URL =
+  location.hostname === "localhost" || location.hostname === "127.0.0.1"
+    ? "./data"
+    : "https://amq-stats-api.yarthepro.workers.dev";
+
+function dataUrl(path) {
+  const cleanPath = String(path || "")
+    .replace(/^data\//, "")
+    .replace(/^\/+/, "");
+  return `${DATA_BASE_URL}/${cleanPath}`;
+}
+
+async function loadJSON(path) {
+  const res = await fetch(dataUrl(path));
+  if (!res.ok) {
+    throw new Error(`Failed to load ${path}: ${res.status}`);
+  }
+  return res.json();
+}
+
+function initializeLoginBackgroundToggle() {
+  const toggleBtn = document.getElementById("loginBgToggleBtn");
+  const videoEl = document.getElementById("loginBackgroundVideo");
+  const dataUpToEl = document.getElementById("loginDataUpTo");
+  const creditLineEl = document.getElementById("loginCreditLine");
+
+  if (!toggleBtn) {
+    return;
+  }
+
+  const loginVideoUrl = "https://amq-stats-api.yarthepro.workers.dev/final_compressed.mp4";
+
+  if (dataUpToEl && !dataUpToEl.dataset.defaultText) {
+    dataUpToEl.dataset.defaultText = dataUpToEl.innerText;
+  }
+  if (creditLineEl && !creditLineEl.dataset.defaultHtml) {
+    creditLineEl.dataset.defaultHtml = creditLineEl.innerHTML;
+  }
+
+  toggleBtn.setAttribute("aria-pressed", "false");
+  toggleBtn.textContent = "Do-not-click";
+
+  if (videoEl) {
+    if (!videoEl.src) {
+      videoEl.src = loginVideoUrl;
+      videoEl.load();
+    }
+
+    videoEl.addEventListener("ended", () => {
+      if (!Number.isFinite(videoEl.duration) || videoEl.duration <= 0) {
+        return;
+      }
+      videoEl.currentTime = Math.max(0, videoEl.duration - 0.001);
+      videoEl.pause();
+    });
+  }
+
+  toggleBtn.addEventListener("click", async () => {
+    if (!videoEl) return;
+
+    const isVideoView = document.body.classList.contains("is-video-view");
+
+    if (isVideoView) {
+      document.body.classList.remove("is-video-view");
+      toggleBtn.setAttribute("aria-pressed", "false");
+      toggleBtn.textContent = "Do-not-click";
+      videoEl.pause();
+      videoEl.currentTime = 0;
+      if (dataUpToEl && dataUpToEl.dataset.defaultText) {
+        dataUpToEl.innerText = dataUpToEl.dataset.defaultText;
+      }
+      if (creditLineEl && creditLineEl.dataset.defaultHtml) {
+        creditLineEl.innerHTML = creditLineEl.dataset.defaultHtml;
+      }
+      return;
+    }
+
+    document.body.classList.add("is-video-view");
+    toggleBtn.setAttribute("aria-pressed", "true");
+    toggleBtn.textContent = "Back";
+    if (dataUpToEl) {
+      dataUpToEl.innerText = "Desmos Tracing / Total 36 hrs";
+    }
+    if (creditLineEl) {
+      creditLineEl.innerText = "";
+    }
+    try {
+      await videoEl.play();
+    } catch (err) {
+      console.warn("Video autoplay failed; waiting for user interaction.", err);
+    }
+  });
+}
+
+function parseDataUpToLineFromChangelogText(text) {
+  const lines = String(text || "").split(/\r?\n/);
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) {
+      continue;
+    }
+    if (/^__\s*data\s*__$/i.test(line)) {
+      continue;
+    }
+    if (/^__.*__$/.test(line)) {
+      break;
+    }
+    if (/^data\s+up\s+to\b/i.test(line)) {
+      return line;
+    }
+  }
+  return "";
+}
+
+function compareVersionFileNamesDesc(a, b) {
+  const getParts = (value) => String(value || "")
+    .replace(/\.txt$/i, "")
+    .split(".")
+    .map(part => Number(part))
+    .filter(Number.isFinite);
+  const aParts = getParts(a);
+  const bParts = getParts(b);
+  const maxLen = Math.max(aParts.length, bParts.length);
+  for (let i = 0; i < maxLen; i += 1) {
+    const av = aParts[i] || 0;
+    const bv = bParts[i] || 0;
+    if (av !== bv) {
+      return bv - av;
+    }
+  }
+  return String(b).localeCompare(String(a));
+}
+
+async function listChangelogFiles() {
+  try {
+    const indexRes = await fetch(dataUrl("changelog/index.json"));
+    if (indexRes.ok) {
+      const payload = await indexRes.json();
+      if (Array.isArray(payload)) {
+        return payload
+          .map(item => String(item || "").trim())
+          .filter(name => /\.txt$/i.test(name));
+      }
+    }
+  } catch (err) {
+    console.warn("Unable to load changelog index.json", err);
+  }
+
+  try {
+    const dirRes = await fetch(dataUrl("changelog/"));
+    if (dirRes.ok) {
+      const html = await dirRes.text();
+      const hrefMatches = [...html.matchAll(/href="([^"]+\.txt)"/gi)];
+      const names = hrefMatches
+        .map(match => decodeURIComponent((match[1] || "").split("/").pop() || ""))
+        .filter(Boolean);
+      return [...new Set(names)];
+    }
+  } catch (err) {
+    console.warn("Unable to read changelog directory listing", err);
+  }
+
+  return [];
+}
+
+function formatIsoDate(isoDate) {
+  const date = new Date(`${isoDate}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) {
+    return isoDate;
+  }
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC"
+  }).format(date);
+}
+
+async function updateLoginDataUpTo() {
+  const dataUpToEl = document.getElementById("loginDataUpTo");
+  if (!dataUpToEl) {
+    return;
+  }
+
+  try {
+    const res = await fetch(dataUrl("changelog/data.txt"));
+    if (!res.ok) {
+      return;
+    }
+    const dataUpToLine = parseDataUpToLineFromChangelogText(await res.text());
+    if (dataUpToLine) {
+      dataUpToEl.dataset.defaultText = dataUpToLine;
+      if (!document.body.classList.contains("is-video-view")) {
+        dataUpToEl.innerText = dataUpToLine;
+      }
+    }
+  } catch (err) {
+    console.warn("Unable to load changelog data.txt", err);
+  }
+}
+
+async function loadPlayers() {
+  if (Array.isArray(window.__cachedPlayersData)) {
+    return window.__cachedPlayersData;
+  }
+  if (window.__cachedPlayersPromise) {
+    return window.__cachedPlayersPromise;
+  }
+
+  window.__cachedPlayersPromise = (async () => {
+  const res = await fetch(dataUrl("players.json"));
+    if (!res.ok) {
+      throw new Error("Could not load data/players.json");
+    }
+    const players = await res.json();
+    window.__cachedPlayersData = Array.isArray(players) ? players : [];
+    window.__cachedPlayersPromise = null;
+    return window.__cachedPlayersData;
+  })();
+
+  return window.__cachedPlayersPromise;
+}
+
+function normalizeLoginName(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function findLoginSuggestion(rawInput, players) {
+  const input = String(rawInput || "");
+  const normalizedInput = normalizeLoginName(input);
+  if (!normalizedInput || !Array.isArray(players) || !players.length) {
+    return "";
+  }
+
+  let bestDisplayName = "";
+  for (const player of players) {
+    const displayName = String(player && player.displayName ? player.displayName : "");
+    if (!displayName) continue;
+    const normalizedDisplayName = normalizeLoginName(displayName);
+    if (!normalizedDisplayName.startsWith(normalizedInput)) continue;
+    if (normalizedDisplayName === normalizedInput) continue;
+    bestDisplayName = displayName;
+    break;
+  }
+  if (bestDisplayName) {
+    return bestDisplayName;
+  }
+
+  for (const player of players) {
+    const altNames = Array.isArray(player && player.altnames) ? player.altnames : [];
+    for (const alt of altNames) {
+      const altName = String(alt || "");
+      const normalizedAltName = normalizeLoginName(altName);
+      if (!normalizedAltName.startsWith(normalizedInput)) continue;
+      if (normalizedAltName === normalizedInput) continue;
+      return altName;
+    }
+  }
+
+  return "";
+}
+
+function initializeLoginUsernameAutocomplete() {
+  const inputEl = document.getElementById("username");
+  const suggestionEl = document.getElementById("loginUsernameSuggestion");
+  if (!inputEl) return;
+
+  let currentSuggestion = "";
+
+  const syncSuggestionMetrics = () => {
+    if (!suggestionEl) return;
+    const cs = window.getComputedStyle(inputEl);
+    suggestionEl.style.font = cs.font;
+    suggestionEl.style.letterSpacing = cs.letterSpacing;
+    suggestionEl.style.lineHeight = cs.lineHeight;
+    suggestionEl.style.paddingLeft = cs.paddingLeft;
+    suggestionEl.style.paddingRight = cs.paddingRight;
+  };
+
+  const renderSuggestion = () => {
+    if (!suggestionEl) return;
+    const typed = inputEl.value || "";
+    if (!currentSuggestion) {
+      suggestionEl.innerHTML = "";
+      return;
+    }
+    if (!currentSuggestion.toLowerCase().startsWith(typed.toLowerCase())) {
+      suggestionEl.innerHTML = "";
+      return;
+    }
+    if (typed.length >= currentSuggestion.length) {
+      suggestionEl.innerHTML = "";
+      return;
+    }
+    const remaining = currentSuggestion.slice(typed.length);
+    suggestionEl.innerHTML = `<span class="login-username-inline-typed">${escapeHtml(typed)}</span><span class="login-username-inline-tail">${escapeHtml(remaining)}</span>`;
+  };
+
+  const refreshSuggestion = async () => {
+    const typed = inputEl.value || "";
+    if (!typed.trim()) {
+      currentSuggestion = "";
+      renderSuggestion();
+      return;
+    }
+    try {
+      const players = await loadPlayers();
+      if ((inputEl.value || "") !== typed) {
+        return;
+      }
+      currentSuggestion = findLoginSuggestion(typed, players);
+      renderSuggestion();
+    } catch (err) {
+      currentSuggestion = "";
+      renderSuggestion();
+    }
+  };
+
+  inputEl.addEventListener("input", refreshSuggestion);
+  inputEl.addEventListener("focus", refreshSuggestion);
+  window.addEventListener("resize", syncSuggestionMetrics);
+  inputEl.addEventListener("keydown", event => {
+    if (event.key !== "Tab" || !currentSuggestion) return;
+    const typed = inputEl.value || "";
+    if (!currentSuggestion.toLowerCase().startsWith(typed.toLowerCase())) return;
+    if (typed.length >= currentSuggestion.length) return;
+    event.preventDefault();
+    inputEl.value = currentSuggestion;
+    currentSuggestion = "";
+    renderSuggestion();
+  });
+
+  syncSuggestionMetrics();
+  loadPlayers().catch(() => {});
+}
+
+async function login() {
+  const errorEl = document.getElementById("error");
+  const inputEl = document.getElementById("username");
+  const input = inputEl.value.trim();
+  const loginErrorColor = "#9F294C";
+
+  errorEl.innerText = "";
+  errorEl.style.color = "";
+
+  if (!input) {
+    errorEl.innerText = "Please enter a username";
+    errorEl.style.color = loginErrorColor;
+    return;
+  }
+
+  try {
+    const players = await loadPlayers();
+    const normalized = input.toLowerCase();
+    const matchedPlayer = players.find(player => {
+      const displayName = String(player.displayName || "").toLowerCase();
+      const altNameMatch = Array.isArray(player.altnames)
+        && player.altnames.some(alt => String(alt).toLowerCase() === normalized);
+      return displayName === normalized || altNameMatch;
+    });
+
+    if (!matchedPlayer || !matchedPlayer.displayName) {
+      errorEl.innerText = "User not found";
+      errorEl.style.color = loginErrorColor;
+      return;
+    }
+
+    window.location.href = `player.html?user=${encodeURIComponent(input)}`;
+  } catch (err) {
+    console.error(err);
+    errorEl.innerText = "Unable to load user data";
+  }
+}
+
+document.getElementById("loginForm").addEventListener("submit", event => {
+  event.preventDefault();
+  login();
+});
+
+initializeLoginBackgroundToggle();
+updateLoginDataUpTo();
+initializeLoginUsernameAutocomplete();

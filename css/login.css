@@ -1,0 +1,37 @@
+    .login-username-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    .login-username-inline-suggestion {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      pointer-events: none;
+      white-space: pre;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #94a3b8;
+      z-index: 2;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      line-height: 1.35;
+    }
+
+    .login-username-inline-typed {
+      color: transparent;
+    }
+
+    .login-username-inline-tail {
+      color: #8fa2b8;
+      letter-spacing: normal;
+      word-spacing: normal;
+      font-weight: 500;
+      display: inline-block;
+      margin-left: 0.12em;
+    }
+  

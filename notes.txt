@@ -1,0 +1,86 @@
+# Recent development notes
+
+## File split
+
+- Moved the login page's embedded CSS into `css/login.css` and its JavaScript
+  into `js/login.js`.
+- Moved the player page's embedded CSS into `css/player.css` and its JavaScript
+  into `js/player.js`.
+- `index.html` and `player.html` now load those external files while preserving
+  the existing CSS and script load order.
+- Checked both JavaScript files with `node --check` and ran `git diff --check`.
+
+## Why localhost uses local data
+
+- Direct requests from `http://localhost:4173` to
+  `https://amq-stats-api.yarthepro.workers.dev` fail in a browser because the
+  API's CORS header allows `https://idontlikeloli.github.io`, not localhost.
+- The application therefore uses `./data` when served from `localhost` or
+  `127.0.0.1`, and uses the Worker/R2 API when deployed elsewhere.
+- A local proxy or a Worker CORS-policy change would be needed to use the live
+  API directly from a localhost browser.
+- `.gitignore` excludes generated JSON, CSV, and text fixture files under
+  `data/`. This keeps local test data out of Git while preserving the tracked
+  image assets and the scripts that recreate the fixture.
+
+## Local Demo fixture
+
+- Added `data/players.json` with a `Demo` account.
+- `Demo` has player ID `364` and aliases to `I_dont_like_loli` so the dashboard
+  can match the local stats key while displaying a clearly local account name.
+- Added `data/stats.json` containing 169 watched-stat records for
+  `I_dont_like_loli`.
+- Added `data/song_key.json`, downloaded from the Worker API. It is used to
+  resolve song IDs in recommendation, relearn, and search-song views.
+- Added `data/mal_image_cache.json`, downloaded from the Worker API. It maps
+  anime metadata to artwork used by song-based dashboard views.
+- Added `data/latest_rank.json`, downloaded from the Worker API. It supplies
+  the latest player rank and percentile information for overview cards.
+- Added the weekly summary datasets from the Worker API:
+  `data/stats_weekly.json`, `data/stats_usual_weekly.json`,
+  `data/stats_last_week.json`, and `data/stats_usual_last_week.json`. These
+  support weekly/last-week summaries and transition-related dashboard views.
+- Downloaded 60 available player-specific JSON files to `data/players/364/`
+  (about 8.6 MB). These include watched/usual artists, search songs,
+  recommendations, relearn data, tags, genres, by-era data, overview data,
+  weighted guesses, and synergy data.
+- The API does not support browsing `players/364/` or `players/364/*`; both
+  return 404. The local mirror instead probes every player-specific endpoint
+  currently used by the dashboard. Seventy-one optional known paths were not
+  present in the API and were not downloaded.
+
+## Fixture scripts
+
+- `scripts/create-demo-fixture.mjs [sourceName] [demoName] [playerId]` downloads
+  `stats.json`, extracts one player's records, and creates `data/players.json`
+  and `data/stats.json`. Defaults: `I_dont_like_loli`, `Demo`, and `364`.
+- `scripts/download-player-fixture.mjs [playerId]` downloads available
+  player-specific resources used by this dashboard and preserves their API path
+  under `data/players/<playerId>/`. Default player ID: `364`.
+- `scripts/download-global-fixture.mjs` downloads the global datasets identified
+  from the local request log: usual stats/ranks, popularity and p-correct data,
+  rank/usefulness estimator data, rig-analysis data, and the changelog index
+  plus its referenced text files.
+- `scripts/create-local-manifest.mjs` writes `data/manifest.json`, the list of
+  files present in the local fixture. The player-data loader consults this list
+  before trying local player-resource fallback paths, which prevents known 404
+  requests without changing production behavior.
+- Both scripts require Node.js and network access to the Worker API.
+
+## Basic local performance instrumentation
+
+- Manifest-aware player-data requests record their path, HTTP status, duration,
+  and timestamp in `window.__amqLocalDataRequests` when the app runs locally.
+- Run `getAmqLocalDataRequestSummary()` in browser DevTools to see the request
+  count, failures, total fetch time, and the ten slowest requests.
+- This is intentionally narrow first-pass instrumentation. Expand it to the
+  shared global-data loader and add `performance.mark()`/`performance.measure()`
+  around chart rendering after the fetch-path cleanup is proven.
+
+## Manual local test
+
+1. Start a static server in the repository root.
+2. Visit `http://localhost:4173/` and hard-refresh after changing files.
+3. Log in as `Demo`.
+4. Check Overview, Knowledge, Insights, and Social views. Empty optional cards
+   may correspond to an API source file that does not exist.

@@ -1,0 +1,7 @@
+# Generated local-development fixture data. Production uses the Worker/R2 API.
+/data/*.json
+/data/**/*.json
+/data/*.csv
+/data/**/*.csv
+/data/*.txt
+/data/**/*.txt
