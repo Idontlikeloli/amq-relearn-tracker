@@ -1835,6 +1835,12 @@
       transform: none !important;
     }
 
+    #overviewWeeklyView .weekly-performance-cards .card:first-child .weekly-card-info-tooltip {
+      left: 0 !important;
+      right: auto !important;
+      transform: none !important;
+    }
+
     #overviewWeeklyView .weekly-performance-cards .card-title .weekly-card-info:hover .weekly-card-info-tooltip,
     #overviewWeeklyView .weekly-performance-cards .card-title .weekly-card-info:focus-visible .weekly-card-info-tooltip {
       opacity: 1 !important;
@@ -3096,6 +3102,18 @@
       left: auto !important;
     }
 
+    #overviewSection .info-hover-wrap.open-below .info-hover-tooltip {
+      top: calc(100% + 8px) !important;
+      bottom: auto !important;
+      transform: none !important;
+    }
+
+    #overviewSection .info-hover-wrap.open-above .info-hover-tooltip {
+      top: auto !important;
+      bottom: calc(100% + 8px) !important;
+      transform: none !important;
+    }
+
     #overviewSection .info-hover-wrap:hover .info-hover-tooltip,
     #overviewSection .info-hover-wrap:focus-within .info-hover-tooltip {
       opacity: 1 !important;
@@ -3163,6 +3181,20 @@
       left: auto !important;
     }
 
+    #insightsSection .info-hover-wrap.open-below .info-hover-tooltip,
+    #otherToolsSection .info-hover-wrap.open-below .info-hover-tooltip {
+      top: calc(100% + 8px) !important;
+      bottom: auto !important;
+      transform: none !important;
+    }
+
+    #insightsSection .info-hover-wrap.open-above .info-hover-tooltip,
+    #otherToolsSection .info-hover-wrap.open-above .info-hover-tooltip {
+      top: auto !important;
+      bottom: calc(100% + 8px) !important;
+      transform: none !important;
+    }
+
     #insightsSection .info-hover-wrap:hover .info-hover-tooltip,
     #insightsSection .info-hover-wrap:focus-within .info-hover-tooltip,
     #otherToolsSection .info-hover-wrap:hover .info-hover-tooltip,
@@ -3226,6 +3258,18 @@
     #socialSection .info-hover-wrap.open-left .info-hover-tooltip {
       right: calc(100% + 8px) !important;
       left: auto !important;
+    }
+
+    #socialSection .info-hover-wrap.open-below .info-hover-tooltip {
+      top: calc(100% + 8px) !important;
+      bottom: auto !important;
+      transform: none !important;
+    }
+
+    #socialSection .info-hover-wrap.open-above .info-hover-tooltip {
+      top: auto !important;
+      bottom: calc(100% + 8px) !important;
+      transform: none !important;
     }
 
     #socialSection .info-hover-wrap:hover .info-hover-tooltip,
@@ -3292,6 +3336,28 @@
       width: max-content !important;
       min-width: 0 !important;
       max-width: min(72vw, 420px) !important;
+    }
+
+    @media (max-width: 1200px) {
+      #overviewWeeklyView .weekly-performance-cards .card:nth-child(odd) .weekly-card-info-tooltip {
+        left: 0 !important;
+        right: auto !important;
+        transform: none !important;
+      }
+
+      #overviewWeeklyView .weekly-performance-cards .card:nth-child(even) .weekly-card-info-tooltip {
+        left: auto !important;
+        right: 0 !important;
+        transform: none !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      #overviewWeeklyView .weekly-performance-cards .card .weekly-card-info-tooltip {
+        left: 0 !important;
+        right: auto !important;
+        transform: none !important;
+      }
     }
 
     #overviewWeeklyView .chart-title .weekly-card-info .weekly-card-info-tooltip {
@@ -5545,11 +5611,187 @@
       display: grid !important;
       grid-template-columns: minmax(320px, 1fr) minmax(520px, 1.5fr) !important;
       gap: 16px !important;
-      align-items: start !important;
+      align-items: stretch !important;
+    }
+
+    #otherToolsSection .single-tour-subpage-selector {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      margin: 0 0 12px 0 !important;
+      padding: 3px !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 10px !important;
+      background: #eef4fb !important;
+      box-shadow: 0 1px 2px rgba(51, 65, 85, 0.08) !important;
+    }
+
+    #otherToolsSection .single-tour-subpage-btn {
+      border: 0 !important;
+      border-radius: 8px !important;
+      background: transparent !important;
+      color: #475569 !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      padding: 8px 12px !important;
+      cursor: pointer !important;
+      transition: background-color 120ms ease, color 120ms ease, box-shadow 120ms ease !important;
+    }
+
+    #otherToolsSection .single-tour-subpage-btn:hover {
+      color: #1f2937 !important;
+      background: rgba(255, 255, 255, 0.58) !important;
+    }
+
+    #otherToolsSection .single-tour-subpage-btn.active {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      box-shadow: 0 1px 3px rgba(51, 65, 85, 0.16) !important;
     }
 
     #otherToolsSection .original-tour-view-stack > .chart-card + .chart-card {
       margin-top: 14px !important;
+    }
+
+    #otherToolsSection .original-tour-songs-card {
+      overflow: visible !important;
+    }
+
+    #otherToolsSection .original-tour-songs-controls {
+      display: flex !important;
+      align-items: center !important;
+      flex-wrap: wrap !important;
+      gap: 10px !important;
+      margin-bottom: 12px !important;
+    }
+
+    #otherToolsSection .original-tour-songs-toggle {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 4px !important;
+      padding: 3px !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 10px !important;
+      background: #f8fafc !important;
+    }
+
+    #otherToolsSection .original-tour-songs-toggle-btn {
+      border: 0 !important;
+      border-radius: 8px !important;
+      background: transparent !important;
+      color: #475569 !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      padding: 8px 11px !important;
+      cursor: pointer !important;
+    }
+
+    #otherToolsSection .original-tour-songs-toggle-btn.active {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      box-shadow: 0 1px 3px rgba(51, 65, 85, 0.16) !important;
+    }
+
+    #otherToolsSection .original-tour-songs-search-input {
+      flex: 1 1 260px !important;
+      min-width: 220px !important;
+      box-sizing: border-box !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 10px !important;
+      padding: 8px 10px !important;
+      font-size: 13px !important;
+      color: #0f172a !important;
+      background: #ffffff !important;
+    }
+
+    #otherToolsSection .original-tour-songs-filter-select {
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 10px !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+      height: 36px !important;
+      min-width: 130px !important;
+      padding: 0 10px !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      cursor: pointer !important;
+    }
+
+    #otherToolsSection .original-tour-songs-table {
+      width: 100% !important;
+      table-layout: fixed !important;
+    }
+
+    #otherToolsSection .original-tour-songs-table th,
+    #otherToolsSection .original-tour-songs-table td {
+      vertical-align: middle !important;
+    }
+
+    #otherToolsSection .original-tour-songs-table th:nth-child(1),
+    #otherToolsSection .original-tour-songs-table td:nth-child(1) {
+      width: 6% !important;
+      text-align: center !important;
+    }
+
+    #otherToolsSection .original-tour-songs-table th:nth-child(2),
+    #otherToolsSection .original-tour-songs-table td:nth-child(2) {
+      width: 9% !important;
+      text-align: center !important;
+    }
+
+    #otherToolsSection .original-tour-songs-table th:nth-child(3),
+    #otherToolsSection .original-tour-songs-table td:nth-child(3),
+    #otherToolsSection .original-tour-songs-table th:nth-child(4),
+    #otherToolsSection .original-tour-songs-table td:nth-child(4),
+    #otherToolsSection .original-tour-songs-table th:nth-child(6),
+    #otherToolsSection .original-tour-songs-table td:nth-child(6) {
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+    }
+
+    #otherToolsSection .original-tour-songs-table th:nth-child(5),
+    #otherToolsSection .original-tour-songs-table td:nth-child(5),
+    #otherToolsSection .original-tour-songs-table th:nth-child(7),
+    #otherToolsSection .original-tour-songs-table td:nth-child(7),
+    #otherToolsSection .original-tour-songs-table th:nth-child(8),
+    #otherToolsSection .original-tour-songs-table td:nth-child(8) {
+      width: 8% !important;
+      text-align: center !important;
+    }
+
+    #otherToolsSection .original-tour-song-result {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      min-width: 58px !important;
+      border-radius: 999px !important;
+      padding: 4px 8px !important;
+      font-size: 11px !important;
+      font-weight: 800 !important;
+      line-height: 1 !important;
+    }
+
+    #otherToolsSection .original-tour-song-result.correct {
+      background: #dcfce7 !important;
+      color: #166534 !important;
+      border: 1px solid #86efac !important;
+    }
+
+    #otherToolsSection .original-tour-song-result.wrong {
+      background: #fee2e2 !important;
+      color: #991b1b !important;
+      border: 1px solid #fca5a5 !important;
+    }
+
+    #otherToolsSection .original-tour-songs-pagination {
+      display: flex !important;
+      justify-content: flex-end !important;
+      align-items: center !important;
+      gap: 8px !important;
+      margin-top: 10px !important;
     }
 
     #otherToolsSection .original-tour-stats-card {
@@ -5563,6 +5805,18 @@
       background: #f8fafc !important;
       padding: 12px !important;
       min-width: 0 !important;
+      min-height: 0 !important;
+    }
+
+    #otherToolsSection .original-tour-left {
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
+    }
+
+    #otherToolsSection .original-tour-right {
+      display: flex !important;
+      flex-direction: column !important;
     }
 
     #otherToolsSection .original-tour-search-input {
@@ -5575,6 +5829,7 @@
       color: #0f172a !important;
       background: #ffffff !important;
       margin-bottom: 10px !important;
+      flex: 0 0 auto !important;
     }
 
     #otherToolsSection .original-tour-game-list {
@@ -5584,6 +5839,8 @@
       border-radius: 10px !important;
       background: #ffffff !important;
       margin-bottom: 10px !important;
+      flex: 0 0 auto !important;
+      box-sizing: border-box !important;
     }
 
     #otherToolsSection .original-tour-game-item {
@@ -5613,7 +5870,10 @@
       border-radius: 10px !important;
       background: #ffffff !important;
       padding: 10px !important;
-      min-height: 160px !important;
+      min-height: 0 !important;
+      flex: 1 1 auto !important;
+      overflow-y: auto !important;
+      box-sizing: border-box !important;
     }
 
     #otherToolsSection .original-tour-players-title {
@@ -5712,6 +5972,8 @@
     #otherToolsSection .original-tour-select-row {
       display: flex !important;
       justify-content: flex-end !important;
+      gap: 8px !important;
+      flex-wrap: wrap !important;
       margin-top: 10px !important;
     }
 
@@ -7271,7 +7533,6 @@
           </div>
           <div class="chart-meta">
             <span id="foundGames">Found 0 tours</span>
-            <span id="slopeInfo">Slope: 0.00% per game</span>
           </div>
         </div>
         <div class="chart-wrap">
@@ -8321,9 +8582,14 @@
       </div>
     </div>
     <div id="otherToolsOriginalTourCalendarView" class="original-tour-view-stack" style="display:none;">
-      <div class="chart-card">
+      <div class="single-tour-subpage-selector" role="tablist" aria-label="Single Tour views">
+        <button class="single-tour-subpage-btn active" type="button" role="tab" aria-selected="true" data-single-tour-view="select">Select</button>
+        <button class="single-tour-subpage-btn" type="button" role="tab" aria-selected="false" data-single-tour-view="stats">Stats Export</button>
+        <button class="single-tour-subpage-btn" type="button" role="tab" aria-selected="false" data-single-tour-view="songs">Songs Table</button>
+      </div>
+      <div id="originalTourSelectCard" class="chart-card">
         <div class="chart-header">
-          <div class="chart-title">Original Tour data(Calendar)</div>
+          <div class="chart-title">Single Tour</div>
           <div class="chart-meta">
             <span id="originalTourMeta">Found 0 games</span>
           </div>
@@ -8347,9 +8613,65 @@
             </div>
             <div id="originalTourCalendarGrid" class="original-tour-calendar-grid"></div>
             <div class="original-tour-select-row">
-              <button id="originalTourSelectBtn" class="original-tour-select-btn" type="button">Select</button>
+              <button id="originalTourSelectStatsBtn" class="original-tour-select-btn" type="button">Select &amp; View Stats</button>
+              <button id="originalTourSelectSongsBtn" class="original-tour-select-btn" type="button">Select &amp; View Songs</button>
             </div>
           </div>
+        </div>
+      </div>
+      <div id="originalTourSongsCard" class="chart-card original-tour-songs-card" style="display:none;">
+        <div class="chart-header">
+          <div id="originalTourSongsTitle" class="chart-title">Songs for selected tour</div>
+          <div class="chart-meta">
+            <span id="originalTourSongsMeta">Found 0 songs</span>
+          </div>
+        </div>
+        <div class="original-tour-songs-controls">
+          <div class="original-tour-songs-toggle" aria-label="Original tour song result filter">
+            <button class="original-tour-songs-toggle-btn active" type="button" data-original-tour-result="all">All</button>
+            <button class="original-tour-songs-toggle-btn" type="button" data-original-tour-result="correct">Correct</button>
+            <button class="original-tour-songs-toggle-btn" type="button" data-original-tour-result="wrong">Wrong</button>
+          </div>
+          <input
+            id="originalTourSongSearchInput"
+            class="original-tour-songs-search-input"
+            type="text"
+            placeholder="Search by anime, song, or artist..."
+          >
+          <select id="originalTourSongFilterSelect" class="original-tour-songs-filter-select" aria-label="Original tour song filter">
+            <option value="all">All filters</option>
+            <option value="1/8">1/8</option>
+            <option value="2/8">2/8</option>
+            <option value="3/8">3/8</option>
+            <option value="7/8">7/8</option>
+            <option value="offlist">Offlist</option>
+            <option value="onlist">Onlist</option>
+            <option value="op">OP</option>
+            <option value="ed">ED</option>
+            <option value="in">IN</option>
+          </select>
+        </div>
+        <div class="relearn-table-wrap">
+          <table id="originalTourSongsTable" class="relearn-table original-tour-songs-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Result</th>
+                <th>Anime</th>
+                <th>Song</th>
+                <th>Type</th>
+                <th>Artist</th>
+                <th>Hit</th>
+                <th>List</th>
+              </tr>
+            </thead>
+            <tbody id="originalTourSongsTableBody"></tbody>
+          </table>
+        </div>
+        <div class="original-tour-songs-pagination">
+          <button id="originalTourSongsPrevPageBtn" class="relearn-page-button" type="button" aria-label="Previous page">◀</button>
+          <span id="originalTourSongsPageMeta" class="relearn-page-meta">Page 1/1</span>
+          <button id="originalTourSongsNextPageBtn" class="relearn-page-button" type="button" aria-label="Next page">▶</button>
         </div>
       </div>
       <div id="originalTourStatsSheetCard" class="chart-card original-tour-stats-card" style="display:none;">
@@ -8898,6 +9220,14 @@ let otherToolsCalendarSelectedTimestamp = null;
 let otherToolsCalendarAppliedTimestamp = null;
 let otherToolsCalendarMonthCursor = null;
 let originalTourColorMode = "extremes";
+const SINGLE_TOUR_SUBPAGE_KEYS = new Set(["select", "stats", "songs"]);
+let singleTourActiveSubpage = "select";
+const originalTourSheetRowsByTourIdCache = new Map();
+const originalTourSheetLoadPromises = new Map();
+let originalTourSongResultMode = "all";
+let originalTourSongSearchQuery = "";
+let originalTourSongFilterMode = "all";
+let originalTourSongsPageIndex = 0;
 let socialTeamRowsByTimestamp = null;
 let socialTeamGames = [];
 let socialTeamFilteredGames = [];
@@ -9005,6 +9335,7 @@ const MAX_SELECTED_SOCIAL_RIVALS = 4;
 const RELEARN_PAGE_SIZE = 20;
 const ARTIST_FAMILIARITY_PAGE_SIZE = 8;
 const SEARCH_SONGS_PAGE_SIZE = 20;
+const ORIGINAL_TOUR_SONGS_PAGE_SIZE = 20;
 const MOMENTUM_SHORT_WINDOW = 3;
 const MOMENTUM_LONG_WINDOW = 10;
 const CONSISTENCY_WINDOW = 10;
@@ -9188,13 +9519,15 @@ const knowledgeWindowFileByRange = {
 /* -------------------------
    SECONDARY NAV CONTENT
 ------------------------- */
+const OTHER_TOOLS_SINGLE_TOUR_LABEL = "Single Tour";
+
 const secondaryNavBySection = {
   overview: [],
   performance: ["Guess Rate", "Lives Taken / Saved", "Onlist/Offlist", "Rigs Missed", "Composite charts"],
   knowledge: ["Artist Familiarity", "Tag Familiarity", "Seasonal Comparison"],
   insights: ["Relearn Tracker", "By never correct", "By Wrong Guess", "By Popularity", "By % correct"],
   social: ["Synergy", "Rivals", "Team Contributions", "Rig / List analysis"],
-  otherTools: ["Search songs", "Search song frequency", "Convert rank/usefulness", "Original Tour data(Calendar)", "Changelog"]
+  otherTools: ["Search songs", "Search song frequency", "Convert rank/usefulness", OTHER_TOOLS_SINGLE_TOUR_LABEL, "Changelog"]
 };
 
 function scheduleBackgroundTask(taskKey, taskFn, delayMs = 0) {
@@ -10227,7 +10560,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       return;
     }
 
-    if (subSection === "Original Tour data(Calendar)") {
+    if (subSection === OTHER_TOOLS_SINGLE_TOUR_LABEL) {
       searchSongsView.style.display = "none";
       searchSongFrequencyView.style.display = "none";
       convertView.style.display = "none";
@@ -10505,6 +10838,50 @@ function renderOverviewSubView() {
   }
 }
 
+function placeInfoHoverTooltip(wrap) {
+  const tooltip = wrap ? wrap.querySelector(".info-hover-tooltip") : null;
+  if (!wrap || !tooltip) return;
+
+  wrap.classList.remove("open-left", "open-below", "open-above");
+  const margin = 8;
+  let rect = tooltip.getBoundingClientRect();
+
+  if (rect.right > window.innerWidth - margin) {
+    wrap.classList.add("open-left");
+    rect = tooltip.getBoundingClientRect();
+  }
+
+  if (rect.left < margin && wrap.classList.contains("open-left")) {
+    wrap.classList.remove("open-left");
+    rect = tooltip.getBoundingClientRect();
+  }
+
+  if (rect.top < margin) {
+    wrap.classList.add("open-below");
+    wrap.classList.remove("open-above");
+    rect = tooltip.getBoundingClientRect();
+  }
+
+  if (rect.bottom > window.innerHeight - margin) {
+    wrap.classList.add("open-above");
+    wrap.classList.remove("open-below");
+  }
+}
+
+function bindInfoHoverTooltipPlacement(root = document) {
+  root.querySelectorAll(".info-hover-wrap").forEach(wrap => {
+    if (wrap.dataset.tooltipPlacementBound === "true") return;
+    wrap.dataset.tooltipPlacementBound = "true";
+    const place = () => placeInfoHoverTooltip(wrap);
+    wrap.addEventListener("mouseenter", place);
+    wrap.addEventListener("focusin", place);
+  });
+}
+
+window.addEventListener("resize", () => {
+  document.querySelectorAll(".info-hover-wrap:hover, .info-hover-wrap:focus-within").forEach(placeInfoHoverTooltip);
+});
+
 function addOverviewInfoButtons() {
   const placeholderText = "Temporary info text. Replace this with metric-specific details.";
   const allowedInfoTitles = new Set([
@@ -10628,20 +11005,9 @@ function addOverviewInfoButtons() {
     wrap.appendChild(button);
     wrap.appendChild(tooltip);
 
-    const placeTooltip = () => {
-      wrap.classList.remove("open-left");
-      const rectRight = tooltip.getBoundingClientRect().right;
-      if (rectRight > window.innerWidth - 8) {
-        wrap.classList.add("open-left");
-      }
-    };
-
-    wrap.addEventListener("mouseenter", placeTooltip);
-    wrap.addEventListener("focusin", placeTooltip);
-    window.addEventListener("resize", placeTooltip);
-
     titleNode.appendChild(wrap);
   });
+  bindInfoHoverTooltipPlacement(document.getElementById("overviewSection") || document);
 }
 
 function getRankPoolSizeForMode(mode = "watched") {
@@ -10696,6 +11062,7 @@ if (overviewViewTabs) {
 
 setActiveSection(initialSection);
 addOverviewInfoButtons();
+bindInfoHoverTooltipPlacement(document);
 
 const relearnPrevPageBtn = document.getElementById("relearnPrevPageBtn");
 const relearnNextPageBtn = document.getElementById("relearnNextPageBtn");
@@ -10866,8 +11233,13 @@ const searchSongFrequencyNextPageBtn = document.getElementById("searchSongFreque
 const originalTourSearchInput = document.getElementById("originalTourSearchInput");
 const originalTourPrevMonthBtn = document.getElementById("originalTourPrevMonthBtn");
 const originalTourNextMonthBtn = document.getElementById("originalTourNextMonthBtn");
-const originalTourSelectBtn = document.getElementById("originalTourSelectBtn");
+const originalTourSelectStatsBtn = document.getElementById("originalTourSelectStatsBtn");
+const originalTourSelectSongsBtn = document.getElementById("originalTourSelectSongsBtn");
 const originalTourColorModeSelect = document.getElementById("originalTourColorModeSelect");
+const originalTourSongSearchInput = document.getElementById("originalTourSongSearchInput");
+const originalTourSongFilterSelect = document.getElementById("originalTourSongFilterSelect");
+const originalTourSongsPrevPageBtn = document.getElementById("originalTourSongsPrevPageBtn");
+const originalTourSongsNextPageBtn = document.getElementById("originalTourSongsNextPageBtn");
 const socialTeamSearchInput = document.getElementById("socialTeamSearchInput");
 const socialTeamPrevMonthBtn = document.getElementById("socialTeamPrevMonthBtn");
 const socialTeamNextMonthBtn = document.getElementById("socialTeamNextMonthBtn");
@@ -11017,10 +11389,23 @@ if (originalTourNextMonthBtn) {
     renderOriginalTourCalendarView();
   });
 }
-if (originalTourSelectBtn) {
-  originalTourSelectBtn.addEventListener("click", () => {
-    otherToolsCalendarAppliedTimestamp = otherToolsCalendarSelectedTimestamp;
-    renderOriginalTourCalendarView();
+window.addEventListener("resize", syncOriginalTourPlayersPanelHeight);
+
+function applyOriginalTourSelectionAndView(subpage) {
+  otherToolsCalendarAppliedTimestamp = otherToolsCalendarSelectedTimestamp;
+  originalTourSongsPageIndex = 0;
+  singleTourActiveSubpage = normalizeSingleTourSubpage(subpage);
+  renderOriginalTourCalendarView();
+}
+
+if (originalTourSelectStatsBtn) {
+  originalTourSelectStatsBtn.addEventListener("click", () => {
+    preserveSingleTourScrollPosition(() => applyOriginalTourSelectionAndView("stats"));
+  });
+}
+if (originalTourSelectSongsBtn) {
+  originalTourSelectSongsBtn.addEventListener("click", () => {
+    preserveSingleTourScrollPosition(() => applyOriginalTourSelectionAndView("songs"));
   });
 }
 if (originalTourColorModeSelect) {
@@ -11029,6 +11414,48 @@ if (originalTourColorModeSelect) {
     originalTourColorMode = nextMode === "extremes" ? "extremes" : "gradient";
     originalTourColorModeSelect.value = originalTourColorMode;
     renderOriginalTourRawDataTable();
+  });
+}
+document.querySelectorAll("[data-single-tour-view]").forEach(button => {
+  button.addEventListener("click", () => {
+    preserveSingleTourScrollPosition(() => {
+      singleTourActiveSubpage = normalizeSingleTourSubpage(button.getAttribute("data-single-tour-view"));
+      renderOriginalTourCalendarView();
+    });
+  });
+});
+document.querySelectorAll("[data-original-tour-result]").forEach(button => {
+  button.addEventListener("click", () => {
+    const nextMode = String(button.getAttribute("data-original-tour-result") || "all").toLowerCase();
+    originalTourSongResultMode = ["correct", "wrong"].includes(nextMode) ? nextMode : "all";
+    originalTourSongsPageIndex = 0;
+    renderOriginalTourSongsTable();
+  });
+});
+if (originalTourSongSearchInput) {
+  originalTourSongSearchInput.addEventListener("input", event => {
+    originalTourSongSearchQuery = String(event.target.value || "");
+    originalTourSongsPageIndex = 0;
+    renderOriginalTourSongsTable();
+  });
+}
+if (originalTourSongFilterSelect) {
+  originalTourSongFilterSelect.addEventListener("change", event => {
+    originalTourSongFilterMode = String(event.target.value || "all").toLowerCase();
+    originalTourSongsPageIndex = 0;
+    renderOriginalTourSongsTable();
+  });
+}
+if (originalTourSongsPrevPageBtn) {
+  originalTourSongsPrevPageBtn.addEventListener("click", () => {
+    originalTourSongsPageIndex = Math.max(0, originalTourSongsPageIndex - 1);
+    renderOriginalTourSongsTable();
+  });
+}
+if (originalTourSongsNextPageBtn) {
+  originalTourSongsNextPageBtn.addEventListener("click", () => {
+    originalTourSongsPageIndex += 1;
+    renderOriginalTourSongsTable();
   });
 }
 
@@ -11207,7 +11634,6 @@ function renderOverviewForActiveMode() {
     const rankEl = document.getElementById("rank");
     const guessEl = document.getElementById("guess");
     const foundEl = document.getElementById("foundGames");
-    const slopeEl = document.getElementById("slopeInfo");
     const momentumEl = document.getElementById("overviewMomentum");
     const consistencyEl = document.getElementById("overviewConsistency");
     const typeMixEl = document.getElementById("overviewTypeMixBalance");
@@ -11215,7 +11641,6 @@ function renderOverviewForActiveMode() {
     if (rankEl) rankEl.innerText = "-";
     if (guessEl) guessEl.innerText = "-";
     if (foundEl) foundEl.innerText = "Found 0 tours";
-    if (slopeEl) slopeEl.innerText = "Slope: -";
     if (momentumEl) momentumEl.innerText = "N/A";
     if (consistencyEl) consistencyEl.innerText = "N/A";
     if (typeMixEl) typeMixEl.innerText = "N/A";
@@ -11865,7 +12290,7 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
       ensureSearchSongFrequencyData();
       renderSearchSongFrequency();
     }
-    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Original Tour data(Calendar)") {
+    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === OTHER_TOOLS_SINGLE_TOUR_LABEL) {
       ensureOriginalTourCalendarData();
       renderOriginalTourCalendarView();
     }
@@ -11906,7 +12331,7 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
       ensureSearchSongFrequencyData();
       renderSearchSongFrequency();
     }
-    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Original Tour data(Calendar)") {
+    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === OTHER_TOOLS_SINGLE_TOUR_LABEL) {
       ensureOriginalTourCalendarData();
       renderOriginalTourCalendarView();
     }
@@ -12367,7 +12792,6 @@ function drawByEraSeasonComparisonChart() {
           label: "Wrong",
           data: wrongData,
           stack: "seasonTotals",
-          hidden: true,
           backgroundColor: "rgba(239, 68, 68, 0.62)",
           borderColor: "#dc2626",
           borderWidth: 1.4,
@@ -14266,10 +14690,15 @@ function filterOriginalTourGames() {
   });
 }
 
-function getSelectedOriginalTourRows() {
+function getOriginalTourRowsForTimestamp(timestamp) {
   if (!otherToolsRowsByTimestamp || !(otherToolsRowsByTimestamp instanceof Map)) return [];
-  if (!otherToolsCalendarAppliedTimestamp) return [];
-  return otherToolsRowsByTimestamp.get(otherToolsCalendarAppliedTimestamp) || [];
+  const timestampKey = String(timestamp || "").trim();
+  if (!timestampKey) return [];
+  return otherToolsRowsByTimestamp.get(timestampKey) || [];
+}
+
+function getSelectedOriginalTourRows() {
+  return getOriginalTourRowsForTimestamp(otherToolsCalendarAppliedTimestamp);
 }
 
 function getOriginalTourAppliedDateLabel() {
@@ -14295,11 +14724,14 @@ function renderOriginalTourPlayersPanel() {
   const wrap = document.getElementById("originalTourPlayers");
   if (!wrap) return;
 
-  const rows = getSelectedOriginalTourRows();
+  const selectedTimestamp = String(otherToolsCalendarSelectedTimestamp || "").trim();
+  const isPreview = Boolean(selectedTimestamp && selectedTimestamp !== String(otherToolsCalendarAppliedTimestamp || "").trim());
+  const titleText = isPreview ? "Players (preview)" : "Players";
+  const rows = getOriginalTourRowsForTimestamp(selectedTimestamp);
   if (!rows.length) {
     wrap.innerHTML = `
-      <div class="original-tour-players-title">Players</div>
-      <div class="relearn-empty">Select a date/game, then press Select.</div>
+      <div class="original-tour-players-title">${titleText}</div>
+      <div class="relearn-empty">${selectedTimestamp ? "No players found for this tour." : "Select a date/game to preview players."}</div>
     `;
     return;
   }
@@ -14342,7 +14774,7 @@ function renderOriginalTourPlayersPanel() {
     .map(item => item.teamName);
 
   const metricByTeam = new Map(teamMetrics.map(item => [item.teamName, item]));
-  wrap.innerHTML = '<div class="original-tour-players-title">Players</div>';
+  wrap.innerHTML = `<div class="original-tour-players-title">${titleText}</div>`;
   teamNames.forEach(teamName => {
     const teamRows = grouped.get(teamName)
       .slice()
@@ -14374,6 +14806,45 @@ function renderOriginalTourPlayersPanel() {
 
     wrap.appendChild(teamWrap);
   });
+}
+
+function syncOriginalTourPlayersPanelHeight() {
+  const players = document.getElementById("originalTourPlayers");
+  const left = document.querySelector("#originalTourSelectCard .original-tour-left");
+  const right = document.querySelector("#originalTourSelectCard .original-tour-right");
+  const search = document.getElementById("originalTourSearchInput");
+  const gameList = document.getElementById("originalTourGameList");
+  if (!players) return;
+  if (normalizeSingleTourSubpage(singleTourActiveSubpage) !== "select" || !left || !right) {
+    players.style.height = "";
+    players.style.maxHeight = "";
+    return;
+  }
+
+  players.style.height = "0px";
+  players.style.maxHeight = "0px";
+  const rightHeight = right.getBoundingClientRect().height;
+  if (!Number.isFinite(rightHeight) || rightHeight <= 0) {
+    players.style.height = "";
+    players.style.maxHeight = "";
+    return;
+  }
+
+  const getOuterHeight = (el) => {
+    if (!el) return 0;
+    const rect = el.getBoundingClientRect();
+    const style = window.getComputedStyle(el);
+    const marginTop = Number.parseFloat(style.marginTop) || 0;
+    const marginBottom = Number.parseFloat(style.marginBottom) || 0;
+    return rect.height + marginTop + marginBottom;
+  };
+
+  const leftStyle = window.getComputedStyle(left);
+  const leftPadding = (Number.parseFloat(leftStyle.paddingTop) || 0) + (Number.parseFloat(leftStyle.paddingBottom) || 0);
+  const reservedHeight = leftPadding + getOuterHeight(search) + getOuterHeight(gameList);
+  const availableHeight = Math.max(0, Math.floor(rightHeight - reservedHeight));
+  players.style.height = `${availableHeight}px`;
+  players.style.maxHeight = `${availableHeight}px`;
 }
 
 function renderOriginalTourGameList() {
@@ -14466,11 +14937,379 @@ function renderOriginalTourCalendarGrid() {
   }
 }
 
+function parseOriginalTourJsonCell(rawValue) {
+  const text = String(rawValue == null ? "" : rawValue).trim();
+  if (!text) return [];
+  try {
+    const parsed = JSON.parse(text);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (_) {
+    return [];
+  }
+}
+
+function getOriginalTourPlayerNames(rawValue) {
+  return parseOriginalTourJsonCell(rawValue)
+    .map(item => {
+      if (typeof item === "string") return item;
+      if (item && typeof item === "object") {
+        return item.name || item.playerName || item.player || item.username || "";
+      }
+      return "";
+    })
+    .map(name => String(name || "").trim())
+    .filter(Boolean);
+}
+
+function normalizeOriginalTourPlayerName(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function getCurrentOriginalTourIdentitySet() {
+  const identities = new Set(getCurrentUserIdentitySet());
+  const addIdentity = value => {
+    const normalized = normalizeOriginalTourPlayerName(value);
+    if (normalized) identities.add(normalized);
+  };
+  addIdentity(currentDisplayName);
+  addIdentity(currentStatKey);
+  addIdentity(username);
+  if (Array.isArray(currentStatSourceKeys)) {
+    currentStatSourceKeys.forEach(addIdentity);
+  }
+
+  const playerEntry = getPlayerEntryFromCacheByName(currentDisplayName || currentStatKey || username || "");
+  if (playerEntry && typeof playerEntry === "object") {
+    addIdentity(playerEntry.displayName);
+    if (Array.isArray(playerEntry.altnames)) {
+      playerEntry.altnames.forEach(addIdentity);
+    }
+  }
+
+  return identities;
+}
+
+function originalTourNamesContainCurrentPlayer(names, identitySet) {
+  if (!identitySet || !identitySet.size) return false;
+  return (Array.isArray(names) ? names : []).some(name => identitySet.has(normalizeOriginalTourPlayerName(name)));
+}
+
+function getOriginalTourListStateForCurrentPlayer(row, identitySet) {
+  const states = parseOriginalTourJsonCell(row && row.listStates);
+  return states.find(state => {
+    if (!state || typeof state !== "object") return false;
+    return identitySet.has(normalizeOriginalTourPlayerName(state.name));
+  }) || null;
+}
+
+function getOriginalTourTypeLabel(row) {
+  const rawType = String(row && row["songInfo.type"] || "").trim();
+  const typeMap = { "1": "OP", "2": "ED", "3": "IN" };
+  const base = typeMap[rawType] || rawType || "—";
+  const rawTypeNumber = String(row && row["songInfo.typeNumber"] || "").trim();
+  const typeNumber = Number(rawTypeNumber);
+  if (base === "—" || !Number.isFinite(typeNumber) || typeNumber <= 0) return base;
+  return `${base}${typeNumber}`;
+}
+
+function getOriginalTourTypeKey(row) {
+  const rawType = String(row && row["songInfo.type"] || "").trim();
+  if (rawType === "1") return "op";
+  if (rawType === "2") return "ed";
+  if (rawType === "3") return "in";
+  return String(getOriginalTourTypeLabel(row)).toLowerCase().replace(/[0-9]+/g, "");
+}
+
+function getSelectedOriginalTourIds() {
+  const tourIds = new Set();
+  getSelectedOriginalTourRows().forEach(row => {
+    const tourId = String(row && (row.tourid || row["tourid"] || row["Tour ID"] || row["tour id"]) || "").trim();
+    if (tourId) tourIds.add(tourId);
+  });
+  return [...tourIds];
+}
+
+async function fetchOriginalTourSheetCsvText(fileName) {
+  const candidates = Array.from(new Set([dataUrl(fileName), fileName]));
+  for (const candidate of candidates) {
+    try {
+      const response = await fetch(candidate);
+      if (response.ok) return await response.text();
+    } catch (_) {
+      // Try the next location.
+    }
+  }
+  return "";
+}
+
+async function ensureOriginalTourSheetRowsForMode(mode = getActiveDataSourceMode()) {
+  const resolvedMode = mode === "usual" ? "usual" : "watched";
+  if (originalTourSheetRowsByTourIdCache.has(resolvedMode)) {
+    return originalTourSheetRowsByTourIdCache.get(resolvedMode);
+  }
+  if (originalTourSheetLoadPromises.has(resolvedMode)) {
+    return originalTourSheetLoadPromises.get(resolvedMode);
+  }
+
+  const promise = (async () => {
+    const fileName = resolvedMode === "usual" ? "json_sheets_usual.csv" : "json_sheets_watched.csv";
+    const csvText = await fetchOriginalTourSheetCsvText(fileName);
+    const rows = csvText ? parseSimpleCsv(csvText) : [];
+    const byTourId = new Map();
+    rows.forEach((row, index) => {
+      const tourId = String(row && row.tourid || "").trim();
+      if (!tourId) return;
+      if (!byTourId.has(tourId)) byTourId.set(tourId, []);
+      byTourId.get(tourId).push({ ...row, _sheetIndex: index });
+    });
+    originalTourSheetRowsByTourIdCache.set(resolvedMode, byTourId);
+    return byTourId;
+  })().catch(err => {
+    console.error("Failed loading original tour sheet CSV", err);
+    const empty = new Map();
+    originalTourSheetRowsByTourIdCache.set(resolvedMode, empty);
+    return empty;
+  }).finally(() => {
+    originalTourSheetLoadPromises.delete(resolvedMode);
+  });
+
+  originalTourSheetLoadPromises.set(resolvedMode, promise);
+  return promise;
+}
+
+function getOriginalTourSongRowsFromSheetIndex(sheetIndex, tourIds) {
+  if (!sheetIndex || !(sheetIndex instanceof Map) || !Array.isArray(tourIds) || !tourIds.length) return [];
+  const identitySet = getCurrentOriginalTourIdentitySet();
+  const rows = [];
+
+  tourIds.forEach(tourId => {
+    const sheetRows = sheetIndex.get(tourId) || [];
+    sheetRows.forEach(row => {
+      const correctNames = getOriginalTourPlayerNames(row.correctGuessPlayers);
+      const incorrectNames = getOriginalTourPlayerNames(row.incorrectGuessPlayers);
+      const gotCorrect = originalTourNamesContainCurrentPlayer(correctNames, identitySet);
+      const gotWrong = originalTourNamesContainCurrentPlayer(incorrectNames, identitySet);
+      if (!gotCorrect && !gotWrong) return;
+
+      const listState = getOriginalTourListStateForCurrentPlayer(row, identitySet);
+      const correctCount = Number(row.correctCount);
+      const wrongCount = Number(row.wrongCount);
+      const hitCount = Number.isFinite(correctCount) ? correctCount : null;
+      const missCount = Number.isFinite(wrongCount) ? wrongCount : null;
+      const totalCount = (hitCount || 0) + (missCount || 0);
+      const typeLabel = getOriginalTourTypeLabel(row);
+
+      rows.push({
+        ...row,
+        animeName: row["English Title"] || row["Romaji Title"] || "—",
+        animeRomaji: row["Romaji Title"] || "",
+        songName: row["Song Name"] || "—",
+        artist: row.Artist || "—",
+        type: typeLabel,
+        typeKey: getOriginalTourTypeKey(row),
+        result: gotCorrect ? "correct" : "wrong",
+        onlist: Boolean(listState),
+        correctCount: hitCount,
+        wrongCount: missCount,
+        hitRateText: totalCount > 0 && hitCount != null ? `${hitCount}/${totalCount}` : "—"
+      });
+    });
+  });
+
+  return rows.sort((a, b) => Number(a._sheetIndex || 0) - Number(b._sheetIndex || 0));
+}
+
+function getFilteredOriginalTourSongRows(rows) {
+  const sourceRows = Array.isArray(rows) ? rows : [];
+  const resultMode = String(originalTourSongResultMode || "all").toLowerCase();
+  const filterMode = String(originalTourSongFilterMode || "all").toLowerCase();
+  const query = String(originalTourSongSearchQuery || "").trim().toLowerCase();
+  const compactQuery = normalizeSearchSongText(query);
+
+  return sourceRows.filter(row => {
+    if (resultMode === "correct" && row.result !== "correct") return false;
+    if (resultMode === "wrong" && row.result !== "wrong") return false;
+
+    if (/^[1237]\/8$/.test(filterMode)) {
+      const targetCorrectCount = Number(filterMode.split("/")[0]);
+      if (Number(row.correctCount) !== targetCorrectCount) return false;
+    } else if (filterMode === "onlist" && !row.onlist) {
+      return false;
+    } else if (filterMode === "offlist" && row.onlist) {
+      return false;
+    } else if (["op", "ed", "in"].includes(filterMode) && row.typeKey !== filterMode) {
+      return false;
+    }
+
+    if (!query) return true;
+    const candidates = getSearchSongCandidatesByMode(row, "all");
+    candidates.push(
+      String(row.type || "").toLowerCase(),
+      String(row.hitRateText || "").toLowerCase(),
+      String(row.tourid || "").toLowerCase()
+    );
+    const compactCandidates = candidates.map(value => normalizeSearchSongText(value));
+    return candidates.some(value => value.includes(query))
+      || compactCandidates.some(value => value.includes(compactQuery));
+  });
+}
+
+function appendOriginalTourTextCell(rowEl, textValue) {
+  const cell = document.createElement("td");
+  const text = String(textValue == null || textValue === "" ? "—" : textValue);
+  cell.innerText = text;
+  if (text !== "—") cell.title = text;
+  rowEl.appendChild(cell);
+}
+
+function normalizeSingleTourSubpage(value) {
+  const key = String(value || "").toLowerCase();
+  return SINGLE_TOUR_SUBPAGE_KEYS.has(key) ? key : "select";
+}
+
+function preserveSingleTourScrollPosition(callback) {
+  const scrollX = window.scrollX;
+  const scrollY = window.scrollY;
+  callback();
+  window.scrollTo(scrollX, scrollY);
+  requestAnimationFrame(() => {
+    window.scrollTo(scrollX, scrollY);
+  });
+  setTimeout(() => {
+    window.scrollTo(scrollX, scrollY);
+  }, 0);
+}
+
+function updateSingleTourSubpageSelector() {
+  singleTourActiveSubpage = normalizeSingleTourSubpage(singleTourActiveSubpage);
+  document.querySelectorAll("[data-single-tour-view]").forEach(button => {
+    const buttonView = normalizeSingleTourSubpage(button.getAttribute("data-single-tour-view"));
+    const isActive = buttonView === singleTourActiveSubpage;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-selected", isActive ? "true" : "false");
+  });
+}
+
+function syncSingleTourSubpageVisibility() {
+  singleTourActiveSubpage = normalizeSingleTourSubpage(singleTourActiveSubpage);
+  const selectCard = document.getElementById("originalTourSelectCard");
+  if (selectCard) {
+    selectCard.style.display = singleTourActiveSubpage === "select" ? "block" : "none";
+  }
+}
+
+function renderOriginalTourSongsTable() {
+  const card = document.getElementById("originalTourSongsCard");
+  const title = document.getElementById("originalTourSongsTitle");
+  const meta = document.getElementById("originalTourSongsMeta");
+  const tbody = document.getElementById("originalTourSongsTableBody");
+  const pageMeta = document.getElementById("originalTourSongsPageMeta");
+  const prevPageBtn = document.getElementById("originalTourSongsPrevPageBtn");
+  const nextPageBtn = document.getElementById("originalTourSongsNextPageBtn");
+  if (!card || !title || !meta || !tbody || !pageMeta || !prevPageBtn || !nextPageBtn) return;
+  if (normalizeSingleTourSubpage(singleTourActiveSubpage) !== "songs") {
+    card.style.display = "none";
+    return;
+  }
+
+  document.querySelectorAll("[data-original-tour-result]").forEach(button => {
+    const buttonMode = String(button.getAttribute("data-original-tour-result") || "all").toLowerCase();
+    button.classList.toggle("active", buttonMode === String(originalTourSongResultMode || "all").toLowerCase());
+  });
+  if (originalTourSongSearchInput && originalTourSongSearchInput.value !== originalTourSongSearchQuery) {
+    originalTourSongSearchInput.value = originalTourSongSearchQuery;
+  }
+  if (originalTourSongFilterSelect && originalTourSongFilterSelect.value !== originalTourSongFilterMode) {
+    originalTourSongFilterSelect.value = originalTourSongFilterMode;
+  }
+
+  const tourIds = getSelectedOriginalTourIds();
+  if (!tourIds.length) {
+    card.style.display = "none";
+    tbody.innerHTML = "";
+    return;
+  }
+  card.style.display = "block";
+  title.innerText = `Songs for ${getOriginalTourAppliedDateLabel()}`;
+
+  const activeMode = getActiveDataSourceMode();
+  const cachedSheetIndex = originalTourSheetRowsByTourIdCache.get(activeMode);
+  if (!cachedSheetIndex) {
+    meta.innerText = "Loading songs...";
+    pageMeta.innerText = "Page 1/1";
+    prevPageBtn.disabled = true;
+    nextPageBtn.disabled = true;
+    tbody.innerHTML = '<tr><td colspan="8" class="relearn-empty">Loading linked sheet rows...</td></tr>';
+    ensureOriginalTourSheetRowsForMode(activeMode).then(() => {
+      if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === OTHER_TOOLS_SINGLE_TOUR_LABEL) {
+        renderOriginalTourSongsTable();
+      }
+    });
+    return;
+  }
+
+  const allSongRows = getOriginalTourSongRowsFromSheetIndex(cachedSheetIndex, tourIds);
+  const filteredRows = getFilteredOriginalTourSongRows(allSongRows);
+  meta.innerText = `Found ${filteredRows.length} / ${allSongRows.length} songs`;
+
+  tbody.innerHTML = "";
+  const pageCount = Math.max(1, Math.ceil(filteredRows.length / ORIGINAL_TOUR_SONGS_PAGE_SIZE));
+  originalTourSongsPageIndex = Math.min(Math.max(0, originalTourSongsPageIndex), pageCount - 1);
+  const start = originalTourSongsPageIndex * ORIGINAL_TOUR_SONGS_PAGE_SIZE;
+  const pageRows = filteredRows.slice(start, start + ORIGINAL_TOUR_SONGS_PAGE_SIZE);
+
+  pageMeta.innerText = `Page ${originalTourSongsPageIndex + 1}/${pageCount}`;
+  prevPageBtn.disabled = originalTourSongsPageIndex <= 0;
+  nextPageBtn.disabled = originalTourSongsPageIndex >= pageCount - 1;
+
+  if (!filteredRows.length) {
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+    cell.colSpan = 8;
+    cell.className = "relearn-empty";
+    cell.innerText = allSongRows.length
+      ? "No songs match the selected filters."
+      : "No linked song rows found for this tour.";
+    row.appendChild(cell);
+    tbody.appendChild(row);
+    return;
+  }
+
+  pageRows.forEach((song, index) => {
+    const row = document.createElement("tr");
+
+    const numberCell = document.createElement("td");
+    numberCell.innerText = String(start + index + 1);
+    row.appendChild(numberCell);
+
+    const resultCell = document.createElement("td");
+    const resultPill = document.createElement("span");
+    resultPill.className = `original-tour-song-result ${song.result === "correct" ? "correct" : "wrong"}`;
+    resultPill.innerText = song.result === "correct" ? "Correct" : "Wrong";
+    resultCell.appendChild(resultPill);
+    row.appendChild(resultCell);
+
+    appendOriginalTourTextCell(row, getLanguageAwareAnimeName(song));
+    appendOriginalTourTextCell(row, formatSearchSongTitle(song));
+    appendOriginalTourTextCell(row, song.type);
+    appendOriginalTourTextCell(row, song.artist);
+    appendOriginalTourTextCell(row, song.hitRateText);
+    appendOriginalTourTextCell(row, song.onlist ? "On" : "Off");
+
+    tbody.appendChild(row);
+  });
+}
+
 function renderOriginalTourRawDataTable() {
   const wrap = document.getElementById("originalTourRawDataWrap");
   const statsCard = document.getElementById("originalTourStatsSheetCard");
   const statsTitle = document.getElementById("originalTourStatsTitle");
   if (!wrap) return;
+  if (normalizeSingleTourSubpage(singleTourActiveSubpage) !== "stats") {
+    if (statsCard) statsCard.style.display = "none";
+    wrap.style.display = "none";
+    return;
+  }
 
   const rows = getSelectedOriginalTourRows();
   if (!rows.length) {
@@ -14745,6 +15584,8 @@ function updateOriginalTourRawStickyColumnOffsets(wrapEl = null) {
 
 function renderOriginalTourCalendarView() {
   const meta = document.getElementById("originalTourMeta");
+  updateSingleTourSubpageSelector();
+  syncSingleTourSubpageVisibility();
 
   if (!otherToolsCalendarFilteredGames.some(game => game.timestamp === otherToolsCalendarSelectedTimestamp)) {
     const fallback = otherToolsCalendarFilteredGames.length
@@ -14759,22 +15600,26 @@ function renderOriginalTourCalendarView() {
   if (meta) {
     meta.innerText = `Found ${otherToolsCalendarFilteredGames.length} games`;
   }
-  if (!otherToolsCalendarFilteredGames.some(game => game.timestamp === otherToolsCalendarAppliedTimestamp)) {
+  if (!otherToolsCalendarGames.some(game => game.timestamp === otherToolsCalendarAppliedTimestamp)) {
     otherToolsCalendarAppliedTimestamp = otherToolsCalendarSelectedTimestamp;
   }
 
   renderOriginalTourGameList();
   renderOriginalTourPlayersPanel();
   renderOriginalTourCalendarGrid();
+  syncOriginalTourPlayersPanelHeight();
+  renderOriginalTourSongsTable();
   renderOriginalTourRawDataTable();
   updateOriginalTourSelectButtonState();
 }
 
 function updateOriginalTourSelectButtonState() {
-  if (!originalTourSelectBtn) return;
+  const selectButtons = [originalTourSelectStatsBtn, originalTourSelectSongsBtn].filter(Boolean);
+  if (!selectButtons.length) return;
   const hasSelected = Boolean(otherToolsCalendarSelectedTimestamp);
-  const hasPendingSelection = otherToolsCalendarSelectedTimestamp !== otherToolsCalendarAppliedTimestamp;
-  originalTourSelectBtn.disabled = !hasSelected || !hasPendingSelection;
+  selectButtons.forEach(button => {
+    button.disabled = !hasSelected;
+  });
 }
 
 function resolveNumericMetricValue(row, key) {
@@ -20307,7 +21152,8 @@ function renderOverviewAnimeTypeCharts() {
           }
         },
         y: {
-          beginAtZero: false,
+          beginAtZero: true,
+          min: 0,
           ticks: {
             color: "#475569",
             callback: function(value) {
@@ -26170,9 +27016,6 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
     : "-";
   const labels = records.map(x => x.Timestamp);
   document.getElementById("foundGames").innerText = `Found ${labels.length} tours`;
-  const { slope } = buildTrend(values);
-  const slopePrefix = slope >= 0 ? "+" : "";
-  document.getElementById("slopeInfo").innerText = `Slope: ${slopePrefix}${slope.toFixed(2)}% per game`;
 
   guessChart = renderTrendChart(
     guessChart,
