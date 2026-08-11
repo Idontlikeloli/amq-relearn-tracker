@@ -15029,8 +15029,24 @@ function getSelectedOriginalTourIds() {
   return [...tourIds];
 }
 
-async function fetchOriginalTourSheetCsvText(fileName) {
-  const candidates = Array.from(new Set([dataUrl(fileName), fileName]));
+function sameOriginDataUrl(path) {
+  const cleanPath = String(path || "")
+    .replace(/^data\//, "")
+    .replace(/^\/+/, "");
+  const url = `./data/${cleanPath}`;
+  if (!isLocalDataContext && shouldVersionDataRequest(cleanPath)) {
+    const separator = url.includes("?") ? "&" : "?";
+    return `${url}${separator}v=${encodeURIComponent(DATA_ASSET_VERSION)}`;
+  }
+  return url;
+}
+
+async function fetchOriginalTourDataText(fileName) {
+  const candidates = Array.from(new Set([
+    dataUrl(fileName),
+    sameOriginDataUrl(fileName),
+    fileName
+  ]));
   for (const candidate of candidates) {
     try {
       const response = await fetch(candidate);
@@ -15040,6 +15056,36 @@ async function fetchOriginalTourSheetCsvText(fileName) {
     }
   }
   return "";
+}
+
+function buildOriginalTourRowsIndexFromJson(jsonText) {
+  if (!jsonText) return null;
+  const parsed = JSON.parse(jsonText);
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+
+  const byTourId = new Map();
+  Object.entries(parsed).forEach(([tourId, rows]) => {
+    const cleanTourId = String(tourId || "").trim();
+    if (!cleanTourId || !Array.isArray(rows)) return;
+    byTourId.set(cleanTourId, rows.map((row, index) => ({
+      ...(row && typeof row === "object" ? row : {}),
+      tourid: cleanTourId,
+      _sheetIndex: index
+    })));
+  });
+  return byTourId;
+}
+
+function buildOriginalTourRowsIndexFromCsv(csvText) {
+  const rows = csvText ? parseSimpleCsv(csvText) : [];
+  const byTourId = new Map();
+  rows.forEach((row, index) => {
+    const tourId = String(row && row.tourid || "").trim();
+    if (!tourId) return;
+    if (!byTourId.has(tourId)) byTourId.set(tourId, []);
+    byTourId.get(tourId).push({ ...row, _sheetIndex: index });
+  });
+  return byTourId;
 }
 
 async function ensureOriginalTourSheetRowsForMode(mode = getActiveDataSourceMode()) {
@@ -15052,20 +15098,23 @@ async function ensureOriginalTourSheetRowsForMode(mode = getActiveDataSourceMode
   }
 
   const promise = (async () => {
-    const fileName = resolvedMode === "usual" ? "json_sheets_usual.csv" : "json_sheets_watched.csv";
-    const csvText = await fetchOriginalTourSheetCsvText(fileName);
-    const rows = csvText ? parseSimpleCsv(csvText) : [];
-    const byTourId = new Map();
-    rows.forEach((row, index) => {
-      const tourId = String(row && row.tourid || "").trim();
-      if (!tourId) return;
-      if (!byTourId.has(tourId)) byTourId.set(tourId, []);
-      byTourId.get(tourId).push({ ...row, _sheetIndex: index });
-    });
+    const jsonFileName = resolvedMode === "usual"
+      ? "original_tour_songs_usual.json"
+      : "original_tour_songs_watched.json";
+    const jsonText = await fetchOriginalTourDataText(jsonFileName);
+    const jsonIndex = buildOriginalTourRowsIndexFromJson(jsonText);
+    if (jsonIndex) {
+      originalTourSheetRowsByTourIdCache.set(resolvedMode, jsonIndex);
+      return jsonIndex;
+    }
+
+    const csvFileName = resolvedMode === "usual" ? "json_sheets_usual.csv" : "json_sheets_watched.csv";
+    const csvText = await fetchOriginalTourDataText(csvFileName);
+    const byTourId = buildOriginalTourRowsIndexFromCsv(csvText);
     originalTourSheetRowsByTourIdCache.set(resolvedMode, byTourId);
     return byTourId;
   })().catch(err => {
-    console.error("Failed loading original tour sheet CSV", err);
+    console.error("Failed loading original tour song data", err);
     const empty = new Map();
     originalTourSheetRowsByTourIdCache.set(resolvedMode, empty);
     return empty;
