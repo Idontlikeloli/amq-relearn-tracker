@@ -12452,6 +12452,10 @@ function rerenderRecommendationsForLanguage() {
       renderSearchSongFrequency();
       return;
     }
+    if (activeSubSection === OTHER_TOOLS_SINGLE_TOUR_LABEL) {
+      renderOriginalTourSongsTable();
+      return;
+    }
   }
 
   if (activeSection === "knowledge") {
@@ -15043,8 +15047,8 @@ function sameOriginDataUrl(path) {
 
 async function fetchOriginalTourDataText(fileName) {
   const candidates = Array.from(new Set([
-    dataUrl(fileName),
     sameOriginDataUrl(fileName),
+    dataUrl(fileName),
     fileName
   ]));
   for (const candidate of candidates) {
@@ -15063,6 +15067,36 @@ function buildOriginalTourRowsIndexFromJson(jsonText) {
   const parsed = JSON.parse(jsonText);
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
 
+  if (
+    Array.isArray(parsed.columns)
+    && parsed.tours
+    && typeof parsed.tours === "object"
+    && !Array.isArray(parsed.tours)
+  ) {
+    const columns = parsed.columns.map(column => String(column || "").trim());
+    const byTourId = new Map();
+    Object.entries(parsed.tours).forEach(([tourId, rows]) => {
+      const cleanTourId = String(tourId || "").trim();
+      if (!cleanTourId || !Array.isArray(rows)) return;
+      byTourId.set(cleanTourId, rows.map((values, index) => {
+        const row = {};
+        if (Array.isArray(values)) {
+          columns.forEach((column, columnIndex) => {
+            if (!column) return;
+            row[column] = values[columnIndex] == null ? "" : String(values[columnIndex]);
+          });
+        }
+        const explicitIndex = Number(row._sheetIndex);
+        return {
+          ...row,
+          tourid: cleanTourId,
+          _sheetIndex: Number.isFinite(explicitIndex) ? explicitIndex : index
+        };
+      }));
+    });
+    return byTourId;
+  }
+
   const byTourId = new Map();
   Object.entries(parsed).forEach(([tourId, rows]) => {
     const cleanTourId = String(tourId || "").trim();
@@ -15070,20 +15104,8 @@ function buildOriginalTourRowsIndexFromJson(jsonText) {
     byTourId.set(cleanTourId, rows.map((row, index) => ({
       ...(row && typeof row === "object" ? row : {}),
       tourid: cleanTourId,
-      _sheetIndex: index
+      _sheetIndex: Number.isFinite(Number(row && row._sheetIndex)) ? Number(row._sheetIndex) : index
     })));
-  });
-  return byTourId;
-}
-
-function buildOriginalTourRowsIndexFromCsv(csvText) {
-  const rows = csvText ? parseSimpleCsv(csvText) : [];
-  const byTourId = new Map();
-  rows.forEach((row, index) => {
-    const tourId = String(row && row.tourid || "").trim();
-    if (!tourId) return;
-    if (!byTourId.has(tourId)) byTourId.set(tourId, []);
-    byTourId.get(tourId).push({ ...row, _sheetIndex: index });
   });
   return byTourId;
 }
@@ -15108,9 +15130,7 @@ async function ensureOriginalTourSheetRowsForMode(mode = getActiveDataSourceMode
       return jsonIndex;
     }
 
-    const csvFileName = resolvedMode === "usual" ? "json_sheets_usual.csv" : "json_sheets_watched.csv";
-    const csvText = await fetchOriginalTourDataText(csvFileName);
-    const byTourId = buildOriginalTourRowsIndexFromCsv(csvText);
+    const byTourId = new Map();
     originalTourSheetRowsByTourIdCache.set(resolvedMode, byTourId);
     return byTourId;
   })().catch(err => {
