@@ -71,6 +71,80 @@
       visibility: visible !important;
     }
 
+    #overviewSection .overview-weekly-range-subtitle .weekly-data-range-info {
+      position: relative !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 14px !important;
+      height: 14px !important;
+      border-radius: 999px !important;
+      border: 1px solid #94a3b8 !important;
+      background: #ffffff !important;
+      color: #475569 !important;
+      font-size: 0 !important;
+      font-family: "Segoe UI", "Avenir Next", sans-serif !important;
+      font-style: normal !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      cursor: default !important;
+      margin-left: 0 !important;
+      transform: none !important;
+      padding: 0 !important;
+      z-index: 300 !important;
+      text-shadow: none !important;
+      letter-spacing: 0 !important;
+      flex: 0 0 auto !important;
+    }
+
+    #overviewSection .overview-weekly-range-subtitle .weekly-data-range-info::before {
+      content: "i" !important;
+      font-size: 9px !important;
+      font-family: "Segoe UI", "Avenir Next", sans-serif !important;
+      font-style: normal !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      color: inherit !important;
+      transform: translateY(-0.2px) !important;
+      text-shadow: none !important;
+      letter-spacing: 0 !important;
+    }
+
+    #overviewSection .overview-weekly-range-subtitle .weekly-data-range-info .weekly-card-info-tooltip {
+      position: absolute !important;
+      left: 0 !important;
+      top: calc(100% + 9px) !important;
+      width: max-content !important;
+      min-width: 0 !important;
+      max-width: min(460px, calc(100vw - 32px)) !important;
+      box-sizing: border-box !important;
+      border-radius: 9px !important;
+      border: 2px solid #94a3b8 !important;
+      background: #f8fafc !important;
+      color: #0f172a !important;
+      font-size: 11px !important;
+      font-weight: 400 !important;
+      line-height: 1.35 !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+      text-align: left !important;
+      padding: 8px 9px !important;
+      white-space: normal !important;
+      overflow-wrap: break-word !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      z-index: 2147483647 !important;
+      box-shadow: 0 10px 20px rgba(51, 65, 85, 0.16) !important;
+      text-shadow: none !important;
+    }
+
+    #overviewSection .overview-weekly-range-subtitle .weekly-data-range-info:hover .weekly-card-info-tooltip,
+    #overviewSection .overview-weekly-range-subtitle .weekly-data-range-info:focus-visible .weekly-card-info-tooltip {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
     body.performance-nav-mode {
       background:
         radial-gradient(circle at 16% -10%, rgba(126, 164, 209, 0.20), rgba(126, 164, 209, 0) 40%),
@@ -2794,11 +2868,21 @@
 
     #overviewSection .overview-weekly-range-subtitle {
       display: none;
-      margin: -30px 0 20px 5px !important;
+      align-items: center !important;
+      gap: 3px !important;
+      width: fit-content !important;
+      position: relative !important;
+      overflow: visible !important;
+      margin: 0 0 14px 5px !important;
       font-size: 12px !important;
       line-height: 1.2 !important;
       color: #64748b !important;
       font-weight: 600 !important;
+    }
+
+    #overviewSection.weekly-performance-active > .page-title {
+      margin-bottom: 6px !important;
+      line-height: 1.04 !important;
     }
 
     #overviewSection .card-title,
@@ -10810,6 +10894,10 @@ function renderOverviewSubView() {
   overviewMainView.style.display = showOverviewMain ? "block" : "none";
   overviewStatsSummaryView.style.display = showStatsSummary ? "block" : "none";
   overviewWeeklyView.style.display = showWeeklyPerformance ? "block" : "none";
+  const overviewSectionEl = document.getElementById("overviewSection");
+  if (overviewSectionEl) {
+    overviewSectionEl.classList.toggle("weekly-performance-active", showWeeklyPerformance);
+  }
   if (isOverviewSection) {
     const title = showStatsSummary
       ? "Stats Summary"
@@ -11782,8 +11870,27 @@ function updateOverviewWeeklyRangeSubtitle(showWeeklyPerformance) {
     return;
   }
   const rangeLabel = getWeeklyDateRangeLabelForActiveMode();
-  subtitleEl.textContent = rangeLabel;
-  subtitleEl.style.setProperty("display", rangeLabel ? "block" : "none", "important");
+  subtitleEl.textContent = "";
+  if (!rangeLabel) {
+    subtitleEl.style.setProperty("display", "none", "important");
+    return;
+  }
+
+  subtitleEl.appendChild(document.createTextNode(rangeLabel));
+
+  const infoIcon = document.createElement("span");
+  infoIcon.className = "weekly-card-info weekly-data-range-info";
+  infoIcon.tabIndex = 0;
+  infoIcon.setAttribute("aria-label", "Weekly data range info");
+  infoIcon.textContent = "i";
+
+  const tooltip = document.createElement("span");
+  tooltip.className = "weekly-card-info-tooltip";
+  tooltip.textContent = "Weekly Performance uses the generated weekly data range. Week boundaries and date cutoffs are based on GMT+8 / Taiwan time.";
+  infoIcon.appendChild(tooltip);
+  subtitleEl.appendChild(infoIcon);
+
+  subtitleEl.style.setProperty("display", "inline-flex", "important");
 }
 
 function normalizeWeeklyIdentityToken(value) {
@@ -14426,11 +14533,9 @@ function getVisibleUserData(userData) {
     return userData.slice(-selectedCount);
   }
 
-  const latestRecordDate = new Date(
-    userData[userData.length - 1].Timestamp.replace(" ", "T")
-  );
+  const latestRecordDate = parseStatsTimestampDate(userData[userData.length - 1].Timestamp);
 
-  if (Number.isNaN(latestRecordDate.getTime())) {
+  if (!latestRecordDate || Number.isNaN(latestRecordDate.getTime())) {
     return userData;
   }
 
@@ -14452,8 +14557,8 @@ function getVisibleUserData(userData) {
   cutoff.setDate(cutoff.getDate() - days);
 
   return userData.filter(row => {
-    const rowDate = new Date(row.Timestamp.replace(" ", "T"));
-    return !Number.isNaN(rowDate.getTime()) && rowDate >= cutoff;
+    const rowDate = parseStatsTimestampDate(row.Timestamp);
+    return rowDate && !Number.isNaN(rowDate.getTime()) && rowDate >= cutoff;
   });
 }
 
@@ -14551,9 +14656,9 @@ function isCurrentUserStatKey(key) {
     && currentStatSourceKeys.some(sourceKey => String(sourceKey || "").trim().toLowerCase() === normalized);
 }
 
-function getSortableTimestampValue(value) {
+function parseStatsTimestampDate(value) {
   const timestamp = String(value || "").trim();
-  if (!timestamp) return Number.NEGATIVE_INFINITY;
+  if (!timestamp) return null;
 
   // Legacy historical rows can be DD-MM-YYYY (optionally with HH:mm[:ss]).
   const legacyDmyMatch = timestamp.match(
@@ -14566,12 +14671,28 @@ function getSortableTimestampValue(value) {
     const hour = Number(legacyDmyMatch[4] || 0);
     const minute = Number(legacyDmyMatch[5] || 0);
     const second = Number(legacyDmyMatch[6] || 0);
-    const parsedLegacy = new Date(year, month - 1, day, hour, minute, second);
-    return Number.isNaN(parsedLegacy.getTime()) ? Number.NEGATIVE_INFINITY : parsedLegacy.getTime();
+    return new Date(year, month - 1, day, hour, minute, second);
   }
 
-  const parsedDate = new Date(timestamp.replace(" ", "T"));
-  return Number.isNaN(parsedDate.getTime()) ? Number.NEGATIVE_INFINITY : parsedDate.getTime();
+  const localYmdMatch = timestamp.match(
+    /^(\d{4})[-/](\d{1,2})[-/](\d{1,2})(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?$/
+  );
+  if (localYmdMatch) {
+    const year = Number(localYmdMatch[1]);
+    const month = Number(localYmdMatch[2]);
+    const day = Number(localYmdMatch[3]);
+    const hour = Number(localYmdMatch[4] || 0);
+    const minute = Number(localYmdMatch[5] || 0);
+    const second = Number(localYmdMatch[6] || 0);
+    return new Date(year, month - 1, day, hour, minute, second);
+  }
+
+  return new Date(timestamp.replace(" ", "T"));
+}
+
+function getSortableTimestampValue(value) {
+  const parsedDate = parseStatsTimestampDate(value);
+  return !parsedDate || Number.isNaN(parsedDate.getTime()) ? Number.NEGATIVE_INFINITY : parsedDate.getTime();
 }
 
 function sortRecordsByTimestamp(records) {
@@ -14589,6 +14710,17 @@ function formatDateKeyNoZeroPadding(dateObj) {
   const month = dateObj.getMonth() + 1;
   const day = dateObj.getDate();
   return `${year}/${month}/${day}`;
+}
+
+function dedupeCalendarGamesByTimestamp(games) {
+  const seen = new Set();
+  return (Array.isArray(games) ? games : []).filter(game => {
+    const timestamp = String(game && game.timestamp || "").trim();
+    if (!timestamp) return false;
+    if (seen.has(timestamp)) return false;
+    seen.add(timestamp);
+    return true;
+  });
 }
 
 function normalizeDateQuery(query) {
@@ -14640,17 +14772,17 @@ function ensureOriginalTourCalendarData() {
   const targetRows = getCurrentUserRecordsForActiveMode();
 
   otherToolsRowsByTimestamp = buildRowsByTimestampIndex();
-  otherToolsCalendarGames = sortRecordsByTimestamp(targetRows)
+  otherToolsCalendarGames = dedupeCalendarGamesByTimestamp(sortRecordsByTimestamp(targetRows)
     .map(row => {
       const ts = String(row && row.Timestamp || "");
-      const dateObj = new Date(ts.replace(" ", "T"));
+      const dateObj = parseStatsTimestampDate(ts);
       return {
         timestamp: ts,
         dateObj,
         dateKey: formatDateKeyNoZeroPadding(dateObj)
       };
     })
-    .filter(game => game.timestamp && game.dateKey);
+    .filter(game => game.timestamp && game.dateKey));
 
   filterOriginalTourGames();
 
@@ -14711,7 +14843,7 @@ function getOriginalTourAppliedDateLabel() {
   const matchingGame = otherToolsCalendarGames.find(game => game.timestamp === appliedTimestamp);
   if (matchingGame && matchingGame.dateKey) return matchingGame.dateKey;
 
-  const parsedDate = new Date(appliedTimestamp.replace(" ", "T"));
+  const parsedDate = parseStatsTimestampDate(appliedTimestamp);
   const dateKey = formatDateKeyNoZeroPadding(parsedDate);
   if (dateKey) return dateKey;
 
@@ -14946,9 +15078,12 @@ function parseOriginalTourJsonCell(rawValue) {
   if (!text) return [];
   try {
     const parsed = JSON.parse(text);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (_) {
+    if (Array.isArray(parsed)) return parsed;
+    if (parsed && typeof parsed === "object") return [parsed];
+    if (typeof parsed === "string" && parsed.trim()) return [parsed.trim()];
     return [];
+  } catch (_) {
+    return [text];
   }
 }
 
@@ -15022,6 +15157,11 @@ function getOriginalTourTypeKey(row) {
   if (rawType === "2") return "ed";
   if (rawType === "3") return "in";
   return String(getOriginalTourTypeLabel(row)).toLowerCase().replace(/[0-9]+/g, "");
+}
+
+function getOriginalTourFirstLooseValue(rawValue) {
+  const values = collectLooseStringValues(rawValue);
+  return values.length ? values[0] : "";
 }
 
 function getSelectedOriginalTourIds() {
@@ -15170,8 +15310,8 @@ function getOriginalTourSongRowsFromSheetIndex(sheetIndex, tourIds) {
 
       rows.push({
         ...row,
-        animeName: row["English Title"] || row["Romaji Title"] || "—",
-        animeRomaji: row["Romaji Title"] || "",
+        animeName: row["English Title"] || row["Romaji Title"] || getOriginalTourFirstLooseValue(row["Alt. Names"]) || "—",
+        animeRomaji: row["Romaji Title"] || getOriginalTourFirstLooseValue(row["Alt. Answers"]) || "",
         songName: row["Song Name"] || "—",
         artist: row.Artist || "—",
         type: typeLabel,
@@ -15717,17 +15857,17 @@ function ensureSocialTeamContributionData() {
   const targetRows = getCurrentUserRecordsForActiveMode();
 
   socialTeamRowsByTimestamp = buildRowsByTimestampIndex();
-  socialTeamGames = sortRecordsByTimestamp(targetRows)
+  socialTeamGames = dedupeCalendarGamesByTimestamp(sortRecordsByTimestamp(targetRows)
     .map(row => {
       const ts = String(row && row.Timestamp || "");
-      const dateObj = new Date(ts.replace(" ", "T"));
+      const dateObj = parseStatsTimestampDate(ts);
       return {
         timestamp: ts,
         dateObj,
         dateKey: formatDateKeyNoZeroPadding(dateObj)
       };
     })
-    .filter(game => game.timestamp && game.dateKey);
+    .filter(game => game.timestamp && game.dateKey));
 
   filterSocialTeamContributionGames();
 
