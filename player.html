@@ -13383,6 +13383,61 @@ function normalizeArtistAttemptsFilterValue(value) {
   return String(value || "").trim().toLowerCase();
 }
 
+function getWindowScrollPositionSnapshot() {
+  return {
+    x: window.scrollX || window.pageXOffset || 0,
+    y: window.scrollY || window.pageYOffset || 0
+  };
+}
+
+function restoreWindowScrollPositionSnapshot(snapshot) {
+  if (!snapshot) return;
+  window.scrollTo({
+    left: Number(snapshot.x) || 0,
+    top: Number(snapshot.y) || 0,
+    behavior: "auto"
+  });
+}
+
+function queueWindowScrollPositionRestore(snapshot) {
+  restoreWindowScrollPositionSnapshot(snapshot);
+  window.requestAnimationFrame(() => restoreWindowScrollPositionSnapshot(snapshot));
+  window.setTimeout(() => restoreWindowScrollPositionSnapshot(snapshot), 0);
+}
+
+function focusElementWithoutWindowScroll(element) {
+  if (!element || typeof element.focus !== "function") return;
+  const snapshot = getWindowScrollPositionSnapshot();
+  try {
+    element.focus({ preventScroll: true });
+  } catch (_err) {
+    element.focus();
+  }
+  queueWindowScrollPositionRestore(snapshot);
+}
+
+function renderArtistFamiliarityViewPreservingWindowScroll() {
+  const snapshot = getWindowScrollPositionSnapshot();
+  const barsWrap = document.getElementById("artistFamiliarityBars");
+  const previousHeight = barsWrap
+    ? Math.ceil(barsWrap.getBoundingClientRect().height)
+    : 0;
+  if (barsWrap && previousHeight > 0) {
+    barsWrap.dataset.artistFamiliarityPreserveHeight = "1";
+    barsWrap.style.minHeight = `${previousHeight}px`;
+  }
+
+  renderArtistFamiliarityView({ preserveAttemptsHeight: true });
+
+  const updatedBarsWrap = document.getElementById("artistFamiliarityBars");
+  if (updatedBarsWrap && previousHeight > 0) {
+    const nextHeight = Math.ceil(updatedBarsWrap.getBoundingClientRect().height);
+    updatedBarsWrap.dataset.artistFamiliarityPreserveHeight = "1";
+    updatedBarsWrap.style.minHeight = `${Math.max(previousHeight, nextHeight)}px`;
+  }
+  queueWindowScrollPositionRestore(snapshot);
+}
+
 function getArtistRowLatestTimestampMs(row) {
   if (!row || !Array.isArray(row.attemptTimestamps) || !row.attemptTimestamps.length) return 0;
   let latest = 0;
@@ -14280,12 +14335,16 @@ function renderArtistCompareRadarPanel(rightPanelHost, primaryEntry) {
   });
 }
 
-function renderArtistFamiliarityView() {
+function renderArtistFamiliarityView(options = {}) {
   const barsWrap = document.getElementById("artistFamiliarityBars");
   const meta = document.getElementById("artistFamiliarityMeta");
   const selected = document.getElementById("artistFamiliaritySelected");
   const attemptsDisclaimer = document.getElementById("artistFamiliarityAttemptsDisclaimer");
   if (!barsWrap || !meta || !selected) return;
+  if (!options.preserveAttemptsHeight && barsWrap.dataset.artistFamiliarityPreserveHeight === "1") {
+    barsWrap.style.minHeight = "";
+    delete barsWrap.dataset.artistFamiliarityPreserveHeight;
+  }
   renderArtistFamiliarityRightModeButtons();
 
   if (!artistFamiliarityEntries.length) {
@@ -14392,7 +14451,7 @@ function renderArtistFamiliarityView() {
         artistFamiliarityAttemptsFilterQuery = String(event.target.value || "");
         artistFamiliarityAttemptsShouldRefocusInput = true;
         artistFamiliarityPageIndex = 0;
-        renderArtistFamiliarityView();
+        renderArtistFamiliarityViewPreservingWindowScroll();
       });
     }
     if (sortSelect) {
@@ -14403,7 +14462,7 @@ function renderArtistFamiliarityView() {
       });
     }
     if (artistFamiliarityAttemptsShouldRefocusInput && filterInput) {
-      filterInput.focus();
+      focusElementWithoutWindowScroll(filterInput);
       const length = filterInput.value.length;
       filterInput.setSelectionRange(length, length);
       artistFamiliarityAttemptsShouldRefocusInput = false;
@@ -14477,7 +14536,7 @@ function renderArtistFamiliarityView() {
       artistFamiliarityAttemptsFilterQuery = String(event.target.value || "");
       artistFamiliarityAttemptsShouldRefocusInput = true;
       artistFamiliarityPageIndex = 0;
-      renderArtistFamiliarityView();
+      renderArtistFamiliarityViewPreservingWindowScroll();
     });
   }
   if (sortSelect) {
@@ -14488,7 +14547,7 @@ function renderArtistFamiliarityView() {
     });
   }
   if (artistFamiliarityAttemptsShouldRefocusInput && filterInput) {
-    filterInput.focus();
+    focusElementWithoutWindowScroll(filterInput);
     const length = filterInput.value.length;
     filterInput.setSelectionRange(length, length);
     artistFamiliarityAttemptsShouldRefocusInput = false;
@@ -14852,7 +14911,9 @@ function getOriginalTourAppliedDateLabel() {
 
 function getTeamLabelFromRow(row) {
   if (!row || typeof row !== "object") return "Unknown";
-  const explicitTeam = Number(row.Team ?? row.team);
+  const rawTeam = row.Team ?? row.team;
+  if (rawTeam === null || rawTeam === undefined || String(rawTeam).trim() === "") return "Unknown";
+  const explicitTeam = Number(rawTeam);
   return Number.isFinite(explicitTeam) ? String(explicitTeam) : "Unknown";
 }
 
@@ -14864,11 +14925,74 @@ function renderOriginalTourPlayersPanel() {
   const isPreview = Boolean(selectedTimestamp && selectedTimestamp !== String(otherToolsCalendarAppliedTimestamp || "").trim());
   const titleText = isPreview ? "Players (preview)" : "Players";
   const rows = getOriginalTourRowsForTimestamp(selectedTimestamp);
+  const formatPlayerWithRank = row => {
+    const playerName = String(row && row["Player name"] || "Unknown");
+    const rank = Number(row && row.Rank);
+    const rankText = Number.isFinite(rank) ? rank.toFixed(3) : "N/A";
+    return `${playerName}(${rankText})`;
+  };
   if (!rows.length) {
     wrap.innerHTML = `
       <div class="original-tour-players-title">${titleText}</div>
       <div class="relearn-empty">${selectedTimestamp ? "No players found for this tour." : "Select a date/game to preview players."}</div>
     `;
+    return;
+  }
+
+  const hasKnownTeam = rows.some(row => {
+    return getTeamLabelFromRow(row) !== "Unknown";
+  });
+  if (!hasKnownTeam) {
+    const fallbackGroups = new Map();
+    rows.forEach(row => {
+      const wins = Number(row && row.WIN);
+      const ties = Number(row && row.TIE);
+      const losses = Number(row && row.LOSE);
+      const totalSongs = Number(row && row["Total songs"]);
+      const hasRecord = Number.isFinite(wins) && Number.isFinite(ties) && Number.isFinite(losses);
+      const key = hasRecord
+        ? `${wins}|${ties}|${losses}|${Number.isFinite(totalSongs) ? totalSongs : ""}`
+        : "unknown";
+      if (!fallbackGroups.has(key)) {
+        fallbackGroups.set(key, {
+          wins,
+          ties,
+          losses,
+          totalSongs,
+          rows: []
+        });
+      }
+      fallbackGroups.get(key).rows.push(row);
+    });
+
+    const sortRowsByRank = (a, b) => {
+      const rankA = Number(a && a.Rank);
+      const rankB = Number(b && b.Rank);
+      if (Number.isFinite(rankA) && Number.isFinite(rankB) && rankA !== rankB) return rankB - rankA;
+      return String(a && a["Player name"] || "").localeCompare(String(b && b["Player name"] || ""));
+    };
+    const sortedFallbackGroups = [...fallbackGroups.values()].sort((a, b) => {
+      if (Number.isFinite(a.wins) && Number.isFinite(b.wins) && a.wins !== b.wins) return b.wins - a.wins;
+      if (Number.isFinite(a.ties) && Number.isFinite(b.ties) && a.ties !== b.ties) return b.ties - a.ties;
+      if (Number.isFinite(a.losses) && Number.isFinite(b.losses) && a.losses !== b.losses) return a.losses - b.losses;
+      if (Number.isFinite(a.totalSongs) && Number.isFinite(b.totalSongs) && a.totalSongs !== b.totalSongs) return a.totalSongs - b.totalSongs;
+      return a.rows.length - b.rows.length;
+    });
+
+    wrap.innerHTML = `<div class="original-tour-players-title">${titleText} (by record)</div>`;
+    sortedFallbackGroups.forEach(group => {
+      const teamWrap = document.createElement("div");
+      teamWrap.className = "original-tour-player-team";
+      const line = document.createElement("div");
+      line.className = "original-tour-player-row";
+      const recordText = Number.isFinite(group.wins) && Number.isFinite(group.ties) && Number.isFinite(group.losses)
+        ? `W-T-L ${group.wins}-${group.ties}-${group.losses}`
+        : "W-T-L unknown";
+      const totalSongsText = Number.isFinite(group.totalSongs) ? ` | ${group.totalSongs} songs` : "";
+      line.innerText = `${group.rows.slice().sort(sortRowsByRank).map(formatPlayerWithRank).join(" ")}  |  ${recordText}${totalSongsText}`;
+      teamWrap.appendChild(line);
+      wrap.appendChild(teamWrap);
+    });
     return;
   }
 
@@ -14928,14 +15052,9 @@ function renderOriginalTourPlayersPanel() {
 
     const line = document.createElement("div");
     line.className = "original-tour-player-row";
-    line.innerText = teamRows
-      .slice(0, 4)
-      .map(row => {
-        const playerName = String(row && row["Player name"] || "Unknown");
-        const rank = Number(row && row.Rank);
-        const rankText = Number.isFinite(rank) ? rank.toFixed(3) : "N/A";
-        return `${playerName}(${rankText})`;
-      })
+    const displayedTeamRows = teamName === "Unknown" ? teamRows : teamRows.slice(0, 4);
+    line.innerText = displayedTeamRows
+      .map(formatPlayerWithRank)
       .join(" ");
     line.innerText = `${line.innerText}  |  ${ratioText}`;
     teamWrap.appendChild(line);
@@ -15164,10 +15283,21 @@ function getOriginalTourFirstLooseValue(rawValue) {
   return values.length ? values[0] : "";
 }
 
+function deriveOriginalTourIdFromTimestamp(timestamp, mode = getActiveDataSourceMode()) {
+  const text = String(timestamp || "").trim().replace(/\//g, "-");
+  const match = text.match(/^(\d{4})-(\d{1,2})-(\d{1,2})\s+(\d{1,2}):(\d{2})(?::(\d{2}))?/);
+  if (!match) return "";
+
+  const [, year, month, day, hour, minute, second = "00"] = match;
+  const prefix = mode === "usual" ? "usual" : "watched";
+  return `${prefix}_${year}${month.padStart(2, "0")}${day.padStart(2, "0")}_${hour.padStart(2, "0")}${minute}${second}`;
+}
+
 function getSelectedOriginalTourIds() {
   const tourIds = new Set();
   getSelectedOriginalTourRows().forEach(row => {
-    const tourId = String(row && (row.tourid || row["tourid"] || row["Tour ID"] || row["tour id"]) || "").trim();
+    const explicitTourId = String(row && (row.tourid || row["tourid"] || row["Tour ID"] || row["tour id"]) || "").trim();
+    const tourId = explicitTourId || deriveOriginalTourIdFromTimestamp(row && row.Timestamp);
     if (tourId) tourIds.add(tourId);
   });
   return [...tourIds];
@@ -21870,11 +22000,29 @@ async function hydrateSongRowsWithSongKey(rows) {
 function resolveRelearnRowsWithSearchSongs(relearnRows, searchRows) {
   const inputRows = Array.isArray(relearnRows) ? relearnRows : [];
   const sourceRows = Array.isArray(searchRows) ? searchRows : [];
+  const sourceRowsBySongId = new Map();
+
+  sourceRows.forEach(sourceRow => {
+    if (!sourceRow || typeof sourceRow !== "object") return;
+    const songid = sourceRow.songid != null
+      ? sourceRow.songid
+      : (sourceRow.songId != null ? sourceRow.songId : null);
+    if (songid == null) return;
+    const key = String(songid);
+    if (!sourceRowsBySongId.has(key)) {
+      sourceRowsBySongId.set(key, sourceRow);
+    }
+  });
 
   return inputRows.map((row, index) => {
+    const rowSongId = row && row.songid != null
+      ? row.songid
+      : (row && row.songId != null ? row.songId : null);
     const refIndex = Number(row && row.searchSongIndex);
+    const hasSongId = rowSongId != null && String(rowSongId).trim() !== "";
+    const searchSongById = hasSongId ? sourceRowsBySongId.get(String(rowSongId)) : null;
     const hasSearchSongRef = Number.isInteger(refIndex) && refIndex >= 0 && refIndex < sourceRows.length;
-    const searchSongRow = hasSearchSongRef ? sourceRows[refIndex] : null;
+    const searchSongRow = searchSongById || (!hasSongId && hasSearchSongRef ? sourceRows[refIndex] : null);
     const mergedRow = searchSongRow && typeof searchSongRow === "object"
       ? { ...searchSongRow, ...(row && typeof row === "object" ? row : {}) }
       : (row && typeof row === "object" ? { ...row } : {});
