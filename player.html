@@ -18934,10 +18934,13 @@ function buildBestCurveTrend(values) {
   };
 }
 
-function buildRadarScale(values, ringCount = 5) {
+function buildRadarScale(values, ringCount = 5, options = {}) {
   const maxValue = Math.max(0, ...values);
   const safeRingCount = Math.max(1, ringCount);
-  const stepSize = Math.max(1, Math.ceil(maxValue / safeRingCount));
+  let stepSize = Math.max(1, Math.ceil(maxValue / safeRingCount));
+  if (options.evenStepSize && stepSize % 2 !== 0) {
+    stepSize += 1;
+  }
   const max = Math.min(100, stepSize * safeRingCount);
 
   return {
@@ -24182,9 +24185,13 @@ function renderInsightsRelearnTracker() {
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
-    const startSampleValue = Number(song && song.startSample);
-    const endSampleValue = Number(song && song.endSample);
+    const sampleAudioLink = String(song && song.sampleAudioLink ? song.sampleAudioLink : "").trim();
+    const rawStartSample = song && song.startSample;
+    const rawEndSample = song && song.endSample;
+    const startSampleValue = rawStartSample == null || rawStartSample === "" ? NaN : Number(rawStartSample);
+    const endSampleValue = rawEndSample == null || rawEndSample === "" ? NaN : Number(rawEndSample);
     const hasValidSampleRange =
+      !!sampleAudioLink &&
       Number.isFinite(startSampleValue) &&
       Number.isFinite(endSampleValue) &&
       endSampleValue > startSampleValue;
@@ -24193,6 +24200,7 @@ function renderInsightsRelearnTracker() {
       playTitle,
       pauseTitle,
       noLinkTitle,
+      link = audioLink,
       clipStart = null,
       clipEnd = null,
       requiresSampleRange = false
@@ -24213,7 +24221,7 @@ function renderInsightsRelearnTracker() {
       toggleIcon.loading = "lazy";
       toggleBtn.appendChild(toggleIcon);
 
-      if (!audioLink) {
+      if (!link) {
         toggleBtn.disabled = true;
         toggleBtn.title = noLinkTitle;
       } else if (requiresSampleRange && !hasValidSampleRange) {
@@ -24221,7 +24229,7 @@ function renderInsightsRelearnTracker() {
         toggleBtn.title = "No sample range available";
       } else {
         toggleBtn.addEventListener("click", () => {
-          toggleRelearnSongAudio(audioLink, toggleBtn, {
+          toggleRelearnSongAudio(link, toggleBtn, {
             startTime: clipStart,
             endTime: clipEnd
           });
@@ -24245,6 +24253,7 @@ function renderInsightsRelearnTracker() {
         playTitle: "Play sample",
         pauseTitle: "Pause sample",
         noLinkTitle: "No audio link available",
+        link: sampleAudioLink,
         clipStart: hasValidSampleRange ? startSampleValue : null,
         clipEnd: hasValidSampleRange ? endSampleValue : null,
         requiresSampleRange: true
@@ -25258,13 +25267,13 @@ function renderInsightsSearchSongs() {
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
-    const startSampleValue = Number(
-      song && (song.startSample != null ? song.startSample : song.sampleStart)
-    );
-    const endSampleValue = Number(
-      song && (song.endSample != null ? song.endSample : song.sampleEnd)
-    );
+    const sampleAudioLink = String(song && song.sampleAudioLink ? song.sampleAudioLink : "").trim();
+    const rawStartSample = song && (song.startSample != null ? song.startSample : song.sampleStart);
+    const rawEndSample = song && (song.endSample != null ? song.endSample : song.sampleEnd);
+    const startSampleValue = rawStartSample == null || rawStartSample === "" ? NaN : Number(rawStartSample);
+    const endSampleValue = rawEndSample == null || rawEndSample === "" ? NaN : Number(rawEndSample);
     const hasValidSampleRange =
+      !!sampleAudioLink &&
       Number.isFinite(startSampleValue) &&
       Number.isFinite(endSampleValue) &&
       endSampleValue > startSampleValue;
@@ -25273,6 +25282,7 @@ function renderInsightsSearchSongs() {
       playTitle,
       pauseTitle,
       noLinkTitle,
+      link = audioLink,
       clipStart = null,
       clipEnd = null,
       requiresSampleRange = false
@@ -25293,7 +25303,7 @@ function renderInsightsSearchSongs() {
       toggleIcon.loading = "lazy";
       toggleBtn.appendChild(toggleIcon);
 
-      if (!audioLink) {
+      if (!link) {
         toggleBtn.disabled = true;
         toggleBtn.title = noLinkTitle;
       } else if (requiresSampleRange && !hasValidSampleRange) {
@@ -25301,7 +25311,7 @@ function renderInsightsSearchSongs() {
         toggleBtn.title = "No sample range available";
       } else {
         toggleBtn.addEventListener("click", () => {
-          toggleRelearnSongAudio(audioLink, toggleBtn, {
+          toggleRelearnSongAudio(link, toggleBtn, {
             startTime: clipStart,
             endTime: clipEnd
           });
@@ -25325,6 +25335,7 @@ function renderInsightsSearchSongs() {
         playTitle: "Play sample",
         pauseTitle: "Pause sample",
         noLinkTitle: "No audio link available",
+        link: sampleAudioLink,
         clipStart: hasValidSampleRange ? startSampleValue : null,
         clipEnd: hasValidSampleRange ? endSampleValue : null,
         requiresSampleRange: true
@@ -26423,7 +26434,7 @@ function renderPerformanceGuessRate(records) {
     inAverage,
     opInAverage
   ];
-  const mixScale = buildRadarScale(mixValues);
+  const mixScale = buildRadarScale(mixValues, 5, { evenStepSize: true });
 
   if (guessRateMixRadarChart) {
     guessRateMixRadarChart.destroy();
