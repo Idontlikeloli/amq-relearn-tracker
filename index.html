@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AMQ Relearn Tracker</title>
   <link rel="icon" type="image/jpeg" href="https://amq-stats-api.yarthepro.workers.dev/tabicon.jpeg">
-  <link rel="preload" href="https://amq-stats-api.yarthepro.workers.dev/final_compressed.mp4" as="video" type="video/mp4" crossorigin>
   <link rel="stylesheet" href="style.css">
   <style>
     .login-username-wrap {
@@ -110,7 +109,31 @@ function initializeLoginBackgroundToggle() {
     return;
   }
 
-  const loginVideoUrl = "https://amq-stats-api.yarthepro.workers.dev/final_compressed.mp4";
+  const loginVideoUrls = [
+    new URL("data/final_compressed.mp4", location.href).href,
+    "https://amq-stats-api.yarthepro.workers.dev/final_compressed.mp4"
+  ];
+  let loginVideoUrlIndex = 0;
+
+  function setLoginVideoSource(index) {
+    if (!videoEl || !loginVideoUrls[index]) {
+      return;
+    }
+    loginVideoUrlIndex = index;
+    if (videoEl.src !== loginVideoUrls[index]) {
+      videoEl.src = loginVideoUrls[index];
+      videoEl.load();
+    }
+  }
+
+  function playLoginVideo() {
+    if (!videoEl) {
+      return Promise.resolve();
+    }
+    return videoEl.play().catch(err => {
+      console.warn("Video playback failed.", err);
+    });
+  }
 
   if (dataUpToEl && !dataUpToEl.dataset.defaultText) {
     dataUpToEl.dataset.defaultText = dataUpToEl.innerText;
@@ -123,10 +146,18 @@ function initializeLoginBackgroundToggle() {
   toggleBtn.textContent = "Do-not-click";
 
   if (videoEl) {
-    if (!videoEl.src) {
-      videoEl.src = loginVideoUrl;
-      videoEl.load();
-    }
+    setLoginVideoSource(0);
+
+    videoEl.addEventListener("error", () => {
+      if (loginVideoUrlIndex >= loginVideoUrls.length - 1) {
+        console.warn("Login background video failed to load.", videoEl.error);
+        return;
+      }
+      setLoginVideoSource(loginVideoUrlIndex + 1);
+      if (document.body.classList.contains("is-video-view")) {
+        playLoginVideo();
+      }
+    });
 
     videoEl.addEventListener("ended", () => {
       if (!Number.isFinite(videoEl.duration) || videoEl.duration <= 0) {
@@ -166,11 +197,7 @@ function initializeLoginBackgroundToggle() {
     if (creditLineEl) {
       creditLineEl.innerText = "";
     }
-    try {
-      await videoEl.play();
-    } catch (err) {
-      console.warn("Video autoplay failed; waiting for user interaction.", err);
-    }
+    await playLoginVideo();
   });
 }
 

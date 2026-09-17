@@ -3946,7 +3946,8 @@
       visibility: hidden;
     }
 
-    #searchSongsAnimeHoverTooltip {
+    #searchSongsAnimeHoverTooltip,
+    #playerDatabasePlayerAltTooltip {
       position: fixed !important;
       width: max-content !important;
       min-width: 0 !important;
@@ -5565,6 +5566,436 @@
       line-height: 1.35 !important;
     }
 
+    #otherToolsSection .player-database-toolbar {
+      position: relative !important;
+      z-index: 120 !important;
+      display: flex !important;
+      align-items: flex-end !important;
+      gap: 10px !important;
+      flex-wrap: wrap !important;
+      margin-bottom: 12px !important;
+      overflow: visible !important;
+    }
+
+    #otherToolsSection .player-database-field {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 5px !important;
+      min-width: 140px !important;
+      position: relative !important;
+    }
+
+    #otherToolsSection .player-database-search-field {
+      flex: 1 1 280px !important;
+      min-width: 260px !important;
+    }
+
+    #otherToolsSection .player-database-search-wrap {
+      position: relative !important;
+      width: 100% !important;
+    }
+
+    #otherToolsSection .player-database-search-wrap .player-database-input {
+      width: 100% !important;
+    }
+
+    #otherToolsSection .player-database-inline-suggestion {
+      position: absolute !important;
+      left: 0 !important;
+      right: 0 !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      pointer-events: none !important;
+      white-space: pre !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      color: #94a3b8 !important;
+      z-index: 2 !important;
+      user-select: none !important;
+      display: flex !important;
+      align-items: center !important;
+      box-sizing: border-box !important;
+      line-height: 1.35 !important;
+    }
+
+    #otherToolsSection .player-database-inline-typed {
+      color: transparent !important;
+    }
+
+    #otherToolsSection .player-database-inline-tail {
+      color: #8fa2b8 !important;
+      letter-spacing: normal !important;
+      word-spacing: normal !important;
+      font-weight: 500 !important;
+      display: inline-block !important;
+      margin-left: 0.12em !important;
+    }
+
+    #otherToolsSection .player-database-label {
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      color: #475569 !important;
+      letter-spacing: 0.04em !important;
+      text-transform: uppercase !important;
+    }
+
+    #otherToolsSection .player-database-input {
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 10px !important;
+      padding: 8px 10px !important;
+      font-size: 13px !important;
+      color: #0f172a !important;
+      background: #ffffff !important;
+      box-sizing: border-box !important;
+      height: 36px !important;
+    }
+
+    #otherToolsSection .player-database-input:focus {
+      outline: 2px solid #93c5fd !important;
+      outline-offset: 1px !important;
+      border-color: #93c5fd !important;
+    }
+
+    #otherToolsSection .player-database-custom-select {
+      position: relative !important;
+      z-index: 125 !important;
+      min-width: 178px !important;
+      width: 100% !important;
+    }
+
+    #otherToolsSection .player-database-custom-select.open {
+      z-index: 140 !important;
+    }
+
+    #otherToolsSection .player-database-custom-select-button {
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 12px !important;
+      width: 100% !important;
+      height: 36px !important;
+      box-sizing: border-box !important;
+      padding: 0 34px 0 10px !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 10px !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+      cursor: pointer !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      line-height: 34px !important;
+      text-align: left !important;
+      white-space: nowrap !important;
+    }
+
+    #otherToolsSection .player-database-custom-select-button::after {
+      content: "" !important;
+      position: absolute !important;
+      right: 13px !important;
+      top: 50% !important;
+      width: 8px !important;
+      height: 8px !important;
+      border-right: 2px solid #334155 !important;
+      border-bottom: 2px solid #334155 !important;
+      transform: translateY(-65%) rotate(45deg) !important;
+      pointer-events: none !important;
+    }
+
+    #otherToolsSection .player-database-custom-select-button:hover {
+      background: #f8fafc !important;
+    }
+
+    #otherToolsSection .player-database-custom-select.open .player-database-custom-select-button {
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      border-color: #93c5fd !important;
+    }
+
+    #otherToolsSection .player-database-custom-select-button:focus-visible {
+      outline: 2px solid #93c5fd !important;
+      outline-offset: 1px !important;
+      border-color: #93c5fd !important;
+    }
+
+    #otherToolsSection .player-database-custom-select-options {
+      position: absolute !important;
+      top: calc(100% - 1px) !important;
+      left: 0 !important;
+      right: 0 !important;
+      display: none !important;
+      z-index: 150 !important;
+      box-sizing: border-box !important;
+      border: 1px solid #93c5fd !important;
+      border-top-color: #dbe6f2 !important;
+      border-radius: 0 0 10px 10px !important;
+      background: #ffffff !important;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12) !important;
+      overflow: hidden !important;
+    }
+
+    #otherToolsSection .player-database-custom-select.open .player-database-custom-select-options {
+      display: block !important;
+    }
+
+    #otherToolsSection .player-database-custom-select-option {
+      display: block !important;
+      width: 100% !important;
+      border: 0 !important;
+      border-bottom: 1px solid #e5e7eb !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+      cursor: pointer !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      line-height: 1.2 !important;
+      padding: 9px 10px !important;
+      text-align: left !important;
+      transition: background-color 120ms ease, color 120ms ease !important;
+    }
+
+    #otherToolsSection .player-database-custom-select-option:last-child {
+      border-bottom: 0 !important;
+    }
+
+    #otherToolsSection .player-database-custom-select-option:hover,
+    #otherToolsSection .player-database-custom-select-option:focus {
+      background: #f1f5f9 !important;
+      outline: none !important;
+    }
+
+    #otherToolsSection .player-database-custom-select-option[aria-selected="true"] {
+      background: #ffffff !important;
+      color: #0f2945 !important;
+      font-weight: 700 !important;
+    }
+
+    #otherToolsSection .player-database-custom-select-option[aria-selected="true"]:hover,
+    #otherToolsSection .player-database-custom-select-option[aria-selected="true"]:focus {
+      background: #f1f5f9 !important;
+      color: #0f2945 !important;
+      outline: none !important;
+    }
+
+    #otherToolsSection .player-database-button {
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 9px !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      padding: 0 14px !important;
+      height: 36px !important;
+      line-height: 34px !important;
+      cursor: pointer !important;
+      white-space: nowrap !important;
+    }
+
+    #otherToolsSection .player-database-button:hover {
+      background: #f8fafc !important;
+    }
+
+    #otherToolsSection .player-database-suggestions {
+      position: absolute !important;
+      left: 0 !important;
+      right: 0 !important;
+      top: calc(100% + 5px) !important;
+      z-index: 30 !important;
+      display: none !important;
+      max-height: 250px !important;
+      overflow-y: auto !important;
+      border: 1px solid #dbe2eb !important;
+      border-radius: 10px !important;
+      background: #ffffff !important;
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12) !important;
+    }
+
+    #otherToolsSection .player-database-suggestion {
+      width: 100% !important;
+      border: 0 !important;
+      border-bottom: 1px solid #e5e7eb !important;
+      background: transparent !important;
+      color: #0f172a !important;
+      cursor: pointer !important;
+      display: block !important;
+      font-size: 12px !important;
+      padding: 8px 10px !important;
+      text-align: left !important;
+    }
+
+    #otherToolsSection .player-database-suggestion:last-child {
+      border-bottom: 0 !important;
+    }
+
+    #otherToolsSection .player-database-suggestion:hover {
+      background: #f8fafc !important;
+    }
+
+    #otherToolsSection .player-database-chip-row {
+      position: relative !important;
+      z-index: 1 !important;
+      display: flex !important;
+      align-items: center !important;
+      flex-wrap: wrap !important;
+      gap: 8px !important;
+      min-height: 32px !important;
+      margin-bottom: 14px !important;
+    }
+
+    #otherToolsSection .player-database-chip {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      max-width: 100% !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 999px !important;
+      background: #f8fafc !important;
+      color: #1f2937 !important;
+      font-size: 12px !important;
+      padding: 5px 10px !important;
+    }
+
+    #otherToolsSection .player-database-chip span {
+      max-width: 240px !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+    }
+
+    #otherToolsSection .player-database-chip button {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 18px !important;
+      height: 18px !important;
+      border: 0 !important;
+      border-radius: 999px !important;
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+      cursor: pointer !important;
+      font-size: 13px !important;
+      font-weight: 800 !important;
+      line-height: 1 !important;
+      padding: 0 !important;
+    }
+
+    #otherToolsSection .player-database-chart-wrap {
+      position: relative !important;
+      z-index: 1 !important;
+      height: 380px !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 12px !important;
+      background: #f8fafc !important;
+      padding: 12px !important;
+      box-sizing: border-box !important;
+      margin-bottom: 14px !important;
+    }
+
+    #otherToolsSection .player-database-table-wrap {
+      position: relative !important;
+      z-index: 1 !important;
+      overflow-x: auto !important;
+    }
+
+    #otherToolsSection .player-database-table {
+      width: 100% !important;
+      min-width: 760px !important;
+      border-collapse: collapse !important;
+      table-layout: fixed !important;
+    }
+
+    #otherToolsSection .player-database-table th,
+    #otherToolsSection .player-database-table td {
+      border-bottom: 1px solid #e5e7eb !important;
+      padding: 10px 12px !important;
+      text-align: center !important;
+      vertical-align: middle !important;
+      color: #0f172a !important;
+      font-size: 13px !important;
+    }
+
+    #otherToolsSection .player-database-table th:first-child,
+    #otherToolsSection .player-database-table td:first-child {
+      text-align: left !important;
+    }
+
+    #otherToolsSection .player-database-player-name-wrap {
+      display: inline-block !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+      vertical-align: bottom !important;
+    }
+
+    #otherToolsSection .player-database-player-alt-hover {
+      position: relative !important;
+      display: inline-block !important;
+      max-width: 100% !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      vertical-align: bottom !important;
+      color: inherit !important;
+      font-weight: inherit !important;
+      cursor: default !important;
+      text-decoration: underline !important;
+      text-decoration-color: currentColor !important;
+      text-underline-offset: 2px !important;
+    }
+
+    #otherToolsSection .player-database-table th:nth-child(1),
+    #otherToolsSection .player-database-table td:nth-child(1) {
+      width: 34% !important;
+    }
+
+    #otherToolsSection .player-database-table th:nth-child(2),
+    #otherToolsSection .player-database-table td:nth-child(2) {
+      width: 14% !important;
+    }
+
+    #otherToolsSection .player-database-table th:nth-child(3),
+    #otherToolsSection .player-database-table td:nth-child(3),
+    #otherToolsSection .player-database-table th:nth-child(4),
+    #otherToolsSection .player-database-table td:nth-child(4) {
+      width: 11% !important;
+    }
+
+    #otherToolsSection .player-database-table th:nth-child(5),
+    #otherToolsSection .player-database-table td:nth-child(5) {
+      width: 14% !important;
+    }
+
+    #otherToolsSection .player-database-table th:nth-child(6),
+    #otherToolsSection .player-database-table td:nth-child(6) {
+      width: 16% !important;
+    }
+
+    #otherToolsSection .player-database-table th,
+    #otherToolsSection .player-database-table td {
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
+    }
+
+    #otherToolsSection .player-database-table th {
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 1 !important;
+      background: #f1f5f9 !important;
+      color: #334155 !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.03em !important;
+      text-transform: uppercase !important;
+      font-size: 11px !important;
+    }
+
+    #otherToolsSection .player-database-empty {
+      color: #64748b !important;
+      font-size: 13px !important;
+      padding: 8px 2px !important;
+    }
+
     #otherToolsSection .convert-estimator-grid {
       display: grid !important;
       grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -5673,11 +6104,12 @@
       text-align: center !important;
     }
 
-    #otherToolsConvertRankUsefulnessView {
-      border: 0 !important;
-      background: transparent !important;
+    #otherToolsPlayerDatabaseView {
+      border: 1px solid #ddd !important;
+      border-radius: 14px !important;
+      background: #ffffff !important;
       box-shadow: none !important;
-      padding: 0 !important;
+      padding: 18px 20px 12px !important;
       margin-top: 12px !important;
     }
 
@@ -8630,39 +9062,81 @@
         <button id="searchSongFrequencyNextPageBtn" class="relearn-page-button" type="button" aria-label="Next page">▶</button>
       </div>
     </div>
-    <div id="otherToolsConvertRankUsefulnessView" style="display:none;">
-      <blockquote class="convert-estimator-quote">"All models are wrong, but some are useful"</blockquote>
-      <div class="convert-estimator-grid">
-        <div class="convert-estimator-card">
-          <div class="convert-estimator-title">Rank converter</div>
-          <div id="convertRankAccuracy" class="convert-estimator-accuracy">Accuracy: —</div>
-          <div class="convert-estimator-row">
-            <input id="convertOldRankInput" class="convert-estimator-input" type="text" placeholder="Old rank (e.g. 8.9)">
-            <button id="convertRankBtn" class="convert-estimator-btn" type="button">Convert</button>
-          </div>
-          <div id="convertRankResult" class="convert-estimator-result">New rank: —</div>
-          <div id="convertRankClosest" class="convert-estimator-closest">
-            <div class="convert-estimator-closest-item"><strong>Closest examples:</strong></div>
-            <div class="convert-estimator-closest-item">1. —</div>
-            <div class="convert-estimator-closest-item">2. —</div>
-            <div class="convert-estimator-closest-item">3. —</div>
+    <div id="otherToolsPlayerDatabaseView" class="chart-card" style="display:none;">
+      <div class="chart-header">
+        <div class="chart-title">
+          Compare by years
+          <span class="info-hover-wrap">
+            <button class="info-hover-btn" type="button" aria-label="About Compare by years">i</button>
+            <span class="info-hover-tooltip">Compares multiple players by time range (Eru mode tools) . </span>
+          </span>
+        </div>
+        <div class="chart-meta">
+          <span id="playerDatabaseMeta">Select players to compare guess rates</span>
+        </div>
+      </div>
+      <div class="player-database-toolbar">
+        <div class="player-database-field player-database-search-field">
+          <label class="player-database-label" for="playerDatabaseSearchInput">Player</label>
+          <div class="player-database-search-wrap">
+            <input id="playerDatabaseSearchInput" class="player-database-input" type="text" placeholder="Search player..." autocomplete="off">
+            <div id="playerDatabaseInlineSuggestion" class="player-database-inline-suggestion" aria-hidden="true"></div>
           </div>
         </div>
-        <div class="convert-estimator-card">
-          <div class="convert-estimator-title">Usefulness converter</div>
-          <div id="convertUsefulnessAccuracy" class="convert-estimator-accuracy">Accuracy: —</div>
-          <div class="convert-estimator-row">
-            <input id="convertOldUsefulnessInput" class="convert-estimator-input" type="text" placeholder="Old usefulness (single value or 3-5 values with space in between)">
-            <button id="convertUsefulnessBtn" class="convert-estimator-btn" type="button">Convert</button>
-          </div>
-          <div id="convertUsefulnessResult" class="convert-estimator-result">New usefulness: —</div>
-          <div id="convertUsefulnessClosest" class="convert-estimator-closest">
-            <div class="convert-estimator-closest-item"><strong>Closest examples:</strong></div>
-            <div class="convert-estimator-closest-item">1. —</div>
-            <div class="convert-estimator-closest-item">2. —</div>
-            <div class="convert-estimator-closest-item">3. —</div>
+        <button id="playerDatabaseAddBtn" class="player-database-button" type="button">Add</button>
+        <div class="player-database-field">
+          <label class="player-database-label" for="playerDatabaseStartYear">Start year</label>
+          <input id="playerDatabaseStartYear" class="player-database-input" type="number" min="1900" max="2100" step="1" placeholder="All">
+        </div>
+        <div class="player-database-field">
+          <label class="player-database-label" for="playerDatabaseEndYear">End year</label>
+          <input id="playerDatabaseEndYear" class="player-database-input" type="number" min="1900" max="2100" step="1" placeholder="All">
+        </div>
+        <div class="player-database-field">
+          <div id="playerDatabaseModeLabel" class="player-database-label">Tour type</div>
+          <div id="playerDatabaseModeSelect" class="player-database-custom-select" data-value="watched">
+            <button id="playerDatabaseModeSelectButton" class="player-database-custom-select-button" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="playerDatabaseModeLabel playerDatabaseModeSelectValue">
+              <span id="playerDatabaseModeSelectValue" class="player-database-custom-select-value">Watched</span>
+            </button>
+            <div class="player-database-custom-select-options" role="listbox" aria-labelledby="playerDatabaseModeLabel">
+              <button class="player-database-custom-select-option" type="button" role="option" aria-selected="true" data-value="watched">Watched</button>
+              <button class="player-database-custom-select-option" type="button" role="option" aria-selected="false" data-value="usual">Usual</button>
+            </div>
           </div>
         </div>
+        <div class="player-database-field">
+          <div id="playerDatabaseViewModeLabel" class="player-database-label">View</div>
+          <div id="playerDatabaseViewModeSelect" class="player-database-custom-select" data-value="table">
+            <button id="playerDatabaseViewModeSelectButton" class="player-database-custom-select-button" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="playerDatabaseViewModeLabel playerDatabaseViewModeSelectValue">
+              <span id="playerDatabaseViewModeSelectValue" class="player-database-custom-select-value">Table</span>
+            </button>
+            <div class="player-database-custom-select-options" role="listbox" aria-labelledby="playerDatabaseViewModeLabel">
+              <button class="player-database-custom-select-option" type="button" role="option" aria-selected="true" data-value="table">Table</button>
+              <button class="player-database-custom-select-option" type="button" role="option" aria-selected="false" data-value="chart">Chart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="playerDatabaseSelectedPlayers" class="player-database-chip-row">
+        <div class="player-database-empty">No players selected</div>
+      </div>
+      <div id="playerDatabaseChartWrap" class="player-database-chart-wrap" style="display:none;">
+        <canvas id="playerDatabaseChart"></canvas>
+      </div>
+      <div id="playerDatabaseTableWrap" class="player-database-table-wrap">
+        <table class="player-database-table">
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Guess rate</th>
+              <th>Correct</th>
+              <th>Wrong</th>
+              <th>Attempts</th>
+              <th>Years</th>
+            </tr>
+          </thead>
+          <tbody id="playerDatabaseTableBody"></tbody>
+        </table>
       </div>
     </div>
     <div id="otherToolsOriginalTourCalendarView" class="original-tour-view-stack" style="display:none;">
@@ -9146,6 +9620,9 @@ const DATA_RANGE_OPTIONS = [
 ];
 
 const DATA_RANGE_EXCLUDED_VALUES_FOR_NO_PAST_GAMES = new Set(["10", "20", "50"]);
+const PLAYER_DATABASE_DATA_RANGE_OPTIONS = DATA_RANGE_OPTIONS.filter(opt =>
+  ["all", "month", "2months", "3months", "6months"].includes(opt.value)
+);
 
 const initialSection = sections[sectionFromUrl] ? sectionFromUrl : "overview";
 const dataRangeSelect = document.getElementById("dataRangeSelect");
@@ -9368,6 +9845,23 @@ let allPlayerWeeklyStatsData = {};
 let allPlayerUsualWeeklyStatsData = {};
 let allPlayerLastWeekStatsData = {};
 let allPlayerUsualLastWeekStatsData = {};
+let playerDatabaseChart = null;
+let playerDatabaseUIBound = false;
+let playerDatabaseSearchQuery = "";
+let playerDatabaseSelectedKey = "";
+let playerDatabaseInlineSuggestion = "";
+let playerDatabaseInlineSuggestionKey = "";
+let playerDatabaseSelectedPlayers = [];
+let playerDatabaseDirectoryRefreshAttached = false;
+let playerDatabaseViewMode = "table";
+let playerDatabaseAppliedStartYear = null;
+let playerDatabaseAppliedEndYear = null;
+let playerDatabaseDisplayedDataKey = "";
+let playerDatabaseViewIsActive = false;
+let shouldDefaultPlayerDatabaseRangeOnEntry = false;
+let playersDirectoryList = [];
+const playerDatabaseAnnualCache = new Map();
+const playerDatabaseAnnualPromiseCache = new Map();
 let weeklyPlayerTransitionCountsByMode = {
   watched: {},
   usual: {}
@@ -9603,6 +10097,7 @@ const knowledgeWindowFileByRange = {
 /* -------------------------
    SECONDARY NAV CONTENT
 ------------------------- */
+const OTHER_TOOLS_PLAYER_DATABASE_LABEL = "Player database";
 const OTHER_TOOLS_SINGLE_TOUR_LABEL = "Single Tour";
 
 const secondaryNavBySection = {
@@ -9611,7 +10106,7 @@ const secondaryNavBySection = {
   knowledge: ["Artist Familiarity", "Tag Familiarity", "Seasonal Comparison"],
   insights: ["Relearn Tracker", "By never correct", "By Wrong Guess", "By Popularity", "By % correct"],
   social: ["Synergy", "Rivals", "Team Contributions", "Rig / List analysis"],
-  otherTools: ["Search songs", "Search song frequency", "Convert rank/usefulness", OTHER_TOOLS_SINGLE_TOUR_LABEL, "Changelog"]
+  otherTools: ["Search songs", "Search song frequency", OTHER_TOOLS_PLAYER_DATABASE_LABEL, OTHER_TOOLS_SINGLE_TOUR_LABEL, "Changelog"]
 };
 
 function scheduleBackgroundTask(taskKey, taskFn, delayMs = 0) {
@@ -10305,6 +10800,8 @@ function scheduleSocialSubSectionRender(subSection) {
 }
 
 function renderSubSectionContent(sectionKey, subSection) {
+  playerDatabaseViewIsActive = sectionKey === "otherTools" && subSection === OTHER_TOOLS_PLAYER_DATABASE_LABEL;
+
   if (sectionKey === "performance") {
     const guessRateView = document.getElementById("performanceGuessRateView");
     const livesView = document.getElementById("performanceLivesView");
@@ -10603,7 +11100,7 @@ function renderSubSectionContent(sectionKey, subSection) {
   if (sectionKey === "otherTools") {
     const searchSongsView = document.getElementById("otherToolsSearchSongsView");
     const searchSongFrequencyView = document.getElementById("otherToolsSearchSongFrequencyView");
-    const convertView = document.getElementById("otherToolsConvertRankUsefulnessView");
+    const playerDatabaseView = document.getElementById("otherToolsPlayerDatabaseView");
     const originalTourView = document.getElementById("otherToolsOriginalTourCalendarView");
     const changelogView = document.getElementById("otherToolsChangelogView");
     const placeholderView = document.getElementById("otherToolsPlaceholderView");
@@ -10611,7 +11108,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     if (subSection === "Search songs") {
       searchSongsView.style.display = "block";
       searchSongFrequencyView.style.display = "none";
-      convertView.style.display = "none";
+      playerDatabaseView.style.display = "none";
       originalTourView.style.display = "none";
       changelogView.style.display = "none";
       placeholderView.style.display = "none";
@@ -10622,7 +11119,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     if (subSection === "Search song frequency") {
       searchSongsView.style.display = "none";
       searchSongFrequencyView.style.display = "block";
-      convertView.style.display = "none";
+      playerDatabaseView.style.display = "none";
       originalTourView.style.display = "none";
       changelogView.style.display = "none";
       placeholderView.style.display = "none";
@@ -10631,23 +11128,22 @@ function renderSubSectionContent(sectionKey, subSection) {
       return;
     }
 
-    if (subSection === "Convert rank/usefulness") {
+    if (subSection === OTHER_TOOLS_PLAYER_DATABASE_LABEL) {
       searchSongsView.style.display = "none";
       searchSongFrequencyView.style.display = "none";
-      convertView.style.display = "block";
+      playerDatabaseView.style.display = "block";
       originalTourView.style.display = "none";
       changelogView.style.display = "none";
       placeholderView.style.display = "none";
-      bindConvertEstimatorControlsOnce();
-      ensureConvertEstimatorsLoaded();
-      ensureConvertExamplesLoaded();
+      bindPlayerDatabaseControlsOnce();
+      renderPlayerDatabase();
       return;
     }
 
     if (subSection === OTHER_TOOLS_SINGLE_TOUR_LABEL) {
       searchSongsView.style.display = "none";
       searchSongFrequencyView.style.display = "none";
-      convertView.style.display = "none";
+      playerDatabaseView.style.display = "none";
       originalTourView.style.display = "block";
       changelogView.style.display = "none";
       placeholderView.style.display = "none";
@@ -10659,7 +11155,7 @@ function renderSubSectionContent(sectionKey, subSection) {
     if (subSection === "Changelog") {
       searchSongsView.style.display = "none";
       searchSongFrequencyView.style.display = "none";
-      convertView.style.display = "none";
+      playerDatabaseView.style.display = "none";
       originalTourView.style.display = "none";
       changelogView.style.display = "block";
       placeholderView.style.display = "none";
@@ -10669,7 +11165,7 @@ function renderSubSectionContent(sectionKey, subSection) {
 
     searchSongsView.style.display = "none";
     searchSongFrequencyView.style.display = "none";
-    convertView.style.display = "none";
+    playerDatabaseView.style.display = "none";
     originalTourView.style.display = "none";
     changelogView.style.display = "none";
     placeholderView.style.display = "block";
@@ -10735,6 +11231,7 @@ function updateDataRangeControlState(sectionKey, subSection) {
   const isPerformanceCompositeCharts = sectionKey === "performance" && subSection === "Composite charts";
   const isKnowledgeSeasonalComparison = sectionKey === "knowledge" && subSection === "Seasonal Comparison";
   const isSocialRigAnalysis = sectionKey === "social" && subSection === "Rig / List analysis";
+  const isOtherToolsPlayerDatabase = sectionKey === "otherTools" && subSection === OTHER_TOOLS_PLAYER_DATABASE_LABEL;
   const shouldUnlockUsingData =
     isOverviewGeneral
     || isOverviewStatsSummary
@@ -10744,7 +11241,8 @@ function updateDataRangeControlState(sectionKey, subSection) {
     || isPerformanceRigsMissed
     || isPerformanceCompositeCharts
     || isKnowledgeSeasonalComparison
-    || isSocialRigAnalysis;
+    || isSocialRigAnalysis
+    || isOtherToolsPlayerDatabase;
 
   const shouldHidePastGameOptions =
     (sectionKey === "overview" && (overviewActiveView === "statsSummary" || overviewActiveView === "weekly"))
@@ -10752,7 +11250,9 @@ function updateDataRangeControlState(sectionKey, subSection) {
     || isRecommendationsSection
     || isOtherToolsSection;
 
-  const allowedOptions = shouldHidePastGameOptions
+  const allowedOptions = isOtherToolsPlayerDatabase
+    ? PLAYER_DATABASE_DATA_RANGE_OPTIONS
+    : shouldHidePastGameOptions
     ? DATA_RANGE_OPTIONS.filter(opt => !DATA_RANGE_EXCLUDED_VALUES_FOR_NO_PAST_GAMES.has(opt.value))
     : DATA_RANGE_OPTIONS;
 
@@ -10761,8 +11261,14 @@ function updateDataRangeControlState(sectionKey, subSection) {
     .map(opt => `<option value="${opt.value}">${opt.label}</option>`)
     .join("");
   const hasPreviousValue = allowedOptions.some(opt => opt.value === previousValue);
-  const nextValue = hasPreviousValue ? previousValue : "all";
+  const shouldUsePlayerDatabaseDefaultRange = isOtherToolsPlayerDatabase && shouldDefaultPlayerDatabaseRangeOnEntry;
+  const nextValue = shouldUsePlayerDatabaseDefaultRange
+    ? "6months"
+    : hasPreviousValue ? previousValue : "all";
   dataRangeSelect.value = nextValue;
+  if (shouldUsePlayerDatabaseDefaultRange && previousValue !== "6months") {
+    playerDatabaseDisplayedDataKey = "";
+  }
 
   const shouldLockToAll = !shouldUnlockUsingData;
   const hasWatchedRows = Array.isArray(fullUserData) && fullUserData.length > 0;
@@ -10801,7 +11307,7 @@ function updateDataRangeControlState(sectionKey, subSection) {
     dataRangeSelect.value = "all";
   }
 
-  if (dataRangeSelect.value !== previousValue) {
+  if (dataRangeSelect.value !== previousValue && !shouldUsePlayerDatabaseDefaultRange) {
     dataRangeSelect.dispatchEvent(new Event("change"));
   }
 }
@@ -10815,7 +11321,12 @@ function setActiveSubSection(sectionKey, subSection) {
     link.classList.toggle("active", link.dataset.item === subSection);
   });
 
+  shouldDefaultPlayerDatabaseRangeOnEntry =
+    sectionKey === "otherTools"
+    && subSection === OTHER_TOOLS_PLAYER_DATABASE_LABEL
+    && !playerDatabaseViewIsActive;
   updateDataRangeControlState(sectionKey, subSection);
+  shouldDefaultPlayerDatabaseRangeOnEntry = false;
   renderSubSectionContent(sectionKey, subSection);
   if (sectionKey === "insights") {
     scheduleInsightsSubSectionLoad(subSection, currentDisplayName || currentStatKey || "");
@@ -15982,6 +16493,904 @@ function formatMetricValueByName(metricName, value) {
   return isRate ? `${formatMetricNumber(numeric)}%` : formatMetricNumber(numeric);
 }
 
+function normalizePlayerDatabaseSearchValue(value) {
+  return String(value || "").trim().toLowerCase().split(/\s+/).filter(Boolean).join(" ");
+}
+
+function getPlayerDatabaseCustomSelectValue(selectId, fallbackValue) {
+  const select = document.getElementById(selectId);
+  return select && select.dataset ? (select.dataset.value || fallbackValue) : fallbackValue;
+}
+
+function closePlayerDatabaseCustomSelect(select) {
+  if (!select) return;
+  select.classList.remove("open");
+  const button = select.querySelector(".player-database-custom-select-button");
+  if (button) button.setAttribute("aria-expanded", "false");
+}
+
+function closeAllPlayerDatabaseCustomSelects(exceptSelect = null) {
+  document.querySelectorAll(".player-database-custom-select.open").forEach(select => {
+    if (select !== exceptSelect) closePlayerDatabaseCustomSelect(select);
+  });
+}
+
+function openPlayerDatabaseCustomSelect(select) {
+  if (!select) return;
+  closeAllPlayerDatabaseCustomSelects(select);
+  select.classList.add("open");
+  const button = select.querySelector(".player-database-custom-select-button");
+  if (button) button.setAttribute("aria-expanded", "true");
+}
+
+function setPlayerDatabaseCustomSelectValue(select, value) {
+  if (!select) return false;
+  const currentValue = select.dataset ? select.dataset.value : "";
+  const options = Array.from(select.querySelectorAll(".player-database-custom-select-option"));
+  const selectedOption = options.find(option => option.dataset && option.dataset.value === value) || options[0] || null;
+  if (!selectedOption || !selectedOption.dataset) return false;
+  const selectedValue = selectedOption.dataset.value || "";
+  if (select.dataset) select.dataset.value = selectedValue;
+  const valueNode = select.querySelector(".player-database-custom-select-value");
+  if (valueNode) valueNode.innerText = selectedOption.innerText;
+  options.forEach(option => {
+    const isSelected = option === selectedOption;
+    option.setAttribute("aria-selected", isSelected ? "true" : "false");
+  });
+  return currentValue !== selectedValue;
+}
+
+function focusPlayerDatabaseCustomSelectOption(select, offset = 0) {
+  if (!select) return;
+  const options = Array.from(select.querySelectorAll(".player-database-custom-select-option"));
+  if (!options.length) return;
+  const currentIndex = Math.max(0, options.findIndex(option => option.getAttribute("aria-selected") === "true"));
+  const nextIndex = (currentIndex + offset + options.length) % options.length;
+  options[nextIndex].focus();
+}
+
+function bindPlayerDatabaseCustomSelect(select, onChange) {
+  if (!select) return;
+  const button = select.querySelector(".player-database-custom-select-button");
+  const options = Array.from(select.querySelectorAll(".player-database-custom-select-option"));
+  const chooseOption = option => {
+    if (!option || !option.dataset) return;
+    const changed = setPlayerDatabaseCustomSelectValue(select, option.dataset.value || "");
+    closePlayerDatabaseCustomSelect(select);
+    if (button) button.focus();
+    if (changed && typeof onChange === "function") onChange();
+  };
+
+  if (button) {
+    button.addEventListener("click", event => {
+      event.stopPropagation();
+      if (select.classList.contains("open")) {
+        closePlayerDatabaseCustomSelect(select);
+      } else {
+        openPlayerDatabaseCustomSelect(select);
+      }
+    });
+    button.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openPlayerDatabaseCustomSelect(select);
+        focusPlayerDatabaseCustomSelectOption(select, 0);
+      } else if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        event.preventDefault();
+        openPlayerDatabaseCustomSelect(select);
+        focusPlayerDatabaseCustomSelectOption(select, event.key === "ArrowDown" ? 1 : -1);
+      } else if (event.key === "Escape") {
+        closePlayerDatabaseCustomSelect(select);
+      }
+    });
+  }
+
+  options.forEach((option, index) => {
+    option.addEventListener("click", event => {
+      event.stopPropagation();
+      chooseOption(option);
+    });
+    option.addEventListener("keydown", event => {
+      let nextIndex = index;
+      if (event.key === "ArrowDown") {
+        nextIndex = (index + 1) % options.length;
+      } else if (event.key === "ArrowUp") {
+        nextIndex = (index - 1 + options.length) % options.length;
+      } else if (event.key === "Home") {
+        nextIndex = 0;
+      } else if (event.key === "End") {
+        nextIndex = options.length - 1;
+      } else if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        chooseOption(option);
+        return;
+      } else if (event.key === "Escape") {
+        event.preventDefault();
+        closePlayerDatabaseCustomSelect(select);
+        if (button) button.focus();
+        return;
+      } else if (event.key === "Tab") {
+        closePlayerDatabaseCustomSelect(select);
+        return;
+      } else {
+        return;
+      }
+      event.preventDefault();
+      if (options[nextIndex]) options[nextIndex].focus();
+    });
+  });
+}
+
+function getPlayerDatabaseMode() {
+  return getPlayerDatabaseCustomSelectValue("playerDatabaseModeSelect", "watched") === "usual" ? "usual" : "watched";
+}
+
+function getPlayerDatabaseViewMode() {
+  return getPlayerDatabaseCustomSelectValue("playerDatabaseViewModeSelect", "table") === "chart" ? "chart" : "table";
+}
+
+function getPlayerDatabaseEntries() {
+  const players = Array.isArray(playersDirectoryList) ? playersDirectoryList : [];
+  return players
+    .map(player => {
+      const playerId = String(player && player.playerId || "").trim();
+      const displayLabel = String(player && player.displayName || playerId || "").trim();
+      const aliases = Array.isArray(player && player.altnames)
+        ? player.altnames.map(name => String(name || "").trim()).filter(Boolean)
+        : [];
+      return {
+        key: playerId,
+        playerId,
+        displayLabel,
+        mainLabel: displayLabel,
+        aliases,
+        searchText: normalizePlayerDatabaseSearchValue([playerId, displayLabel, ...aliases].join(" "))
+      };
+    })
+    .filter(entry => entry.playerId && entry.displayLabel)
+    .sort((a, b) => a.displayLabel.localeCompare(b.displayLabel));
+}
+
+function getPlayerDatabaseEntryByKey(key) {
+  const target = String(key || "");
+  if (!target) return null;
+  return getPlayerDatabaseEntries().find(entry => entry.key === target || entry.playerId === target) || null;
+}
+
+function getPlayerDatabaseAliasEntries(player) {
+  const label = String(player && (player.mainLabel || player.displayLabel || player.key) || "").trim();
+  const playerId = String(player && player.playerId || "").trim();
+  const seen = new Set([label, playerId].map(value => value.toLowerCase()).filter(Boolean));
+  const aliases = Array.isArray(player && player.aliases) ? player.aliases : [];
+  const cleanedAliases = [];
+  aliases.forEach(alias => {
+    const text = String(alias || "").trim();
+    const key = text.toLowerCase();
+    if (!text || seen.has(key)) return;
+    seen.add(key);
+    cleanedAliases.push(text);
+  });
+  return cleanedAliases;
+}
+
+function createPlayerDatabaseSelectedPlayer(entry, fallback = {}) {
+  const entryAliases = getPlayerDatabaseAliasEntries(entry);
+  return {
+    key: entry.key || fallback.key,
+    playerId: entry.playerId || fallback.playerId || "",
+    displayLabel: entry.displayLabel || entry.key || fallback.displayLabel || fallback.key || "",
+    mainLabel: entry.mainLabel || entry.displayLabel || entry.key || fallback.mainLabel || fallback.displayLabel || fallback.key || "",
+    aliases: entryAliases.length ? entryAliases : getPlayerDatabaseAliasEntries(fallback)
+  };
+}
+
+function getPlayerDatabaseSuggestions(query) {
+  const normalized = normalizePlayerDatabaseSearchValue(query);
+  if (!normalized) return [];
+  const selectedKeys = new Set(playerDatabaseSelectedPlayers.map(player => player.key));
+  return getPlayerDatabaseEntries()
+    .filter(entry => !selectedKeys.has(entry.key))
+    .filter(entry => entry.searchText.includes(normalized))
+    .slice(0, 12);
+}
+
+function findPlayerDatabaseAutocompleteSuggestion(query) {
+  const typed = String(query || "");
+  const normalized = normalizePlayerDatabaseSearchValue(typed);
+  if (!normalized) return null;
+  const selectedKeys = new Set(playerDatabaseSelectedPlayers.map(player => player.key));
+  const entries = getPlayerDatabaseEntries().filter(entry => !selectedKeys.has(entry.key));
+  for (const entry of entries) {
+    const displayName = String(entry.displayLabel || entry.key || "");
+    const normalizedDisplayName = normalizePlayerDatabaseSearchValue(displayName);
+    if (normalizedDisplayName.startsWith(normalized) && normalizedDisplayName !== normalized) {
+      return { entry, suggestionText: displayName };
+    }
+  }
+  for (const entry of entries) {
+    const aliases = Array.isArray(entry.aliases) ? entry.aliases : [];
+    for (const alias of aliases) {
+      const aliasName = String(alias || "");
+      const normalizedAlias = normalizePlayerDatabaseSearchValue(aliasName);
+      if (normalizedAlias.startsWith(normalized) && normalizedAlias !== normalized) {
+        return { entry, suggestionText: aliasName };
+      }
+    }
+  }
+  return null;
+}
+
+function syncPlayerDatabaseInlineSuggestionMetrics() {
+  const input = document.getElementById("playerDatabaseSearchInput");
+  const suggestion = document.getElementById("playerDatabaseInlineSuggestion");
+  if (!input || !suggestion) return;
+  const cs = window.getComputedStyle(input);
+  suggestion.style.font = cs.font;
+  suggestion.style.letterSpacing = cs.letterSpacing;
+  suggestion.style.lineHeight = cs.lineHeight;
+  suggestion.style.paddingLeft = cs.paddingLeft;
+  suggestion.style.paddingRight = cs.paddingRight;
+}
+
+function hidePlayerDatabaseSuggestions() {
+  playerDatabaseInlineSuggestion = "";
+  playerDatabaseInlineSuggestionKey = "";
+  const suggestion = document.getElementById("playerDatabaseInlineSuggestion");
+  if (suggestion) suggestion.innerHTML = "";
+}
+
+function renderPlayerDatabaseSuggestions() {
+  const suggestion = document.getElementById("playerDatabaseInlineSuggestion");
+  const typed = String(playerDatabaseSearchQuery || "");
+  const match = findPlayerDatabaseAutocompleteSuggestion(typed);
+  if (!suggestion || !typed.trim() || !match) {
+    playerDatabaseSelectedKey = "";
+    hidePlayerDatabaseSuggestions();
+    return;
+  }
+
+  playerDatabaseSelectedKey = match.entry.key;
+  playerDatabaseInlineSuggestion = match.suggestionText;
+  playerDatabaseInlineSuggestionKey = match.entry.key;
+  if (!match.suggestionText.toLowerCase().startsWith(typed.toLowerCase()) || typed.length >= match.suggestionText.length) {
+    suggestion.innerHTML = "";
+    return;
+  }
+
+  const remaining = match.suggestionText.slice(typed.length);
+  suggestion.innerHTML = `<span class="player-database-inline-typed">${escapeHtml(typed)}</span><span class="player-database-inline-tail">${escapeHtml(remaining)}</span>`;
+}
+
+function acceptPlayerDatabaseInlineSuggestion() {
+  const input = document.getElementById("playerDatabaseSearchInput");
+  if (!input || !playerDatabaseInlineSuggestion) return false;
+  const typed = input.value || "";
+  if (!playerDatabaseInlineSuggestion.toLowerCase().startsWith(typed.toLowerCase())) return false;
+  if (typed.length >= playerDatabaseInlineSuggestion.length) return false;
+  input.value = playerDatabaseInlineSuggestion;
+  playerDatabaseSearchQuery = playerDatabaseInlineSuggestion;
+  playerDatabaseSelectedKey = playerDatabaseInlineSuggestionKey;
+  hidePlayerDatabaseSuggestions();
+  return true;
+}
+
+function getPlayerDatabaseExactSearchEntry(query) {
+  const normalized = normalizePlayerDatabaseSearchValue(query);
+  if (!normalized) return null;
+  const selectedKeys = new Set(playerDatabaseSelectedPlayers.map(player => player.key));
+  return getPlayerDatabaseEntries().find(entry => {
+    if (selectedKeys.has(entry.key)) return false;
+    const names = [entry.displayLabel, entry.playerId, ...(Array.isArray(entry.aliases) ? entry.aliases : [])];
+    return names.some(name => normalizePlayerDatabaseSearchValue(name) === normalized);
+  }) || null;
+}
+
+function addPlayerDatabasePlayer(key, options = {}) {
+  const allowAutocompleteFallback = options.allowAutocompleteFallback !== false;
+  const entry = getPlayerDatabaseEntryByKey(key)
+    || (allowAutocompleteFallback ? getPlayerDatabaseEntryByKey(playerDatabaseInlineSuggestionKey) : null)
+    || getPlayerDatabaseExactSearchEntry(playerDatabaseSearchQuery)
+    || (allowAutocompleteFallback ? getPlayerDatabaseSuggestions(playerDatabaseSearchQuery)[0] : null)
+    || null;
+  if (!entry || playerDatabaseSelectedPlayers.some(player => player.key === entry.key)) return;
+  playerDatabaseSelectedPlayers = [
+    ...playerDatabaseSelectedPlayers,
+    createPlayerDatabaseSelectedPlayer(entry)
+  ];
+  playerDatabaseSearchQuery = "";
+  playerDatabaseSelectedKey = "";
+  playerDatabaseInlineSuggestion = "";
+  playerDatabaseInlineSuggestionKey = "";
+  const input = document.getElementById("playerDatabaseSearchInput");
+  if (input) input.value = "";
+  hidePlayerDatabaseSuggestions();
+  renderPlayerDatabase();
+}
+
+const playerDatabaseAnnualFileByRange = {
+  all: "all.json",
+  month: "past_month.json",
+  "2months": "past_2_months.json",
+  "3months": "past_3_months.json",
+  "6months": "past_6_months.json"
+};
+
+function getPlayerDatabaseRangeValue() {
+  const rawValue = String(dataRangeSelect && dataRangeSelect.value ? dataRangeSelect.value : "all");
+  return playerDatabaseAnnualFileByRange[rawValue] ? rawValue : "all";
+}
+
+function getPlayerDatabaseRangeLabel(rangeValue = getPlayerDatabaseRangeValue()) {
+  const option = PLAYER_DATABASE_DATA_RANGE_OPTIONS.find(item => item.value === rangeValue);
+  return option ? option.label : "All tours";
+}
+
+function getPlayerDatabaseAnnualFileName(rangeValue = getPlayerDatabaseRangeValue()) {
+  return playerDatabaseAnnualFileByRange[rangeValue] || "all.json";
+}
+
+function getPlayerDatabaseAnnualCacheKey(playerId, mode, rangeValue = getPlayerDatabaseRangeValue()) {
+  return `${mode || "watched"}:${rangeValue || "all"}:${String(playerId || "").trim()}`;
+}
+
+function getCachedPlayerDatabaseAnnualData(playerId, mode, rangeValue = getPlayerDatabaseRangeValue()) {
+  const key = getPlayerDatabaseAnnualCacheKey(playerId, mode, rangeValue);
+  return playerDatabaseAnnualCache.has(key) ? playerDatabaseAnnualCache.get(key) : null;
+}
+
+function hasCachedPlayerDatabaseAnnualData(playerId, mode, rangeValue = getPlayerDatabaseRangeValue()) {
+  return playerDatabaseAnnualCache.has(getPlayerDatabaseAnnualCacheKey(playerId, mode, rangeValue));
+}
+
+function ensurePlayerDatabaseAnnualData(playerId, mode, rangeValue = getPlayerDatabaseRangeValue()) {
+  const cleanPlayerId = String(playerId || "").trim();
+  if (!cleanPlayerId) return Promise.resolve(null);
+  const safeRangeValue = playerDatabaseAnnualFileByRange[rangeValue] ? rangeValue : "all";
+  const cacheKey = getPlayerDatabaseAnnualCacheKey(cleanPlayerId, mode, safeRangeValue);
+  if (playerDatabaseAnnualCache.has(cacheKey)) {
+    return Promise.resolve(playerDatabaseAnnualCache.get(cacheKey));
+  }
+  if (playerDatabaseAnnualPromiseCache.has(cacheKey)) {
+    return playerDatabaseAnnualPromiseCache.get(cacheKey);
+  }
+  const promise = fetchPlayerScopedResponse(cleanPlayerId, `annual_gr/${getPlayerDatabaseAnnualFileName(safeRangeValue)}`, mode)
+    .then(async response => {
+      if (!response || !response.ok) return null;
+      return response.json();
+    })
+    .catch(err => {
+      console.warn("Failed loading annual guess-rate data", cleanPlayerId, mode, err);
+      return null;
+    })
+    .then(payload => {
+      playerDatabaseAnnualCache.set(cacheKey, payload);
+      playerDatabaseAnnualPromiseCache.delete(cacheKey);
+      return payload;
+    });
+  playerDatabaseAnnualPromiseCache.set(cacheKey, promise);
+  return promise;
+}
+
+function getPlayerDatabaseYearBounds() {
+  const mode = getPlayerDatabaseMode();
+  const rangeValue = getPlayerDatabaseRangeValue();
+  const years = [];
+  playerDatabaseSelectedPlayers.forEach(player => {
+    const annualData = getCachedPlayerDatabaseAnnualData(player.playerId, mode, rangeValue);
+    const rows = annualData && Array.isArray(annualData.years) ? annualData.years : [];
+    rows.forEach(row => {
+      const year = Number(row && row.year);
+      if (Number.isFinite(year)) years.push(year);
+    });
+  });
+  if (!years.length) return { minYear: null, maxYear: null };
+  return {
+    minYear: Math.min(...years),
+    maxYear: Math.max(...years)
+  };
+}
+
+function syncPlayerDatabaseYearInputBounds() {
+  const { minYear, maxYear } = getPlayerDatabaseYearBounds();
+  const startInput = document.getElementById("playerDatabaseStartYear");
+  const endInput = document.getElementById("playerDatabaseEndYear");
+  [startInput, endInput].forEach(input => {
+    if (!input) return;
+    if (minYear != null) {
+      input.min = String(minYear);
+    } else {
+      input.removeAttribute("min");
+    }
+    if (maxYear != null) {
+      input.max = String(maxYear);
+    } else {
+      input.removeAttribute("max");
+    }
+  });
+}
+
+function parsePlayerDatabaseYearInput(input, bounds) {
+  const raw = String(input && input.value || "").trim();
+  if (!raw) return { valid: true, year: null };
+  if (!/^\d{4}$/.test(raw)) return { valid: false, year: null };
+  if (!bounds || bounds.minYear == null || bounds.maxYear == null) return { valid: false, year: null };
+  const year = Number(raw);
+  if (!Number.isInteger(year)) return { valid: false, year: null };
+  if (bounds && bounds.minYear != null && year < bounds.minYear) return { valid: false, year: null };
+  if (bounds && bounds.maxYear != null && year > bounds.maxYear) return { valid: false, year: null };
+  return { valid: true, year };
+}
+
+function updatePlayerDatabaseYearInputValidity(input, parsed, bounds) {
+  if (!input) return;
+  if (parsed.valid) {
+    input.setCustomValidity("");
+    return;
+  }
+  const hasBounds = bounds && bounds.minYear != null && bounds.maxYear != null;
+  const rangeLabel = hasBounds ? ` between ${bounds.minYear} and ${bounds.maxYear}` : "";
+  input.setCustomValidity(`Enter a valid 4-digit year${rangeLabel}.`);
+}
+
+function applyPlayerDatabaseYearInputs() {
+  const startInput = document.getElementById("playerDatabaseStartYear");
+  const endInput = document.getElementById("playerDatabaseEndYear");
+  const bounds = getPlayerDatabaseYearBounds();
+  syncPlayerDatabaseYearInputBounds();
+  const startParsed = parsePlayerDatabaseYearInput(startInput, bounds);
+  const endParsed = parsePlayerDatabaseYearInput(endInput, bounds);
+  updatePlayerDatabaseYearInputValidity(startInput, startParsed, bounds);
+  updatePlayerDatabaseYearInputValidity(endInput, endParsed, bounds);
+  if (!startParsed.valid || !endParsed.valid) return false;
+
+  let startYear = startParsed.year;
+  let endYear = endParsed.year;
+  if (startYear != null && endYear != null && endYear < startYear) {
+    endYear = startYear;
+    if (endInput) endInput.value = String(startYear);
+  }
+  if (playerDatabaseAppliedStartYear === startYear && playerDatabaseAppliedEndYear === endYear) {
+    return false;
+  }
+  playerDatabaseAppliedStartYear = startYear;
+  playerDatabaseAppliedEndYear = endYear;
+  return true;
+}
+
+function getPlayerDatabaseYearRange() {
+  return {
+    startYear: playerDatabaseAppliedStartYear,
+    endYear: playerDatabaseAppliedEndYear
+  };
+}
+
+function formatPlayerDatabaseRangeLabel() {
+  const { startYear, endYear } = getPlayerDatabaseYearRange();
+  if (startYear != null && endYear != null) return startYear === endYear ? String(startYear) : `${startYear}-${endYear}`;
+  if (startYear != null) return `${startYear}+`;
+  if (endYear != null) return `Through ${endYear}`;
+  return "All years";
+}
+
+function buildPlayerDatabaseSummaries() {
+  const mode = getPlayerDatabaseMode();
+  const rangeValue = getPlayerDatabaseRangeValue();
+  const { startYear, endYear } = getPlayerDatabaseYearRange();
+  return playerDatabaseSelectedPlayers.map(player => {
+    const hasLoaded = hasCachedPlayerDatabaseAnnualData(player.playerId, mode, rangeValue);
+    const annualData = getCachedPlayerDatabaseAnnualData(player.playerId, mode, rangeValue);
+    const years = annualData && Array.isArray(annualData.years) ? annualData.years : [];
+    const selectedYears = years.filter(row => {
+      const year = Number(row && row.year);
+      if (!Number.isFinite(year)) return false;
+      if (startYear != null && year < startYear) return false;
+      if (endYear != null && year > endYear) return false;
+      return true;
+    });
+    const correct = selectedYears.reduce((sum, row) => sum + (Number(row && row.correct) || 0), 0);
+    const wrong = selectedYears.reduce((sum, row) => sum + (Number(row && row.wrong) || 0), 0);
+    const attempts = selectedYears.reduce((sum, row) => sum + (Number(row && row.count) || 0), 0);
+    return {
+      ...player,
+      annualData,
+      isLoading: !hasLoaded,
+      correct,
+      wrong,
+      attempts,
+      guessRate: attempts > 0 ? (correct / attempts) * 100 : null,
+      yearsLabel: formatPlayerDatabaseRangeLabel()
+    };
+  }).sort((a, b) => {
+    if (a.isLoading !== b.isLoading) return a.isLoading ? 1 : -1;
+    const aRate = Number.isFinite(a.guessRate) ? a.guessRate : -Infinity;
+    const bRate = Number.isFinite(b.guessRate) ? b.guessRate : -Infinity;
+    if (aRate !== bRate) return bRate - aRate;
+    const aAttempts = Number(a.attempts || 0);
+    const bAttempts = Number(b.attempts || 0);
+    if (aAttempts !== bAttempts) return bAttempts - aAttempts;
+    return String(a.mainLabel || a.displayLabel || a.key || "").localeCompare(String(b.mainLabel || b.displayLabel || b.key || ""));
+  });
+}
+
+function ensurePlayerDatabaseDefaultSelection() {
+  if (playerDatabaseSelectedPlayers.length) return;
+  const playerEntry = currentPlayerId
+    ? getPlayerDatabaseEntryByKey(currentPlayerId)
+    : (getPlayerEntryFromCacheByName(currentDisplayName || currentStatKey || username || "") || null);
+  const entry = playerEntry && playerEntry.playerId
+    ? getPlayerDatabaseEntryByKey(playerEntry.playerId)
+    : null;
+  if (!entry) return;
+  playerDatabaseSelectedPlayers = [createPlayerDatabaseSelectedPlayer(entry)];
+}
+
+function renderPlayerDatabaseChips() {
+  const wrap = document.getElementById("playerDatabaseSelectedPlayers");
+  if (!wrap) return;
+  if (!playerDatabaseSelectedPlayers.length) {
+    wrap.innerHTML = '<div class="player-database-empty">No players selected</div>';
+    return;
+  }
+  wrap.innerHTML = "";
+  playerDatabaseSelectedPlayers.forEach(player => {
+    const chip = document.createElement("div");
+    chip.className = "player-database-chip";
+    const text = document.createElement("span");
+    appendPlayerDatabasePlayerNameCell(text, player);
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.innerText = "x";
+    removeBtn.title = `Remove ${player.mainLabel || player.displayLabel || player.key}`;
+    removeBtn.addEventListener("click", () => {
+      playerDatabaseSelectedPlayers = playerDatabaseSelectedPlayers.filter(item => item.key !== player.key);
+      renderPlayerDatabase();
+    });
+    chip.appendChild(text);
+    chip.appendChild(removeBtn);
+    wrap.appendChild(chip);
+  });
+}
+
+function ensurePlayerDatabasePlayerAltTooltip() {
+  let tooltip = document.getElementById("playerDatabasePlayerAltTooltip");
+  if (!tooltip) {
+    tooltip = document.createElement("div");
+    tooltip.id = "playerDatabasePlayerAltTooltip";
+    document.body.appendChild(tooltip);
+  }
+  return tooltip;
+}
+
+function positionPlayerDatabasePlayerAltTooltip(tooltip, anchorRect) {
+  const margin = 12;
+  const offset = 10;
+  const rect = tooltip.getBoundingClientRect();
+  let left = anchorRect.left;
+  let top = anchorRect.bottom + offset;
+  if (left + rect.width > window.innerWidth - margin) {
+    left = anchorRect.right - rect.width;
+  }
+  if (left < margin) left = margin;
+  if (top + rect.height > window.innerHeight - margin) {
+    top = anchorRect.top - rect.height - offset;
+  }
+  if (top < margin) top = margin;
+  tooltip.style.left = `${left}px`;
+  tooltip.style.top = `${top}px`;
+}
+
+function hidePlayerDatabasePlayerAltTooltip() {
+  const tooltip = document.getElementById("playerDatabasePlayerAltTooltip");
+  if (!tooltip) return;
+  tooltip.style.opacity = "0";
+  tooltip.style.visibility = "hidden";
+}
+
+function appendPlayerDatabasePlayerNameCell(cell, player) {
+  const label = String(player && (player.mainLabel || player.displayLabel || player.key) || "—");
+  const aliases = getPlayerDatabaseAliasEntries(player);
+  if (!aliases.length || label === "—") {
+    cell.innerText = label;
+    return;
+  }
+
+  const wrap = document.createElement("span");
+  wrap.className = "player-database-player-name-wrap";
+
+  const hoverNode = document.createElement("span");
+  hoverNode.className = "player-database-player-alt-hover";
+  hoverNode.tabIndex = 0;
+  hoverNode.innerText = label;
+
+  const showTooltip = () => {
+    const tooltip = ensurePlayerDatabasePlayerAltTooltip();
+    tooltip.innerText = aliases.join(", ");
+    tooltip.style.visibility = "visible";
+    tooltip.style.opacity = "1";
+    positionPlayerDatabasePlayerAltTooltip(tooltip, hoverNode.getBoundingClientRect());
+  };
+
+  hoverNode.addEventListener("mouseenter", showTooltip);
+  hoverNode.addEventListener("mouseleave", hidePlayerDatabasePlayerAltTooltip);
+  hoverNode.addEventListener("focus", showTooltip);
+  hoverNode.addEventListener("blur", hidePlayerDatabasePlayerAltTooltip);
+
+  wrap.appendChild(hoverNode);
+  cell.appendChild(wrap);
+}
+
+function renderPlayerDatabaseTable(summaries) {
+  const tbody = document.getElementById("playerDatabaseTableBody");
+  if (!tbody) return;
+  hidePlayerDatabasePlayerAltTooltip();
+  if (!summaries.length) {
+    tbody.innerHTML = '<tr><td colspan="6" class="player-database-empty">Select players to compare.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = "";
+  summaries.forEach(summary => {
+    const row = document.createElement("tr");
+    const nameCell = document.createElement("td");
+    appendPlayerDatabasePlayerNameCell(nameCell, summary);
+    row.appendChild(nameCell);
+
+    [
+      summary.isLoading ? "Loading..." : (Number.isFinite(summary.guessRate) ? `${summary.guessRate.toFixed(2)}%` : "N/A"),
+      summary.isLoading ? "..." : Number(summary.correct || 0),
+      summary.isLoading ? "..." : Number(summary.wrong || 0),
+      summary.isLoading ? "..." : Number(summary.attempts || 0),
+      summary.yearsLabel || formatPlayerDatabaseRangeLabel()
+    ].forEach(value => {
+      const cell = document.createElement("td");
+      cell.innerText = String(value);
+      row.appendChild(cell);
+    });
+
+    tbody.appendChild(row);
+  });
+}
+
+function renderPlayerDatabaseChart(summaries) {
+  const canvas = document.getElementById("playerDatabaseChart");
+  if (!canvas || typeof Chart !== "function") return;
+  if (playerDatabaseChart) {
+    playerDatabaseChart.destroy();
+    playerDatabaseChart = null;
+  }
+
+  const chartRows = summaries.filter(summary => Number.isFinite(summary.guessRate));
+  const chartWrap = document.getElementById("playerDatabaseChartWrap");
+  if (chartWrap) {
+    const baselineRows = 6;
+    const baselineHeight = 380;
+    const fixedChartSpace = 74;
+    const rowHeight = (baselineHeight - fixedChartSpace) / baselineRows;
+    const chartHeight = fixedChartSpace + Math.max(baselineRows, chartRows.length) * rowHeight;
+    chartWrap.style.setProperty("height", `${Math.ceil(chartHeight)}px`, "important");
+    chartWrap.style.setProperty("min-height", `${Math.ceil(chartHeight)}px`, "important");
+    chartWrap.style.setProperty("max-height", "none", "important");
+  }
+  const labels = chartRows.map(summary => summary.mainLabel || summary.displayLabel || summary.key);
+  const barBorderWidth = Math.max(0.5, Math.min(2, 12 / Math.max(chartRows.length, 6)));
+
+  playerDatabaseChart = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        label: "Guess rate",
+        data: chartRows.map(summary => summary.guessRate),
+        backgroundColor: "rgba(96, 148, 232, 0.78)",
+        borderColor: "rgba(37, 99, 235, 0.96)",
+        borderWidth: barBorderWidth,
+        borderRadius: {
+          topLeft: 0,
+          bottomLeft: 0,
+          topRight: 6,
+          bottomRight: 6
+        },
+        borderSkipped: "start",
+        inflateAmount: 0
+      }]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: items => {
+              const item = Array.isArray(items) ? items[0] : null;
+              return item && item.label ? item.label : "";
+            },
+            label: context => {
+              const raw = Number(context.raw);
+              return Number.isFinite(raw)
+                ? `${raw.toFixed(2)}%`
+                : "N/A";
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          min: 0,
+          max: 100,
+          title: {
+            display: true,
+            text: "Guess rate (%)",
+            color: "#334155",
+            font: { size: 13, weight: "bold" }
+          },
+          ticks: {
+            color: "#475569",
+            callback: value => `${Number(value).toFixed(0)}%`
+          },
+          grid: { color: "#e2e8f0" }
+        },
+        y: {
+          ticks: {
+            color: "#475569"
+          },
+          grid: { color: "#e2e8f0" }
+        }
+      }
+    }
+  });
+}
+
+function renderPlayerDatabase() {
+  const view = document.getElementById("otherToolsPlayerDatabaseView");
+  if (!view) return;
+  if (
+    playersDirectoryByLookup instanceof Map
+    && !playersDirectoryByLookup.size
+    && !playerDatabaseDirectoryRefreshAttached
+  ) {
+    playerDatabaseDirectoryRefreshAttached = true;
+    loadPlayersDirectory().then(() => {
+      if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === OTHER_TOOLS_PLAYER_DATABASE_LABEL) {
+        renderPlayerDatabase();
+      }
+    }).catch(() => {});
+  }
+
+  ensurePlayerDatabaseDefaultSelection();
+  playerDatabaseSelectedPlayers = playerDatabaseSelectedPlayers.map(player => {
+    const entry = getPlayerDatabaseEntryByKey(player.key);
+    return entry ? createPlayerDatabaseSelectedPlayer(entry, player) : player;
+  });
+  const meta = document.getElementById("playerDatabaseMeta");
+  const tableWrap = document.getElementById("playerDatabaseTableWrap");
+  const chartWrap = document.getElementById("playerDatabaseChartWrap");
+  playerDatabaseViewMode = getPlayerDatabaseViewMode();
+  const mode = getPlayerDatabaseMode();
+  const rangeValue = getPlayerDatabaseRangeValue();
+  const dataKey = `${mode}:${rangeValue}`;
+  const pendingLoads = playerDatabaseSelectedPlayers
+    .filter(player => player && player.playerId && !hasCachedPlayerDatabaseAnnualData(player.playerId, mode, rangeValue))
+    .map(player => ensurePlayerDatabaseAnnualData(player.playerId, mode, rangeValue));
+  if (pendingLoads.length) {
+    Promise.all(pendingLoads).then(() => {
+      if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === OTHER_TOOLS_PLAYER_DATABASE_LABEL) {
+        renderPlayerDatabase();
+      }
+    });
+    if (playerDatabaseDisplayedDataKey && playerDatabaseDisplayedDataKey !== dataKey) {
+      if (tableWrap) tableWrap.style.display = playerDatabaseViewMode === "table" ? "block" : "none";
+      if (chartWrap) chartWrap.style.display = playerDatabaseViewMode === "chart" ? "block" : "none";
+      renderPlayerDatabaseChips();
+      if (document.activeElement === document.getElementById("playerDatabaseSearchInput")) {
+        renderPlayerDatabaseSuggestions();
+      }
+      return;
+    }
+  }
+  syncPlayerDatabaseYearInputBounds();
+  const summaries = buildPlayerDatabaseSummaries();
+  const totalAttempts = summaries.reduce((sum, item) => sum + Number(item.attempts || 0), 0);
+  const averageAttempts = summaries.length ? totalAttempts / summaries.length : 0;
+  const averageAttemptsLabel = String(Math.round(averageAttempts));
+  if (meta) {
+    const modeLabel = mode === "usual" ? "usual" : "watched";
+    meta.innerText = `${summaries.length} player${summaries.length === 1 ? "" : "s"} | ${formatPlayerDatabaseRangeLabel()} | ${modeLabel} | Average ${averageAttemptsLabel} attempts`;
+  }
+  if (tableWrap) tableWrap.style.display = playerDatabaseViewMode === "table" ? "block" : "none";
+  if (chartWrap) chartWrap.style.display = playerDatabaseViewMode === "chart" ? "block" : "none";
+  renderPlayerDatabaseChips();
+  renderPlayerDatabaseTable(summaries);
+  renderPlayerDatabaseChart(summaries);
+  if (!pendingLoads.length) {
+    playerDatabaseDisplayedDataKey = dataKey;
+  }
+  if (document.activeElement === document.getElementById("playerDatabaseSearchInput")) {
+    renderPlayerDatabaseSuggestions();
+  }
+}
+
+function bindPlayerDatabaseControlsOnce() {
+  if (playerDatabaseUIBound) return;
+  playerDatabaseUIBound = true;
+  const input = document.getElementById("playerDatabaseSearchInput");
+  const addBtn = document.getElementById("playerDatabaseAddBtn");
+  const startInput = document.getElementById("playerDatabaseStartYear");
+  const endInput = document.getElementById("playerDatabaseEndYear");
+  const modeSelect = document.getElementById("playerDatabaseModeSelect");
+  const viewModeSelect = document.getElementById("playerDatabaseViewModeSelect");
+
+  if (input) {
+    input.addEventListener("input", event => {
+      playerDatabaseSearchQuery = String(event.target.value || "");
+      syncPlayerDatabaseInlineSuggestionMetrics();
+      renderPlayerDatabaseSuggestions();
+    });
+    input.addEventListener("focus", () => {
+      playerDatabaseSearchQuery = String(input.value || "");
+      syncPlayerDatabaseInlineSuggestionMetrics();
+      renderPlayerDatabaseSuggestions();
+    });
+    input.addEventListener("keydown", event => {
+      if (event.key === "Tab" && !event.shiftKey && acceptPlayerDatabaseInlineSuggestion()) {
+        event.preventDefault();
+        return;
+      }
+      if (event.key === "Enter") {
+        event.preventDefault();
+        playerDatabaseSearchQuery = String(input.value || "");
+        addPlayerDatabasePlayer("", { allowAutocompleteFallback: false });
+      }
+      if (event.key === "Escape") {
+        hidePlayerDatabaseSuggestions();
+      }
+    });
+    input.addEventListener("blur", () => {
+      setTimeout(hidePlayerDatabaseSuggestions, 120);
+    });
+    window.addEventListener("resize", syncPlayerDatabaseInlineSuggestionMetrics);
+    syncPlayerDatabaseInlineSuggestionMetrics();
+  }
+
+  if (addBtn) {
+    addBtn.addEventListener("click", () => {
+      addPlayerDatabasePlayer(playerDatabaseSelectedKey);
+    });
+  }
+
+  [startInput, endInput].forEach(yearInput => {
+    if (!yearInput) return;
+    yearInput.addEventListener("input", () => {
+      if (applyPlayerDatabaseYearInputs()) {
+        renderPlayerDatabase();
+      }
+    });
+    yearInput.addEventListener("change", () => {
+      if (applyPlayerDatabaseYearInputs()) {
+        renderPlayerDatabase();
+      }
+    });
+    yearInput.addEventListener("keydown", event => {
+      if (event.key !== "Enter") return;
+      event.preventDefault();
+      if (applyPlayerDatabaseYearInputs()) {
+        renderPlayerDatabase();
+      } else if (typeof yearInput.reportValidity === "function") {
+        yearInput.reportValidity();
+      }
+    });
+  });
+
+  bindPlayerDatabaseCustomSelect(modeSelect, renderPlayerDatabase);
+  bindPlayerDatabaseCustomSelect(viewModeSelect, renderPlayerDatabase);
+  document.addEventListener("click", event => {
+    if (!(event.target instanceof Element) || !event.target.closest(".player-database-custom-select")) {
+      closeAllPlayerDatabaseCustomSelects();
+    }
+  });
+}
+
 function ensureSocialTeamContributionData() {
   const activeStatsData = getSocialStatsDataForActiveMode();
   const targetRows = getCurrentUserRecordsForActiveMode();
@@ -20316,11 +21725,13 @@ async function loadPlayersDirectory() {
       const playersRes = await fetch(dataUrl("players.json"));
       if (!playersRes.ok) {
         playersDirectoryByLookup = new Map();
+        playersDirectoryList = [];
         return [];
       }
       const players = await playersRes.json();
       if (!Array.isArray(players)) {
         playersDirectoryByLookup = new Map();
+        playersDirectoryList = [];
         return [];
       }
 
@@ -20337,10 +21748,12 @@ async function loadPlayersDirectory() {
         });
       });
       playersDirectoryByLookup = lookup;
+      playersDirectoryList = players;
       return players;
     } catch (err) {
       console.error("Failed loading players.json", err);
       playersDirectoryByLookup = new Map();
+      playersDirectoryList = [];
       return [];
     }
   })();
@@ -27398,6 +28811,10 @@ function renderOverview(records, latestRankOverride = null, latestRankPercentile
 
 if (dataRangeSelect) {
   dataRangeSelect.addEventListener("change", () => {
+    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === OTHER_TOOLS_PLAYER_DATABASE_LABEL) {
+      renderPlayerDatabase();
+      return;
+    }
     if (!fullUserData.length) return;
     const performanceVisibleRecords = getVisibleUserData(getPerformanceRowsForActiveMode());
     renderOverviewForActiveMode();
