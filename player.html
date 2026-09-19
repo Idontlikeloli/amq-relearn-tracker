@@ -4445,6 +4445,7 @@
       display: flex !important;
       align-items: center !important;
       gap: 12px !important;
+      flex-wrap: wrap !important;
       margin-bottom: 10px !important;
     }
 
@@ -4579,6 +4580,167 @@
 
     #otherToolsSection .search-songs-button:hover {
       background: #f8fafc !important;
+    }
+
+    #otherToolsSection .search-songs-display-toggle {
+      position: relative !important;
+      display: inline-grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      align-items: center !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 9px !important;
+      padding: 2px !important;
+      background: #ffffff !important;
+      box-shadow: 0 1px 2px rgba(51, 65, 85, 0.08) !important;
+      overflow: hidden !important;
+      isolation: isolate !important;
+    }
+
+    #otherToolsSection .search-songs-display-toggle::before {
+      content: "" !important;
+      position: absolute !important;
+      top: 2px !important;
+      bottom: 2px !important;
+      left: 2px !important;
+      width: calc(50% - 2px) !important;
+      border-radius: 6px !important;
+      background: #e8f1fb !important;
+      box-shadow: 0 1px 2px rgba(59, 92, 126, 0.18) !important;
+      transform: translateX(0) !important;
+      transition: transform 180ms ease !important;
+      z-index: 0 !important;
+    }
+
+    #otherToolsSection .search-songs-display-toggle.is-links::before {
+      transform: translateX(100%) !important;
+    }
+
+    #otherToolsSection .search-songs-display-btn {
+      position: relative !important;
+      z-index: 1 !important;
+      border: 0 !important;
+      border-radius: 6px !important;
+      background: transparent !important;
+      color: #4b6075 !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.02em !important;
+      min-width: 54px !important;
+      height: 24px !important;
+      padding: 0 8px !important;
+      cursor: pointer !important;
+      line-height: 24px !important;
+      white-space: nowrap !important;
+    }
+
+    #otherToolsSection .search-songs-display-btn.active {
+      color: #183a5c !important;
+    }
+
+    #otherToolsSection .search-songs-sample-chart {
+      position: relative !important;
+      display: flex !important;
+      align-items: center !important;
+      width: 100% !important;
+      min-width: 170px !important;
+      height: 30px !important;
+      box-sizing: border-box !important;
+      padding: 0 4px !important;
+    }
+
+    #otherToolsSection .search-songs-sample-track {
+      position: relative !important;
+      display: block !important;
+      width: 100% !important;
+      height: 18px !important;
+      border-radius: 999px !important;
+      border: 1px solid #c5d1dd !important;
+      background:
+        linear-gradient(90deg, rgba(79, 99, 119, 0.14), rgba(79, 99, 119, 0.05)),
+        repeating-linear-gradient(
+          90deg,
+          rgba(79, 99, 119, 0.13) 0,
+          rgba(79, 99, 119, 0.13) 1px,
+          rgba(255, 255, 255, 0) 1px,
+          rgba(255, 255, 255, 0) 18px
+        ) !important;
+      overflow: hidden !important;
+    }
+
+    #otherToolsSection .search-songs-sample-track::before {
+      content: "" !important;
+      position: absolute !important;
+      left: 0 !important;
+      right: 0 !important;
+      top: 50% !important;
+      height: 2px !important;
+      transform: translateY(-50%) !important;
+      background: rgba(75, 96, 117, 0.34) !important;
+    }
+
+    #otherToolsSection .search-songs-sample-point {
+      position: absolute !important;
+      top: 50% !important;
+      width: 8px !important;
+      height: 8px !important;
+      border-radius: 999px !important;
+      border: 1px solid rgba(15, 23, 42, 0.22) !important;
+      box-sizing: border-box !important;
+      transform: translate(-50%, -50%) !important;
+      cursor: default !important;
+      z-index: 1 !important;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.16) !important;
+    }
+
+    #otherToolsSection .search-songs-sample-point.pattern-correct {
+      background: #2f9e67 !important;
+    }
+
+    #otherToolsSection .search-songs-sample-point.pattern-wrong {
+      background: #c95a5a !important;
+    }
+
+    #otherToolsSection .search-songs-sample-point.pattern-unknown {
+      background: #7b8ba0 !important;
+    }
+
+    #otherToolsSection .search-songs-sample-point:nth-child(3n) {
+      margin-top: -4px !important;
+    }
+
+    #otherToolsSection .search-songs-sample-point:nth-child(3n + 1) {
+      margin-top: 4px !important;
+    }
+
+    #otherToolsSection .search-songs-sample-chart.empty .search-songs-sample-track {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      color: #64748b !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+    }
+
+    #otherToolsSection .search-songs-link-stack {
+      display: inline-flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 4px !important;
+      line-height: 1.1 !important;
+    }
+
+    #otherToolsSection .search-songs-link-stack a {
+      color: #2f4d52 !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      text-decoration: underline !important;
+      text-underline-offset: 2px !important;
+      transition: color 120ms ease, text-decoration-color 120ms ease !important;
+    }
+
+    #otherToolsSection .search-songs-link-stack a:hover,
+    #otherToolsSection .search-songs-link-stack a:focus-visible {
+      color: #183a5c !important;
     }
 
     #otherToolsSection {
@@ -8992,6 +9154,10 @@
           <span>Exact Match</span>
         </label>
         <button id="searchSongsApplyBtn" class="search-songs-button" type="button">Search</button>
+        <div id="searchSongsDisplayToggle" class="search-songs-display-toggle" role="group" aria-label="Search songs display">
+          <button id="searchSongsDisplayClassicBtn" class="search-songs-display-btn active" type="button" aria-pressed="true">Play</button>
+          <button id="searchSongsDisplayLinksBtn" class="search-songs-display-btn" type="button" aria-pressed="false">Links</button>
+        </div>
       </div>
       <div class="relearn-table-wrap">
         <table class="relearn-table">
@@ -9002,9 +9168,9 @@
               <th>Song</th>
               <th>Artist</th>
               <th>Type</th>
-              <th>Pattern</th>
-              <th>Play song</th>
-              <th>Play sample</th>
+              <th id="searchSongsPatternHeader">Pattern</th>
+              <th id="searchSongsActionHeaderOne">Play song</th>
+              <th id="searchSongsActionHeaderTwo">Play sample</th>
             </tr>
           </thead>
           <tbody id="searchSongsTableBody"></tbody>
@@ -9659,6 +9825,9 @@ const artistFamiliarityRightModeAttemptsBtn = document.getElementById("artistFam
 const artistFamiliarityRightModeCompareBtn = document.getElementById("artistFamiliarityRightModeCompareBtn");
 const searchSongsSuggestions = document.getElementById("searchSongsSuggestions");
 const searchSongsInlineSuggestion = document.getElementById("searchSongsInlineSuggestion");
+const searchSongsDisplayToggle = document.getElementById("searchSongsDisplayToggle");
+const searchSongsDisplayClassicBtn = document.getElementById("searchSongsDisplayClassicBtn");
+const searchSongsDisplayLinksBtn = document.getElementById("searchSongsDisplayLinksBtn");
 const relearnAudioProgressDock = document.getElementById("relearnAudioProgressDock");
 const relearnAudioDockToggleBtn = document.getElementById("relearnAudioDockToggleBtn");
 const relearnAudioDockVolumeWrap = document.getElementById("relearnAudioDockVolumeWrap");
@@ -9755,6 +9924,7 @@ let pcorrectPageIndex = 0;
 let searchSongsQuery = "";
 let searchSongsExactMatch = false;
 let searchSongsMode = "all";
+let searchSongsDisplayMode = "classic";
 let searchSongsPageIndex = 0;
 let searchSongFrequencyQuery = "";
 let searchSongFrequencyExactMatch = false;
@@ -11905,6 +12075,16 @@ if (searchSongsModeSelect) {
     searchSongsMode = String(event.target.value || "all");
     renderSearchSongsSuggestions();
     applySearchSongsFilters();
+  });
+}
+if (searchSongsDisplayClassicBtn) {
+  searchSongsDisplayClassicBtn.addEventListener("click", () => {
+    setSearchSongsDisplayMode("classic");
+  });
+}
+if (searchSongsDisplayLinksBtn) {
+  searchSongsDisplayLinksBtn.addEventListener("click", () => {
+    setSearchSongsDisplayMode("links");
   });
 }
 if (searchSongsPrevPageBtn) {
@@ -16785,6 +16965,75 @@ function getPlayerDatabaseExactSearchEntry(query) {
   }) || null;
 }
 
+function escapePlayerDatabaseRegExp(value) {
+  return String(value || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function getPlayerDatabaseBulkMatchNames(entry) {
+  const seen = new Set();
+  const names = [
+    entry && entry.displayLabel,
+    ...(Array.isArray(entry && entry.aliases) ? entry.aliases : [])
+  ];
+  return names
+    .map(name => String(name || "").trim())
+    .filter(name => {
+      const normalized = normalizePlayerDatabaseSearchValue(name);
+      if (!normalized || seen.has(normalized)) return false;
+      seen.add(normalized);
+      return true;
+    });
+}
+
+function findPlayerDatabaseEntriesInText(text) {
+  const source = String(text || "");
+  if (!source.trim()) return [];
+  const selectedKeys = new Set(playerDatabaseSelectedPlayers.map(player => player.key));
+  const occupiedRanges = [];
+  const matchesByKey = new Map();
+  const candidates = getPlayerDatabaseEntries()
+    .filter(entry => entry && entry.key && !selectedKeys.has(entry.key))
+    .flatMap(entry => getPlayerDatabaseBulkMatchNames(entry).map(name => ({ entry, name })))
+    .sort((a, b) => b.name.length - a.name.length || a.name.localeCompare(b.name));
+
+  candidates.forEach(candidate => {
+    if (matchesByKey.has(candidate.entry.key)) return;
+    const pattern = new RegExp(`(^|[^A-Za-z0-9_])(${escapePlayerDatabaseRegExp(candidate.name)})(?=$|[^A-Za-z0-9_])`, "gi");
+    let match;
+    while ((match = pattern.exec(source)) !== null) {
+      const start = match.index + match[1].length;
+      const end = start + match[2].length;
+      const overlaps = occupiedRanges.some(range => start < range.end && end > range.start);
+      if (overlaps) continue;
+      matchesByKey.set(candidate.entry.key, { entry: candidate.entry, start, end });
+      occupiedRanges.push({ start, end });
+      return;
+    }
+  });
+
+  return Array.from(matchesByKey.values())
+    .sort((a, b) => a.start - b.start || a.end - b.end)
+    .map(match => match.entry);
+}
+
+function addPlayerDatabasePlayersFromText(text) {
+  const entries = findPlayerDatabaseEntriesInText(text);
+  if (!entries.length) return false;
+  playerDatabaseSelectedPlayers = [
+    ...playerDatabaseSelectedPlayers,
+    ...entries.map(entry => createPlayerDatabaseSelectedPlayer(entry))
+  ];
+  playerDatabaseSearchQuery = "";
+  playerDatabaseSelectedKey = "";
+  playerDatabaseInlineSuggestion = "";
+  playerDatabaseInlineSuggestionKey = "";
+  const input = document.getElementById("playerDatabaseSearchInput");
+  if (input) input.value = "";
+  hidePlayerDatabaseSuggestions();
+  renderPlayerDatabase();
+  return true;
+}
+
 function addPlayerDatabasePlayer(key, options = {}) {
   const allowAutocompleteFallback = options.allowAutocompleteFallback !== false;
   const entry = getPlayerDatabaseEntryByKey(key)
@@ -17327,6 +17576,12 @@ function bindPlayerDatabaseControlsOnce() {
       syncPlayerDatabaseInlineSuggestionMetrics();
       renderPlayerDatabaseSuggestions();
     });
+    input.addEventListener("paste", event => {
+      const pastedText = event.clipboardData ? event.clipboardData.getData("text") : "";
+      if (addPlayerDatabasePlayersFromText(pastedText)) {
+        event.preventDefault();
+      }
+    });
     input.addEventListener("focus", () => {
       playerDatabaseSearchQuery = String(input.value || "");
       syncPlayerDatabaseInlineSuggestionMetrics();
@@ -17340,6 +17595,7 @@ function bindPlayerDatabaseControlsOnce() {
       if (event.key === "Enter") {
         event.preventDefault();
         playerDatabaseSearchQuery = String(input.value || "");
+        if (addPlayerDatabasePlayersFromText(playerDatabaseSearchQuery)) return;
         addPlayerDatabasePlayer("", { allowAutocompleteFallback: false });
       }
       if (event.key === "Escape") {
@@ -17355,6 +17611,7 @@ function bindPlayerDatabaseControlsOnce() {
 
   if (addBtn) {
     addBtn.addEventListener("click", () => {
+      if (input && addPlayerDatabasePlayersFromText(input.value)) return;
       addPlayerDatabasePlayer(playerDatabaseSelectedKey);
     });
   }
@@ -23303,6 +23560,20 @@ function collectAnimeAltTitlesFromKey(keyRow) {
   return values;
 }
 
+function getMediaExtension(url) {
+  const text = String(url || "").trim().split("?", 1)[0].toLowerCase();
+  const dotIndex = text.lastIndexOf(".");
+  return dotIndex >= 0 ? text.slice(dotIndex + 1) : "";
+}
+
+function isAudioMediaUrl(url) {
+  return ["mp3", "m4a", "aac", "ogg", "oga"].includes(getMediaExtension(url));
+}
+
+function isVideoMediaUrl(url) {
+  return ["webm", "mp4", "mkv"].includes(getMediaExtension(url));
+}
+
 function hydrateSongRowWithKey(rawRow, keyRow) {
   const row = rawRow && typeof rawRow === "object" ? { ...rawRow } : {};
   const key = keyRow && typeof keyRow === "object" ? keyRow : null;
@@ -23317,7 +23588,9 @@ function hydrateSongRowWithKey(rawRow, keyRow) {
   const artist = String(key.artist || "").trim();
   const type = String(key.type || "").trim();
   const audioLink = String(key.audioLink || "").trim();
+  const videoLink = String(key.videoLink || "").trim();
   const malId = key.malId;
+  const aniListId = key.aniListId;
   const keyCorrectPct = Number(key.correctPct);
   const keyArtistMembers = Array.isArray(key.artistMembers) ? key.artistMembers : [];
   const keyArtistAltNames = collectArtistAltNamesFromMembers(keyArtistMembers);
@@ -23362,8 +23635,19 @@ function hydrateSongRowWithKey(rawRow, keyRow) {
 
   if (!String(row.artist || "").trim() && artist) row.artist = artist;
   if (!String(row.type || "").trim() && type) row.type = type;
-  if (!String(row.audioLink || "").trim() && audioLink) row.audioLink = audioLink;
+  const existingAudioLink = String(row.audioLink || "").trim();
+  if (!String(row.videoLink || "").trim() && isVideoMediaUrl(existingAudioLink)) {
+    row.videoLink = existingAudioLink;
+  }
+  if (audioLink && (!existingAudioLink || !isAudioMediaUrl(existingAudioLink))) {
+    row.audioLink = audioLink;
+  }
+  const existingVideoLink = String(row.videoLink || "").trim();
+  if (videoLink && (!existingVideoLink || !isVideoMediaUrl(existingVideoLink))) {
+    row.videoLink = videoLink;
+  }
   if ((row.malId == null || row.malId === "") && malId != null) row.malId = malId;
+  if ((row.aniListId == null || row.aniListId === "") && aniListId != null) row.aniListId = aniListId;
   if (Number.isFinite(keyCorrectPct)) row.correctPct = keyCorrectPct;
   if (!Array.isArray(row.artistMembers) || !row.artistMembers.length) {
     row.artistMembers = keyArtistMembers;
@@ -23465,7 +23749,15 @@ function resolveSearchSongDatePoolRows(rows, datePool) {
       return dateValue || null;
     });
 
-    return { ...rawRow, patternDates };
+    const sampleRanges = Array.isArray(rawRow.sampleRanges)
+      ? rawRow.sampleRanges.map((range, index) => {
+        if (!range || typeof range !== "object") return range;
+        if (range.date) return range;
+        return { ...range, date: patternDates[index] || null };
+      })
+      : rawRow.sampleRanges;
+
+    return { ...rawRow, patternDates, sampleRanges };
   });
 }
 
@@ -25598,6 +25890,9 @@ function renderInsightsRelearnTracker() {
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
+    const videoLink = String(song && song.videoLink ? song.videoLink : "").trim();
+    const mp3Link = isAudioMediaUrl(audioLink) ? audioLink : "";
+    const mediaVideoLink = isVideoMediaUrl(videoLink) ? videoLink : (isVideoMediaUrl(audioLink) ? audioLink : "");
     const sampleAudioLink = String(song && song.sampleAudioLink ? song.sampleAudioLink : "").trim();
     const rawStartSample = song && song.startSample;
     const rawEndSample = song && song.endSample;
@@ -26315,15 +26610,49 @@ function renderInsightsPCorrect() {
   }, 400);
 }
 
+function updateSearchSongsDisplayToggleUI() {
+  const useLinksDisplay = searchSongsDisplayMode === "links";
+  if (searchSongsDisplayToggle) {
+    searchSongsDisplayToggle.classList.toggle("is-links", useLinksDisplay);
+  }
+  if (searchSongsDisplayClassicBtn) {
+    searchSongsDisplayClassicBtn.classList.toggle("active", !useLinksDisplay);
+    searchSongsDisplayClassicBtn.setAttribute("aria-pressed", useLinksDisplay ? "false" : "true");
+  }
+  if (searchSongsDisplayLinksBtn) {
+    searchSongsDisplayLinksBtn.classList.toggle("active", useLinksDisplay);
+    searchSongsDisplayLinksBtn.setAttribute("aria-pressed", useLinksDisplay ? "true" : "false");
+  }
+}
+
+function setSearchSongsDisplayMode(mode) {
+  const nextMode = mode === "links" ? "links" : "classic";
+  if (searchSongsDisplayMode === nextMode) {
+    updateSearchSongsDisplayToggleUI();
+    return;
+  }
+  searchSongsDisplayMode = nextMode;
+  updateSearchSongsDisplayToggleUI();
+  renderInsightsSearchSongs();
+}
+
 function renderInsightsSearchSongs() {
   const tbody = document.getElementById("searchSongsTableBody");
   const meta = document.getElementById("searchSongsMeta");
   const pageMeta = document.getElementById("searchSongsPageMeta");
   const prevPageBtn = document.getElementById("searchSongsPrevPageBtn");
   const nextPageBtn = document.getElementById("searchSongsNextPageBtn");
+  const patternHeader = document.getElementById("searchSongsPatternHeader");
+  const actionHeaderOne = document.getElementById("searchSongsActionHeaderOne");
+  const actionHeaderTwo = document.getElementById("searchSongsActionHeaderTwo");
   if (!tbody || !meta || !pageMeta || !prevPageBtn || !nextPageBtn) return;
 
   const songs = Array.isArray(cachedSearchSongs) ? cachedSearchSongs : [];
+  const useLinksDisplay = searchSongsDisplayMode === "links";
+  updateSearchSongsDisplayToggleUI();
+  if (patternHeader) patternHeader.innerText = useLinksDisplay ? "Sample Points" : "Pattern";
+  if (actionHeaderOne) actionHeaderOne.innerText = useLinksDisplay ? "Anime links" : "Play song";
+  if (actionHeaderTwo) actionHeaderTwo.innerText = useLinksDisplay ? "Media" : "Play sample";
   const normalizedQuery = String(searchSongsQuery || "").trim().toLowerCase();
   const normalizedQueryCompact = normalizeSearchSongText(normalizedQuery);
   const rawMode = String(searchSongsMode || "all").toLowerCase();
@@ -26364,8 +26693,10 @@ function renderInsightsSearchSongs() {
     const maxPatternCount = pageSongs.reduce((maxValue, song) => {
       return Math.max(maxValue, getPatternMarkerCount(song && song.pattern));
     }, 0);
-    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1, 30));
-    const patternWidth = Math.max(72, Math.min(130, 16 + (boundedCount * 11)));
+    const boundedCount = Math.max(1, Math.min(useLinksDisplay ? 14 : 10, maxPatternCount || 1, 30));
+    const patternWidth = useLinksDisplay
+      ? 178
+      : Math.max(72, Math.min(130, 16 + (boundedCount * 11)));
     const extraSpace = 130 - patternWidth;
     const textWidth = 150 + Math.round(extraSpace / 3);
     searchSongsTableEl.style.setProperty("--search-pattern-col-width", `${patternWidth}px`);
@@ -26648,6 +26979,48 @@ function renderInsightsSearchSongs() {
     cell.appendChild(clampNode);
   };
 
+  const makeExternalTextLink = (label, href, title) => {
+    const link = document.createElement("a");
+    link.href = href;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.innerText = label;
+    if (title) link.title = title;
+    return link;
+  };
+
+  const appendEmptyDash = parent => {
+    const dash = document.createElement("span");
+    dash.innerText = "—";
+    parent.appendChild(dash);
+  };
+
+  const createLinkStackCell = links => {
+    const cell = document.createElement("td");
+    const wrap = document.createElement("span");
+    wrap.className = "search-songs-link-stack";
+    const validLinks = Array.isArray(links) ? links.filter(item => item && item.href) : [];
+    if (!validLinks.length) {
+      appendEmptyDash(wrap);
+    } else {
+      validLinks.forEach(item => {
+        wrap.appendChild(makeExternalTextLink(item.label, item.href, item.title));
+      });
+    }
+    cell.appendChild(wrap);
+    return cell;
+  };
+
+  const addMediaFragment = (url, start, end) => {
+    const text = String(url || "").trim();
+    if (!text) return "";
+    const startValue = Number(start);
+    const endValue = Number(end);
+    if (!Number.isFinite(startValue) || !Number.isFinite(endValue) || endValue <= startValue) return text;
+    const separator = text.includes("#") ? "&" : "#";
+    return `${text}${separator}t=${startValue},${endValue}`;
+  };
+
   pageSongs.forEach(song => {
     const row = document.createElement("tr");
 
@@ -26672,14 +27045,19 @@ function renderInsightsSearchSongs() {
     row.appendChild(typeCell);
 
     const patternCell = document.createElement("td");
-    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, {
-      maxPerRow: 10,
-      maxCount: 30,
-      dates: song && song.patternDates
-    }));
+    patternCell.appendChild(useLinksDisplay
+      ? buildSearchSongsSampleBarNode(song)
+      : buildPatternSquareNode(song && song.pattern, {
+        maxPerRow: 10,
+        maxCount: 30,
+        dates: song && song.patternDates
+      }));
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
+    const videoLink = String(song && song.videoLink ? song.videoLink : "").trim();
+    const mp3Link = isAudioMediaUrl(audioLink) ? audioLink : "";
+    const mediaVideoLink = isVideoMediaUrl(videoLink) ? videoLink : (isVideoMediaUrl(audioLink) ? audioLink : "");
     const sampleAudioLink = String(song && song.sampleAudioLink ? song.sampleAudioLink : "").trim();
     const rawStartSample = song && (song.startSample != null ? song.startSample : song.sampleStart);
     const rawEndSample = song && (song.endSample != null ? song.endSample : song.sampleEnd);
@@ -26736,24 +27114,53 @@ function renderInsightsSearchSongs() {
       return cell;
     };
 
-    row.appendChild(
-      createAudioToggleCell({
-        playTitle: "Play song",
-        pauseTitle: "Pause song",
-        noLinkTitle: "No audio link available"
-      })
-    );
-    row.appendChild(
-      createAudioToggleCell({
-        playTitle: "Play sample",
-        pauseTitle: "Pause sample",
-        noLinkTitle: "No audio link available",
-        link: sampleAudioLink,
-        clipStart: hasValidSampleRange ? startSampleValue : null,
-        clipEnd: hasValidSampleRange ? endSampleValue : null,
-        requiresSampleRange: true
-      })
-    );
+    if (useLinksDisplay) {
+      const malIdValue = song && song.malId != null ? String(song.malId).trim() : "";
+      const aniListIdValue = song && song.aniListId != null ? String(song.aniListId).trim() : "";
+      row.appendChild(createLinkStackCell([
+        malIdValue ? {
+          label: "MAL",
+          href: `https://myanimelist.net/anime/${encodeURIComponent(malIdValue)}`,
+          title: "Open MyAnimeList page"
+        } : null,
+        aniListIdValue ? {
+          label: "AniList",
+          href: `https://anilist.co/anime/${encodeURIComponent(aniListIdValue)}`,
+          title: "Open AniList page"
+        } : null
+      ]));
+      row.appendChild(createLinkStackCell([
+        mp3Link ? {
+          label: "MP3",
+          href: mp3Link,
+          title: "Open MP3"
+        } : null,
+        mediaVideoLink ? {
+          label: "Video",
+          href: mediaVideoLink,
+          title: "Open video"
+        } : null
+      ]));
+    } else {
+      row.appendChild(
+        createAudioToggleCell({
+          playTitle: "Play song",
+          pauseTitle: "Pause song",
+          noLinkTitle: "No audio link available"
+        })
+      );
+      row.appendChild(
+        createAudioToggleCell({
+          playTitle: "Play sample",
+          pauseTitle: "Pause sample",
+          noLinkTitle: "No audio link available",
+          link: sampleAudioLink,
+          clipStart: hasValidSampleRange ? startSampleValue : null,
+          clipEnd: hasValidSampleRange ? endSampleValue : null,
+          requiresSampleRange: true
+        })
+      );
+    }
 
     tbody.appendChild(row);
   });
@@ -27105,6 +27512,117 @@ function buildPatternSquareNode(patternRaw, options = {}) {
 
   container.removeAttribute("title");
   container.setAttribute("aria-label", "Pattern");
+  return container;
+}
+
+function formatSampleTime(value) {
+  const seconds = Number(value);
+  if (!Number.isFinite(seconds)) return "?";
+  const minutes = Math.floor(Math.max(0, seconds) / 60);
+  const remainder = Math.max(0, seconds) - (minutes * 60);
+  const roundedRemainder = Math.round(remainder * 10) / 10;
+  const secondsText = Number.isInteger(roundedRemainder)
+    ? String(roundedRemainder).padStart(2, "0")
+    : roundedRemainder.toFixed(1).padStart(4, "0");
+  return `${minutes}:${secondsText}`;
+}
+
+function buildSearchSongsSampleBarNode(song) {
+  const container = document.createElement("span");
+  container.className = "search-songs-sample-chart";
+  const track = document.createElement("span");
+  track.className = "search-songs-sample-track";
+  container.appendChild(track);
+
+  const patternText = String(song && song.pattern ? song.pattern : "");
+  const patternChars = Array.from(patternText).filter(ch => /[✅✔☑🟩🟢❌✖✗🟥🔴⬜◻◽▫]/.test(ch));
+  const fallbackDates = Array.isArray(song && song.patternDates) ? song.patternDates : [];
+
+  const points = [];
+  const getStateForPoint = (source, index) => {
+    const patternState = detectPatternState(patternChars[index] || "");
+    if (patternState && patternState !== "unknown") return patternState;
+    if (source && source.correct === true) return "correct";
+    if (source && source.correct === false) return "wrong";
+    return "unknown";
+  };
+  const addPoint = (source, index, startValue, endValue = null, dateValue = null) => {
+    const start = Number(startValue);
+    if (!Number.isFinite(start) || start < 0) return;
+    const end = Number(endValue);
+    const hasEnd = Number.isFinite(end) && end > start;
+    points.push({
+      start,
+      end: hasEnd ? end : null,
+      state: getStateForPoint(source, index),
+      date: dateValue || (source && (source.date || source.attemptDate)) || fallbackDates[index] || null
+    });
+  };
+
+  const sourceRanges = Array.isArray(song && song.sampleRanges) ? song.sampleRanges : [];
+  sourceRanges.forEach((range, index) => {
+    if (!range || typeof range !== "object") return;
+    addPoint(range, index, range.start ?? range.sampleStart ?? range.startSample, range.end ?? range.sampleEnd ?? range.endSample);
+  });
+
+  const sourcePoints = Array.isArray(song && song.samplePoints) ? song.samplePoints : [];
+  sourcePoints.forEach((point, index) => {
+    if (point && typeof point === "object") {
+      addPoint(point, index, point.start ?? point.sampleStart ?? point.startSample ?? point.point ?? point.time, point.end ?? point.sampleEnd ?? point.endSample);
+    } else {
+      addPoint(null, index, point);
+    }
+  });
+
+  const sourceAttempts = Array.isArray(song && song.attemptHistory)
+    ? song.attemptHistory
+    : (Array.isArray(song && song.attempts) ? song.attempts : []);
+  sourceAttempts.forEach((attempt, index) => {
+    if (!attempt || typeof attempt !== "object") return;
+    addPoint(
+      attempt,
+      index,
+      attempt.sampleStart ?? attempt.startSample ?? attempt.start ?? attempt.point ?? attempt.time,
+      attempt.sampleEnd ?? attempt.endSample ?? attempt.end,
+      attempt.date
+    );
+  });
+
+  if (!points.length) {
+    addPoint(
+      null,
+      Math.max(0, patternChars.length - 1),
+      song && (song.startSample ?? song.sampleStart),
+      song && (song.endSample ?? song.sampleEnd),
+      fallbackDates[fallbackDates.length - 1]
+    );
+  }
+
+  if (!points.length) {
+    container.classList.add("empty");
+    track.innerText = "—";
+    container.title = "No sample points available";
+    container.setAttribute("aria-label", "No sample points available");
+    return container;
+  }
+
+  const maxEnd = Math.max(30, ...points.map(point => Number(point.end != null ? point.end : point.start) || 0));
+  points.forEach((point, index) => {
+    const marker = document.createElement("span");
+    marker.className = `search-songs-sample-point pattern-${point.state || "unknown"}`;
+    const left = Math.max(0, Math.min(100, (point.start / maxEnd) * 100));
+    marker.style.left = `${left}%`;
+    const stateLabel = point.state === "correct" ? "Correct" : (point.state === "wrong" ? "Wrong" : "Unknown");
+    const sampleText = point.end != null
+      ? `${formatSampleTime(point.start)}-${formatSampleTime(point.end)}`
+      : formatSampleTime(point.start);
+    marker.title = `${stateLabel}${point.date ? ` on ${point.date}` : ""}: ${sampleText}`;
+    marker.setAttribute("aria-label", marker.title);
+    track.appendChild(marker);
+  });
+
+  container.title = `${points.length} sample point${points.length === 1 ? "" : "s"} shown`;
+  container.setAttribute("aria-label", container.title);
   return container;
 }
 
