@@ -5733,8 +5733,8 @@
       z-index: 120 !important;
       display: flex !important;
       align-items: flex-end !important;
-      gap: 10px !important;
-      flex-wrap: wrap !important;
+      gap: 8px !important;
+      flex-wrap: nowrap !important;
       margin-bottom: 12px !important;
       overflow: visible !important;
     }
@@ -5748,8 +5748,27 @@
     }
 
     #otherToolsSection .player-database-search-field {
-      flex: 1 1 280px !important;
-      min-width: 260px !important;
+      flex: 1 1 auto !important;
+      min-width: 300px !important;
+    }
+
+    #otherToolsSection .player-database-year-field {
+      flex: 0 0 88px !important;
+      min-width: 88px !important;
+    }
+
+    #otherToolsSection .player-database-select-field {
+      flex: 0 0 118px !important;
+      min-width: 118px !important;
+    }
+
+    #otherToolsSection .player-database-view-field {
+      flex: 0 0 96px !important;
+      min-width: 96px !important;
+    }
+
+    #otherToolsSection .player-database-select-field .player-database-custom-select {
+      min-width: 0 !important;
     }
 
     #otherToolsSection .player-database-search-wrap {
@@ -5799,6 +5818,7 @@
       color: #475569 !important;
       letter-spacing: 0.04em !important;
       text-transform: uppercase !important;
+      white-space: nowrap !important;
     }
 
     #otherToolsSection .player-database-input {
@@ -5834,11 +5854,11 @@
       display: flex !important;
       align-items: center !important;
       justify-content: space-between !important;
-      gap: 12px !important;
+      gap: 8px !important;
       width: 100% !important;
       height: 36px !important;
       box-sizing: border-box !important;
-      padding: 0 34px 0 10px !important;
+      padding: 0 26px 0 9px !important;
       border: 1px solid #cbd5e1 !important;
       border-radius: 10px !important;
       background: #ffffff !important;
@@ -5854,7 +5874,7 @@
     #otherToolsSection .player-database-custom-select-button::after {
       content: "" !important;
       position: absolute !important;
-      right: 13px !important;
+      right: 11px !important;
       top: 50% !important;
       width: 8px !important;
       height: 8px !important;
@@ -5946,7 +5966,7 @@
       color: #0f172a !important;
       font-size: 12px !important;
       font-weight: 700 !important;
-      padding: 0 14px !important;
+      padding: 0 10px !important;
       height: 36px !important;
       line-height: 34px !important;
       cursor: pointer !important;
@@ -5955,6 +5975,24 @@
 
     #otherToolsSection .player-database-button:hover {
       background: #f8fafc !important;
+    }
+
+    #otherToolsSection .player-database-danger-button {
+      border-color: #f0b4b4 !important;
+      color: #0f172a !important;
+      background: #fff7f7 !important;
+    }
+
+    #otherToolsSection .player-database-danger-button:hover {
+      background: #ffecec !important;
+    }
+
+    #otherToolsSection .player-database-button:disabled {
+      opacity: 0.48 !important;
+      cursor: not-allowed !important;
+      background: #f8fafc !important;
+      color: #94a3b8 !important;
+      border-color: #dbe3ee !important;
     }
 
     #otherToolsSection .player-database-suggestions {
@@ -6079,6 +6117,139 @@
     #otherToolsSection .player-database-table th:first-child,
     #otherToolsSection .player-database-table td:first-child {
       text-align: left !important;
+    }
+
+    #otherToolsSection .player-database-player-header {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 7px !important;
+      min-width: 0 !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn {
+      position: relative !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 22px !important;
+      min-width: 22px !important;
+      height: 22px !important;
+      border: 0 !important;
+      border-radius: 5px !important;
+      background: rgba(15, 23, 42, 0.06) !important;
+      color: #1e293b !important;
+      font-size: 0 !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+      padding: 0 !important;
+      cursor: pointer !important;
+      white-space: nowrap !important;
+      box-shadow: none !important;
+      transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease, transform 120ms ease !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn::before,
+    #otherToolsSection .player-database-copy-summary-btn::after {
+      content: "" !important;
+      position: absolute !important;
+      box-sizing: border-box !important;
+      width: 9px !important;
+      height: 11px !important;
+      border: 1.5px solid currentColor !important;
+      border-radius: 2px !important;
+      background: transparent !important;
+      pointer-events: none !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn::before {
+      left: 8px !important;
+      top: 5px !important;
+      opacity: 0.58 !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn::after {
+      left: 5px !important;
+      top: 8px !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn:hover {
+      background: rgba(15, 23, 42, 0.11) !important;
+      color: #0f172a !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn:active:not(:disabled) {
+      background: rgba(15, 23, 42, 0.16) !important;
+      transform: translateY(1px) !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn:focus-visible {
+      outline: 2px solid rgba(147, 197, 253, 0.75) !important;
+      outline-offset: 2px !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn.is-copying {
+      background: rgba(37, 99, 235, 0.12) !important;
+      color: #1d4ed8 !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn.is-copied {
+      background: rgba(22, 163, 74, 0.15) !important;
+      color: #15803d !important;
+      opacity: 1 !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn.is-copied::before {
+      content: none !important;
+      display: none !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn.is-copied::after {
+      left: 6px !important;
+      top: 7px !important;
+      width: 10px !important;
+      height: 6px !important;
+      border: 0 !important;
+      border-left: 2px solid currentColor !important;
+      border-bottom: 2px solid currentColor !important;
+      border-radius: 0 !important;
+      transform: rotate(-45deg) !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn.is-copy-failed {
+      background: rgba(220, 38, 38, 0.13) !important;
+      color: #b91c1c !important;
+      opacity: 1 !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn.is-copy-failed::before,
+    #otherToolsSection .player-database-copy-summary-btn.is-copy-failed::after {
+      left: 5px !important;
+      top: 10px !important;
+      width: 12px !important;
+      height: 2px !important;
+      border: 0 !important;
+      border-radius: 999px !important;
+      background: currentColor !important;
+      opacity: 1 !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn.is-copy-failed::before {
+      transform: rotate(45deg) !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn.is-copy-failed::after {
+      transform: rotate(-45deg) !important;
+    }
+
+    #otherToolsSection .player-database-copy-summary-btn:disabled {
+      border: 0 !important;
+      background: rgba(15, 23, 42, 0.04) !important;
+      color: #334155 !important;
+      box-shadow: none !important;
+      opacity: 0.72 !important;
+      cursor: not-allowed !important;
     }
 
     #otherToolsSection .player-database-player-name-wrap {
@@ -9245,32 +9416,21 @@
         <div class="player-database-field player-database-search-field">
           <label class="player-database-label" for="playerDatabaseSearchInput">Player</label>
           <div class="player-database-search-wrap">
-            <input id="playerDatabaseSearchInput" class="player-database-input" type="text" placeholder="Search player..." autocomplete="off">
+            <input id="playerDatabaseSearchInput" class="player-database-input" type="text" placeholder="Search one or multiple players..." autocomplete="off">
             <div id="playerDatabaseInlineSuggestion" class="player-database-inline-suggestion" aria-hidden="true"></div>
           </div>
         </div>
         <button id="playerDatabaseAddBtn" class="player-database-button" type="button">Add</button>
-        <div class="player-database-field">
+        <button id="playerDatabaseDeleteAllBtn" class="player-database-button player-database-danger-button" type="button" disabled>Delete All</button>
+        <div class="player-database-field player-database-year-field">
           <label class="player-database-label" for="playerDatabaseStartYear">Start year</label>
           <input id="playerDatabaseStartYear" class="player-database-input" type="number" min="1900" max="2100" step="1" placeholder="All">
         </div>
-        <div class="player-database-field">
+        <div class="player-database-field player-database-year-field">
           <label class="player-database-label" for="playerDatabaseEndYear">End year</label>
           <input id="playerDatabaseEndYear" class="player-database-input" type="number" min="1900" max="2100" step="1" placeholder="All">
         </div>
-        <div class="player-database-field">
-          <div id="playerDatabaseModeLabel" class="player-database-label">Tour type</div>
-          <div id="playerDatabaseModeSelect" class="player-database-custom-select" data-value="watched">
-            <button id="playerDatabaseModeSelectButton" class="player-database-custom-select-button" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="playerDatabaseModeLabel playerDatabaseModeSelectValue">
-              <span id="playerDatabaseModeSelectValue" class="player-database-custom-select-value">Watched</span>
-            </button>
-            <div class="player-database-custom-select-options" role="listbox" aria-labelledby="playerDatabaseModeLabel">
-              <button class="player-database-custom-select-option" type="button" role="option" aria-selected="true" data-value="watched">Watched</button>
-              <button class="player-database-custom-select-option" type="button" role="option" aria-selected="false" data-value="usual">Usual</button>
-            </div>
-          </div>
-        </div>
-        <div class="player-database-field">
+        <div class="player-database-field player-database-select-field player-database-view-field">
           <div id="playerDatabaseViewModeLabel" class="player-database-label">View</div>
           <div id="playerDatabaseViewModeSelect" class="player-database-custom-select" data-value="table">
             <button id="playerDatabaseViewModeSelectButton" class="player-database-custom-select-button" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="playerDatabaseViewModeLabel playerDatabaseViewModeSelectValue">
@@ -9293,7 +9453,12 @@
         <table class="player-database-table">
           <thead>
             <tr>
-              <th>Player</th>
+              <th>
+                <span class="player-database-player-header">
+                  <span>Player</span>
+                  <button id="playerDatabaseCopySummaryBtn" class="player-database-copy-summary-btn" type="button" title="Copy selected players and guess rates" aria-label="Copy selected players and guess rates" disabled></button>
+                </span>
+              </th>
               <th>Guess rate</th>
               <th>Correct</th>
               <th>Wrong</th>
@@ -10022,6 +10187,7 @@ let playerDatabaseSelectedKey = "";
 let playerDatabaseInlineSuggestion = "";
 let playerDatabaseInlineSuggestionKey = "";
 let playerDatabaseSelectedPlayers = [];
+let playerDatabaseUserClearedSelection = false;
 let playerDatabaseDirectoryRefreshAttached = false;
 let playerDatabaseViewMode = "table";
 let playerDatabaseAppliedStartYear = null;
@@ -13088,6 +13254,9 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
       ensureSearchSongFrequencyData();
       renderSearchSongFrequency();
     }
+    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === OTHER_TOOLS_PLAYER_DATABASE_LABEL) {
+      renderPlayerDatabase();
+    }
     if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === OTHER_TOOLS_SINGLE_TOUR_LABEL) {
       ensureOriginalTourCalendarData();
       renderOriginalTourCalendarView();
@@ -13128,6 +13297,9 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === "Search song frequency") {
       ensureSearchSongFrequencyData();
       renderSearchSongFrequency();
+    }
+    if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === OTHER_TOOLS_PLAYER_DATABASE_LABEL) {
+      renderPlayerDatabase();
     }
     if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === OTHER_TOOLS_SINGLE_TOUR_LABEL) {
       ensureOriginalTourCalendarData();
@@ -16802,7 +16974,7 @@ function bindPlayerDatabaseCustomSelect(select, onChange) {
 }
 
 function getPlayerDatabaseMode() {
-  return getPlayerDatabaseCustomSelectValue("playerDatabaseModeSelect", "watched") === "usual" ? "usual" : "watched";
+  return getActiveDataSourceMode();
 }
 
 function getPlayerDatabaseViewMode() {
@@ -17023,6 +17195,7 @@ function addPlayerDatabasePlayersFromText(text) {
     ...playerDatabaseSelectedPlayers,
     ...entries.map(entry => createPlayerDatabaseSelectedPlayer(entry))
   ];
+  playerDatabaseUserClearedSelection = false;
   playerDatabaseSearchQuery = "";
   playerDatabaseSelectedKey = "";
   playerDatabaseInlineSuggestion = "";
@@ -17046,6 +17219,7 @@ function addPlayerDatabasePlayer(key, options = {}) {
     ...playerDatabaseSelectedPlayers,
     createPlayerDatabaseSelectedPlayer(entry)
   ];
+  playerDatabaseUserClearedSelection = false;
   playerDatabaseSearchQuery = "";
   playerDatabaseSelectedKey = "";
   playerDatabaseInlineSuggestion = "";
@@ -17263,6 +17437,7 @@ function buildPlayerDatabaseSummaries() {
 
 function ensurePlayerDatabaseDefaultSelection() {
   if (playerDatabaseSelectedPlayers.length) return;
+  if (playerDatabaseUserClearedSelection) return;
   const playerEntry = currentPlayerId
     ? getPlayerDatabaseEntryByKey(currentPlayerId)
     : (getPlayerEntryFromCacheByName(currentDisplayName || currentStatKey || username || "") || null);
@@ -17276,6 +17451,8 @@ function ensurePlayerDatabaseDefaultSelection() {
 function renderPlayerDatabaseChips() {
   const wrap = document.getElementById("playerDatabaseSelectedPlayers");
   if (!wrap) return;
+  const deleteAllBtn = document.getElementById("playerDatabaseDeleteAllBtn");
+  if (deleteAllBtn) deleteAllBtn.disabled = !playerDatabaseSelectedPlayers.length;
   if (!playerDatabaseSelectedPlayers.length) {
     wrap.innerHTML = '<div class="player-database-empty">No players selected</div>';
     return;
@@ -17292,12 +17469,22 @@ function renderPlayerDatabaseChips() {
     removeBtn.title = `Remove ${player.mainLabel || player.displayLabel || player.key}`;
     removeBtn.addEventListener("click", () => {
       playerDatabaseSelectedPlayers = playerDatabaseSelectedPlayers.filter(item => item.key !== player.key);
+      if (!playerDatabaseSelectedPlayers.length) playerDatabaseUserClearedSelection = true;
       renderPlayerDatabase();
     });
     chip.appendChild(text);
     chip.appendChild(removeBtn);
     wrap.appendChild(chip);
   });
+}
+
+function clearPlayerDatabaseSelectedPlayers() {
+  if (!playerDatabaseSelectedPlayers.length) return;
+  playerDatabaseSelectedPlayers = [];
+  playerDatabaseUserClearedSelection = true;
+  hidePlayerDatabaseSuggestions();
+  hidePlayerDatabasePlayerAltTooltip();
+  renderPlayerDatabase();
 }
 
 function ensurePlayerDatabasePlayerAltTooltip() {
@@ -17368,9 +17555,84 @@ function appendPlayerDatabasePlayerNameCell(cell, player) {
   cell.appendChild(wrap);
 }
 
+function formatPlayerDatabaseCopySummary(summaries) {
+  return (Array.isArray(summaries) ? summaries : [])
+    .map(summary => {
+      const label = String(summary && (summary.mainLabel || summary.displayLabel || summary.key) || "").trim();
+      if (!label) return "";
+      const guessRate = Number(summary && summary.guessRate);
+      const guessRateText = Number.isFinite(guessRate) ? guessRate.toFixed(3) : "N/A";
+      return `${label} (${guessRateText})`;
+    })
+    .filter(Boolean)
+    .join(", ");
+}
+
+function copyTextToClipboard(text) {
+  const value = String(text || "");
+  if (!value) return Promise.reject(new Error("Nothing to copy"));
+  if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+    return navigator.clipboard.writeText(value);
+  }
+  return new Promise((resolve, reject) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = value;
+    textarea.setAttribute("readonly", "readonly");
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    textarea.style.top = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      const copied = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      copied ? resolve() : reject(new Error("Copy failed"));
+    } catch (error) {
+      document.body.removeChild(textarea);
+      reject(error);
+    }
+  });
+}
+
+function setPlayerDatabaseCopyButtonStatus(text, reset = false) {
+  const button = document.getElementById("playerDatabaseCopySummaryBtn");
+  if (!button) return;
+  const status = String(text || "Copy");
+  const label = status === "Copy" ? "Copy selected players and guess rates" : status;
+  button.classList.remove("is-copying", "is-copied", "is-copy-failed");
+  if (status === "Copying") button.classList.add("is-copying");
+  if (status === "Copied") button.classList.add("is-copied");
+  if (status === "Failed") button.classList.add("is-copy-failed");
+  button.title = label;
+  button.setAttribute("aria-label", label);
+  if (!reset) return;
+  window.setTimeout(() => {
+    const currentButton = document.getElementById("playerDatabaseCopySummaryBtn");
+    if (currentButton && currentButton.getAttribute("aria-label") === label) {
+      currentButton.classList.remove("is-copying", "is-copied", "is-copy-failed");
+      currentButton.title = "Copy selected players and guess rates";
+      currentButton.setAttribute("aria-label", "Copy selected players and guess rates");
+    }
+  }, 1200);
+}
+
+function copyPlayerDatabaseSummaryToClipboard() {
+  const summaries = buildPlayerDatabaseSummaries();
+  const text = formatPlayerDatabaseCopySummary(summaries);
+  setPlayerDatabaseCopyButtonStatus("Copying");
+  copyTextToClipboard(text)
+    .then(() => setPlayerDatabaseCopyButtonStatus("Copied", true))
+    .catch(() => setPlayerDatabaseCopyButtonStatus("Failed", true));
+}
+
 function renderPlayerDatabaseTable(summaries) {
   const tbody = document.getElementById("playerDatabaseTableBody");
   if (!tbody) return;
+  const copySummaryBtn = document.getElementById("playerDatabaseCopySummaryBtn");
+  if (copySummaryBtn) {
+    copySummaryBtn.disabled = !summaries.length || summaries.some(summary => summary && summary.isLoading);
+    setPlayerDatabaseCopyButtonStatus("Copy");
+  }
   hidePlayerDatabasePlayerAltTooltip();
   if (!summaries.length) {
     tbody.innerHTML = '<tr><td colspan="6" class="player-database-empty">Select players to compare.</td></tr>';
@@ -17565,9 +17827,10 @@ function bindPlayerDatabaseControlsOnce() {
   playerDatabaseUIBound = true;
   const input = document.getElementById("playerDatabaseSearchInput");
   const addBtn = document.getElementById("playerDatabaseAddBtn");
+  const deleteAllBtn = document.getElementById("playerDatabaseDeleteAllBtn");
+  const copySummaryBtn = document.getElementById("playerDatabaseCopySummaryBtn");
   const startInput = document.getElementById("playerDatabaseStartYear");
   const endInput = document.getElementById("playerDatabaseEndYear");
-  const modeSelect = document.getElementById("playerDatabaseModeSelect");
   const viewModeSelect = document.getElementById("playerDatabaseViewModeSelect");
 
   if (input) {
@@ -17616,6 +17879,14 @@ function bindPlayerDatabaseControlsOnce() {
     });
   }
 
+  if (deleteAllBtn) {
+    deleteAllBtn.addEventListener("click", clearPlayerDatabaseSelectedPlayers);
+  }
+
+  if (copySummaryBtn) {
+    copySummaryBtn.addEventListener("click", copyPlayerDatabaseSummaryToClipboard);
+  }
+
   [startInput, endInput].forEach(yearInput => {
     if (!yearInput) return;
     yearInput.addEventListener("input", () => {
@@ -17639,7 +17910,6 @@ function bindPlayerDatabaseControlsOnce() {
     });
   });
 
-  bindPlayerDatabaseCustomSelect(modeSelect, renderPlayerDatabase);
   bindPlayerDatabaseCustomSelect(viewModeSelect, renderPlayerDatabase);
   document.addEventListener("click", event => {
     if (!(event.target instanceof Element) || !event.target.closest(".player-database-custom-select")) {
