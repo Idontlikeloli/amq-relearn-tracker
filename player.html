@@ -4031,9 +4031,9 @@
       box-sizing: border-box !important;
       padding: 2px !important;
       border: 1px solid #cbd5e1 !important;
-      border-radius: 10px !important;
-      background: #eef4fb !important;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.64) !important;
+      border-radius: 9px !important;
+      background: #ffffff !important;
+      box-shadow: 0 1px 2px rgba(51, 65, 85, 0.08) !important;
     }
 
     #insightsSection #insightsRelearnTrackerView .search-songs-display-toggle {
@@ -4046,7 +4046,7 @@
       border: 0 !important;
       border-radius: 8px !important;
       background: transparent !important;
-      color: #4f6377 !important;
+      color: #4b6075 !important;
       font-size: 11px !important;
       font-weight: 700 !important;
       letter-spacing: 0.02em !important;
@@ -4059,14 +4059,14 @@
     }
 
     #insightsSection .relearn-onlist-filter-btn:hover {
-      color: #1f3a55 !important;
-      background: rgba(255, 255, 255, 0.52) !important;
+      color: #183a5c !important;
+      background: #f8fafc !important;
     }
 
     #insightsSection .relearn-onlist-filter-btn.active {
-      background: #ffffff !important;
-      color: #173c5b !important;
-      box-shadow: 0 1px 3px rgba(51, 65, 85, 0.18) !important;
+      background: #e8f1fb !important;
+      color: #183a5c !important;
+      box-shadow: 0 1px 2px rgba(59, 92, 126, 0.18) !important;
     }
 
     #insightsSection .relearn-cover {
@@ -10151,6 +10151,7 @@ let cachedMalImageCache = null;
 let cachedMalImageCachePromise = null;
 let cachedSongKeyById = null;
 let cachedSongKeyByIdPromise = null;
+let cachedSearchSongsMediaDurationByUrl = new Map();
 let weightedGuessRateRequestId = 0;
 let overviewLanguageRerenderHandle = null;
 let cachedChangelogPosts = null;
@@ -27952,13 +27953,126 @@ function buildPatternSquareNode(patternRaw, options = {}) {
 function formatSampleTime(value) {
   const seconds = Number(value);
   if (!Number.isFinite(seconds)) return "?";
-  const minutes = Math.floor(Math.max(0, seconds) / 60);
-  const remainder = Math.max(0, seconds) - (minutes * 60);
-  const roundedRemainder = Math.round(remainder * 10) / 10;
-  const secondsText = Number.isInteger(roundedRemainder)
-    ? String(roundedRemainder).padStart(2, "0")
-    : roundedRemainder.toFixed(1).padStart(4, "0");
-  return `${minutes}:${secondsText}`;
+  const roundedSeconds = Math.round(Math.max(0, seconds));
+  const minutes = Math.floor(roundedSeconds / 60);
+  const remainder = roundedSeconds % 60;
+  return `${minutes}:${String(remainder).padStart(2, "0")}`;
+}
+
+function parseSearchSongsDurationValue(rawValue, options = {}) {
+  if (rawValue == null || rawValue === "") return null;
+  const shouldConvertMs = !!(options && options.milliseconds);
+  if (typeof rawValue === "number") {
+    const value = shouldConvertMs ? rawValue / 1000 : rawValue;
+    return Number.isFinite(value) && value > 0 ? value : null;
+  }
+
+  const text = String(rawValue).trim();
+  if (!text) return null;
+  if (/^\d+(?:\.\d+)?$/.test(text)) {
+    const numeric = Number(text);
+    const value = shouldConvertMs ? numeric / 1000 : numeric;
+    return Number.isFinite(value) && value > 0 ? value : null;
+  }
+
+  if (/^\d+(?::\d+(?:\.\d+)?){1,2}$/.test(text)) {
+    const parts = text.split(":").map(part => Number(part));
+    if (parts.every(part => Number.isFinite(part) && part >= 0)) {
+      const seconds = parts.reduce((total, part) => total * 60 + part, 0);
+      return seconds > 0 ? seconds : null;
+    }
+  }
+
+  return null;
+}
+
+function getSearchSongsKnownDurationSeconds(song) {
+  if (!song || typeof song !== "object") return null;
+  const secondFields = [
+    "durationSeconds",
+    "songDurationSeconds",
+    "audioDurationSeconds",
+    "trackDurationSeconds",
+    "lengthSeconds",
+    "songLengthSeconds",
+    "audioLengthSeconds",
+    "duration",
+    "songDuration",
+    "audioDuration",
+    "trackDuration",
+    "songLength",
+    "audioLength",
+    "trackLength",
+    "length"
+  ];
+  const millisecondFields = [
+    "durationMs",
+    "durationMilliseconds",
+    "songDurationMs",
+    "songDurationMilliseconds",
+    "audioDurationMs",
+    "audioDurationMilliseconds",
+    "songLengthMs",
+    "songLengthMilliseconds"
+  ];
+
+  for (const key of secondFields) {
+    const parsed = parseSearchSongsDurationValue(song[key]);
+    if (parsed != null) return parsed;
+  }
+  for (const key of millisecondFields) {
+    const parsed = parseSearchSongsDurationValue(song[key], { milliseconds: true });
+    if (parsed != null) return parsed;
+  }
+  return null;
+}
+
+function getSearchSongsDurationMediaUrl(song) {
+  if (!song || typeof song !== "object") return "";
+  const audioLink = String(song.audioLink || "").trim();
+  if (audioLink && isAudioMediaUrl(audioLink)) return audioLink;
+  const videoLink = String(song.videoLink || "").trim();
+  if (videoLink && isVideoMediaUrl(videoLink)) return videoLink;
+  return "";
+}
+
+function loadSearchSongsMediaDurationSeconds(url) {
+  const sourceUrl = String(url || "").trim();
+  if (!sourceUrl) return Promise.resolve(null);
+  if (cachedSearchSongsMediaDurationByUrl.has(sourceUrl)) {
+    return cachedSearchSongsMediaDurationByUrl.get(sourceUrl);
+  }
+
+  const durationPromise = new Promise(resolve => {
+    const media = document.createElement(isVideoMediaUrl(sourceUrl) ? "video" : "audio");
+    let settled = false;
+    let timeoutId = null;
+    const settle = value => {
+      if (settled) return;
+      settled = true;
+      if (timeoutId != null) window.clearTimeout(timeoutId);
+      media.removeAttribute("src");
+      media.load();
+      const duration = Number(value);
+      resolve(Number.isFinite(duration) && duration > 0 ? duration : null);
+    };
+    const trySettleFromMedia = () => {
+      if (Number.isFinite(media.duration) && media.duration > 0) {
+        settle(media.duration);
+      }
+    };
+
+    media.preload = "metadata";
+    media.addEventListener("loadedmetadata", trySettleFromMedia, { once: true });
+    media.addEventListener("durationchange", trySettleFromMedia);
+    media.addEventListener("error", () => settle(null), { once: true });
+    timeoutId = window.setTimeout(() => settle(null), 12000);
+    media.src = sourceUrl;
+    media.load();
+  });
+
+  cachedSearchSongsMediaDurationByUrl.set(sourceUrl, durationPromise);
+  return durationPromise;
 }
 
 function collectSearchSongsSamplePoints(song) {
@@ -28062,27 +28176,17 @@ function buildSearchSongsSampleBarNode(song) {
   }
 
   const visiblePoints = points;
-  const maxSamplePoint = Math.max(
+  const fallbackScaleEnd = Math.max(
     8,
     ...points.map(point => {
       const start = Number(point && point.start);
-      return Number.isFinite(start) ? start : 0;
+      const end = Number(point && point.end);
+      return Math.max(
+        Number.isFinite(start) ? start : 0,
+        Number.isFinite(end) ? end : 0
+      );
     })
   );
-
-  visiblePoints.forEach((point, visibleIndex) => {
-    const originalIndex = points.length - visiblePoints.length + visibleIndex;
-    const segment = document.createElement("span");
-    segment.className = `search-songs-sample-segment lane-${visibleIndex % 2} pattern-${point.state || "unknown"}`;
-    const stateLabel = point.state === "correct" ? "Correct" : (point.state === "wrong" ? "Wrong" : "Unknown");
-    const sampleText = formatSampleTime(point.start);
-    const startPercent = Math.max(0, Math.min(100, (Number(point.start) / maxSamplePoint) * 100));
-
-    segment.style.left = `${startPercent}%`;
-    segment.title = `Sample ${originalIndex + 1}: ${stateLabel}${point.date ? ` on ${point.date}` : ""}: ${sampleText}`;
-    segment.setAttribute("aria-label", segment.title);
-    track.appendChild(segment);
-  });
 
   const axis = document.createElement("span");
   axis.className = "search-songs-sample-axis";
@@ -28092,11 +28196,42 @@ function buildSearchSongsSampleBarNode(song) {
   axisMid.className = "search-songs-sample-axis-mid";
   axisMid.innerText = "";
   const axisEnd = document.createElement("span");
-  axisEnd.innerText = formatSampleTime(maxSamplePoint);
   axis.appendChild(axisStart);
   axis.appendChild(axisMid);
   axis.appendChild(axisEnd);
   container.appendChild(axis);
+
+  const renderAtScaleEnd = rawScaleEnd => {
+    const scaleEnd = Math.max(fallbackScaleEnd, Number(rawScaleEnd) || 0);
+    track.innerHTML = "";
+    axisEnd.innerText = formatSampleTime(scaleEnd);
+    visiblePoints.forEach((point, visibleIndex) => {
+      const originalIndex = points.length - visiblePoints.length + visibleIndex;
+      const segment = document.createElement("span");
+      segment.className = `search-songs-sample-segment lane-${visibleIndex % 2} pattern-${point.state || "unknown"}`;
+      const stateLabel = point.state === "correct" ? "Correct" : (point.state === "wrong" ? "Wrong" : "Unknown");
+      const sampleText = formatSampleTime(point.start);
+      const startPercent = Math.max(0, Math.min(100, (Number(point.start) / scaleEnd) * 100));
+
+      segment.style.left = `${startPercent}%`;
+      segment.title = `Sample ${originalIndex + 1}: ${stateLabel}${point.date ? ` on ${point.date}` : ""}: ${sampleText}`;
+      segment.setAttribute("aria-label", segment.title);
+      track.appendChild(segment);
+    });
+  };
+
+  const knownDuration = getSearchSongsKnownDurationSeconds(song);
+  renderAtScaleEnd(knownDuration || fallbackScaleEnd);
+  if (knownDuration == null) {
+    const durationMediaUrl = getSearchSongsDurationMediaUrl(song);
+    if (durationMediaUrl) {
+      loadSearchSongsMediaDurationSeconds(durationMediaUrl).then(duration => {
+        if (!container.isConnected || !Number.isFinite(duration) || duration <= 0) return;
+        renderAtScaleEnd(duration);
+      });
+    }
+  }
+
   container.title = `${points.length} sample point${points.length === 1 ? "" : "s"} available`;
   container.setAttribute("aria-label", container.title);
   return container;
