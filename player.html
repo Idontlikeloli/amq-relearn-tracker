@@ -26920,7 +26920,7 @@ function renderInsightsSearchSongs() {
   const songs = Array.isArray(cachedSearchSongs) ? cachedSearchSongs : [];
   const useLinksDisplay = searchSongsDisplayMode === "links";
   updateSearchSongsDisplayToggleUI();
-  if (patternHeader) patternHeader.innerText = useLinksDisplay ? "Sample Points" : "Pattern";
+  if (patternHeader) patternHeader.innerText = "Pattern";
   if (actionHeaderOne) actionHeaderOne.innerText = useLinksDisplay ? "Anime links" : "Play song";
   if (actionHeaderTwo) actionHeaderTwo.innerText = useLinksDisplay ? "Media" : "Play sample";
   const normalizedQuery = String(searchSongsQuery || "").trim().toLowerCase();
@@ -26963,10 +26963,8 @@ function renderInsightsSearchSongs() {
     const maxPatternCount = pageSongs.reduce((maxValue, song) => {
       return Math.max(maxValue, getPatternMarkerCount(song && song.pattern));
     }, 0);
-    const boundedCount = Math.max(1, Math.min(useLinksDisplay ? 14 : 10, maxPatternCount || 1, 30));
-    const patternWidth = useLinksDisplay
-      ? 178
-      : Math.max(72, Math.min(130, 16 + (boundedCount * 11)));
+    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1, 30));
+    const patternWidth = Math.max(72, Math.min(130, 16 + (boundedCount * 11)));
     const extraSpace = 130 - patternWidth;
     const textWidth = 150 + Math.round(extraSpace / 3);
     searchSongsTableEl.style.setProperty("--search-pattern-col-width", `${patternWidth}px`);
@@ -27315,13 +27313,11 @@ function renderInsightsSearchSongs() {
     row.appendChild(typeCell);
 
     const patternCell = document.createElement("td");
-    patternCell.appendChild(useLinksDisplay
-      ? buildSearchSongsSampleBarNode(song)
-      : buildPatternSquareNode(song && song.pattern, {
-        maxPerRow: 10,
-        maxCount: 30,
-        dates: song && song.patternDates
-      }));
+    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, {
+      maxPerRow: 10,
+      maxCount: 30,
+      dates: song && song.patternDates
+    }));
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
