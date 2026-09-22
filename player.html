@@ -4011,15 +4011,35 @@
       width: 100% !important;
     }
 
+    #insightsSection #insightsRelearnTrackerView .chart-header {
+      align-items: center !important;
+    }
+
+    #insightsSection #insightsRelearnTrackerView .chart-meta {
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      gap: 8px !important;
+      flex-wrap: wrap !important;
+    }
+
     #insightsSection .relearn-onlist-filter-toggle {
       display: inline-flex !important;
       align-items: center !important;
       gap: 4px !important;
-      padding: 3px !important;
+      height: 30px !important;
+      box-sizing: border-box !important;
+      padding: 2px !important;
       border: 1px solid #cbd5e1 !important;
       border-radius: 10px !important;
       background: #eef4fb !important;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.64) !important;
+    }
+
+    #insightsSection #insightsRelearnTrackerView .search-songs-display-toggle {
+      height: 30px !important;
+      align-self: center !important;
+      box-sizing: border-box !important;
     }
 
     #insightsSection .relearn-onlist-filter-btn {
@@ -4030,8 +4050,9 @@
       font-size: 11px !important;
       font-weight: 700 !important;
       letter-spacing: 0.02em !important;
-      line-height: 1 !important;
-      padding: 7px 10px !important;
+      height: 24px !important;
+      line-height: 24px !important;
+      padding: 0 10px !important;
       cursor: pointer !important;
       white-space: nowrap !important;
       transition: background-color 120ms ease, color 120ms ease, box-shadow 120ms ease !important;
@@ -4582,7 +4603,7 @@
       background: #f8fafc !important;
     }
 
-    #otherToolsSection .search-songs-display-toggle {
+    .search-songs-display-toggle {
       position: relative !important;
       display: inline-grid !important;
       grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -4596,7 +4617,7 @@
       isolation: isolate !important;
     }
 
-    #otherToolsSection .search-songs-display-toggle::before {
+    .search-songs-display-toggle::before {
       content: "" !important;
       position: absolute !important;
       top: 2px !important;
@@ -4611,11 +4632,11 @@
       z-index: 0 !important;
     }
 
-    #otherToolsSection .search-songs-display-toggle.is-links::before {
+    .search-songs-display-toggle.is-links::before {
       transform: translateX(100%) !important;
     }
 
-    #otherToolsSection .search-songs-display-btn {
+    .search-songs-display-btn {
       position: relative !important;
       z-index: 1 !important;
       border: 0 !important;
@@ -4633,95 +4654,154 @@
       white-space: nowrap !important;
     }
 
-    #otherToolsSection .search-songs-display-btn.active {
+    .search-songs-display-btn.active {
       color: #183a5c !important;
     }
 
-    #otherToolsSection .search-songs-sample-chart {
+    .search-songs-sample-chart {
       position: relative !important;
       display: flex !important;
-      align-items: center !important;
+      flex-direction: column !important;
+      gap: 2px !important;
       width: 100% !important;
-      min-width: 170px !important;
-      height: 30px !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
       box-sizing: border-box !important;
-      padding: 0 4px !important;
     }
 
-    #otherToolsSection .search-songs-sample-track {
+    .search-songs-sample-track {
       position: relative !important;
       display: block !important;
       width: 100% !important;
-      height: 18px !important;
-      border-radius: 999px !important;
-      border: 1px solid #c5d1dd !important;
+      height: 22px !important;
+      border-radius: 6px !important;
+      border: 1px solid #cbd7e4 !important;
       background:
-        linear-gradient(90deg, rgba(79, 99, 119, 0.14), rgba(79, 99, 119, 0.05)),
-        repeating-linear-gradient(
-          90deg,
-          rgba(79, 99, 119, 0.13) 0,
-          rgba(79, 99, 119, 0.13) 1px,
-          rgba(255, 255, 255, 0) 1px,
-          rgba(255, 255, 255, 0) 18px
-        ) !important;
+        linear-gradient(90deg,
+          rgba(71, 85, 105, 0) 0%,
+          rgba(71, 85, 105, 0) 24%,
+          rgba(71, 85, 105, 0.16) 24.2%,
+          rgba(71, 85, 105, 0.16) 24.8%,
+          rgba(71, 85, 105, 0) 25%,
+          rgba(71, 85, 105, 0) 49%,
+          rgba(71, 85, 105, 0.18) 49.2%,
+          rgba(71, 85, 105, 0.18) 49.8%,
+          rgba(71, 85, 105, 0) 50%,
+          rgba(71, 85, 105, 0) 74%,
+          rgba(71, 85, 105, 0.16) 74.2%,
+          rgba(71, 85, 105, 0.16) 74.8%,
+          rgba(71, 85, 105, 0) 75%),
+        linear-gradient(180deg, #f9fbff 0%, #edf4fb 100%) !important;
       overflow: hidden !important;
+      box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.06) !important;
     }
 
-    #otherToolsSection .search-songs-sample-track::before {
+    .search-songs-sample-track::before {
       content: "" !important;
       position: absolute !important;
-      left: 0 !important;
-      right: 0 !important;
+      left: 7px !important;
+      right: 7px !important;
       top: 50% !important;
       height: 2px !important;
       transform: translateY(-50%) !important;
-      background: rgba(75, 96, 117, 0.34) !important;
-    }
-
-    #otherToolsSection .search-songs-sample-point {
-      position: absolute !important;
-      top: 50% !important;
-      width: 8px !important;
-      height: 8px !important;
       border-radius: 999px !important;
-      border: 1px solid rgba(15, 23, 42, 0.22) !important;
+      background: #566879 !important;
+      opacity: 0.88 !important;
+    }
+
+    .search-songs-sample-segment {
+      position: absolute !important;
+      top: 4px !important;
+      display: block !important;
+      width: 3px !important;
+      height: 14px !important;
       box-sizing: border-box !important;
-      transform: translate(-50%, -50%) !important;
+      border-radius: 999px !important;
+      border: 1px solid rgba(15, 23, 42, 0.18) !important;
+      transform: translateX(-50%) !important;
+      font-size: 0 !important;
+      line-height: 0 !important;
       cursor: default !important;
-      z-index: 1 !important;
-      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.16) !important;
+      z-index: 2 !important;
+      overflow: hidden !important;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.18) !important;
     }
 
-    #otherToolsSection .search-songs-sample-point.pattern-correct {
-      background: #2f9e67 !important;
+    .search-songs-sample-segment.lane-1 {
+      top: 4px !important;
     }
 
-    #otherToolsSection .search-songs-sample-point.pattern-wrong {
-      background: #c95a5a !important;
+    .search-songs-sample-segment.pattern-correct {
+      background: linear-gradient(180deg, #34c979 0%, #159653 100%) !important;
     }
 
-    #otherToolsSection .search-songs-sample-point.pattern-unknown {
-      background: #7b8ba0 !important;
+    .search-songs-sample-segment.pattern-wrong {
+      background: linear-gradient(180deg, #f06b6b 0%, #c93d3d 100%) !important;
     }
 
-    #otherToolsSection .search-songs-sample-point:nth-child(3n) {
-      margin-top: -4px !important;
+    .search-songs-sample-segment.pattern-unknown {
+      background: linear-gradient(180deg, #a8b4c3 0%, #718096 100%) !important;
     }
 
-    #otherToolsSection .search-songs-sample-point:nth-child(3n + 1) {
-      margin-top: 4px !important;
+    .search-songs-sample-hidden-count {
+      position: absolute !important;
+      right: 5px !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      height: 16px !important;
+      min-width: 22px !important;
+      box-sizing: border-box !important;
+      padding: 0 5px !important;
+      border-radius: 999px !important;
+      border: 1px solid rgba(100, 116, 139, 0.36) !important;
+      background: rgba(248, 250, 252, 0.94) !important;
+      color: #475569 !important;
+      font-size: 9px !important;
+      line-height: 1 !important;
+      font-weight: 800 !important;
+      z-index: 3 !important;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.10) !important;
     }
 
-    #otherToolsSection .search-songs-sample-chart.empty .search-songs-sample-track {
+    .search-songs-sample-axis {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+      font-size: 8px !important;
+      line-height: 1 !important;
+      font-weight: 700 !important;
+      color: #64748b !important;
+      white-space: nowrap !important;
+    }
+
+    .search-songs-sample-axis-mid {
+      flex: 1 1 auto !important;
+      text-align: center !important;
+      color: #94a3b8 !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+    }
+
+    .search-songs-sample-chart.empty .search-songs-sample-track {
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       color: #64748b !important;
       font-size: 12px !important;
-      font-weight: 700 !important;
+      font-weight: 800 !important;
+      border-style: dashed !important;
     }
 
-    #otherToolsSection .search-songs-link-stack {
+    .search-songs-sample-chart.empty .search-songs-sample-track::before {
+      display: none !important;
+    }
+
+    .search-songs-link-stack {
       display: inline-flex !important;
       flex-direction: column !important;
       align-items: center !important;
@@ -4729,7 +4809,7 @@
       line-height: 1.1 !important;
     }
 
-    #otherToolsSection .search-songs-link-stack a {
+    .search-songs-link-stack a {
       color: #2f4d52 !important;
       font-size: 12px !important;
       font-weight: 700 !important;
@@ -4738,8 +4818,8 @@
       transition: color 120ms ease, text-decoration-color 120ms ease !important;
     }
 
-    #otherToolsSection .search-songs-link-stack a:hover,
-    #otherToolsSection .search-songs-link-stack a:focus-visible {
+    .search-songs-link-stack a:hover,
+    .search-songs-link-stack a:focus-visible {
       color: #183a5c !important;
     }
 
@@ -8908,6 +8988,10 @@
             <button class="relearn-onlist-filter-btn" type="button" data-relearn-onlist-filter="onlist" aria-pressed="false">Onlist</button>
             <button class="relearn-onlist-filter-btn" type="button" data-relearn-onlist-filter="offlist" aria-pressed="false">Offlist</button>
           </div>
+          <div id="relearnDisplayToggle" class="search-songs-display-toggle" role="group" aria-label="Relearn tracker display">
+            <button id="relearnDisplayClassicBtn" class="search-songs-display-btn active" type="button" aria-pressed="true">Play</button>
+            <button id="relearnDisplayLinksBtn" class="search-songs-display-btn" type="button" aria-pressed="false">Links</button>
+          </div>
         </div>
       </div>
       <div class="relearn-table-wrap">
@@ -8919,9 +9003,9 @@
               <th>Song</th>
               <th>Artist</th>
               <th>Type</th>
-              <th>Pattern</th>
-              <th>Play song</th>
-              <th>Play sample</th>
+              <th id="relearnPatternHeader">Pattern</th>
+              <th id="relearnActionHeaderOne">Play song</th>
+              <th id="relearnActionHeaderTwo">Play sample</th>
             </tr>
           </thead>
           <tbody id="relearnSongsTableBody"></tbody>
@@ -9988,6 +10072,9 @@ const artistFamiliarityInlineSuggestion = document.getElementById("artistFamilia
 const artistFamiliarityRightModeToggle = document.getElementById("artistFamiliarityRightModeToggle");
 const artistFamiliarityRightModeAttemptsBtn = document.getElementById("artistFamiliarityRightModeAttemptsBtn");
 const artistFamiliarityRightModeCompareBtn = document.getElementById("artistFamiliarityRightModeCompareBtn");
+const relearnDisplayToggle = document.getElementById("relearnDisplayToggle");
+const relearnDisplayClassicBtn = document.getElementById("relearnDisplayClassicBtn");
+const relearnDisplayLinksBtn = document.getElementById("relearnDisplayLinksBtn");
 const searchSongsSuggestions = document.getElementById("searchSongsSuggestions");
 const searchSongsInlineSuggestion = document.getElementById("searchSongsInlineSuggestion");
 const searchSongsDisplayToggle = document.getElementById("searchSongsDisplayToggle");
@@ -10082,6 +10169,7 @@ let isRelearnVolumePopoverOpen = false;
 let relearnVolumePopoverFadeTimer = null;
 let relearnPageIndex = 0;
 let relearnOnlistFilterMode = "all";
+let relearnDisplayMode = "classic";
 let wrongGuessPageIndex = 0;
 let neverCorrectPageIndex = 0;
 let popularityPageIndex = 0;
@@ -12031,6 +12119,16 @@ document.querySelectorAll("[data-relearn-onlist-filter]").forEach(button => {
     renderInsightsRelearnTracker();
   });
 });
+if (relearnDisplayClassicBtn) {
+  relearnDisplayClassicBtn.addEventListener("click", () => {
+    setRelearnDisplayMode("classic");
+  });
+}
+if (relearnDisplayLinksBtn) {
+  relearnDisplayLinksBtn.addEventListener("click", () => {
+    setRelearnDisplayMode("links");
+  });
+}
 if (wrongGuessPrevPageBtn) {
   wrongGuessPrevPageBtn.addEventListener("click", () => {
     wrongGuessPageIndex = Math.max(0, wrongGuessPageIndex - 1);
@@ -25965,14 +26063,48 @@ function updateRelearnOnlistFilterButtons() {
   });
 }
 
+function updateRelearnDisplayToggleUI() {
+  const useLinksDisplay = relearnDisplayMode === "links";
+  if (relearnDisplayToggle) {
+    relearnDisplayToggle.classList.toggle("is-links", useLinksDisplay);
+  }
+  if (relearnDisplayClassicBtn) {
+    relearnDisplayClassicBtn.classList.toggle("active", !useLinksDisplay);
+    relearnDisplayClassicBtn.setAttribute("aria-pressed", useLinksDisplay ? "false" : "true");
+  }
+  if (relearnDisplayLinksBtn) {
+    relearnDisplayLinksBtn.classList.toggle("active", useLinksDisplay);
+    relearnDisplayLinksBtn.setAttribute("aria-pressed", useLinksDisplay ? "true" : "false");
+  }
+}
+
+function setRelearnDisplayMode(mode) {
+  const nextMode = mode === "links" ? "links" : "classic";
+  if (relearnDisplayMode === nextMode) {
+    updateRelearnDisplayToggleUI();
+    return;
+  }
+  relearnDisplayMode = nextMode;
+  updateRelearnDisplayToggleUI();
+  renderInsightsRelearnTracker();
+}
+
 function renderInsightsRelearnTracker() {
   const tbody = document.getElementById("relearnSongsTableBody");
   const pageMeta = document.getElementById("relearnPageMeta");
   const prevPageBtn = document.getElementById("relearnPrevPageBtn");
   const nextPageBtn = document.getElementById("relearnNextPageBtn");
+  const patternHeader = document.getElementById("relearnPatternHeader");
+  const actionHeaderOne = document.getElementById("relearnActionHeaderOne");
+  const actionHeaderTwo = document.getElementById("relearnActionHeaderTwo");
   if (!tbody || !pageMeta || !prevPageBtn || !nextPageBtn) return;
 
   updateRelearnOnlistFilterButtons();
+  const useLinksDisplay = relearnDisplayMode === "links";
+  updateRelearnDisplayToggleUI();
+  if (patternHeader) patternHeader.innerText = useLinksDisplay ? "Sample Points" : "Pattern";
+  if (actionHeaderOne) actionHeaderOne.innerText = useLinksDisplay ? "Anime links" : "Play song";
+  if (actionHeaderTwo) actionHeaderTwo.innerText = useLinksDisplay ? "Media" : "Play sample";
   const songs = getFilteredRelearnSongs();
   tbody.innerHTML = "";
 
@@ -25982,25 +26114,10 @@ function renderInsightsRelearnTracker() {
   const end = start + RELEARN_PAGE_SIZE;
   const pageSongs = songs.slice(start, end);
   const relearnTableEl = document.getElementById("relearnSongsTable");
-  const getPatternMarkerCount = patternRaw => {
-    const text = String(patternRaw == null ? "" : patternRaw).trim();
-    if (!text) return 0;
-    const marks = Array.from(text).filter(ch => /[✅✔☑🟩🟢❌✖✗🟥🔴⬜◻◽▫]/.test(ch));
-    if (marks.length) return marks.length;
-    return /^[01]+$/.test(text) ? text.length : 0;
-  };
   if (relearnTableEl) {
-    const maxPatternCount = pageSongs.reduce((maxValue, song) => {
-      return Math.max(maxValue, getPatternMarkerCount(song && song.pattern));
-    }, 0);
-    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1, 30));
-    const patternWidth = Math.max(72, Math.min(160, 16 + (boundedCount * 14)));
-    const extraSpace = 160 - patternWidth;
-    const animeWidth = 185 + Math.round(extraSpace * 0.65);
-    const artistWidth = 130 + Math.round(extraSpace * 0.35);
-    relearnTableEl.style.setProperty("--relearn-pattern-col-width", `${patternWidth}px`);
-    relearnTableEl.style.setProperty("--relearn-anime-col-width", `${animeWidth}px`);
-    relearnTableEl.style.setProperty("--relearn-artist-col-width", `${artistWidth}px`);
+    relearnTableEl.style.setProperty("--relearn-pattern-col-width", "160px");
+    relearnTableEl.style.setProperty("--relearn-anime-col-width", "185px");
+    relearnTableEl.style.setProperty("--relearn-artist-col-width", "130px");
   }
   pageMeta.innerText = `Page ${relearnPageIndex + 1}/${pageCount}`;
   prevPageBtn.disabled = relearnPageIndex <= 0;
@@ -26128,6 +26245,38 @@ function renderInsightsRelearnTracker() {
     cell.appendChild(clampNode);
   };
 
+  const makeExternalTextLink = (label, href, title) => {
+    const link = document.createElement("a");
+    link.href = href;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.innerText = label;
+    if (title) link.title = title;
+    return link;
+  };
+
+  const appendEmptyDash = parent => {
+    const dash = document.createElement("span");
+    dash.innerText = "—";
+    parent.appendChild(dash);
+  };
+
+  const createLinkStackCell = links => {
+    const cell = document.createElement("td");
+    const wrap = document.createElement("span");
+    wrap.className = "search-songs-link-stack";
+    const validLinks = Array.isArray(links) ? links.filter(item => item && item.href) : [];
+    if (!validLinks.length) {
+      appendEmptyDash(wrap);
+    } else {
+      validLinks.forEach(item => {
+        wrap.appendChild(makeExternalTextLink(item.label, item.href, item.title));
+      });
+    }
+    cell.appendChild(wrap);
+    return cell;
+  };
+
   pageSongs.forEach(song => {
     const row = document.createElement("tr");
 
@@ -26152,11 +26301,13 @@ function renderInsightsRelearnTracker() {
     row.appendChild(typeCell);
 
     const patternCell = document.createElement("td");
-    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, {
-      maxPerRow: 10,
-      maxCount: 30,
-      dates: song && song.patternDates
-    }));
+    patternCell.appendChild(useLinksDisplay
+      ? buildSearchSongsSampleBarNode(song)
+      : buildPatternSquareNode(song && song.pattern, {
+        maxPerRow: 10,
+        maxCount: 30,
+        dates: song && song.patternDates
+      }));
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
@@ -26164,8 +26315,8 @@ function renderInsightsRelearnTracker() {
     const mp3Link = isAudioMediaUrl(audioLink) ? audioLink : "";
     const mediaVideoLink = isVideoMediaUrl(videoLink) ? videoLink : (isVideoMediaUrl(audioLink) ? audioLink : "");
     const sampleAudioLink = String(song && song.sampleAudioLink ? song.sampleAudioLink : "").trim();
-    const rawStartSample = song && song.startSample;
-    const rawEndSample = song && song.endSample;
+    const rawStartSample = song && (song.startSample != null ? song.startSample : song.sampleStart);
+    const rawEndSample = song && (song.endSample != null ? song.endSample : song.sampleEnd);
     const startSampleValue = rawStartSample == null || rawStartSample === "" ? NaN : Number(rawStartSample);
     const endSampleValue = rawEndSample == null || rawEndSample === "" ? NaN : Number(rawEndSample);
     const hasValidSampleRange =
@@ -26219,24 +26370,53 @@ function renderInsightsRelearnTracker() {
       return cell;
     };
 
-    row.appendChild(
-      createAudioToggleCell({
-        playTitle: "Play song",
-        pauseTitle: "Pause song",
-        noLinkTitle: "No audio link available"
-      })
-    );
-    row.appendChild(
-      createAudioToggleCell({
-        playTitle: "Play sample",
-        pauseTitle: "Pause sample",
-        noLinkTitle: "No audio link available",
-        link: sampleAudioLink,
-        clipStart: hasValidSampleRange ? startSampleValue : null,
-        clipEnd: hasValidSampleRange ? endSampleValue : null,
-        requiresSampleRange: true
-      })
-    );
+    if (useLinksDisplay) {
+      const malIdValue = song && song.malId != null ? String(song.malId).trim() : "";
+      const aniListIdValue = song && song.aniListId != null ? String(song.aniListId).trim() : "";
+      row.appendChild(createLinkStackCell([
+        malIdValue ? {
+          label: "MAL",
+          href: `https://myanimelist.net/anime/${encodeURIComponent(malIdValue)}`,
+          title: "Open MyAnimeList page"
+        } : null,
+        aniListIdValue ? {
+          label: "AniList",
+          href: `https://anilist.co/anime/${encodeURIComponent(aniListIdValue)}`,
+          title: "Open AniList page"
+        } : null
+      ]));
+      row.appendChild(createLinkStackCell([
+        mp3Link ? {
+          label: "MP3",
+          href: mp3Link,
+          title: "Open MP3"
+        } : null,
+        mediaVideoLink ? {
+          label: "Video",
+          href: mediaVideoLink,
+          title: "Open video"
+        } : null
+      ]));
+    } else {
+      row.appendChild(
+        createAudioToggleCell({
+          playTitle: "Play song",
+          pauseTitle: "Pause song",
+          noLinkTitle: "No audio link available"
+        })
+      );
+      row.appendChild(
+        createAudioToggleCell({
+          playTitle: "Play sample",
+          pauseTitle: "Pause sample",
+          noLinkTitle: "No audio link available",
+          link: sampleAudioLink,
+          clipStart: hasValidSampleRange ? startSampleValue : null,
+          clipEnd: hasValidSampleRange ? endSampleValue : null,
+          requiresSampleRange: true
+        })
+      );
+    }
 
     tbody.appendChild(row);
   });
@@ -26920,7 +27100,7 @@ function renderInsightsSearchSongs() {
   const songs = Array.isArray(cachedSearchSongs) ? cachedSearchSongs : [];
   const useLinksDisplay = searchSongsDisplayMode === "links";
   updateSearchSongsDisplayToggleUI();
-  if (patternHeader) patternHeader.innerText = "Pattern";
+  if (patternHeader) patternHeader.innerText = useLinksDisplay ? "Sample Points" : "Pattern";
   if (actionHeaderOne) actionHeaderOne.innerText = useLinksDisplay ? "Anime links" : "Play song";
   if (actionHeaderTwo) actionHeaderTwo.innerText = useLinksDisplay ? "Media" : "Play sample";
   const normalizedQuery = String(searchSongsQuery || "").trim().toLowerCase();
@@ -26952,23 +27132,9 @@ function renderInsightsSearchSongs() {
   const end = start + SEARCH_SONGS_PAGE_SIZE;
   const pageSongs = filteredSongs.slice(start, end);
   const searchSongsTableEl = tbody.closest("table");
-  const getPatternMarkerCount = patternRaw => {
-    const text = String(patternRaw == null ? "" : patternRaw).trim();
-    if (!text) return 0;
-    const marks = Array.from(text).filter(ch => /[✅✔☑🟩🟢❌✖✗🟥🔴⬜◻◽▫]/.test(ch));
-    if (marks.length) return marks.length;
-    return /^[01]+$/.test(text) ? text.length : 0;
-  };
   if (searchSongsTableEl) {
-    const maxPatternCount = pageSongs.reduce((maxValue, song) => {
-      return Math.max(maxValue, getPatternMarkerCount(song && song.pattern));
-    }, 0);
-    const boundedCount = Math.max(1, Math.min(10, maxPatternCount || 1, 30));
-    const patternWidth = Math.max(72, Math.min(130, 16 + (boundedCount * 11)));
-    const extraSpace = 130 - patternWidth;
-    const textWidth = 150 + Math.round(extraSpace / 3);
-    searchSongsTableEl.style.setProperty("--search-pattern-col-width", `${patternWidth}px`);
-    searchSongsTableEl.style.setProperty("--search-text-col-width", `${textWidth}px`);
+    searchSongsTableEl.style.setProperty("--search-pattern-col-width", "130px");
+    searchSongsTableEl.style.setProperty("--search-text-col-width", "150px");
   }
   pageMeta.innerText = `Page ${searchSongsPageIndex + 1}/${pageCount}`;
   prevPageBtn.disabled = searchSongsPageIndex <= 0;
@@ -27313,11 +27479,13 @@ function renderInsightsSearchSongs() {
     row.appendChild(typeCell);
 
     const patternCell = document.createElement("td");
-    patternCell.appendChild(buildPatternSquareNode(song && song.pattern, {
-      maxPerRow: 10,
-      maxCount: 30,
-      dates: song && song.patternDates
-    }));
+    patternCell.appendChild(useLinksDisplay
+      ? buildSearchSongsSampleBarNode(song)
+      : buildPatternSquareNode(song && song.pattern, {
+        maxPerRow: 10,
+        maxCount: 30,
+        dates: song && song.patternDates
+      }));
     row.appendChild(patternCell);
 
     const audioLink = String(song && song.audioLink ? song.audioLink : "").trim();
@@ -27793,23 +27961,27 @@ function formatSampleTime(value) {
   return `${minutes}:${secondsText}`;
 }
 
-function buildSearchSongsSampleBarNode(song) {
-  const container = document.createElement("span");
-  container.className = "search-songs-sample-chart";
-  const track = document.createElement("span");
-  track.className = "search-songs-sample-track";
-  container.appendChild(track);
-
+function collectSearchSongsSamplePoints(song) {
   const patternText = String(song && song.pattern ? song.pattern : "");
-  const patternChars = Array.from(patternText).filter(ch => /[✅✔☑🟩🟢❌✖✗🟥🔴⬜◻◽▫]/.test(ch));
   const fallbackDates = Array.isArray(song && song.patternDates) ? song.patternDates : [];
+  const patternMarks = Array.from(patternText).filter(ch => /[✅✔☑🟩🟢❌✖✗🟥🔴⬜◻◽▫]/.test(ch));
+  if (!patternMarks.length && /^[01]+$/.test(patternText.trim())) {
+    patternMarks.push(...Array.from(patternText.trim()));
+  }
+  if (!patternMarks.length && /^[crwx]+$/i.test(patternText.trim())) {
+    patternMarks.push(...Array.from(patternText.trim()));
+  }
 
   const points = [];
   const getStateForPoint = (source, index) => {
-    const patternState = detectPatternState(patternChars[index] || "");
+    const patternState = detectPatternState(patternMarks[index] || "");
     if (patternState && patternState !== "unknown") return patternState;
-    if (source && source.correct === true) return "correct";
-    if (source && source.correct === false) return "wrong";
+    const rawCorrect = source && (source.correct ?? source.isCorrect ?? source.correctGuess);
+    if (rawCorrect === true) return "correct";
+    if (rawCorrect === false) return "wrong";
+    const correctText = String(rawCorrect == null ? "" : rawCorrect).trim().toLowerCase();
+    if (["1", "true", "correct", "right"].includes(correctText)) return "correct";
+    if (["0", "false", "wrong", "incorrect"].includes(correctText)) return "wrong";
     return "unknown";
   };
   const addPoint = (source, index, startValue, endValue = null, dateValue = null) => {
@@ -27825,69 +27997,107 @@ function buildSearchSongsSampleBarNode(song) {
     });
   };
 
-  const sourceRanges = Array.isArray(song && song.sampleRanges) ? song.sampleRanges : [];
-  sourceRanges.forEach((range, index) => {
-    if (!range || typeof range !== "object") return;
-    addPoint(range, index, range.start ?? range.sampleStart ?? range.startSample, range.end ?? range.sampleEnd ?? range.endSample);
-  });
+  const appendRanges = () => {
+    const sourceRanges = Array.isArray(song && song.sampleRanges) ? song.sampleRanges : [];
+    sourceRanges.forEach((range, index) => {
+      if (!range || typeof range !== "object") return;
+      addPoint(range, index, range.start ?? range.sampleStart ?? range.startSample, range.end ?? range.sampleEnd ?? range.endSample);
+    });
+  };
+  const appendPoints = () => {
+    const sourcePoints = Array.isArray(song && song.samplePoints) ? song.samplePoints : [];
+    sourcePoints.forEach((point, index) => {
+      if (point && typeof point === "object") {
+        addPoint(point, index, point.start ?? point.sampleStart ?? point.startSample ?? point.point ?? point.time, point.end ?? point.sampleEnd ?? point.endSample);
+      } else {
+        addPoint(null, index, point);
+      }
+    });
+  };
+  const appendAttempts = () => {
+    const sourceAttempts = Array.isArray(song && song.attemptHistory)
+      ? song.attemptHistory
+      : (Array.isArray(song && song.attempts) ? song.attempts : []);
+    sourceAttempts.forEach((attempt, index) => {
+      if (!attempt || typeof attempt !== "object") return;
+      addPoint(
+        attempt,
+        index,
+        attempt.sampleStart ?? attempt.startSample ?? attempt.start ?? attempt.point ?? attempt.time,
+        attempt.sampleEnd ?? attempt.endSample ?? attempt.end,
+        attempt.date
+      );
+    });
+  };
 
-  const sourcePoints = Array.isArray(song && song.samplePoints) ? song.samplePoints : [];
-  sourcePoints.forEach((point, index) => {
-    if (point && typeof point === "object") {
-      addPoint(point, index, point.start ?? point.sampleStart ?? point.startSample ?? point.point ?? point.time, point.end ?? point.sampleEnd ?? point.endSample);
-    } else {
-      addPoint(null, index, point);
-    }
-  });
-
-  const sourceAttempts = Array.isArray(song && song.attemptHistory)
-    ? song.attemptHistory
-    : (Array.isArray(song && song.attempts) ? song.attempts : []);
-  sourceAttempts.forEach((attempt, index) => {
-    if (!attempt || typeof attempt !== "object") return;
-    addPoint(
-      attempt,
-      index,
-      attempt.sampleStart ?? attempt.startSample ?? attempt.start ?? attempt.point ?? attempt.time,
-      attempt.sampleEnd ?? attempt.endSample ?? attempt.end,
-      attempt.date
-    );
-  });
-
+  appendRanges();
+  if (!points.length) appendPoints();
+  if (!points.length) appendAttempts();
   if (!points.length) {
     addPoint(
       null,
-      Math.max(0, patternChars.length - 1),
+      Math.max(0, patternMarks.length - 1),
       song && (song.startSample ?? song.sampleStart),
       song && (song.endSample ?? song.sampleEnd),
       fallbackDates[fallbackDates.length - 1]
     );
   }
 
+  return points;
+}
+
+function buildSearchSongsSampleBarNode(song) {
+  const container = document.createElement("span");
+  container.className = "search-songs-sample-chart";
+  const points = collectSearchSongsSamplePoints(song);
+  const track = document.createElement("span");
+  track.className = "search-songs-sample-track";
+  container.appendChild(track);
+
   if (!points.length) {
     container.classList.add("empty");
-    track.innerText = "—";
-    container.title = "No sample points available";
+    track.innerText = "-";
     container.setAttribute("aria-label", "No sample points available");
     return container;
   }
 
-  const maxEnd = Math.max(30, ...points.map(point => Number(point.end != null ? point.end : point.start) || 0));
-  points.forEach((point, index) => {
-    const marker = document.createElement("span");
-    marker.className = `search-songs-sample-point pattern-${point.state || "unknown"}`;
-    const left = Math.max(0, Math.min(100, (point.start / maxEnd) * 100));
-    marker.style.left = `${left}%`;
+  const visiblePoints = points;
+  const maxSamplePoint = Math.max(
+    8,
+    ...points.map(point => {
+      const start = Number(point && point.start);
+      return Number.isFinite(start) ? start : 0;
+    })
+  );
+
+  visiblePoints.forEach((point, visibleIndex) => {
+    const originalIndex = points.length - visiblePoints.length + visibleIndex;
+    const segment = document.createElement("span");
+    segment.className = `search-songs-sample-segment lane-${visibleIndex % 2} pattern-${point.state || "unknown"}`;
     const stateLabel = point.state === "correct" ? "Correct" : (point.state === "wrong" ? "Wrong" : "Unknown");
-    const sampleText = point.end != null
-      ? `${formatSampleTime(point.start)}-${formatSampleTime(point.end)}`
-      : formatSampleTime(point.start);
-    marker.title = `${stateLabel}${point.date ? ` on ${point.date}` : ""}: ${sampleText}`;
-    marker.setAttribute("aria-label", marker.title);
-    track.appendChild(marker);
+    const sampleText = formatSampleTime(point.start);
+    const startPercent = Math.max(0, Math.min(100, (Number(point.start) / maxSamplePoint) * 100));
+
+    segment.style.left = `${startPercent}%`;
+    segment.title = `Sample ${originalIndex + 1}: ${stateLabel}${point.date ? ` on ${point.date}` : ""}: ${sampleText}`;
+    segment.setAttribute("aria-label", segment.title);
+    track.appendChild(segment);
   });
 
-  container.title = `${points.length} sample point${points.length === 1 ? "" : "s"} shown`;
+  const axis = document.createElement("span");
+  axis.className = "search-songs-sample-axis";
+  const axisStart = document.createElement("span");
+  axisStart.innerText = "0:00";
+  const axisMid = document.createElement("span");
+  axisMid.className = "search-songs-sample-axis-mid";
+  axisMid.innerText = "";
+  const axisEnd = document.createElement("span");
+  axisEnd.innerText = formatSampleTime(maxSamplePoint);
+  axis.appendChild(axisStart);
+  axis.appendChild(axisMid);
+  axis.appendChild(axisEnd);
+  container.appendChild(axis);
+  container.title = `${points.length} sample point${points.length === 1 ? "" : "s"} available`;
   container.setAttribute("aria-label", container.title);
   return container;
 }
