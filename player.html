@@ -765,6 +765,53 @@
       align-self: center !important;
     }
 
+    .topbar-data-range .ant-stats-toggle {
+      display: none !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border: 0 !important;
+      border-radius: 8px !important;
+      background: transparent !important;
+      width: 28px !important;
+      height: 28px !important;
+      flex: 0 0 28px !important;
+      padding: 0 !important;
+      cursor: pointer !important;
+      box-shadow: none !important;
+      outline-offset: 2px !important;
+      opacity: 0.45 !important;
+      transition: opacity 140ms ease !important;
+    }
+
+    .topbar-data-range .ant-stats-toggle img {
+      display: block !important;
+      width: 28px !important;
+      height: 28px !important;
+      object-fit: contain !important;
+      pointer-events: none !important;
+    }
+
+    .topbar-data-range .ant-stats-toggle:focus-visible {
+      outline: 2px solid #1f3f5e !important;
+    }
+
+    .topbar-data-range .ant-stats-toggle.visible {
+      display: inline-flex !important;
+    }
+
+    .topbar-data-range .ant-stats-toggle.active {
+      opacity: 1 !important;
+    }
+
+    #antStatsSeparatorBefore[hidden] {
+      display: none !important;
+    }
+
+    .topbar-data-range .ant-stats-toggle:disabled {
+      opacity: 0.45 !important;
+      cursor: not-allowed !important;
+    }
+
     body.unified-nav-mode .subnav .language-toggle {
       border-color: #8d99a6 !important;
       background: #5a646f !important;
@@ -790,6 +837,14 @@
 
     body.unified-nav-mode .subnav .topbar-control-separator {
       background: #1f2933 !important;
+    }
+
+    body.unified-nav-mode .subnav .ant-stats-toggle {
+      background: transparent !important;
+    }
+
+    body.unified-nav-mode .subnav .ant-stats-toggle:focus-visible {
+      outline: 2px solid #c2d3e5 !important;
     }
 
     #knowledgeByEraView .by-era-season-body {
@@ -5835,6 +5890,16 @@
       display: inline-flex !important;
     }
 
+    #playlistLoopDockBtn .playlist-loop-twice-indicator,
+    #playlistLoopDockBtn.loop-twice .playlist-loop-icon {
+      display: none !important;
+    }
+
+    #playlistLoopDockBtn.loop-twice .playlist-loop-twice-indicator {
+      display: inline !important;
+      font-size: 12px !important;
+    }
+
     #playlistLoopDockBtn .playlist-loop-one-indicator {
       display: none !important;
       position: absolute !important;
@@ -7441,6 +7506,11 @@
       min-width: 96px !important;
     }
 
+    #otherToolsSection .player-database-compare-mode-field {
+      flex: 0 0 138px !important;
+      min-width: 138px !important;
+    }
+
     #otherToolsSection .player-database-select-field .player-database-custom-select {
       min-width: 0 !important;
     }
@@ -7751,6 +7821,98 @@
       font-weight: 800 !important;
       line-height: 1 !important;
       padding: 0 !important;
+    }
+
+    #otherToolsSection .player-database-genre-tag-panel {
+      position: relative !important;
+      z-index: 2 !important;
+      margin: 0 0 14px !important;
+      padding: 12px !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 12px !important;
+      background: #f8fafc !important;
+    }
+
+    #otherToolsSection .player-database-genre-tag-controls {
+      display: flex !important;
+      align-items: flex-end !important;
+      gap: 8px !important;
+      margin-bottom: 10px !important;
+    }
+
+    #otherToolsSection .player-database-label-search-field {
+      flex: 1 1 auto !important;
+      min-width: 0 !important;
+    }
+
+    #otherToolsSection .player-database-label-chip-row {
+      margin-bottom: 10px !important;
+    }
+
+    #otherToolsSection .player-database-label-list {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 16px !important;
+    }
+
+    #otherToolsSection .player-database-label-group {
+      min-width: 0 !important;
+    }
+
+    #otherToolsSection .player-database-label-group-heading {
+      margin: 0 0 8px !important;
+      color: #334155 !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      letter-spacing: 0 !important;
+    }
+
+    #otherToolsSection .player-database-label-options {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 8px 12px !important;
+      height: 280px !important;
+      max-height: 280px !important;
+      overflow-y: auto !important;
+      padding: 10px !important;
+      border: 1px solid #dbe3ee !important;
+      border-radius: 8px !important;
+      background: #ffffff !important;
+      align-content: start !important;
+    }
+
+    #otherToolsSection .player-database-label-option {
+      display: flex !important;
+      align-items: flex-start !important;
+      gap: 7px !important;
+      min-width: 0 !important;
+      color: #0f172a !important;
+      font-size: 12px !important;
+      line-height: 1.25 !important;
+      cursor: pointer !important;
+      word-break: break-word !important;
+    }
+
+    #otherToolsSection .player-database-label-option input {
+      flex: 0 0 auto !important;
+      margin: 1px 0 0 !important;
+    }
+
+    @media (max-width: 1180px) {
+      #otherToolsSection .player-database-toolbar {
+        flex-wrap: wrap !important;
+      }
+
+      #otherToolsSection .player-database-label-options {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      #otherToolsSection .player-database-genre-tag-controls {
+        align-items: stretch !important;
+        flex-direction: column !important;
+      }
     }
 
     #otherToolsSection .player-database-chart-wrap {
@@ -9990,6 +10152,10 @@
           <button id="overviewLanguageEnBtn" class="language-toggle-btn active" type="button" data-lang="en" aria-pressed="true">EN</button>
           <button id="overviewLanguageJpBtn" class="language-toggle-btn" type="button" data-lang="jp" aria-pressed="false">JP</button>
         </div>
+        <span id="antStatsSeparatorBefore" class="topbar-control-separator" aria-hidden="true"></span>
+        <button id="antStatsToggle" class="ant-stats-toggle" type="button" aria-label="Include Ant watched stats" aria-pressed="false" title="Include Ant watched stats">
+          <img src="data/ant_icon.png" data-data-src="ant_icon.png" alt="" width="28" height="28">
+        </button>
       </div>
     </div>
   </div>
@@ -11308,10 +11474,10 @@
     <div id="otherToolsPlayerDatabaseView" class="chart-card" style="display:none;">
       <div class="chart-header">
         <div class="chart-title">
-          Compare by years
+          Player database compare
           <span class="info-hover-wrap">
-            <button class="info-hover-btn" type="button" aria-label="About Compare by years">i</button>
-            <span class="info-hover-tooltip">Compares multiple players by time range (Eru mode tools) . </span>
+            <button class="info-hover-btn" type="button" aria-label="About player database compare">i</button>
+            <span class="info-hover-tooltip">Compares multiple players by year range or by songs that contain every selected genre/tag.</span>
           </span>
         </div>
         <div class="chart-meta">
@@ -11328,6 +11494,18 @@
         </div>
         <button id="playerDatabaseAddBtn" class="player-database-button" type="button">Add</button>
         <button id="playerDatabaseDeleteAllBtn" class="player-database-button player-database-danger-button" type="button" disabled>Delete All</button>
+        <div class="player-database-field player-database-select-field player-database-compare-mode-field">
+          <div id="playerDatabaseCompareModeLabel" class="player-database-label">Compare</div>
+          <div id="playerDatabaseCompareModeSelect" class="player-database-custom-select" data-value="years">
+            <button id="playerDatabaseCompareModeSelectButton" class="player-database-custom-select-button" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="playerDatabaseCompareModeLabel playerDatabaseCompareModeSelectValue">
+              <span id="playerDatabaseCompareModeSelectValue" class="player-database-custom-select-value">Years</span>
+            </button>
+            <div class="player-database-custom-select-options" role="listbox" aria-labelledby="playerDatabaseCompareModeLabel">
+              <button class="player-database-custom-select-option" type="button" role="option" aria-selected="true" data-value="years">Years</button>
+              <button class="player-database-custom-select-option" type="button" role="option" aria-selected="false" data-value="genreTags">Genres &amp; Tags</button>
+            </div>
+          </div>
+        </div>
         <div class="player-database-field player-database-year-field">
           <label class="player-database-label" for="playerDatabaseStartYear">Start year</label>
           <input id="playerDatabaseStartYear" class="player-database-input" type="number" min="1900" max="2100" step="1" placeholder="All">
@@ -11347,6 +11525,21 @@
               <button class="player-database-custom-select-option" type="button" role="option" aria-selected="false" data-value="chart">Chart</button>
             </div>
           </div>
+        </div>
+      </div>
+      <div id="playerDatabaseGenreTagPanel" class="player-database-genre-tag-panel" style="display:none;">
+        <div class="player-database-genre-tag-controls">
+          <div class="player-database-field player-database-label-search-field">
+            <label class="player-database-label" for="playerDatabaseLabelSearchInput">Genres / Tags</label>
+            <input id="playerDatabaseLabelSearchInput" class="player-database-input" type="text" placeholder="Search genres or tags..." autocomplete="off">
+          </div>
+          <button id="playerDatabaseClearLabelsBtn" class="player-database-button" type="button" disabled>Clear Labels</button>
+        </div>
+        <div id="playerDatabaseSelectedLabels" class="player-database-chip-row player-database-label-chip-row">
+          <div class="player-database-empty">No genre/tag labels selected</div>
+        </div>
+        <div id="playerDatabaseLabelList" class="player-database-label-list">
+          <div class="player-database-empty">Loading genres and tags...</div>
         </div>
       </div>
       <div id="playerDatabaseSelectedPlayers" class="player-database-chip-row">
@@ -11369,7 +11562,7 @@
               <th>Correct</th>
               <th>Wrong</th>
               <th>Attempts</th>
-              <th>Years</th>
+              <th id="playerDatabaseFilterColumnHeader">Years</th>
             </tr>
           </thead>
           <tbody id="playerDatabaseTableBody"></tbody>
@@ -11508,7 +11701,8 @@
       <img src="" data-data-src="images/play.png" alt="Play" loading="lazy">
     </button>
     <button id="playlistLoopDockBtn" class="relearn-audio-btn playlist-playback-dock-btn" type="button" aria-label="Play playlist once" aria-pressed="false" disabled>
-      <span aria-hidden="true">↻</span>
+      <span class="playlist-loop-icon" aria-hidden="true">↻</span>
+      <span class="playlist-loop-twice-indicator" aria-hidden="true">2x</span>
       <span class="playlist-loop-one-indicator" aria-hidden="true">1</span>
     </button>
     <span id="relearnAudioProgressCurrent">0:00</span>
@@ -11880,6 +12074,8 @@ const overviewDataToggle = document.getElementById("overviewDataToggle");
 const overviewDataSourceToggle = document.getElementById("overviewDataSourceToggle");
 const overviewDataSourceWatchedBtn = document.getElementById("overviewDataSourceWatchedBtn");
 const overviewDataSourceUsualBtn = document.getElementById("overviewDataSourceUsualBtn");
+const antStatsToggle = document.getElementById("antStatsToggle");
+const antStatsSeparatorBefore = document.getElementById("antStatsSeparatorBefore");
 const overviewTopDoublesTypeToggle = document.getElementById("overviewTopDoublesTypeToggle");
 const overviewTopDoublesTypeGeneralBtn = document.getElementById("overviewTopDoublesTypeGeneralBtn");
 const overviewTopDoublesTypeTheirRigBtn = document.getElementById("overviewTopDoublesTypeTheirRigBtn");
@@ -12059,6 +12255,7 @@ let byEraScaleType = "linear";
 let byEraSeasonDataMode = "count";
 let overviewDataMode = "count";
 let overviewDataSourceMode = "watched";
+let includeAntStatsMode = false;
 let isTourTypeToggleLocked = false;
 let overviewLanguageMode = "en";
 let selectedByEraSeasonLabels = [];
@@ -12134,11 +12331,12 @@ let playlistDraggedSongRowKey = "";
 let playlistDragSuppressClick = false;
 let playlistOrderSaveToken = 0;
 let playlistSongOrderSaveToken = 0;
-const PLAYLIST_PLAYBACK_LOOP_MODES = ["off", "playlist", "song"];
+const PLAYLIST_PLAYBACK_LOOP_MODES = ["off", "twice", "playlist", "song"];
 const PLAYLIST_AUDIO_PRELOAD_LIMIT = 5;
 let playlistPlaybackContext = null;
 let playlistPlaybackRandomEnabled = false;
 let playlistPlaybackLoopMode = "off";
+let playlistPlaybackSongRepeated = false;
 let playlistPlaybackShuffleQueue = [];
 let playlistAudioPreloadTimer = null;
 const playlistAudioPreloadCache = new Map();
@@ -12153,11 +12351,15 @@ let currentLatestRankValue = null;
 let currentLatestRankPercentile = null;
 let currentLatestRankIsTopThree = false;
 let usualUserData = [];
+let antUserData = [];
+let usualAntUserData = [];
 let currentUsualLatestRankValue = null;
 let currentUsualLatestRankPercentile = null;
 let currentUsualLatestRankIsTopThree = false;
 let allPlayerStatsData = {};
 let allPlayerUsualStatsData = {};
+let allPlayerAntStatsData = {};
+let allPlayerUsualAntStatsData = {};
 let allPlayerWeeklyStatsData = {};
 let allPlayerUsualWeeklyStatsData = {};
 let allPlayerLastWeekStatsData = {};
@@ -12172,6 +12374,7 @@ let playerDatabaseSelectedPlayers = [];
 let playerDatabaseUserClearedSelection = false;
 let playerDatabaseDirectoryRefreshAttached = false;
 let playerDatabaseViewMode = "table";
+let playerDatabaseCompareMode = "years";
 let playerDatabaseAppliedStartYear = null;
 let playerDatabaseAppliedEndYear = null;
 let playerDatabaseDisplayedDataKey = "";
@@ -12180,6 +12383,12 @@ let shouldDefaultPlayerDatabaseRangeOnEntry = false;
 let playersDirectoryList = [];
 const playerDatabaseAnnualCache = new Map();
 const playerDatabaseAnnualPromiseCache = new Map();
+let playerDatabaseGenreTagLabelPayload = null;
+let playerDatabaseGenreTagLabelPromise = null;
+let playerDatabaseGenreTagSearchQuery = "";
+let playerDatabaseSelectedLabelIds = [];
+const playerDatabaseGenreTagCache = new Map();
+const playerDatabaseGenreTagPromiseCache = new Map();
 let weeklyPlayerTransitionCountsByMode = {
   watched: {},
   usual: {}
@@ -12571,10 +12780,9 @@ function preloadOtherSubtabsForSection(sectionKey, displayName) {
       if (performanceRows.length) {
         const visible = getVisibleUserData(performanceRows);
         renderPerformanceLivesTakenSaved(visible);
-        const watchedVisible = getVisibleUserData(fullUserData);
-        renderPerformanceRigAnalysis(watchedVisible);
-        renderPerformanceRigsMissed(watchedVisible);
-        renderPerformanceCompositeCharts(watchedVisible);
+        renderPerformanceRigAnalysis(visible);
+        renderPerformanceRigsMissed(visible);
+        renderPerformanceCompositeCharts(visible);
       }
       return;
     }
@@ -13202,8 +13410,9 @@ function renderSubSectionContent(sectionKey, subSection) {
       compositeChartsView.style.display = "none";
       placeholderView.style.display = "none";
 
-      if (fullUserData.length) {
-        renderPerformanceRigAnalysis(getVisibleUserData(fullUserData));
+      const performanceRows = getPerformanceRowsForActiveMode();
+      if (performanceRows.length) {
+        renderPerformanceRigAnalysis(getVisibleUserData(performanceRows));
       }
       return;
     }
@@ -13216,7 +13425,7 @@ function renderSubSectionContent(sectionKey, subSection) {
       compositeChartsView.style.display = "none";
       placeholderView.style.display = "none";
 
-      renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
+      renderPerformanceRigsMissed(getVisibleUserData(getPerformanceRowsForActiveMode()));
       return;
     }
 
@@ -13228,8 +13437,9 @@ function renderSubSectionContent(sectionKey, subSection) {
       compositeChartsView.style.display = "grid";
       placeholderView.style.display = "none";
 
-      if (fullUserData.length) {
-        renderPerformanceCompositeCharts(getVisibleUserData(fullUserData));
+      const performanceRows = getPerformanceRowsForActiveMode();
+      if (performanceRows.length) {
+        renderPerformanceCompositeCharts(getVisibleUserData(performanceRows));
       }
       return;
     }
@@ -13609,8 +13819,12 @@ function updateDataRangeControlState(sectionKey, subSection) {
   }
 
   const shouldLockToAll = !shouldUnlockUsingData;
-  const hasWatchedRows = Array.isArray(fullUserData) && fullUserData.length > 0;
-  const hasUsualRows = Array.isArray(usualUserData) && usualUserData.length > 0;
+  const hasWatchedRows =
+    (Array.isArray(fullUserData) && fullUserData.length > 0)
+    || (Array.isArray(antUserData) && antUserData.length > 0);
+  const hasUsualRows =
+    (Array.isArray(usualUserData) && usualUserData.length > 0)
+    || (Array.isArray(usualAntUserData) && usualAntUserData.length > 0);
   const noWatchedDataAvailable = hasUsualRows && !hasWatchedRows;
   const noUsualDataAvailable = hasWatchedRows && !hasUsualRows;
   const shouldLockTourType = isSocialRigAnalysis || isPerformanceOnlistOfflist || isPerformanceRigsMissed || isInsightsPlaylists;
@@ -14318,7 +14532,7 @@ document.addEventListener("keydown", event => {
 });
 document.addEventListener("visibilitychange", syncRelearnAudioWakeLock);
 window.addEventListener("resize", hidePlaylistRowContextMenu);
-window.addEventListener("scroll", hidePlaylistRowContextMenu, true);
+window.addEventListener("scroll", handlePlaylistRowContextScroll, true);
 if (playlistViewAddBtn) {
   playlistViewAddBtn.addEventListener("click", () => {
     setPlaylistSignedInViewMode("add");
@@ -14869,6 +15083,15 @@ if (overviewDataToggle) {
   });
 }
 
+if (antStatsToggle) {
+  updateAntStatsToggleUI();
+  antStatsToggle.addEventListener("click", () => {
+    if (antStatsToggle.disabled) return;
+    includeAntStatsMode = !includeAntStatsMode;
+    refreshActiveStatsViews();
+  });
+}
+
 function updateOverviewLanguageToggleUI() {
   if (overviewLanguageToggle) {
     const isJp = overviewLanguageMode === "jp";
@@ -14887,21 +15110,15 @@ function updateOverviewLanguageToggleUI() {
 }
 
 function getOverviewRowsForActiveMode() {
-  if (overviewDataSourceMode === "usual" && Array.isArray(usualUserData) && usualUserData.length) {
-    return usualUserData;
-  }
-  return Array.isArray(fullUserData) ? fullUserData : [];
+  return getRowsWithOptionalAnt();
 }
 
 function getPerformanceRowsForActiveMode() {
-  if (overviewDataSourceMode === "usual" && Array.isArray(usualUserData) && usualUserData.length) {
-    return usualUserData;
-  }
-  return Array.isArray(fullUserData) ? fullUserData : [];
+  return getRowsWithOptionalAnt();
 }
 
 function getOverviewRankMetaForActiveMode() {
-  if (overviewDataSourceMode === "usual" && Array.isArray(usualUserData) && usualUserData.length) {
+  if (overviewDataSourceMode === "usual") {
     return {
       rank: currentUsualLatestRankValue,
       percentile: currentUsualLatestRankPercentile,
@@ -15520,6 +15737,104 @@ function updateOverviewDataSourceToggleUI() {
     overviewDataSourceUsualBtn.disabled = isTourTypeToggleLocked;
     overviewDataSourceUsualBtn.setAttribute("aria-disabled", isTourTypeToggleLocked ? "true" : "false");
   }
+  updateAntStatsToggleUI();
+}
+
+function isAntStatsRelevantContext(sectionKey = activeSection, subSection = activeSubSectionBySection[activeSection] || "") {
+  if (sectionKey === "performance") return true;
+  if (sectionKey !== "overview") return false;
+  return overviewActiveView !== "weekly";
+}
+
+function getAntRowsForActiveMode() {
+  const rows = overviewDataSourceMode === "usual" ? usualAntUserData : antUserData;
+  return Array.isArray(rows) ? rows : [];
+}
+
+function hasAntStatsForCurrentUser() {
+  return getAntRowsForActiveMode().length > 0;
+}
+
+function shouldUseAntStatsRows() {
+  return includeAntStatsMode && hasAntStatsForCurrentUser();
+}
+
+function updateAntStatsToggleUI() {
+  if (!antStatsToggle) return;
+  const canShow = isAntStatsRelevantContext();
+  const canToggle = canShow && hasAntStatsForCurrentUser();
+  antStatsToggle.classList.toggle("visible", canShow);
+  antStatsToggle.classList.toggle("active", canToggle && includeAntStatsMode);
+  antStatsToggle.disabled = !canToggle;
+  antStatsToggle.setAttribute("aria-pressed", canToggle && includeAntStatsMode ? "true" : "false");
+  const modeLabel = overviewDataSourceMode === "usual" ? "usual" : "watched";
+  antStatsToggle.title = canToggle
+    ? `${includeAntStatsMode ? "Exclude" : "Include"} Ant ${modeLabel} stats`
+    : (canShow ? `No Ant ${modeLabel} stats for this player` : "Ant stats are available in Overview/Performance");
+  antStatsToggle.setAttribute("aria-label", antStatsToggle.title);
+  if (antStatsSeparatorBefore) antStatsSeparatorBefore.hidden = !canShow;
+}
+
+function getStatsRowDedupeKey(row) {
+  return [
+    String(row && row.Timestamp || ""),
+    String(row && row["Player name"] || ""),
+    String(row && row["Guess rate"] || ""),
+    String(row && row["OP guess rate"] || ""),
+    String(row && row["ED guess rate"] || ""),
+    String(row && row["IN guess rate"] || ""),
+    String(row && row["Rank"] || ""),
+    String(row && row["Lives saved"] || ""),
+    String(row && row["Lives taken"] || "")
+  ].join("|");
+}
+
+function mergeAndSortStatsRows(...rowGroups) {
+  const seenKeys = new Set();
+  const rows = [];
+  rowGroups.forEach(group => {
+    if (!Array.isArray(group)) return;
+    group.forEach(row => {
+      if (!row || typeof row !== "object") return;
+      const key = getStatsRowDedupeKey(row);
+      if (seenKeys.has(key)) return;
+      seenKeys.add(key);
+      rows.push(row);
+    });
+  });
+  return sortRecordsByTimestamp(rows);
+}
+
+function getRowsWithOptionalAnt() {
+  const rows = overviewDataSourceMode === "usual" ? usualUserData : fullUserData;
+  const baseRows = Array.isArray(rows) ? rows : [];
+  if (!shouldUseAntStatsRows()) return baseRows;
+  return mergeAndSortStatsRows(baseRows, getAntRowsForActiveMode());
+}
+
+function refreshActiveStatsViews() {
+  updateAntStatsToggleUI();
+  renderOverviewForActiveMode();
+  if (activeSection === "overview" && overviewActiveView === "weekly") {
+    renderWeeklyPerformanceView();
+  }
+  const performanceRows = getPerformanceRowsForActiveMode();
+  const visiblePerformanceRows = getVisibleUserData(performanceRows);
+  if (activeSection === "performance" && activeSubSectionBySection.performance === "Guess Rate" && performanceRows.length) {
+    renderPerformanceGuessRate(visiblePerformanceRows);
+  }
+  if (activeSection === "performance" && activeSubSectionBySection.performance === "Lives Taken / Saved" && performanceRows.length) {
+    renderPerformanceLivesTakenSaved(visiblePerformanceRows);
+  }
+  if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
+    renderPerformanceRigsMissed(visiblePerformanceRows);
+  }
+  if (activeSection === "performance" && activeSubSectionBySection.performance === "Onlist/Offlist") {
+    renderPerformanceRigAnalysis(visiblePerformanceRows);
+  }
+  if (activeSection === "performance" && activeSubSectionBySection.performance === "Composite charts") {
+    renderPerformanceCompositeCharts(visiblePerformanceRows);
+  }
 }
 
 function refreshOverviewModeScopedCards(displayName) {
@@ -15578,7 +15893,7 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
       renderPerformanceLivesTakenSaved(getVisibleUserData(performanceRows));
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
-      renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
+      renderPerformanceRigsMissed(getVisibleUserData(getPerformanceRowsForActiveMode()));
     }
     if (activeSection === "social") {
       scheduleSocialSubSectionRender(activeSubSectionBySection.social || "");
@@ -15622,7 +15937,7 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
       renderPerformanceLivesTakenSaved(getVisibleUserData(performanceRows));
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
-      renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
+      renderPerformanceRigsMissed(getVisibleUserData(getPerformanceRowsForActiveMode()));
     }
     if (activeSection === "social") {
       scheduleSocialSubSectionRender(activeSubSectionBySection.social || "");
@@ -17805,14 +18120,15 @@ function getSocialStatsDataForActiveMode() {
 function getCurrentUserRecordsForActiveMode() {
   if (overviewDataSourceMode === "usual") {
     if (Array.isArray(usualUserData) && usualUserData.length) {
-      return usualUserData;
+      return getRowsWithOptionalAnt();
     }
     const usualStats = getSocialStatsDataForActiveMode();
-    return Array.isArray(currentStatKey && usualStats[currentStatKey])
+    const usualRows = Array.isArray(currentStatKey && usualStats[currentStatKey])
       ? usualStats[currentStatKey]
       : [];
+    return shouldUseAntStatsRows() ? mergeAndSortStatsRows(usualRows, usualAntUserData) : usualRows;
   }
-  return getCurrentUserRecords();
+  return getRowsWithOptionalAnt();
 }
 
 function getCurrentUserIdentitySet() {
@@ -17832,9 +18148,7 @@ function getCurrentUserIdentitySet() {
 }
 
 function getCurrentUserStatsRowsForSelectedMode() {
-  const currentRows = Array.isArray(fullUserData) && fullUserData.length
-    ? fullUserData
-    : getCurrentUserRecords();
+  const currentRows = getCurrentUserRecordsForActiveMode();
   const dedupeSeenKeys = new Set();
   const dedupedRows = currentRows.filter(row => {
     if (!row || typeof row !== "object") return false;
@@ -19282,6 +19596,10 @@ function getPlayerDatabaseViewMode() {
   return getPlayerDatabaseCustomSelectValue("playerDatabaseViewModeSelect", "table") === "chart" ? "chart" : "table";
 }
 
+function getPlayerDatabaseCompareMode() {
+  return getPlayerDatabaseCustomSelectValue("playerDatabaseCompareModeSelect", "years") === "genreTags" ? "genreTags" : "years";
+}
+
 function getPlayerDatabaseEntries() {
   const players = Array.isArray(playersDirectoryList) ? playersDirectoryList : [];
   return players
@@ -19595,6 +19913,137 @@ function ensurePlayerDatabaseAnnualData(playerId, mode, rangeValue = getPlayerDa
   return promise;
 }
 
+function ensurePlayerDatabaseGenreTagLabels() {
+  if (playerDatabaseGenreTagLabelPayload) {
+    return Promise.resolve(playerDatabaseGenreTagLabelPayload);
+  }
+  if (playerDatabaseGenreTagLabelPromise) {
+    return playerDatabaseGenreTagLabelPromise;
+  }
+  playerDatabaseGenreTagLabelPromise = loadJSON("player_genre_tag_labels.json")
+    .catch(err => {
+      console.warn("Failed loading player genre/tag label data", err);
+      return null;
+    })
+    .then(payload => {
+      playerDatabaseGenreTagLabelPayload = payload;
+      playerDatabaseGenreTagLabelPromise = null;
+      return payload;
+    });
+  return playerDatabaseGenreTagLabelPromise;
+}
+
+function getPlayerDatabaseGenreTagLabels() {
+  const labels = playerDatabaseGenreTagLabelPayload && Array.isArray(playerDatabaseGenreTagLabelPayload.labels)
+    ? playerDatabaseGenreTagLabelPayload.labels
+    : [];
+  return labels
+    .map(label => ({
+      id: Number(label && label.id),
+      kind: String(label && label.kind || ""),
+      name: String(label && label.name || "").trim()
+    }))
+    .filter(label => Number.isInteger(label.id) && (label.kind === "genre" || label.kind === "tag") && label.name);
+}
+
+function getPlayerDatabaseGenreTagLabelById(labelId) {
+  const target = Number(labelId);
+  if (!Number.isInteger(target)) return null;
+  return getPlayerDatabaseGenreTagLabels().find(label => label.id === target) || null;
+}
+
+function getPlayerDatabaseGenreTagCacheKey(playerId, mode) {
+  return `${mode || "watched"}:${String(playerId || "").trim()}`;
+}
+
+function getCachedPlayerDatabaseGenreTagData(playerId, mode) {
+  const key = getPlayerDatabaseGenreTagCacheKey(playerId, mode);
+  return playerDatabaseGenreTagCache.has(key) ? playerDatabaseGenreTagCache.get(key) : null;
+}
+
+function hasCachedPlayerDatabaseGenreTagData(playerId, mode) {
+  return playerDatabaseGenreTagCache.has(getPlayerDatabaseGenreTagCacheKey(playerId, mode));
+}
+
+function ensurePlayerDatabaseGenreTagData(playerId, mode) {
+  const cleanPlayerId = String(playerId || "").trim();
+  if (!cleanPlayerId) return Promise.resolve(null);
+  const cacheKey = getPlayerDatabaseGenreTagCacheKey(cleanPlayerId, mode);
+  if (playerDatabaseGenreTagCache.has(cacheKey)) {
+    return Promise.resolve(playerDatabaseGenreTagCache.get(cacheKey));
+  }
+  if (playerDatabaseGenreTagPromiseCache.has(cacheKey)) {
+    return playerDatabaseGenreTagPromiseCache.get(cacheKey);
+  }
+  const promise = fetchPlayerScopedResponse(cleanPlayerId, "genre_tag_compare/all.json", mode)
+    .then(async response => {
+      if (!response || !response.ok) return null;
+      return response.json();
+    })
+    .catch(err => {
+      console.warn("Failed loading genre/tag compare data", cleanPlayerId, mode, err);
+      return null;
+    })
+    .then(payload => {
+      playerDatabaseGenreTagCache.set(cacheKey, payload);
+      playerDatabaseGenreTagPromiseCache.delete(cacheKey);
+      return payload;
+    });
+  playerDatabaseGenreTagPromiseCache.set(cacheKey, promise);
+  return promise;
+}
+
+function getPlayerDatabaseGenreTagWindowStartDay(rangeValue = getPlayerDatabaseRangeValue()) {
+  const windows = playerDatabaseGenreTagLabelPayload && playerDatabaseGenreTagLabelPayload.windows;
+  if (!windows || typeof windows !== "object") return null;
+  const value = windows[rangeValue];
+  const numeric = Number(value);
+  return Number.isFinite(numeric) ? numeric : null;
+}
+
+function getPlayerDatabaseSelectedGenreTagLabels() {
+  return playerDatabaseSelectedLabelIds
+    .map(labelId => getPlayerDatabaseGenreTagLabelById(labelId))
+    .filter(Boolean);
+}
+
+function formatPlayerDatabaseGenreTagFilterLabel() {
+  const labels = getPlayerDatabaseSelectedGenreTagLabels();
+  if (!labels.length) return "All genre/tag songs";
+  if (labels.length <= 2) return labels.map(label => label.name).join(" + ");
+  return `${labels.length} labels`;
+}
+
+function formatPlayerDatabaseActiveFilterLabel() {
+  return getPlayerDatabaseCompareMode() === "genreTags"
+    ? formatPlayerDatabaseGenreTagFilterLabel()
+    : formatPlayerDatabaseRangeLabel();
+}
+
+function playerDatabaseRowHasAllSelectedLabels(row, selectedGenres, selectedTags) {
+  const genreIds = new Set(Array.isArray(row && row[2]) ? row[2].map(Number).filter(Number.isFinite) : []);
+  const tagIds = new Set(Array.isArray(row && row[3]) ? row[3].map(Number).filter(Number.isFinite) : []);
+  for (const id of selectedGenres) {
+    if (!genreIds.has(id)) return false;
+  }
+  for (const id of selectedTags) {
+    if (!tagIds.has(id)) return false;
+  }
+  return true;
+}
+
+function setPlayerDatabaseSelectedLabelIds(nextIds) {
+  const cleanIds = [];
+  const seen = new Set();
+  (Array.isArray(nextIds) ? nextIds : []).forEach(value => {
+    const id = Number(value);
+    if (!Number.isInteger(id) || seen.has(id)) return;
+    seen.add(id);
+    cleanIds.push(id);
+  });
+  playerDatabaseSelectedLabelIds = cleanIds;
+}
+
 function getPlayerDatabaseYearBounds() {
   const mode = getPlayerDatabaseMode();
   const rangeValue = getPlayerDatabaseRangeValue();
@@ -19696,11 +20145,24 @@ function formatPlayerDatabaseRangeLabel() {
   return "All years";
 }
 
-function buildPlayerDatabaseSummaries() {
+function sortPlayerDatabaseSummaries(summaries) {
+  return (Array.isArray(summaries) ? summaries : []).sort((a, b) => {
+    if (a.isLoading !== b.isLoading) return a.isLoading ? 1 : -1;
+    const aRate = Number.isFinite(a.guessRate) ? a.guessRate : -Infinity;
+    const bRate = Number.isFinite(b.guessRate) ? b.guessRate : -Infinity;
+    if (aRate !== bRate) return bRate - aRate;
+    const aAttempts = Number(a.attempts || 0);
+    const bAttempts = Number(b.attempts || 0);
+    if (aAttempts !== bAttempts) return bAttempts - aAttempts;
+    return String(a.mainLabel || a.displayLabel || a.key || "").localeCompare(String(b.mainLabel || b.displayLabel || b.key || ""));
+  });
+}
+
+function buildPlayerDatabaseAnnualSummaries() {
   const mode = getPlayerDatabaseMode();
   const rangeValue = getPlayerDatabaseRangeValue();
   const { startYear, endYear } = getPlayerDatabaseYearRange();
-  return playerDatabaseSelectedPlayers.map(player => {
+  return sortPlayerDatabaseSummaries(playerDatabaseSelectedPlayers.map(player => {
     const hasLoaded = hasCachedPlayerDatabaseAnnualData(player.playerId, mode, rangeValue);
     const annualData = getCachedPlayerDatabaseAnnualData(player.playerId, mode, rangeValue);
     const years = annualData && Array.isArray(annualData.years) ? annualData.years : [];
@@ -19722,18 +20184,62 @@ function buildPlayerDatabaseSummaries() {
       wrong,
       attempts,
       guessRate: attempts > 0 ? (correct / attempts) * 100 : null,
-      yearsLabel: formatPlayerDatabaseRangeLabel()
+      yearsLabel: formatPlayerDatabaseRangeLabel(),
+      filterLabel: formatPlayerDatabaseRangeLabel()
     };
-  }).sort((a, b) => {
-    if (a.isLoading !== b.isLoading) return a.isLoading ? 1 : -1;
-    const aRate = Number.isFinite(a.guessRate) ? a.guessRate : -Infinity;
-    const bRate = Number.isFinite(b.guessRate) ? b.guessRate : -Infinity;
-    if (aRate !== bRate) return bRate - aRate;
-    const aAttempts = Number(a.attempts || 0);
-    const bAttempts = Number(b.attempts || 0);
-    if (aAttempts !== bAttempts) return bAttempts - aAttempts;
-    return String(a.mainLabel || a.displayLabel || a.key || "").localeCompare(String(b.mainLabel || b.displayLabel || b.key || ""));
-  });
+  }));
+}
+
+function buildPlayerDatabaseGenreTagSummaries() {
+  const mode = getPlayerDatabaseMode();
+  const rangeValue = getPlayerDatabaseRangeValue();
+  const windowStartDay = getPlayerDatabaseGenreTagWindowStartDay(rangeValue);
+  const labelsLoaded = !!playerDatabaseGenreTagLabelPayload;
+  const selectedLabels = getPlayerDatabaseSelectedGenreTagLabels();
+  const selectedGenres = selectedLabels
+    .filter(label => label.kind === "genre")
+    .map(label => label.id);
+  const selectedTags = selectedLabels
+    .filter(label => label.kind === "tag")
+    .map(label => label.id);
+  const filterLabel = formatPlayerDatabaseGenreTagFilterLabel();
+
+  return sortPlayerDatabaseSummaries(playerDatabaseSelectedPlayers.map(player => {
+    const hasLoaded = labelsLoaded && hasCachedPlayerDatabaseGenreTagData(player.playerId, mode);
+    const genreTagData = getCachedPlayerDatabaseGenreTagData(player.playerId, mode);
+    const rows = genreTagData && Array.isArray(genreTagData.rows) ? genreTagData.rows : [];
+    let correct = 0;
+    let attempts = 0;
+
+    if (hasLoaded) {
+      rows.forEach(row => {
+        const day = Number(row && row[0]);
+        if (windowStartDay != null && (!Number.isFinite(day) || day < windowStartDay)) return;
+        if (!playerDatabaseRowHasAllSelectedLabels(row, selectedGenres, selectedTags)) return;
+        attempts += 1;
+        if (Number(row && row[1]) === 1) correct += 1;
+      });
+    }
+
+    const wrong = Math.max(0, attempts - correct);
+    return {
+      ...player,
+      genreTagData,
+      isLoading: !hasLoaded,
+      correct,
+      wrong,
+      attempts,
+      guessRate: attempts > 0 ? (correct / attempts) * 100 : null,
+      yearsLabel: filterLabel,
+      filterLabel
+    };
+  }));
+}
+
+function buildPlayerDatabaseSummaries() {
+  return getPlayerDatabaseCompareMode() === "genreTags"
+    ? buildPlayerDatabaseGenreTagSummaries()
+    : buildPlayerDatabaseAnnualSummaries();
 }
 
 function ensurePlayerDatabaseDefaultSelection() {
@@ -19777,6 +20283,111 @@ function renderPlayerDatabaseChips() {
     chip.appendChild(removeBtn);
     wrap.appendChild(chip);
   });
+}
+
+function renderPlayerDatabaseSelectedLabelChips() {
+  const wrap = document.getElementById("playerDatabaseSelectedLabels");
+  if (!wrap) return;
+  const clearBtn = document.getElementById("playerDatabaseClearLabelsBtn");
+  const selectedLabels = getPlayerDatabaseSelectedGenreTagLabels();
+  if (clearBtn) clearBtn.disabled = !selectedLabels.length;
+  if (!selectedLabels.length) {
+    wrap.innerHTML = '<div class="player-database-empty">No genre/tag labels selected</div>';
+    return;
+  }
+  wrap.innerHTML = "";
+  selectedLabels.forEach(label => {
+    const chip = document.createElement("div");
+    chip.className = "player-database-chip";
+    const text = document.createElement("span");
+    text.innerText = `${label.kind === "genre" ? "Genre" : "Tag"}: ${label.name}`;
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.innerText = "x";
+    removeBtn.ariaLabel = `Remove ${label.name}`;
+    removeBtn.addEventListener("click", () => {
+      setPlayerDatabaseSelectedLabelIds(playerDatabaseSelectedLabelIds.filter(id => id !== label.id));
+      renderPlayerDatabase();
+    });
+    chip.appendChild(text);
+    chip.appendChild(removeBtn);
+    wrap.appendChild(chip);
+  });
+}
+
+function renderPlayerDatabaseLabelList() {
+  const list = document.getElementById("playerDatabaseLabelList");
+  if (!list) return;
+
+  const query = normalizePlayerDatabaseSearchValue(playerDatabaseGenreTagSearchQuery);
+  const selectedIds = new Set(playerDatabaseSelectedLabelIds);
+  const labels = getPlayerDatabaseGenreTagLabels()
+    .filter(label => {
+      if (!query) return true;
+      const kindText = label.kind === "genre" ? "genre" : "tag";
+      return normalizePlayerDatabaseSearchValue(`${kindText} ${label.name}`).includes(query);
+    })
+    .sort((a, b) => {
+      if (a.kind !== b.kind) return a.kind === "genre" ? -1 : 1;
+      return a.name.localeCompare(b.name);
+    });
+
+  list.innerHTML = "";
+  const groups = new Map();
+  [["genre", "Genres"], ["tag", "Tags"]].forEach(([kind, title]) => {
+    const group = document.createElement("div");
+    group.className = "player-database-label-group";
+    const heading = document.createElement("h3");
+    heading.className = "player-database-label-group-heading";
+    heading.id = `playerDatabaseLabelHeading-${kind}`;
+    heading.innerText = title;
+    const options = document.createElement("div");
+    options.className = "player-database-label-options";
+    options.dataset.kind = kind;
+    options.setAttribute("role", "group");
+    options.setAttribute("aria-labelledby", heading.id);
+    if (!playerDatabaseGenreTagLabelPayload || !labels.some(label => label.kind === kind)) {
+      const empty = document.createElement("div");
+      empty.className = "player-database-empty";
+      empty.innerText = !playerDatabaseGenreTagLabelPayload
+        ? `Loading ${title.toLowerCase()}...`
+        : `No matching ${title.toLowerCase()}.`;
+      options.appendChild(empty);
+    }
+    group.appendChild(heading);
+    group.appendChild(options);
+    list.appendChild(group);
+    groups.set(kind, options);
+  });
+  labels.forEach(label => {
+    const item = document.createElement("label");
+    item.className = "player-database-label-option";
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = selectedIds.has(label.id);
+    checkbox.value = String(label.id);
+    checkbox.addEventListener("change", () => {
+      if (checkbox.checked) {
+        setPlayerDatabaseSelectedLabelIds([...playerDatabaseSelectedLabelIds, label.id]);
+      } else {
+        setPlayerDatabaseSelectedLabelIds(playerDatabaseSelectedLabelIds.filter(id => id !== label.id));
+      }
+      renderPlayerDatabase();
+    });
+
+    const text = document.createElement("span");
+    text.innerText = label.name;
+    item.appendChild(checkbox);
+    item.appendChild(text);
+    groups.get(label.kind).appendChild(item);
+  });
+  renderPlayerDatabaseSelectedLabelChips();
+}
+
+function clearPlayerDatabaseSelectedLabels() {
+  if (!playerDatabaseSelectedLabelIds.length) return;
+  setPlayerDatabaseSelectedLabelIds([]);
+  renderPlayerDatabase();
 }
 
 function clearPlayerDatabaseSelectedPlayers() {
@@ -19927,6 +20538,10 @@ function copyPlayerDatabaseSummaryToClipboard() {
 function renderPlayerDatabaseTable(summaries) {
   const tbody = document.getElementById("playerDatabaseTableBody");
   if (!tbody) return;
+  const filterHeader = document.getElementById("playerDatabaseFilterColumnHeader");
+  if (filterHeader) {
+    filterHeader.innerText = getPlayerDatabaseCompareMode() === "genreTags" ? "Filter" : "Years";
+  }
   const copySummaryBtn = document.getElementById("playerDatabaseCopySummaryBtn");
   if (copySummaryBtn) {
     copySummaryBtn.disabled = !summaries.length || summaries.some(summary => summary && summary.isLoading);
@@ -19949,7 +20564,7 @@ function renderPlayerDatabaseTable(summaries) {
       summary.isLoading ? "..." : Number(summary.correct || 0),
       summary.isLoading ? "..." : Number(summary.wrong || 0),
       summary.isLoading ? "..." : Number(summary.attempts || 0),
-      summary.yearsLabel || formatPlayerDatabaseRangeLabel()
+      summary.filterLabel || summary.yearsLabel || formatPlayerDatabaseActiveFilterLabel()
     ].forEach(value => {
       const cell = document.createElement("td");
       cell.innerText = String(value);
@@ -20077,12 +20692,30 @@ function renderPlayerDatabase() {
   const tableWrap = document.getElementById("playerDatabaseTableWrap");
   const chartWrap = document.getElementById("playerDatabaseChartWrap");
   playerDatabaseViewMode = getPlayerDatabaseViewMode();
+  playerDatabaseCompareMode = getPlayerDatabaseCompareMode();
   const mode = getPlayerDatabaseMode();
   const rangeValue = getPlayerDatabaseRangeValue();
-  const dataKey = `${mode}:${rangeValue}`;
-  const pendingLoads = playerDatabaseSelectedPlayers
-    .filter(player => player && player.playerId && !hasCachedPlayerDatabaseAnnualData(player.playerId, mode, rangeValue))
-    .map(player => ensurePlayerDatabaseAnnualData(player.playerId, mode, rangeValue));
+  const compareMode = playerDatabaseCompareMode;
+  const labelKey = playerDatabaseSelectedLabelIds.join(",");
+  const dataKey = `${compareMode}:${mode}:${rangeValue}:${labelKey}`;
+  const yearFields = Array.from(view.querySelectorAll(".player-database-year-field"));
+  yearFields.forEach(field => {
+    field.style.display = compareMode === "years" ? "" : "none";
+  });
+  const genreTagPanel = document.getElementById("playerDatabaseGenreTagPanel");
+  if (genreTagPanel) {
+    genreTagPanel.style.display = compareMode === "genreTags" ? "block" : "none";
+  }
+  const pendingLoads = compareMode === "genreTags"
+    ? [
+        ...(!playerDatabaseGenreTagLabelPayload ? [ensurePlayerDatabaseGenreTagLabels()] : []),
+        ...playerDatabaseSelectedPlayers
+          .filter(player => player && player.playerId && !hasCachedPlayerDatabaseGenreTagData(player.playerId, mode))
+          .map(player => ensurePlayerDatabaseGenreTagData(player.playerId, mode))
+      ]
+    : playerDatabaseSelectedPlayers
+      .filter(player => player && player.playerId && !hasCachedPlayerDatabaseAnnualData(player.playerId, mode, rangeValue))
+      .map(player => ensurePlayerDatabaseAnnualData(player.playerId, mode, rangeValue));
   if (pendingLoads.length) {
     Promise.all(pendingLoads).then(() => {
       if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === OTHER_TOOLS_PLAYER_DATABASE_LABEL) {
@@ -20099,14 +20732,22 @@ function renderPlayerDatabase() {
       return;
     }
   }
-  syncPlayerDatabaseYearInputBounds();
+  if (compareMode === "years") {
+    syncPlayerDatabaseYearInputBounds();
+  }
+  if (compareMode === "genreTags") {
+    renderPlayerDatabaseLabelList();
+  } else {
+    renderPlayerDatabaseSelectedLabelChips();
+  }
   const summaries = buildPlayerDatabaseSummaries();
   const totalAttempts = summaries.reduce((sum, item) => sum + Number(item.attempts || 0), 0);
   const averageAttempts = summaries.length ? totalAttempts / summaries.length : 0;
   const averageAttemptsLabel = String(Math.round(averageAttempts));
   if (meta) {
     const modeLabel = mode === "usual" ? "usual" : "watched";
-    meta.innerText = `${summaries.length} player${summaries.length === 1 ? "" : "s"} | ${formatPlayerDatabaseRangeLabel()} | ${modeLabel} | Average ${averageAttemptsLabel} attempts`;
+    const compareLabel = compareMode === "genreTags" ? formatPlayerDatabaseGenreTagFilterLabel() : formatPlayerDatabaseRangeLabel();
+    meta.innerText = `${summaries.length} player${summaries.length === 1 ? "" : "s"} | ${compareLabel} | ${getPlayerDatabaseRangeLabel(rangeValue)} | ${modeLabel} | Average ${averageAttemptsLabel} attempts`;
   }
   if (tableWrap) tableWrap.style.display = playerDatabaseViewMode === "table" ? "block" : "none";
   if (chartWrap) chartWrap.style.display = playerDatabaseViewMode === "chart" ? "block" : "none";
@@ -20130,7 +20771,10 @@ function bindPlayerDatabaseControlsOnce() {
   const copySummaryBtn = document.getElementById("playerDatabaseCopySummaryBtn");
   const startInput = document.getElementById("playerDatabaseStartYear");
   const endInput = document.getElementById("playerDatabaseEndYear");
+  const compareModeSelect = document.getElementById("playerDatabaseCompareModeSelect");
   const viewModeSelect = document.getElementById("playerDatabaseViewModeSelect");
+  const labelSearchInput = document.getElementById("playerDatabaseLabelSearchInput");
+  const clearLabelsBtn = document.getElementById("playerDatabaseClearLabelsBtn");
 
   if (input) {
     input.addEventListener("input", event => {
@@ -20209,7 +20853,23 @@ function bindPlayerDatabaseControlsOnce() {
     });
   });
 
+  bindPlayerDatabaseCustomSelect(compareModeSelect, () => {
+    playerDatabaseDisplayedDataKey = "";
+    renderPlayerDatabase();
+  });
   bindPlayerDatabaseCustomSelect(viewModeSelect, renderPlayerDatabase);
+
+  if (labelSearchInput) {
+    labelSearchInput.addEventListener("input", event => {
+      playerDatabaseGenreTagSearchQuery = String(event.target.value || "");
+      renderPlayerDatabaseLabelList();
+    });
+  }
+
+  if (clearLabelsBtn) {
+    clearLabelsBtn.addEventListener("click", clearPlayerDatabaseSelectedLabels);
+  }
+
   document.addEventListener("click", event => {
     if (!(event.target instanceof Element) || !event.target.closest(".player-database-custom-select")) {
       closeAllPlayerDatabaseCustomSelects();
@@ -25127,7 +25787,7 @@ function renderOverviewTypeMixBalance(records = null) {
 
   const sourceRecords = Array.isArray(records) && records.length
     ? records
-    : (Array.isArray(fullUserData) && fullUserData.length ? getVisibleUserData(fullUserData) : []);
+    : getVisibleUserData(getOverviewRowsForActiveMode());
   const score = calculateOverviewTypeMixBalanceScore(sourceRecords);
   typeMixEl.innerText = Number.isFinite(score) ? score.toFixed(1) : "-";
 }
@@ -26096,6 +26756,29 @@ function collectLooseStringValues(raw) {
     .filter(Boolean);
 }
 
+function collectArtistAltNamesFromSong(song) {
+  const row = song && typeof song === "object" ? song : {};
+  const values = [];
+  const seen = new Set();
+  const pushIfText = raw => {
+    const text = String(raw == null ? "" : raw).trim();
+    if (!text) return;
+    const key = text.toLowerCase();
+    if (seen.has(key)) return;
+    seen.add(key);
+    values.push(text);
+  };
+
+  collectLooseStringValues(row.artistAltName).forEach(pushIfText);
+  collectLooseStringValues(row.artistAltNames).forEach(pushIfText);
+  collectLooseStringValues(row.artistAlias).forEach(pushIfText);
+  collectLooseStringValues(row.artistAliases).forEach(pushIfText);
+  collectLooseStringValues(row.artistNames).forEach(pushIfText);
+  collectArtistAltNamesFromMembers(row.artistMembers).forEach(pushIfText);
+
+  return values;
+}
+
 function collectAnimeAltTitlesFromKey(keyRow) {
   const key = keyRow && typeof keyRow === "object" ? keyRow : null;
   if (!key) return [];
@@ -26139,6 +26822,11 @@ function normalizeSongIdentityValue(value) {
     .toLowerCase();
 }
 
+function normalizeArtistIdentityValue(value) {
+  return normalizeSongIdentityValue(value)
+    .replace(/([a-z])\.\s+(?=[a-z])/g, "$1.");
+}
+
 function getSongIdentityAnimeValues(song) {
   const row = song && typeof song === "object" ? song : {};
   const candidates = [
@@ -26172,7 +26860,7 @@ function getSongIdentityParts(song) {
   return {
     anime: getSongIdentityAnimeValues(row)[0] || "",
     song: normalizeSongIdentityValue(row.songName || row.title || row.song || ""),
-    artist: normalizeSongIdentityValue(row.artist || row.songArtist || row.artistName || ""),
+    artist: normalizeArtistIdentityValue(row.artist || row.songArtist || row.artistName || ""),
     type: normalizeSongIdentityValue(row.type || row.songType || "")
   };
 }
@@ -26269,13 +26957,18 @@ function getSongExternalIdentityToken(song) {
 
 function getSongDuplicateIdentityKey(song) {
   const parts = getSongIdentityParts(song);
-  if (!parts.song || (!parts.artist && !parts.type)) return "";
+  if (!parts.song || !parts.artist) return "";
+
+  if (parts.anime) {
+    return `text:${buildSongIdentityKey(parts, ["anime", "song", "artist", "type"])}`;
+  }
 
   const mediaTokens = getSongMediaIdentityTokens(song);
   if (mediaTokens.length) {
     return [
       `media:${mediaTokens.join(",")}`,
       `song:${parts.song}`,
+      `artist:${parts.artist}`,
       `type:${parts.type}`
     ].join("|");
   }
@@ -26552,7 +27245,7 @@ function hydrateSongRowWithKey(rawRow, keyRow) {
   const keyCorrectPct = Number(key.correctPct);
   const keyDuration = getSearchSongsKnownDurationSeconds(key);
   const keyArtistMembers = Array.isArray(key.artistMembers) ? key.artistMembers : [];
-  const keyArtistAltNames = collectArtistAltNamesFromMembers(keyArtistMembers);
+  const keyArtistAltNames = collectArtistAltNamesFromSong(key);
   const keyAnimeAltTitles = collectAnimeAltTitlesFromKey(key);
   const normalizedSongId = row.songid != null ? row.songid : row.songId;
   if (normalizedSongId != null) {
@@ -28608,21 +29301,26 @@ function updatePlaylistPlaybackDockControls() {
   }
 
   if (playlistLoopDockBtn) {
-    const isLooping = playlistPlaybackLoopMode !== "off";
+    const isLooping = playlistPlaybackLoopMode === "playlist" || playlistPlaybackLoopMode === "song";
     playlistLoopDockBtn.disabled = !controlsEnabled;
     playlistLoopDockBtn.classList.toggle("active", isLooping);
+    playlistLoopDockBtn.classList.toggle("loop-twice", playlistPlaybackLoopMode === "twice");
     playlistLoopDockBtn.classList.toggle("loop-song", playlistPlaybackLoopMode === "song");
     playlistLoopDockBtn.classList.toggle("loop-playlist", playlistPlaybackLoopMode === "playlist");
-    playlistLoopDockBtn.setAttribute("aria-pressed", isLooping ? "true" : "false");
+    playlistLoopDockBtn.setAttribute("aria-pressed", playlistPlaybackLoopMode !== "off" ? "true" : "false");
     const loopTitle = playlistPlaybackLoopMode === "song"
       ? "Loop song"
-      : (playlistPlaybackLoopMode === "playlist" ? "Loop playlist" : "Play playlist once");
+      : (playlistPlaybackLoopMode === "playlist"
+        ? "Loop playlist"
+        : (playlistPlaybackLoopMode === "twice" ? "Play each song twice, playlist once" : "Play playlist once"));
     playlistLoopDockBtn.ariaLabel = loopTitle;
+    playlistLoopDockBtn.title = loopTitle;
   }
 }
 
 function clearPlaylistPlaybackContext() {
   playlistPlaybackContext = null;
+  playlistPlaybackSongRepeated = false;
   playlistPlaybackShuffleQueue = [];
   clearPlaylistAudioPreloadCache();
   updatePlaylistPlaybackDockControls();
@@ -28697,6 +29395,7 @@ function setPlaylistPlaybackContext(context = {}) {
     String(playlistPlaybackContext.playlistId) !== playlistId ||
     String(playlistPlaybackContext.songRowKey) !== songRowKey;
 
+  if (isNewContext) playlistPlaybackSongRepeated = false;
   playlistPlaybackContext = { playlistId, songRowKey };
   const contextWork = {
     playlistId,
@@ -28757,9 +29456,10 @@ function playPlaylistSongFromRowKey(playlistId, songRowKey) {
 function handlePlaylistPlaybackEnded() {
   if (!playlistPlaybackContext) return false;
 
-  if (playlistPlaybackLoopMode === "song") {
+  if (playlistPlaybackLoopMode === "song" || (playlistPlaybackLoopMode === "twice" && !playlistPlaybackSongRepeated)) {
     const audio = relearnAudioElement;
     if (!audio) return false;
+    playlistPlaybackSongRepeated = true;
     audio.currentTime = Number.isFinite(relearnActiveClipStartTime) ? relearnActiveClipStartTime : 0;
     audio.play().catch(err => {
       console.error("Failed to loop playlist song audio", err);
@@ -30038,13 +30738,25 @@ function getPlaylistRowContextHitRect() {
 function isPointInPlaylistRowContextHitRect(x, y) {
   const rect = getPlaylistRowContextHitRect();
   if (!rect) return false;
-  return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+  const tolerance = 8;
+  return (
+    x >= rect.left - tolerance &&
+    x <= rect.right + tolerance &&
+    y >= rect.top - tolerance &&
+    y <= rect.bottom + tolerance
+  );
 }
 
 function handlePlaylistRowContextPointerMove(event) {
   if (!isPointInPlaylistRowContextHitRect(event.clientX, event.clientY)) {
     hidePlaylistRowContextMenu();
   }
+}
+
+function handlePlaylistRowContextScroll(event) {
+  const menu = document.getElementById("playlistRowContextMenu");
+  if (menu && !menu.hidden && menu.contains(event.target)) return;
+  hidePlaylistRowContextMenu();
 }
 
 function startPlaylistRowContextPointerTracking() {
@@ -30561,6 +31273,35 @@ function playlistSongMatchesQuery(song, query, mode, exact = false) {
   return candidates.some(value => value.includes(normalizedQuery));
 }
 
+function dedupePlaylistSongSearchRows(rows) {
+  const output = [];
+  const byMediaKey = new Map();
+  dedupeEquivalentSongRows(rows).forEach(row => {
+    const parts = getSongIdentityParts(row);
+    // Artist romanization can differ between records of the same recording.
+    // Only fold long-u spelling differences; distinct performers stay separate.
+    const media = [getPlaylistSongAudioLink(row), getPlaylistSongVideoLink(row)]
+      .map(value => String(value || "").trim())
+      .filter(Boolean);
+    const key = parts.anime && parts.song && parts.type && media.length
+      ? JSON.stringify([parts.anime, parts.song, parts.type, parts.artist.replace(/uu/g, "u"), [...new Set(media)].sort()])
+      : "";
+    const index = key ? byMediaKey.get(key) : undefined;
+    if (index == null) {
+      if (key) byMediaKey.set(key, output.length);
+      output.push(row);
+      return;
+    }
+    const existing = output[index];
+    const merged = mergeEquivalentSongRows(existing, row);
+    merged.artistAltNames = mergeUniqueSongArrays(
+      existing.artistAltNames, row.artistAltNames, [existing.artist, row.artist]
+    ).filter(value => normalizeSongIdentityValue(value) !== normalizeSongIdentityValue(merged.artist));
+    output[index] = merged;
+  });
+  return output;
+}
+
 function getPlaylistSongKeySearchRows() {
   const songKeyById = cachedSongKeyById && typeof cachedSongKeyById === "object"
     ? cachedSongKeyById
@@ -30569,7 +31310,7 @@ function getPlaylistSongKeySearchRows() {
   if (cachedPlaylistSongKeyRowsSource === songKeyById) return cachedPlaylistSongKeyRows;
 
   cachedPlaylistSongKeyRowsSource = songKeyById;
-  cachedPlaylistSongKeyRows = dedupeEquivalentSongRows(Object.values(songKeyById)
+  cachedPlaylistSongKeyRows = dedupePlaylistSongSearchRows(Object.values(songKeyById)
     .map(row => {
       if (!row || typeof row !== "object") return null;
       const songid = row.songid != null ? row.songid : row.songId;
@@ -33455,6 +34196,7 @@ if (playlistLoopDockBtn) {
     if (playlistLoopDockBtn.disabled || !playlistPlaybackContext) return;
     const currentIndex = PLAYLIST_PLAYBACK_LOOP_MODES.indexOf(playlistPlaybackLoopMode);
     playlistPlaybackLoopMode = PLAYLIST_PLAYBACK_LOOP_MODES[(currentIndex + 1) % PLAYLIST_PLAYBACK_LOOP_MODES.length];
+    playlistPlaybackSongRepeated = false;
     updatePlaylistPlaybackDockControls();
     schedulePlaylistAudioPreload();
   });
@@ -33526,25 +34268,30 @@ document.addEventListener("keydown", event => {
   }
 });
 
-document.addEventListener("keydown", event => {
+function handleRelearnPlaybackSpaceKey(event) {
   if (event.key !== " " && event.code !== "Space") return;
+  if (event.altKey || event.ctrlKey || event.metaKey || event.isComposing) return;
 
   const target = event.target;
   if (target instanceof HTMLElement) {
-    const tagName = target.tagName;
+    const isPlaybackSlider = target === relearnAudioProgressRange || target === relearnAudioDockVolumeSlider;
     const isTypingField =
-      tagName === "INPUT" ||
-      tagName === "TEXTAREA" ||
-      tagName === "SELECT" ||
+      (target.tagName === "INPUT" && !isPlaybackSlider) ||
+      target.tagName === "TEXTAREA" ||
+      target.tagName === "SELECT" ||
       target.isContentEditable;
     if (isTypingField) return;
   }
 
   if (!relearnAudioProgressDock || relearnAudioProgressDock.style.display === "none") return;
 
+  // Claim space before focused controls can activate or handle it themselves.
   event.preventDefault();
-  toggleRelearnPlaybackFromControls();
-});
+  event.stopPropagation();
+  if (!event.repeat) toggleRelearnPlaybackFromControls();
+}
+
+document.addEventListener("keydown", handleRelearnPlaybackSpaceKey, true);
 
 function getFilteredRelearnSongs() {
   const songs = Array.isArray(cachedRelearnSongs) ? cachedRelearnSongs : [];
@@ -35519,9 +36266,7 @@ function getSearchSongCandidates(song) {
   pushIfText(song.animeTitle);
   pushIfText(song.songName || song.title);
   pushIfText(song.artist);
-  if (Array.isArray(song.artistAltNames)) {
-    song.artistAltNames.forEach(pushIfText);
-  }
+  collectArtistAltNamesFromSong(song).forEach(pushIfText);
 
   // Optional alternate fields (if present in generated search_songs.json).
   [
@@ -35602,9 +36347,7 @@ function getSearchSongCandidatesByMode(song, mode) {
 
   if (normalizedMode === "artist") {
     pushIfText(song.artist);
-    if (Array.isArray(song.artistAltNames)) {
-      song.artistAltNames.forEach(pushIfText);
-    }
+    collectArtistAltNamesFromSong(song).forEach(pushIfText);
     return [...new Set(values)];
   }
 
@@ -35766,7 +36509,7 @@ function renderPerformanceGuessRate(records) {
     });
   };
 
-  renderWeightedGuessRateChart(getVisibleUserData(fullUserData));
+  renderWeightedGuessRateChart(records);
 
   if (!records.length) {
     if (combinedGuessAreaChart) {
@@ -37190,8 +37933,9 @@ if (dataRangeSelect) {
       renderPlayerDatabase();
       return;
     }
-    if (!fullUserData.length) return;
-    const performanceVisibleRecords = getVisibleUserData(getPerformanceRowsForActiveMode());
+    const activePerformanceRows = getPerformanceRowsForActiveMode();
+    if (!activePerformanceRows.length) return;
+    const performanceVisibleRecords = getVisibleUserData(activePerformanceRows);
     renderOverviewForActiveMode();
 
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Guess Rate") {
@@ -37201,13 +37945,13 @@ if (dataRangeSelect) {
       renderPerformanceLivesTakenSaved(performanceVisibleRecords);
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
-      renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
+      renderPerformanceRigsMissed(performanceVisibleRecords);
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Onlist/Offlist") {
-      renderPerformanceRigAnalysis(getVisibleUserData(fullUserData));
+      renderPerformanceRigAnalysis(performanceVisibleRecords);
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Composite charts") {
-      renderPerformanceCompositeCharts(getVisibleUserData(fullUserData));
+      renderPerformanceCompositeCharts(performanceVisibleRecords);
     }
     if (activeSection === "social") {
       scheduleSocialSubSectionRender(activeSubSectionBySection.social || "");
@@ -37592,9 +38336,13 @@ function applyCurrentRankCardStyle(percentile, isTopThree = false, forceTierClas
 }
 
 async function loadGlobalStatsData(mode = "watched") {
-  const resolvedMode = mode === "usual" ? "usual" : "watched";
-  const jsonFile = resolvedMode === "usual" ? "stats_usual.json" : "stats.json";
-  const csvFile = resolvedMode === "usual" ? "stats_usual.csv" : "stats.csv";
+  const resolvedMode = ["usual", "ant", "ant_usual"].includes(mode) ? mode : "watched";
+  const jsonFile = resolvedMode === "usual"
+    ? "stats_usual.json"
+    : (resolvedMode === "ant_usual" ? "ant_stats_usual.json" : (resolvedMode === "ant" ? "ant_stats.json" : "stats.json"));
+  const csvFile = resolvedMode === "usual"
+    ? "stats_usual.csv"
+    : (resolvedMode === "ant_usual" ? "ant_stats_usual.csv" : (resolvedMode === "ant" ? "ant_stats.csv" : "stats.csv"));
 
   const jsonRes = await fetch(dataUrl(jsonFile));
   if (jsonRes.ok) {
@@ -37646,6 +38394,27 @@ function normalizeStatsMapFromPayload(payload) {
     return payload.players;
   }
   return payload;
+}
+
+function mergeStatsMaps(...maps) {
+  const merged = {};
+  const seenKeysByPlayer = {};
+  maps.forEach(map => {
+    if (!map || typeof map !== "object") return;
+    Object.entries(map).forEach(([key, rows]) => {
+      if (!Array.isArray(rows)) return;
+      if (!merged[key]) merged[key] = [];
+      if (!seenKeysByPlayer[key]) seenKeysByPlayer[key] = new Set();
+      rows.forEach(row => {
+        if (!row || typeof row !== "object") return;
+        const dedupeKey = getStatsRowDedupeKey(row);
+        if (seenKeysByPlayer[key].has(dedupeKey)) return;
+        seenKeysByPlayer[key].add(dedupeKey);
+        merged[key].push(row);
+      });
+    });
+  });
+  return merged;
 }
 
 async function loadScopedStatsDataForCurrentUser(mode = "watched") {
@@ -37709,6 +38478,14 @@ Promise.all([
     console.warn("Usual stats load failed; keeping watched-only mode", err);
     return { data: {}, playerEntry: null, source: "global" };
   }),
+  loadGlobalStatsData("ant").catch(err => {
+    console.warn("Ant watched stats load failed; watched Ant toggle disabled", err);
+    return {};
+  }),
+  loadGlobalStatsData("ant_usual").catch(err => {
+    console.warn("Ant usual stats load failed; usual Ant toggle disabled", err);
+    return {};
+  }),
   loadWeeklyStatsData("watched").catch(err => {
     console.warn("Weekly watched stats load failed", err);
     return {};
@@ -37726,10 +38503,11 @@ Promise.all([
     return {};
   })
 ])
-  .then(async ([watchedStatsResult, usualStatsResult, weeklyWatchedPayload, weeklyUsualPayload, lastWeekWatchedPayload, lastWeekUsualPayload]) => {
+  .then(async ([watchedStatsResult, usualStatsResult, antStatsPayload, usualAntStatsPayload, weeklyWatchedPayload, weeklyUsualPayload, lastWeekWatchedPayload, lastWeekUsualPayload]) => {
     const data = watchedStatsResult && typeof watchedStatsResult === "object" ? (watchedStatsResult.data || {}) : {};
     const usualData = usualStatsResult && typeof usualStatsResult === "object" ? (usualStatsResult.data || {}) : {};
-    const usualStatKeys = Object.keys(usualData);
+    const antData = normalizeStatsMapFromPayload(antStatsPayload);
+    const usualAntData = normalizeStatsMapFromPayload(usualAntStatsPayload);
     const latestRankMapPromise = loadLatestRankMap("watched");
     const latestRankUsualMapPromise = loadLatestRankMap("usual");
     let globalSocialData = null;
@@ -37752,12 +38530,12 @@ Promise.all([
     } catch (globalUsualLoadErr) {
       console.warn("Global usual stats load failed for social views; using current scoped usual dataset as fallback", globalUsualLoadErr);
     }
-    allPlayerStatsData = (globalSocialData && typeof globalSocialData === "object")
-      ? globalSocialData
-      : ((data && typeof data === "object") ? data : {});
-    allPlayerUsualStatsData = (globalSocialUsualData && typeof globalSocialUsualData === "object")
-      ? globalSocialUsualData
-      : ((usualData && typeof usualData === "object") ? usualData : {});
+    const watchedDataForUser = mergeStatsMaps(globalSocialData, data);
+    const usualDataForUser = mergeStatsMaps(globalSocialUsualData, usualData);
+    allPlayerStatsData = watchedDataForUser;
+    allPlayerUsualStatsData = usualDataForUser;
+    allPlayerAntStatsData = (antData && typeof antData === "object") ? antData : {};
+    allPlayerUsualAntStatsData = (usualAntData && typeof usualAntData === "object") ? usualAntData : {};
     allPlayerWeeklyStatsData = normalizeStatsMapFromPayload(weeklyWatchedPayload);
     allPlayerUsualWeeklyStatsData = normalizeStatsMapFromPayload(weeklyUsualPayload);
     allPlayerLastWeekStatsData = normalizeStatsMapFromPayload(lastWeekWatchedPayload);
@@ -37775,7 +38553,10 @@ Promise.all([
     cachedWeightedGuessRateSeriesByPlayerId = new Map();
     weightedGuessRateRequestId = 0;
     const normalizedUser = String(username || "").trim().toLowerCase();
-    const statKeys = Object.keys(data);
+    const statKeys = Object.keys(watchedDataForUser);
+    const usualStatKeys = Object.keys(usualDataForUser);
+    const antStatKeys = Object.keys(antData);
+    const usualAntStatKeys = Object.keys(usualAntData);
     let matchedKey = statKeys.find(key => key.toLowerCase() === normalizedUser);
     let playerEntry = watchedStatsResult && watchedStatsResult.playerEntry ? watchedStatsResult.playerEntry : await getPlayerEntryByName(username || "");
 
@@ -37799,11 +38580,25 @@ Promise.all([
         if (!matchedKey) {
           matchedKey = usualStatKeys.find(key => aliasCandidates.has(String(key || "").trim().toLowerCase()));
         }
+        if (!matchedKey) {
+          matchedKey = antStatKeys.find(key => aliasCandidates.has(String(key || "").trim().toLowerCase()));
+        }
+        if (!matchedKey) {
+          matchedKey = usualAntStatKeys.find(key => aliasCandidates.has(String(key || "").trim().toLowerCase()));
+        }
       }
     }
 
     if (!matchedKey) {
       matchedKey = usualStatKeys.find(key => String(key || "").trim().toLowerCase() === normalizedUser);
+    }
+
+    if (!matchedKey) {
+      matchedKey = antStatKeys.find(key => String(key || "").trim().toLowerCase() === normalizedUser);
+    }
+
+    if (!matchedKey) {
+      matchedKey = usualAntStatKeys.find(key => String(key || "").trim().toLowerCase() === normalizedUser);
     }
 
     if (!matchedKey) {
@@ -37840,13 +38635,15 @@ Promise.all([
     ].filter(Boolean));
     let sourceKeys = Array.from(new Set([
       ...statKeys.filter(key => identityNames.has(String(key || "").trim().toLowerCase())),
-      ...usualStatKeys.filter(key => identityNames.has(String(key || "").trim().toLowerCase()))
+      ...usualStatKeys.filter(key => identityNames.has(String(key || "").trim().toLowerCase())),
+      ...antStatKeys.filter(key => identityNames.has(String(key || "").trim().toLowerCase())),
+      ...usualAntStatKeys.filter(key => identityNames.has(String(key || "").trim().toLowerCase()))
     ]));
     if (!sourceKeys.length) {
       sourceKeys = [matchedKey];
     }
     const mergedUserDataRaw = sourceKeys
-      .flatMap(key => Array.isArray(data[key]) ? data[key] : [])
+      .flatMap(key => Array.isArray(watchedDataForUser[key]) ? watchedDataForUser[key] : [])
       .filter(row => row && typeof row === "object");
     const dedupeSeenKeys = new Set();
     const mergedUserData = mergedUserDataRaw.filter(row => {
@@ -37881,7 +38678,7 @@ Promise.all([
     preloadOverviewStatsSummaryForUser(canonicalName, { immediate: true });
 
     const usualMergedUserDataRaw = sourceKeys
-      .flatMap(key => Array.isArray(usualData[key]) ? usualData[key] : [])
+      .flatMap(key => Array.isArray(usualDataForUser[key]) ? usualDataForUser[key] : [])
       .filter(row => row && typeof row === "object");
     const usualDedupeSeenKeys = new Set();
     usualUserData = usualMergedUserDataRaw.filter(row => {
@@ -37901,7 +38698,16 @@ Promise.all([
     });
     usualUserData = sortRecordsByTimestamp(usualUserData);
 
-    if (!mergedUserData.length && !usualUserData.length) {
+    const antMergedUserDataRaw = sourceKeys
+      .flatMap(key => Array.isArray(antData[key]) ? antData[key] : [])
+      .filter(row => row && typeof row === "object");
+    antUserData = mergeAndSortStatsRows(antMergedUserDataRaw);
+    const usualAntMergedUserDataRaw = sourceKeys
+      .flatMap(key => Array.isArray(usualAntData[key]) ? usualAntData[key] : [])
+      .filter(row => row && typeof row === "object");
+    usualAntUserData = mergeAndSortStatsRows(usualAntMergedUserDataRaw);
+
+    if (!mergedUserData.length && !usualUserData.length && !antUserData.length && !usualAntUserData.length) {
       alert("No records found for this user");
       return;
     }
@@ -37910,7 +38716,7 @@ Promise.all([
     const sortedMergedUserData = sortRecordsByTimestamp(mergedUserData);
 
     fullUserData = sortedMergedUserData;
-    if (!fullUserData.length && usualUserData.length) {
+    if (!fullUserData.length && !antUserData.length && (usualUserData.length || usualAntUserData.length)) {
       // Usual-only user: default to usual data source on first load.
       overviewDataSourceMode = "usual";
     }
@@ -37928,13 +38734,13 @@ Promise.all([
       renderPerformanceLivesTakenSaved(performanceVisibleRecords);
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Rigs Missed") {
-      renderPerformanceRigsMissed(getVisibleUserData(fullUserData));
+      renderPerformanceRigsMissed(performanceVisibleRecords);
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Onlist/Offlist") {
-      renderPerformanceRigAnalysis(getVisibleUserData(fullUserData));
+      renderPerformanceRigAnalysis(performanceVisibleRecords);
     }
     if (activeSection === "performance" && activeSubSectionBySection.performance === "Composite charts") {
-      renderPerformanceCompositeCharts(getVisibleUserData(fullUserData));
+      renderPerformanceCompositeCharts(performanceVisibleRecords);
     }
     if (activeSection === "social") {
       scheduleSocialSubSectionRender(activeSubSectionBySection.social || "");
