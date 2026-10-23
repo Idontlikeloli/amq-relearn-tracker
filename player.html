@@ -4013,6 +4013,88 @@
       box-sizing: border-box !important;
     }
 
+    #relearnDownloadOpenBtn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 30px;
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    #relearnDownloadOpenBtn:hover { background: #e8f1fb; }
+    #relearnDownloadOpenBtn img { width: 18px; height: 18px; opacity: 0.7; }
+    #insightsRelearnTrackerView .relearn-download-toolbar { display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+    #relearnDownloadDialog {
+      box-sizing: border-box;
+      width: min(440px, calc(100% - 32px));
+      max-height: calc(100dvh - 32px);
+      margin: auto;
+      padding: 24px;
+      overflow: auto;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: #fff;
+      color: #1e293b;
+      box-shadow: 0 16px 48px rgba(15, 23, 42, 0.2);
+      font: inherit;
+      letter-spacing: 0;
+    }
+
+    #relearnDownloadDialog::backdrop { background: rgba(15, 23, 42, 0.35); }
+    #relearnDownloadDialog h2 { margin: 0 0 20px; font-size: 18px; }
+    #relearnDownloadDialog .relearn-download-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    #relearnDownloadDialog label { display: grid; gap: 6px; font-size: 13px; font-weight: 600; }
+    #relearnDownloadDialog .relearn-download-limit { grid-column: 1 / -1; }
+    #relearnDownloadDialog select,
+    #relearnDownloadDialog input {
+      box-sizing: border-box;
+      width: 100%;
+      min-width: 0;
+      height: 38px;
+      padding: 0 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #f8fafc;
+      color: #1e293b;
+      font: inherit;
+    }
+    #relearnDownloadCount { margin: 10px 0 0; color: #64748b; font-size: 13px; }
+    #relearnDownloadStatus { margin-top: 16px; font-size: 13px; overflow-wrap: anywhere; }
+    #relearnDownloadStatus:empty { display: none; }
+    #relearnDownloadStatus[data-kind="error"] { color: #b91c1c; }
+    #relearnDownloadStatus[data-kind="success"] { color: #166534; }
+    #relearnDownloadFailures { max-height: 140px; padding-left: 18px; font-size: 12px; overflow: auto; overflow-wrap: anywhere; }
+    #relearnDownloadFailures:empty { display: none; }
+    #relearnDownloadDialog .relearn-download-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+    #relearnDownloadDialog .relearn-download-export-actions { display: flex; flex-shrink: 0; gap: 8px; }
+    #relearnDownloadDialog button {
+      min-height: 36px;
+      padding: 7px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #fff;
+      color: #334155;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    #relearnDownloadDialog button[type="submit"] { background: #e8f1fb; color: #183a5c; border-color: #a9c7e5; }
+    #relearnDownloadDialog :disabled { cursor: not-allowed; opacity: 0.55; }
+    #relearnDownloadDialog :focus-visible,
+    #relearnDownloadOpenBtn:focus-visible { outline: 2px solid #6099c6; outline-offset: 2px; }
+
     #insightsSection .relearn-onlist-filter-btn {
       border: 0 !important;
       border-radius: 8px !important;
@@ -9073,8 +9155,14 @@
       margin-bottom: 10px !important;
     }
 
+    #socialSection[data-social-subsection="Synergy"] > .page-title {
+      font-size: 28px !important;
+      line-height: 1.3 !important;
+      margin-bottom: 20px !important;
+    }
+
     #socialSection .social-synergy-select-row {
-      margin-top: 20px !important;
+      margin-top: 12px !important;
       padding-top: 0 !important;
       display: flex !important;
       align-items: center !important;
@@ -9149,17 +9237,18 @@
 
     #socialSection .social-synergy-single-layout {
       display: grid !important;
-      grid-template-columns: minmax(240px, 0.9fr) minmax(320px, 1.6fr) !important;
-      gap: 12px !important;
-      margin-top: 12px !important;
-      margin-bottom: 12px !important;
-      align-items: stretch !important;
-      min-height: 380px !important;
-      padding: 14px !important;
-      border: 1px solid #c9d6e5 !important;
-      border-radius: 14px !important;
-      background: #edf4fc !important;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 8px 18px rgba(81, 105, 132, 0.08) !important;
+      grid-template-columns: 248px minmax(0, 1fr) !important;
+      gap: 28px !important;
+      margin: 0 !important;
+      align-items: start !important;
+      min-height: 0 !important;
+      padding: 22px 20px !important;
+      border: 0 !important;
+      border-top: 1px solid #e2e8f0 !important;
+      border-bottom: 1px solid #e2e8f0 !important;
+      border-radius: 0 !important;
+      background: #ffffff !important;
+      box-shadow: none !important;
     }
 
     #socialSection .social-synergy-single-left,
@@ -9174,21 +9263,27 @@
     }
 
     #socialSection .social-synergy-single-left {
-      display: flex !important;
-      flex-direction: column !important;
-      min-height: 100% !important;
+      border-right: 1px solid #e2e8f0 !important;
+      padding-right: 24px !important;
     }
 
     #socialSection .social-synergy-single-title {
-      display: inline-flex !important;
+      display: flex !important;
       align-items: center !important;
+      justify-content: space-between !important;
       gap: 6px !important;
-      margin: 0 0 8px 0 !important;
-      font-size: 18px !important;
+      margin: 0 0 14px 0 !important;
+      font-size: 14px !important;
       font-weight: 700 !important;
       line-height: 1.2 !important;
       color: #334155 !important;
-      white-space: nowrap !important;
+      flex-wrap: wrap !important;
+    }
+
+    #socialSynergyMeta {
+      color: #64748b !important;
+      font-size: 11px !important;
+      font-weight: 400 !important;
     }
 
     #socialSection .social-synergy-single-title .info-hover-wrap {
@@ -9200,25 +9295,25 @@
       margin-top: 0 !important;
       display: flex !important;
       flex-direction: column !important;
-      gap: 6px !important;
-      height: 260px !important;
-      max-height: 260px !important;
-      min-height: 260px !important;
+      gap: 0 !important;
+      height: 220px !important;
+      max-height: 220px !important;
+      min-height: 220px !important;
       overflow-y: auto !important;
-      border: 1px solid #d6e0ec !important;
-      border-radius: 8px !important;
-      background: #eef4fb !important;
-      padding: 6px !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      padding: 0 !important;
+      scrollbar-gutter: stable !important;
     }
 
     #socialSection #socialSynergySingleCompare {
-      margin-top: 4px !important;
-      height: 380px !important;
-      min-height: 380px !important;
-      max-height: 380px !important;
-      overflow-y: auto !important;
-      overflow-x: hidden !important;
-      padding-right: 2px !important;
+      margin-top: 0 !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
+      padding: 0 !important;
       position: relative !important;
       z-index: 1 !important;
     }
@@ -9237,16 +9332,139 @@
     }
 
     #socialSection .social-synergy-single-right .chart-title {
-      font-size: 30px !important;
-      line-height: 1.08 !important;
-      font-weight: 800 !important;
+      font-size: 20px !important;
+      line-height: 1.4 !important;
+      font-weight: 700 !important;
+      margin: 0 !important;
+      min-width: 0 !important;
+      overflow-wrap: anywhere !important;
+      white-space: normal !important;
+      color: #1e293b !important;
+    }
+
+    #socialSection .social-synergy-pair-header {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: flex-start !important;
+      gap: 12px !important;
+      margin-bottom: 18px !important;
+    }
+
+    #socialSection .social-synergy-pair-name {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      min-width: 0 !important;
+    }
+
+    #socialSection .social-synergy-pools {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      gap: 24px !important;
+      margin-top: 18px !important;
+    }
+
+    #socialSection .social-synergy-pool {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) auto !important;
+      align-items: center !important;
+      gap: 12px 16px !important;
+      min-width: 0 !important;
+      padding-top: 16px !important;
+      border-top: 1px solid #e2e8f0 !important;
+    }
+
+    #socialSection .social-synergy-pool-title {
+      grid-column: 1 !important;
+      grid-row: 1 !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      margin: 0 !important;
+      color: #334155 !important;
+      font-size: 14px !important;
+      font-weight: 600 !important;
+      line-height: 1.4 !important;
+    }
+
+    #socialSection #socialSynergySingleCompare .social-synergy-comparison {
+      display: contents !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      padding: 0 !important;
+    }
+
+    #socialSection #socialSynergySingleCompare .social-synergy-comparison .social-synergy-row-head {
+      grid-column: 2 !important;
+      grid-row: 1 !important;
+      display: grid !important;
+      grid-template-columns: repeat(3, max-content) !important;
+      justify-self: end !important;
+      text-align: right !important;
+      gap: 16px !important;
+      margin-bottom: 0 !important;
+    }
+
+    #socialSection #socialSynergySingleCompare .social-synergy-comparison .social-synergy-row-head > div + div {
+      position: relative !important;
+    }
+
+    #socialSection #socialSynergySingleCompare .social-synergy-comparison .social-synergy-row-head > div + div::before {
+      content: "" !important;
+      position: absolute !important;
+      left: -8px !important;
+      top: 0 !important;
+      bottom: 0 !important;
+      border-left: 1px solid #d1d5db !important;
+    }
+
+    #socialSection .social-synergy-count-label {
+      display: block !important;
+      color: #4b5563 !important;
+      font-size: 11px !important;
+      font-weight: 400 !important;
+      margin-bottom: 5px !important;
+    }
+
+    #socialSection .social-synergy-count-value {
+      display: block !important;
+      font-size: 16px !important;
+      font-weight: 700 !important;
+      color: #4b5563 !important;
+      font-variant-numeric: tabular-nums !important;
+    }
+
+    #socialSection #socialSynergySingleCompare .social-synergy-bar {
+      grid-column: 1 / -1 !important;
+      height: 12px !important;
+      border-radius: 3px !important;
+    }
+
+    #socialSection #socialSynergySingleCompare .social-synergy-left-base,
+    #socialSection #socialSynergySingleCompare .social-synergy-right-base { background: #d1d5db !important; }
+    #socialSection #socialSynergySingleCompare .social-synergy-overlap-base { background: #e5c56b !important; }
+
+    #socialSection .social-synergy-count-label.social-synergy-count-label-overlap,
+    #socialSection .social-synergy-count-value.social-synergy-count-overlap { color: #8a691e !important; }
+
+    #socialSynergyView .social-synergy-empty {
+      grid-column: 1 / -1 !important;
+      margin-top: 0 !important;
+      padding: 12px 0 !important;
     }
 
     #socialSection .social-synergy-extra-grid {
       display: grid !important;
       grid-template-columns: minmax(0, 1fr) !important;
-      gap: 12px !important;
-      margin-top: 12px !important;
+      gap: 28px !important;
+      margin-top: 0 !important;
+      padding: 22px 20px !important;
+      background: #ffffff !important;
+    }
+
+    #socialSection #socialSynergyExtraGrid[hidden] {
+      display: none !important;
     }
 
     #socialSection:not([data-social-subsection="Synergy"]) #socialSynergyExtraGrid,
@@ -9256,31 +9474,34 @@
     }
 
     #socialSection .social-synergy-extra-card .chart-header {
-      margin-bottom: 8px !important;
+      margin-bottom: 14px !important;
+      align-items: center !important;
+      gap: 10px !important;
+      flex-wrap: wrap !important;
     }
 
     #socialSection .social-synergy-rig-mode-toggle {
       display: inline-flex !important;
       align-items: center !important;
-      gap: 6px !important;
-      padding: 3px !important;
-      border: 1px solid #9db8b5 !important;
-      border-radius: 10px !important;
-      background: #dbeceb !important;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.52) !important;
-      margin-bottom: 5px !important;
+      gap: 2px !important;
+      padding: 2px !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 6px !important;
+      background: #f1f5f9 !important;
+      box-shadow: none !important;
+      margin-bottom: 0 !important;
     }
 
     #socialSection .social-synergy-rig-mode-btn {
       border: 0 !important;
-      border-radius: 8px !important;
+      border-radius: 4px !important;
       background: transparent !important;
-      color: #4f6d72 !important;
+      color: #64748b !important;
       font-size: 11px !important;
       font-weight: 700 !important;
-      letter-spacing: 0.02em !important;
+      letter-spacing: 0 !important;
       line-height: 1 !important;
-      padding: 7px 10px !important;
+      padding: 7px 8px !important;
       cursor: pointer !important;
       white-space: nowrap !important;
       transition: background-color 120ms ease, color 120ms ease, box-shadow 120ms ease !important;
@@ -9292,21 +9513,25 @@
     }
 
     #socialSection .social-synergy-rig-mode-btn.active {
-      background: #f4faf9 !important;
-      color: #234247 !important;
-      box-shadow: 0 1px 3px rgba(61, 95, 101, 0.22) !important;
+      background: #ffffff !important;
+      color: #334155 !important;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08) !important;
     }
 
     #socialSection .social-synergy-extra-card .chart-title {
-      font-size: 18px !important;
-      font-weight: 800 !important;
+      font-size: 16px !important;
+      font-weight: 700 !important;
       line-height: 1.3 !important;
     }
 
     #socialSection .social-synergy-extra-card {
-      border: 1px solid #bcd8d4 !important;
-      background: linear-gradient(145deg, #eef7f6 0%, #e6f1ef 52%, #ddebea 100%) !important;
-      box-shadow: 0 4px 10px rgba(71, 102, 112, 0.10) !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      min-width: 0 !important;
     }
 
     #socialSection .overview-rig-top-songs-wrap {
@@ -9324,12 +9549,12 @@
     }
 
     #socialSection .overview-rig-top-song-card {
-      width: 178px !important;
-      min-width: 178px !important;
-      border: 1px solid #C8DBEA !important;
-      border-radius: 10px !important;
-      background: #E9F2FA !important;
-      box-shadow: 0 3px 8px rgba(95, 76, 66, 0.12) !important;
+      width: 148px !important;
+      min-width: 148px !important;
+      border: 1px solid #e2e8f0 !important;
+      border-radius: 6px !important;
+      background: #f8fafb !important;
+      box-shadow: none !important;
       padding: 8px !important;
       box-sizing: border-box !important;
       display: flex !important;
@@ -9349,7 +9574,7 @@
       width: 100% !important;
       height: auto !important;
       aspect-ratio: 2 / 3 !important;
-      border-radius: 8px !important;
+      border-radius: 4px !important;
       object-fit: contain !important;
       object-position: center center !important;
       border: 0 !important;
@@ -9363,9 +9588,9 @@
     #socialSection .overview-rig-top-song-type,
     #socialSection .overview-rig-top-song-submeta {
       margin: 0 !important;
-      font-size: 13px !important;
+      font-size: 12px !important;
       line-height: 1.3 !important;
-      color: #4a3a33 !important;
+      color: #334155 !important;
       word-break: break-word !important;
       overflow-wrap: anywhere !important;
     }
@@ -9375,12 +9600,12 @@
     }
 
     #socialSection .overview-rig-top-song-type {
-      color: #6a564e !important;
+      color: #64748b !important;
       font-weight: 700 !important;
     }
 
     #socialSection .overview-rig-top-song-submeta {
-      color: #7b685f !important;
+      color: #64748b !important;
       font-weight: 600 !important;
     }
 
@@ -9390,7 +9615,12 @@
       padding: 8px 2px !important;
     }
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1100px) {
+      #socialSection .social-synergy-pools {
+        grid-template-columns: minmax(0, 1fr) !important;
+        gap: 18px !important;
+      }
+
       #socialSection .social-synergy-extra-grid {
         grid-template-columns: minmax(0, 1fr) !important;
       }
@@ -9398,34 +9628,49 @@
 
     #socialSection .social-synergy-single-picker-item {
       width: 100% !important;
-      border: 1px solid #c5d7e9 !important;
-      border-radius: 8px !important;
-      background: #e8eff8 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 10px !important;
+      border: 0 !important;
+      border-bottom: 1px solid #edf0f3 !important;
+      border-radius: 0 !important;
+      background: transparent !important;
       color: #0f172a !important;
       text-align: left !important;
-      padding: 7px 8px !important;
+      padding: 10px 8px !important;
+      min-height: 38px !important;
+      flex: 0 0 auto !important;
       cursor: pointer !important;
       font-size: 12px !important;
       line-height: 1.3 !important;
     }
 
     #socialSection .social-synergy-single-picker-item:hover {
-      background: #e2ebf6 !important;
-      border-color: #94a3b8 !important;
+      background: #f5f7f9 !important;
     }
 
     #socialSection .social-synergy-single-picker-item.active {
-      border-color: #93c5fd !important;
-      background: #dfeafb !important;
+      background: #edf4fc !important;
+      box-shadow: inset 3px 0 #709dce !important;
       font-weight: 700 !important;
+    }
+
+    #socialSection .social-synergy-single-picker-item > span:first-child {
+      min-width: 0 !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      white-space: nowrap !important;
     }
 
     #socialSection .social-synergy-single-picker-item .meta {
       display: block !important;
-      margin-top: 2px !important;
+      margin-top: 0 !important;
       font-size: 11px !important;
       color: #64748b !important;
       font-weight: 600 !important;
+      flex: 0 0 auto !important;
+      font-variant-numeric: tabular-nums !important;
     }
 
     #socialSection .social-synergy-row {
@@ -9436,13 +9681,39 @@
     }
 
     #socialSection .social-synergy-stats-card {
-      border-color: #b8c7da !important;
-      background: #dce4ef !important;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48) !important;
+      border: 0 !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+      box-shadow: none !important;
     }
 
     #socialSection .social-synergy-stats-card .social-synergy-row-meta {
-      color: #3c4f67 !important;
+      display: grid !important;
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      gap: 0 !important;
+      margin: 0 !important;
+      text-align: center !important;
+    }
+
+    #socialSection .social-synergy-row-meta > div {
+      padding: 12px !important;
+      min-width: 0 !important;
+    }
+
+    #socialSection .social-synergy-row-meta dt {
+      color: #64748b !important;
+      font-size: 11px !important;
+      line-height: 1.4 !important;
+      margin-bottom: 8px !important;
+    }
+
+    #socialSection .social-synergy-row-meta dd {
+      color: #334155 !important;
+      font-size: 18px !important;
+      font-weight: 600 !important;
+      font-variant-numeric: tabular-nums !important;
+      margin: 0 !important;
     }
 
     #socialSection .social-synergy-stats-card .social-synergy-row-meta strong {
@@ -9668,6 +9939,17 @@
       font-size: 12px !important;
       min-width: 88px !important;
       text-align: center !important;
+    }
+
+    @media (max-width: 600px) {
+      #socialSection .social-synergy-pool {
+        grid-template-columns: minmax(0, 1fr) !important;
+      }
+
+      #socialSection #socialSynergySingleCompare .social-synergy-comparison .social-synergy-row-head {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+      }
     }
 
     #overviewSection .overview-synergy-summary-card {
@@ -10129,6 +10411,28 @@
       #socialSection .social-synergy-single-layout {
         grid-template-columns: minmax(0, 1fr) !important;
         min-height: 0 !important;
+        gap: 22px !important;
+        padding: 18px 16px !important;
+      }
+
+      #socialSection .social-synergy-single-left {
+        border-right: 0 !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        padding: 0 0 18px !important;
+      }
+
+      #socialSection .social-synergy-single-picker-list {
+        height: 180px !important;
+        min-height: 180px !important;
+        max-height: 180px !important;
+      }
+
+      #socialSection .social-synergy-stats-card .social-synergy-row-meta {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+
+      #socialSection .social-synergy-extra-grid {
+        padding: 18px 16px !important;
       }
 
       #knowledgeGenreView .tag-familiarity-body {
@@ -10889,12 +11193,51 @@
             <button class="relearn-onlist-filter-btn" type="button" data-relearn-onlist-filter="onlist" aria-pressed="false">Onlist</button>
             <button class="relearn-onlist-filter-btn" type="button" data-relearn-onlist-filter="offlist" aria-pressed="false">Offlist</button>
           </div>
-          <div id="relearnDisplayToggle" class="search-songs-display-toggle" role="group" aria-label="Relearn tracker display">
-            <button id="relearnDisplayClassicBtn" class="search-songs-display-btn active" type="button" aria-pressed="true">Play</button>
-            <button id="relearnDisplayLinksBtn" class="search-songs-display-btn" type="button" aria-pressed="false">Links</button>
+          <div class="relearn-download-toolbar">
+            <div id="relearnDisplayToggle" class="search-songs-display-toggle" role="group" aria-label="Relearn tracker display">
+              <button id="relearnDisplayClassicBtn" class="search-songs-display-btn active" type="button" aria-pressed="true">Play</button>
+              <button id="relearnDisplayLinksBtn" class="search-songs-display-btn" type="button" aria-pressed="false">Links</button>
+            </div>
+            <button id="relearnDownloadOpenBtn" type="button" aria-label="Download Relearn Tracker songs" title="Download songs" aria-haspopup="dialog" aria-controls="relearnDownloadDialog">
+              <img src="assets/icons/download.svg" alt="" aria-hidden="true">
+            </button>
           </div>
         </div>
       </div>
+      <dialog id="relearnDownloadDialog" aria-labelledby="relearnDownloadTitle">
+        <form id="relearnDownloadForm">
+          <h2 id="relearnDownloadTitle">Download Relearn Songs</h2>
+          <div class="relearn-download-fields">
+            <label>Tour type
+              <select id="relearnDownloadMode">
+                <option value="watched">Watched</option>
+                <option value="usual">Usual</option>
+                <option value="all">All</option>
+              </select>
+            </label>
+            <label>List
+              <select id="relearnDownloadList">
+                <option value="all">All</option>
+                <option value="onlist">Onlist</option>
+                <option value="offlist">Offlist</option>
+              </select>
+            </label>
+            <label class="relearn-download-limit">Latest songs to download
+              <input id="relearnDownloadLimit" type="number" min="1" step="1" required aria-describedby="relearnDownloadCount">
+            </label>
+          </div>
+          <p id="relearnDownloadCount" aria-live="polite"></p>
+          <div id="relearnDownloadStatus" role="status" aria-live="polite"></div>
+          <ul id="relearnDownloadFailures"></ul>
+          <div class="relearn-download-actions">
+            <button id="relearnDownloadCloseBtn" type="button">Close</button>
+            <div class="relearn-download-export-actions">
+              <button id="relearnExportCslBtn" type="button">Export for CSL</button>
+              <button id="relearnDownloadSubmitBtn" type="submit">Download ZIP</button>
+            </div>
+          </div>
+        </form>
+      </dialog>
       <div class="relearn-table-wrap">
         <table id="relearnSongsTable" class="relearn-table">
           <thead>
@@ -11288,27 +11631,32 @@
     <h1 class="page-title">Synergy</h1>
     <div id="socialSynergyView" class="chart-card" style="display:none;">
       <div style="display:none;">
-        <span id="socialSynergyMeta">Found 0 players</span>
         <div id="socialSynergyList" class="social-synergy-list"></div>
       </div>
       <div class="social-synergy-single-layout">
         <div class="social-synergy-single-left">
           <div class="social-synergy-single-title">
-            Single Comparison
-            <span class="info-hover-wrap">
-              <button class="info-hover-btn" type="button" aria-label="About Synergy Comparison">i</button>
-              <span class="info-hover-tooltip">Shows overlap between you and the target player. Overlap is measured by what you both got correct(thus it is NOT rig overlap). The left displays unique songs you got correct, while the right displays unique songs the target player got correct.</span>
-            </span>
+            <span>Compare with</span>
+            <span id="socialSynergyMeta">Found 0 players</span>
           </div>
-          <input id="socialSynergyPlayerSearchInput" class="social-rivals-search-input" type="text" placeholder="Search player...">
-          <div id="socialSynergyPlayerSearchList" class="social-synergy-single-picker-list"></div>
+          <input id="socialSynergyPlayerSearchInput" class="social-rivals-search-input" type="search" aria-label="Search comparison players" placeholder="Search player...">
+          <div id="socialSynergyPlayerSearchList" class="social-synergy-single-picker-list" role="group" aria-label="Comparison players"></div>
           <div class="social-synergy-select-row">
             <div id="socialSynergySelectedPlayer" class="social-synergy-selected-player">Selected player</div>
             <button id="socialSynergySelectBtn" class="social-team-select-btn" type="button">Select</button>
           </div>
         </div>
         <div class="social-synergy-single-right">
-          <div id="socialSynergySingleCompare" class="social-synergy-list"></div>
+          <div class="social-synergy-pair-header">
+            <div class="social-synergy-pair-name">
+              <h2 id="socialSynergyPairTitle" class="chart-title">Player comparison</h2>
+              <span class="info-hover-wrap">
+                <button class="info-hover-btn" type="button" aria-label="About Synergy Comparison">i</button>
+                <span class="info-hover-tooltip">Shows overlap between you and the target player. Overlap is measured by what you both got correct(thus it is NOT rig overlap). The left displays unique songs you got correct, while the right displays unique songs the target player got correct.</span>
+              </span>
+            </div>
+          </div>
+          <div id="socialSynergySingleCompare" class="social-synergy-list" aria-live="polite"></div>
         </div>
       </div>
     </div>
@@ -11323,7 +11671,7 @@
             </span>
           </div>
           <div class="chart-meta">
-            <div class="social-synergy-rig-mode-toggle">
+            <div class="social-synergy-rig-mode-toggle" role="group" aria-label="Their rig song selection">
               <button id="socialTargetRigUniqueBtn" class="social-synergy-rig-mode-btn active" type="button">Unique rig</button>
               <button id="socialTargetRigSharedBtn" class="social-synergy-rig-mode-btn" type="button">Include shared rig</button>
             </div>
@@ -11343,7 +11691,7 @@
             </span>
           </div>
           <div class="chart-meta">
-            <div class="social-synergy-rig-mode-toggle">
+            <div class="social-synergy-rig-mode-toggle" role="group" aria-label="Your rig song selection">
               <button id="socialOtherRigUniqueBtn" class="social-synergy-rig-mode-btn active" type="button">Unique rig</button>
               <button id="socialOtherRigSharedBtn" class="social-synergy-rig-mode-btn" type="button">Include shared rig</button>
             </div>
@@ -12241,6 +12589,11 @@ const artistFamiliarityRightModeCompareBtn = document.getElementById("artistFami
 const relearnDisplayToggle = document.getElementById("relearnDisplayToggle");
 const relearnDisplayClassicBtn = document.getElementById("relearnDisplayClassicBtn");
 const relearnDisplayLinksBtn = document.getElementById("relearnDisplayLinksBtn");
+const relearnDownloadDialog = document.getElementById("relearnDownloadDialog");
+const relearnDownloadMode = document.getElementById("relearnDownloadMode");
+const relearnDownloadList = document.getElementById("relearnDownloadList");
+const relearnDownloadLimit = document.getElementById("relearnDownloadLimit");
+let relearnDownloadState = null;
 const searchSongsSuggestions = document.getElementById("searchSongsSuggestions");
 const searchSongsInlineSuggestion = document.getElementById("searchSongsInlineSuggestion");
 const searchSongsDisplayToggle = document.getElementById("searchSongsDisplayToggle");
@@ -14483,6 +14836,20 @@ if (relearnDisplayLinksBtn) {
     setRelearnDisplayMode("links");
   });
 }
+document.getElementById("relearnDownloadOpenBtn").addEventListener("click", openRelearnDownloadDialog);
+document.getElementById("relearnDownloadCloseBtn").addEventListener("click", closeRelearnDownloadDialog);
+relearnDownloadDialog.addEventListener("click", handleRelearnDownloadOutsideClick);
+relearnDownloadDialog.addEventListener("cancel", () => {
+  if (relearnDownloadState && relearnDownloadState.controller) relearnDownloadState.controller.abort();
+});
+relearnDownloadMode.addEventListener("change", refreshRelearnDownloadSelection);
+relearnDownloadList.addEventListener("change", refreshRelearnDownloadSelection);
+relearnDownloadLimit.addEventListener("input", () => renderRelearnDownloadControls());
+document.getElementById("relearnExportCslBtn").addEventListener("click", exportRelearnSongsForCsl);
+document.getElementById("relearnDownloadForm").addEventListener("submit", event => {
+  event.preventDefault();
+  downloadRelearnSongs();
+});
 if (wrongGuessPrevPageBtn) {
   wrongGuessPrevPageBtn.addEventListener("click", () => {
     wrongGuessPageIndex = Math.max(0, wrongGuessPageIndex - 1);
@@ -16694,10 +17061,18 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
+function getArtistExactSearchEntry(query) {
+  const normalizedQuery = normalizeArtistSearchValue(query);
+  if (!normalizedQuery) return null;
+  return artistFamiliarityEntries.find(entry =>
+    normalizeArtistSearchValue(entry.name) === normalizedQuery
+  ) || null;
+}
+
 function getArtistPrefixSuggestion(rawTypedText) {
   const normalizedTyped = normalizeArtistSearchValue(rawTypedText);
   if (!normalizedTyped) return null;
-  return artistFamiliarityEntries.find(entry =>
+  return getArtistExactSearchEntry(rawTypedText) || artistFamiliarityEntries.find(entry =>
     String(entry.name || "").toLowerCase().startsWith(normalizedTyped)
   ) || null;
 }
@@ -16792,43 +17167,22 @@ function submitArtistSearch(typedValue) {
     hideArtistSuggestions();
     return;
   }
-  const prefixSuggestion = getArtistPrefixSuggestion(typed);
-  if (prefixSuggestion && prefixSuggestion.name) {
-    applySelectedArtist(prefixSuggestion.name);
-    return;
-  }
-  const suggestions = getArtistSuggestions();
-  if (suggestions.length) {
-    applySelectedArtist(suggestions[0].name);
-  } else if (artistFamiliarityEntries.length) {
-    applySelectedArtist(artistFamiliarityEntries[0].name);
-  }
+  const entry = getArtistExactSearchEntry(typed);
+  if (entry) applySelectedArtist(entry.name);
 }
 
-function submitArtistCompareSearch(compareInput, compareInlineSuggestion) {
+function submitArtistCompareSearch(compareInput) {
   if (!compareInput) return;
   const typed = String(compareInput.value || "").trim();
   if (!typed) {
     hideArtistCompareSuggestions();
     return;
   }
-  const prefixSuggestion = getArtistPrefixSuggestion(typed);
-  if (prefixSuggestion && prefixSuggestion.name) {
-    artistFamiliarityCompareSearchQuery = prefixSuggestion.name;
-    applySelectedCompareArtist(prefixSuggestion.name);
-    return;
+  const entry = getArtistExactSearchEntry(typed);
+  if (entry) {
+    artistFamiliarityCompareSearchQuery = entry.name;
+    applySelectedCompareArtist(entry.name);
   }
-  const suggestions = getArtistSuggestionsForQuery(typed);
-  if (suggestions.length) {
-    const exactMatch = suggestions.find(
-      entry => String(entry.name || "").toLowerCase() === typed.toLowerCase()
-    );
-    const chosenName = (exactMatch || suggestions[0]).name;
-    artistFamiliarityCompareSearchQuery = chosenName;
-    applySelectedCompareArtist(chosenName);
-    return;
-  }
-  if (compareInlineSuggestion) compareInlineSuggestion.innerHTML = "";
 }
 
 function hideArtistCompareSuggestions() {
@@ -17980,7 +18334,7 @@ function renderArtistCompareRadarPanel(rightPanelHost, primaryEntry) {
     }
     if (event.key === "Enter") {
       event.preventDefault();
-      submitArtistCompareSearch(compareInput, compareInlineSuggestion);
+      submitArtistCompareSearch(compareInput);
       return;
     }
     if (event.key === "Escape") {
@@ -17989,7 +18343,7 @@ function renderArtistCompareRadarPanel(rightPanelHost, primaryEntry) {
     }
   });
   compareSearchBtn.addEventListener("click", () => {
-    submitArtistCompareSearch(compareInput, compareInlineSuggestion);
+    submitArtistCompareSearch(compareInput);
   });
 }
 
@@ -19938,12 +20292,9 @@ function addPlayerDatabasePlayersFromText(text) {
   return true;
 }
 
-function addPlayerDatabasePlayer(key, options = {}) {
-  const allowAutocompleteFallback = options.allowAutocompleteFallback !== false;
+function addPlayerDatabasePlayer(key) {
   const entry = getPlayerDatabaseEntryByKey(key)
-    || (allowAutocompleteFallback ? getPlayerDatabaseEntryByKey(playerDatabaseInlineSuggestionKey) : null)
     || getPlayerDatabaseExactSearchEntry(playerDatabaseSearchQuery)
-    || (allowAutocompleteFallback ? getPlayerDatabaseSuggestions(playerDatabaseSearchQuery)[0] : null)
     || null;
   if (!entry || playerDatabaseSelectedPlayers.some(player => player.key === entry.key)) return;
   playerDatabaseSelectedPlayers = [
@@ -20820,7 +21171,7 @@ function bindPlayerDatabaseControlsOnce() {
         event.preventDefault();
         playerDatabaseSearchQuery = String(input.value || "");
         if (addPlayerDatabasePlayersFromText(playerDatabaseSearchQuery)) return;
-        addPlayerDatabasePlayer("", { allowAutocompleteFallback: false });
+        addPlayerDatabasePlayer();
       }
       if (event.key === "Escape") {
         hidePlayerDatabaseSuggestions();
@@ -20836,7 +21187,7 @@ function bindPlayerDatabaseControlsOnce() {
   if (addBtn) {
     addBtn.addEventListener("click", () => {
       if (input && addPlayerDatabasePlayersFromText(input.value)) return;
-      addPlayerDatabasePlayer(playerDatabaseSelectedKey);
+      addPlayerDatabasePlayer();
     });
   }
 
@@ -22163,6 +22514,7 @@ function syncSocialSynergyRigModeButtons() {
     const button = document.getElementById(id);
     if (!button) return;
     button.classList.toggle("active", Boolean(isActive));
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
   });
 }
 
@@ -22187,6 +22539,7 @@ async function renderSocialSynergyRigTables(modeOverride = null) {
   const socialSectionEl = document.getElementById("socialSection");
   const activeSocialSubsection = socialSectionEl ? String(socialSectionEl.getAttribute("data-social-subsection") || "") : "";
   if (activeSocialSubsection !== "Synergy") {
+    extraGrid.hidden = true;
     extraGrid.style.display = "none";
     targetCard.style.display = "none";
     otherCard.style.display = "none";
@@ -22196,12 +22549,14 @@ async function renderSocialSynergyRigTables(modeOverride = null) {
 
   const activeMode = modeOverride === "usual" ? "usual" : (modeOverride === "watched" ? "watched" : getActiveDataSourceMode());
   if (activeMode !== "watched") {
+    extraGrid.hidden = true;
     extraGrid.style.display = "none";
     targetCard.style.display = "none";
     otherCard.style.display = "none";
     return;
   }
 
+  extraGrid.hidden = false;
   extraGrid.style.display = "";
   targetCard.style.display = "";
   otherCard.style.display = "";
@@ -22344,7 +22699,7 @@ function buildMergedSocialSynergyRows(synergyPayload, modeOverride = null) {
   return rows;
 }
 
-function createSocialSynergyRowElement(row, targetLabel, rankText = "") {
+function createSocialSynergyRowElement(row, targetLabel, rankText = "", showBreakdown = false) {
   const leftExclusive = Math.max(0, Number(row && row.targetOnlyCount || 0));
   const rightExclusive = Math.max(0, Number(row && row.otherOnlyCount || 0));
   const overlapCount = Math.max(0, Number(row && row.overlapCount || 0));
@@ -22358,17 +22713,26 @@ function createSocialSynergyRowElement(row, targetLabel, rankText = "") {
 
   const container = document.createElement("div");
   container.className = "social-synergy-row";
+  if (showBreakdown) container.classList.add("social-synergy-comparison");
 
   const head = document.createElement("div");
   head.className = "social-synergy-row-head";
   const rigLabelHtml = ` × <span class="social-synergy-rival-label">${escapeHtml(row && row.rivalLabel || "Unknown")}</span>`;
-  head.innerHTML = `
+  head.innerHTML = showBreakdown ? `
+    <div><span class="social-synergy-count-label">Only you</span><strong class="social-synergy-count-value social-synergy-count-target">${leftExclusive}</strong></div>
+    <div><span class="social-synergy-count-label social-synergy-count-label-overlap">Both correct</span><strong class="social-synergy-count-value social-synergy-count-overlap">${overlapCount}</strong></div>
+    <div><span class="social-synergy-count-label">Only them</span><strong class="social-synergy-count-value social-synergy-count-other">${rightExclusive}</strong></div>
+  ` : `
     <div class="name">${rankText ? `${rankText} ` : ""}<span class="social-synergy-target-label">${escapeHtml(targetLabel)}</span>${rigLabelHtml}</div>
     <div class="stats">${leftExclusive} | <span class="social-synergy-overlap-pill">${overlapCount}</span> | ${rightExclusive}</div>
   `;
 
   const bar = document.createElement("div");
   bar.className = "social-synergy-bar";
+  if (showBreakdown) {
+    bar.setAttribute("role", "img");
+    bar.setAttribute("aria-label", `Only you: ${leftExclusive}; both correct: ${overlapCount}; only them: ${rightExclusive}`);
+  }
 
   const left = document.createElement("div");
   left.className = "social-synergy-left-segment";
@@ -22437,12 +22801,37 @@ function renderOverviewSynergyRows(rows, targetLabel) {
   });
 }
 
+function createSocialSynergyComparisonPool(title, tooltip, row, targetLabel) {
+  const section = document.createElement("section");
+  section.className = "social-synergy-pool";
+  const heading = document.createElement("h3");
+  heading.className = "social-synergy-pool-title";
+  heading.innerHTML = `${escapeHtml(title)}
+    <span class="info-hover-wrap open-left social-synergy-hover-layer">
+      <button class="info-hover-btn" type="button" aria-label="About ${escapeHtml(title.toLowerCase())}">i</button>
+      <span class="info-hover-tooltip">${escapeHtml(tooltip)}</span>
+    </span>`;
+  section.appendChild(heading);
+  if (row) {
+    section.appendChild(createSocialSynergyRowElement(row, targetLabel, "", true));
+  } else {
+    const empty = document.createElement("div");
+    empty.className = "social-synergy-empty";
+    empty.textContent = "No shared-seen comparison data available.";
+    section.appendChild(empty);
+  }
+  return section;
+}
+
 function renderSocialSynergySinglePicker(rows, targetLabel) {
   const searchInput = document.getElementById("socialSynergyPlayerSearchInput");
   const list = document.getElementById("socialSynergyPlayerSearchList");
   const compareWrap = document.getElementById("socialSynergySingleCompare");
   const selectedPlayerText = document.getElementById("socialSynergySelectedPlayer");
+  const pairTitle = document.getElementById("socialSynergyPairTitle");
+  const playerMeta = document.getElementById("socialSynergyMeta");
   if (!list || !compareWrap) return;
+  if (pairTitle) pairTitle.innerText = "Player comparison";
   compareWrap.classList.toggle("usual-mode", getActiveDataSourceMode() === "usual");
   if (searchInput && String(searchInput.value || "").toLowerCase() !== socialSynergySingleSearchQuery) {
     searchInput.value = socialSynergySingleSearchQuery;
@@ -22450,6 +22839,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
 
   const sourceRows = Array.isArray(rows) ? rows : [];
   if (!sourceRows.length) {
+    if (playerMeta) playerMeta.innerText = "Found 0 players";
     list.innerHTML = '<div class="social-synergy-empty">No players available.</div>';
     compareWrap.innerHTML = '<div class="social-synergy-empty">No comparison selected.</div>';
     if (selectedPlayerText) selectedPlayerText.innerText = "Selected player";
@@ -22467,6 +22857,10 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
       && row.rivalAltNames.some(name => String(name || "").toLowerCase().includes(query));
     return rivalLabel.includes(query) || rivalKey.includes(query) || altNameMatch;
   });
+  if (playerMeta) playerMeta.innerText = `Found ${filteredRows.length} players`;
+  const previousScrollTop = list.dataset.query === query ? list.scrollTop : 0;
+  const focusedKey = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.synergyKey : "";
+  list.dataset.query = query;
 
   let selectedRow = sourceRows.find(
     row => getSocialSynergyComparableKey(row) === socialSynergySingleSelectedRivalKey
@@ -22501,6 +22895,9 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "social-synergy-single-picker-item";
+      btn.dataset.synergyKey = rowKey;
+      btn.setAttribute("aria-pressed", rowKey === socialSynergySinglePendingRivalKey ? "true" : "false");
+      btn.title = `${row.rivalLabel || row.rivalKey || "Unknown"} | Overlap ${Number(row.overlapCount || 0)}`;
       if (rowKey === socialSynergySinglePendingRivalKey) {
         btn.classList.add("active");
       }
@@ -22518,6 +22915,9 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
     if (!pickerItems.length) {
       list.innerHTML = '<div class="social-synergy-empty">No players match your search.</div>';
     }
+    list.scrollTop = previousScrollTop;
+    const focusedItem = pickerItems.find(item => item.dataset.synergyKey === focusedKey);
+    if (focusedItem) focusedItem.focus({ preventScroll: true });
   }
 
   compareWrap.innerHTML = "";
@@ -22525,6 +22925,7 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
     compareWrap.innerHTML = '<div class="social-synergy-empty">No comparison selected. Click a player then press Select.</div>';
     return;
   }
+  if (pairTitle) pairTitle.innerText = `${targetLabel} × ${selectedRow.rivalLabel || selectedRow.rivalKey || "Unknown"}`;
 
   const selectedRivalId = String(selectedRow && selectedRow.rivalKey || "").trim();
   const selectedRivalLabel = String(selectedRow && selectedRow.rivalLabel || "").trim().toLowerCase();
@@ -22546,68 +22947,31 @@ function renderSocialSynergySinglePicker(rows, targetLabel) {
   if (shouldShowWatchedRigStats && (selectedRigStats || (cachedSocialSynergyRigStats && typeof cachedSocialSynergyRigStats === "object"))) {
     const rigStatsCard = document.createElement("div");
     rigStatsCard.className = "social-synergy-row social-synergy-stats-card";
-    rigStatsCard.style.setProperty("padding", "10px 12px", "important");
-    rigStatsCard.style.setProperty("margin-top", "26px", "important");
-    rigStatsCard.style.setProperty("margin-bottom", "10px", "important");
     const targetSelfKnownPct = Number(cachedSocialSynergyRigStats && cachedSocialSynergyRigStats.targetSelfKnownPct || 0);
     const otherKnownPct = Number(selectedRigStats && selectedRigStats.otherKnownPct || 0);
     const otherSelfKnownPct = Number(selectedRigStats && selectedRigStats.otherSelfKnownPct || 0);
     const targetKnownPct = Number(selectedRigStats && selectedRigStats.targetKnownPct || 0);
     rigStatsCard.innerHTML = `
-      <div class="social-synergy-row-meta" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 12px;font-size:12px;line-height:1.35;">
-        <div><strong>Your Onlist:</strong> ${formatRigPct(targetSelfKnownPct)}</div>
-        <div><strong>Their Onlist:</strong> ${formatRigPct(otherSelfKnownPct)}</div>
-        <div><strong>Them on your list:</strong> ${formatRigPct(otherKnownPct)}</div>
-        <div><strong>You on their list:</strong> ${formatRigPct(targetKnownPct)}</div>
-      </div>
+      <dl class="social-synergy-row-meta">
+        <div><dt>Your onlist</dt><dd>${formatRigPct(targetSelfKnownPct)}</dd></div>
+        <div><dt>Their onlist</dt><dd>${formatRigPct(otherSelfKnownPct)}</dd></div>
+        <div><dt>Them on your list</dt><dd>${formatRigPct(otherKnownPct)}</dd></div>
+        <div><dt>You on their list</dt><dd>${formatRigPct(targetKnownPct)}</dd></div>
+      </dl>
     `;
     compareWrap.appendChild(rigStatsCard);
   }
 
-  const allSeenTitle = document.createElement("div");
-  allSeenTitle.className = "chart-meta";
-  allSeenTitle.style.setProperty("margin", "12px 0 8px 0", "important");
-  allSeenTitle.style.setProperty("font-weight", "400", "important");
-  allSeenTitle.style.setProperty("font-size", "12px", "important");
-  allSeenTitle.style.setProperty("text-align", "center", "important");
-  allSeenTitle.style.setProperty("white-space", "nowrap", "important");
-  allSeenTitle.innerHTML = `
-    <span style="display:inline !important; white-space:nowrap !important;">
-      All seen songs
-      <span class="info-hover-wrap open-left social-synergy-hover-layer" style="display:inline-flex !important; vertical-align:middle !important; margin-left:6px !important;">
-        <button class="info-hover-btn" type="button" aria-label="About all seen songs" style="display:inline-flex !important;">i</button>
-        <span class="info-hover-tooltip">All seen songs: data pool uses all songs either you or the target player has seen. This means, if you or the target player has played more tours, it is likely that numbers may be inflated just because they have seen more songs.</span>
-      </span>
-    </span>
-  `;
-  compareWrap.appendChild(allSeenTitle);
-  compareWrap.appendChild(createSocialSynergyRowElement(selectedRow.classic || selectedRow, targetLabel));
-
-  const sharedSeenTitle = document.createElement("div");
-  sharedSeenTitle.className = "chart-meta";
-  sharedSeenTitle.style.setProperty("margin", "14px 0 8px 0", "important");
-  sharedSeenTitle.style.setProperty("font-weight", "400", "important");
-  sharedSeenTitle.style.setProperty("font-size", "12px", "important");
-  sharedSeenTitle.style.setProperty("text-align", "center", "important");
-  sharedSeenTitle.style.setProperty("white-space", "nowrap", "important");
-  sharedSeenTitle.innerHTML = `
-    <span style="display:inline !important; white-space:nowrap !important;">
-      Shared seen songs
-      <span class="info-hover-wrap open-left social-synergy-hover-layer" style="display:inline-flex !important; vertical-align:middle !important; margin-left:6px !important;">
-        <button class="info-hover-btn" type="button" aria-label="About shared seen songs" style="display:inline-flex !important;">i</button>
-        <span class="info-hover-tooltip">Shared seen songs: data pool uses only songs that both of you have seen. This more accurately measures skill on equal terms.</span>
-      </span>
-    </span>
-  `;
-  compareWrap.appendChild(sharedSeenTitle);
-  if (selectedRow.shared) {
-    compareWrap.appendChild(createSocialSynergyRowElement(selectedRow.shared, targetLabel));
-  } else {
-    const empty = document.createElement("div");
-    empty.className = "social-synergy-empty";
-    empty.textContent = "No shared-seen comparison data available.";
-    compareWrap.appendChild(empty);
-  }
+  const pools = document.createElement("div");
+  pools.className = "social-synergy-pools";
+  pools.appendChild(createSocialSynergyComparisonPool("All seen songs",
+    "All seen songs: data pool uses all songs either you or the target player has seen. This means, if you or the target player has played more tours, it is likely that numbers may be inflated just because they have seen more songs.",
+    selectedRow.classic || selectedRow, targetLabel));
+  pools.appendChild(createSocialSynergyComparisonPool("Shared seen songs",
+    "Shared seen songs: data pool uses only songs that both of you have seen. This more accurately measures skill on equal terms.",
+    selectedRow.shared, targetLabel));
+  compareWrap.appendChild(pools);
+  bindInfoHoverTooltipPlacement(compareWrap);
 }
 
 function renderSocialSynergyTableRows(allRows) {
@@ -24822,10 +25186,10 @@ function renderKnowledgeTagRadar() {
   const tagEntries = Object.entries(cachedTagData)
     .filter(([, value]) => value && typeof value.guessRate === "number")
     .sort((a, b) => {
-      const guessRateDiff = Number(b[1].guessRate || 0) - Number(a[1].guessRate || 0);
-      if (guessRateDiff !== 0) return guessRateDiff;
       const totalDiff = Number(b[1].total || 0) - Number(a[1].total || 0);
       if (totalDiff !== 0) return totalDiff;
+      const guessRateDiff = Number(b[1].guessRate || 0) - Number(a[1].guessRate || 0);
+      if (guessRateDiff !== 0) return guessRateDiff;
       return String(a[0]).localeCompare(String(b[0]));
     });
   const tagEntriesAlphabetical = [...tagEntries].sort((a, b) => a[0].localeCompare(b[0]));
@@ -28748,8 +29112,8 @@ function triggerPlaylistFileDownload(href, filename) {
   link.remove();
 }
 
-async function fetchPlaylistAudioFileForZip(url, filename) {
-  const response = await fetch(url, { cache: "no-store" });
+async function fetchPlaylistAudioFileForZip(url, filename, signal) {
+  const response = await fetch(url, { cache: "no-store", signal });
   if (!response.ok) throw new Error(`Request failed (${response.status})`);
   const bytes = new Uint8Array(await response.arrayBuffer());
   if (!bytes.length) throw new Error("Empty MP3 response");
@@ -34591,15 +34955,292 @@ function handleRelearnPlaybackSpaceKey(event) {
 
 document.addEventListener("keydown", handleRelearnPlaybackSpaceKey, true);
 
-function getFilteredRelearnSongs() {
-  const songs = Array.isArray(cachedRelearnSongs) ? cachedRelearnSongs : [];
-  if (relearnOnlistFilterMode === "onlist") {
-    return songs.filter(song => song && song.isOnlist === true);
-  }
-  if (relearnOnlistFilterMode === "offlist") {
-    return songs.filter(song => song && song.isOnlist === false);
+function getRelearnDownloadTimestamp(song) {
+  // Exports retain an exact filename timestamp even when chart dates are day-only.
+  const match = String(song.lastAttemptFile || "").match(/(\d{4}-\d{2}-\d{2})[T_ ](\d{2})[-:](\d{2})[-:](\d{2})/);
+  const dates = Array.isArray(song.patternDates) ? song.patternDates : [];
+  const value = match
+    ? `${match[1]}T${match[2]}:${match[3]}:${match[4]}Z`
+    : (song.lastAttemptDate || dates[dates.length - 1]);
+  const timestamp = Date.parse(value || "");
+  return Number.isFinite(timestamp) ? timestamp : 0;
+}
+
+function filterRelearnSongsByList(rows, listMode = "all") {
+  const songs = Array.isArray(rows) ? rows : [];
+  if (listMode === "onlist") return songs.filter(song => song && song.isOnlist === true);
+  if (listMode === "offlist") return songs.filter(song => song && song.isOnlist === false);
+  return songs;
+}
+
+function selectRelearnDownloadSongs(rows, listMode = "all", limit = null) {
+  const songs = filterRelearnSongsByList(rows, listMode);
+  return limit == null ? songs : songs.slice(0, Math.max(0, Math.floor(Number(limit) || 0)));
+}
+
+function mergeRelearnDownloadModeRows(modeRows, listMode = "all") {
+  const sources = modeRows.map(rows => filterRelearnSongsByList(rows, listMode));
+  const positions = sources.map(() => 0);
+  const songs = [];
+  const seen = new Set();
+  // Interleave modes without re-sorting either tracker; timestamps only choose between their next rows.
+  while (true) {
+    let nextSource = -1;
+    sources.forEach((rows, index) => {
+      if (positions[index] >= rows.length) return;
+      if (nextSource < 0 || getRelearnDownloadTimestamp(rows[positions[index]]) > getRelearnDownloadTimestamp(sources[nextSource][positions[nextSource]])) {
+        nextSource = index;
+      }
+    });
+    if (nextSource < 0) break;
+    const song = sources[nextSource][positions[nextSource]++];
+    const key = getPlaylistSongStableKey(song);
+    if (key && seen.has(key)) continue;
+    if (key) seen.add(key);
+    songs.push(song);
   }
   return songs;
+}
+
+async function loadRelearnDownloadModeRows(playerId, mode) {
+  // Do not fall back to a legacy path: that could silently substitute another mode.
+  const read = async relativePath => {
+    const response = await fetch(dataUrl(buildPlayerModePath(playerId, relativePath, mode)));
+    if (!response.ok) throw new Error(`Could not load ${mode} songs (${response.status}).`);
+    return response.json();
+  };
+  const relearn = await read("relearn_tracker/relearn_songs.json");
+  if (!Array.isArray(relearn.relearnSongs)) throw new Error(`Invalid ${mode} Relearn Tracker data.`);
+  if (!relearn.relearnSongs.length) return [];
+  const search = await read("search_songs/search_songs.json");
+  if (!Array.isArray(search.searchSongs)) throw new Error(`Invalid ${mode} song history.`);
+  const historyRows = resolveSearchSongDatePoolRows(search.searchSongs, search.datePool);
+  const resolvedRows = resolveRelearnRowsWithSearchSongs(relearn.relearnSongs, historyRows);
+  return hydrateSongRowsWithSongKey(resolvedRows);
+}
+
+function setRelearnDownloadStatus(message = "", kind = "") {
+  const status = document.getElementById("relearnDownloadStatus");
+  status.textContent = message;
+  status.dataset.kind = kind;
+}
+
+function renderRelearnDownloadControls(resetLimit = false) {
+  const state = relearnDownloadState;
+  if (!state) return;
+  const available = state.songs.length;
+  if (resetLimit) relearnDownloadLimit.value = String(available);
+  relearnDownloadLimit.max = String(available);
+  const limit = Number(relearnDownloadLimit.value);
+  const validLimit = Number.isInteger(limit) && limit >= 1 && limit <= available;
+  const disabled = state.loading || state.busy;
+  relearnDownloadMode.disabled = state.busy;
+  relearnDownloadList.disabled = state.busy;
+  relearnDownloadLimit.disabled = disabled || !available;
+  document.getElementById("relearnDownloadCount").textContent = state.loading
+    ? "Loading songs..."
+    : `${available} songs available${validLimit ? ` | ${limit} selected` : ""}`;
+  const submit = document.getElementById("relearnDownloadSubmitBtn");
+  submit.disabled = disabled || !validLimit;
+  document.getElementById("relearnExportCslBtn").disabled = disabled || !validLimit;
+  submit.textContent = state.busy ? "Downloading..." : "Download ZIP";
+  document.getElementById("relearnDownloadCloseBtn").textContent = state.busy ? "Cancel download" : "Close";
+}
+
+async function refreshRelearnDownloadSelection() {
+  const state = relearnDownloadState;
+  if (!state || state.busy) return;
+  const requestId = ++state.requestId;
+  const mode = relearnDownloadMode.value;
+  const listMode = relearnDownloadList.value;
+  state.loading = true;
+  state.songs = [];
+  setRelearnDownloadStatus();
+  document.getElementById("relearnDownloadFailures").replaceChildren();
+  renderRelearnDownloadControls(true);
+  try {
+    const modeRows = [];
+    for (const sourceMode of mode === "all" ? ["watched", "usual"] : [mode]) {
+      if (!state.byMode.has(sourceMode)) {
+        const pending = loadRelearnDownloadModeRows(state.playerId, sourceMode);
+        state.byMode.set(sourceMode, pending);
+        // Allow a failed mode to be retried without reopening the dialog.
+        pending.catch(() => {
+          if (state.byMode.get(sourceMode) === pending) state.byMode.delete(sourceMode);
+        });
+      }
+      modeRows.push(await state.byMode.get(sourceMode));
+    }
+    if (state !== relearnDownloadState || requestId !== state.requestId) return;
+    state.songs = mode === "all"
+      ? mergeRelearnDownloadModeRows(modeRows, listMode)
+      : selectRelearnDownloadSongs(modeRows[0], listMode);
+    if (!state.songs.length) setRelearnDownloadStatus("No songs match these filters.");
+  } catch (error) {
+    if (state !== relearnDownloadState || requestId !== state.requestId) return;
+    setRelearnDownloadStatus(error.message || "Could not load songs. Please try again.", "error");
+  } finally {
+    if (state === relearnDownloadState && requestId === state.requestId) {
+      state.loading = false;
+      renderRelearnDownloadControls(true);
+    }
+  }
+}
+
+function closeRelearnDownloadDialog() {
+  if (relearnDownloadState && relearnDownloadState.controller) relearnDownloadState.controller.abort();
+  relearnDownloadDialog.close();
+}
+
+function handleRelearnDownloadOutsideClick(event) {
+  if (!relearnDownloadDialog.open || event.target !== relearnDownloadDialog) return;
+  const bounds = relearnDownloadDialog.getBoundingClientRect();
+  if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) {
+    closeRelearnDownloadDialog();
+  }
+}
+
+function openRelearnDownloadDialog() {
+  if (!relearnDownloadState || !relearnDownloadState.busy) {
+    relearnDownloadState = {
+      playerId: currentPlayerId,
+      playerName: currentDisplayName,
+      byMode: new Map(),
+      songs: [],
+      requestId: 0,
+      loading: false,
+      busy: false,
+      controller: null
+    };
+    relearnDownloadMode.value = getActiveDataSourceMode();
+    relearnDownloadList.value = relearnOnlistFilterMode;
+    refreshRelearnDownloadSelection();
+  }
+  if (!relearnDownloadDialog.open) relearnDownloadDialog.showModal();
+}
+
+function getSelectedRelearnDownloadSongs() {
+  const state = relearnDownloadState;
+  const limit = Number(relearnDownloadLimit.value);
+  if (!state || state.loading || state.busy || !Number.isInteger(limit) || limit < 1 || limit > state.songs.length) return [];
+  return state.songs.slice(0, limit);
+}
+
+function buildRelearnAmqPlusExport(rows, roomName, startTime = Date.now()) {
+  const songs = [];
+  const failures = [];
+  rows.forEach((song, index) => {
+    const rawId = song.annSongId;
+    const annSongId = typeof rawId === "number" || (typeof rawId === "string" && /^\d+$/.test(rawId.trim()))
+      ? Number(rawId) : NaN;
+    if (!Number.isSafeInteger(annSongId) || annSongId <= 0) {
+      failures.push({ label: getPlaylistDownloadSongLabel(song, index), reason: "Missing or invalid ANN song ID" });
+      return;
+    }
+    songs.push({ annSongId, startPoint: 0, sampleEnd: 100, guessTime: 30, extraGuessTime: 0 });
+  });
+  return { data: { roomName, startTime, songs }, failures };
+}
+
+function exportRelearnSongsForCsl() {
+  const selected = getSelectedRelearnDownloadSongs();
+  if (!selected.length) return;
+  const state = relearnDownloadState;
+  const failuresElement = document.getElementById("relearnDownloadFailures");
+  failuresElement.replaceChildren();
+  try {
+    const { data, failures } = buildRelearnAmqPlusExport(selected, `Relearn Tracker - ${state.playerName || state.playerId}`);
+    failures.forEach(failure => {
+      const item = document.createElement("li");
+      item.textContent = `${failure.label} - ${failure.reason}`;
+      failuresElement.appendChild(item);
+    });
+    if (!data.songs.length) throw new Error("No songs could be exported: the selected rows have no valid ANN song IDs.");
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    try {
+      const name = sanitizePlaylistDownloadFilename(`${state.playerName || state.playerId}-relearn-${relearnDownloadMode.value}-${relearnDownloadList.value}-${selected.length}-amqplus`);
+      triggerPlaylistFileDownload(url, `${name}.json`);
+    } finally {
+      window.setTimeout(() => URL.revokeObjectURL(url), 30000);
+    }
+    setRelearnDownloadStatus(
+      `Exported ${data.songs.length}/${selected.length} songs for AMQ+.${failures.length ? ` ${failures.length} skipped; see below.` : ""}`,
+      failures.length ? "error" : "success"
+    );
+  } catch (error) {
+    setRelearnDownloadStatus(error.message || "Could not export songs.", "error");
+  }
+}
+
+async function downloadRelearnSongs() {
+  const songs = getSelectedRelearnDownloadSongs();
+  if (!songs.length) return;
+  const state = relearnDownloadState;
+  const mode = relearnDownloadMode.value;
+  const listMode = relearnDownloadList.value;
+  const controller = new AbortController();
+  const { signal } = controller;
+  state.controller = controller;
+  state.busy = true;
+  renderRelearnDownloadControls();
+  const failuresElement = document.getElementById("relearnDownloadFailures");
+  failuresElement.replaceChildren();
+  const failures = [];
+  const zipFiles = [];
+  const usedNames = new Set();
+  try {
+    for (let index = 0; index < songs.length; index += 1) {
+      signal.throwIfAborted();
+      setRelearnDownloadStatus(`Downloading ${index + 1}/${songs.length} songs...`);
+      const song = songs[index];
+      const label = getPlaylistDownloadSongLabel(song, index);
+      const audioLink = getPlaylistSongAudioLink(song);
+      if (!audioLink) {
+        failures.push({ label, reason: "No audio link found" });
+        continue;
+      }
+      try {
+        const number = String(index + 1).padStart(Math.max(3, String(songs.length).length), "0");
+        const filename = getUniquePlaylistZipFilename(`${number} - ${getPlaylistSongDownloadFilename(song, index)}`, usedNames);
+        zipFiles.push(await fetchPlaylistAudioFileForZip(audioLink, filename, signal));
+      } catch (error) {
+        if (signal.aborted) throw error;
+        failures.push({ label, reason: error.message || "Download failed" });
+      }
+      await waitForPlaylistDownload();
+    }
+    signal.throwIfAborted();
+    if (!zipFiles.length) throw new Error("No songs could be downloaded.");
+    setRelearnDownloadStatus(`Building ZIP (${zipFiles.length}/${songs.length} songs)...`);
+    const blob = createPlaylistZipBlob(zipFiles);
+    const url = URL.createObjectURL(blob);
+    try {
+      const name = sanitizePlaylistDownloadFilename(`${state.playerName || state.playerId}-relearn-${mode}-${listMode}-${songs.length}`);
+      triggerPlaylistFileDownload(url, `${name}.zip`);
+    } finally {
+      window.setTimeout(() => URL.revokeObjectURL(url), 30000);
+    }
+    setRelearnDownloadStatus(
+      `Downloaded ZIP with ${zipFiles.length}/${songs.length} songs.${failures.length ? ` ${failures.length} failed; see below.` : ""}`,
+      failures.length ? "error" : "success"
+    );
+  } catch (error) {
+    setRelearnDownloadStatus(signal.aborted ? "Download cancelled." : (error.message || "Could not create ZIP."), signal.aborted ? "" : "error");
+  } finally {
+    state.busy = false;
+    state.controller = null;
+    failures.forEach(failure => {
+      const item = document.createElement("li");
+      item.textContent = `${failure.label} - ${failure.reason}`;
+      failuresElement.appendChild(item);
+    });
+    renderRelearnDownloadControls();
+  }
+}
+
+function getFilteredRelearnSongs() {
+  return filterRelearnSongsByList(cachedRelearnSongs, relearnOnlistFilterMode);
 }
 
 function updateRelearnOnlistFilterButtons() {
