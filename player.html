@@ -6638,6 +6638,17 @@
       position: relative !important;
     }
 
+    #rigAnalysisEmpty {
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      border-left: 3px solid #94a3b8;
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 14px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
     #otherToolsRigAnalysisView {
       position: static !important;
       border: 0 !important;
@@ -11812,6 +11823,7 @@
       </div>
     </div>
     <div id="otherToolsRigAnalysisView" class="chart-card" style="display:none;">
+      <div id="rigAnalysisEmpty" role="status" aria-live="polite" style="display:none;"></div>
       <section class="rig-analysis-year-section">
         <div class="rig-analysis-year-title">Average Year</div>
         <div id="rigAnalysisYearValue" class="rig-analysis-year-value">—</div>
@@ -11863,7 +11875,6 @@
           <div id="rigAnalysisAvgRigPctSub" class="rig-analysis-section-sub">No data</div>
         </section>
       </div>
-      <div id="rigAnalysisEmpty" class="relearn-empty" style="display:none;"></div>
     </div>
     <div id="socialPlaceholderView" class="placeholder-card" style="display:none;"></div>
   </div>
@@ -12226,6 +12237,7 @@
   </div>
 </div>
 
+<script src="analytics.js?v=20261029"></script>
 <script>
 const isLocalDataContext =
   location.protocol === "file:"
@@ -12741,6 +12753,7 @@ let convertExamplesLoadPromise = null;
 const rigAnalysisCacheByMode = new Map();
 const rigAnalysisLoadPromisesByMode = new Map();
 const rigAnalysisAllowedModes = ["all", "10", "20", "50", "week", "month", "2months", "3months", "6months"];
+const RIG_ANALYSIS_MIN_ALL_SAMPLES = 300;
 let rigAnalysisPrefetchStarted = false;
 let otherToolsRowsByTimestamp = null;
 let otherToolsCalendarGames = [];
@@ -13337,12 +13350,12 @@ function loadInsightsDataForSubSection(subSection, displayName, options = {}) {
     loadPlaylistsData(options);
     loadMalImageCache()
       .then(() => {
-        if (activeSection === "insights" && activeSubSection === "Playlists") renderInsightsPlaylists();
+        if (activeSection === "insights" && activeSubSectionBySection.insights === "Playlists") renderInsightsPlaylists();
       })
       .catch(err => console.error("Failed loading playlist image cache", err));
     loadSongKeyById()
       .then(() => {
-        if (activeSection === "insights" && activeSubSection === "Playlists") renderInsightsPlaylists();
+        if (activeSection === "insights" && activeSubSectionBySection.insights === "Playlists") renderInsightsPlaylists();
       })
       .catch(err => console.error("Failed loading playlist song key data", err));
     return;
@@ -14370,6 +14383,7 @@ function setActiveSubSection(sectionKey, subSection) {
     subSection = fallbackItems[0] || "";
   }
   activeSubSectionBySection[sectionKey] = subSection;
+  if (sectionKey !== "overview") globalThis.AMQAnalytics?.view(sectionKey, subSection);
   setSectionTitle(sectionKey, subSection || sectionLabels[sectionKey]);
   updateSectionHeaderVisibility(sectionKey, subSection);
 
@@ -14452,6 +14466,7 @@ function setActiveSection(targetSection) {
 
 function renderOverviewSubView() {
   if (!overviewMainView || !overviewStatsSummaryView || !overviewWeeklyView) return;
+  if (activeSection === "overview") globalThis.AMQAnalytics?.view("overview", overviewActiveView);
 
   const isOverviewSection = activeSection === "overview";
   const showOverviewMain = isOverviewSection && overviewActiveView === "overview";
@@ -15234,6 +15249,7 @@ if (socialSynergySelectBtn) {
   socialSynergySelectBtn.addEventListener("click", () => {
     if (!socialSynergySinglePendingRivalKey || socialSynergySinglePendingRivalKey === socialSynergySingleSelectedRivalKey) return;
     socialSynergySingleSelectedRivalKey = socialSynergySinglePendingRivalKey;
+    globalThis.AMQAnalytics?.track("search_submitted", { feature: "synergy" });
     renderSocialSynergySinglePicker(cachedSocialSynergyRows, currentDisplayName || currentStatKey || "You");
     renderSocialSynergyRigTables();
   });
@@ -15298,6 +15314,7 @@ const socialTeamNextMonthBtn = document.getElementById("socialTeamNextMonthBtn")
 const socialTeamSelectBtn = document.getElementById("socialTeamSelectBtn");
 
 function applySearchSongsFilters() {
+  globalThis.AMQAnalytics?.track("search_submitted", { feature: "song" });
   searchSongsQuery = String(searchSongsInput && searchSongsInput.value || "");
   searchSongsExactMatch = Boolean(searchSongsExactMatchInput && searchSongsExactMatchInput.checked);
   searchSongsPageIndex = 0;
@@ -15384,6 +15401,7 @@ if (searchSongsNextPageBtn) {
 }
 
 function applySearchSongFrequencyFilters() {
+  globalThis.AMQAnalytics?.track("search_submitted", { feature: "song_frequency" });
   searchSongFrequencyQuery = String(searchSongFrequencyInput && searchSongFrequencyInput.value || "");
   searchSongFrequencyExactMatch = Boolean(searchSongFrequencyExactMatchInput && searchSongFrequencyExactMatchInput.checked);
   searchSongFrequencyPageIndex = 0;
@@ -15649,6 +15667,7 @@ if (antStatsToggle) {
   antStatsToggle.addEventListener("click", () => {
     if (antStatsToggle.disabled) return;
     includeAntStatsMode = !includeAntStatsMode;
+    globalThis.AMQAnalytics?.track("filter_changed", { filter: "ant", value: includeAntStatsMode ? "on" : "off" });
     refreshActiveStatsViews();
   });
 }
@@ -16443,6 +16462,7 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (isTourTypeToggleLocked) return;
     if (overviewDataSourceMode === "watched") return;
     overviewDataSourceMode = "watched";
+    globalThis.AMQAnalytics?.track("filter_changed", { filter: "tour_mode", value: "watched" });
     updateOverviewDataSourceToggleUI();
     refreshOverviewModeScopedCards(currentDisplayName);
     renderOverviewForActiveMode();
@@ -16487,6 +16507,7 @@ if (overviewDataSourceWatchedBtn && overviewDataSourceUsualBtn) {
     if (isTourTypeToggleLocked) return;
     if (overviewDataSourceMode === "usual") return;
     overviewDataSourceMode = "usual";
+    globalThis.AMQAnalytics?.track("filter_changed", { filter: "tour_mode", value: "usual" });
     updateOverviewDataSourceToggleUI();
     refreshOverviewModeScopedCards(currentDisplayName);
     renderOverviewForActiveMode();
@@ -17187,7 +17208,10 @@ function submitArtistSearch(typedValue) {
     return;
   }
   const entry = getArtistExactSearchEntry(typed);
-  if (entry) applySelectedArtist(entry.name);
+  if (entry) {
+    globalThis.AMQAnalytics?.track("search_submitted", { feature: "artist" });
+    applySelectedArtist(entry.name);
+  }
 }
 
 function submitArtistCompareSearch(compareInput) {
@@ -20082,6 +20106,7 @@ function setPlayerDatabaseViewMode(mode) {
     return;
   }
   playerDatabaseViewMode = nextMode;
+  globalThis.AMQAnalytics?.track("filter_changed", { filter: "comparison_view", value: nextMode });
   renderPlayerDatabase();
 }
 
@@ -20300,6 +20325,7 @@ function addPlayerDatabasePlayersFromText(text) {
     ...entries.map(entry => createPlayerDatabaseSelectedPlayer(entry))
   ];
   playerDatabaseUserClearedSelection = false;
+  globalThis.AMQAnalytics?.track("search_submitted", { feature: "player_comparison", player_count: playerDatabaseSelectedPlayers.length });
   playerDatabaseSearchQuery = "";
   playerDatabaseSelectedKey = "";
   playerDatabaseInlineSuggestion = "";
@@ -20321,6 +20347,7 @@ function addPlayerDatabasePlayer(key) {
     createPlayerDatabaseSelectedPlayer(entry)
   ];
   playerDatabaseUserClearedSelection = false;
+  globalThis.AMQAnalytics?.track("search_submitted", { feature: "player_comparison", player_count: playerDatabaseSelectedPlayers.length });
   playerDatabaseSearchQuery = "";
   playerDatabaseSelectedKey = "";
   playerDatabaseInlineSuggestion = "";
@@ -27983,7 +28010,7 @@ function hydrateSongRowWithKey(rawRow, keyRow) {
   if (!String(row.videoLink || "").trim() && isVideoMediaUrl(existingAudioLink)) {
     row.videoLink = existingAudioLink;
   }
-  if (audioLink && !hasCustomAudio) {
+  if (audioLink && !hasCustomAudio && !row.practiceSegment) {
     row.audioLink = audioLink;
   }
   const existingVideoLink = String(row.videoLink || "").trim();
@@ -28782,7 +28809,9 @@ function normalizePlaylistSettingsDedupePart(value) {
 }
 
 function getPlaylistSettingsSongDedupeKey(song) {
-  const stableKey = getPlaylistSongStableKey(song);
+  // All-playlist statistics count recordings once, including their practice sections.
+  const recordingSong = song && song.practiceSegment ? { ...song, practiceSegment: null } : song;
+  const stableKey = getPlaylistSongStableKey(recordingSong);
   if (stableKey) return stableKey;
   const parts = [
     getPlaylistSongDisplayValue(song, "anime"),
@@ -29139,6 +29168,48 @@ async function fetchPlaylistAudioFileForZip(url, filename, signal) {
   return { name: filename, bytes };
 }
 
+function encodePlaylistClipWav(buffer, startTime, endTime) {
+  const rate = buffer.sampleRate;
+  const first = Math.max(0, Math.floor(startTime * rate));
+  const last = Math.min(buffer.length, Math.ceil(endTime * rate));
+  if (last <= first) throw new Error("Section does not overlap the decoded recording");
+  const channels = Math.min(2, buffer.numberOfChannels);
+  const dataLength = (last - first) * channels * 2;
+  const bytes = new Uint8Array(44 + dataLength);
+  const view = new DataView(bytes.buffer);
+  const text = (offset, value) => bytes.set(new TextEncoder().encode(value), offset);
+  text(0, "RIFF"); view.setUint32(4, 36 + dataLength, true); text(8, "WAVE");
+  text(12, "fmt "); view.setUint32(16, 16, true); view.setUint16(20, 1, true);
+  view.setUint16(22, channels, true); view.setUint32(24, rate, true);
+  view.setUint32(28, rate * channels * 2, true); view.setUint16(32, channels * 2, true);
+  view.setUint16(34, 16, true); text(36, "data"); view.setUint32(40, dataLength, true);
+  const samples = Array.from({ length: channels }, (_, channel) => buffer.getChannelData(channel));
+  let offset = 44;
+  for (let frame = first; frame < last; frame += 1) {
+    for (let channel = 0; channel < channels; channel += 1) {
+      const sample = Math.max(-1, Math.min(1, samples[channel][frame]));
+      view.setInt16(offset, Math.round(sample * (sample < 0 ? 32768 : 32767)), true);
+      offset += 2;
+    }
+  }
+  return bytes;
+}
+
+async function fetchPlaylistSectionFileForZip(song, filename) {
+  const clip = getPlaylistSongClipWindow(song);
+  if (!clip) throw new Error("Invalid section timestamps");
+  const file = await fetchPlaylistAudioFileForZip(getPlaylistSongAudioLink(song), filename);
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) throw new Error("This browser cannot decode section downloads");
+  const context = new AudioContextClass();
+  try {
+    const decoded = await context.decodeAudioData(file.bytes.buffer);
+    return { name: filename, bytes: encodePlaylistClipWav(decoded, clip.startTime, clip.endTime) };
+  } finally {
+    await context.close();
+  }
+}
+
 async function downloadSelectedPlaylistSongs() {
   const playlist = getPlaylistById(playlistDownloadSelectedId || selectedPlaylistId);
   if (!playlist) {
@@ -29175,8 +29246,13 @@ async function downloadSelectedPlaylistSongs() {
     }
 
     try {
-      const filename = getUniquePlaylistZipFilename(getPlaylistSongDownloadFilename(song, index), usedZipNames);
-      zipFiles.push(await fetchPlaylistAudioFileForZip(audioLink, filename));
+      const clip = getPlaylistSongClipWindow(song);
+      const baseName = getPlaylistSongDownloadFilename(song, index);
+      const downloadName = clip ? baseName.replace(/\.mp3$/i, `-${song.practiceSegment.kind}.wav`) : baseName;
+      const filename = getUniquePlaylistZipFilename(downloadName, usedZipNames);
+      zipFiles.push(clip
+        ? await fetchPlaylistSectionFileForZip(song, filename)
+        : await fetchPlaylistAudioFileForZip(audioLink, filename));
       downloadedCount += 1;
     } catch (err) {
       failures.push({ label, reason: String(err && err.message ? err.message : "Download failed") });
@@ -29192,6 +29268,7 @@ async function downloadSelectedPlaylistSongs() {
       const zipBlob = createPlaylistZipBlob(zipFiles);
       const objectUrl = URL.createObjectURL(zipBlob);
       triggerPlaylistFileDownload(objectUrl, getPlaylistZipDownloadFilename(playlist));
+      globalThis.AMQAnalytics?.track("songs_exported", { source: "playlist", format: "zip", song_count: downloadedCount });
       zipDownloaded = true;
       window.setTimeout(() => URL.revokeObjectURL(objectUrl), 30000);
     } catch (err) {
@@ -29214,6 +29291,8 @@ async function downloadSelectedPlaylistSongs() {
 }
 
 function renderPlaylistSettingsModal(options = {}) {
+  const modal = document.getElementById("playlistSettingsModal");
+  if (!modal || modal.hidden) return;
   const summary = document.getElementById("playlistSettingsSummary");
   const renameInput = document.getElementById("playlistRenameInput");
   const renameBtn = document.getElementById("playlistRenameBtn");
@@ -29579,8 +29658,31 @@ function appendPlaylistArtistCell(row, song) {
 
 function getPlaylistSongAudioLink(song) {
   if (!song || typeof song !== "object") return "";
+  if (song.practiceSegment) {
+    return getPlaylistSongClipWindow(song) ? String(song.practiceSegment.audioUrl || "").trim() : "";
+  }
   const audioLink = String(song.audioLink || song.audio_link || song.link || song.mp3 || song.audio || song.url || "").trim();
   return audioLink || getPlaylistSongVideoLink(song);
+}
+
+function getPlaylistSongClipWindow(song) {
+  const clip = song && song.practiceSegment;
+  if (!clip || clip.schema !== 1 || !["Verse", "Pre-chorus", "Chorus"].includes(clip.kind)) return null;
+  if (typeof clip.start !== "number" || typeof clip.end !== "number") return null;
+  const startTime = clip.start;
+  const endTime = clip.end;
+  if (!Number.isFinite(startTime) || !Number.isFinite(endTime) || startTime < 0 || endTime <= startTime) return null;
+  if (!/^https?:\/\//i.test(String(clip.audioUrl || ""))) return null;
+  return { startTime, endTime };
+}
+
+function setPlaylistAudioButtonClip(button, song) {
+  const clip = getPlaylistSongClipWindow(song);
+  if (!button || !clip) return;
+  button.dataset.clipStart = String(clip.startTime);
+  button.dataset.clipEnd = String(clip.endTime);
+  const estimated = song.practiceSegment.estimatedStart || song.practiceSegment.estimatedEnd;
+  button.title = `${song.practiceSegment.kind}: ${formatAudioTime(clip.startTime)} - ${formatAudioTime(clip.endTime)}${estimated ? " (estimated boundary)" : ""}`;
 }
 
 function getPlaylistSongVideoLink(song) {
@@ -29590,6 +29692,7 @@ function getPlaylistSongVideoLink(song) {
 
 function getPlaylistSongStableKey(song) {
   if (!song || typeof song !== "object") return "";
+  if (song.practiceSegment) return `section:${song.song_identity_key || song.songIdentityKey || JSON.stringify(song.practiceSegment)}`;
   const duplicateIdentityKey = getSongDuplicateIdentityKey(song);
   if (duplicateIdentityKey) return `duplicate:${duplicateIdentityKey}`;
   const identityKey = getPrimarySongIdentityKey(song);
@@ -29600,6 +29703,7 @@ function getPlaylistSongStableKey(song) {
 
 function getPlaylistSongLogicalStableKey(song) {
   if (!song || typeof song !== "object") return "";
+  if (song.practiceSegment) return getPlaylistSongStableKey(song);
   const identityKey = getPrimarySongIdentityKey(song);
   if (identityKey) return `identity:${identityKey}`;
   return getPlaylistSongStableKey(song);
@@ -29895,6 +29999,7 @@ function getPlaylistUpcomingPreloadUrls(limit = PLAYLIST_AUDIO_PRELOAD_LIMIT) {
   const entries = getPlaylistPlayableSongEntries(playlist);
   if (!entries.length || limit <= 0) return [];
 
+  const targetCount = Math.min(limit, new Set(entries.map(entry => entry.audioLink)).size);
   const currentRowKey = playlistPlaybackContext.songRowKey;
   const entryByRowKey = new Map(entries.map(entry => [entry.rowKey, entry]));
   const urls = [];
@@ -29904,13 +30009,13 @@ function getPlaylistUpcomingPreloadUrls(limit = PLAYLIST_AUDIO_PRELOAD_LIMIT) {
     if (!entry || !entry.audioLink || seenUrls.has(entry.audioLink)) return false;
     urls.push(entry.audioLink);
     seenUrls.add(entry.audioLink);
-    return urls.length >= limit;
+    return urls.length >= targetCount;
   };
 
   if (playlistPlaybackRandomEnabled) {
     let simulatedCurrentRowKey = currentRowKey;
     let simulatedQueue = playlistPlaybackShuffleQueue.slice();
-    while (urls.length < limit) {
+    while (urls.length < targetCount) {
       if (!simulatedQueue.length) {
         if (playlistPlaybackLoopMode !== "playlist") break;
         simulatedQueue = shufflePlaylistRowKeys(entries
@@ -30155,6 +30260,7 @@ function playPlaylistSongFromRowKey(playlistId, songRowKey) {
 
   const toggleBtn = findPlaylistAudioToggleButton(playlistId, songRowKey);
   toggleRelearnSongAudio(audioLink, toggleBtn, {
+    ...(getPlaylistSongClipWindow(song) || {}),
     playlistContext: { playlistId, songRowKey, preserveShuffleQueue: true }
   });
   return true;
@@ -30200,12 +30306,14 @@ function appendPlaylistPlayCell(row, song, playlist) {
 
   const audioLink = getPlaylistSongAudioLink(song);
   toggleBtn.dataset.audioUrl = audioLink;
+  setPlaylistAudioButtonClip(toggleBtn, song);
   if (!audioLink) {
     toggleBtn.disabled = true;
     toggleBtn.ariaLabel = "No audio link available";
   } else {
     toggleBtn.addEventListener("click", () => {
       toggleRelearnSongAudio(audioLink, toggleBtn, {
+        ...(getPlaylistSongClipWindow(song) || {}),
         playlistContext: {
           playlistId: playlist && playlist.id != null ? String(playlist.id) : selectedPlaylistId,
           songRowKey: getPlaylistSongRowKey(song)
@@ -30238,12 +30346,13 @@ function appendPlaylistSearchPlayCell(row, song, playlistSong = null) {
   const playbackSong = playlistSong || song;
   const audioLink = getPlaylistSongAudioLink(playbackSong);
   toggleBtn.dataset.audioUrl = audioLink;
+  setPlaylistAudioButtonClip(toggleBtn, playbackSong);
   if (!audioLink) {
     toggleBtn.disabled = true;
     toggleBtn.ariaLabel = "No audio link available";
   } else {
     toggleBtn.addEventListener("click", () => {
-      toggleRelearnSongAudio(audioLink, toggleBtn);
+      toggleRelearnSongAudio(audioLink, toggleBtn, getPlaylistSongClipWindow(playbackSong) || {});
     });
   }
 
@@ -31572,7 +31681,7 @@ function showPlaylistRowContextMenu(event, playlist, song) {
   playlistContextMenuSongRowKeys = contextRowKeys.length ? contextRowKeys : [rowKey];
   playlistContextMenuPlaylistId = String(playlist.id || "");
   playlistContextMenuMode = "playlist";
-  renderPlaylistSongsReadTable(playlist);
+  syncSelectedPlaylistSongRowHighlight();
 
   const menu = getPlaylistRowContextMenu();
   const targetList = document.getElementById("playlistRowContextTargetList");
@@ -31846,18 +31955,20 @@ function appendPlaylistReadTableRow(tbody, playlist, song, options = {}) {
     row.addEventListener("click", event => {
       if (playlistDragSuppressClick) return;
       if (event.button !== 0) return;
+      if (event.target.closest("button, a, input, textarea, select")) return;
       selectPlaylistSongRow(playlist, rowKey, {
         range: Boolean(event.shiftKey)
       });
       hidePlaylistRowContextMenu();
-      renderSelectedPlaylistSongs();
+      syncSelectedPlaylistSongRowHighlight();
     });
     row.addEventListener("keydown", event => {
+      if (event.target !== row) return;
       if (event.key !== "Enter" && event.key !== " ") return;
       event.preventDefault();
       selectPlaylistSongRow(playlist, rowKey);
       hidePlaylistRowContextMenu();
-      renderSelectedPlaylistSongs();
+      syncSelectedPlaylistSongRowHighlight();
     });
     row.addEventListener("contextmenu", event => {
       showPlaylistRowContextMenu(event, playlist, song);
@@ -31901,13 +32012,15 @@ function renderCumulativePlaylistSearchTable(query) {
     return;
   }
 
+  const fragment = document.createDocumentFragment();
   results.forEach(entry => {
-    appendPlaylistReadTableRow(tbody, entry.playlist, entry.song, {
+    appendPlaylistReadTableRow(fragment, entry.playlist, entry.song, {
       canManageRow: false,
       searchContextMenu: true,
       searchPlayback: true
     });
   });
+  tbody.appendChild(fragment);
   syncRelearnVisibleAudioToggleButtons();
 }
 
@@ -31938,11 +32051,13 @@ function renderPlaylistSongsReadTable(playlist, options = {}) {
     pruneSelectedPlaylistSongRows(playlist);
   }
 
+  const fragment = document.createDocumentFragment();
   songs.forEach(song => {
-    appendPlaylistReadTableRow(tbody, playlist, song, {
+    appendPlaylistReadTableRow(fragment, playlist, song, {
       canManageRow: playlistsAuthenticated && !isFiltered
     });
   });
+  tbody.appendChild(fragment);
   syncRelearnVisibleAudioToggleButtons();
 }
 
@@ -33299,7 +33414,7 @@ async function loadSearchSongsDataForUser(displayName) {
 
     searchSongsPageIndex = 0;
     renderInsightsSearchSongs();
-    if (activeSection === "insights" && activeSubSection === "Playlists") {
+    if (activeSection === "insights" && activeSubSectionBySection.insights === "Playlists") {
       renderInsightsPlaylists();
     }
     renderInsightsWrongGuess();
@@ -33765,12 +33880,13 @@ function getRigAnalysisPlayerEntry(payload) {
     if (directEntry && typeof directEntry === "object") return directEntry;
   }
 
-  const normalizedDisplayName = normalizeText(currentDisplayName || username || "");
+  const normalizeName = value => String(value || "").trim().toLowerCase();
+  const normalizedDisplayName = normalizeName(currentDisplayName || username || "");
   if (!normalizedDisplayName) return null;
   const entries = Object.values(players);
   for (const entry of entries) {
     if (!entry || typeof entry !== "object") continue;
-    if (normalizeText(entry.displayName || "") === normalizedDisplayName) {
+    if (normalizeName(entry.displayName) === normalizedDisplayName) {
       return entry;
     }
   }
@@ -33879,6 +33995,21 @@ function prefetchRigAnalysisDataInBackground() {
   });
 }
 
+function getRigAnalysisAvailability(modeValue, modeData, vintageEntry, difficultyEntry) {
+  const hasPlayers = payload => payload && payload.players && typeof payload.players === "object" && !Array.isArray(payload.players);
+  if (!hasPlayers(modeData.vintagePayload) || !hasPlayers(modeData.difficultyPayload)) {
+    return { title: "Unavailable", message: "Rig/list analysis could not be loaded. Please refresh and try again." };
+  }
+  if (vintageEntry && difficultyEntry) return null;
+  if (modeValue === "all") {
+    return {
+      title: "Insufficient data",
+      message: `“All tours” analysis requires at least ${RIG_ANALYSIS_MIN_ALL_SAMPLES} qualifying rig-song samples. This player does not meet that minimum. Change using data mode from “All Tours” to any other to display rig/list stats.`
+    };
+  }
+  return { title: "No data", message: "No rig analysis data for this player in the selected range." };
+}
+
 function renderRigAnalysisView() {
   const yearValueEl = document.getElementById("rigAnalysisYearValue");
   const yearRangeEl = document.getElementById("rigAnalysisYearRange");
@@ -33952,35 +34083,37 @@ function renderRigAnalysisView() {
     (vintageEntry && typeof vintageEntry === "object")
     || (difficultyEntry && typeof difficultyEntry === "object")
   );
+  const availability = getRigAnalysisAvailability(modeValue, modeData, vintageEntry, difficultyEntry);
 
   if (!hasAnyData) {
     yearValueEl.innerText = "—";
-    yearRangeEl.innerText = "No data";
+    yearRangeEl.innerText = availability.title;
     yearPercentilesEl.innerHTML = "";
     yearLegendEl.innerHTML = "";
-    yearSubEl.innerText = "No data";
+    yearSubEl.innerText = availability.title;
     yearMeanTagEl.innerText = "Mean year: — (—)";
     yearMedianTagEl.innerText = "Median year: — (—)";
     yearMeanMarkerEl.style.display = "none";
     yearMedianMarkerEl.style.display = "none";
     difficultyValueEl.innerText = "—";
-    difficultyRangeEl.innerText = "No range";
+    difficultyRangeEl.innerText = availability.title;
     difficultyPercentilesEl.innerHTML = "";
     difficultyLegendEl.innerHTML = "";
     difficultyTrackEl.style.setProperty("background", "#e2e8f0", "important");
     difficultyMarkerEl.style.display = "none";
     difficultyTagEl.innerText = "Mean Difficulty: —%";
-    difficultySubEl.innerText = "No data";
+    difficultySubEl.innerText = availability.title;
     avgRigValueEl.innerText = "—";
-    avgRigSubEl.innerText = "";
+    avgRigSubEl.innerText = availability.title;
     avgRigPctValueEl.innerText = "—";
-    avgRigPctSubEl.innerText = "";
+    avgRigPctSubEl.innerText = availability.title;
     emptyEl.style.display = "block";
-    emptyEl.innerText = "No rig analysis data for this player in the selected mode.";
+    emptyEl.innerText = availability.message;
     return;
   }
 
-  emptyEl.style.display = "none";
+  emptyEl.style.display = availability ? "block" : "none";
+  emptyEl.innerText = availability ? availability.message : "";
 
   const isValidYearValue = value => Number.isFinite(value) && value >= 1900 && value <= 2100;
   const averageSeasonText = String(vintageEntry && vintageEntry.averageSeason ? vintageEntry.averageSeason : "—");
@@ -34445,13 +34578,15 @@ function setRelearnInlineToggleState(toggleBtn, isPlaying) {
   if (!toggleBtn) return;
   const icon = toggleBtn.querySelector("img");
   if (icon) {
-    icon.src = isPlaying ? "data/images/pause.png" : "data/images/play.png";
-    icon.alt = isPlaying ? "Pause" : "Play";
+    const iconSrc = isPlaying ? "data/images/pause.png" : "data/images/play.png";
+    const iconAlt = isPlaying ? "Pause" : "Play";
+    if (icon.getAttribute("src") !== iconSrc) icon.src = iconSrc;
+    if (icon.alt !== iconAlt) icon.alt = iconAlt;
   }
   const titleText = isPlaying
     ? String(toggleBtn.dataset.pauseTitle || "Pause")
     : String(toggleBtn.dataset.playTitle || "Play");
-  toggleBtn.ariaLabel = titleText;
+  if (toggleBtn.ariaLabel !== titleText) toggleBtn.ariaLabel = titleText;
 }
 
 function setRelearnDockToggleState(isPlaying) {
@@ -34475,7 +34610,11 @@ function syncRelearnVisibleAudioToggleButtons(forceIsPlaying = null) {
 
   buttons.forEach(button => {
     const buttonUrl = String(button.dataset.audioUrl || "").trim();
-    const isCurrentButton = Boolean(buttonUrl && currentUrl && buttonUrl === currentUrl);
+    const buttonStart = Number(button.dataset.clipStart || 0);
+    const buttonEnd = button.dataset.clipEnd == null ? null : Number(button.dataset.clipEnd);
+    const activeStart = Number.isFinite(relearnActiveClipStartTime) ? relearnActiveClipStartTime : 0;
+    const activeEnd = Number.isFinite(relearnActiveClipEndTime) ? relearnActiveClipEndTime : null;
+    const isCurrentButton = Boolean(buttonUrl && currentUrl && buttonUrl === currentUrl && buttonStart === activeStart && buttonEnd === activeEnd);
     setRelearnInlineToggleState(button, isPlaying && isCurrentButton);
     if (isCurrentButton && !replacementActiveButton) {
       replacementActiveButton = button;
@@ -34724,6 +34863,7 @@ function ensureRelearnAudioElement() {
     syncRelearnAudioWakeLock();
   });
   relearnAudioElement.addEventListener("ended", () => {
+    if (!relearnAudioElement.ended) return;
     if (handlePlaylistPlaybackEnded()) return;
     clearRelearnAudioButtonState(true);
     syncRelearnAudioWakeLock();
@@ -34732,10 +34872,13 @@ function ensureRelearnAudioElement() {
     if (
       Number.isFinite(relearnActiveClipEndTime) &&
       relearnActiveClipEndTime > 0 &&
+      !relearnAudioElement.paused &&
       relearnAudioElement.currentTime >= relearnActiveClipEndTime
     ) {
       relearnAudioElement.currentTime = relearnActiveClipEndTime;
       relearnAudioElement.pause();
+      if (handlePlaylistPlaybackEnded()) return;
+      updateRelearnAudioProgressUI();
       return;
     }
     updateRelearnAudioProgressUI();
@@ -34787,6 +34930,13 @@ function toggleRelearnSongAudio(audioLink, toggleBtn, options = {}) {
   const clipEndRaw = Number(options.endTime);
   const clipStart = Number.isFinite(clipStartRaw) && clipStartRaw >= 0 ? clipStartRaw : 0;
   const clipEnd = Number.isFinite(clipEndRaw) && clipEndRaw > clipStart ? clipEndRaw : null;
+  const sameClip = (Number.isFinite(relearnActiveClipStartTime) ? relearnActiveClipStartTime : 0) === clipStart
+    && (Number.isFinite(relearnActiveClipEndTime) ? relearnActiveClipEndTime : null) === clipEnd;
+  const changedPlaylistEntry = Boolean(options.playlistContext && (
+    !playlistPlaybackContext
+    || String(playlistPlaybackContext.playlistId) !== String(options.playlistContext.playlistId)
+    || String(playlistPlaybackContext.songRowKey) !== String(options.playlistContext.songRowKey)
+  ));
   let deferredPlaylistContextWork = null;
   if (options.playlistContext) {
     deferredPlaylistContextWork = setPlaylistPlaybackContext({
@@ -34798,7 +34948,7 @@ function toggleRelearnSongAudio(audioLink, toggleBtn, options = {}) {
     clearPlaylistPlaybackContext();
   }
 
-  if (currentUrl === url && !audio.paused) {
+  if (currentUrl === url && sameClip && !changedPlaylistEntry && !audio.paused) {
     audio.pause();
     return;
   }
@@ -34808,6 +34958,8 @@ function toggleRelearnSongAudio(audioLink, toggleBtn, options = {}) {
   const reachedClipEnd = audio.ended || (clipEnd != null && audio.currentTime >= (clipEnd - 0.05));
   const shouldResetToClipStart =
     currentUrl !== url ||
+    !sameClip ||
+    changedPlaylistEntry ||
     !Number.isFinite(audio.currentTime) ||
     audio.currentTime < clipStart ||
     reachedClipEnd;
@@ -34821,6 +34973,13 @@ function toggleRelearnSongAudio(audioLink, toggleBtn, options = {}) {
 
   audio.play()
     .then(() => {
+      const analyticsPlaylistSong = globalThis.AMQAnalytics && options.playlistContext
+        ? getPlaylistSongByRowKey(findPlaylistById(options.playlistContext.playlistId), options.playlistContext.songRowKey)
+        : null;
+      globalThis.AMQAnalytics?.track("song_played", {
+        source: options.playlistContext ? "playlist" : (activeSection === "insights" && activeSubSectionBySection.insights === "Relearn Tracker" ? "relearn" : "search"),
+        clip: analyticsPlaylistSong?.practiceSegment?.kind || (clipEnd !== null ? "sample" : "full")
+      });
       if (relearnActiveToggleButton && relearnActiveToggleButton !== toggleBtn) {
         setRelearnInlineToggleState(relearnActiveToggleButton, false);
       }
@@ -35180,6 +35339,7 @@ function exportRelearnSongsForCsl() {
     try {
       const name = sanitizePlaylistDownloadFilename(`${state.playerName || state.playerId}-relearn-${relearnDownloadMode.value}-${relearnDownloadList.value}-${selected.length}-amqplus`);
       triggerPlaylistFileDownload(url, `${name}.json`);
+      globalThis.AMQAnalytics?.track("songs_exported", { source: "relearn", format: "csl", mode: relearnDownloadMode.value, list: relearnDownloadList.value, song_count: data.songs.length });
     } finally {
       window.setTimeout(() => URL.revokeObjectURL(url), 30000);
     }
@@ -35237,6 +35397,7 @@ async function downloadRelearnSongs() {
     try {
       const name = sanitizePlaylistDownloadFilename(`${state.playerName || state.playerId}-relearn-${mode}-${listMode}-${songs.length}`);
       triggerPlaylistFileDownload(url, `${name}.zip`);
+      globalThis.AMQAnalytics?.track("songs_exported", { source: "relearn", format: "zip", mode, list: listMode, song_count: zipFiles.length });
     } finally {
       window.setTimeout(() => URL.revokeObjectURL(url), 30000);
     }
@@ -38894,13 +39055,15 @@ if (overviewTrendSelect) {
       return;
     }
     overviewTrendMode = event.target.value === "combined" ? "combined" : "regular";
+    globalThis.AMQAnalytics?.track("filter_changed", { filter: "trend", value: overviewTrendMode });
     renderOverviewTrendChart();
     if (overviewTrendMode === "combined") zoomOverviewTrendTo2026();
   });
 }
 
 if (dataRangeSelect) {
-  dataRangeSelect.addEventListener("change", () => {
+  dataRangeSelect.addEventListener("change", event => {
+    if (event.isTrusted) globalThis.AMQAnalytics?.track("filter_changed", { filter: "data_range", value: dataRangeSelect.value });
     if (activeSection === "otherTools" && activeSubSectionBySection.otherTools === OTHER_TOOLS_PLAYER_DATABASE_LABEL) {
       renderPlayerDatabase();
       return;

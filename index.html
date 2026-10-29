@@ -78,6 +78,7 @@
 </div>
 <video id="loginBackgroundVideo" class="login-background-video" preload="auto" playsinline aria-hidden="true"></video>
 
+<script src="analytics.js?v=20261029"></script>
 <script>
 const DATA_BASE_URL =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
@@ -483,6 +484,7 @@ async function login() {
       return;
     }
 
+    globalThis.AMQAnalytics?.track("dashboard_opened");
     window.location.href = `player.html?user=${encodeURIComponent(input)}`;
   } catch (err) {
     console.error(err);
