@@ -11612,7 +11612,7 @@
                   <div class="playlists-settings-section">
                     <div class="playlists-settings-label">Account</div>
                     <div class="playlists-auth-row playlists-settings-auth-row">
-                      <input id="playlistsPasswordInput" class="playlists-input" type="password" autocomplete="current-password" placeholder="Password">
+                      <input id="playlistsPasswordInput" class="playlists-input ph-no-capture ph-mask" type="password" autocomplete="current-password" placeholder="Password">
                       <button id="playlistsLoginBtn" class="playlists-button primary" type="button">Login</button>
                       <button id="playlistsLogoutBtn" class="playlists-button" type="button" disabled>Logout</button>
                       <button id="playlistsRefreshBtn" class="playlists-button" type="button">Refresh</button>
@@ -12237,7 +12237,7 @@
   </div>
 </div>
 
-<script src="analytics.js?v=20261029"></script>
+<script src="analytics.js?v=20261029-replay1"></script>
 <script>
 const isLocalDataContext =
   location.protocol === "file:"
@@ -15249,7 +15249,7 @@ if (socialSynergySelectBtn) {
   socialSynergySelectBtn.addEventListener("click", () => {
     if (!socialSynergySinglePendingRivalKey || socialSynergySinglePendingRivalKey === socialSynergySingleSelectedRivalKey) return;
     socialSynergySingleSelectedRivalKey = socialSynergySinglePendingRivalKey;
-    globalThis.AMQAnalytics?.track("search_submitted", { feature: "synergy" });
+    globalThis.AMQAnalytics?.search?.("socialSynergyPlayerSearchInput", socialSynergyPlayerSearchInput?.value || socialSynergySingleSelectedRivalKey);
     renderSocialSynergySinglePicker(cachedSocialSynergyRows, currentDisplayName || currentStatKey || "You");
     renderSocialSynergyRigTables();
   });
@@ -15314,8 +15314,8 @@ const socialTeamNextMonthBtn = document.getElementById("socialTeamNextMonthBtn")
 const socialTeamSelectBtn = document.getElementById("socialTeamSelectBtn");
 
 function applySearchSongsFilters() {
-  globalThis.AMQAnalytics?.track("search_submitted", { feature: "song" });
   searchSongsQuery = String(searchSongsInput && searchSongsInput.value || "");
+  globalThis.AMQAnalytics?.search?.("searchSongsInput", searchSongsQuery);
   searchSongsExactMatch = Boolean(searchSongsExactMatchInput && searchSongsExactMatchInput.checked);
   searchSongsPageIndex = 0;
   if (searchSongsModeSelect) {
@@ -15401,8 +15401,8 @@ if (searchSongsNextPageBtn) {
 }
 
 function applySearchSongFrequencyFilters() {
-  globalThis.AMQAnalytics?.track("search_submitted", { feature: "song_frequency" });
   searchSongFrequencyQuery = String(searchSongFrequencyInput && searchSongFrequencyInput.value || "");
+  globalThis.AMQAnalytics?.search?.("searchSongFrequencyInput", searchSongFrequencyQuery);
   searchSongFrequencyExactMatch = Boolean(searchSongFrequencyExactMatchInput && searchSongFrequencyExactMatchInput.checked);
   searchSongFrequencyPageIndex = 0;
   renderSearchSongFrequency();
@@ -17168,6 +17168,7 @@ function renderArtistSuggestions() {
     button.innerText = `${entry.name} (${entry.total || 0})`;
     button.addEventListener("mousedown", event => {
       event.preventDefault();
+      globalThis.AMQAnalytics?.search?.("artistFamiliaritySearchInput", entry.name);
       applySelectedArtist(entry.name);
     });
     artistFamiliaritySuggestions.appendChild(button);
@@ -17207,9 +17208,9 @@ function submitArtistSearch(typedValue) {
     hideArtistSuggestions();
     return;
   }
+  globalThis.AMQAnalytics?.search?.("artistFamiliaritySearchInput", typed);
   const entry = getArtistExactSearchEntry(typed);
   if (entry) {
-    globalThis.AMQAnalytics?.track("search_submitted", { feature: "artist" });
     applySelectedArtist(entry.name);
   }
 }
@@ -17221,6 +17222,7 @@ function submitArtistCompareSearch(compareInput) {
     hideArtistCompareSuggestions();
     return;
   }
+  globalThis.AMQAnalytics?.search?.("artistFamiliarityCompareSearchInput", typed);
   const entry = getArtistExactSearchEntry(typed);
   if (entry) {
     artistFamiliarityCompareSearchQuery = entry.name;
@@ -17281,6 +17283,7 @@ function renderArtistCompareSuggestions(inputEl, suggestionsEl, inlineEl) {
     button.innerText = `${entry.name} (${entry.total || 0})`;
     button.addEventListener("mousedown", event => {
       event.preventDefault();
+      globalThis.AMQAnalytics?.search?.("artistFamiliarityCompareSearchInput", entry.name);
       applySelectedCompareArtist(entry.name);
     });
     suggestionsEl.appendChild(button);
@@ -20325,7 +20328,7 @@ function addPlayerDatabasePlayersFromText(text) {
     ...entries.map(entry => createPlayerDatabaseSelectedPlayer(entry))
   ];
   playerDatabaseUserClearedSelection = false;
-  globalThis.AMQAnalytics?.track("search_submitted", { feature: "player_comparison", player_count: playerDatabaseSelectedPlayers.length });
+  globalThis.AMQAnalytics?.search?.("playerDatabaseSearchInput", text, { player_count: playerDatabaseSelectedPlayers.length });
   playerDatabaseSearchQuery = "";
   playerDatabaseSelectedKey = "";
   playerDatabaseInlineSuggestion = "";
@@ -20347,7 +20350,7 @@ function addPlayerDatabasePlayer(key) {
     createPlayerDatabaseSelectedPlayer(entry)
   ];
   playerDatabaseUserClearedSelection = false;
-  globalThis.AMQAnalytics?.track("search_submitted", { feature: "player_comparison", player_count: playerDatabaseSelectedPlayers.length });
+  globalThis.AMQAnalytics?.search?.("playerDatabaseSearchInput", playerDatabaseSearchQuery || entry.displayLabel, { player_count: playerDatabaseSelectedPlayers.length });
   playerDatabaseSearchQuery = "";
   playerDatabaseSelectedKey = "";
   playerDatabaseInlineSuggestion = "";
@@ -32079,6 +32082,7 @@ function setPlaylistSongSearchMode(mode) {
 
 function commitPlaylistSongSearch() {
   playlistSongSearchQuery = String(document.getElementById("playlistSongSearchInput")?.value || "").trim();
+  globalThis.AMQAnalytics?.search?.("playlistSongSearchInput", playlistSongSearchQuery);
   playlistSongSearchMode = getSelectedPlaylistSongSearchMode();
   playlistSongSearchExact = Boolean(playlistSongSearchExactCheckbox && playlistSongSearchExactCheckbox.checked);
   playlistSongSearchPageIndex = 0;

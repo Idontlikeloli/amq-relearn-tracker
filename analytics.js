@@ -1,11 +1,11 @@
-/* Aggregate feature usage. Never pass player names, search text or media URLs here. */
+/* Feature usage and session replay. Search text is allowed only for named search controls. */
 (() => {
   "use strict";
   const w = window;
   const d = document;
   if (w.AMQAnalytics) return;
   const noop = () => {};
-  w.AMQAnalytics = Object.freeze({ track: noop, view: noop });
+  w.AMQAnalytics = Object.freeze({ track: noop, view: noop, search: noop });
   const host = location.hostname.toLowerCase();
   if (!/^https?:$/.test(location.protocol) || !host || host === "localhost"
       || host.endsWith(".localhost") || host.endsWith(".local")
@@ -20,13 +20,50 @@
     social: ["Synergy", "Rivals", "Team Contributions", "Rig / List analysis"],
     otherTools: ["Search songs", "Search song frequency", "Player database", "Single Tour", "Changelog"]
   };
+  const searchInputs = {
+    username: "dashboard_player",
+    artistFamiliaritySearchInput: "artist",
+    artistFamiliarityCompareSearchInput: "artist_comparison",
+    searchSongsInput: "song",
+    searchSongFrequencyInput: "song_frequency",
+    playerDatabaseSearchInput: "player_comparison",
+    socialSynergyPlayerSearchInput: "synergy",
+    playlistSongSearchInput: "playlist_song",
+    playlistLocalSearchInput: "playlist_filter",
+    tagSearchInput: "tag",
+    byEraSeasonSearchInput: "season",
+    socialRivalSearchInput: "rival",
+    socialTeamSearchInput: "team_date",
+    originalTourSearchInput: "tour_date",
+    originalTourSongSearchInput: "tour_song",
+    playerDatabaseLabelSearchInput: "genre_tag",
+    artistFamiliarityAttemptsFilterInput: "artist_song"
+  };
+  const liveSearchInputs = new Set([
+    "playlistLocalSearchInput", "tagSearchInput", "byEraSeasonSearchInput",
+    "socialRivalSearchInput", "socialTeamSearchInput", "originalTourSearchInput",
+    "originalTourSongSearchInput", "playerDatabaseLabelSearchInput", "artistFamiliarityAttemptsFilterInput"
+  ]);
+  function isSearchInput(element) {
+    return !!element && Object.hasOwn(searchInputs, element.id)
+      && ["text", "search"].includes(String(element.type || "text").toLowerCase())
+      && !element.closest?.('.ph-no-capture, .ph-mask, [data-ph-sensitive]');
+  }
+  function normalizeSearch(value) {
+    return typeof value === "string" ? value.replace(/[\u0000-\u001f\u007f]/g, " ").replace(/\s+/g, " ").trim().slice(0, 220) : "";
+  }
+  function maskReplayInput(value, element) {
+    const text = String(value || "");
+    return isSearchInput(element) ? text : "*".repeat(text.length);
+  }
   const choices = {
     mode: ["watched", "usual", "all"],
     list: ["onlist", "offlist", "all"],
     format: ["zip", "csl"],
     source: ["relearn", "playlist", "search", "other"],
     clip: ["full", "sample", "Verse", "Pre-chorus", "Chorus"],
-    feature: ["artist", "song", "song_frequency", "player_comparison", "synergy"],
+    feature: Object.values(searchInputs),
+    input_id: Object.keys(searchInputs),
     filter: ["tour_mode", "ant", "data_range", "trend", "comparison_view"],
     value: ["watched", "usual", "on", "off", "all", "week", "month", "2months", "3months", "6months", "10", "20", "50", "regular", "combined", "table", "chart"]
   };
@@ -37,7 +74,8 @@
     dashboard_opened: [],
     song_played: ["source", "clip"],
     songs_exported: ["source", "format", "mode", "list", "song_count"],
-    search_submitted: ["feature", "player_count"],
+    search_submitted: ["feature", "input_id", "query", "player_count"],
+    search_filtered: ["feature", "input_id", "query"],
     filter_changed: ["filter", "value"]
   };
   function cleanFields(name, properties = {}) {
@@ -46,6 +84,11 @@
       const value = properties[key];
       if (key === "section" && Object.hasOwn(views, value)) clean[key] = value;
       else if (key === "view" && views[properties.section]?.includes(value)) clean[key] = value;
+      else if (key === "query" && Object.hasOwn(searchInputs, properties.input_id)
+          && searchInputs[properties.input_id] === properties.feature) {
+        const query = normalizeSearch(value);
+        if (query) clean[key] = query;
+      }
       else if (choices[key]?.includes(value)) clean[key] = value;
       else if (["song_count", "player_count", "visible_seconds"].includes(key)
           && Number.isFinite(value) && value >= 0) clean[key] = Math.min(1000000, Math.round(value));
@@ -60,6 +103,9 @@
   const page = /\/player\.html$/.test(location.pathname) ? "player.html" : "index.html";
   const safeUrl = new URL(page, location.href).origin + new URL(page, location.href).pathname;
   function beforeSend(event) {
+    // Replay snapshots have already passed browser-side input masking. Preserve
+    // their payload and metadata; the analytics allowlist would erase the replay.
+    if (event?.event === "$snapshot") return event;
     if (!event || !Object.hasOwn(fields, event.event)) return null;
     const original = event.properties || {};
     const properties = cleanFields(event.event, original);
@@ -75,6 +121,29 @@
   function track(name, properties) {
     if (!Object.hasOwn(fields, name)) return;
     try { w.posthog?.capture(name, cleanFields(name, { ...current, ...properties })); } catch (_) { /* Analytics must never interrupt the app. */ }
+  }
+  function search(inputId, value, extra = {}) {
+    const element = d.getElementById(inputId);
+    if (!isSearchInput(element)) return;
+    const query = normalizeSearch(value);
+    if (!query) return;
+    track("search_submitted", { feature: searchInputs[inputId], input_id: inputId, query, player_count: extra.player_count });
+  }
+
+  // Live filters have no submit button: capture once after a pause, Enter or
+  // leaving the field. Delegation also covers dynamically rendered search bars.
+  const searchTimers = new Map();
+  const lastLiveQueries = new Map();
+  function commitLiveSearch(element) {
+    if (!isSearchInput(element) || !liveSearchInputs.has(element.id)) return;
+    const id = element.id;
+    w.clearTimeout(searchTimers.get(id));
+    searchTimers.delete(id);
+    const query = normalizeSearch(element.value);
+    if (!query) { lastLiveQueries.delete(id); return; }
+    if (lastLiveQueries.get(id) === query) return;
+    lastLiveQueries.set(id, query);
+    track("search_filtered", { feature: searchInputs[id], input_id: id, query });
   }
 
   let current = null;
@@ -120,17 +189,40 @@
       capture_pageleave: false,
       capture_dead_clicks: false,
       rageclick: false,
-      disable_session_recording: true,
+      disable_session_recording: false,
+      enable_recording_console_log: false,
+      session_recording: {
+        maskAllInputs: true,
+        maskInputFn: maskReplayInput,
+        blockSelector: 'input[type="password"], #playlistsPasswordInput',
+        recordHeaders: false,
+        recordBody: false,
+        streamNetworkBody: false,
+        recordCanvas: false
+      },
       disable_surveys: true,
       capture_heatmaps: false,
       capture_performance: false,
       capture_exceptions: false,
-      advanced_disable_flags: true,
+      advanced_disable_flags: false,
+      advanced_disable_feature_flags: true,
       advanced_disable_toolbar_metrics: true,
       before_send: beforeSend
     });
   } catch (_) { return; }
-  w.AMQAnalytics = Object.freeze({ track, view });
+  w.AMQAnalytics = Object.freeze({ track, view, search });
+  d.addEventListener("input", event => {
+    const element = event.target;
+    if (!event.isTrusted || !isSearchInput(element) || !liveSearchInputs.has(element.id)) return;
+    w.clearTimeout(searchTimers.get(element.id));
+    searchTimers.set(element.id, w.setTimeout(() => commitLiveSearch(element), 1200));
+  });
+  d.addEventListener("focusout", event => {
+    if (event.isTrusted) commitLiveSearch(event.target);
+  });
+  d.addEventListener("keydown", event => {
+    if (event.isTrusted && event.key === "Enter") commitLiveSearch(event.target);
+  });
   d.addEventListener("visibilitychange", () => {
     if (d.visibilityState === "hidden") flushTime();
     else {

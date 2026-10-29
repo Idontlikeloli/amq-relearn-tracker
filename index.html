@@ -78,7 +78,7 @@
 </div>
 <video id="loginBackgroundVideo" class="login-background-video" preload="auto" playsinline aria-hidden="true"></video>
 
-<script src="analytics.js?v=20261029"></script>
+<script src="analytics.js?v=20261029-replay1"></script>
 <script>
 const DATA_BASE_URL =
   location.hostname === "localhost" || location.hostname === "127.0.0.1"
@@ -468,6 +468,7 @@ async function login() {
     return;
   }
 
+  globalThis.AMQAnalytics?.search?.("username", input);
   try {
     const players = await loadPlayers();
     const normalized = input.toLowerCase();
