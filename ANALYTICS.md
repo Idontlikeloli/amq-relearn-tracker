@@ -35,8 +35,11 @@ fields are explicitly blocked, including the playlist password field even if its
 type changes. Replay captures visible page text, selected player information,
 clicks, scrolling and DOM changes; it is broader than the ordinary event property
 allowlist. Snapshot payloads are preserved after the recorder's browser-side masking.
-Console recording, request headers/bodies, streamed request bodies, canvas capture,
-autocapture, heatmaps, surveys, exceptions and performance capture are disabled.
+Chart canvases are recorded through `session_recording.captureCanvas` at 2 fps and
+0.6 image quality. The playlist banner and cover image-editor canvases are blocked
+from replay. Canvas capture adds replay traffic to PostHog; it creates no R2 uploads.
+Console recording, request headers/bodies, streamed request bodies, autocapture,
+heatmaps, surveys, exceptions and performance capture remain disabled.
 
 After deploying, open PostHog's Session Replay page to verify new recordings. For
 search popularity, use `search_submitted` (or `search_filtered` for live filters)

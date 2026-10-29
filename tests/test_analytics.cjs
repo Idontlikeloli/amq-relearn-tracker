@@ -52,7 +52,11 @@ assert.equal(test.config.advanced_disable_feature_flags, true);
 assert.equal(test.config.enable_recording_console_log, false);
 assert.equal(test.config.session_recording.maskAllInputs, true);
 assert.match(test.config.session_recording.blockSelector, /input\[type="password"\]/);
-for (const key of ['recordHeaders', 'recordBody', 'streamNetworkBody', 'recordCanvas']) assert.equal(test.config.session_recording[key], false);
+for (const key of ['recordHeaders', 'recordBody', 'streamNetworkBody']) assert.equal(test.config.session_recording[key], false);
+assert.equal(test.config.session_recording.captureCanvas.recordCanvas, true);
+assert.equal(test.config.session_recording.captureCanvas.canvasFps, 2);
+assert.equal(test.config.session_recording.captureCanvas.canvasQuality, 0.6);
+for (const selector of ['#playlistSearchBannerEditorCanvas', '#playlistCoverEditorCanvas']) assert(test.config.session_recording.blockSelector.includes(selector));
 assert.equal(test.config.disable_surveys, true);
 assert.equal(test.config.person_profiles, 'never');
 assert.equal(test.config.persistence, 'sessionStorage');
@@ -152,7 +156,7 @@ assert.equal(blocked.window.posthog.length, 0);
 
 for (const page of ['index.html', 'player.html']) {
   const html = fs.readFileSync(path.join(__dirname, '..', page), 'utf8');
-  assert.equal((html.match(/src="analytics\.js\?v=20261029-replay1"/g) || []).length, 1);
+  assert.equal((html.match(/src="analytics\.js\?v=20261029-canvas1"/g) || []).length, 1);
   assert(html.indexOf('src="analytics.js') < html.indexOf('<script>'));
   for (const [, code] of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new vm.Script(code);
 }

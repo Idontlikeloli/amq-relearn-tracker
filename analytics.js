@@ -194,11 +194,15 @@
       session_recording: {
         maskAllInputs: true,
         maskInputFn: maskReplayInput,
-        blockSelector: 'input[type="password"], #playlistsPasswordInput',
+        blockSelector: 'input[type="password"], #playlistsPasswordInput, #playlistSearchBannerEditorCanvas, #playlistCoverEditorCanvas',
         recordHeaders: false,
         recordBody: false,
         streamNetworkBody: false,
-        recordCanvas: false
+        captureCanvas: {
+          recordCanvas: true,
+          canvasFps: 2,
+          canvasQuality: 0.6
+        }
       },
       disable_surveys: true,
       capture_heatmaps: false,
