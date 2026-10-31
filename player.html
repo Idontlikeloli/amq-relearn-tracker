@@ -13141,7 +13141,7 @@
   </div>
 </div>
 
-<script src="analytics.js?v=20261031-qualified-tab-visits"></script>
+<script src="analytics.js?v=20261031-relearn-export-clicks"></script>
 <script>
 const isLocalDataContext =
   location.protocol === "file:"
@@ -37325,6 +37325,8 @@ function buildRelearnAmqPlusExport(rows, roomName, startTime = Date.now()) {
 function exportRelearnSongsForCsl() {
   const selected = getSelectedRelearnDownloadSongs();
   if (!selected.length) return;
+  // Count the button activation before export work, including failed exports.
+  globalThis.AMQAnalytics?.track("songs_export_clicked", { source: "relearn", format: "csl", mode: relearnDownloadMode.value, list: relearnDownloadList.value, song_count: selected.length });
   const state = relearnDownloadState;
   const failuresElement = document.getElementById("relearnDownloadFailures");
   failuresElement.replaceChildren();
@@ -37360,6 +37362,8 @@ async function downloadRelearnSongs() {
   const state = relearnDownloadState;
   const mode = relearnDownloadMode.value;
   const listMode = relearnDownloadList.value;
+  // Count once per activation, even if fetching later fails or is cancelled.
+  globalThis.AMQAnalytics?.track("songs_export_clicked", { source: "relearn", format: "zip", mode, list: listMode, song_count: songs.length });
   const controller = new AbortController();
   const { signal } = controller;
   state.controller = controller;
