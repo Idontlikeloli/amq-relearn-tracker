@@ -13,9 +13,9 @@
 
   const views = {
     landing: ["Home"],
-    overview: ["overview", "statsSummary", "weekly"],
+    overview: ["overview", "latestTour", "statsSummary", "weekly", "siteGuide"],
     performance: ["Guess Rate", "Lives Taken / Saved", "Onlist/Offlist", "Rigs Missed", "Composite charts"],
-    knowledge: ["Artist Familiarity", "Tag Familiarity", "Seasonal Comparison"],
+    knowledge: ["Artist Familiarity", "Franchise Familiarity", "Tag Familiarity", "Seasonal Comparison"],
     insights: ["Relearn Tracker", "By never correct", "By Wrong Guess", "Playlists"],
     social: ["Synergy", "Rivals", "Team Contributions", "Rig / List analysis"],
     otherTools: ["Search songs", "Search song frequency", "Player database", "Single Tour", "Changelog"]
@@ -70,9 +70,11 @@
   const fields = {
     $pageview: ["section", "view"],
     section_viewed: ["section", "view"],
+    section_engaged: ["section", "view", "visible_seconds"],
     section_time: ["section", "view", "visible_seconds"],
     dashboard_opened: [],
     song_played: ["source", "clip"],
+    songs_export_clicked: ["source", "format", "mode", "list", "song_count"],
     songs_exported: ["source", "format", "mode", "list", "song_count"],
     search_submitted: ["feature", "input_id", "query", "player_count"],
     search_filtered: ["feature", "input_id", "query"],
@@ -146,31 +148,67 @@
     track("search_filtered", { feature: searchInputs[id], input_id: id, query });
   }
 
+  const MIN_TAB_VIEW_MS = 5000;
   let current = null;
   let pending = null;
   let timer = null;
   let visibleSince = null;
-  function flushTime() {
-    if (current && visibleSince !== null) {
-      const seconds = Math.round((performance.now() - visibleSince) / 1000);
-      if (seconds > 0) track("section_time", { ...current, visible_seconds: seconds });
+  let visibleVisitMs = 0;
+  let engagementTimer = null;
+  let visitEngaged = false;
+  function captureEngagedVisit() {
+    engagementTimer = null;
+    if (!current || visitEngaged) return;
+    const elapsed = visibleVisitMs + (visibleSince === null ? 0 : Math.max(0, performance.now() - visibleSince));
+    if (elapsed >= MIN_TAB_VIEW_MS) {
+      visitEngaged = true;
+      track("section_engaged", { ...current, visible_seconds: Math.floor(elapsed / 1000) });
+    } else if (visibleSince !== null && d.visibilityState !== "hidden") {
+      engagementTimer = w.setTimeout(captureEngagedVisit, MIN_TAB_VIEW_MS - elapsed);
     }
-    visibleSince = null;
+  }
+  function startVisibleTime() {
+    if (!current || visibleSince !== null || d.visibilityState === "hidden") return;
+    visibleSince = performance.now();
+    if (!visitEngaged) {
+      engagementTimer = w.setTimeout(captureEngagedVisit, Math.max(0, MIN_TAB_VIEW_MS - visibleVisitMs));
+    }
+  }
+  function flushTime() {
+    if (engagementTimer !== null) w.clearTimeout(engagementTimer);
+    engagementTimer = null;
+    if (current && visibleSince !== null) {
+      const elapsed = Math.max(0, performance.now() - visibleSince);
+      visibleVisitMs += elapsed;
+      visibleSince = null;
+      const seconds = Math.round(elapsed / 1000);
+      if (seconds > 0) track("section_time", { ...current, visible_seconds: seconds });
+      // Also qualify visits when a busy page delayed the threshold timer.
+      captureEngagedVisit();
+    }
   }
   function showPending() {
+    if (timer !== null) w.clearTimeout(timer);
     timer = null;
     if (!pending || d.visibilityState === "hidden") return;
     const next = pending;
     pending = null;
-    if (current?.section === next.section && current?.view === next.view) return;
+    if (current?.section === next.section && current?.view === next.view) {
+      startVisibleTime();
+      return;
+    }
     flushTime();
     current = next;
-    visibleSince = performance.now();
+    visibleVisitMs = 0;
+    visitEngaged = false;
     track("section_viewed", current);
+    startVisibleTime();
   }
   function view(section, name) {
     if (!views[section]?.includes(name)) return;
     pending = { section, view: name };
+    // Stop the old clock at navigation, before rendering the new tab can block.
+    if (current && (current.section !== section || current.view !== name)) flushTime();
     if (timer !== null) w.clearTimeout(timer);
     // Collapse synchronous navigation renders; background preloads never call view.
     timer = w.setTimeout(showPending, 0);
@@ -231,12 +269,12 @@
     if (d.visibilityState === "hidden") flushTime();
     else {
       showPending();
-      if (current && visibleSince === null) visibleSince = performance.now();
+      startVisibleTime();
     }
   });
   w.addEventListener("pagehide", flushTime);
   w.addEventListener("pageshow", () => {
-    if (current && visibleSince === null && d.visibilityState !== "hidden") visibleSince = performance.now();
+    startVisibleTime();
   });
   track("$pageview", page === "index.html" ? { section: "landing", view: "Home" } : {});
   if (page === "index.html") view("landing", "Home");
