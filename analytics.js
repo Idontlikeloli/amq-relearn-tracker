@@ -57,6 +57,8 @@
     return isSearchInput(element) ? text : "*".repeat(text.length);
   }
   const choices = {
+    method: ["calendar", "search"],
+    action: ["date_selected", "previous_month", "next_month", "query_changed"],
     mode: ["watched", "usual", "all"],
     list: ["onlist", "offlist", "all"],
     format: ["zip", "csl"],
@@ -73,6 +75,7 @@
     section_engaged: ["section", "view", "visible_seconds"],
     section_time: ["section", "view", "visible_seconds"],
     dashboard_opened: [],
+    single_tour_navigation: ["method", "action"],
     song_played: ["source", "clip"],
     songs_export_clicked: ["source", "format", "mode", "list", "song_count"],
     songs_exported: ["source", "format", "mode", "list", "song_count"],
@@ -146,6 +149,9 @@
     if (lastLiveQueries.get(id) === query) return;
     lastLiveQueries.set(id, query);
     track("search_filtered", { feature: searchInputs[id], input_id: id, query });
+    if (id === "originalTourSearchInput") {
+      track("single_tour_navigation", { section: "otherTools", view: "Single Tour", method: "search", action: "query_changed" });
+    }
   }
 
   const MIN_TAB_VIEW_MS = 5000;
@@ -221,7 +227,9 @@
       api_host: "https://us.i.posthog.com",
       defaults: "2026-05-30",
       person_profiles: "never",
-      persistence: "sessionStorage",
+      // Retain an anonymous browser identity across return visits; the SDK still
+      // rotates session IDs for separate visits. Never identify the viewed player.
+      persistence: "localStorage",
       autocapture: false,
       capture_pageview: false,
       capture_pageleave: false,

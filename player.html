@@ -7311,7 +7311,7 @@
       cursor: default !important;
       z-index: 2 !important;
       overflow: hidden !important;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.18) !important;
+      box-shadow: none !important;
     }
 
     .search-songs-sample-segment.lane-1 {
@@ -7319,15 +7319,15 @@
     }
 
     .search-songs-sample-segment.pattern-correct {
-      background: linear-gradient(180deg, #34c979 0%, #159653 100%) !important;
+      background: #76db9b !important;
     }
 
     .search-songs-sample-segment.pattern-wrong {
-      background: linear-gradient(180deg, #f06b6b 0%, #c93d3d 100%) !important;
+      background: #f58b8b !important;
     }
 
     .search-songs-sample-segment.pattern-unknown {
-      background: linear-gradient(180deg, #a8b4c3 0%, #718096 100%) !important;
+      background: #94a3b8 !important;
     }
 
     .search-songs-sample-hidden-count {
@@ -8842,6 +8842,7 @@
       display: grid !important;
       grid-template-columns: minmax(0, 1fr) !important;
       gap: 2px 12px !important;
+      height: 224px !important;
       max-height: 224px !important;
       overflow-y: auto !important;
       padding: 6px 0 !important;
@@ -13141,7 +13142,7 @@
   </div>
 </div>
 
-<script src="analytics.js?v=20261031-relearn-export-clicks"></script>
+<script src="analytics.js?v=20261031-tour-navigation-persistent-id"></script>
 <script>
 const isLocalDataContext =
   location.protocol === "file:"
@@ -13716,6 +13717,7 @@ let socialSynergyTargetRigMode = "unique";
 let socialSynergyOtherRigMode = "unique";
 let socialRivalsMetricKey = "guess_rate";
 let socialRivalsSelectionOwnerKey = "";
+let socialRivalsHeightObserver = null;
 let socialSynergyRequestId = 0;
 let overviewSynergyRequestId = 0;
 const socialSynergyCacheByKey = new Map();
@@ -16418,6 +16420,7 @@ if (originalTourSearchInput) {
 if (originalTourPrevMonthBtn) {
   originalTourPrevMonthBtn.addEventListener("click", () => {
     if (!(otherToolsCalendarMonthCursor instanceof Date)) return;
+    globalThis.AMQAnalytics?.track("single_tour_navigation", { section: "otherTools", view: "Single Tour", method: "calendar", action: "previous_month" });
     otherToolsCalendarMonthCursor = new Date(
       otherToolsCalendarMonthCursor.getFullYear(),
       otherToolsCalendarMonthCursor.getMonth() - 1,
@@ -16429,6 +16432,7 @@ if (originalTourPrevMonthBtn) {
 if (originalTourNextMonthBtn) {
   originalTourNextMonthBtn.addEventListener("click", () => {
     if (!(otherToolsCalendarMonthCursor instanceof Date)) return;
+    globalThis.AMQAnalytics?.track("single_tour_navigation", { section: "otherTools", view: "Single Tour", method: "calendar", action: "next_month" });
     otherToolsCalendarMonthCursor = new Date(
       otherToolsCalendarMonthCursor.getFullYear(),
       otherToolsCalendarMonthCursor.getMonth() + 1,
@@ -21235,6 +21239,7 @@ function renderOriginalTourCalendarGrid() {
         const preferred = games.find(game => game.timestamp === otherToolsCalendarSelectedTimestamp);
         const selectedGame = preferred || games[games.length - 1];
         otherToolsCalendarSelectedTimestamp = selectedGame.timestamp;
+        globalThis.AMQAnalytics?.track("single_tour_navigation", { section: "otherTools", view: "Single Tour", method: "calendar", action: "date_selected" });
         renderOriginalTourCalendarView();
       });
     }
@@ -25181,8 +25186,38 @@ async function renderOverviewSynergySummary() {
   renderOverviewSynergyRows(topRows, targetLabel);
 }
 
+function getSocialRivalsStatsDataForActiveMode() {
+  const stats = getSocialStatsDataForActiveMode();
+  const groups = new Map();
+  Object.entries(stats).forEach(([key, rows]) => {
+    if (!Array.isArray(rows)) return;
+    const entry = getPlayerEntryFromCacheByName(key);
+    const playerId = String(entry && entry.playerId || "").trim();
+    const identity = playerId ? `id:${playerId}` : `name:${key.trim().toLowerCase()}`;
+    if (!groups.has(identity)) groups.set(identity, { keys: [], rows: [] });
+    const group = groups.get(identity);
+    group.keys.push(key);
+    group.rows.push(...rows);
+  });
+
+  const mergedStats = Object.create(null);
+  groups.forEach((group, identity) => {
+    const seen = new Set();
+    const rows = sortRecordsByTimestamp(group.rows.filter(row => {
+      if (!row || typeof row !== "object") return false;
+      // An alias changes the name, not the identity of the player's tour result.
+      const key = getStatsRowDedupeKey({ ...row, "Player name": identity });
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }));
+    group.keys.forEach(key => { mergedStats[key] = rows; });
+  });
+  return mergedStats;
+}
+
 function getAvailableSocialRivalEntries() {
-  const activeStatsData = getSocialStatsDataForActiveMode();
+  const activeStatsData = getSocialRivalsStatsDataForActiveMode();
   if (!currentStatKey || !activeStatsData || typeof activeStatsData !== "object") return [];
   const activeMode = getActiveDataSourceMode();
   const currentPlayerEntry = getPlayerEntryFromCacheByName(currentStatKey || currentDisplayName || "");
@@ -25493,7 +25528,6 @@ function syncSocialRivalsBubbleHeight() {
   bubbleView.style.height = `${measuredHeight}px`;
 }
 
-let socialRivalsHeightObserver = null;
 function startSocialRivalsHeightSync() {
   const filterView = document.getElementById("socialRivalsFilterView");
   if (!filterView) return;
@@ -25562,7 +25596,7 @@ function renderSocialRivalsChart() {
     socialRivalsBubbleChart = null;
   }
 
-  const activeStatsData = getSocialStatsDataForActiveMode();
+  const activeStatsData = getSocialRivalsStatsDataForActiveMode();
   const activeMode = getActiveDataSourceMode();
   const targetRows = getCurrentUserRecordsForActiveMode();
   if (!currentStatKey || !targetRows.length) {
@@ -25625,9 +25659,9 @@ function renderSocialRivalsChart() {
   const timestampSet = new Set();
   seriesData.forEach(player => {
     player.rows.forEach(row => {
-      const metricValue = Number(row && row[metricConfig.field]);
+      const metricValue = toFiniteTrendValue(row && row[metricConfig.field]);
       const timestamp = String(row && row.Timestamp || "");
-      if (!timestamp || !Number.isFinite(metricValue)) return;
+      if (!timestamp || metricValue == null) return;
       timestampSet.add(timestamp);
     });
   });
@@ -25665,15 +25699,16 @@ function renderSocialRivalsChart() {
     const valueMap = new Map();
     player.rows.forEach(row => {
       const timestamp = String(row && row.Timestamp || "");
-      const metricValue = Number(row && row[metricConfig.field]);
-      if (!timestamp || !Number.isFinite(metricValue)) return;
+      const metricValue = toFiniteTrendValue(row && row[metricConfig.field]);
+      if (!timestamp || metricValue == null) return;
       valueMap.set(timestamp, metricValue);
     });
 
+    const isolatedPoint = valueMap.size === 1;
     const color = palette[index % palette.length];
     const isTarget = index === 0;
-    const baseLineAlpha = 0.28;
-    const basePointAlpha = 0.20;
+    const baseLineAlpha = 0.65;
+    const basePointAlpha = 0.65;
     const targetLineAlpha = 0.92;
     const targetPointAlpha = 0.80;
     const lineAlpha = isTarget ? targetLineAlpha : baseLineAlpha;
@@ -25692,7 +25727,7 @@ function renderSocialRivalsChart() {
         pointBorderColor: toRgba(color, pointAlpha)
       },
       pointRadius: hideStaticPoints
-        ? (context => (context && context.active ? overviewHoverPointRadius : 0))
+        ? (context => (context && context.active ? overviewHoverPointRadius : (isolatedPoint ? 2 : 0)))
         : 2,
       pointHoverRadius: hideStaticPoints ? overviewHoverPointRadius : 4,
       pointHitRadius: 12,
@@ -25705,7 +25740,6 @@ function renderSocialRivalsChart() {
 
   const plottedValues = datasets
     .flatMap(dataset => dataset.data)
-    .map(value => Number(value))
     .filter(value => Number.isFinite(value));
   const minMetricValue = plottedValues.length ? Math.min(...plottedValues) : 0;
   const maxMetricValue = plottedValues.length ? Math.max(...plottedValues) : 100;
