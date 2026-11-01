@@ -57,6 +57,7 @@
     return isSearchInput(element) ? text : "*".repeat(text.length);
   }
   const choices = {
+    profile_scope: ["owner", "other"],
     method: ["calendar", "search"],
     action: ["date_selected", "previous_month", "next_month", "query_changed"],
     mode: ["watched", "usual", "all"],
@@ -70,10 +71,10 @@
     value: ["watched", "usual", "on", "off", "all", "week", "month", "2months", "3months", "6months", "10", "20", "50", "regular", "combined", "table", "chart"]
   };
   const fields = {
-    $pageview: ["section", "view"],
-    section_viewed: ["section", "view"],
-    section_engaged: ["section", "view", "visible_seconds"],
-    section_time: ["section", "view", "visible_seconds"],
+    $pageview: ["section", "view", "profile_scope"],
+    section_viewed: ["section", "view", "profile_scope"],
+    section_engaged: ["section", "view", "visible_seconds", "profile_scope"],
+    section_time: ["section", "view", "visible_seconds", "profile_scope"],
     dashboard_opened: [],
     single_tour_navigation: ["method", "action"],
     song_played: ["source", "clip"],
@@ -106,6 +107,12 @@
     "$lib", "$lib_version", "$browser", "$browser_version", "$os", "$os_version",
     "$device_type", "$screen_height", "$screen_width", "$viewport_height", "$viewport_width"];
   const page = /\/player\.html$/.test(location.pathname) ? "player.html" : "index.html";
+  // Only classify the viewed page; never identify the visitor or send the username.
+  // These aliases resolve to owner player 364 in players.json.
+  const profileName = new URL(location.href).searchParams.get("user")?.trim().toLowerCase();
+  const profileScope = page === "player.html" && profileName
+    ? (["i_dont_like_loli", "amq_grind"].includes(profileName) ? "owner" : "other")
+    : undefined;
   const safeUrl = new URL(page, location.href).origin + new URL(page, location.href).pathname;
   function beforeSend(event) {
     // Replay snapshots have already passed browser-side input masking. Preserve
@@ -125,7 +132,7 @@
   }
   function track(name, properties) {
     if (!Object.hasOwn(fields, name)) return;
-    try { w.posthog?.capture(name, cleanFields(name, { ...current, ...properties })); } catch (_) { /* Analytics must never interrupt the app. */ }
+    try { w.posthog?.capture(name, cleanFields(name, { profile_scope: profileScope, ...current, ...properties })); } catch (_) { /* Analytics must never interrupt the app. */ }
   }
   function search(inputId, value, extra = {}) {
     const element = d.getElementById(inputId);

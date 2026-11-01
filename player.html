@@ -11725,7 +11725,7 @@
           <div class="card">
             <div class="card-title">Usefulness &amp; Solos
               <span class="weekly-card-info" tabindex="0">i
-                <span class="weekly-card-info-tooltip">Weekly averages from your games: Usefulness and Solos (Erigs + Offlist erigs), with change from last week.</span>
+                <span class="weekly-card-info-tooltip">Weekly averages from your games: Usefulness and Solos (ERigs, which already includes Offlist ERigs), with change from last week.</span>
               </span>
             </div>
             <div class="card-lines" id="weeklyUsefulnessSolosGroupValue">
@@ -13142,7 +13142,7 @@
   </div>
 </div>
 
-<script src="analytics.js?v=20261031-tour-navigation-persistent-id"></script>
+<script src="analytics.js?v=20261101-profile-scope"></script>
 <script>
 const isLocalDataContext =
   location.protocol === "file:"
@@ -16913,17 +16913,8 @@ function averageMetricFromRows(rows, key) {
 }
 
 function averageSolosFromRows(rows) {
-  const values = rows
-    .map(row => {
-      const erigs = Number.parseFloat(row && row.erigs);
-      const offlistErigs = Number.parseFloat(row && row["Offlist erigs"]);
-      if (!Number.isFinite(erigs)) return null;
-      if (!Number.isFinite(offlistErigs)) return erigs;
-      return erigs + offlistErigs;
-    })
-    .filter(Number.isFinite);
-  if (!values.length) return null;
-  return values.reduce((sum, value) => sum + value, 0) / values.length;
+  // ERigs already includes Offlist ERigs.
+  return averageMetricFromRows(rows, "erigs");
 }
 
 function weeklySortByTimestampAsc(rows) {
