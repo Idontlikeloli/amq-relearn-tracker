@@ -14588,13 +14588,38 @@ async function loadChangelogDataText(forceReload = false) {
   }
 }
 
+function formatChangelogDataWithLocalTime(content) {
+  const text = String(content || "");
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  return text.replace(/^(Last updated: ([A-Za-z]+) (\d{1,2}), (\d{4}) (\d{2}):(\d{2}):(\d{2}) CST)[ \t]*$/gm,
+    (line, original, monthName, dayText, yearText, hourText, minuteText, secondText) => {
+      const month = months.findIndex(name => name.toLowerCase() === monthName.toLowerCase());
+      const [year, day, hour, minute, second] = [yearText, dayText, hourText, minuteText, secondText].map(Number);
+      if (month < 0 || year < 100 || hour > 23 || minute > 59 || second > 59) return line;
+      const wallTime = new Date(Date.UTC(year, month, day, hour, minute, second));
+      if (wallTime.getUTCFullYear() !== year || wallTime.getUTCMonth() !== month || wallTime.getUTCDate() !== day) return line;
+      // data.txt is generated in China Standard Time; parsing bare "CST" can mean US Central Time.
+      const instant = new Date(wallTime.getTime() - 8 * 60 * 60 * 1000);
+      try {
+        const localTime = new Intl.DateTimeFormat("en-US", {
+          year: "numeric", month: "long", day: "numeric",
+          hour: "2-digit", minute: "2-digit", second: "2-digit",
+          hourCycle: "h23", timeZoneName: "short"
+        }).format(instant);
+        return `${original} (local time: ${localTime})`;
+      } catch (_) {
+        return line;
+      }
+    });
+}
+
 async function renderOtherToolsChangelogData() {
   const contentEl = document.getElementById("otherToolsChangelogDataContent");
   if (!contentEl) return;
 
   const dataText = await loadChangelogDataText();
   if (dataText) {
-    renderChangelogContent(contentEl, dataText);
+    renderChangelogContent(contentEl, formatChangelogDataWithLocalTime(dataText));
   } else {
     contentEl.innerText = "No recent data information available.";
   }
