@@ -3118,189 +3118,128 @@
       margin-top: 34px !important;
     }
 
-    body.unified-nav-mode.site-guide-active .subnav-right {
-      display: none !important;
-    }
+    body.unified-nav-mode.site-guide-active .subnav-right { display: none !important; }
 
-    /* Temporarily hidden for the public release; implementation is retained. */
-    #overviewViewTabSiteGuide,
-    #overviewSiteGuideView,
-    #knowledgeAnimeView {
-      display: none !important;
-    }
+    /* Franchise Familiarity remains temporarily hidden. */
+    #knowledgeAnimeView { display: none !important; }
 
-    #overviewSiteGuideView {
-      max-width: 1160px;
-      margin: 0 auto;
-      color: #334155;
-      font-size: 14px;
-      line-height: 1.65;
+    #overviewSiteGuideView { max-width: 1360px; margin: 0 auto; color: #334155; font-size: 15px; line-height: 1.8; }
+    #overviewSiteGuideView [hidden] { display: none !important; }
+    #overviewSiteGuideView .site-guide-intro { max-width: 78ch; margin: 0 0 36px; color: #526578; font-size: 16px; }
+    #overviewSiteGuideView .site-guide-layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: clamp(24px, 4vw, 64px); align-items: start; }
+    #overviewSiteGuideView .site-guide-reading { min-width: 0; }
+    #overviewSiteGuideView .site-guide-section { scroll-margin-top: 155px; margin: 0 0 60px; }
+    #overviewSiteGuideView .site-guide-section > h2 { margin: 0 0 28px; padding-bottom: 14px; border-bottom: 1px solid #d7e2ed; font-size: 25px; color: #293e52; line-height: 1.35; }
+    #overviewSiteGuideView .site-guide-topic { min-width: 0; scroll-margin-top: 155px; padding: 0; margin: 0 0 42px; border: 0; background: transparent; }
+    #overviewSiteGuideView .site-guide-topic-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 15px; }
+    #overviewSiteGuideView h3 { margin: 0; color: #2f4153; font-size: 20px; line-height: 1.4; }
+    #overviewSiteGuideView p { margin: 0 0 17px; overflow-wrap: anywhere; }
+    #overviewSiteGuideView p:last-child { margin-bottom: 0; }
+    #overviewSiteGuideView a { color: #315f88; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    #overviewSiteGuideView strong { color: #2f4153; font-weight: 650; }
+    #overviewSiteGuideView .site-guide-open, .site-guide-topic-link { border: 1px solid #d3dfeb; border-radius: 7px; background: #f8fbfe; color: #426480; padding: 4px 10px; font: inherit; font-size: 12px; font-weight: 500; line-height: 1.5; white-space: nowrap; cursor: pointer; }
+    #overviewSiteGuideView .site-guide-open { font-family: inherit; font-size: 12px; }
+    .site-guide-topic-link { margin-left: 14px; font-size: 12px !important; font-family: inherit; font-weight: 500 !important; vertical-align: middle; }
+    #overviewSiteGuideView .site-guide-open:hover, .site-guide-topic-link:hover { background: #eaf2fa; border-color: #a9c3da; }
+    #overviewSiteGuideView .site-guide-sidebar { position: sticky; top: 145px; max-height: calc(100vh - 170px); overflow-y: auto; scrollbar-width: thin; border-left: 1px solid #d7e2ed; padding-left: 22px; padding-right: 6px; }
+    #overviewSiteGuideView .site-guide-sidebar h2 { font-size: 12px; line-height: 1.4; color: #6a7c8e; font-weight: 650; margin: 0 0 12px; }
+    #overviewSiteGuideView .site-guide-contents, #overviewSiteGuideView .site-guide-local-contents { display: flex; flex-direction: column; gap: 2px; }
+    #overviewSiteGuideView .site-guide-contents { padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid #d7e2ed; }
+    #overviewSiteGuideView .site-guide-sidebar a { display: block; padding: 6px 9px; border-radius: 6px; text-decoration: none; font-size: 13px; line-height: 1.45; color: #526578; }
+    #overviewSiteGuideView .site-guide-sidebar a:hover { background: #f0f5fa; color: #284c6c; }
+    #overviewSiteGuideView .site-guide-sidebar a[aria-current] { background: #e6f0fa; color: #254d70; font-weight: 650; }
+    #overviewSiteGuideView .site-guide-topic-links { display: grid; gap: 3px; }
+    #overviewSiteGuideView .site-guide-local-contents a { font-size: 12px; }
+    #overviewSiteGuideView .site-guide-figure { margin: 22px 0; }
+    #overviewSiteGuideView .site-guide-image-button { display: block; max-width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; border-radius: 8px; overflow: hidden; }
+    #overviewSiteGuideView .site-guide-figure img { display: block; max-width: 100%; height: auto; }
+    #overviewSiteGuideView .site-guide-caption { color: #6a7c8e; font-size: 13px; }
+    #overviewSiteGuideView .site-guide-table-wrap { overflow-x: auto; margin: 22px 0; border: 1px solid #d7e2ed; border-radius: 9px; }
+    #overviewSiteGuideView .site-guide-table { width: 100%; border-collapse: collapse; font-size: 14px; background: #fbfdff; }
+    #overviewSiteGuideView .site-guide-table caption { text-align: left; font-size: 12px; color: #64748b; padding: 10px 14px; }
+    #overviewSiteGuideView .site-guide-table :is(th, td) { padding: 10px 14px; text-align: left; border-top: 1px solid #e0e7ef; white-space: nowrap; }
+    #overviewSiteGuideView .site-guide-table th { background: #f0f5fa; color: #40536a; font-weight: 600; }
+    #overviewSiteGuideView .site-guide-table td { font-variant-numeric: tabular-nums; }
+    #overviewSiteGuideView .site-guide-text-example { padding: 12px 16px; border-left: 3px solid #b5cde3; background: #f7fafd; }
+    #overviewSiteGuideView .site-guide-question { scroll-margin-top: 155px; border: 1px solid #d7e2ed; border-radius: 10px; background: #fbfdff; margin-bottom: 12px; padding: 16px 19px; }
+    #overviewSiteGuideView .site-guide-question summary { cursor: pointer; font-weight: 600; color: #334b62; line-height: 1.5; }
+    #overviewSiteGuideView .site-guide-question > p { margin-top: 15px; }
+    #overviewSiteGuideView .site-guide-question[open] { background: #f7fbff; }
+    #overviewSiteGuideView .site-guide-ranking { padding-left: 24px; }
+    #overviewSiteGuideView .site-guide-ranking li { padding-left: 6px; margin-bottom: 16px; }
+    #overviewSiteGuideView .site-guide-ranking li::marker { color: #5a7892; font-weight: 650; }
+    #overviewSiteGuideView .site-guide-image-dialog { max-width: min(94vw, 1800px); max-height: 90vh; padding: 42px 16px 16px; border: 1px solid #c7d5e3; border-radius: 12px; background: #f9fcff; overflow: auto; }
+    #overviewSiteGuideView .site-guide-image-dialog::backdrop { background: rgba(17, 30, 44, .65); }
+    #overviewSiteGuideView .site-guide-image-dialog img { display: block; width: auto; height: auto; max-width: 100%; max-height: calc(90vh - 70px); object-fit: contain; margin: auto; }
+    #overviewSiteGuideView .site-guide-image-close { position: absolute; right: 10px; top: 6px; border: 0; background: transparent; font-size: 27px; color: #435d73; cursor: pointer; padding: 0 8px; }
+    #overviewSiteGuideView :is(a, button, summary):focus-visible, .site-guide-topic-link:focus-visible { outline: 2px solid #7ba4ca; outline-offset: 3px; }
+    body.site-guide-active #overviewSection > .page-title { max-width: 1360px; margin-left: auto; margin-right: auto; }
+    @media (max-width: 900px) {
+      #overviewSiteGuideView .site-guide-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+      #overviewSiteGuideView .site-guide-sidebar { position: static; grid-row: 1; max-height: none; overflow: visible; padding: 16px; border: 1px solid #d7e2ed; border-radius: 10px; background: #f7fafd; }
+      #overviewSiteGuideView .site-guide-contents { flex-direction: row; flex-wrap: wrap; gap: 5px; padding-bottom: 12px; margin-bottom: 12px; }
+      #overviewSiteGuideView .site-guide-sidebar h2 { width: 100%; }
+      #overviewSiteGuideView .site-guide-topic-links { display: flex; flex-wrap: wrap; gap: 4px 6px; max-height: 170px; overflow: auto; }
+      #overviewSiteGuideView .site-guide-reading { grid-row: 2; }
+      #overviewSiteGuideView .site-guide-intro { margin-bottom: 22px; }
     }
-
-    #overviewSiteGuideView .site-guide-intro {
-      max-width: 76ch;
-      margin: 0 0 18px;
-      color: #526578;
-      font-size: 16px;
-    }
-
-    #overviewSiteGuideView .site-guide-contents {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 28px;
-    }
-
-    #overviewSiteGuideView .site-guide-contents a {
-      border: 1px solid #d9e3ef;
-      border-radius: 8px;
-      padding: 6px 12px;
-      background: #fbfdff;
-      color: #315c80;
-      text-decoration: none;
-    }
-
-    #overviewSiteGuideView .site-guide-section {
-      scroll-margin-top: 150px;
-      margin-top: 30px;
-    }
-
-    #overviewSiteGuideView h2 {
-      margin: 0 0 14px;
-      color: #2f4153;
-      font-size: 21px;
-      line-height: 1.35;
-    }
-
-    #overviewSiteGuideView h3 {
-      margin: 0 0 8px;
-      color: #2f4153;
-      font-size: 16px;
-      line-height: 1.4;
-    }
-
-    #overviewSiteGuideView p {
-      margin: 0 0 10px;
-    }
-
-    #overviewSiteGuideView .site-guide-steps {
-      margin: 0;
-      padding: 16px 20px 16px 40px;
-      border: 1px solid #dbe4ee;
-      border-radius: 12px;
-      background: #fbfdff;
-    }
-
-    #overviewSiteGuideView .site-guide-steps li + li {
-      margin-top: 12px;
-    }
-
-    #overviewSiteGuideView .site-guide-note {
-      margin-top: 12px;
-      color: #64748b;
-      font-size: 13px;
-    }
-
-    #overviewSiteGuideView .site-guide-feature-grid,
-    #overviewSiteGuideView .site-guide-explain-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    #overviewSiteGuideView article {
-      min-width: 0;
-      padding: 18px 20px;
-      border: 1px solid #dbe4ee;
-      border-radius: 12px;
-      background: #fbfdff;
-    }
-
-    #overviewSiteGuideView article > :last-child {
-      margin-bottom: 0;
-    }
-
-    #overviewSiteGuideView .site-guide-link {
-      padding: 0;
-      border: 0;
-      background: transparent;
-      color: #315f88;
-      font: inherit;
-      font-weight: 600;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    #overviewSiteGuideView .site-guide-link:hover {
-      text-decoration: underline;
-    }
-
-    #overviewSiteGuideView .site-guide-example {
-      padding-left: 12px;
-      border-left: 3px solid #b6cde1;
-      color: #526578;
-    }
-
-    #overviewSiteGuideView code {
-      font-size: 0.95em;
-      overflow-wrap: anywhere;
-    }
-
-    #overviewSiteGuideView .site-guide-glossary {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      column-gap: 28px;
-      margin: 0;
-    }
-
-    #overviewSiteGuideView .site-guide-glossary > div {
-      padding: 14px 0;
-      border-top: 1px solid #dbe4ee;
-    }
-
-    #overviewSiteGuideView dt {
-      margin-bottom: 4px;
-      font-weight: 700;
-      color: #2f4153;
-    }
-
-    #overviewSiteGuideView dd {
-      margin: 0;
-    }
-
-    #overviewSiteGuideView .site-guide-question {
-      padding: 14px 18px;
-      margin-bottom: 10px;
-      border: 1px solid #dbe4ee;
-      border-radius: 10px;
-      background: #fbfdff;
-    }
-
-    #overviewSiteGuideView .site-guide-question summary {
-      font-weight: 600;
-      color: #2f4153;
-      cursor: pointer;
-    }
-
-    #overviewSiteGuideView .site-guide-question p {
-      margin: 12px 0 0;
-    }
-
-    #overviewSiteGuideView :is(a, button, summary):focus-visible {
-      outline: 2px solid #7ba4ca;
-      outline-offset: 3px;
-    }
-
     @media (max-width: 700px) {
-      body.unified-nav-mode.overview-section-active .overview-view-tabs {
-        flex-wrap: wrap !important;
-      }
+      body.unified-nav-mode.overview-section-active .overview-view-tabs { flex-wrap: wrap !important; }
+      #overviewSiteGuideView { font-size: 14px; }
+      #overviewSiteGuideView .site-guide-section > h2 { font-size: 22px; }
+      #overviewSiteGuideView h3 { font-size: 18px; }
+      #overviewSiteGuideView .site-guide-topic-heading { align-items: start; }
+    }
 
-      #overviewSiteGuideView .site-guide-feature-grid,
-      #overviewSiteGuideView .site-guide-explain-grid,
-      #overviewSiteGuideView .site-guide-glossary {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    /* Keep the guide navigator attached to the viewport, not a non-scrolling body. */
+    body.unified-nav-mode.overview-section-active.site-guide-active { overflow: visible !important; overflow-anchor: none; }
+    #overviewSiteGuideView .site-guide-topic + .site-guide-topic { padding-top: 32px; border-top: 1px solid #cbd8e5; }
+    #overviewSiteGuideView .site-guide-section + .site-guide-section { padding-top: 38px; border-top: 2px solid #cbd8e5; }
+    #overviewSiteGuideView .site-guide-image-button { border: 1px solid #b8c9da; padding: 3px; background: #fbfdff; }
+    #overviewSiteGuideView .site-guide-image-dialog img { border: 1px solid #b8c9da; }
+    #overviewSiteGuideView .site-guide-sidebar { display: flex; flex-direction: column; }
+    #overviewSiteGuideView .site-guide-contents { flex-shrink: 0; }
+    #overviewSiteGuideView .site-guide-local-contents { min-height: 0; overflow-y: auto; scrollbar-width: thin; }
+    #overviewSiteGuideView .site-guide-contents button { width: 100%; text-align: left; padding: 6px 9px; border: 0; border-radius: 6px; background: transparent; color: #526578; font: inherit; font-size: 13px; line-height: 1.45; cursor: pointer; }
+    #overviewSiteGuideView .site-guide-contents button:hover { background: #f0f5fa; color: #284c6c; }
+    #overviewSiteGuideView .site-guide-contents button[aria-pressed="true"] { background: #e6f0fa; color: #254d70; font-weight: 650; }
+    #overviewSiteGuideView .site-guide-full-contents { padding: 22px 25px; margin-bottom: 46px; border: 1px solid #d7e2ed; border-radius: 10px; background: #f8fbfd; }
+    #overviewSiteGuideView .site-guide-full-contents h2 { margin: 0 0 20px; color: #2f4153; font-size: 20px; line-height: 1.4; }
+    #overviewSiteGuideView .site-guide-contents-groups { columns: 1; column-gap: 35px; margin: 0; padding-left: 22px; }
+    #overviewSiteGuideView .site-guide-contents-groups > li { break-inside: avoid; margin-bottom: 20px; padding-left: 3px; }
+    #overviewSiteGuideView .site-guide-contents-category { font-weight: 650; }
+    #overviewSiteGuideView .site-guide-contents-groups ul { padding-left: 17px; margin: 7px 0 0; list-style: disc; }
+    #overviewSiteGuideView .site-guide-contents-groups ul li { margin: 3px 0; font-size: 13px; line-height: 1.7; }
+    @media (max-width: 900px) {
+      #overviewSiteGuideView .site-guide-nav-column { grid-row: 1; position: sticky; top: 32px; max-height: 35vh; z-index: 5; overflow: auto; }
+      #overviewSiteGuideView .site-guide-sidebar { position: static; max-height: none; box-shadow: 0 4px 12px #3341550d; }
+      #overviewSiteGuideView .site-guide-contents { flex-wrap: nowrap; overflow-x: auto; }
+      #overviewSiteGuideView .site-guide-contents h2 { display: none; }
+      #overviewSiteGuideView .site-guide-contents button { width: auto; flex-shrink: 0; }
+      #overviewSiteGuideView .site-guide-topic-links { max-height: 100px; }
+      #overviewSiteGuideView .site-guide-section, #overviewSiteGuideView .site-guide-topic, #overviewSiteGuideView .site-guide-question { scroll-margin-top: 390px; }
+    }
+    @media (max-width: 550px) {
+      #overviewSiteGuideView .site-guide-contents-groups { columns: 1; }
+      #overviewSiteGuideView .site-guide-full-contents { padding: 18px; }
+    }
+
+    @media (min-width: 901px) {
+      #overviewSiteGuideView .site-guide-nav-column { align-self: stretch; min-width: 0; box-sizing: border-box; padding-top: var(--site-guide-nav-start, 0px); }
+      #overviewSiteGuideView .site-guide-sidebar { position: sticky; top: 46px; width: 260px; box-sizing: border-box; max-height: calc(100vh - 62px); }
+      body.site-guide-active #overviewSection > .page-title { padding-right: 284px; box-sizing: border-box; }
+    }
+
+    #overviewSiteGuideView .site-guide-arrow-caption { position: relative; z-index: 1; color: #18232f; margin-top: clamp(-26px, -3vw, -10px); pointer-events: none; }
+    #overviewSiteGuideView .site-guide-example-arrow { display: block; width: 100%; height: clamp(65px, 9vw, 110px); overflow: visible; }
+    #overviewSiteGuideView .site-guide-arrow-caption span { display: block; width: 48%; margin-left: 38%; text-align: center; font-size: 14px; line-height: 1.5; }
+
+    #overviewSiteGuideView .site-guide-figure-compact { width: min(100%, 480px); margin-left: auto; margin-right: auto; }
+    #overviewSiteGuideView .site-guide-figure-compact + .site-guide-caption { text-align: center; }
+    #overviewSiteGuideView .site-guide-chart-examples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; gap: 18px; margin: 22px 0; }
+    #overviewSiteGuideView .site-guide-chart-examples .site-guide-figure { margin: 0; min-width: 0; }
+    @media (max-width: 600px) {
+      #overviewSiteGuideView .site-guide-chart-examples { grid-template-columns: minmax(0, 1fr); }
     }
 
     #overviewLatestTourView > * + * {
@@ -11562,73 +11501,120 @@
       </div>
       </div>
       <div id="overviewSiteGuideView" class="site-guide" style="display:none;">
-        <p class="site-guide-intro">Find your way around the tracker, understand the numbers, and turn your tour history into a learning plan. This guide is the same for everyone.</p>
-        <nav class="site-guide-contents" aria-label="Site guide contents">
-          <a href="#siteGuideStart">Getting started</a>
-          <a href="#siteGuideFeatures">Find a feature</a>
-          <a href="#siteGuideNumbers">Reading the numbers</a>
-          <a href="#siteGuideDefinitions">Definitions</a>
-          <a href="#siteGuideTips">Common questions</a>
-        </nav>
+        <p class="site-guide-intro">I know there may be questions regarding the site. This guide serves to answer some, if not all, of them (written personally by me and took a very long time 😭)</p>
+        <div class="site-guide-layout">
+          <div class="site-guide-reading"><nav class="site-guide-full-contents" aria-label="Complete table of contents"><h2>Table of contents</h2><ol class="site-guide-contents-groups"><li><a class="site-guide-contents-category" href="#guide-group-philosophies">General philosophies</a><ul><li><a href="#guide-performance-vs-knowledge">Performance vs Knowledge</a></li><li><a href="#guide-the-last-2-attempt">The Last-2 Attempt</a></li><li><a href="#guide-time-series-charts">Time Series Charts</a></li><li><a href="#guide-standardized-score-z-score">Standardized score (z-score)</a></li><li><a href="#guide-data-sources">Data Sources</a></li><li><a href="#guide-tour-vs-difficulty">Tour % vs Difficulty</a></li><li><a href="#guide-autocomplete-and-table-functions">Autocomplete and Table Functions</a></li><li><a href="#guide-ant">Ant</a></li><li><a href="#guide-personalized-vs-global-tabs">Personalized vs Global tabs</a></li></ul></li><li><a class="site-guide-contents-category" href="#guide-group-tabs">By tabs</a><ul><li><a href="#guide-overview-general">General</a></li><li><a href="#guide-latest-tour">Latest Tour</a></li><li><a href="#guide-stats-summary">Stats Summary</a></li><li><a href="#guide-weekly-performance">Weekly Performance</a></li><li><a href="#guide-performance">Guess Rate</a></li><li><a href="#guide-artist-familiarity">Artist Familiarity</a></li><li><a href="#guide-franchise-familiarity">Franchise familiarity</a></li><li><a href="#guide-tag-familiarity">Tag familiarity</a></li><li><a href="#guide-seasonal-comparison">Seasonal Comparison</a></li><li><a href="#guide-relearn-tracker">Relearn Tracker</a></li><li><a href="#guide-by-never-correct">By Never Correct</a></li><li><a href="#guide-by-wrong-guess">By Wrong Guess</a></li><li><a href="#guide-synergy">Synergy</a></li><li><a href="#guide-rivals">Rivals</a></li><li><a href="#guide-team-contributions">Team Contributions</a></li><li><a href="#guide-rig-list-analysis">Rig / List Analysis</a></li><li><a href="#guide-search-songs">Search Songs</a></li><li><a href="#guide-search-song-frequency">Search Song frequency</a></li><li><a href="#guide-player-database">Player Database</a></li><li><a href="#guide-single-tour">Single Tour</a></li><li><a href="#guide-changelog">Changelog</a></li></ul></li><li><a class="site-guide-contents-category" href="#guide-group-limitations">Limitations</a></li><li><a class="site-guide-contents-category" href="#guide-group-user-data">User Data</a></li><li><a class="site-guide-contents-category" href="#guide-group-questions">Common Questions</a><ul><li><a href="#guide-faq-how-often-is-the-data-updated">How often is the data updated?</a></li><li><a href="#guide-faq-how-often-is-this-site-updated">How often is this site updated?</a></li><li><a href="#guide-faq-it-says-the-data-is-updated-why-is-the-last-tour-i-played-not-there">It says the data is updated. Why is the last tour I played not there?</a></li><li><a href="#guide-faq-what-is-the-difference-between-the-z-score-calculation-in-stats-summary-and-latest-tour">What is the difference between the z-score calculation in Stats Summary and Latest-tour?</a></li><li><a href="#guide-faq-do-you-make-money">Do you make money?</a></li><li><a href="#guide-faq-do-you-lose-money">Do you lose money?</a></li><li><a href="#guide-faq-can-i-cheat-using-this-site">Can I cheat using this site?</a></li><li><a href="#guide-faq-will-this-site-die">Will this site die?</a></li></ul></li><li><a class="site-guide-contents-category" href="#guide-group-personal-ranking">Personal Ranking of features</a></li><li><a class="site-guide-contents-category" href="#guide-group-end-note">End Note</a></li></ol></nav><section id="guide-group-philosophies" class="site-guide-section" data-guide-group="philosophies"><h2>General philosophies</h2><article id="guide-performance-vs-knowledge" class="site-guide-topic" data-guide-group="philosophies"><div class="site-guide-topic-heading"><h3>Performance vs Knowledge</h3></div><p>This is where everything starts. I gather data from mainly two sources: stat sheet exports and files(JSONs) sent into the game-reporting channel (now using google sheets). The former is what I call “performance” metrics, while the latter is “knowledge.” Performance measures how you perform(obviously), and examples include your guess rate, usefulness, and whether you hit erigs and how many. Knowledge measures what you hit specifically: impossible Rena Uehara from To Heart 2 Adnext, all the way to I call your name again that gets spammed every watched tour.</p>
+<figure class="site-guide-figure"><button class="site-guide-image-button" type="button" data-guide-image="assets/site-guide/example-23.png" aria-label="Enlarge Site guide example 1"><img src="assets/site-guide/example-23.png" width="2250" height="349" alt="Site guide example 1" loading="lazy" decoding="async"></button></figure>
+<p class="site-guide-caption">Example of performance metrics</p>
+<figure class="site-guide-figure site-guide-figure-compact"><button class="site-guide-image-button" type="button" data-guide-image="assets/site-guide/example-27.png" aria-label="Enlarge Site guide example 2"><img src="assets/site-guide/example-27.png" width="1100" height="754" alt="Site guide example 2" loading="lazy" decoding="async"></button></figure>
+<p class="site-guide-caption">Example of knowledge metrics</p>
+<p>I may refer to these separately later on in the guide, so it’s clear we distinguish them. These two concepts are so important that you see them as two entire sections on the site.</p></article><article class="site-guide-topic" data-guide-group="philosophies" id="guide-the-last-2-attempt"><div class="site-guide-topic-heading"><h3>The Last-2 Attempt</h3></div><p>This is arguably the most important system that governs this site. It answers the question: “How do we determine if a player knows a song?”</p>
+<p>Each “attempt” is an instance of listening to a song (doesn’t matter whether you get it right or not). If either one of your last 2 attempts are right, according to the site you know the song.</p>
+<p>Here is an example using 🐶</p>
+<figure class="site-guide-figure"><button aria-label="Enlarge Site guide example 3" class="site-guide-image-button" data-guide-image="assets/site-guide/example-29.png" type="button"><img alt="Site guide example 3" decoding="async" height="186" loading="lazy" src="assets/site-guide/example-29.png" width="1712"/></button></figure>
+<p>There are 4 attempts, 3 wrong and 1 right. By majority of attempts, it would seem that I don’t know this song (only 25% guess rate). However, since either one of the last 2 were correct, the system flags me as knowing this.</p>
+<p>The “last-2 attempt” system is used almost everywhere in this site. As to why I implemented this system, let’s use this very obvious example of my genre guess rates.</p>
+<figure class="site-guide-figure site-guide-figure-compact"><button aria-label="Enlarge Site guide example 4" class="site-guide-image-button" data-guide-image="assets/site-guide/example-31.png" type="button"><img alt="Site guide example 4" decoding="async" height="1242" loading="lazy" src="assets/site-guide/example-31.png" width="1484"/></button></figure>
+<p>Imagine Call of Silence from Attack on Titan Season 2 spams every tour. If it keeps appearing and everyone keeps getting it, the Thriller genre would be misleading because of so many duplicate songs. Therefore, each song only counts once, and the simple rule decides whether to count you as knowing the song or not. Note: in this case many other songs from Attack on Titan Season 2 can still count, though each song only contributes one entry to the % calculation.</p>
+<p>There are a few places where the last-2 attempt isn’t used which will be mentioned, such as in the <a href="#guide-artist-familiarity">Artist Familiarity Radar</a>. The rig/non-rig accuracy counts repeated attempts instead of only counting based on Last-2.</p>
+<p>p.s. count how many times I use “Last-2” in this tab; it’s probably the most used term.</p></article><article id="guide-time-series-charts" class="site-guide-topic" data-guide-group="philosophies"><div class="site-guide-topic-heading"><h3>Time Series Charts</h3></div><p>These charts plot performance trends over time, and dominate the site. It’s easy to interpret, so I’ll focus on some features.</p>
+<figure class="site-guide-figure"><button class="site-guide-image-button" type="button" data-guide-image="assets/site-guide/example-33.png" aria-label="Enlarge Site guide example 5"><img src="assets/site-guide/example-33.png" width="2374" height="1104" alt="Site guide example 5" loading="lazy" decoding="async"></button></figure>
+<p>First, holding and dragging allows you to select and zoom in on a time period. Oh hey, look at that disgusting 21% guess rate from January…</p>
+<figure class="site-guide-figure"><button class="site-guide-image-button" type="button" data-guide-image="assets/site-guide/example-35.png" aria-label="Enlarge Site guide example 6"><img src="assets/site-guide/example-35.png" width="2380" height="1118" alt="Site guide example 6" loading="lazy" decoding="async"></button></figure>
+<p>After zooming in, you may press the “Reset zoom” button or the escape key (ESC) to reset.</p>
+<p>Second, you may click any of the trends or data points in the legend, and they will toggle on/off. This is useful when you just want to look at the general trends instead of the data points.</p>
+<p>Currently, only the time series charts in Overview use nonlinear trend lines. The charts in Performance still use a linear trend.</p>
+<figure class="site-guide-figure"><button class="site-guide-image-button" type="button" data-guide-image="assets/site-guide/example-37.png" aria-label="Enlarge Site guide example 7"><img src="assets/site-guide/example-37.png" width="2392" height="954" alt="Site guide example 7" loading="lazy" decoding="async"></button></figure></article><article id="guide-standardized-score-z-score" class="site-guide-topic" data-guide-group="philosophies"><div class="site-guide-topic-heading"><h3>Standardized score (z-score)</h3></div><p>I’m sure we all learned about this in statistics. This is useful if we want to standardize metrics with different scales and compare them.</p>
+<p>For example, let’s say you want to compare your guess rate and usefulness to the average tour player. There’s a problem though: guess rate and usefulness operate entirely on a different scale (guess rate is 0-100, usefulness uhhh…idk, maybe 40-130+). The z-score standardizes these on the same scale and allows us to compare them.</p>
+<figure class="site-guide-figure"><button class="site-guide-image-button" type="button" data-guide-image="assets/site-guide/example-39.png" aria-label="Enlarge Z-score formula"><img src="assets/site-guide/example-39.png" width="242" height="112" alt="Z-score formula" loading="lazy" decoding="async"></button></figure>
+<p>The z-score formula is relatively simple. It’s our sample point minus the average of our population, divided by the population’s standard deviation. The z-score is used in, but not limited to, these following areas.</p>
+<div class="site-guide-chart-examples"><figure class="site-guide-figure"><button class="site-guide-image-button" type="button" data-guide-image="assets/site-guide/example-40.png" aria-label="Enlarge Site guide example 9"><img src="assets/site-guide/example-40.png" width="1702" height="1158" alt="Site guide example 9" loading="lazy" decoding="async"></button></figure><figure class="site-guide-figure"><button class="site-guide-image-button" type="button" data-guide-image="assets/site-guide/example-42.png" aria-label="Enlarge Site guide example 10"><img src="assets/site-guide/example-42.png" width="2380" height="1100" alt="Site guide example 10" loading="lazy" decoding="async"></button></figure></div></article><article id="guide-data-sources" class="site-guide-topic" data-guide-group="philosophies"><div class="site-guide-topic-heading"><h3>Data Sources</h3></div><p>Here are all the data sources I use.</p>
+<p>Google Sheets data for the AMQ Tours Server (<a href="https://docs.google.com/spreadsheets/d/1ihfqssregh74curDyvRE0GAFihQfovUAHpYDrtOIrOA/edit?gid=1719516221#gid=1719516221" target="_blank" rel="noopener noreferrer">https://docs.google.com/spreadsheets/d/1ihfqssregh74curDyvRE0GAFihQfovUAHpYDrtOIrOA/edit?gid=1719516221#gid=1719516221</a>). I use Watched FL, Random FL, JsonData, and IDs. These provide performance and knowledge stats for AMQ Tours Server.</p>
+<p>Google Sheets data for Ant (<a href="https://docs.google.com/spreadsheets/d/1WadyJ-rpY8AbjO8TW8rKBt1PerYOQH7tj2yk9hgNOzU/edit?gid=487191751#gid=487191751" target="_blank" rel="noopener noreferrer">https://docs.google.com/spreadsheets/d/1WadyJ-rpY8AbjO8TW8rKBt1PerYOQH7tj2yk9hgNOzU/edit?gid=487191751#gid=487191751</a>). I use Watched, Random, and JSON. These provide performance and knowledge stats for Ant.</p>
+<p><strong>Local JSONs:</strong> same thing as google sheets, but I manually retrieved these from Discord. These help cover the older files, especially from El Triunvirato.</p>
+<p><strong>AnisongDB:</strong> I use this to store accurate song metadata. I build an entire song_key database around it.</p>
+<p><strong>MAL and Anilist APIs:</strong> First, I use this to gather user lists. My script downloads each tour player’s entire anime list, recording entries and their size. Currently, anime from each player’s list is not used, while list size is used to calculate “Size vs rig rate” in Single Tour —&gt; View Stats. Second, images/posters of each anime were retrieved through the Jikan API (rather than directly from the MAL API). Third, AniList provides information on seasons, so I use it to group anime by an entire franchise.</p></article><article id="guide-tour-vs-difficulty" class="site-guide-topic" data-guide-group="philosophies"><div class="site-guide-topic-heading"><h3>Tour % vs Difficulty</h3></div><p>Difficulty refers to AMQ’s native Difficulty. I do not change it anywhere in my pipeline.</p>
+<p>Tour % is calculated from the AMQ Tours Server only (for now). It uses the Last-2 rule for each player. Tour % = correct players ÷ total players who encountered the song × 100.</p></article><article class="site-guide-topic" data-guide-group="philosophies" id="guide-autocomplete-and-table-functions"><div class="site-guide-topic-heading"><h3>Autocomplete and Table Functions</h3></div><p>Wherever there is a search bar, there probably is an autocomplete system in place. Simply press TAB after typing out a few letters. Autocomplete only works if you start typing from the very beginning of the word.</p>
+<figure class="site-guide-figure"><button aria-label="Enlarge Site guide example 11" class="site-guide-image-button" data-guide-image="assets/site-guide/example-52.png" type="button"><img alt="Site guide example 11" decoding="async" height="204" loading="lazy" src="assets/site-guide/example-52.png" width="1734"/></button></figure>
+<p>Autocomplete can sometimes be annoying. There was a previous case where you simply cannot type “Sayuri” because of Sayuri Yahagi in the Artist Familiarity page (thank you Florenz). Changes were made so that autocomplete isn’t forced, and now whatever you enter will be submitted. In addition, some features allow you to disable autocomplete.</p>
+<p>Some tables are accompanied by patterns. Hover to see attempt date. In tables, shortcuts/alternative names will be highlighted using a black line. For artist groups, those are emphasized with blue text, and hovering over them allows you to see the full artists(well, hopefully, unless those also contain groups). Inside Player database, the same black line is used when you want to hover over a player to see their alt names.</p>
+<figure class="site-guide-figure site-guide-annotated-example"><button aria-label="Enlarge Site guide example 12" class="site-guide-image-button" data-guide-image="assets/site-guide/example-58.png" type="button"><img alt="Site guide example 12" decoding="async" height="172" loading="lazy" src="assets/site-guide/example-58.png" width="2306"/></button><figcaption class="site-guide-arrow-caption"><svg aria-hidden="true" class="site-guide-example-arrow" focusable="false" preserveaspectratio="none" viewbox="0 0 1000 125"><defs><marker id="siteGuidePatternArrowhead" markerheight="8" markerunits="strokeWidth" markerwidth="8" orient="auto" refx="7" refy="4"><path d="M0,0 L8,4 L0,8 Z" fill="currentColor"></path></marker></defs><path d="M620 115 L690 8" fill="none" marker-end="url(#siteGuidePatternArrowhead)" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke"></path></svg><span>S-tier song and gae performance</span></figcaption></figure>
+</article><article id="guide-ant" class="site-guide-topic" data-guide-group="philosophies"><div class="site-guide-topic-heading"><h3>Ant</h3></div><p>Ant tours follow the same process as regular tours. Performance stats are currently used and retrieved from the google sheet. Knowledge stats are not, but will be implemented soon. For the database, ant stats are currently not contributing to it, but may be changed later.</p></article><article id="guide-personalized-vs-global-tabs" class="site-guide-topic" data-guide-group="philosophies"><div class="site-guide-topic-heading"><h3>Personalized vs Global tabs</h3></div><p>The purpose of this site is to cater to everyone individually. Therefore, most of the tabs use a personalized approach: data is only about you, not other players. For example, a plot of your guess rate, a section on what artists you know, etc. However, you may have noticed that this site acts as a database as well. I take in all the information from tours and compute, for example, tour averages, songs that play the most, etc. The data is not only about you, but rather, the entire tour server, and the data gets put into what I call global tabs. Personalized tabs have stats that are different for everyone, while global tabs are literally a copy-paste across everyone’s accounts. Examples of global tabs include: Search song frequency, Player database, the late By Popularity and By % Correct(rip), and even the Changelog and this Site Guide (yes).</p></article></section><section id="guide-group-tabs" class="site-guide-section" data-guide-group="tabs"><h2>By tabs</h2><article id="guide-overview-general" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>General</h3><button type="button" class="site-guide-open" data-guide-section="overview" data-guide-view="overview">Open General <span aria-hidden="true">↗</span></button></div><p><strong>Current Rank:</strong> This metric is simple, but has a lot of problems. First, it doesn’t actually reflect your current rank. My script gets rank from the performance sheet, so it will reflect your last tour’s rank. Second, there is currently no way of telling whether the rank is from draft tours or not. Since draft uses a different system, some numbers may not be accurate. This will resolve itself if you just play a regular tour afterwards. Third, ranks less than 25 are automatically labeled as unassigned (seen with a neutral silver plate). This is because some players may have never played a tour in 2026 and therefore their Elo was still using the old system.</p>
+<p><strong>Songs Seen and Songs Gotten:</strong> values depend on watched or usual. Historically, it does not differentiate these modes.</p>
+<p><strong>Guess Rate Trend/Combined Trend:</strong> Both use either a quadratic trend or a square root trend, whichever’s sum of squared errors is smaller. Combined trend uses the z-score calculation shown.</p>
+<p><strong>Top Solos:</strong> displays in descending order, from most solos you got to least. If tied, lower difficulty wins. Only a maximum of 50 songs will be shown.</p>
+<p><strong>Top Doubles:</strong> for all three modes, will retrieve 20% of your doubles, with a maximum of 50 songs.</p>
+<p><strong>Top Songs from Rig:</strong> python generator first takes the top 10%, the website then takes top 30%, and afterwards applies a maximum of 100 songs.</p></article><article id="guide-latest-tour" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Latest Tour</h3><button type="button" class="site-guide-open" data-guide-section="overview" data-guide-view="latestTour">Open Latest Tour <span aria-hidden="true">↗</span></button></div><p>Nothing to see here :)</p></article><article class="site-guide-topic" data-guide-group="tabs" id="guide-stats-summary"><div class="site-guide-topic-heading"><h3>Stats Summary</h3><button class="site-guide-open" data-guide-section="overview" data-guide-view="statsSummary" type="button">Open Stats Summary <span aria-hidden="true">↗</span></button></div><p><strong>Standardized score:</strong> Tries to use a player’s last 10 tours, but if there aren’t enough, it uses the maximum up to that point(for most metrics, except usefulness, 3/8 or below, Lives taken/saved, Erigs, and Offlist Erigs). For usefulness, only tours after 2026-02-16 are used, with at least 5 eligible tours needed; for 3/8 or below, Lives taken/saved, Erigs, and Offlist erigs, only tours after 2026-01-01 are used, and at least 7 tours are needed.</p>
+<p>The Genre radar chart uses the Last-2 system; By Decades, Total Songs Played by Type and Guess Rate by Type use RAW COUNTS (so repeated songs can count).</p>
+<p><strong>Synergy:</strong> same as the synergy bars in <a href="#guide-synergy">the synergy section</a>.</p></article><article id="guide-weekly-performance" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Weekly Performance</h3><button type="button" class="site-guide-open" data-guide-section="overview" data-guide-view="weekly">Open Weekly Performance <span aria-hidden="true">↗</span></button></div><p>Pretty self-explanatory</p></article><article class="site-guide-topic" data-guide-group="tabs" id="guide-performance"><div class="site-guide-topic-heading"><h3>Guess Rate</h3><button class="site-guide-open" data-guide-section="performance" data-guide-view="Guess Rate" type="button">Open Guess Rate <span aria-hidden="true">↗</span></button></div><p><strong>Rolling Average (aka moving average) :</strong> The regular time series chart fluctuates a lot (sometimes I get 40% guess rate, while sometimes I get 30%, and there is a big difference). For a rolling average, in simple terms, it smoothes the time series chart. The 5-game moving average is more smooth than the 3-game moving average which in turn is more smooth than your guess rate trend.</p>
+<p>For the 3-game rolling average, for each tour, it takes the previous 2 tour’s guess rate + current tour’s guess rate and averages them. It does this for each tour on the time series chart, effectively turning the high-variation guess rate chart into a smoother version. The 5-game rolling average is the same concept. It adds up the guess rate from the previous 4 tours + the guess rate from the current tour, divided by 5, and repeats the process for each tour.</p>
+<figure class="site-guide-figure"><button aria-label="Enlarge Site guide example 13" class="site-guide-image-button" data-guide-image="assets/site-guide/example-60.png" type="button"><img alt="Site guide example 13" decoding="async" height="962" loading="lazy" src="assets/site-guide/example-60.png" width="2370"/></button></figure>
+<p class="site-guide-caption">The green line fluctuates less because a 5-game average produces a smoother curve compared to a 3-game average</p>
+<p><strong>Weighted Guess Rate:</strong> calculates average tour correct percentage for each song, using all watched and usual games (expressed as p). Scores are earned for each song, with correct answer getting 1-p, wrong answer getting -p. Sum up all the scores and divide by amount of songs played × 100.</p></article><article class="site-guide-topic" data-guide-group="tabs" id="guide-artist-familiarity"><div class="site-guide-topic-heading"><h3>Artist Familiarity</h3><button class="site-guide-open" data-guide-section="knowledge" data-guide-view="Artist Familiarity" type="button">Open Artist Familiarity <span aria-hidden="true">↗</span></button></div><p><strong>Artist Familiarity:</strong> One of the only few places where the Last-2 system is NOT used. Each of the following metrics is elaborated here.</p>
+<p><strong>Rig accuracy:</strong> amount of rig correct/total amount of rig for this artist</p>
+<p><strong>Non-rig accuracy:</strong> amount of non-rig correct/total amount of non-rig for this artist</p>
+<p><strong>Coverage:</strong> Songs got at least once for this artist/songs you have encountered for this artist</p>
+<p><strong>Stability:</strong> uses the formula (1 − flips / transitions) × 100. A flip occurs when ✅→❌ and ❌→✅. A transition is counted as going from one attempt to the next(so transitions in this case will be length of patterns - 1).</p>
+<p><strong>Example pattern for a song:</strong> ✅✅❌❌✅<br/>Stability = (1 − 2/4) × 100 = 50%</p>
+<p>When there are multiple songs for an artist(usually the case):<br/>Example pattern for song 1: ✅✅❌❌✅ → 2 flips, 4 transitions<br/>Example pattern for song 2: ✅✅ → 0 flips, 1 transition</p>
+<p>Calculate the flips and transitions for each song, and add them up. Song 1 has 2 flips and 4 transitions; song 2 has 0 flips and 1 transition. Total: 2 flips and 5 transitions. Artist stability is therefore 1 − 2/5 = 60%.</p>
+<p><strong>Consistency:</strong> Uses the formula [1 − min(1, variance(rollingAverage5(scores)) / 0.25)] × 100. A score of 0 gets assigned to a wrong answer, a 0.7 for a rig correct, and 1.0 for non-rig correct.</p>
+<p><strong>Example pattern for a song:</strong> ✅✅❌❌✅, where all are non-rig attempts<br/>Therefore scores: [1, 1, 0, 0, 1]<br/>Rolling averages of up to 5 attempts is taken. In this case, the first attempt has a rolling average of 1; second has a rolling average of (1+1)/2=1; third has a rolling average of (1+1+0)/3 = 0.667; fourth has a rolling average of (1+1+0+0)/4 = 0.5; fifth has a rolling average of (1+1+0+0+1)/5 = 0.6.</p>
+<p><strong>Rolling averages therefore:</strong> [1, 1, 0.667, 0.5, 0.6]<br/>Then, use the variance formula on these rolling averages.</p>
+<div class="site-guide-table-wrap"><table class="site-guide-table"><caption>Consistency example</caption><thead><tr><th scope="col">Rolling average</th><th scope="col">Difference from mean</th><th scope="col">Squared difference</th></tr></thead><tbody><tr><td>1</td><td>0.246667</td><td>0.060844</td></tr><tr><td>1</td><td>0.246667</td><td>0.060844</td></tr><tr><td>0.667</td><td>-0.086667</td><td>0.007511</td></tr><tr><td>0.5</td><td>-0.253333</td><td>0.064178</td></tr><tr><td>0.6</td><td>-0.153333</td><td>0.023511</td></tr></tbody></table></div>
+<p>Sum up the squared differences and divide by 5 = 0.0433.<br/>Finally, 1 - min(1, 0.0433/0.25) = 0.8265 (min chooses the minimum between the two values). 0.8265 × 100 = 82.65% for consistency.</p>
+<p>If there are multiple songs for an artist(usually the case):<br/>Example pattern for song 1: ✅✅❌❌✅<br/>Example pattern for song 2: ✅✅</p>
+<p>Combine every song into one giant sequence, regardless of song. For example, instead of the final pattern being ✅✅❌❌✅ ✅✅, it might be ✅✅✅❌✅❌✅ based on the dates of those attempts. After combining, use the previous formula to get rolling averages and calculate consistency.</p>
+<p><strong>Diversity:</strong> Uses Shannon diversity.</p>
+<figure class="site-guide-figure"><button aria-label="Enlarge Shannon diversity formula" class="site-guide-image-button" data-guide-image="assets/site-guide/example-44.png" type="button"><img alt="Shannon diversity formula" decoding="async" height="166" loading="lazy" src="assets/site-guide/example-44.png" width="520"/></button></figure>
+<p>Where:<br/><var>N</var> = number of distinct songs encountered for the artist.<br/><var>p<sub>i</sub></var> = attempts on song <var>i</var> ÷ total attempts across those songs.<br/><span class="site-guide-math">ln</span> = natural logarithm.</p>
+<p>For example, imagine a song with 3 patterns. In the diversity calculation, ✅ and ❌ do not matter. Share of attempts is attempts per song over total attempts for this artist.</p>
+<div class="site-guide-table-wrap"><table class="site-guide-table"><caption>Diversity example</caption><thead><tr><th scope="col">Song</th><th scope="col">Pattern</th><th scope="col">Attempts</th><th scope="col">Share of attempts</th></tr></thead><tbody><tr><td>A</td><td>✅❌✅❌</td><td>4</td><td>4/6</td></tr><tr><td>B</td><td>✅</td><td>1</td><td>1/6</td></tr><tr><td>C</td><td>❌</td><td>1</td><td>1/6</td></tr></tbody></table></div>
+<figure class="site-guide-figure"><button aria-label="Enlarge Diversity calculation: 78.97%" class="site-guide-image-button" data-guide-image="assets/site-guide/example-46.png" type="button"><img alt="Diversity calculation: 78.97%" decoding="async" height="146" loading="lazy" src="assets/site-guide/example-46.png" width="900"/></button></figure></article><article id="guide-franchise-familiarity" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Franchise familiarity</h3></div><p>Nothing to see here :)</p></article><article id="guide-tag-familiarity" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Tag familiarity</h3><button type="button" class="site-guide-open" data-guide-section="knowledge" data-guide-view="Tag Familiarity">Open Tag familiarity <span aria-hidden="true">↗</span></button></div><p>Uses the last-2 rule. Default: 8 tags are selected with the most samples. This is in contrast to the previous version where the 8 default selected are the ones with the highest guess rate. Users may select from 3-8 tags. Tags are retrieved from AniList.</p></article><article id="guide-seasonal-comparison" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Seasonal Comparison</h3><button type="button" class="site-guide-open" data-guide-section="knowledge" data-guide-view="Seasonal Comparison">Open Seasonal Comparison <span aria-hidden="true">↗</span></button></div><p>This does NOT use the last-2 rule. By default, the chart selects the 6 latest seasons.</p></article><article id="guide-relearn-tracker" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Relearn Tracker</h3><button type="button" class="site-guide-open" data-guide-section="insights" data-guide-view="Relearn Tracker">Open Relearn Tracker <span aria-hidden="true">↗</span></button></div><p><strong>Sample Point visualization:</strong> may not show all attempts due to missing data, but as many as possible is shown.</p>
+<p><strong>Play Sample:</strong> Will try to play the sample from your latest attempt. However, you may have noticed some aren’t available. This is because not everyone has the latest version of the stats script. In an event like this, my code searches through past tours and grabs the latest sample point of any available song you encountered, whether you got it right or wrong.</p>
+<p><strong>View:</strong> 20 songs per page. Also, this is a rare exception where all the data is kept, unlike other views where there are limits of top 50 or top 100.</p></article><article id="guide-by-never-correct" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>By Never Correct</h3><button type="button" class="site-guide-open" data-guide-section="insights" data-guide-view="By never correct">Open By Never Correct <span aria-hidden="true">↗</span></button></div><p>Limit of 30 songs maximum shown, with 20 songs per page.</p></article><article id="guide-by-wrong-guess" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>By Wrong Guess</h3><button type="button" class="site-guide-open" data-guide-section="insights" data-guide-view="By Wrong Guess">Open By Wrong Guess <span aria-hidden="true">↗</span></button></div><p>Limit of 200 songs maximum shown.</p></article><article class="site-guide-topic" data-guide-group="tabs" id="guide-synergy"><div class="site-guide-topic-heading"><h3>Synergy</h3><button class="site-guide-open" data-guide-section="social" data-guide-view="Synergy" type="button">Open Synergy <span aria-hidden="true">↗</span></button></div><p>This section compares synergy of songs hit, rather than rig synergy. I use “target player” here to describe a player who you have selected to compare with.</p>
+<p>First of all, this section attempts to answer the question: “Of all the songs you and the target player knows, how much of them overlap?” This section is divided into All Seen Songs and Shared Seen Songs.</p>
+<p><strong>Search bar:</strong> allows you not only to search main names but alt names as well.</p>
+<p>Your Onlist, Their Onlist, Them on your list, you on their list, and the synergy bars all use the Last-2 rule.</p>
+<p><strong>All Seen Songs:</strong> the data pool is everything you OR the target player has seen. If the target player has simply played more tours than you, they might have seen more unique songs, and therefore their chance of getting something correct that you don’t is increased. Therefore, the “Only them” number may be very large compared to yours.</p>
+<p><strong>Shared Seen Songs:</strong> the data pool is everything you AND the target player has seen. You two don’t need to have played the exact same tours, but the condition is you must have seen the exact same song. This more accurately reflects a direct comparison.</p>
+<p>Notice that in both modes the overlap values will always be the same.</p>
+<p>Their rig, you hit / Your rig, they hit: does NOT use the Last-2 system. Currently, if you ever hit a song from their list, it will be recorded (and vice versa). It’s similar to the coverage stat in Artist Familiarity. For the amount shown, a maximum of 50 is imposed, sorted by ascending Tour %.</p></article><article class="site-guide-topic" data-guide-group="tabs" id="guide-rivals"><div class="site-guide-topic-heading"><h3>Rivals</h3><button class="site-guide-open" data-guide-section="social" data-guide-view="Rivals" type="button">Open Rivals <span aria-hidden="true">↗</span></button></div><p><strong>Bubble chart:</strong> x = latest rating, y = average of up to 5 values of Guess Rates. Size of the bubble uses the average of up to 5 usefulness values. Currently: Old usefulness values are automatically converted using a machine learning model, if the usefulness is less than 30.</p>
+<p>The model is estimated using the formula:</p>
+<p>New Usefulness = 6.9731 + 8.8822 × (Old Usefulness)</p></article><article class="site-guide-topic" data-guide-group="tabs" id="guide-team-contributions"><div class="site-guide-topic-heading"><h3>Team Contributions</h3><button class="site-guide-open" data-guide-section="social" data-guide-view="Team Contributions" type="button">Open Team Contributions <span aria-hidden="true">↗</span></button></div><p><strong>Rig carried:</strong> (Rigs hit/total songs) × 100</p>
+<p><strong>Solo Carried:</strong> Lives taken + Lives saved</p>
+<p>For OP/ED/IN guess rate metrics, Onlist and Offlist, in the event of a tie, a rule-based system decides who ranks higher:<br/>Checks whose usefulness is higher and places them above</p>
+<p>For the rest of the performance metrics, in the event of a tie, a rule-based system decides who ranks higher:<br/>first checks lives taken + saves saved, who is higher<br/>If that is also tied, then checks whose usefulness is higher</p></article><article class="site-guide-topic" data-guide-group="tabs" id="guide-rig-list-analysis"><div class="site-guide-topic-heading"><h3>Rig / List Analysis</h3><button class="site-guide-open" data-guide-section="social" data-guide-view="Rig / List analysis" type="button">Open Rig / List Analysis <span aria-hidden="true">↗</span></button></div><p>First things first…zoomer and boomer are RELATIVE, you BOZOS</p>
+<p>From a folder called Watched JSONs(my local JSONs folder mostly made up of old tour files) and Google Sheets, it only selects those with exactly 8 players, checking list status 1 or 2(watching/completed). This does NOT use the Last-2 system.</p>
+<p>Eligibility for “All Tours” to display a chart requires a minimum of 300 samples. A sample is a rig, not a JSON file. All other modes of “Using data” have no minimum requirements.</p>
+<p><strong>Mean difficulty:</strong> this does NOT use the Last-2 system and does not use Tour %. Repeated occurrences are weighted.</p></article><article id="guide-search-songs" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Search Songs</h3><button type="button" class="site-guide-open" data-guide-section="otherTools" data-guide-view="Search songs">Open Search Songs <span aria-hidden="true">↗</span></button></div><p>Complete database of songs you’ve seen. The table has songs ranked by amount of times played, though of course you can search up any song. A maximum of 30 patterns is displayed per song, but I still keep data about other attempts if there are more.</p>
+<figure class="site-guide-figure"><button class="site-guide-image-button" type="button" data-guide-image="assets/site-guide/example-50.png" aria-label="Enlarge Site guide example 16"><img src="assets/site-guide/example-50.png" width="2352" height="816" alt="Site guide example 16" loading="lazy" decoding="async"></button></figure></article><article class="site-guide-topic" data-guide-group="tabs" id="guide-search-song-frequency"><div class="site-guide-topic-heading"><h3>Search Song frequency</h3><button class="site-guide-open" data-guide-section="otherTools" data-guide-view="Search song frequency" type="button">Open Search Song frequency <span aria-hidden="true">↗</span></button></div><p>If you’ve made it this far, this is the first global tab since the deletion of By Popularity and By % Correct. This database is built directly off of AnisongDB. The main purpose is to see how often a certain song plays in tour, on average. There is one huge caveat: it groups by songName + animeName, and therefore the many versions of the same song may not appear if they are all in one anime.</p>
+<p><strong>Here is an example using the previous most spammed tour song:</strong> <br/>Instead of showing all EDs, it only shows one (not counting the Sou one, ofc).</p><figure class="site-guide-figure"><button aria-label="Enlarge Site guide example 17" class="site-guide-image-button" data-guide-image="assets/site-guide/example-48.png" type="button"><img alt="Site guide example 17" decoding="async" height="596" loading="lazy" src="assets/site-guide/example-48.png" width="2380"/></button></figure>
 
-        <section id="siteGuideStart" class="site-guide-section" aria-labelledby="siteGuideStartTitle">
-          <h2 id="siteGuideStartTitle">Getting started</h2>
-          <ol class="site-guide-steps">
-            <li><strong>Choose a player.</strong> Search for a player on the home page. Use <em>Change User</em> in the top bar to open someone else’s dashboard.</li>
-            <li><strong>Choose your context.</strong> W / U selects Watched or Usual tour records. <em>Using data</em> changes the history window on supported pages. EN / JP changes anime titles where available.</li>
-            <li><strong>Choose your goal.</strong> Start with Latest Tour to review a game, Knowledge to explore strengths, or Relearn Tracker to find songs to practise.</li>
-          </ol>
-          <p class="site-guide-note">The ant icon includes ANT stats on supported views. Full opacity means on; faded means off. A locked control means that view uses a fixed context.</p>
-        </section>
-
-        <section id="siteGuideFeatures" class="site-guide-section" aria-labelledby="siteGuideFeaturesTitle">
-          <h2 id="siteGuideFeaturesTitle">Where to find things</h2>
-          <div class="site-guide-feature-grid">
-            <article><h3>Overview</h3><p><strong>General</strong> gives a recent snapshot and historical highlights. <strong>Latest Tour</strong> compares the latest tour with your previous 3 or 10 tours and shows Solos, Doubles, and Franchise Repeats. <strong>Stats Summary</strong> compares broader strengths; <strong>Weekly Performance</strong> shows weekly results and changes.</p><button type="button" class="site-guide-link" data-guide-section="overview" data-guide-view="latestTour">Open Latest Tour <span aria-hidden="true">→</span></button></article>
-            <article><h3>Performance</h3><p>Explore guess-rate trends, Lives Taken / Saved, Onlist/Offlist, Rigs Missed, and Composite charts. Use this section to see how your performance changes over time.</p><button type="button" class="site-guide-link" data-guide-section="performance" data-guide-view="Guess Rate">Open Performance <span aria-hidden="true">→</span></button></article>
-            <article><h3>Knowledge</h3><p>Use Artist, Franchise, and Tag Familiarity to explore what you know and inspect song attempts. Franchise Familiarity groups related anime entries. Seasonal Comparison compares release seasons.</p><button type="button" class="site-guide-link" data-guide-section="knowledge" data-guide-view="Artist Familiarity">Open Knowledge <span aria-hidden="true">→</span></button></article>
-            <article><h3>Recommendations</h3><p><strong>Relearn Tracker</strong> finds songs you previously got correct but missed most recently. <strong>By Wrong Guess</strong> ranks songs by misses; <strong>By never correct</strong> focuses on songs you have not answered correctly in the available history. Playlists appear for players with access.</p><button type="button" class="site-guide-link" data-guide-section="insights" data-guide-view="Relearn Tracker">Open Relearn Tracker <span aria-hidden="true">→</span></button></article>
-            <article><h3>Social</h3><p>Synergy compares correct-answer overlap with another player. Rivals and Team Contributions explore player comparisons and team results. Rig / List analysis explores the songs associated with your list.</p><button type="button" class="site-guide-link" data-guide-section="social" data-guide-view="Synergy">Open Synergy <span aria-hidden="true">→</span></button></article>
-            <article><h3>Other tools</h3><p>Search songs to inspect individual histories, or Search song frequency to explore how often songs appear. Player database compares players with combined year and genre/tag filters. Single Tour opens a particular tour’s results.</p><button type="button" class="site-guide-link" data-guide-section="otherTools" data-guide-view="Search songs">Open Search songs <span aria-hidden="true">→</span></button></article>
-          </div>
-        </section>
-
-        <section id="siteGuideNumbers" class="site-guide-section" aria-labelledby="siteGuideNumbersTitle">
-          <h2 id="siteGuideNumbersTitle">Reading the numbers</h2>
-          <div class="site-guide-explain-grid">
-            <article><h3>Attempts and song familiarity answer different questions</h3><p>A tour’s guess rate describes your correct answers in that tour. Repeated appearances can count as separate attempts. The same song appearing five times is five attempts.</p><p>Genre summaries, Tag Familiarity, Franchise Familiarity, and Player database comparisons use the last-two-attempt approach: a song entry counts once and is treated as correct if either of its last two tracked attempts was correct. A single tracked attempt uses that result.</p><p class="site-guide-example"><strong>Example:</strong> wrong → correct → wrong is three attempts with one correct answer, but the song counts as correct under the last-two rule.</p></article>
-            <article><h3>Tour % is a song reference</h3><p><strong>Tour %</strong> comes from the song’s stored Watched or Usual tour-correct percentage. It is a shared reference for the song, accounting for overplayed songs, rather than your personal correct / attempts percentage.</p><p><strong>Difficulty</strong> is a separate catalog value. It is not your personal guess rate and is not another name for Tour %.</p><p class="site-guide-note">Compare like with like: check the mode, history window, denominator, and any minimum sample requirement before comparing two numbers.</p></article>
-            <article><h3>Standardized scores depend on the baseline</h3><p>A z-score is <code>(value − mean) / standard deviation</code>. Zero is the baseline average; +1 is one standard deviation above it and −1 is one below.</p><p><strong>Latest Tour:</strong> the latest value is compared with the previous 3 or 10 comparable tours, excluding the latest tour. <strong>Combined trend:</strong> each metric is standardized against its own history. <strong>Stats Summary:</strong> standardized metrics compare recent performance against other players.</p><p>These charts use different reference groups, so their z-scores need not match. If a metric cannot be compared, Latest Tour explains why above the chart.</p></article>
-            <article><h3>Dates and scoring systems matter</h3><p>Watched and Usual are separate datasets. Some metrics are unavailable in one mode or time period. Usefulness and rank use different scoring systems before 2026.</p><p>The Combined overview trend only includes usefulness and rank from 2026 onward, and does not show ANT usefulness or rank. Its view selection is unavailable with ANT selected.</p><p>Some cards explicitly use a recent 10-tour window even when another history range is selected. Hover the info icon beside a title for that card’s calculation.</p></article>
-          </div>
-        </section>
-
-        <section id="siteGuideDefinitions" class="site-guide-section" aria-labelledby="siteGuideDefinitionsTitle">
-          <h2 id="siteGuideDefinitionsTitle">Definitions at a glance</h2>
-          <dl class="site-guide-glossary">
-            <div><dt>OP / ED / IN</dt><dd>Opening, ending, and insert song. A number such as OP2 identifies the song’s opening/ending sequence.</dd></div>
-            <div><dt>Pattern squares</dt><dd>Green means correct; red means wrong. Each square represents a tracked attempt. Hover a square for its date where available. Some views limit how many attempts are displayed.</dd></div>
-            <div><dt>Onlist / rig</dt><dd>A song associated with the player’s list in the recorded data. Offlist refers to songs outside that list. Historical list associations can differ from a player’s current anime list.</dd></div>
-            <div><dt>Solo / double</dt><dd>A song answered correctly by one or two players. Latest Tour’s Solos and Doubles show your correct answers from eight-player song results; “You &amp; player” names the other correct player on a double.</dd></div>
-            <div><dt>Franchise repeat</dt><dd>Two or more song appearances from the same anime or related franchise in the songs you encountered during the latest tour. Other matches in the tour that you did not play are excluded.</dd></div>
-            <div><dt>Correct &gt; 1 / Wrong / All</dt><dd>In Franchise Repeats, Correct &gt; 1 requires at least two correct answers; Wrong requires every answer to be wrong; All includes every repeated franchise. The selected franchise’s results include all its encountered songs.</dd></div>
-            <div><dt>W-T-L</dt><dd>Wins, ties, and losses, in that order. This describes team match results, rather than individual song accuracy.</dd></div>
-            <div><dt>Elo / rank</dt><dd>The tour’s recorded player rating is shown beside player names. It is a separate measure from guess rate; do not read it as a percentage of songs answered correctly.</dd></div>
-            <div><dt>Lives taken / saved</dt><dd>Team-impact measures reported in the tour results. The site’s Net Lives Contribution card averages lives saved + lives taken over the last 10 games.</dd></div>
-            <div><dt>Usefulness</dt><dd>A tour-reported performance measure, distinct from guess rate. Its scoring system changed before/after 2026, so direct comparisons across those periods need care.</dd></div>
-            <div><dt>Momentum / consistency</dt><dd>Momentum compares the last 3 guess rates with the last 10. The Overview consistency card measures recent variation; lower means steadier. Artist radar metrics have their own definitions.</dd></div>
-            <div><dt>Sample point</dt><dd>A playback start point attached to a recorded song appearance. Play sample uses the available sample; Play song plays the recording normally.</dd></div>
-          </dl>
-        </section>
-
-        <section id="siteGuideTips" class="site-guide-section" aria-labelledby="siteGuideTipsTitle">
-          <h2 id="siteGuideTipsTitle">Common questions</h2>
-          <details class="site-guide-question"><summary>How do I inspect a chart?</summary><p>Hover a point or bar for details. On charts with a legend, click a legend item to show or hide that series. Data and trend lines may have separate legend entries. Where zoom is supported, drag over a range and use the reset control to return.</p></details>
-          <details class="site-guide-question"><summary>How do I practise or export relearn songs?</summary><p>Open Recommendations → Relearn Tracker. Use All / Onlist / Offlist to filter songs and Play / Links to change the controls. The download icon opens Watched / Usual / All, list filters, and the maximum number of latest songs. Download ZIP saves audio; Export for CSL uses the AMQ+ import format. The selected latest songs follow the tracker’s order.</p></details>
-          <details class="site-guide-question"><summary>How do I navigate Franchise Repeats?</summary><p>Select a cover or use the left/right controls. When the selector has keyboard focus, use ← / → to move between franchises. The row below shows songs from the selected franchise. Choose All to see every repeated franchise.</p></details>
-          <details class="site-guide-question"><summary>Why is a view empty or locked?</summary><p>The selected player, mode, or time window may have no qualifying data. Some pages require a minimum sample count. Rig / List analysis in All tours requires at least 300 qualifying rig-song samples; try another Using data mode when that minimum is not met. A dash or unavailable message should not be read as zero.</p></details>
-          <details class="site-guide-question"><summary>Does Synergy measure list overlap?</summary><p>The Only you / Both correct / Only them bars compare correct-answer overlap, not anime-list overlap. All seen songs and Shared seen songs use different sets of encountered songs, so read the info icon for each bar.</p></details>
-        </section>
+<p>p.s. that’s actually how I type in AMQ :) Idk if there is a better way tho</p></article><article id="guide-player-database" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Player Database</h3><button type="button" class="site-guide-open" data-guide-section="otherTools" data-guide-view="Player database">Open Player Database <span aria-hidden="true">↗</span></button></div><p>Another global tab. Nothing much else to say here, uses Last-2 attempt.</p></article><article id="guide-single-tour" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Single Tour</h3><button type="button" class="site-guide-open" data-guide-section="otherTools" data-guide-view="Single Tour">Open Single Tour <span aria-hidden="true">↗</span></button></div><p>A personalized tab that combines performance and knowledge metrics. Displays the tour export sheets and also songs you got correct/wrong, for each tour you played. Note on Calendars: if you played 2 tours in one day, selecting the calendar wouldn’t allow you to specify which. However, this is a rare case because people don’t usually play 2 tours in a day, right?</p>
+<p>Also, the columns List Size and Size vs Rig Rate may sometimes be unfilled. Unfortunately, there is no public sheet containing everyone’s lists. Even after retrieving most of them from the introductions-and-registrations channel, some players have changed names and therefore those links in Discord don’t work.</p></article><article id="guide-changelog" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Changelog</h3><button type="button" class="site-guide-open" data-guide-section="otherTools" data-guide-view="Changelog">Open Changelog <span aria-hidden="true">↗</span></button></div><p>A place to keep updates transparent. Of course, not every single thing has to be mentioned, so I prioritize the most important ones.</p></article></section><section id="guide-group-limitations" class="site-guide-section" data-guide-group="limitations"><h2>Limitations</h2><article id="guide-limitations" class="site-guide-topic" data-guide-group="limitations"><p>Even though I think it is a very useful tool, my site does have its limitations, and I do not wish to hide them.</p>
+<p>First, it takes a HUGE amount of time to update the data each day. We’re talking about 35 minutes for the python scripts to run, and another 30-40 minutes for the data to be uploaded to Cloudflare. It’s not too bad, but I just have to remember to do it every day or else the data doesn’t get updated(I often run the python scripts and after it finishes I just forget to upload the data to Cloudflare…)</p>
+<p>Second, old entries may not be too accurate as a lot of them have missing data. In the El Triunvirato times, the data was just starting to be collected and a lot of them have different formats, missing values, etc. Unfortunately, there’s nothing I could do about those.</p>
+<p>Third, a branch of the second point, there is a reason I didn’t include usefulness and rank stats until recently. They are a PAIN to deal with. The system for ranks and usefulness have changed at least once(probably more idk). Thankfully GPT-6 has gotten to the point where I need to do virtually nothing(bro those older models :sob: )</p>
+<p>Building upon the previous points, Ant stats seem to use the old ranking system. In addition, there may be a pattern of regular players in Ant that don’t play as often in regular Tour, so going forward, I’ll have to decide what gets counted and where.</p>
+<p>There may be other specific limitations of functions, which are described in each section.</p></article></section><section id="guide-group-user-data" class="site-guide-section" data-guide-group="user-data"><h2>User Data</h2><article id="guide-user-data" class="site-guide-topic" data-guide-group="user-data"><p>I intend to be fully transparent about user data.</p>
+<p>I am able to see each person’s actions on the site using PostHog—something I recently added because searching through discord is a pain. I am not able to see who specifically— as anyone can log in to any account. The site does not verify your real identity. Analytics uses an anonymous browser identifier, and I can see recorded interactions and searches. I am able to track what features gets used most and least. If interested, feel free to read PostHog’s documentation, or the <a href="https://github.com/Idontlikeloli/amq-relearn-tracker/blob/main/ANALYTICS.md" target="_blank" rel="noopener noreferrer">Analytics.md file on Github</a> (though it is all AI-written). Of course, everything is public, so you can even inspect the code if you want.</p>
+<p>The purpose of collecting user data is for one thing and one thing only: site improvement. I am not making any money using this site—this is a pure hobbyist project, for a tour player, by a tour player.</p></article></section><section id="guide-group-questions" class="site-guide-section" data-guide-group="questions"><h2>Common Questions</h2><article id="guide-common-questions" class="site-guide-topic" data-guide-group="questions"><details id="guide-faq-how-often-is-the-data-updated" class="site-guide-question"><summary>How often is the data updated?</summary><p>The data is updated once per day, at around 11am CST/Taiwan time. Of course, it totally depends on what time I run the backend scripts, but usually that is the time to expect an update.</p></details>
+<details id="guide-faq-how-often-is-this-site-updated" class="site-guide-question"><summary>How often is this site updated?</summary><p>I have no clue bro. Whenever I think of a new feature, someone reports a bug, or something else.</p></details>
+<details id="guide-faq-it-says-the-data-is-updated-why-is-the-last-tour-i-played-not-there" class="site-guide-question"><summary>It says the data is updated. Why is the last tour I played not there?</summary><p>When I run the script, it automatically retrieves from Google Sheets. If the script runners didn’t upload the JSON files or stat exports to the sheets when I run the script, they will not be included. This usually happens when I run the script during or immediately after a tour (rare case but might happen).</p></details>
+<details id="guide-faq-what-is-the-difference-between-the-z-score-calculation-in-stats-summary-and-latest-tour" class="site-guide-question"><summary>What is the difference between the z-score calculation in Stats Summary and Latest-tour?</summary><p>The z-score calculation in Stats Summary gives you a general sense of how you perform compared to all the tour players. The z-score in Latest Tour compares your performance against your average. It is true that Latest Tour also provides a comparison between how you perform and how others perform, but that is only for 1 single tour (latest tour). The Stats Summary combines multiple tours (tries to use 10, but if not, just uses the most amount available; see stats summary).</p></details>
+<details id="guide-faq-do-you-make-money" class="site-guide-question"><summary>Do you make money?</summary><p>No. This is a site for a tour player, by a tour player.</p></details>
+<details id="guide-faq-do-you-lose-money" class="site-guide-question"><summary>Do you lose money?</summary><p>Why are you clicking this? Kind of but not really? ChatGPT subscription is $20/month, but I’m using it for school anyways so that doesn’t count. I may have accidentally uploaded too many things to Cloudflare, so around an extra $10 was spent, but everything is able to be done without that cost. Do not worry.</p></details>
+<details id="guide-faq-can-i-cheat-using-this-site" class="site-guide-question"><summary>Can I cheat using this site?</summary><p>Bro u gotta stop clicking these. The answer is, theoretically yes. However, I would suggest you not to cheat because that would make me very sad.</p></details>
+<details id="guide-faq-will-this-site-die" class="site-guide-question" data-guide-reveal-question><summary>Will this site die?</summary><p>What are these questions bro, they’re getting ridiculous. I wonder if anyone actually reads these. If you don’t stop clicking it might actually die.</p></details>
+<details id="guide-faq-can-i-ddos-this-site" class="site-guide-question" hidden><summary>Can I DDOS this site?</summary><p>…</p></details></article></section><section id="guide-group-personal-ranking" class="site-guide-section" data-guide-group="personal-ranking"><h2>Personal Ranking of features</h2><article id="guide-personal-ranking-of-features" class="site-guide-topic" data-guide-group="personal-ranking"><p>The site is fun and all, but at the end of the day, we’re using it to get an understanding of ourselves. Here are what I think are the most important features, ranked.</p><ol class="site-guide-ranking"><li><p>Relearn Tracker. Who would’ve guessed it, the site is literally named that. The thing that inspired me to make this.</p></li><li><p>Guess Rate Trend. I’m the biggest guess rate enjoyer. My usefulness is sh*t and the only thing I’m decent at is guess rate(ok sorry I’m not even that good at guess rate IM SORRY)</p></li><li><p>Single Tour. Comprehensive database of all the tours I’ve played, with stat exports easy to find. Can even see specific erigs or doubles I got with the Songs Table view.</p></li><li><p>Search Songs. This provides a comprehensive database of what songs I’ve encountered and got/didn’t get.</p></li><li><p>Latest Tour. I’ve actually wanted this for a while but didn’t really know how to make it look good.</p></li></ol><p>Of course, this is only my opinion as a lowly t4 in Watched tour. Usual gods may think erig views are important, which I totally understand. I do not want to engage in an all-out war against these gods because I will lose every time in a 1v1.</p></article></section><section id="guide-group-end-note" class="site-guide-section" data-guide-group="end-note"><h2>End Note</h2><article id="guide-end-note" class="site-guide-topic" data-guide-group="end-note"><p>I’m surprised you made it this far. I mean, this isn’t a Terms of Service, but I’m genuinely appreciative of the read. There’s no way you just skipped to this- *Ahem* .</p>
+<p>First, I want to thank the tour staff, especially recently arpia97, for satisfying a lot of my requests and being the main point of communication between stats maker and tour hosts. The reason a large part of the data can be updated is because of JSONs being synced to Google Sheets now, which in turn allows me to automate the pipeline.</p>
+<p>Second, I want to thank the early testers of this project. When the website wasn’t built, I’d just send stat trends like the time series charts you see now as individual images run through python. Thank you to brettyukino9, hakohoka, and naizuri. You guys gave me the confidence to push this forward, especially when seeing that people may actually use this. I also want to individually thank Hako for working on and maintaining Ant stats, especially the JSON uploads.</p>
+<p>Third, I am appreciative of my IRL friends @raphtelia and @apurplenose. Unfortunately, I have only been given the opportunity to meet these two AMQ players in real life.</p>
+<p>There may be others I have missed, so please let me know if I am forgetting.</p></article></section></div>
+          <div class="site-guide-nav-column"><aside class="site-guide-sidebar" aria-label="Site guide navigation"><nav class="site-guide-contents" aria-label="Guide categories"><h2>Sections</h2><button type="button" data-guide-group-select="philosophies" aria-controls="guide-topics-philosophies" aria-pressed="true">General philosophies</button><button type="button" data-guide-group-select="tabs" aria-controls="guide-topics-tabs" aria-pressed="false">By tabs</button><button type="button" data-guide-group-select="limitations" aria-controls="guide-topics-limitations" aria-pressed="false">Limitations</button><button type="button" data-guide-group-select="user-data" aria-controls="guide-topics-user-data" aria-pressed="false">User Data</button><button type="button" data-guide-group-select="questions" aria-controls="guide-topics-questions" aria-pressed="false">Common Questions</button><button type="button" data-guide-group-select="personal-ranking" aria-controls="guide-topics-personal-ranking" aria-pressed="false">Personal Ranking of features</button><button type="button" data-guide-group-select="end-note" aria-controls="guide-topics-end-note" aria-pressed="false">End Note</button></nav><nav class="site-guide-local-contents" aria-label="Topics in this section"><h2>In this section</h2><div id="guide-topics-philosophies" class="site-guide-topic-links" data-guide-topics="philosophies"><a href="#guide-performance-vs-knowledge">Performance vs Knowledge</a><a href="#guide-the-last-2-attempt">The Last-2 Attempt</a><a href="#guide-time-series-charts">Time Series Charts</a><a href="#guide-standardized-score-z-score">Standardized score (z-score)</a><a href="#guide-data-sources">Data Sources</a><a href="#guide-tour-vs-difficulty">Tour % vs Difficulty</a><a href="#guide-autocomplete-and-table-functions">Autocomplete and Table Functions</a><a href="#guide-ant">Ant</a><a href="#guide-personalized-vs-global-tabs">Personalized vs Global tabs</a></div><div id="guide-topics-tabs" class="site-guide-topic-links" data-guide-topics="tabs" hidden=""><a href="#guide-overview-general">General</a><a href="#guide-latest-tour">Latest Tour</a><a href="#guide-stats-summary">Stats Summary</a><a href="#guide-weekly-performance">Weekly Performance</a><a href="#guide-performance">Guess Rate</a><a href="#guide-artist-familiarity">Artist Familiarity</a><a href="#guide-franchise-familiarity">Franchise familiarity</a><a href="#guide-tag-familiarity">Tag familiarity</a><a href="#guide-seasonal-comparison">Seasonal Comparison</a><a href="#guide-relearn-tracker">Relearn Tracker</a><a href="#guide-by-never-correct">By Never Correct</a><a href="#guide-by-wrong-guess">By Wrong Guess</a><a href="#guide-synergy">Synergy</a><a href="#guide-rivals">Rivals</a><a href="#guide-team-contributions">Team Contributions</a><a href="#guide-rig-list-analysis">Rig / List Analysis</a><a href="#guide-search-songs">Search Songs</a><a href="#guide-search-song-frequency">Search Song frequency</a><a href="#guide-player-database">Player Database</a><a href="#guide-single-tour">Single Tour</a><a href="#guide-changelog">Changelog</a></div><div id="guide-topics-limitations" class="site-guide-topic-links" data-guide-topics="limitations" hidden=""><a href="#guide-group-limitations">(go to) Limitations</a></div><div id="guide-topics-user-data" class="site-guide-topic-links" data-guide-topics="user-data" hidden=""><a href="#guide-group-user-data">(go to) User Data</a></div><div id="guide-topics-questions" class="site-guide-topic-links" data-guide-topics="questions" hidden=""><a href="#guide-faq-how-often-is-the-data-updated">How often is the data updated?</a><a href="#guide-faq-how-often-is-this-site-updated">How often is this site updated?</a><a href="#guide-faq-it-says-the-data-is-updated-why-is-the-last-tour-i-played-not-there">It says the data is updated. Why is the last tour I played not there?</a><a href="#guide-faq-what-is-the-difference-between-the-z-score-calculation-in-stats-summary-and-latest-tour">What is the difference between the z-score calculation in Stats Summary and Latest-tour?</a><a href="#guide-faq-do-you-make-money">Do you make money?</a><a href="#guide-faq-do-you-lose-money">Do you lose money?</a><a href="#guide-faq-can-i-cheat-using-this-site">Can I cheat using this site?</a><a href="#guide-faq-will-this-site-die">Will this site die?</a></div><div id="guide-topics-personal-ranking" class="site-guide-topic-links" data-guide-topics="personal-ranking" hidden=""><a href="#guide-group-personal-ranking">(go to) Personal Ranking of features</a></div><div id="guide-topics-end-note" class="site-guide-topic-links" data-guide-topics="end-note" hidden=""><a href="#guide-group-end-note">(go to) End Note</a></div></nav></aside></div>
+        </div>
+        <dialog id="siteGuideImageDialog" class="site-guide-image-dialog" aria-label="Enlarged guide example"><button type="button" class="site-guide-image-close" aria-label="Close image">×</button><img alt=""></dialog>
       </div>
       <div id="overviewLatestTourView" style="display:none;"></div>
       <div id="overviewStatsSummaryView" style="display:none;">
@@ -15428,7 +15414,6 @@ function setActiveSection(targetSection) {
 }
 
 function renderOverviewSubView() {
-  if (overviewActiveView === "siteGuide") overviewActiveView = "overview";
   if (!overviewMainView || !overviewLatestTourView || !overviewStatsSummaryView || !overviewWeeklyView) return;
   if (activeSection === "overview") globalThis.AMQAnalytics?.view("overview", overviewActiveView);
 
@@ -15474,6 +15459,8 @@ function renderOverviewSubView() {
   } else {
     destroyOverviewLatestTourComparisonChart();
   }
+
+  if (showSiteGuide) requestAnimationFrame(() => { positionSiteGuideNavigator(); updateSiteGuideContents(); });
 
   if (overviewViewTabs) {
     overviewViewTabs.querySelectorAll(".overview-view-tab").forEach(button => {
@@ -15727,6 +15714,96 @@ document.querySelectorAll(".topbar-link").forEach(link => {
   });
 });
 
+function positionSiteGuideNavigator() {
+  if (!overviewSiteGuideView || !document.body.classList.contains("site-guide-active")) return;
+  const layout = overviewSiteGuideView.querySelector(".site-guide-layout");
+  const firstHeading = overviewSiteGuideView.querySelector("#guide-group-philosophies > h2");
+  if (layout && firstHeading) {
+    const startOffset = Math.max(0, firstHeading.getBoundingClientRect().top - layout.getBoundingClientRect().top + 14);
+    overviewSiteGuideView.style.setProperty("--site-guide-nav-start", `${startOffset}px`);
+  }
+}
+
+function updateSiteGuideContents(preferredGroup = "") {
+  if (!overviewSiteGuideView || !document.body.classList.contains("site-guide-active")) return;
+  const groups = [...overviewSiteGuideView.querySelectorAll(".site-guide-section")];
+  const groupKey = preferredGroup || overviewSiteGuideView.dataset.selectedGuideGroup || "philosophies";
+  const active = groups.find(group => group.dataset.guideGroup === groupKey);
+  if (!active) return;
+  overviewSiteGuideView.dataset.selectedGuideGroup = groupKey;
+  overviewSiteGuideView.querySelectorAll("[data-guide-group-select]").forEach(button => {
+    button.setAttribute("aria-pressed", String(button.dataset.guideGroupSelect === groupKey));
+  });
+  let hasTopics = false;
+  overviewSiteGuideView.querySelectorAll("[data-guide-topics]").forEach(list => {
+    list.hidden = list.dataset.guideTopics !== groupKey;
+    if (!list.hidden && list.childElementCount) hasTopics = true;
+  });
+  const localContents = overviewSiteGuideView.querySelector(".site-guide-local-contents");
+  if (localContents) localContents.hidden = !hasTopics;
+  const topics = [...active.querySelectorAll(".site-guide-topic, .site-guide-question:not([hidden])")];
+  const topic = [...topics].reverse().find(item => item.getBoundingClientRect().top <= 195);
+  overviewSiteGuideView.querySelectorAll(".site-guide-local-contents a").forEach(link => {
+    if (topic && link.getAttribute("href") === `#${topic.id}`) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+}
+
+function initializeSiteGuide() {
+  if (!overviewSiteGuideView) return;
+  window.addEventListener("resize", positionSiteGuideNavigator);
+  let scrollPending = false;
+  window.addEventListener("scroll", () => {
+    if (scrollPending || !document.body.classList.contains("site-guide-active")) return;
+    scrollPending = true;
+    requestAnimationFrame(() => { scrollPending = false; updateSiteGuideContents(); });
+  }, { passive: true });
+  overviewSiteGuideView.addEventListener("click", event => {
+    const category = event.target.closest("[data-guide-group-select]");
+    if (category) {
+      const key = category.dataset.guideGroupSelect;
+      const pageScroll = window.scrollY;
+      updateSiteGuideContents(key);
+      window.scrollTo({ top: pageScroll, behavior: "auto" });
+      return;
+    }
+    const anchor = event.target.closest('a[href^="#guide-"]');
+    if (anchor) {
+      const target = document.getElementById(anchor.getAttribute("href").slice(1));
+      if (target && overviewSiteGuideView.contains(target)) {
+        event.preventDefault();
+        if (target.matches("details")) target.open = true;
+        target.scrollIntoView({ block: "start", behavior: "auto" });
+        updateSiteGuideContents(target.closest(".site-guide-section")?.dataset.guideGroup || "");
+      }
+    }
+    const imageButton = event.target.closest("[data-guide-image]");
+    if (imageButton) {
+      const dialog = document.getElementById("siteGuideImageDialog");
+      const image = dialog?.querySelector("img");
+      if (dialog && image) {
+        image.src = imageButton.dataset.guideImage;
+        image.alt = imageButton.querySelector("img")?.alt || "Guide example";
+        dialog.showModal();
+      }
+    }
+  });
+  const reveal = overviewSiteGuideView.querySelector("[data-guide-reveal-question]");
+  reveal?.addEventListener("toggle", () => {
+    if (reveal.open) {
+      const hiddenQuestion = document.getElementById("guide-faq-can-i-ddos-this-site");
+      if (hiddenQuestion) hiddenQuestion.hidden = false;
+    }
+  });
+  const dialog = document.getElementById("siteGuideImageDialog");
+  dialog?.querySelector(".site-guide-image-close")?.addEventListener("click", () => dialog.close());
+  dialog?.addEventListener("click", event => {
+    if (event.target !== dialog) return;
+    const rect = dialog.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
+  });
+}
+
 function navigateFromSiteGuide(event) {
   const button = event.target.closest("button[data-guide-section]");
   if (!button || !overviewSiteGuideView?.contains(button)) return;
@@ -15747,12 +15824,13 @@ function navigateFromSiteGuide(event) {
 }
 
 if (overviewSiteGuideView) overviewSiteGuideView.addEventListener("click", navigateFromSiteGuide);
+initializeSiteGuide();
 
 if (overviewViewTabs) {
   overviewViewTabs.querySelectorAll(".overview-view-tab").forEach(button => {
     button.addEventListener("click", () => {
       const requestedView = String(button.dataset.overviewView || "");
-      const targetView = ["latestTour", "statsSummary", "weekly"].includes(requestedView)
+      const targetView = ["latestTour", "statsSummary", "weekly", "siteGuide"].includes(requestedView)
         ? requestedView
         : "overview";
       overviewActiveView = targetView;
@@ -20584,7 +20662,6 @@ function renderOverviewLatestTour() {
       <div class="latest-tour-header">
         <div class="latest-tour-heading">
           <div class="latest-tour-date">${escapeHtml(getTimeSeriesDisplayDate(timestamp) || "Date unavailable")}</div>
-          <div class="latest-tour-meta">${mode === "usual" ? "Usual" : "Watched"}${isAnt ? " · ANT" : ""} · ${tourRows.length} players</div>
         </div>
         ${isAnt ? "" : '<button id="overviewLatestTourOpenBtn" class="latest-tour-open" type="button">Open in Single Tour</button>'}
       </div>
