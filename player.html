@@ -13181,7 +13181,7 @@
 </div>
 
 <script src="analytics.js?v=20261101-profile-scope"></script>
-<script src="assets/js/latest-tour-what-if.js?v=20261105-manual-results"></script>
+<script src="assets/js/latest-tour-what-if.js?v=20261105-dated-aliases"></script>
 <script>
 const isLocalDataContext =
   location.protocol === "file:"
@@ -13627,6 +13627,7 @@ let artistRadarHoveredLabelIndex = -1;
 const trendZoomCharts = new Set();
 let activeSection = initialSection;
 let overviewActiveView = "overview";
+let siteGuideReturnScroll = null;
 let overviewLatestTourRenderId = 0;
 let overviewLatestTourWhatIfState = null;
 const overviewLatestTourWhatIfProfiles = new Map();
@@ -15517,7 +15518,19 @@ function renderOverviewSubView() {
     destroyOverviewLatestTourComparisonChart();
   }
 
-  if (showSiteGuide) requestAnimationFrame(() => { positionSiteGuideNavigator(); updateSiteGuideContents(); });
+  if (showSiteGuide) {
+    // Only an Open button in the guide creates a return position. Other tabs
+    // retain their normal navigation behavior.
+    if (siteGuideReturnScroll) {
+      restoreWindowScrollPositionSnapshot(siteGuideReturnScroll);
+      siteGuideReturnScroll = null;
+    }
+    requestAnimationFrame(() => {
+      if (activeSection !== "overview" || overviewActiveView !== "siteGuide") return;
+      positionSiteGuideNavigator();
+      updateSiteGuideContents();
+    });
+  }
 
   if (overviewViewTabs) {
     overviewViewTabs.querySelectorAll(".overview-view-tab").forEach(button => {
@@ -15873,6 +15886,7 @@ function navigateFromSiteGuide(event) {
     if (!secondaryNavBySection[section]?.includes(view)) return;
     activeSubSectionBySection[section] = view;
   }
+  siteGuideReturnScroll = getWindowScrollPositionSnapshot();
   setActiveSection(section);
   document.querySelector(section === "overview"
     ? `.overview-view-tab[data-overview-view="${view}"]`
@@ -20916,24 +20930,22 @@ async function loadOverviewLatestTourWhatIf(context, sheetIndex, renderId) {
     if (context.isAnt) throw new Error('Song-level results are not available for ANT What if analysis.');
     if (context.timestamp.replace('T', ' ').slice(0, 19) < engine.cutoff) throw new Error('What if supports tours from February 16, 2026 onwards.');
     status.innerText = 'Loading known-song history…';
-    const [profile] = await Promise.all([loadOverviewLatestTourWhatIfProfile(playerId, context.mode), loadPlayersDirectory()]);
+    const [profile, players] = await Promise.all([loadOverviewLatestTourWhatIfProfile(playerId, context.mode), loadPlayersDirectory()]);
     if (!isCurrent()) return;
     const rawSongs = sheetIndex.get(context.tourId) || [];
     const identityNames = getCurrentOriginalTourIdentitySet();
+    const canonicalName = engine.createPlayerNameResolver(players, context.timestamp);
+    const identities = new Set([...identityNames].map(name => canonicalName(name)));
     const historySongs = [];
     for (const [id, rows] of sheetIndex) {
       if (id === context.tourId) continue;
       for (const row of rows) {
         const timestamp = String(row['Export Date'] || '').replace('T', ' ').replace(/Z$/, '');
         if (timestamp && timestamp < context.timestamp.replace('T', ' ')
-          && originalTourNamesContainCurrentPlayer(getOriginalTourPlayerNames(row.correctGuessPlayers), identityNames)) historySongs.push(row);
+          && getOriginalTourPlayerNames(row.correctGuessPlayers).some(name => identities.has(canonicalName(name, timestamp)))) historySongs.push(row);
       }
     }
-    const eligibleMisses = engine.findEligibleMisses({ rawSongs, historySongs, ...profile, identityNames, timestamp: context.timestamp });
-    const canonicalName = name => {
-      const entry = getPlayerEntryFromCacheByName(name);
-      return entry?.playerId != null ? `player:${entry.playerId}` : engine.normalize(name);
-    };
+    const eligibleMisses = engine.findEligibleMisses({ rawSongs, historySongs, ...profile, identityNames, timestamp: context.timestamp, canonicalName });
     const selectionKey = `${playerId}:${context.mode}:${context.tourId}`;
     const displayRows = await hydrateSongRowsWithSongKey(eligibleMisses.map(song => ({ ...song,
       animeName: song['English Title'] || song['Romaji Title'], animeRomaji: song['Romaji Title'],

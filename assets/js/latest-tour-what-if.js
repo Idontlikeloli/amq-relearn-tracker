@@ -17,6 +17,39 @@
   const type = song => String(song['songInfo.type'] || ({ OP: 1, ED: 2, IN: 3 }[String(song.type || '').replace(/\d/g, '').toUpperCase()]) || '');
   const day = value => String(value || '').match(/\d{4}-\d{2}-\d{2}/)?.[0] || '';
 
+  // Identity ownership can change over time (for example Lika before/after
+  // 2024-03-01). Keep the same inclusive-after/exclusive-before bounds as the pipeline.
+  function createPlayerNameResolver(players, timestamp = '') {
+    const plain = new Map(), dated = new Map();
+    const add = (map, name, value) => {
+      if (!map.has(name)) map.set(name, []);
+      map.get(name).push(value);
+    };
+    for (const player of players || []) {
+      if (player?.playerId == null) continue;
+      const key = `player:${player.playerId}`;
+      for (const raw of [player.displayName, ...(Array.isArray(player.altnames) ? player.altnames : [])]) {
+        const spec = String(raw || '').trim();
+        if (!spec) continue;
+        const match = spec.match(/^(.*?)\s*\[([^\]]+)\]$/);
+        const bounds = match && match[2].split(',').map(part => part.trim().match(/^([<>])\s*(\d{4}-\d{2}-\d{2})$/));
+        if (bounds?.length && bounds.every(Boolean)) {
+          const rule = { key, before: null, after: null };
+          bounds.forEach(([, sign, date]) => { rule[sign === '<' ? 'before' : 'after'] = date; });
+          add(dated, normalize(match[1]), rule);
+        } else add(plain, normalize(spec), key);
+      }
+    }
+    return (name, at = timestamp) => {
+      const token = normalize(name), date = day(at);
+      const matching = date ? (dated.get(token) || []).filter(rule =>
+        (!rule.before || date < rule.before) && (!rule.after || date >= rule.after)) : [];
+      const keys = new Set(matching.length ? matching.map(rule => rule.key) : plain.get(token) || []);
+      if (keys.size > 1) throw new Error(`Player alias "${name}" is ambiguous for this tour; results cannot be matched reliably.`);
+      return keys.size ? [...keys][0] : token;
+    };
+  }
+
   function songKeys(song) {
     const title = normalize(song['Song Name'] || song.songName || song.title || song.song);
     const artist = normalize(song.Artist || song.artist);
@@ -47,9 +80,9 @@
       || (numeric(a._sheetIndex) ?? 0) - (numeric(b._sheetIndex) ?? 0));
   }
 
-  function findEligibleMisses({ rawSongs, historySongs = [], searchRows = [], relearnRows = [], identityNames, timestamp }) {
-    const identities = new Set([...identityNames].map(normalize));
-    const isMe = name => identities.has(normalize(name));
+  function findEligibleMisses({ rawSongs, historySongs = [], searchRows = [], relearnRows = [], identityNames, timestamp, canonicalName = normalize }) {
+    const identities = new Set([...identityNames].map(name => normalize(canonicalName(name))));
+    const isMe = (name, at = timestamp) => identities.has(normalize(canonicalName(name, at)));
     const known = new Set();
     const forced = new Set();
     const mark = (set, song) => songKeys(song).forEach(key => set.add(key));
@@ -62,13 +95,13 @@
     // Precise tour timestamps resolve earlier tours on the same date. Never use future tours.
     for (const song of historySongs) {
       const date = String(song['Export Date'] || '').replace('T', ' ').replace(/Z$/, '');
-      if (date && date < String(timestamp).replace('T', ' ').replace(/Z$/, '') && names(song.correctGuessPlayers).some(isMe)) mark(known, song);
+      if (date && date < String(timestamp).replace('T', ' ').replace(/Z$/, '') && names(song.correctGuessPlayers).some(name => isMe(name, date))) mark(known, song);
     }
     for (const song of relearnRows) if (song.shouldKnow === true) mark(forced, song);
     const eligible = [];
     for (const song of orderedSongs(rawSongs)) {
-      const correct = names(song.correctGuessPlayers).some(isMe);
-      const wrong = names(song.incorrectGuessPlayers).some(isMe);
+      const correct = names(song.correctGuessPlayers).some(name => isMe(name));
+      const wrong = names(song.incorrectGuessPlayers).some(name => isMe(name));
       if (!correct && !wrong) continue; // Never include matches the player did not see.
       if (wrong && !correct && songKeys(song).some(key => known.has(key) || forced.has(key))) eligible.push(song);
       if (correct) mark(known, song);
@@ -98,7 +131,7 @@
     const songs = orderedSongs(rawSongs);
     const eligibleKeys = new Set(eligibleMisses.map(encounterKey));
     const candidates = songs.filter(song => eligibleKeys.has(encounterKey(song))
-      && names(song.incorrectGuessPlayers).some(isMe) && !names(song.correctGuessPlayers).some(isMe));
+      && names(song.incorrectGuessPlayers).some(name => isMe(name)) && !names(song.correctGuessPlayers).some(name => isMe(name)));
     const candidateKeys = new Set(candidates.map(encounterKey));
     const selectedKeys = selectedEncounterKeys == null
       ? new Set(candidates.slice(0, Math.round(candidates.length * percent / 100)).map(encounterKey))
@@ -218,5 +251,5 @@
       targetName: stats.get(targetKey)['Player name'], selectedKeys,
       selectedSongs, eligibleSongs: candidates };
   }
-  return Object.freeze({ weights, cutoff, normalize, songKeys, encounterKey, orderedSongs, findEligibleMisses, simulate });
+  return Object.freeze({ weights, cutoff, normalize, createPlayerNameResolver, songKeys, encounterKey, orderedSongs, findEligibleMisses, simulate });
 });
