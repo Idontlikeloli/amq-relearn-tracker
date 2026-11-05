@@ -3247,6 +3247,46 @@
       #overviewSiteGuideView .site-guide-chart-examples { grid-template-columns: minmax(0, 1fr); }
     }
 
+
+    #overviewLatestTourView .latest-tour-what-if-card { background: #fbfdff; border: 1px solid #d9e3f0; min-width: 0; }
+    #overviewLatestTourView .latest-tour-what-if-card > .chart-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 14px; }
+    #overviewLatestTourView .latest-tour-what-if-heading { display: flex; align-items: center; gap: 12px; min-width: 0; min-height: 36px; }
+    #overviewLatestTourView .latest-tour-what-if-heading .chart-title { flex: 0 0 auto; margin: 0; }
+    @media (max-width: 640px) { #overviewLatestTourView .latest-tour-what-if-card > .chart-header { grid-template-columns: minmax(0, 1fr); } }
+    #overviewLatestTourView .latest-tour-what-if-control { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; color: #536881; font-size: 13px; }
+    #overviewLatestTourView .latest-tour-what-if-control input { width: 82px; box-sizing: border-box; border: 1px solid #c7d6e6; border-radius: 8px; padding: 7px 9px; background: #fff; color: #263e55; font: inherit; }
+    #overviewLatestTourView .latest-tour-what-if-control input:focus-visible { outline: 2px solid #82afd0; outline-offset: 2px; }
+    #overviewLatestTourView .latest-tour-what-if-control input[aria-invalid="true"] { border-color: #bd5b50; }
+    #overviewLatestTourView .latest-tour-what-if-status { min-width: 0; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #536881; font-size: 13px; line-height: 1.6; }
+    #overviewLatestTourView .latest-tour-what-if-status:empty { display: none; }
+    #overviewLatestTourView .latest-tour-what-if-status[data-error="true"] { color: #9b5437; }
+    #overviewLatestTourView .latest-tour-what-if-table { display: none; margin: 0; }
+    #overviewLatestTourView #overviewLatestTourWhatIfTable .latest-tour-what-if-player > td:not([data-stat-heat]) { font-weight: 400 !important; background-image: linear-gradient(rgba(254, 232, 179, 0.5), rgba(254, 232, 179, 0.5)) !important; }
+    #overviewLatestTourView #overviewLatestTourWhatIfTable .latest-tour-what-if-original > td:not([data-stat-heat]) { font-weight: 400 !important; background-image: linear-gradient(rgba(191, 219, 254, 0.5), rgba(191, 219, 254, 0.5)) !important; }
+    :is(#overviewLatestTourWhatIfTable, #originalTourRawDataWrap) .what-if-sort-button { display: inline-flex; align-items: center; gap: 6px; border: 0; padding: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; white-space: nowrap; }
+    :is(#overviewLatestTourWhatIfTable, #originalTourRawDataWrap) .what-if-sort-indicator { display: inline-block; width: 10px; flex: 0 0 10px; font-size: 9px; }
+    :is(#overviewLatestTourWhatIfTable, #originalTourRawDataWrap) .what-if-sort-button:hover { color: #2563eb; }
+    :is(#overviewLatestTourWhatIfTable, #originalTourRawDataWrap) .what-if-sort-button:focus-visible { outline: 2px solid #82afd0; outline-offset: 4px; border-radius: 2px; }
+    #overviewLatestTourView .latest-tour-what-if-row-label { margin-left: 8px; color: #536881; font-size: 11px; font-weight: 400; }
+    #overviewLatestTourView .latest-tour-what-if-note { color: #6b7d91; font-size: 12px; line-height: 1.6; margin: 12px 0 0; }
+    #overviewLatestTourView .latest-tour-what-if-songs { margin-top: 14px; color: #536881; font-size: 13px; line-height: 1.7; }
+    #overviewLatestTourView .latest-tour-what-if-songs summary { cursor: pointer; width: fit-content; }
+    #overviewLatestTourView .latest-tour-what-if-selection-note { margin: 10px 0; font-size: 12px; color: #6b7d91; }
+    #overviewLatestTourView .latest-tour-what-if-eligible-wrap { margin-top: 12px; max-height: 520px; overflow: auto; border: 1px solid #d9e3ed; border-radius: 10px; }
+    #overviewLatestTourView .latest-tour-what-if-eligible-table { width: 100%; min-width: 760px; table-layout: fixed; border-collapse: separate; border-spacing: 0; margin: 0; }
+    #overviewLatestTourView .latest-tour-what-if-eligible-table :is(th, td) { padding: 10px 12px; border-bottom: 1px solid #e3eaf1; text-align: left; vertical-align: middle; color: #334155; font-size: 13px; overflow-wrap: anywhere; }
+    #overviewLatestTourView .latest-tour-what-if-eligible-table th { position: sticky; top: 0; z-index: 1; background: #f1f5f9; font-weight: 600; }
+    #overviewLatestTourView .latest-tour-what-if-eligible-table td { background: #fff; }
+    #overviewLatestTourView .latest-tour-what-if-eligible-table tbody tr:last-child td { border-bottom: 0; }
+    #overviewLatestTourView .latest-tour-what-if-eligible-table :is(th, td):nth-child(1) { width: 72px; }
+    #overviewLatestTourView .latest-tour-what-if-eligible-table :is(th, td):nth-child(4) { width: 55px; }
+    #overviewLatestTourView .latest-tour-what-if-eligible-table :is(th, td):nth-child(5) { width: 90px; }
+    #overviewLatestTourView .latest-tour-what-if-eligible-table :is(th, td):nth-child(6) { width: 145px; }
+    #overviewLatestTourView .latest-tour-what-if-eligible-table :is(.relearn-cover, .relearn-cover-placeholder) { display: block; width: 54px; height: 76px; object-fit: cover; border-radius: 5px; border: 1px solid #d6e1ec; }
+    #overviewLatestTourView .latest-tour-what-if-eligible-artist { display: block; margin-top: 4px; color: #6b7d91; font-size: 12px; }
+    #overviewLatestTourView .latest-tour-what-if-result-button { cursor: pointer; transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease, border-color 120ms ease !important; }
+    #overviewLatestTourView .latest-tour-what-if-result-button:focus-visible { outline: 2px solid #82afd0; outline-offset: 2px; }
+
     #overviewLatestTourView > * + * {
       margin-top: 18px;
     }
@@ -9402,7 +9442,7 @@
       text-align: center !important;
     }
 
-    #otherToolsSection .original-tour-song-result {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-song-result {
       display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
@@ -9414,13 +9454,13 @@
       line-height: 1 !important;
     }
 
-    #otherToolsSection .original-tour-song-result.correct {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-song-result.correct {
       background: #dcfce7 !important;
       color: #166534 !important;
       border: 1px solid #86efac !important;
     }
 
-    #otherToolsSection .original-tour-song-result.wrong {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-song-result.wrong {
       background: #fee2e2 !important;
       color: #991b1b !important;
       border: 1px solid #fca5a5 !important;
@@ -9639,14 +9679,16 @@
     }
 
     #otherToolsSection .original-tour-select-btn:hover:not(:disabled),
-    #overviewLatestTourView .latest-tour-open:hover:not(:disabled) {
+    #overviewLatestTourView .latest-tour-open:hover:not(:disabled),
+    #overviewLatestTourView .latest-tour-what-if-result-button:hover:not(:disabled) {
       border-color: #93c5fd !important;
       background: #eff6ff !important;
       box-shadow: 0 2px 8px rgba(37, 99, 235, 0.18) !important;
     }
 
     #otherToolsSection .original-tour-select-btn:active:not(:disabled),
-    #overviewLatestTourView .latest-tour-open:active:not(:disabled) {
+    #overviewLatestTourView .latest-tour-open:active:not(:disabled),
+    #overviewLatestTourView .latest-tour-what-if-result-button:active:not(:disabled) {
       transform: translateY(1px) !important;
       box-shadow: 0 1px 4px rgba(37, 99, 235, 0.2) inset !important;
     }
@@ -9691,7 +9733,7 @@
       cursor: pointer !important;
     }
 
-    #otherToolsSection .original-tour-raw-wrap {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-wrap {
       margin-top: 12px !important;
       border: 0 !important;
       border-radius: 0 !important;
@@ -9702,7 +9744,7 @@
       display: none;
     }
 
-    #otherToolsSection .original-tour-raw-table {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table {
       width: max-content !important;
       min-width: 100% !important;
       border-collapse: separate !important;
@@ -9710,8 +9752,8 @@
       table-layout: auto !important;
     }
 
-    #otherToolsSection .original-tour-raw-table th,
-    #otherToolsSection .original-tour-raw-table td {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table th,
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table td {
       border-bottom: 1px solid #e5e7eb !important;
       text-align: left !important;
       padding: 8px 10px !important;
@@ -9722,7 +9764,7 @@
       word-break: normal !important;
     }
 
-    #otherToolsSection .original-tour-raw-table th {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table th {
       background: #f8fafc !important;
       color: #334155 !important;
       position: sticky !important;
@@ -9730,24 +9772,24 @@
       z-index: 1 !important;
     }
 
-    #otherToolsSection .original-tour-raw-table th:nth-child(1),
-    #otherToolsSection .original-tour-raw-table td:nth-child(1) {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table th:nth-child(1),
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table td:nth-child(1) {
       position: sticky !important;
       left: 0 !important;
       background: #ffffff !important;
       z-index: 3 !important;
     }
 
-    #otherToolsSection .original-tour-raw-table th:nth-child(2),
-    #otherToolsSection .original-tour-raw-table td:nth-child(2) {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table th:nth-child(2),
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table td:nth-child(2) {
       position: sticky !important;
       left: calc(var(--original-tour-sticky-col1-width, 0px) - 1px) !important;
       background: #ffffff !important;
       z-index: 3 !important;
     }
 
-    #otherToolsSection .original-tour-raw-table th:nth-child(3),
-    #otherToolsSection .original-tour-raw-table td:nth-child(3) {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table th:nth-child(3),
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table td:nth-child(3) {
       position: sticky !important;
       left: calc(var(--original-tour-sticky-col1-width, 0px) + var(--original-tour-sticky-col2-width, 0px) - 2px) !important;
       background: #ffffff !important;
@@ -9755,16 +9797,16 @@
       box-shadow: 2px 0 0 #e5e7eb !important;
     }
 
-    #otherToolsSection .original-tour-raw-table th:nth-child(-n+3),
-    #otherToolsSection .original-tour-raw-table td:nth-child(-n+3) {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table th:nth-child(-n+3),
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table td:nth-child(-n+3) {
       background-clip: padding-box !important;
       overflow: visible !important;
     }
 
-    #otherToolsSection .original-tour-raw-table th:nth-child(1)::after,
-    #otherToolsSection .original-tour-raw-table td:nth-child(1)::after,
-    #otherToolsSection .original-tour-raw-table th:nth-child(2)::after,
-    #otherToolsSection .original-tour-raw-table td:nth-child(2)::after {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table th:nth-child(1)::after,
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table td:nth-child(1)::after,
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table th:nth-child(2)::after,
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table td:nth-child(2)::after {
       content: "" !important;
       position: absolute !important;
       top: 0 !important;
@@ -9776,7 +9818,7 @@
       z-index: 1 !important;
     }
 
-    #otherToolsSection .original-tour-raw-table thead th:nth-child(-n+3) {
+    :is(#otherToolsSection, #overviewLatestTourView) .original-tour-raw-table thead th:nth-child(-n+3) {
       background: #f8fafc !important;
       z-index: 4 !important;
     }
@@ -11549,7 +11591,12 @@
 <p><strong>Guess Rate Trend/Combined Trend:</strong> Both use either a quadratic trend or a square root trend, whichever’s sum of squared errors is smaller. Combined trend uses the z-score calculation shown.</p>
 <p><strong>Top Solos:</strong> displays in descending order, from most solos you got to least. If tied, lower difficulty wins. Only a maximum of 50 songs will be shown.</p>
 <p><strong>Top Doubles:</strong> for all three modes, will retrieve 20% of your doubles, with a maximum of 50 songs.</p>
-<p><strong>Top Songs from Rig:</strong> python generator first takes the top 10%, the website then takes top 30%, and afterwards applies a maximum of 100 songs.</p></article><article id="guide-latest-tour" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Latest Tour</h3><button type="button" class="site-guide-open" data-guide-section="overview" data-guide-view="latestTour">Open Latest Tour <span aria-hidden="true">↗</span></button></div><p>Nothing to see here :)</p></article><article class="site-guide-topic" data-guide-group="tabs" id="guide-stats-summary"><div class="site-guide-topic-heading"><h3>Stats Summary</h3><button class="site-guide-open" data-guide-section="overview" data-guide-view="statsSummary" type="button">Open Stats Summary <span aria-hidden="true">↗</span></button></div><p><strong>Standardized score:</strong> Tries to use a player’s last 10 tours, but if there aren’t enough, it uses the maximum up to that point(for most metrics, except usefulness, 3/8 or below, Lives taken/saved, Erigs, and Offlist Erigs). For usefulness, only tours after 2026-02-16 are used, with at least 5 eligible tours needed; for 3/8 or below, Lives taken/saved, Erigs, and Offlist erigs, only tours after 2026-01-01 are used, and at least 7 tours are needed.</p>
+<p><strong>Top Songs from Rig:</strong> python generator first takes the top 10%, the website then takes top 30%, and afterwards applies a maximum of 100 songs.</p></article><article id="guide-latest-tour" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Latest Tour</h3><button type="button" class="site-guide-open" data-guide-section="overview" data-guide-view="latestTour">Open Latest Tour <span aria-hidden="true">↗</span></button></div>
+<p><strong>What if &amp; Usefulness calculation:</strong> Usefulness is completely dependent upon what you got correct and how many others got that song correct (also considers the tour’s average Elo and how many songs you’ve encountered). The raw formula is:</p>
+<figure class="site-guide-figure"><button class="site-guide-image-button" type="button" data-guide-image="assets/site-guide/usefulness-formula.png" aria-label="Enlarge usefulness formula"><img src="assets/site-guide/usefulness-formula.png" width="858" height="158" alt="Usefulness equals the sum, over correct answers, of 8 times tour average Elo divided by songs encountered, multiplied by the correct-player weight." loading="lazy" decoding="async"></button></figure>
+<p>Each song will gain you a certain amount of usefulness points. For example, assuming the tour average Elo is 100 and you encountered 100 songs during this tour, each song you get correct will gain you this amount of usefulness points:</p>
+<div class="site-guide-table-wrap"><table class="site-guide-table" aria-label="Usefulness weights and points"><thead><tr><th scope="col">Correct players</th><th scope="col">Weight <var>w(k)</var></th><th scope="col">Usefulness points</th></tr></thead><tbody><tr><td>1/8</td><td>1</td><td>8</td></tr><tr><td>2/8</td><td>0.642857</td><td>5.142857</td></tr><tr><td>3/8</td><td>0.404762</td><td>3.238095</td></tr><tr><td>4/8</td><td>0.25</td><td>2</td></tr><tr><td>5/8</td><td>0.15</td><td>1.2</td></tr><tr><td>6/8</td><td>0.083333</td><td>0.666667</td></tr><tr><td>7/8</td><td>0.035714</td><td>0.285714</td></tr><tr><td>8/8</td><td>0</td><td>0</td></tr></tbody></table></div>
+<p>8/8 will always gain you 0 usefulness points. Therefore, using the “What if” tool, you can sabotage other players. For example, using the above example (and assuming everyone encountered 100 songs), if you missed a 7/8 and should have gotten it(marked it as hypothetically correct), instead of everyone gaining 0.2857 usefulness points, they get 0. Another example is if someone gets an erig and you mark it as hypothetically correct, instead of them getting 8 usefulness point, they only gain 5.1429.</p></article><article class="site-guide-topic" data-guide-group="tabs" id="guide-stats-summary"><div class="site-guide-topic-heading"><h3>Stats Summary</h3><button class="site-guide-open" data-guide-section="overview" data-guide-view="statsSummary" type="button">Open Stats Summary <span aria-hidden="true">↗</span></button></div><p><strong>Standardized score:</strong> Tries to use a player’s last 10 tours, but if there aren’t enough, it uses the maximum up to that point(for most metrics, except usefulness, 3/8 or below, Lives taken/saved, Erigs, and Offlist Erigs). For usefulness, only tours after 2026-02-16 are used, with at least 5 eligible tours needed; for 3/8 or below, Lives taken/saved, Erigs, and Offlist erigs, only tours after 2026-01-01 are used, and at least 7 tours are needed.</p>
 <p>The Genre radar chart uses the Last-2 system; By Decades, Total Songs Played by Type and Guess Rate by Type use RAW COUNTS (so repeated songs can count).</p>
 <p><strong>Synergy:</strong> same as the synergy bars in <a href="#guide-synergy">the synergy section</a>.</p></article><article id="guide-weekly-performance" class="site-guide-topic" data-guide-group="tabs"><div class="site-guide-topic-heading"><h3>Weekly Performance</h3><button type="button" class="site-guide-open" data-guide-section="overview" data-guide-view="weekly">Open Weekly Performance <span aria-hidden="true">↗</span></button></div><p>Pretty self-explanatory</p></article><article class="site-guide-topic" data-guide-group="tabs" id="guide-performance"><div class="site-guide-topic-heading"><h3>Guess Rate</h3><button class="site-guide-open" data-guide-section="performance" data-guide-view="Guess Rate" type="button">Open Guess Rate <span aria-hidden="true">↗</span></button></div><p><strong>Rolling Average (aka moving average) :</strong> The regular time series chart fluctuates a lot (sometimes I get 40% guess rate, while sometimes I get 30%, and there is a big difference). For a rolling average, in simple terms, it smoothes the time series chart. The 5-game moving average is more smooth than the 3-game moving average which in turn is more smooth than your guess rate trend.</p>
 <p>For the 3-game rolling average, for each tour, it takes the previous 2 tour’s guess rate + current tour’s guess rate and averages them. It does this for each tour on the time series chart, effectively turning the high-variation guess rate chart into a smoother version. The 5-game rolling average is the same concept. It adds up the guess rate from the previous 4 tours + the guess rate from the current tour, divided by 5, and repeats the process for each tour.</p>
@@ -13134,6 +13181,7 @@
 </div>
 
 <script src="analytics.js?v=20261101-profile-scope"></script>
+<script src="assets/js/latest-tour-what-if.js?v=20261105-manual-results"></script>
 <script>
 const isLocalDataContext =
   location.protocol === "file:"
@@ -13580,6 +13628,10 @@ const trendZoomCharts = new Set();
 let activeSection = initialSection;
 let overviewActiveView = "overview";
 let overviewLatestTourRenderId = 0;
+let overviewLatestTourWhatIfState = null;
+const overviewLatestTourWhatIfProfiles = new Map();
+const overviewLatestTourWhatIfPercentages = new Map();
+const overviewLatestTourWhatIfSelections = new Map();
 let overviewLatestTourComparisonChart = null;
 let overviewLatestTourBaselineSize = 10;
 let cachedAnimeSeriesLookup = null;
@@ -20701,6 +20753,26 @@ function renderOverviewLatestTour() {
         </div>
       </div>
     </section>
+    <section id="overviewLatestTourWhatIfCard" class="chart-card latest-tour-what-if-card" aria-labelledby="overviewLatestTourWhatIfTitle">
+      <div class="chart-header">
+        <div class="latest-tour-what-if-heading">
+        <h3 id="overviewLatestTourWhatIfTitle" class="chart-title">What if?
+          <span class="info-hover-wrap"><button class="info-hover-btn" type="button" aria-label="About What if" aria-describedby="overviewLatestTourWhatIfHelp">?</button><span id="overviewLatestTourWhatIfHelp" class="info-hover-tooltip" role="tooltip">What if you had gotten all the songs you knew? What if you had gotten x% of songs you knew? Uses Relearn Tracker to fill songs you could’ve gotten. </span></span>
+        </h3>
+        <span id="overviewLatestTourWhatIfStatus" class="latest-tour-what-if-status" role="status">Loading What if…</span>
+        </div>
+        <label class="latest-tour-what-if-control" for="overviewLatestTourWhatIfPercent">Recover missed known songs
+          <span><input id="overviewLatestTourWhatIfPercent" type="text" value="100" inputmode="decimal" autocomplete="off" aria-describedby="overviewLatestTourWhatIfStatus" disabled> %</span>
+        </label>
+      </div>
+      <div id="overviewLatestTourWhatIfTable" class="original-tour-raw-wrap latest-tour-what-if-table" role="region" aria-label="Hypothetical tour stats" tabindex="0"></div>
+      <details id="overviewLatestTourWhatIfSongs" class="latest-tour-what-if-songs" hidden>
+        <summary>Eligible missed songs (if you care about usefulness). Recovered missed known songs % overrides this. </summary>
+        <div class="latest-tour-what-if-eligible-wrap" role="region" aria-label="Eligible missed songs and hypothetical answers" tabindex="0">
+          <table class="latest-tour-what-if-eligible-table"><thead><tr><th scope="col">Image</th><th scope="col">Anime</th><th scope="col">Song</th><th scope="col">Type</th><th scope="col">Room correct</th><th scope="col">Hypothetical</th></tr></thead><tbody id="overviewLatestTourWhatIfSongList"></tbody></table>
+        </div>
+      </details>
+    </section>
     <div id="overviewLatestTourSongs" class="latest-tour-songs-wrap" aria-live="polite">
       ${[1, 2].map(hitCount => {
         const label = hitCount === 1 ? "Solos" : "Doubles";
@@ -20726,6 +20798,10 @@ All: All repeated franchises, whether you got them right or wrong and doesn't ma
       <div id="overviewLatestTourRepeatsBody" aria-live="polite"></div>
     </section>`;
   document.getElementById("overviewLatestTourOpenBtn")?.addEventListener("click", openOverviewLatestTour);
+  overviewLatestTourWhatIfState = null;
+  document.getElementById("overviewLatestTourWhatIfPercent")?.addEventListener("input", event => {
+    if (typeof updateOverviewLatestTourWhatIf === "function") updateOverviewLatestTourWhatIf(event.target.value);
+  });
   bindOverviewLatestTourBaselineDropdown();
   updateOverviewLatestTourRepeatFilterUI();
   ["correct", "wrong", "mixed"].forEach(filterMode => {
@@ -20764,6 +20840,8 @@ function setOverviewLatestTourSongsMessage(message) {
   });
   const repeatBody = document.getElementById("overviewLatestTourRepeatsBody");
   if (repeatBody) repeatBody.innerHTML = `<div class="overview-rig-top-songs-empty">${escapeHtml(message)}</div>`;
+  const whatIfStatus = document.getElementById("overviewLatestTourWhatIfStatus");
+  if (whatIfStatus) whatIfStatus.innerText = message;
 }
 
 function renderOverviewLatestTourSongs(context, sheetIndex, renderId) {
@@ -20795,6 +20873,194 @@ function renderOverviewLatestTourSongs(context, sheetIndex, renderId) {
     });
   });
   renderOverviewLatestTourRepeats(context, songs, renderId);
+  if (typeof loadOverviewLatestTourWhatIf === "function") loadOverviewLatestTourWhatIf(context, sheetIndex, renderId);
+}
+
+async function loadOverviewLatestTourWhatIfProfile(playerId, mode) {
+  const key = `${playerId}:${mode}`;
+  if (overviewLatestTourWhatIfProfiles.has(key)) return overviewLatestTourWhatIfProfiles.get(key);
+  const promise = (async () => {
+    const read = async relative => {
+      const response = await fetch(dataUrl(buildPlayerModePath(playerId, relative, mode)));
+      if (!response.ok) throw new Error(`Could not load ${mode} song history. Please refresh and try again.`);
+      return response.json();
+    };
+    const [search, relearn] = await Promise.all([
+      cachedOverviewSearchSongsByMode.has(key) ? null : read('search_songs/search_songs.json'),
+      read('relearn_tracker/relearn_songs.json')
+    ]);
+    if ((search && !Array.isArray(search.searchSongs)) || !Array.isArray(relearn.relearnSongs)) throw new Error('Invalid Relearn Tracker or song-history data.');
+    const searchRows = search
+      ? await hydrateSongRowsWithSongKey(resolveSearchSongDatePoolRows(search.searchSongs, search.datePool))
+      : cachedOverviewSearchSongsByMode.get(key);
+    const relearnRows = await hydrateSongRowsWithSongKey(resolveRelearnRowsWithSearchSongs(relearn.relearnSongs, searchRows));
+    return { searchRows, relearnRows };
+  })().catch(error => {
+    overviewLatestTourWhatIfProfiles.delete(key);
+    throw error;
+  });
+  overviewLatestTourWhatIfProfiles.set(key, promise);
+  return promise;
+}
+
+async function loadOverviewLatestTourWhatIf(context, sheetIndex, renderId) {
+  const status = document.getElementById('overviewLatestTourWhatIfStatus');
+  const input = document.getElementById('overviewLatestTourWhatIfPercent');
+  if (!status || !input) return;
+  const playerId = String(currentPlayerId || '');
+  const isCurrent = () => renderId === overviewLatestTourRenderId && playerId === String(currentPlayerId || '')
+    && context.mode === getActiveDataSourceMode() && activeSection === 'overview' && overviewActiveView === 'latestTour';
+  try {
+    const engine = globalThis.AMQLatestTourWhatIf;
+    if (!engine) throw new Error('What if could not load. Please refresh this page.');
+    if (context.isAnt) throw new Error('Song-level results are not available for ANT What if analysis.');
+    if (context.timestamp.replace('T', ' ').slice(0, 19) < engine.cutoff) throw new Error('What if supports tours from February 16, 2026 onwards.');
+    status.innerText = 'Loading known-song history…';
+    const [profile] = await Promise.all([loadOverviewLatestTourWhatIfProfile(playerId, context.mode), loadPlayersDirectory()]);
+    if (!isCurrent()) return;
+    const rawSongs = sheetIndex.get(context.tourId) || [];
+    const identityNames = getCurrentOriginalTourIdentitySet();
+    const historySongs = [];
+    for (const [id, rows] of sheetIndex) {
+      if (id === context.tourId) continue;
+      for (const row of rows) {
+        const timestamp = String(row['Export Date'] || '').replace('T', ' ').replace(/Z$/, '');
+        if (timestamp && timestamp < context.timestamp.replace('T', ' ')
+          && originalTourNamesContainCurrentPlayer(getOriginalTourPlayerNames(row.correctGuessPlayers), identityNames)) historySongs.push(row);
+      }
+    }
+    const eligibleMisses = engine.findEligibleMisses({ rawSongs, historySongs, ...profile, identityNames, timestamp: context.timestamp });
+    const canonicalName = name => {
+      const entry = getPlayerEntryFromCacheByName(name);
+      return entry?.playerId != null ? `player:${entry.playerId}` : engine.normalize(name);
+    };
+    const selectionKey = `${playerId}:${context.mode}:${context.tourId}`;
+    const displayRows = await hydrateSongRowsWithSongKey(eligibleMisses.map(song => ({ ...song,
+      animeName: song['English Title'] || song['Romaji Title'], animeRomaji: song['Romaji Title'],
+      songName: song['Song Name'], artist: song.Artist, type: getOriginalTourTypeLabel(song)
+    })));
+    await loadMalImageCache();
+    if (!isCurrent()) return;
+    const displaySongs = new Map(displayRows.map(song => [engine.encounterKey(song), song]));
+    overviewLatestTourWhatIfState = { context, renderId, rawSongs, eligibleMisses, identityNames, canonicalName, selectionKey, displaySongs };
+    input.value = String(overviewLatestTourWhatIfPercentages.get(selectionKey) ?? 100);
+    input.disabled = false;
+    updateOverviewLatestTourWhatIf(input.value, overviewLatestTourWhatIfSelections.get(selectionKey) ?? null);
+  } catch (error) {
+    if (!isCurrent()) return;
+    status.innerText = error.message || 'What if is unavailable for this tour.';
+    status.dataset.error = 'true';
+    input.disabled = true;
+  }
+}
+
+function updateOverviewLatestTourWhatIf(rawPercentage, selectedEncounterKeys = null) {
+  const state = overviewLatestTourWhatIfState;
+  if (!state || state.renderId !== overviewLatestTourRenderId || activeSection !== 'overview' || overviewActiveView !== 'latestTour') return;
+  const input = document.getElementById('overviewLatestTourWhatIfPercent');
+  const status = document.getElementById('overviewLatestTourWhatIfStatus');
+  const table = document.getElementById('overviewLatestTourWhatIfTable');
+  const percentage = String(rawPercentage).trim() === '' ? NaN : Number(rawPercentage);
+  if (!Number.isFinite(percentage) || percentage < 0 || percentage > 100) {
+    input.setAttribute('aria-invalid', 'true');
+    status.dataset.error = 'true';
+    status.innerText = 'Enter a percentage from 0 to 100 or use the custom selection below';
+    status.title = status.innerText;
+    return;
+  }
+  try {
+    const engine = globalThis.AMQLatestTourWhatIf;
+    const result = engine.simulate({ ...state, tourRows: state.context.tourRows, mode: state.context.mode, timestamp: state.context.timestamp, percentage, selectedEncounterKeys });
+    state.lastResult = result;
+    overviewLatestTourWhatIfPercentages.set(state.selectionKey, percentage);
+    if (selectedEncounterKeys == null) overviewLatestTourWhatIfSelections.delete(state.selectionKey);
+    else overviewLatestTourWhatIfSelections.set(state.selectionKey, new Set(result.selectedKeys));
+    input.setAttribute('aria-invalid', 'false');
+    status.dataset.error = 'false';
+    const original = state.context.tourRows.find(row => row['Player name'] === result.targetName);
+    status.innerText = '';
+    status.title = '';
+    input.value = selectedEncounterKeys == null ? String(rawPercentage) : 'custom';
+    renderOriginalTourRawDataTable({ wrapId: 'overviewLatestTourWhatIfTable', rows: result.rows, colorMode: 'extremes', formatValues: true,
+      sortable: true, highlightPlayer: result.targetName, comparisonRow: original, excludeColumns: ['Timestamp', 'tourid', 'team'] });
+    const details = document.getElementById('overviewLatestTourWhatIfSongs');
+    details.hidden = !result.eligibleCount;
+    renderOverviewLatestTourWhatIfEligibleSongs(state, result);
+  } catch (error) {
+    status.innerText = error.message || 'What if is unavailable for this tour.';
+    status.dataset.error = 'true';
+    table.innerHTML = '';
+    table.style.display = 'none';
+  }
+}
+
+function setOverviewLatestTourWhatIfSongResult(encounterKey, got) {
+  const state = overviewLatestTourWhatIfState;
+  if (!state || state.renderId !== overviewLatestTourRenderId || !state.lastResult
+    || !state.eligibleMisses.some(song => globalThis.AMQLatestTourWhatIf.encounterKey(song) === encounterKey)) return;
+  const selection = new Set(state.lastResult.selectedKeys);
+  if (got) selection.add(encounterKey);
+  else selection.delete(encounterKey);
+  updateOverviewLatestTourWhatIf(state.lastResult.percentage, selection);
+}
+
+function renderOverviewLatestTourWhatIfEligibleSongs(state, result) {
+  const body = document.getElementById('overviewLatestTourWhatIfSongList');
+  if (!body) return;
+  const engine = globalThis.AMQLatestTourWhatIf;
+  if (state.eligibleTableBody !== body) {
+    body.replaceChildren();
+    state.eligibleTableBody = body;
+    state.songControls = new Map();
+    for (const song of result.eligibleSongs) {
+      const key = engine.encounterKey(song);
+      const display = state.displaySongs?.get(key) || {
+        animeName: song['English Title'] || song['Romaji Title'] || 'Unknown anime',
+        animeRomaji: song['Romaji Title'], songName: song['Song Name'] || 'Unknown song',
+        artist: song.Artist || '', type: getOriginalTourTypeLabel(song)
+      };
+      const tr = document.createElement('tr');
+      const appendText = text => {
+        const cell = document.createElement('td');
+        cell.innerText = String(text ?? '');
+        tr.appendChild(cell);
+        return cell;
+      };
+      const imageCell = document.createElement('td');
+      imageCell.appendChild(buildInsightsCoverNode(display));
+      tr.appendChild(imageCell);
+      appendText(getLanguageAwareAnimeName(display) || display.animeName || display.anime || 'Unknown anime');
+      const songCell = appendText(display.songName || song['Song Name'] || 'Unknown song');
+      const artist = document.createElement('span');
+      artist.className = 'latest-tour-what-if-eligible-artist';
+      artist.innerText = display.artist || song.Artist || '';
+      songCell.appendChild(artist);
+      appendText(getOriginalTourTypeLabel(song));
+      const roomCount = appendText('');
+      const resultCell = document.createElement('td');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'original-tour-song-result latest-tour-what-if-result-button';
+      button.setAttribute('aria-label', `Recover ${display.songName || song['Song Name']}`);
+      button.addEventListener('click', () => {
+        if (state !== overviewLatestTourWhatIfState) return;
+        const got = state.lastResult.selectedKeys.has(key);
+        setOverviewLatestTourWhatIfSongResult(key, !got);
+      });
+      resultCell.appendChild(button);
+      tr.appendChild(resultCell);
+      body.appendChild(tr);
+      state.songControls.set(key, { button, roomCount, originalCount: Number(song.correctCount) });
+    }
+  }
+  for (const [key, controls] of state.songControls) {
+    const got = result.selectedKeys.has(key);
+    controls.button.innerText = got ? 'Correct' : 'Wrong';
+    controls.button.className = `original-tour-song-result latest-tour-what-if-result-button ${got ? 'correct' : 'wrong'}`;
+    controls.button.setAttribute('aria-pressed', String(got));
+    controls.button.title = got ? 'Mark as Wrong' : 'Mark as Correct';
+    controls.roomCount.innerText = `${controls.originalCount + (got ? 1 : 0)}/8`;
+  }
 }
 
 function getLatestTourDoublePartnerName(song, identitySet = getCurrentOriginalTourIdentitySet()) {
@@ -21794,18 +22060,18 @@ function renderOriginalTourSongsTable() {
   });
 }
 
-function renderOriginalTourRawDataTable() {
-  const wrap = document.getElementById("originalTourRawDataWrap");
-  const statsCard = document.getElementById("originalTourStatsSheetCard");
-  const statsTitle = document.getElementById("originalTourStatsTitle");
+function renderOriginalTourRawDataTable(options = null) {
+  const wrap = document.getElementById(options?.wrapId || "originalTourRawDataWrap");
+  const statsCard = options ? null : document.getElementById("originalTourStatsSheetCard");
+  const statsTitle = options ? null : document.getElementById("originalTourStatsTitle");
   if (!wrap) return;
-  if (normalizeSingleTourSubpage(singleTourActiveSubpage) !== "stats") {
+  if (!options && normalizeSingleTourSubpage(singleTourActiveSubpage) !== "stats") {
     if (statsCard) statsCard.style.display = "none";
     wrap.style.display = "none";
     return;
   }
 
-  const rows = getSelectedOriginalTourRows();
+  const rows = options?.rows || getSelectedOriginalTourRows();
   if (!rows.length) {
     if (statsCard) statsCard.style.display = "none";
     wrap.style.display = "none";
@@ -21824,7 +22090,7 @@ function renderOriginalTourRawDataTable() {
     return Number.isFinite(numeric) ? numeric : null;
   };
 
-  const derivedRows = rows.map(row => {
+  const deriveRow = row => {
     if (!row || typeof row !== "object") return row;
     const nextRow = { ...row };
     if (nextRow["size vs rig rate"] == null || nextRow["size vs rig rate"] === "") {
@@ -21835,13 +22101,14 @@ function renderOriginalTourRawDataTable() {
         : Number((size / rigRate).toFixed(3));
     }
     return nextRow;
-  });
+  };
+  const derivedRows = rows.map(deriveRow);
 
   const columnSet = new Set();
   derivedRows.forEach(row => {
     Object.keys(row || {}).forEach(key => columnSet.add(key));
   });
-  const columns = [...columnSet];
+  const columns = [...columnSet].filter(col => !(options?.excludeColumns || []).includes(col));
   const sizeVsRigRateColumnIndex = columns.indexOf("size vs rig rate");
   if (sizeVsRigRateColumnIndex >= 0) {
     columns.splice(sizeVsRigRateColumnIndex, 1);
@@ -21856,7 +22123,7 @@ function renderOriginalTourRawDataTable() {
     return;
   }
 
-  const sortedRows = derivedRows.slice().sort((a, b) => {
+  const compareDefaultRows = (a, b) => {
     const guessRateCandidates = ["Guess rate", "Guess Rate", "Guess rate (%)", "Guess Rate (%)"];
     const getGuessRateValue = (row) => {
       for (const key of guessRateCandidates) {
@@ -21876,7 +22143,36 @@ function renderOriginalTourRawDataTable() {
     const rankB = Number(b && b.Rank);
     if (Number.isFinite(rankA) && Number.isFinite(rankB) && rankA !== rankB) return rankA - rankB;
     return String(a && a["Player name"] || "").localeCompare(String(b && b["Player name"] || ""));
-  });
+  };
+  // Keep the chosen header when recoveries re-render this table.
+  const defaultSortColumn = columns.find(col => /^guess rate(?: \(.*\))?$/i.test(col)) || columns[0];
+  const sortable = options ? options.sortable : true;
+  if (sortable && !columns.includes(wrap.whatIfSort?.column)) {
+    wrap.whatIfSort = { column: defaultSortColumn, bestFirst: true };
+  }
+  const sortState = sortable ? wrap.whatIfSort : null;
+  const lowerIsBetter = column => /(?:avg\s*\/\s*8|[07]\s*\/\s*8|rigs missed|missed solos|lives? lost|lived lost|size vs rig rate)/i.test(column)
+    || ['size', 'list size', 'lose', 'losses'].includes(String(column).trim().toLowerCase());
+  const textSortColumn = column => /^(?:player name|player|name|team|timestamp|date|tourid|tour id)$/i.test(column);
+  const sortNumber = value => {
+    const numeric = parseNumericCellValue(value);
+    if (numeric != null) return numeric;
+    // Some sheet cells include a percentage followed by a sample count.
+    const match = String(value ?? '').trim().match(/^([+-]?[\d,]+(?:\.\d+)?)\s*%?\s*\([^)]*\)$/);
+    return match ? parseNumericCellValue(match[1]) : null;
+  };
+  const sortAscending = sortState && (textSortColumn(sortState.column) || lowerIsBetter(sortState.column)) === sortState.bestFirst;
+  const compareRows = (a, b) => {
+    if (!sortState) return compareDefaultRows(a, b);
+    const column = sortState.column;
+    const text = textSortColumn(column);
+    const av = text ? String(a?.[column] ?? '').trim() || null : sortNumber(a?.[column]);
+    const bv = text ? String(b?.[column] ?? '').trim() || null : sortNumber(b?.[column]);
+    if (av == null || bv == null) return av == null && bv == null ? compareDefaultRows(a, b) : av == null ? 1 : -1;
+    const difference = text ? av.localeCompare(bv, undefined, { sensitivity: 'base', numeric: true }) : av - bv;
+    return (sortAscending ? difference : -difference) || compareDefaultRows(a, b);
+  };
+  const sortedRows = derivedRows.slice().sort(compareRows);
 
   const noHeatKeywords = [
     "rank",
@@ -22028,22 +22324,63 @@ function renderOriginalTourRawDataTable() {
     return "";
   };
   const toCellStyle = (col, rawValue, rowIndex) => {
-    const heatStyle = originalTourColorMode === "extremes"
+    const heatStyle = (options?.colorMode || originalTourColorMode) === "extremes"
       ? toExtremeHeatStyle(col, rawValue)
       : toGradientHeatStyle(col, rawValue);
-    if (heatStyle) return ` style="${heatStyle}"`;
-    if (originalTourColorMode === "extremes" && rowIndex % 2 === 1) {
+    if (heatStyle) return ` data-stat-heat="true" style="${heatStyle}"`;
+    if ((options?.colorMode || originalTourColorMode) === "extremes" && rowIndex % 2 === 1) {
       return ' style="background-color: #E8E8E8 !important;"';
     }
     return "";
   };
 
-  const thead = `<thead><tr>${columns.map(col => `<th>${escapeHtml(displayColumnName(col))}</th>`).join("")}</tr></thead>`;
-  const tbody = `<tbody>${sortedRows.map((row, rowIndex) => `<tr>${columns.map(col => {
-    const value = String(row && row[col] != null ? row[col] : "");
-    return `<td${toCellStyle(col, value, rowIndex)}>${value}</td>`;
-  }).join("")}</tr>`).join("")}</tbody>`;
+  const thead = `<thead><tr>${columns.map((col, index) => {
+    const label = escapeHtml(displayColumnName(col));
+    if (!sortState) return `<th>${label}</th>`;
+    const active = col === sortState.column;
+    const direction = active ? (sortAscending ? 'ascending' : 'descending') : 'none';
+    const nextOrder = active && sortState.bestFirst ? 'worst first' : 'best first';
+    return `<th aria-sort="${direction}"><button type="button" class="what-if-sort-button" data-sort-column-index="${index}" aria-label="Sort by ${label}, ${nextOrder}" title="Sort by ${label}, ${nextOrder}">${label}<span class="what-if-sort-indicator" aria-hidden="true">${active ? (sortState.bestFirst ? '▼' : '▲') : ''}</span></button></th>`;
+  }).join("")}</tr></thead>`;
+  // The original row is a reference, not an extra competitor in the color cutoffs.
+  const displayRows = sortedRows.map((row, rowIndex) => ({
+    row, rowIndex, variant: options?.highlightPlayer === row["Player name"] ? "hypothetical" : ""
+  }));
+  if (options?.comparisonRow && displayRows.some(entry => entry.variant === "hypothetical")) {
+    displayRows.push({ row: deriveRow(options.comparisonRow), variant: "original" });
+    displayRows.sort((a, b) => compareRows(a.row, b.row)
+      || (a.variant === "original" ? -1 : b.variant === "original" ? 1 : 0));
+    displayRows.forEach((entry, rowIndex) => { entry.rowIndex = rowIndex; });
+  }
+  const tbody = `<tbody>${displayRows.map(({ row, rowIndex, variant }) => {
+    const rowAttributes = variant === "original"
+      ? ' class="latest-tour-what-if-original" aria-label="Your original stats"'
+      : variant === "hypothetical" ? ' class="latest-tour-what-if-player" aria-label="Your hypothetical stats"' : "";
+    return `<tr${rowAttributes}>${columns.map(col => {
+      const rawValue = row && row[col];
+      const value = options?.formatValues && typeof rawValue === "number" && !Number.isInteger(rawValue)
+        ? rawValue.toFixed(3) : String(rawValue ?? "");
+      const label = col === "Player name" && variant
+        ? `<span class="latest-tour-what-if-row-label">${variant === "original" ? "Original" : "What if"}</span>` : "";
+      return `<td${toCellStyle(col, rawValue, rowIndex)}>${escapeHtml(value)}${label}</td>`;
+    }).join("")}</tr>`;
+  }).join("")}</tbody>`;
   wrap.innerHTML = `<table class="original-tour-raw-table">${thead}${tbody}</table>`;
+  if (sortState) {
+    wrap.querySelectorAll('.what-if-sort-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const index = Number(button.dataset.sortColumnIndex);
+        const column = columns[index];
+        const scrollLeft = wrap.scrollLeft;
+        const scrollTop = wrap.scrollTop;
+        wrap.whatIfSort = { column, bestFirst: column === sortState.column ? !sortState.bestFirst : true };
+        renderOriginalTourRawDataTable(options);
+        wrap.scrollLeft = scrollLeft;
+        wrap.scrollTop = scrollTop;
+        wrap.querySelector(`[data-sort-column-index="${index}"]`)?.focus({ preventScroll: true });
+      });
+    });
+  }
   if (statsCard) statsCard.style.display = "block";
   wrap.style.display = "block";
   updateOriginalTourRawStickyColumnOffsets(wrap);
