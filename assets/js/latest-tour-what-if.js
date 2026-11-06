@@ -127,7 +127,16 @@
     const targetKey = target[0];
     const eloValues = [...stats.values()].map(row => numeric(row.Rank)).filter(Number.isFinite);
     if (eloValues.length !== stats.size) throw new Error('Tour Elo values are missing; usefulness cannot be recalculated reliably.');
-    const averageElo = eloValues.reduce((sum, value) => sum + value, 0) / eloValues.length;
+    const rosterAverages = [...stats.values()].map(row => numeric(row.tour_average_elo)).filter(Number.isFinite);
+    const hasSubstitutes = [...stats.values()].some(row => numeric(row.is_substitute) === 1);
+    if (rosterAverages.some(value => Math.abs(value - rosterAverages[0]) > 1e-8)) {
+      throw new Error('The original tour Elo average is inconsistent; please refresh the tour data.');
+    }
+    if (hasSubstitutes && !rosterAverages.length) {
+      throw new Error('The original roster Elo average is missing for this substitute tour; please refresh the tour data.');
+    }
+    const averageElo = rosterAverages.length ? rosterAverages[0]
+      : eloValues.reduce((sum, value) => sum + value, 0) / eloValues.length;
     const songs = orderedSongs(rawSongs);
     const eligibleKeys = new Set(eligibleMisses.map(encounterKey));
     const candidates = songs.filter(song => eligibleKeys.has(encounterKey(song))
