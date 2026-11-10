@@ -109,9 +109,20 @@
     return eligible;
   }
 
-  function simulate({ tourRows, rawSongs, eligibleMisses, identityNames, percentage = 100, canonicalName = normalize, timestamp, mode = 'watched', selectedEncounterKeys = null }) {
-    const percent = Number(percentage);
-    if (!Number.isFinite(percent) || percent < 0 || percent > 100) throw new Error('Enter a percentage from 0 to 100.');
+  function findEligibleRigMisses({ rawSongs, eligibleMisses = [], identityNames, canonicalName = normalize }) {
+    const identities = new Set([...identityNames].map(name => normalize(canonicalName(name))));
+    const isMe = name => identities.has(normalize(canonicalName(name)));
+    const knownKeys = new Set(eligibleMisses.map(encounterKey));
+    return orderedSongs(rawSongs).filter(song => !knownKeys.has(encounterKey(song))
+      && names(song.incorrectGuessPlayers).some(isMe) && !names(song.correctGuessPlayers).some(isMe)
+      && array(song.listStates).some(entry => entry && typeof entry === 'object'
+        && isMe(entry.name) && numeric(entry.status) === 2));
+  }
+
+  function simulate({ tourRows, rawSongs, eligibleMisses, identityNames, percentage = 100, canonicalName = normalize, timestamp, mode = 'watched', selectedEncounterKeys = null, rigPercentage = 0, selectedRigEncounterKeys = null }) {
+    const percent = Number(percentage), rigPercent = Number(rigPercentage);
+    if (!Number.isFinite(percent) || percent < 0 || percent > 100
+      || !Number.isFinite(rigPercent) || rigPercent < 0 || rigPercent > 100) throw new Error('Enter a percentage from 0 to 100.');
     if (String(timestamp || '').replace('T', ' ').slice(0, 19) < cutoff) throw new Error('What if supports the usefulness calculation used from February 16, 2026 onwards.');
     const canonical = name => normalize(canonicalName(name));
     const identities = new Set([...identityNames].map(canonical));
@@ -141,14 +152,20 @@
     const eligibleKeys = new Set(eligibleMisses.map(encounterKey));
     const candidates = songs.filter(song => eligibleKeys.has(encounterKey(song))
       && names(song.incorrectGuessPlayers).some(name => isMe(name)) && !names(song.correctGuessPlayers).some(name => isMe(name)));
-    const candidateKeys = new Set(candidates.map(encounterKey));
-    const selectedKeys = selectedEncounterKeys == null
-      ? new Set(candidates.slice(0, Math.round(candidates.length * percent / 100)).map(encounterKey))
-      : new Set(selectedEncounterKeys);
-    if ([...selectedKeys].some(key => !candidateKeys.has(key))) {
-      throw new Error('Only eligible missed answers can be changed.');
-    }
-    const selectedSongs = candidates.filter(song => selectedKeys.has(encounterKey(song)));
+    const rigCandidates = findEligibleRigMisses({rawSongs: songs, eligibleMisses: candidates, identityNames, canonicalName});
+    const select = (pool, percentage, manualKeys) => {
+      const allowed = new Set(pool.map(encounterKey));
+      const selected = manualKeys == null
+        ? new Set(pool.slice(0, Math.round(pool.length * percentage / 100)).map(encounterKey)) : new Set(manualKeys);
+      if ([...selected].some(key => !allowed.has(key))) throw new Error('Only eligible missed answers can be changed.');
+      return selected;
+    };
+    const selectedKnownKeys = select(candidates, percent, selectedEncounterKeys);
+    const selectedRigKeys = select(rigCandidates, rigPercent, selectedRigEncounterKeys);
+    const selectedKeys = new Set([...selectedKnownKeys, ...selectedRigKeys]);
+    const allCandidateKeys = new Set([...candidates, ...rigCandidates].map(encounterKey));
+    const eligibleSongs = songs.filter(song => allCandidateKeys.has(encounterKey(song)));
+    const selectedSongs = eligibleSongs.filter(song => selectedKeys.has(encounterKey(song)));
     const added = selectedSongs.length;
     const createAccumulator = () => ({ songs: 0, hit: 0, weight: 0, sumK: 0, solos: 0, zeros: 0, sevens: 0, hard: 0,
       taken: 0, saved: 0, rigs: 0, rigHit: 0, rigSumK: 0, soloRigs: 0, missedSolos: 0, lostRig: 0, offSolos: 0,
@@ -256,9 +273,11 @@
       changedFields.set(original['Player name'], changes);
       return row;
     });
-    return { rows, added, eligibleCount: candidates.length, percentage: percent, averageElo, changedFields,
-      targetName: stats.get(targetKey)['Player name'], selectedKeys,
-      selectedSongs, eligibleSongs: candidates };
+    return { rows, added, eligibleCount: eligibleSongs.length, knownEligibleCount: candidates.length,
+      rigEligibleCount: rigCandidates.length, percentage: percent, rigPercentage: rigPercent, averageElo, changedFields,
+      targetName: stats.get(targetKey)['Player name'], selectedKeys, selectedKnownKeys, selectedRigKeys,
+      knownAdded: selectedKnownKeys.size, rigAdded: selectedRigKeys.size,
+      selectedSongs, eligibleSongs, eligibleKnownSongs: candidates, eligibleRigSongs: rigCandidates };
   }
-  return Object.freeze({ weights, cutoff, normalize, createPlayerNameResolver, songKeys, encounterKey, orderedSongs, findEligibleMisses, simulate });
+  return Object.freeze({ weights, cutoff, normalize, createPlayerNameResolver, songKeys, encounterKey, orderedSongs, findEligibleMisses, findEligibleRigMisses, simulate });
 });

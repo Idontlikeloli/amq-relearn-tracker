@@ -13189,7 +13189,7 @@
 </div>
 
 <script src="analytics.js?v=20261101-profile-scope"></script>
-<script src="assets/js/latest-tour-what-if.js?v=20261108-rig-recovery"></script>
+<script src="assets/js/latest-tour-what-if.js?v=20261110-aa9e0d34bbb7"></script>
 <script>
 const isLocalDataContext =
   location.protocol === "file:"
@@ -21017,7 +21017,9 @@ async function loadOverviewLatestTourWhatIf(context, sheetIndex, renderId, view 
   const isCurrent = () => isTourWhatIfCurrent(context, renderId, view, playerId);
   try {
     const engine = globalThis.AMQLatestTourWhatIf;
-    if (!engine) throw new Error('What if could not load. Please refresh this page.');
+    if (!engine || typeof engine.findEligibleRigMisses !== 'function') {
+      throw new Error('What if could not load the latest update. Please reload this page.');
+    }
     if (context.isAnt) throw new Error('Song-level results are not available for ANT What if analysis.');
     if (context.timestamp.replace('T', ' ').slice(0, 19) < engine.cutoff) throw new Error('What if supports tours from February 16, 2026 onwards.');
     status.innerText = 'Loading known-song history…';
