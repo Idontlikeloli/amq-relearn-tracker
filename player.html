@@ -13797,8 +13797,11 @@ const PLAYLISTS_TOKEN_STORAGE_KEY = "amq_playlists_session_token";
 let playlistsAuthToken = "";
 let playlistsAuthenticated = false;
 let playlistsAuthChecked = false;
+let playlistsAuthUnavailable = false;
 let playlistsApiBusy = false;
 let cachedPlaylists = [];
+let playlistsDataRevision = 0;
+let playlistsLoadRequestId = 0;
 let selectedPlaylistId = "";
 const playlistCoverPreloadCache = new Map();
 const PLAYLIST_COVER_PRELOAD_LIMIT = 32;
@@ -31090,7 +31093,17 @@ async function playlistsApiRequest(path, options = {}) {
   }
 
   const cleanPath = String(path || "").startsWith("/") ? String(path || "") : `/${path || ""}`;
-  const response = await fetch(`${PLAYLISTS_API_BASE}${cleanPath}`, fetchOptions);
+  let response;
+  try {
+    response = await fetch(`${PLAYLISTS_API_BASE}${cleanPath}`, fetchOptions);
+  } catch (cause) {
+    // Never replay a write: the server may have saved it before the connection failed.
+    const error = new Error(method === "GET"
+      ? "Could not reach the playlist service. Try Refresh shortly."
+      : "Connection interrupted. The change may already be saved; refresh before trying again.");
+    error.cause = cause;
+    throw error;
+  }
   const payload = await readPlaylistsJsonSafe(response);
   if (!response.ok) {
     const error = new Error(
@@ -32189,7 +32202,9 @@ function renderPlaylistsAuthControls() {
   const loginBtn = document.getElementById("playlistsLoginBtn");
   const logoutBtn = document.getElementById("playlistsLogoutBtn");
   const refreshBtn = document.getElementById("playlistsRefreshBtn");
-  if (authState) authState.innerText = playlistsAuthenticated ? "Signed in" : "Signed out";
+  if (authState) authState.innerText = playlistsAuthUnavailable
+    ? "Connection unavailable"
+    : (playlistsAuthenticated ? "Signed in" : "Signed out");
   if (!playlistsAuthenticated) {
     closePlaylistCreateModal();
   }
@@ -34512,13 +34527,17 @@ async function addContextSongsToPlaylist(targetPlaylist) {
   setPlaylistsStatus(`Adding ${songsToAdd.length === 1 ? "song" : "songs"} to "${targetPlaylist.name || "playlist"}"...`);
   try {
     const playlistId = encodeURIComponent(String(targetPlaylist.id));
+    let needsReload = false;
     for (const song of songsToAdd) {
-      await playlistsApiRequest(`/playlists/${playlistId}/songs`, {
+      const submittedSong = buildPlaylistAddPayloadFromPlaylistSong(song);
+      const payload = await playlistsApiRequest(`/playlists/${playlistId}/songs`, {
         method: "POST",
-        body: buildPlaylistAddPayloadFromPlaylistSong(song)
+        body: submittedSong
       });
+      if (!cacheSavedPlaylistSong(targetPlaylist.id, submittedSong, payload)) needsReload = true;
     }
-    await loadPlaylistsData();
+    if (needsReload) await loadPlaylistsData();
+    else renderInsightsPlaylists();
     setPlaylistsStatus(
       `${songsToAdd.length === 1 ? "Song" : `${songsToAdd.length} songs`} added to "${targetPlaylist.name || "playlist"}".`,
       "success"
@@ -35547,15 +35566,22 @@ async function checkPlaylistsAuth({ silent = false } = {}) {
   if (!playlistsAuthToken) {
     playlistsAuthenticated = false;
     playlistsAuthChecked = true;
+    playlistsAuthUnavailable = false;
     renderInsightsPlaylists();
     if (!silent) setPlaylistsStatus("Enter your password to manage playlists.");
     return false;
   }
 
+  const checkedToken = getActivePlaylistsAuthToken();
   try {
     const payload = await playlistsApiRequest("/me");
+    if (checkedToken !== getActivePlaylistsAuthToken()) return playlistsAuthenticated;
+    if (!payload || typeof payload.authenticated !== "boolean") {
+      throw new Error("Could not verify playlist login. Try Refresh shortly.");
+    }
     playlistsAuthenticated = Boolean(payload && payload.authenticated);
     playlistsAuthChecked = true;
+    playlistsAuthUnavailable = false;
     if (!playlistsAuthenticated) {
       setPlaylistsToken("");
       if (!silent) setPlaylistsStatus("Session expired. Log in again.", "error");
@@ -35563,16 +35589,23 @@ async function checkPlaylistsAuth({ silent = false } = {}) {
     renderInsightsPlaylists();
     return playlistsAuthenticated;
   } catch (err) {
-    playlistsAuthenticated = false;
-    playlistsAuthChecked = true;
-    setPlaylistsToken("");
+    if (checkedToken !== getActivePlaylistsAuthToken()) return playlistsAuthenticated;
+    const expired = Number(err && err.status) === 401;
+    playlistsAuthUnavailable = !expired;
+    playlistsAuthChecked = expired;
+    if (expired) {
+      playlistsAuthenticated = false;
+      setPlaylistsToken("");
+    }
     renderInsightsPlaylists();
     if (!silent) setPlaylistsStatus(err.message || "Could not check playlist login.", "error");
-    return false;
+    return playlistsAuthenticated;
   }
 }
 
 async function loadPlaylistsData(options = {}) {
+  const requestId = ++playlistsLoadRequestId;
+  const revision = playlistsDataRevision;
   const shouldRender = () => {
     if (options && options.render === false) return false;
     return typeof options.shouldRender === "function" ? options.shouldRender() : true;
@@ -35580,7 +35613,12 @@ async function loadPlaylistsData(options = {}) {
 
   try {
     const payload = await playlistsApiRequest("/playlists", { auth: false });
-    cachedPlaylists = await hydratePlaylistsWithSongKey(normalizePlaylistsPayload(payload));
+    if (!Array.isArray(payload) && !Array.isArray(payload?.playlists) && !Array.isArray(payload?.items)) {
+      throw new Error("The playlist service returned an invalid response. Try Refresh shortly.");
+    }
+    const loaded = await hydratePlaylistsWithSongKey(normalizePlaylistsPayload(payload));
+    if (requestId !== playlistsLoadRequestId || revision !== playlistsDataRevision) return;
+    cachedPlaylists = loaded;
     if (!cachedPlaylists.some(playlist => String(playlist.id) === String(selectedPlaylistId))) {
       selectedPlaylistId = cachedPlaylists.length ? String(cachedPlaylists[0].id) : "";
     }
@@ -35594,14 +35632,15 @@ async function loadPlaylistsData(options = {}) {
     }
     scheduleAutoSeedMissingPlaylistCovers(options);
   } catch (err) {
-    cachedPlaylists = [];
-    selectedPlaylistId = "";
+    if (requestId !== playlistsLoadRequestId || revision !== playlistsDataRevision) return;
     if (shouldRender()) {
       const missingRoute = [404, 405].includes(Number(err && err.status));
       setPlaylistsStatus(
         missingRoute
           ? "The Worker needs GET /api/playlists before playlists can be shown."
-          : (err.message || "Could not load playlists."),
+          : (cachedPlaylists.length
+            ? "Could not refresh playlists. Your loaded songs are still shown. Try Refresh shortly."
+            : (err.message || "Could not load playlists.")),
         "error"
       );
       renderInsightsPlaylists();
@@ -35626,12 +35665,15 @@ async function loginPlaylists() {
       body: { password }
     });
     const token = getPlaylistsLoginTokenFromPayload(payload);
+    if (!token) throw new Error("Login worked, but the API did not return a session token.");
     setPlaylistsToken(token);
+    // POST /login has already verified the password. A failed /me request
+    // must not discard this valid token or undo the successful login.
+    playlistsAuthenticated = true;
     playlistsAuthenticated = token ? await checkPlaylistsAuth({ silent: true }) : false;
-    playlistsAuthChecked = true;
     if (passwordInput) passwordInput.value = "";
     if (!playlistsAuthenticated) {
-      setPlaylistsStatus("Login worked, but the API did not return a session token.", "error");
+      setPlaylistsStatus("Session expired. Log in again.", "error");
       renderInsightsPlaylists();
       return;
     }
@@ -35639,11 +35681,12 @@ async function loginPlaylists() {
     setPlaylistsStatus("Signed in.", "success");
     await loadPlaylistsData();
   } catch (err) {
-    playlistsAuthenticated = false;
-    playlistsAuthChecked = true;
-    setPlaylistsToken("");
-    cachedPlaylists = [];
-    selectedPlaylistId = "";
+    if (Number(err && err.status) === 401) {
+      playlistsAuthenticated = false;
+      playlistsAuthChecked = true;
+      playlistsAuthUnavailable = false;
+      setPlaylistsToken("");
+    }
     setPlaylistsStatus(err.message || "Login failed.", "error");
     renderInsightsPlaylists();
   } finally {
@@ -35655,6 +35698,7 @@ function logoutPlaylists() {
   setPlaylistsToken("");
   playlistsAuthenticated = false;
   playlistsAuthChecked = true;
+  playlistsAuthUnavailable = false;
   playlistSignedInViewMode = "table";
   setPlaylistsStatus("Signed out.");
   renderInsightsPlaylists();
@@ -35802,6 +35846,29 @@ function clearPlaylistSongForm() {
   setPlaylistSongSearchMode("");
 }
 
+function cacheSavedPlaylistSong(playlistId, submittedSong, payload) {
+  const target = cachedPlaylists.find(row => String(row.id) === String(playlistId));
+  const saved = payload && (payload.song || payload.item);
+  const id = payload && (payload.playlist_song_id ?? saved?.playlist_song_id ?? saved?.playlistSongId);
+  if (!target || id == null || String(id) === "") return false;
+  if (payload.playlist_id != null && String(payload.playlist_id) !== String(playlistId)) return false;
+  const song = normalizePlaylistSong({ ...submittedSong, ...saved, playlist_song_id: id });
+  if (!Array.isArray(target.songs)) target.songs = [];
+  const index = target.songs.findIndex(row => getPlaylistSongApiId(row) === String(id));
+  if (index >= 0) target.songs[index] = song;
+  else target.songs.push(song);
+  playlistsDataRevision += 1;
+  return true;
+}
+
+function cacheRemovedPlaylistSongs(playlistId, songIds) {
+  const target = cachedPlaylists.find(row => String(row.id) === String(playlistId));
+  if (!target) return;
+  const removed = new Set(songIds.map(String));
+  target.songs = (target.songs || []).filter(row => !removed.has(getPlaylistSongApiId(row)));
+  playlistsDataRevision += 1;
+}
+
 async function postSongToSelectedPlaylist(song, successMessage = "Song added.", options = {}) {
   const playlist = getSelectedPlaylist();
   const preserveSearch = Boolean(options && options.preserveSearch);
@@ -35823,12 +35890,17 @@ async function postSongToSelectedPlaylist(song, successMessage = "Song added.", 
   setPlaylistsStatus("Adding song...");
   try {
     const playlistId = encodeURIComponent(String(playlist.id));
-    await playlistsApiRequest(`/playlists/${playlistId}/songs`, {
+    const payload = await playlistsApiRequest(`/playlists/${playlistId}/songs`, {
       method: "POST",
       body: song
     });
     if (!preserveSearch) clearPlaylistSongForm();
-    await loadPlaylistsData();
+    if (cacheSavedPlaylistSong(playlist.id, song, payload)) {
+      renderInsightsPlaylists();
+      scheduleAutoSeedMissingPlaylistCovers();
+    } else {
+      await loadPlaylistsData();
+    }
     setPlaylistsStatus(successMessage, "success");
   } catch (err) {
     const missingRoute = [404, 405].includes(Number(err && err.status));
@@ -35953,7 +36025,8 @@ async function deletePlaylistSong(playlist, song, options = {}) {
     await playlistsApiRequest(`/playlists/${playlistId}/songs/${songId}`, {
       method: "DELETE"
     });
-    await loadPlaylistsData();
+    cacheRemovedPlaylistSongs(playlist.id, [playlistSongId]);
+    renderInsightsPlaylists();
     setPlaylistsStatus(successMessage, "success");
   } catch (err) {
     const missingRoute = [404, 405].includes(Number(err && err.status));
@@ -36005,8 +36078,9 @@ async function deletePlaylistSongs(playlist, songs, options = {}) {
       await playlistsApiRequest(`/playlists/${playlistId}/songs/${songId}`, {
         method: "DELETE"
       });
+      cacheRemovedPlaylistSongs(playlist.id, [playlistSongId]);
     }
-    await loadPlaylistsData();
+    renderInsightsPlaylists();
     setPlaylistsStatus(successMessage, "success");
   } catch (err) {
     const missingRoute = [404, 405].includes(Number(err && err.status));
