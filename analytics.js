@@ -1,4 +1,4 @@
-/* Feature usage and session replay. Search text is allowed only for named search controls. */
+/* Feature usage and session replay. Only named search and What If controls reveal input text. */
 (() => {
   "use strict";
   const w = window;
@@ -52,9 +52,18 @@
   function normalizeSearch(value) {
     return typeof value === "string" ? value.replace(/[\u0000-\u001f\u007f]/g, " ").replace(/\s+/g, " ").trim().slice(0, 220) : "";
   }
+  // These recovery controls contain percentages or "custom", not search queries.
+  // Allow them only in replay; keep every other input masked by default.
+  const whatIfReplayInputs = new Set([
+    "overviewLatestTourWhatIfPercent", "overviewLatestTourWhatIfRigPercent",
+    "originalTourWhatIfPercent", "originalTourWhatIfRigPercent"
+  ]);
   function maskReplayInput(value, element) {
     const text = String(value || "");
-    return isSearchInput(element) ? text : "*".repeat(text.length);
+    const revealWhatIf = !!element && whatIfReplayInputs.has(element.id)
+      && String(element.type || "text").toLowerCase() === "text"
+      && !element.closest?.('.ph-no-capture, .ph-mask, [data-ph-sensitive]');
+    return isSearchInput(element) || revealWhatIf ? text : "*".repeat(text.length);
   }
   const choices = {
     profile_scope: ["owner", "other"],
