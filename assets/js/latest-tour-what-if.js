@@ -80,6 +80,59 @@
       || (numeric(a._sheetIndex) ?? 0) - (numeric(b._sheetIndex) ?? 0));
   }
 
+  // Hosts can upload several drafts of the same tour. Only use another
+  // snapshot when shared encounters prove the relationship AND every player's
+  // encounter/hit totals exactly reproduce the published sheet.
+  function resolveTourSongSnapshot({ tourId, rawSongs = [], sheetIndex, tourRows = [], timestamp, canonicalName = normalize }) {
+    const canonical = name => normalize(canonicalName(name, timestamp));
+    const expected = new Map(tourRows.map(row => [canonical(row['Player name']), row]));
+    const inspect = rows => {
+      const songs = orderedSongs(rows), counts = new Map(), hits = new Map(), signatures = [];
+      let valid = true;
+      for (const song of songs) {
+        const correct = [...new Set(names(song.correctGuessPlayers).map(canonical))].sort();
+        const wrong = [...new Set(names(song.incorrectGuessPlayers).map(canonical))].sort();
+        const members = new Set([...correct, ...wrong]);
+        if (members.size !== 8 || correct.length + wrong.length !== 8
+          || correct.length !== numeric(song.correctCount) || wrong.length !== numeric(song.wrongCount)
+          || [...members].some(key => !expected.has(key))) valid = false;
+        for (const key of members) counts.set(key, (counts.get(key) || 0) + 1);
+        for (const key of correct) hits.set(key, (hits.get(key) || 0) + 1);
+        signatures.push(JSON.stringify([String(song.songNumber || song['Song No.'] || ''),
+          normalize(song['Song Name']), normalize(song.Artist), type(song), correct, wrong]));
+      }
+      signatures.sort();
+      const complete = valid && expected.size === tourRows.length && songs.length > 0
+        && [...expected].every(([key, row]) => counts.get(key) === numeric(row['Total songs'])
+          && (hits.get(key) || 0) === numeric(row['Total hit']));
+      return { songs, valid, complete, signatures: new Set(signatures), fingerprint: JSON.stringify(signatures) };
+    };
+    const original = inspect(rawSongs);
+    const relatedTourIds = new Set([tourId]);
+    const matches = [];
+    if (sheetIndex && typeof sheetIndex[Symbol.iterator] === 'function' && original.valid && original.songs.length) {
+      for (const [id, rows] of sheetIndex) {
+        if (id === tourId || !rows?.length || day(rows[0]['Export Date']) !== day(timestamp)) continue;
+        let candidate;
+        try { candidate = inspect(rows); } catch (_) { continue; }
+        if (!candidate.valid) continue;
+        const shared = [...candidate.signatures].filter(key => original.signatures.has(key)).length;
+        if (shared < Math.min(5, original.signatures.size, candidate.signatures.size)) continue;
+        relatedTourIds.add(id);
+        if (candidate.complete) matches.push({ ...candidate, sourceTourId: id,
+          exactTimestamp: String(rows[0]['Export Date']).replace('T', ' ') === String(timestamp).replace('T', ' ') });
+      }
+    }
+    let selected = { ...original, sourceTourId: tourId };
+    if (!original.complete && matches.length) {
+      if (new Set(matches.map(match => match.fingerprint)).size > 1) {
+        throw new Error('Multiple different song exports match this stats sheet; What if cannot choose one reliably.');
+      }
+      selected = matches.find(match => match.exactTimestamp) || matches[0];
+    }
+    return { songs: selected.songs, sourceTourId: selected.sourceTourId, relatedTourIds: [...relatedTourIds] };
+  }
+
   function findEligibleMisses({ rawSongs, historySongs = [], searchRows = [], relearnRows = [], identityNames, timestamp, canonicalName = normalize }) {
     const identities = new Set([...identityNames].map(name => normalize(canonicalName(name))));
     const isMe = (name, at = timestamp) => identities.has(normalize(canonicalName(name, at)));
@@ -279,5 +332,5 @@
       knownAdded: selectedKnownKeys.size, rigAdded: selectedRigKeys.size,
       selectedSongs, eligibleSongs, eligibleKnownSongs: candidates, eligibleRigSongs: rigCandidates };
   }
-  return Object.freeze({ weights, cutoff, normalize, createPlayerNameResolver, songKeys, encounterKey, orderedSongs, findEligibleMisses, findEligibleRigMisses, simulate });
+  return Object.freeze({ weights, cutoff, normalize, createPlayerNameResolver, songKeys, encounterKey, orderedSongs, resolveTourSongSnapshot, findEligibleMisses, findEligibleRigMisses, simulate });
 });

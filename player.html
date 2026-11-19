@@ -14009,19 +14009,19 @@
     <input id="relearnAudioProgressRange" type="range" min="0" max="100" step="0.01" value="0" aria-label="Seek audio position">
     <span id="relearnAudioProgressDuration">0:00</span>
     <div id="relearnAudioDockVolumeWrap">
-      <button id="relearnAudioDockVolumeBtn" class="relearn-audio-btn" type="button" aria-label="Volume: 100%" disabled>
-        <img src="" data-data-src="images/sound_1.jpg" alt="Volume: 100%" loading="lazy">
+      <button id="relearnAudioDockVolumeBtn" class="relearn-audio-btn" type="button" aria-label="Volume: 50%" disabled>
+        <img src="" data-data-src="images/sound_2.jpg" alt="Volume: 50%" loading="lazy">
       </button>
       <div id="relearnAudioDockVolumePopover" hidden>
-        <input id="relearnAudioDockVolumeSlider" type="range" min="0" max="100" step="1" value="100" aria-label="Volume percentage">
-        <span id="relearnAudioDockVolumePercent">100%</span>
+        <input id="relearnAudioDockVolumeSlider" type="range" min="0" max="100" step="1" value="50" aria-label="Volume percentage">
+        <span id="relearnAudioDockVolumePercent">50%</span>
       </div>
     </div>
   </div>
 </div>
 
 <script src="analytics.js?v=20261112-what-if-replay"></script>
-<script src="assets/js/latest-tour-what-if.js?v=20261110-aa9e0d34bbb7"></script>
+<script src="assets/js/latest-tour-what-if.js?v=20261119-complete-snapshot"></script>
 <script>
 const isLocalDataContext =
   location.protocol === "file:"
@@ -14527,8 +14527,11 @@ let relearnActiveToggleButton = null;
 let relearnActiveClipStartTime = null;
 let relearnActiveClipEndTime = null;
 let isSeekingRelearnAudio = false;
-let relearnAudioVolumePercentValue = 100;
-let relearnAudioLastNonZeroPercentValue = 100;
+const RELEARN_AUDIO_DEFAULT_VOLUME_PERCENT = 50;
+const RELEARN_AUDIO_VOLUME_STORAGE_KEY = "amqPlaybackVolume";
+const relearnAudioInitialVolumeState = loadRelearnAudioVolumeState();
+let relearnAudioVolumePercentValue = relearnAudioInitialVolumeState.percent;
+let relearnAudioLastNonZeroPercentValue = relearnAudioInitialVolumeState.lastNonZeroPercent;
 let isRelearnVolumePopoverOpen = false;
 let relearnVolumePopoverFadeTimer = null;
 let relearnAudioWakeLock = null;
@@ -22026,7 +22029,7 @@ async function loadOverviewLatestTourWhatIf(context, sheetIndex, renderId, view 
   const isCurrent = () => isTourWhatIfCurrent(context, renderId, view, playerId);
   try {
     const engine = globalThis.AMQLatestTourWhatIf;
-    if (!engine || typeof engine.findEligibleRigMisses !== 'function') {
+    if (!engine || typeof engine.findEligibleRigMisses !== 'function' || typeof engine.resolveTourSongSnapshot !== 'function') {
       throw new Error('What if could not load the latest update. Please reload this page.');
     }
     if (context.isAnt) throw new Error('Song-level results are not available for ANT What if analysis.');
@@ -22034,16 +22037,19 @@ async function loadOverviewLatestTourWhatIf(context, sheetIndex, renderId, view 
     status.innerText = 'Loading known-song history…';
     const [profile, players, shouldKnowSongs] = await Promise.all([loadOverviewLatestTourWhatIfProfile(playerId, context.mode), loadPlayersDirectory(), loadTourWhatIfShouldKnowSongs(playerId)]);
     if (!isCurrent()) return;
-    const rawSongs = sheetIndex.get(context.tourId) || [];
+    const linkedSongs = sheetIndex.get(context.tourId) || [];
     const identityNames = getCurrentOriginalTourIdentitySet();
     const canonicalName = engine.createPlayerNameResolver(players, context.timestamp);
+    const snapshot = engine.resolveTourSongSnapshot({tourId: context.tourId, rawSongs: linkedSongs, sheetIndex, tourRows: context.tourRows, timestamp: context.timestamp, canonicalName});
+    const rawSongs = snapshot.songs;
+    const relatedTourIds = new Set(snapshot.relatedTourIds);
     const identities = new Set([...identityNames].map(name => canonicalName(name)));
     if (!context.tourRows.some(row => identities.has(canonicalName(row['Player name'])))) {
       throw new Error('This player did not participate in the selected tour.');
     }
     const historySongs = [];
     for (const [id, rows] of sheetIndex) {
-      if (id === context.tourId) continue;
+      if (relatedTourIds.has(id)) continue;
       for (const row of rows) {
         const timestamp = String(row['Export Date'] || '').replace('T', ' ').replace(/Z$/, '');
         if (timestamp && timestamp < context.timestamp.replace('T', ' ')
@@ -38711,11 +38717,39 @@ function getRelearnAudioVolumeIconPath(percentValue) {
   return RELEARN_AUDIO_VOLUME_ICONS[0];
 }
 
+function loadRelearnAudioVolumeState() {
+  const fallback = {
+    percent: RELEARN_AUDIO_DEFAULT_VOLUME_PERCENT,
+    lastNonZeroPercent: RELEARN_AUDIO_DEFAULT_VOLUME_PERCENT
+  };
+  try {
+    const saved = JSON.parse(window.sessionStorage.getItem(RELEARN_AUDIO_VOLUME_STORAGE_KEY));
+    if (!saved || typeof saved.percent !== "number" || !Number.isFinite(saved.percent)
+      || saved.percent < 0 || saved.percent > 100) return fallback;
+    const percent = Math.round(saved.percent);
+    const lastNonZeroPercent = percent > 0 ? percent
+      : (typeof saved.lastNonZeroPercent === "number" && Number.isFinite(saved.lastNonZeroPercent)
+        && saved.lastNonZeroPercent >= 1 && saved.lastNonZeroPercent <= 100
+        ? Math.round(saved.lastNonZeroPercent) : RELEARN_AUDIO_DEFAULT_VOLUME_PERCENT);
+    return { percent, lastNonZeroPercent };
+  } catch (_) {
+    return fallback;
+  }
+}
+
 function applyRelearnAudioVolumeState(percentValue = relearnAudioVolumePercentValue) {
   const clampedPercent = Math.round(Math.max(0, Math.min(100, Number(percentValue) || 0)));
   relearnAudioVolumePercentValue = clampedPercent;
   if (clampedPercent > 0) {
     relearnAudioLastNonZeroPercentValue = clampedPercent;
+  }
+  try {
+    window.sessionStorage.setItem(RELEARN_AUDIO_VOLUME_STORAGE_KEY, JSON.stringify({
+      percent: clampedPercent,
+      lastNonZeroPercent: relearnAudioLastNonZeroPercentValue
+    }));
+  } catch (_) {
+    // Playback and in-page volume changes also work when storage is unavailable.
   }
 
   if (relearnAudioElement) {
@@ -39085,7 +39119,7 @@ if (relearnAudioDockVolumeBtn) {
       applyRelearnAudioVolumeState(0);
       return;
     }
-    const restoredPercent = Math.max(1, Math.min(100, Number(relearnAudioLastNonZeroPercentValue) || 100));
+    const restoredPercent = Math.max(1, Math.min(100, Number(relearnAudioLastNonZeroPercentValue) || RELEARN_AUDIO_DEFAULT_VOLUME_PERCENT));
     applyRelearnAudioVolumeState(restoredPercent);
   });
 }
